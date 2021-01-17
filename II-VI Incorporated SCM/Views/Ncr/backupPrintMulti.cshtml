@@ -1,0 +1,675 @@
+﻿@foreach (var item in Model)
+{
+    <body style="width: 940px; margin: auto;">
+        <div id="printDiv">
+            @*<div class="row">
+                    <img class="img-responsive" src="~/Theme/assets/layouts/layout6/img/II-VI.jpg" />
+                </div>
+                <div class="row">
+                    <h2 style="text-align: center">ATTACHMENT 4.1</h2>
+                </div>*@
+            <div class="row">
+                <div class="col-xs-7">
+                    <img class="img-responsive" src="@Url.Content("~/Theme/assets/layouts/layout6/img/II-VI(2).jpg")" style="width:100%" />
+                </div>
+                <div class="col-xs-5">
+                    <h4>
+                        <b> NON-CONFORMANCE REPORT </b>
+                    </h4>
+                    <br />
+                    <h3>
+                        <b>NO. @item.NCR_NUM</b>
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 ChangeHeight1 style-border remove-boder-bottom">
+                    <p><b>MI PART NO: </b></p>
+                    <p>@item.MI_PART_NO</p>
+                </div>
+                <div class="col-xs-1 ChangeHeight1 style-border remove-boder-rigth remove-boder-bottom remove-boder-left ">
+                    <p><b>REV:</b></p>
+                    <p>@item.DRAW_REV</p>
+                </div>
+                <div class="col-xs-4 ChangeHeight1 style-border remove-boder-bottom remove-boder-rigth">
+                    <p><b>PO NUMBER: </b></p>
+                    <p>@item.PO_NUM</p>
+                </div>
+                <div class="col-xs-3 ChangeHeight1 style-border remove-boder-bottom ">
+                    <p><b>TRAVELER NO./ ARM NO. /LOT#.</b></p>
+                    @item.LOT
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-xs-5 ChangeHeight2 style-border remove-boder-bottom remove-boder-rigth" style="height: 60px;">
+                    <p><b>DESCRIPTION OF MATERRIAL</b></p>
+                    <p style="font-size:13px">@item.ITEM_DESC</p>
+                    <br />
+                </div>
+                <div class="col-xs-4 ChangeHeight2  remove-boder-bottom style-border remove-boder-rigth" style="height:60px">
+                    <p><b>MODEL OR SERIAL NO.</b></p>
+                    <p>@item.MODEL_NO</p>
+                    <br />
+                </div>
+                @if (@item.TYPE_NCR == "IQC")
+                {
+                    <div class="col-xs-1 ChangeHeight2  style-border remove-boder-bottom remove-boder-rigth" style="text-align:center;height:60px">
+                        <p>
+                            <b>REC.INSP</b>
+                        </p>
+                        <input type="checkbox" disabled="disabled" class="checkboxes" checked="checked" />
+                    </div>
+                    <div class="col-xs-2 ChangeHeight2  remove-boder-bottom style-border" style="text-align:center;height:60px">
+                        <p>
+                            <b>INPROCESS</b>
+                        </p>
+                        <input type="checkbox" disabled="disabled" class="checkboxes" />
+                    </div>
+                }
+                else if (@item.TYPE_NCR == "PROCESS")
+                {
+                    <div class="col-xs-1 ChangeHeight2  style-border remove-boder-bottom remove-boder-rigth" style="text-align:center;height:60px">
+                        <p>
+                            <b>REC.INSP</b>
+                        </p>
+                        <input type="checkbox" disabled="disabled" class="checkboxes" />
+                    </div>
+                    <div class="col-xs-2 ChangeHeight2 remove-boder-bottom  style-border" style="text-align:center;height:60px">
+                        <p>
+                            <b>IN PROCESS</b>
+                        </p>
+                        <input type="checkbox" disabled="disabled" class="checkboxes" checked="checked" />
+                    </div>
+                }
+            </div>
+            <div class="table-responsive" style="margin-bottom: -18px; overflow: hidden">
+                <table class="table table-bordered ">
+                    <tbody>
+                        <tr class="style-border">
+                            <th colspan="2"> </th>
+                            <th colspan="4" class="text-center" style="height:3px">INSPECTION PLAN</th>
+                        </tr>
+                        <tr>
+                            <td rowspan="4" style="vertical-align: middle"><p style="margin-left: 2px;"><b>V<br>E<br>N<br>D<br>O<br>R<br></b></p></td>
+                            <td rowspan="2">
+                                <p>
+                                    <b>NAME OF VENDOR</b>
+                                </p>
+                                @item.VEN_NAME
+                            </td>
+
+                            @if (@item.SAMPLE_INSP == true)
+                            {
+                                <td colspan="2">
+                                    <p>
+                                        <b>SAMPLE INSP</b>
+                                    </p>
+                                    <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                                    <label>AQL</label> 0.65 LEVEL C=0
+                                </td>
+                            }
+                            else
+                            {
+                                <td colspan="2">
+                                    <p>
+                                        <b>SAMPLE INSP</b>
+                                    </p>
+                                    <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                    <label>AQL: _____</label>&nbsp; LEVEL &nbsp;_______
+                                </td>
+                            }
+                            @if (@item.PERCENT_INSP == true)
+                            {
+                                <td style="text-align:center;">
+                                    <p>
+                                        <b>100% INSP</b>
+                                    </p>
+
+                                    <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="text-align:center;">
+                                    <p>
+                                        <b>100%  INSP</b>
+                                    </p>
+
+                                    <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                </td>
+
+                            }
+                            @if (item.FIRST_ARTICLE == true)
+                            {
+                                <td colspan="2">
+                                    <p><b>FIRST ARTICLE</b></p>
+                                    <input type="checkbox" class="checkboxes" checked="checked" disabled="disabled" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td colspan="2">
+                                    <p><b>FIRST ARTICLE</b></p>
+                                    <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                </td>
+                            }
+
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <p style="text-align: center;height: 7px;">
+                                    <b>QUANTITY</b>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>
+                                    <b>STREET ADDRESS</b>
+                                </p>
+                                @item.VEN_ADD
+                            </td>
+                            <td>
+                                <p>
+                                    <b>RECEIVED</b>
+                                </p>
+                                @item.REC_QTY
+                            </td>
+                            <td>
+                                <p>
+                                    <b>INSPECTED</b>
+                                </p>
+                                @item.INS_QTY
+                            </td>
+                            <td>
+                                <p>
+                                    <b>DEFECTIVE</b>
+                                </p>
+                                @item.defect
+
+                            </td>
+                            <td>
+                                <p>
+                                    <b>REJECTED</b>
+                                </p>
+                                @item.REJ_QTY
+                            </td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td style="text-align: left">
+                                <p>
+                                    <b>CITY :</b> @item.CITY
+                                    <b>STATE:</b> @item.STATE <b> ZIP CODE:</b> @item.ZIP_CODE
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <b>REPORT WRITTEN BY </b>
+                                </p>
+                                @item.INSPECTOR
+                            </td>
+                            <td colspan="3">
+                                <p>
+                                    <b>DATE</b>
+                                </p>
+                                @(item.INS_DATE.HasValue ? item.INS_DATE.Value.ToShortDateString() : "")
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ITEM</th>
+                        <th>QTY</th>
+                        <th>DESCRIPTION</th>
+                        <th>DEFECT</th>
+                        <th>RESPON</th>
+                        <th>DISP'N</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var count = 1;
+                        foreach (var item1 in item.ListdefectprocessString)
+                        {
+                            <tr class="odd data-confirmity" id="data-confirmity-@count" rev="@item1.ITEM">
+                                <td>@count</td>
+                                <td id="dataqty_@count">@item1.QTY</td>
+                                <td>
+                                    @item1.DEFECT_STRING
+                                </td>
+                                <td>
+                                    @if (item1.REMARK != null)
+                                    {
+                                        @(item1.NC_DESC_STRING + " " + item1.REMARK + "; ")
+                                    }
+                                    else
+                                    {
+                                        @(item1.NC_DESC_STRING + "")
+                                    }
+                                </td>
+
+                                <td>@item1.RESPONSENAME</td>
+                                <td>
+                                    @item1.DISPOSITIONNAME
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    }
+                </tbody>
+            </table>
+
+
+
+            @*<div class="row ">
+                    <div class="col-xs-1 style-border remove-boder-rigth">
+                        <p>
+                            <b>ITEM</b>
+                        </p>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-1 style-border remove-boder-rigth">
+                        <p>
+                            <b> QTY</b>
+                        </p>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-3 style-border remove-boder-rigth">
+                        <p>
+                            <b> DESCRIPTION</b>
+                        </p>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-2 style-border remove-boder-rigth">
+                        <p>
+                            <b>DEFECT</b>
+                        </p>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-2 style-border remove-boder-rigth">
+                        <p>
+                            <b>RESPON</b>
+                        </p>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-3 style-border ">
+                        <p>
+                            <b>DISP'N</b>
+                        </p>
+                        <p></p>
+                    </div>
+                </div>
+
+                @foreach (var item in Model.ListdefectprocessString)
+                {
+                    <div class="row ">
+                        <div class="col-xs-1 style-border remove-boder-rigth remove-boder-top ChangeHeight4">
+                            @item.ITEM
+                            <p></p>
+                        </div>
+                        <div class="col-xs-1 style-border remove-boder-top remove-boder-rigth ChangeHeight4">
+                            @item.QTY
+                            <p></p>
+                        </div>
+                        <div class="col-xs-6 style-border remove-boder-top remove-boder-rigth ChangeHeight4">
+                            <p>@(item.NC_DESC_STRING + item.REMARK + "; ")</p>
+
+                            <p></p>
+                        </div>
+                        <div class="col-xs-2 style-border remove-boder-rigth remove-boder-top ChangeHeight4">
+                            <p>@item.DEFECT_STRING</p>
+                            <p></p>
+                        </div>
+                        <div class="col-xs-1 style-border  remove-boder-top  remove-boder-rigth  ChangeHeight4">
+                            @item.RESPONSE
+                            <p></p>
+                        </div>
+                        <div class="col-xs-1 style-border remove-boder-top ChangeHeight4 ">
+                            @item.DISPOSITION
+                            <p></p>
+                        </div>
+                    </div>
+                }*@
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="row ">
+                        <div class="col-xs-8 text-center" style="border-bottom: 1px solid; margin-bottom: 10px;">
+                            <p style="margin-bottom: 0">
+                                <b>DEFECT CODE</b>
+                            </p>
+                        </div>
+                    </div>
+                    @{
+                        int num = item.ListNC_Group.Count;
+                        int n = II_VI_Incorporated_SCM.Services.Print.count;
+                        float n1 = (float)num / 2;
+                        double temp1 = num % 2;
+                        double temp = Math.Round(n1);
+                    }
+                    <table>
+                        @{
+                            if (num > n)
+                            {
+                                for (int i = 0; i < temp; i++)
+                                {
+                                    if (i == temp - 1)
+                                    {
+                                        if (temp1 == 0)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @{var index = i + 1;}
+                                                    <b>@index.  @item.ListNC_Group[i].NC_GRP_DESC</b>
+                                                </td>
+                                                <td>
+                                                    @{var index1 = n + i + 1;}
+                                                    <b>@index1.  @item.ListNC_Group[n + i].NC_GRP_DESC</b>
+                                                </td>
+                                            </tr>
+
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @{var index = n + i + 1;}
+                                                    <b>@index.  @item.ListNC_Group[n + i].NC_GRP_DESC</b>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td>
+                                                @{var ind = i + 1;}
+                                                <b>@ind. @item.ListNC_Group[i].NC_GRP_DESC</b>
+                                            </td>
+
+                                            <td>
+                                                @{var index = n + i + 1;}
+                                                <b>&nbsp;&nbsp;@index. @item.ListNC_Group[n + i].NC_GRP_DESC</b>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < num; i++)
+                                {
+                                    <tr>
+                                        <td>
+
+                                            <b>&nbsp;&nbsp;@i. @item.ListNC_Group[i].NC_GRP_DESC</b>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </table>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="row ">
+
+                        <div class="col-xs-8 text-center" style="border-bottom: 1px solid; margin-bottom: 10px;">
+                            <p style="margin-bottom: 0">
+                                <b>RESPONSIBILITY</b>
+                            </p>
+                        </div>
+                    </div>
+                    @{
+
+                        int rescount = item.ListRespon.Count;
+                    }
+                    @for (int i = 0; i < rescount; i++)
+                    {
+                        <table>
+                            <tr>
+                                <td>
+                                    <b>@(i + 1). @item.ListRespon[i].NAME</b>
+                                </td>
+                            </tr>
+                        </table>
+                    }
+
+                </div>
+
+                <div class="col-xs-4">
+
+                    <div class="row ">
+                        <div class="col-xs-8 text-center" style="border-bottom: 1px solid; margin-bottom: 10px;">
+                            <p style="margin-bottom: 0">
+                                <b>DISPOSITION</b>
+                            </p>
+                        </div>
+                    </div>
+                    @foreach (var item2 in item.ListDispo)
+                    {
+                        <table>
+                            <tr>
+                                <td>
+                                    <b>@item2.ID. @item2.NAME</b>
+                                </td>
+                            </tr>
+                        </table>
+                    }
+
+                </div>
+
+
+            </div>
+
+            <div class="row ">
+                <div class="col-xs-1 style-border remove-boder-rigth">
+                    <p>
+                        <b>ITEM</b>
+                    </p>
+                    <p></p>
+                </div>
+                <div class="col-xs-1 style-border remove-boder-rigth">
+                    <p>
+                        <b>QTY</b>
+                    </p>
+                    <p></p>
+                </div>
+                <div class="col-xs-8 style-border remove-boder-rigth">
+                    <p>
+                        <b>ADDITIONAL INSTRUCTION</b>
+                    </p>
+                    <p></p>
+                </div>
+                <div class="col-xs-1 style-border remove-boder-rigth">
+                    <p>
+                        <b>INSP.</b>
+                    </p>
+                    <p></p>
+                </div>
+                <div class="col-xs-1 style-border ">
+                    <p>
+                        <b>DATE</b>
+                    </p>
+                    <p></p>
+                </div>
+            </div>
+
+            @foreach (var item1 in item.ListAdditional)
+            {
+
+                <div class="row ">
+                    <div class="col-xs-1 style-border remove-boder-rigth  remove-boder-top ChangeHeight4">
+                        <p>@item1.ITEM</p>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-1 style-border remove-boder-rigth remove-boder-top ChangeHeight4">
+                        <p>@item1.QTY</p>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-8 style-border remove-boder-rigth remove-boder-top ChangeHeight4">
+                        <p>@( item1.ADD_INS_NAME += !string.IsNullOrEmpty(item1.REMARK) ? " with remark: " + item1.REMARK + "; " : "")</p>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-1 style-border remove-boder-rigth remove-boder-top ChangeHeight4">
+                        <p style="font-size:13px">@item1.INSPECTOR</p>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-1 style-border  remove-boder-top ChangeHeight4">
+                        @(item1.DATEAPPROVAL.HasValue ? item1.DATEAPPROVAL.Value.ToShortDateString() : "")
+                        <p></p>
+                    </div>
+                </div>
+
+            }
+            <div class="row">
+                <div class="col-sm-8">
+                    <b>CORRECTIVE ACTION:</b>
+                    <input type="checkbox" disabled="disabled" class="checkbox-inline" @item.Notrequered /> <b>NOT REQUIRED</b>
+                    <input type="checkbox" disabled="disabled" class="checkbox-inline" @item.requered /> <b>REQUIRED</b>
+                    <input type="checkbox" disabled="disabled" class="checkbox-inline" @item.notification /> <b>NOTIFCATION</b>
+                </div>
+                <p style="float:left"><b>ISSUED CA REQUEST NO:</b>@item.ISSUED_REQUEST_NO  DATE:@(item.ISSUED_REQUEST_DATE.HasValue ? item.ISSUED_REQUEST_DATE.Value.ToShortDateString() : "")</p>
+            </div>
+            <div class="row">
+                <b>FOLLOW UP NOTES:</b>@item.FOLLOW_UP_NOTES
+            </div>
+            <div class="row">
+                <div class="pull-right">
+                    <table class="table table-bordered" style="margin-bottom: 2px;">
+                        <tr class="style-border">
+                            <td width="250px" ;><b>ACCTG, USE ONLY</b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>REMOVED FROM:</b> @item.REMOVED_FROM <br /><b>BOOK INV:</b> @item.BOOK_INV
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row" style="margin-top:-5px; margin-bottom:0px;">
+                <div style="text-align:center;">
+                    <table class="table table-bordered" style="margin-bottom: 2px;">
+                        <div class="row" style="margin-top:-5px; margin-bottom:0px;">
+                            <div style="text-align:center;">
+                                <table class="table table-bordered" style="margin-bottom: 2px;">
+                                    <tr>
+                                        <td><b>ADDITIONAL INSTRUCTION</b></td>
+
+                                        <td width="300px" height="60px"><b>ISSUE DEBIT MEMO </b><br /><b>DATE.</b>@(item.ISSUE_MEMO_DATE.HasValue ? item.ISSUE_MEMO_DATE.Value.ToShortDateString() : "") <b>NO.</b> @item.ISSUE_MEMO_NO</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </table>
+                    <div class="row">
+                        <div>
+                            @if (item.ListUSerAppr != null && item.ListUSerAppr.Count > 0)
+                            {
+                                <table class="table table-bordered">
+                                    <tr class="style-border">
+                                        <td width="200px" height="70px">
+                                            <b>QUALITY ASSURANCE:</b>
+                                            @if (item.ListUSerAppr.ElementAt(0).Signature != null & !string.IsNullOrEmpty(item.ListUSerAppr.ElementAt(0).Signature))
+                                            {
+                                                <div style="width:100%;text-align:center">
+                                                    <img style="width:50%" src="@Url.Content(item.ListUSerAppr.ElementAt(0).Signature)" onerror="signature_err(this)" />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <p>Signature</p>
+                                            }
+                                            <br />
+                                            @item.ListUSerAppr.ElementAt(0).FullName
+                                            <br />
+                                        </td>
+                                        <td width="80px">
+                                            <b>DATE:</b>
+                                            <br />
+                                            <p>@item.ListUSerAppr.ElementAt(0).DateAppr </p>
+                                        </td>
+                                        <td width="200px">
+                                            <b>ENGINEERING:</b>
+                                            <br />
+                                            @if (item.ListUSerAppr.ElementAt(1).Signature != null & !string.IsNullOrEmpty(item.ListUSerAppr.ElementAt(1).Signature))
+                                            {
+                                                <div style="width:100%;text-align:center">
+                                                    <img style="width:50%" src="@Url.Content(item.ListUSerAppr.ElementAt(1).Signature)" onerror="signature_err(this)" />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <p>No Signature</p>
+                                            }
+                                            @item.ListUSerAppr.ElementAt(1).FullName
+                                        </td>
+                                        <td width="80px">
+                                            <b>DATE:</b>
+                                            <br />
+                                            <p>@item.ListUSerAppr.ElementAt(1).DateAppr</p>
+                                        </td>
+                                        <td rowspan="2" width="300px"> <br /><b>SHIPPING METHOD: </b><br />@item.SHIPPING_METHOD</td>
+                                    </tr>
+                                    <tr class="style-border">
+                                        <td width="200px">
+                                            <b>MEG/ ASSY:</b>
+                                            <br />
+                                            @if (item.ListUSerAppr.ElementAt(2).Signature != null & !string.IsNullOrEmpty(item.ListUSerAppr.ElementAt(2).Signature))
+                                            {
+                                                <div style="width:100%;text-align:center">
+                                                    <img style="width:50%" src="@Url.Content(item.ListUSerAppr.ElementAt(2).Signature)" onerror="signature_err(this)" />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <p> No Signature</p>
+                                            }
+                                            <br />
+                                            @item.ListUSerAppr.ElementAt(2).FullName
+                                        </td>
+                                        <td width="80px">
+                                            <b>DATE:</b>
+                                            <br />
+                                            <p>@item.ListUSerAppr.ElementAt(2).DateAppr</p>
+                                        </td>
+                                        <td width="200px">
+                                            <b>PURCHASING:</b>
+                                            <br />
+                                            @if (item.ListUSerAppr.ElementAt(3).Signature != null & !string.IsNullOrEmpty(item.ListUSerAppr.ElementAt(3).Signature))
+                                            {
+                                                <div style="width:100%;text-align:center">
+                                                    <img style="width:50%" src="@Url.Content(item.ListUSerAppr.ElementAt(3).Signature)" onerror="signature_err(this)" />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <p> No Signature</p>
+                                            }
+                                            @item.ListUSerAppr.ElementAt(3).FullName
+                                        </td>
+                                        <td width="80px">
+                                            <b>DATE:</b>
+                                            <br />
+                                            <p>@item.ListUSerAppr.ElementAt(3).DateAppr</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:right"> FORM @Model[0].FORM      REV @Model[0].REV</div>
+        </div>
+        <div class="page-break">
+
+        </div>
+    </body>
+}

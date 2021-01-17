@@ -1,0 +1,48 @@
+﻿  .removeBorder {
+      border: 0px !important;
+  }
+
+  .remove-boder-top {
+      border-top: 0.5px !important;
+      padding-left: 2px;
+  }
+
+  .remove-boder-rigth {
+      border-right: 0.5px !important;
+      padding-left: 2px;
+  }
+
+  .remove-boder-bottom {
+      border-bottom: 0.5px !important;
+      padding-left: 2px;
+  }
+
+  .remove-boder-left {
+      border-left: 0.5px !important;
+      padding-left: 2px;
+  }
+
+  .style-border {
+      border: 0.5px groove;
+      padding-right: 0px;
+  }
+
+  div.col-md-12 {
+      padding-right: 0px;
+      padding-left: 2px;
+  }
+
+  .margin-left-right-0 {
+      margin-left: 0;
+      margin-right: 0;
+  }
+
+  .padding-left-right-0 {
+      padding-left: 0;
+      padding-right: 0;
+  }
+
+  .wid-hei-chkbox {
+      height: 20px;
+      width: 20px;
+  }

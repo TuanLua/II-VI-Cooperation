@@ -1,0 +1,778 @@
+﻿@using System.ServiceModel.Channels
+@using Kendo.Mvc
+@using Kendo.Mvc.Extensions
+@using Microsoft.AspNet.Identity
+@using II_VI_Incorporated_SCM.Extensions;
+@model II_VI_Incorporated_SCM.Models.NCR.NCRManagementViewModel
+
+
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @*<title>PrintNCR | NCR</title>*@
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="image/png" href="@Url.Content("~/Theme/assets/global/icons/favicon-32x32.png")" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <link href="@Url.Content("~/Content/Site.css")" rel='stylesheet' type='text/css' />
+    <style>
+        [class*="col-"] {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        .table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+            border: 1px solid;
+            padding: 2px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .table-bordered {
+            border: 1px solid;
+        }
+
+        .removeBorder {
+            border: 0px !important;
+        }
+
+        .remove-boder-top {
+            border-top: 1px !important;
+            /*padding-left: 2px;*/
+        }
+
+        .remove-boder-rigth {
+            border-right: 1px !important;
+            /*padding-left: 2px;*/
+        }
+
+        .remove-boder-bottom {
+            border-bottom: 1px !important;
+            /*padding-left: 2px;*/
+        }
+
+        .remove-boder-left {
+            border-left: 1px !important;
+            /*padding-left: 2px;*/
+        }
+
+        .style-border {
+            border: 1px solid;
+            /*padding-right: 0px;*/
+        }
+
+        .padding-left-right-0 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .margin-left-right-0 {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .row {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .wid-hei-chkbox {
+            height: 20px;
+            width: 20px;
+        }
+
+        .sizefont {
+            font-size: 12px;
+        }
+
+        @@media print {
+            body.modal-open {
+                visibility: hidden;
+            }
+
+                body.modal-open .modal .modal-body {
+                    visibility: visible;
+                }
+        }
+    </style>
+</head>
+<body style="width: 940px; margin: auto;">
+    <div id="printDiv">
+        <div class="row">
+            <div class="col-xs-7">
+                <img class="img-responsive" src="@Url.Content("~/Theme/assets/layouts/layout6/img/II-VI(2).jpg")" style="width:100%" />
+            </div>
+            <div class="col-xs-5">
+                <h4>
+                    <b> NON-CONFORMANCE REPORT </b>
+                </h4>
+                <br />
+                <h3>
+                    <b class="digital-led">NO. @Model.NCR_NUM</b>
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 ChangeHeight1 style-border remove-boder-bottom">
+                <p><b>MI PART NO: </b></p>
+                <p>@Model.MI_PART_NO</p>
+            </div>
+            <div class="col-xs-1 ChangeHeight1 style-border remove-boder-rigth remove-boder-bottom remove-boder-left ">
+                <p><b>REV:</b></p>
+                <p>@Model.DRAW_REV</p>
+            </div>
+            <div class="col-xs-4 ChangeHeight1 style-border remove-boder-bottom remove-boder-rigth">
+                <p><b>PO NUMBER: </b></p>
+                <p>@Model.PO_NUM</p>
+            </div>
+            <div class="col-xs-3 ChangeHeight1 style-border remove-boder-bottom ">
+                <p><b>TRAVELER NO./ ARM NO. /LOT#.</b></p>
+                @Model.LOT
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-xs-5 ChangeHeight2 style-border remove-boder-bottom remove-boder-rigth" style="height: 60px;">
+                <p><b>DESCRIPTION OF MATERRIAL</b></p>
+                <p>@Model.ITEM_DESC</p>
+                <br />
+            </div>
+            <div class="col-xs-4 ChangeHeight2  remove-boder-bottom style-border remove-boder-rigth" style="height:60px">
+                <p><b>MODEL OR SERIAL NO.</b></p>
+                <p>@Model.MODEL_NO</p>
+                <br />
+            </div>
+            @if (@Model.TYPE_NCR == "IQC")
+            {
+                <div class="col-xs-1 ChangeHeight2  style-border remove-boder-bottom remove-boder-rigth" style="text-align:center;height:60px">
+                    <p>
+                        <b>REC.INSP</b>
+                    </p>
+                    <input type="checkbox" disabled="disabled" class="checkboxes" checked="checked" />
+                </div>
+                <div class="col-xs-2 ChangeHeight2  remove-boder-bottom style-border" style="text-align:center;height:60px">
+                    <p>
+                        <b>INPROCESS</b>
+                    </p>
+                    <input type="checkbox" disabled="disabled" class="checkboxes" />
+                </div>
+            }
+            else if (@Model.TYPE_NCR == "PROCESS")
+            {
+                <div class="col-xs-1 ChangeHeight2  style-border remove-boder-bottom remove-boder-rigth" style="text-align:center;height:60px">
+                    <p>
+                        <b>REC.INSP</b>
+                    </p>
+                    <input type="checkbox" disabled="disabled" class="checkboxes" />
+                </div>
+                <div class="col-xs-2 ChangeHeight2 remove-boder-bottom  style-border" style="text-align:center;height:60px">
+                    <p>
+                        <b>IN PROCESS</b>
+                    </p>
+                    <input type="checkbox" disabled="disabled" class="checkboxes" checked="checked" />
+                </div>
+            }
+        </div>
+        <div class="table-responsive" style="margin-bottom: -18px; overflow: hidden">
+            <table class="table table-bordered ">
+                <tbody>
+                    <tr class="style-border">
+                        <th colspan="2"> </th>
+                        <th colspan="4" class="text-center" style="height:3px">INSPECTION PLAN</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="4" style="vertical-align: middle"><p style="margin-left: 2px;"><b>V<br>E<br>N<br>D<br>O<br>R<br></b></p></td>
+                        <td rowspan="2">
+                            <p>
+                                <b>NAME OF VENDOR</b>
+                            </p>
+                            @Model.VEN_NAME
+                        </td>
+
+                        @if (@Model.SAMPLE_INSP == true)
+                        {
+                            <td colspan="2">
+                                <p>
+                                    <b>SAMPLE INSP</b>
+                                </p>
+                                <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                                <label>AQL</label> 0.65 LEVEL C=0
+                            </td>
+                        }
+                        else
+                        {
+                            <td colspan="2">
+                                <p>
+                                    <b>SAMPLE INSP</b>
+                                </p>
+                                <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                <label>AQL: _____</label>&nbsp; LEVEL &nbsp;_______
+                            </td>
+                        }
+                        @if (@Model.PERCENT_INSP == true)
+                        {
+                            <td style="text-align:center;">
+                                <p>
+                                    <b>100% INSP</b>
+                                </p>
+
+                                <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="text-align:center;">
+                                <p>
+                                    <b>100%  INSP</b>
+                                </p>
+
+                                <input type="checkbox" class="checkboxes" disabled="disabled" />
+                            </td>
+
+                        }
+                        @if (Model.FIRST_ARTICLE == true)
+                        {
+                            <td colspan="2" style="text-align: center;">
+                                <p>
+                                    <b>FIRST ARTICLE</b>
+                                </p>
+                                <input type="checkbox" checked="checked" class="checkboxes" disabled="disabled" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td colspan="2" style="text-align: center;">
+                                <p>
+                                    <b>FIRST ARTICLE</b>
+                                </p>
+                                <input type="checkbox" class="checkboxes" disabled="disabled" />
+                            </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <p style="text-align: center;height: 7px;">
+                                <b>QUANTITY</b>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <b>STREET ADDRESS</b>
+                            </p>
+                            @Model.VEN_ADD
+                        </td>
+                        <td>
+                            <p>
+                                <b>RECEIVED</b>
+                            </p>
+                            @Model.REC_QTY
+                        </td>
+                        <td>
+                            <p>
+                                <b>INSPECTED</b>
+                            </p>
+                            @Model.INS_QTY
+                        </td>
+                        <td>
+                            <p>
+                                <b>DEFECTIVE</b>
+                            </p>
+                            @Model.defect
+
+                        </td>
+                        <td>
+                            <p>
+                                <b>REJECTED</b>
+                            </p>
+                            @Model.REJ_QTY
+                        </td>
+                    </tr>
+                    <tr class="odd gradeX">
+                        <td style="text-align: left">
+                            <p>
+                                <b>CITY :</b> @Model.CITY
+                                <b>STATE:</b> @Model.STATE <b> ZIP CODE:</b> @Model.ZIP_CODE
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <b>REPORT WRITTEN BY </b>
+                            </p>
+                            @Model.INSPECTOR
+                        </td>
+                        <td colspan="3">
+                            <p>
+                                <b>DATE</b>
+                            </p>
+                            @(Model.INS_DATE.HasValue ? Model.INS_DATE.Value.GetDateTimeFormat() : "")
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ITEM</th>
+                    <th>QTY</th>
+                    <th>DESCRIPTION</th>
+                    <th>DEFECT</th>
+                    <th>RESPON</th>
+                    <th>DISP'N</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var count = 1;
+                    foreach (var item in Model.NCRDETs)
+                    {
+                        <tr class="odd data-confirmity" id="data-confirmity-@count" rev="@item.ITEM">
+                            <td>@count</td>
+                            <td id="dataqty_@count">@item.QTY</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.REMARK))
+                                {
+                                    @(item.NC_DESC_STRING + (!string.IsNullOrEmpty(item.REMARK) ? " " + item.REMARK + "; " : ""))
+                                }
+                                else
+                                {
+                                    @(item.NC_DESC_STRING + " ")
+                                }
+                            </td>
+                            <td>
+                                @item.DEFECT_STRING
+                            </td>
+                            <td>@item.RESPONSENAME</td>
+                            <td>
+                                @item.DISPOSITIONNAME
+                            </td>
+                        </tr>
+                        count++;
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="row ">
+                    <div class="col-xs-8 text-center" style="border-bottom: 1px solid; margin-bottom: 10px;">
+                        <p style="margin-bottom: 0">
+                            <b>DEFECT CODE</b>
+                        </p>
+                    </div>
+                </div>
+                
+
+                @{
+                    double num = Model.ListNC_Group.Count;
+                    int n = 0;
+                    double n1 = 0;
+                    double temp1 = 0;
+                    double temp = n1;
+
+                    if (Model.CCN == "03")
+                    {
+                        n = II_VI_Incorporated_SCM.Services.Print.count;
+                        n1 = Math.Round((num / 2), 0);
+                        temp1 = Math.Round((num / 2), 0);
+                        temp = n1;
+                        <table>
+                            @{
+                                if (num > n)
+                                {
+                                    for (int i = 0; i < temp; i++)
+                                    {
+                                        if (i == temp)
+                                        {
+                                            if (temp1 == 0)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @{var index = i + 1;}
+                                                        <b>@index.  @Model.ListNC_Group[i].NC_GRP_DESC</b>
+                                                    </td>
+                                                    <td>
+                                                        @{var index1 = n + i + 1;}
+                                                        <b>@index1.  @Model.ListNC_Group[n + i].NC_GRP_DESC</b>
+                                                    </td>
+                                                </tr>
+
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @{var index = n + i + 1;}
+                                                        <b>@index.  @Model.ListNC_Group[n + i].NC_GRP_DESC</b>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @{var ind = i + 1;}
+                                                    <b>@ind. @Model.ListNC_Group[i].NC_GRP_DESC</b>
+                                                </td>
+
+                                                <td>
+                                                    @{var index = n + i + 1;}
+                                                    <b>@*&nbsp;*@&nbsp;@index. @Model.ListNC_Group[n + i].NC_GRP_DESC</b>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < num; i++)
+                                    {
+                                        <tr>
+                                            <td>
+
+                                                <b>&nbsp;&nbsp;@i. @Model.ListNC_Group[i].NC_GRP_DESC</b>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </table>
+
+                    }
+                    else
+                    {
+                        n = II_VI_Incorporated_SCM.Services.PrintCCN.count;
+                        n1 = Math.Round((num / 2), 0);
+                        temp1 = Math.Round((num / 2), 0);
+                        temp = n1;
+                        <table>
+                            @{
+                                if (num > n)
+                                {
+                                    for (int i = 0; i < temp; i++)
+                                    {
+                                        if (i == temp -1)
+                                        {
+                                            if (temp1 == 0)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @{var index = i + 1;}
+                                                        <b>@index.  @Model.ListNC_Group[i].NC_GRP_DESC</b>
+                                                    </td>
+                                                    <td>
+                                                        @{var index1 = n + i + 1;}
+                                                        <b>@index1.  @Model.ListNC_Group[n + i].NC_GRP_DESC</b>
+                                                    </td>
+                                                </tr>
+
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @{var index = n + i + 1;}
+                                                        <b>@index.  @Model.ListNC_Group[n + i].NC_GRP_DESC</b>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @{var ind = i + 1;}
+                                                    <b>@ind. @Model.ListNC_Group[i].NC_GRP_DESC</b>
+                                                </td>
+
+                                                <td>
+                                                    @{var index = n + i + 1;}
+                                                    <b>@*&nbsp;*@&nbsp;@index. @Model.ListNC_Group[n + i].NC_GRP_DESC</b>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < num; i++)
+                                    {
+                                        <tr>
+                                            <td>
+
+                                                <b>&nbsp;&nbsp;@i. @Model.ListNC_Group[i].NC_GRP_DESC</b>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </table>
+
+                    }
+                    // double a = Math.Round((num / 2),0);
+
+                }
+            </div>
+
+            <div class="col-xs-4">
+                <div class="row ">
+
+                    <div class="col-xs-8 text-center" style="border-bottom: 1px solid; margin-bottom: 10px;">
+                        <p style="margin-bottom: 0">
+                            <b>RESPONSIBILITY</b>
+                        </p>
+                    </div>
+                </div>
+                @{
+
+                    int rescount = Model.ListRespon.Count;
+                }
+                @for (int i = 0; i < rescount; i++)
+                {
+                    <table style="margin-left: 70px" ;>
+                        <tr>
+                            <td>
+                                <b>@(i + 1). @Model.ListRespon[i].NAME</b>
+                            </td>
+                        </tr>
+                    </table>
+                }
+
+            </div>
+
+            <div class="col-xs-4">
+
+                <div class="row ">
+                    <div class="col-xs-8 text-center" style="border-bottom: 1px solid; margin-bottom: 10px;">
+                        <p style="margin-bottom: 0">
+                            <b>DISPOSITION</b>
+                        </p>
+                    </div>
+                </div>
+                @foreach (var item in Model.ListDispo)
+                {
+                    <table>
+                        <tr>
+                            <td>
+                                <b>@item.ID. @item.NAME</b>
+                            </td>
+                        </tr>
+                    </table>
+                }
+
+            </div>
+        </div>
+
+
+
+
+        <div class="row ">
+            <div class="col-xs-1 style-border remove-boder-rigth">
+                <p>
+                    <b>ITEM</b>
+                </p>
+            </div>
+            <div class="col-xs-1 style-border remove-boder-rigth">
+                <p>
+                    <b>QTY</b>
+                </p>
+            </div>
+            <div class="col-xs-7 style-border remove-boder-rigth">
+                <p>
+                    <b>ADDITIONAL INSTRUCTION</b>
+                </p>
+            </div>
+            <div class="col-xs-2 style-border remove-boder-rigth">
+                <p>
+                    <b>INSP.</b>
+                </p>
+            </div>
+            <div class="col-xs-1 style-border ">
+                <p>
+                    <b>DATE</b>
+                </p>
+            </div>
+        </div>
+
+        @foreach (var item in Model.ListAdditional)
+        {
+            int it = int.Parse(item.ITEM) + 1;
+            <div class="row ">
+                <div class="col-xs-1 style-border remove-boder-rigth  remove-boder-top ChangeHeight" style="min-height:50px">
+                    <p>@it</p>
+                </div>
+                <div class="col-xs-1 style-border remove-boder-rigth remove-boder-top ChangeHeight" style="min-height:50px">
+                    <p>@item.QTY</p>
+                </div>
+                <div class="col-xs-7 style-border remove-boder-rigth remove-boder-top ChangeHeight" style="min-height:50px">
+                    <p>@( item.ADD_INS_NAME += !string.IsNullOrEmpty(item.REMARK) ? " with remark: " + item.REMARK + "; " : "") </p>
+                </div>
+                <div class="col-xs-2 style-border remove-boder-rigth remove-boder-top ChangeHeight" style="min-height:50px">
+                    <p>@item.INSPECTOR</p>
+                </div>
+                <div class="col-xs-1 style-border  remove-boder-top ChangeHeight" style="min-height:50px">
+                    @(item.DATEAPPROVAL.HasValue ? item.DATEAPPROVAL.Value.GetDateTimeFormat() : "")
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-sm-8">
+                <b>CORRECTIVE ACTION:</b>
+                <input type="checkbox" disabled="disabled" class="checkbox-inline" @Model.Notrequered /> <b>NOT REQUIRED</b>
+                <input type="checkbox" disabled="disabled" class="checkbox-inline" @Model.requered /> <b>REQUIRED</b>
+                <input type="checkbox" disabled="disabled" class="checkbox-inline" @Model.notification /> <b>NOTIFCATION</b>
+            </div>
+            <p style="float:left"><b>ISSUED CA REQUEST NO:</b>@Model.ISSUED_REQUEST_NO  DATE:@(Model.ISSUED_REQUEST_DATE.HasValue ? Model.ISSUED_REQUEST_DATE.Value.GetDateTimeFormat() : "")</p>
+        </div>
+        <div class="row">
+            <b>FOLLOW UP NOTES:</b>@Model.FOLLOW_UP_NOTES see detail in NCR database
+        </div>
+        <div class="row">
+            <div class="pull-right">
+                <table class="table table-bordered" style="margin-bottom: 2px;">
+                    <tr class="style-border">
+                        <td width="250px" ;><b>ACCTG, USE ONLY</b></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>REMOVED FROM:</b> @Model.REMOVED_FROM <br /><b>BOOK INV:</b> @Model.BOOK_INV
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row" style="margin-top:-5px; margin-bottom:0px;">
+            <div style="text-align:center;">
+                <table class="table table-bordered" style="margin-bottom: 2px;">
+                    <div class="row" style="margin-top:-5px; margin-bottom:0px;">
+                        <div style="text-align:center;">
+                            <table class="table table-bordered" style="margin-bottom: 2px;">
+                                <tr>
+                                    <td><b>MARLOW MRB AUTHORIZATION</b></td>
+
+                                    <td width="300px"><b>ISSUE DEBIT MEMO </b><br /><b>DATE.</b>@(Model.ISSUE_MEMO_DATE.HasValue ? Model.ISSUE_MEMO_DATE.Value.ToShortDateString() : "") <b>NO.</b> @Model.ISSUE_MEMO_NO</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </table>
+                <div class="row ">
+                    <div>
+                        <table class="table table-bordered">
+                            @if (Model.ListUSerAppr != null && Model.ListUSerAppr.Count > 0)
+                            {
+                                int render = 0;
+                                foreach (var approver in Model.ListUSerAppr)
+                                {
+                                    if (render == 0)
+                                    {@Html.Raw("<tr class='style-border'>");
+                                };
+                                render++;
+
+                                <td width="200px">
+                                    <b>@approver.RoleName:</b>
+                                    @if (!string.IsNullOrEmpty(approver.Signature) && !string.IsNullOrEmpty(approver.DateAppr) )
+                                    {
+                                        <div style="width:100%;text-align:center">
+                                            <img style="width:50%" src="@Url.Content(approver.Signature)" onerror="signature_err(this)" />
+                                        </div>
+                                    }
+                                    else if (!string.IsNullOrEmpty(approver.FullName) && !string.IsNullOrEmpty(approver.DateAppr))
+                                    {
+                                        <p>Chu Ky</p>
+                                    }
+                                    <br />
+                                    @approver.FullName
+                                    <br />
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(approver.FullName))
+                                    {
+                                        <b>DATE:</b>
+                                        <br />
+                                        <p>@approver.DateAppr </p>
+                                    }
+
+                                </td>
+
+                                if (render == 2)
+                                { @Html.Raw("</tr>"); render = 0;
+                            };
+                        }
+                    }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div style="text-align:right"> FORM @Model.FORM      REV @Model.REV</div>
+</body>
+</html>
+<script src="~/Scripts/printThis/printThis.js"></script>
+<script>
+    $(document).ready(function () {
+        //$("#printDiv").printThis({
+        //    importCSS: true,
+        //    importStyle: true,
+        //});
+        window.print();
+    });
+    //function PrintModal() {
+    //    $("#printDiv").printThis({
+    //        importCSS: true,
+    //        importStyle: true,
+    //        header: null,
+    //        footer: null
+    //    });
+    //}
+    $(function () {
+        debugger
+        //SetMaxHeight($(".ChangeHeight1"));
+        //SetMaxHeight($(".ChangeHeight2"));
+        //SetMaxHeight($(".ChangeHeight3"));
+        //SetMaxHeight($(".ChangeHeight4"));
+        SetMaxHeight();
+        function SetMaxHeight() {
+            let list = $('.ChangeHeight');
+            let max = 0;
+            for (let i = 0; i < list.length; i++) {
+
+                if ($(list[i]).height() > max) {
+                    max = $(list[i]).height();
+                };
+            }
+            for (let i = 0; i < list.length; i++) {
+
+                $(list[i]).height(max);
+            }
+
+            //return max;
+        }
+    });
+
+
+    function signature_err(img) {
+        $(img).attr('src', '@Url.Content("~/Theme/assets/layouts/layout6/img/nosignature.png")');
+    }
+</script>

@@ -1,0 +1,193 @@
+﻿@using II_VI_Incorporated_SCM.Models
+@using II_VI_Incorporated_SCM.Services
+@using Microsoft.AspNet.Identity
+
+<style>
+    .NCR_NUM:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .NCR_NUM {
+        color: blue;
+    }
+</style>
+<div class="portlet box">
+    <div class="portlet-title">
+        <div class="caption">
+            <div class="btn-group">
+                <button type="button" class="btn green dropdown-toggle btn-sm" id="create">
+                    <i class="fa fa-plus"></i> Create
+                </button>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="btn-group">
+                <button type="button" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                    <i class="fa"></i> Find By
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:;" id="clear"> Clear Filter</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('Part_Num')"> Part Number </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('Description')"> Description  </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('Plan_Type')"> Plan_Type  </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<sp_Inv_GetProTransfer_List_Result>()
+                                                      .Name("gridNCR")
+                                                      .Columns(columns =>
+                                                      {
+                                                          columns.Bound(p => p.Part_Num).Title("Part_Num").HtmlAttributes(new { @class = "NCR_NUM" }).Width(120);
+                                                          columns.Bound(p => p.Description).Title("Description").Width(150);
+                                                          columns.Bound(p => p.Plan_Type).Width(120); ;
+                                                          columns.Bound(p => p.Initail_User).Title("Initail_User").Width(120);
+                                                          columns.Bound(p => p.Vn_Owner).Title("Vn Owner").Width(120);
+                                                          columns.Bound(p => p.Current_Step).Title("Current_Step").Width(120);
+                                                      })
+                                                      .ToolBar(tools => tools.Excel())
+                                              .Excel(excel => excel
+                                .FileName("ProductTransferList.xlsx")
+                                .Filterable(true)
+                                .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+                                          )
+                                                      .Sortable()
+                                                      .Scrollable()
+                                                      .Filterable()
+                                                        .Pageable()
+                                                        .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 150, 1200, "All" }).Refresh(true))
+                                                      .HtmlAttributes(new { style = "height:550px;" })
+                                                      .DataSource(dataSource => dataSource
+                                                          .Ajax()
+                                                          .PageSize(10)
+                                                          .Read(read => read.Action("ListProductTranfer", "ProductTranfer"))
+                                                         .Sort(sort => sort.Add("Date").Descending())
+                                                      ))
+        </div>
+    </div>
+</div>
+<div id="popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control boder-opal" id="search">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearch()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        var tdSearch;
+        $(document).ready(function () {
+            $.post('@Url.Action("GetRoleByID", "ProductTranfer")', {},
+                function (result) {
+                    debugger;
+                    var roleuser = result.replace(/&quot;/g, '"');
+                    var parsedTest = JSON.parse(roleuser);
+                    if (parsedTest.includes('PE')) {
+                        //$("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Current_Step", operator: "contains", value: "Initial_Info-Complete" });
+                        $("#gridNCR").data("kendoGrid").dataSource.filter({
+                            logic: "and",
+                            filters: [
+                                { field: "Current_Step", operator: "contains", value: "Initial_Info-Completed" },
+                                { field: "Plan_Type", operator: "contains", value: "Make" }
+                            ]
+                        });
+                    }
+                    else
+                        if (parsedTest.includes('VN Owner')) {
+                            //$("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Current_Step", operator: "contains", value: "Update_Info-Complete" });
+                            $("#gridNCR").data("kendoGrid").dataSource.filter({
+                                logic: "and",
+                                filters: [{ field: "Current_Step", operator: "contains", value: "Update_Info-Completed" },
+                                { field: "Plan_Type", operator: "contains", value: "Make" },
+				                { field: "Vn_Owner", operator: "contains", value: Name }
+                                ]
+                            });
+                        }
+                });
+        })
+        function onFind(condition) {
+            $('.searchField').text(condition);
+
+            if (condition == 'Part_Num') {
+                $('#search').val();
+                $('#searchId').val(0);
+            }
+            else if (condition == 'Description') {
+                $('#searchId').val(1);
+            }
+            else if (condition == 'Plan_Type') {
+                $('#searchId').val(2);
+            }
+            $('#popup').modal('show');
+        }
+        function onSearch() {
+            var searchText = $('#search').val().toLowerCase();
+            var number = $('#searchId').val();
+            if (number == '0') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Part_Num", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '1') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Description", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '2') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Plan_Type", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            $('#popup').modal('hide');
+        }
+        $("#gridNCR").on("click", ".NCR_NUM", function (e) {
+            var grid = $("#gridNCR").data("kendoGrid");
+            var model = grid.dataItem($(e.target).closest("tr"));
+            var part = model.Part_Num;
+             window.open('@Url.Action("CreateProductranfer", "ProductTranfer")' + "?PartNum=" + part, '_blank');
+    });
+        $("#clear").click(function () {
+            $("#gridNCR").data('kendoGrid').dataSource.filter({
+                field: "Description",
+                operator: "contains",
+                value: ""
+            });
+            $('a.k-grid-filter').removeClass('k-state-active');
+        });
+        $('#create').on('click', function () {
+            let part = "";
+            window.open('@Url.Action("CreateProductranfer", "ProductTranfer")' + "?PartNum=" + part, '_blank');
+        })
+    </script>
+}

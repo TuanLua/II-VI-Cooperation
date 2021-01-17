@@ -1,0 +1,298 @@
+﻿@using II_VI_Incorporated_SCM.Models.TaskManagement
+@using II_VI_Incorporated_SCM.Services
+@using Microsoft.AspNet.Identity
+<style>
+    .RefNUMBER:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .RefNUMBER:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .RefNUMBER {
+        color: blue;
+    }
+
+    .RefNUMBER {
+        color: blue;
+    }
+
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+</style>
+    <div class="portlet-title" style="text-align:right">
+        <div class="actions">
+            <div class="btn-group" align="left">
+                @if ((bool)ViewBag.UserOner && ViewBag.Step2 == true)
+                {
+                    <a class="btn btn-success btn-sm" id="closencr" target="_blank" href="@Url.Action("CreateTaskManagementNcrByTaskNo", "TaskManagement", new { taskNO = ViewBag.PartNum, type = "ProductTranfer" })">
+                        Add Task
+                    </a>
+
+                }
+                <a class="btn btn-success btn-sm" id="addTaskList">
+                    Add List Task
+                </a>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                    <i class="fa"></i> Find By
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:;" id="clear"> Clear Filter</a></li>
+                    <li><a href="javascript:;" onclick="onFind('RefNUMBER')"> RefNUMBER  </a></li>
+                    <li><a href="javascript:;" onclick="onFind('TaskName')"> TaskName  </a></li>
+                    <li><a href="javascript:;" onclick="onFind('Owner')"> Owner  </a></li>
+                    <li><a href="javascript:;" onclick="onFind('Assignee')"> Assignee  </a></li>
+                    <li><a href="javascript:;" onclick="onFind('TaskID')"> TaskID  </a></li>
+                    <li><a href="javascript:;" onclick="onFindStatus('Status')"> Status </a></li>
+                    <li><a href="javascript:;" onclick="onFindPriority('Priority')"> Priority </a></li>
+                    <li>
+                        <a href="javascript:;" onclick="onFindName()"> My Task </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</div>
+        <div class="row">
+                @(Html.Kendo().Grid<TaskmanagementViewmodel>()
+                                                          .Name("gridNCR")
+                                                          .Columns(columns =>
+                                                          {
+                                                              columns.Bound(p => p.RefNUMBER).Title("RefNUMBER").Width(100);
+                                                              columns.Bound(p => p.TaskDetailID).Title("TaskID").HtmlAttributes(new { @class = "Taskname" }).Width(150);
+                                                              columns.Bound(p => p.Taskname).Title("Taskname").HtmlAttributes(new { @class = "Taskname" }).Width(300);
+                                                              columns.Bound(p => p.TaskDescription).Title("TaskComment").Width(150);
+                                                              columns.Bound(p => p.Owner).Title("Requester").Width(100);
+                                                              columns.Bound(p => p.Assignee).Title("Assignee").Width(100);
+                                                              columns.Bound(p => p.Approve).Title("Approve").Width(100);
+                                                              columns.Bound(p => p.DueDate).Format("{0:MM/dd/yyyy}").Title("EstimateDueDate").Width(100);
+                                                              columns.Bound(p => p.Status).Title("Status").Width(100);
+                                                              columns.Bound(p => p.Taskno).Title("Taskno").Hidden();
+                                                              columns.Bound(p => p.TaskDetailID).Title("Taskno").Hidden();
+                                                          })
+                                                          .ToolBar(tools => tools.Excel())
+                                              .Excel(excel => excel
+                                .FileName("NCRManagement.xlsx")
+                                .Filterable(true)
+                                .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+                                          )
+                                                            .Sortable()
+                                                      .Scrollable()
+                                                      .Filterable()
+                                                        .Pageable()
+                                                        .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 150, 1200, "All" }).Refresh(true))
+                                                      .HtmlAttributes(new { style = "height:350px;" })
+                                                      .DataSource(dataSource => dataSource
+                                                          .Ajax()
+                                                              .Read(read => read.Action("ReadTaksMantProduct", "ProductTranfer", new { partnum = ViewBag.partnum }))
+                                                                       .PageSize(10)
+                                                               .Sort(sort => sort.Add("StartDay").Descending())
+                                                          ))
+            </div>
+<div id="popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control boder-opal" id="search">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearch()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupstatus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <input id="statusSearch" type="text" class="dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Created')"> Created </a>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Approve')"> Approve</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Completed')">Completed</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Reject')">Reject </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Reopen')"> Reopen </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Cancel')"> Cancel </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Delete')"> Delete </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchStastus()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="name" />
+<div id="popuppriority" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <input id="prioritySearch" type="text" class="dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Low')"> Low </a>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Normal')"> Normal</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('High')">High</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Urgent')">Urgent </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Immediate')"> Immediate </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchPriority()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="CreateTask" class="modal fade" tabindex="-1" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Create Task</h4>
+            </div>
+            <div class="modal-body">
+                <label>Name</label>
+                <input />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn green" onclick="CreateTaskList()">
+                    Save
+                </button>
+
+                <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupListTask" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                @using (Html.BeginForm("SaveListTask", "ProductTranfer", FormMethod.Post, new
+                {
+                    @class = "form-inline",
+                    @role = "form",
+                    @id = "form-ListTask"
+                }))
+                {
+                    <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <td align="center">
+                                    Please Choose ListTask:
+                                </td>
+                                <td>
+                                    <input type="hidden" id="ID" name="ID" />
+                                    @Html.DropDownList("TASK_NAME", (IEnumerable<SelectListItem>)ViewBag.ListTask, new { @class = "form-control", id = "ListTask", required = "required", style = "width:100%", multiple = "multiple" })
+                                    <input type="hidden" id="Part_Num" name="Part_Num" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button class="btn btn-success btn-sm" id="saveListTask">Save</button>
+                        @*<button class="btn btn-sm btn-info" id="accept">Accept</button>*@
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

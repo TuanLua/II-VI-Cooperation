@@ -1,0 +1,574 @@
+﻿@using II_VI_Incorporated_SCM.Models.NCR
+@using II_VI_Incorporated_SCM.Services
+@using Microsoft.AspNet.Identity
+
+@model II_VI_Incorporated_SCM.Models.TaskManagement.TaskManagementNCRViewModel
+
+@{
+    ViewBag.Title = "Task Management";
+}
+<style>
+    .RefNUMBER:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .RefNUMBER:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .RefNUMBER {
+        color: blue;
+    }
+
+    .RefNUMBER {
+        color: blue;
+    }
+
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+</style>
+<div class="portlet-title">
+    <h4> <p>TASK LIST: <span style="color: red">@ViewBag.TaskNo </span></p>  </h4>
+    <div class="caption" style="padding-left: 15px">
+        <div class="btn-group">
+            <a class="btn btn-success btn-sm" target="_blank" id="closencr" href="@Url.Action("CreateTaskManagementNcrByTaskNo", "TaskManagement", new { taskNO = @ViewBag.TaskNo })">
+                Add Task
+            </a>
+            @*<a href="@Url.Action("CreateTaskManagementNcr","TaskManagement", new { taskID = @ViewBag.TaskManID })">
+            <i class="fa fa-plus"></i> New Task
+        </a>*@
+            @*<a onclick="ChangeStatus(1)">
+            <i class="icon-tag"></i> Approve
+        </a>
+        <a onclick="ChangeStatus(2)">
+            <i class="fa fa-check"></i> Complete
+        </a>
+        <a onclick="ChangeStatus(3)">
+            <i class="icon-pointer"></i> Reject
+        </a>
+        <a onclick="ChangeStatus(4)">
+            <i class="icon-graph"></i> Reopen
+        </a>
+        <a onclick="ChangeStatus(5)">
+            <i class="fa fa-warning"></i> Cancel
+        </a>
+        <a onclick="DeleteTask()">
+            <i class="fa fa-trash"></i> Delete
+        </a>*@
+        </div>
+    </div>
+
+    <div class="actions" style="float:right; padding-bottom: 10px; padding-right: 15px">
+        <div class="btn-group">
+            <button type="button" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                <i class="fa"></i> Find By
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="javascript:;" id="clear"> Clear Filter</a></li>
+                <li><a href="javascript:;" onclick="onFind('Owner')"> Owner  </a></li>
+                <li><a href="javascript:;" onclick="onFind('Assignee')"> Assignee  </a></li>
+                <li><a href="javascript:;" onclick="onFindStatus('Status')"> Status </a></li>
+                <li><a href="javascript:;" onclick="onFindPriority('Priority')"> Priority </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@*<div>
+        <div class="col-sm-2">
+            Progress(25%)
+            Filter
+        </div>
+        <div class="col-sm-2">
+            <a>
+                Owner
+            </a>
+            <select>
+                <option>All</option>
+                <option>Tuan</option>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <a>
+                Assignee
+            </a>
+            <select>
+                <option>All</option>
+                <option>Tuan</option>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <a>
+                Status
+            </a>
+            <select>
+                <option>open Tasks</option>
+                <option>Tuan</option>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <a>
+                Priority
+            </a>
+            <select>
+                <option>All</option>
+                <option>Tuan</option>
+            </select>
+        </div>
+        <div class="col-sm-2" style="padding-bottom: 8px;">
+            <button class="btn btn-success btn-sm"> Reset</button>
+            <button class="btn btn-success btn-sm"> Filter</button>
+        </div>
+    </div>*@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<II_VI_Incorporated_SCM.Models.TaskManagement.TaskManagementNCRViewModel>()
+                      .Name("gridNCR")
+                      .Columns(columns =>
+                      {
+                          //columns.Template(m => { }).ClientTemplate("<input type=\"checkbox\"  class=\"chkbox\" id=\"#=gridNCR#\" /> ");
+                          //columns.Select().Width(30);
+                          columns.Bound(p => p.TaskDetail.TaskID).Hidden();
+                          columns.Bound(p => p.TaskDetail.TASKNAME).Title("Task").HtmlAttributes(new { @class = "ClickGrid" }).HtmlAttributes(new { @class = "RefNUMBER" }).Width(300); 
+                          columns.Bound(p => p.TaskDetail.TaskID).Title("TaskID").HtmlAttributes(new { @class = "ClickGrid" });
+                          //  columns.Bound(p => p.DocumentCount).Title("Files").HtmlAttributes(new { @class = "ClickGrid" });
+                          columns.Bound(p => p.TaskDetail.OWNER).Title("Owner").Hidden();
+                          columns.Bound(p => p.OwnerName).Title("Requester").HtmlAttributes(new { @class = "ClickGrid" });
+                          columns.Bound(p => p.AssigneeName).Title("Assignee").HtmlAttributes(new { @class = "ClickGrid" });
+                          columns.Bound(p => p.OpproverName).Title("Approver").HtmlAttributes(new { @class = "ClickGrid" }).Encoded(false);
+                          columns.Bound(p => p.TaskDetail.EstimateStartDate).Title("Start Date").HtmlAttributes(new { @class = "ClickGrid" }).ClientTemplate("#= TaskDetail.STARTDATE ? kendo.toString(kendo.parseDate(TaskDetail.STARTDATE), 'MM/dd/yyyy') : '' #");
+                          columns.Bound(p => p.TaskDetail.EstimateEndDate).Title("Due Date").HtmlAttributes(new { @class = "ClickGrid" }).ClientTemplate("#= TaskDetail.DUEDATE ? kendo.toString(kendo.parseDate(TaskDetail.DUEDATE), 'MM/dd/yyyy') : '' #");
+                          columns.Bound(p => p.TaskDetail.ActualStartDate).Title("Correct Start Date").HtmlAttributes(new { @class = "ClickGrid" }).ClientTemplate("#= TaskDetail.CORRECTSTARTDATE ? kendo.toString(kendo.parseDate(TaskDetail.CORRECTSTARTDATE), 'MM/dd/yyyy') : '' #");
+                          columns.Bound(p => p.TaskDetail.ActualEndDate).Title("Correct End Date").HtmlAttributes(new { @class = "ClickGrid" }).ClientTemplate("#= TaskDetail.CORRECTENDDATE ? kendo.toString(kendo.parseDate(TaskDetail.CORRECTENDDATE), 'MM/dd/yyyy') : '' #");
+                          columns.Bound(p => p.TaskDetail.CreateDate).Title("Est./Actual").HtmlAttributes(new { @class = "ClickGrid" }).ClientTemplate("#= TaskDetail.EST_COMPLETEIONDATE ? kendo.toString(kendo.parseDate(TaskDetail.EST_COMPLETEIONDATE), 'MM/dd/yyyy') : '' #");
+                          columns.Bound(p => p.TaskDetail.STATUS).Title("Status").HtmlAttributes(new { @class = "ClickGrid" });
+                          //columns.Bound(p => p.TaskDetail.PRIORITY).Title("Priority").HtmlAttributes(new { @class = "ClickGrid" });
+                          columns.Bound(p => p.LastComment).Title("Last Comment").HtmlAttributes(new { @class = "ClickGrid" }).Encoded(false);
+                          //columns.Command(m => { m.Custom("Detail").HtmlAttributes(new { @class = "ClickGrid" }); }).HtmlAttributes(new { style = "text-align:center;" }).Title("Edit").Width(100);
+                      })
+                       .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                      .Sortable()
+                      .Scrollable()
+                      .Filterable()
+                      .HtmlAttributes(new { style = "height:550px;" })
+                      .DataSource(dataSource => dataSource
+                          .Ajax()
+                          .PageSize(10)
+                          .Read(read => read.Action("ReadTaksMantNCR", "TaskManagement", new { taskID = @ViewBag.TaskManID }))
+                          .Sort(sort => sort.Add("TaskDetail.EstimateStartDate").Ascending())
+                      ))
+        </div>
+    </div>
+</div>
+<div id="popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control boder-opal" id="search">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearch()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupstatus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <input id="statusSearch" type="text" class="dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Created')"> Created </a>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Approve')"> Approve</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Completed')">Completed</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Reject')">Reject </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Reopen')"> Reopen </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Cancel')"> Cancel </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Delete')"> Delete </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchStastus()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popuppriority" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <input id="prioritySearch" type="text" class="dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Low')"> Low </a>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Normal')"> Normal</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('High')">High</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Urgent')">Urgent </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Immediate')"> Immediate </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchPriority()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<script>
+        var Url = '@Url.Action("GetdropdownDefect", "WriteNcrForProcess")';
+        var urlview = '@Url.Action("ViewApproval", "NCRApproval")';
+    </script>*@
+@section scripts {
+    <script type="text/javascript">
+        var tdSearch;
+        $(document).ready(function () {
+            $("#datefrom").datepicker();
+            $("#dateto").datepicker();
+        })
+        function onFind(condition) {
+            $('.searchField').text(condition);
+
+            if (condition == 'Owner') {
+                $('#search').val();
+                $('#searchId').val(0);
+            }
+            else if (condition == 'Assignee') {
+                $('#searchId').val(1);
+            }
+            else if (condition == 'Status') {
+                $('#searchId').val(2)
+            }
+            else if (condition == 'Priority') {
+                $('#searchId').val(3)
+            }
+            $('#popup').modal('show');
+        }
+        function onSearch() {
+            var searchText = $('#search').val().toLowerCase();
+            var number = $('#searchId').val();
+            var num;
+            if (number == '1') {
+                num = 1;
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "OwnerName", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '2') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AssigneeName", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '3') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "TaskDetail.STATUS", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '4') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "TaskDetail.PRIORITY", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            $('#popup').modal('hide');
+
+        }
+
+
+        function onSearchAge() {
+            var age1cond = $('#age1').val();
+            var age2cond = $('#age2').val();
+            var age3cond = $('#age3').val();
+            if (age1cond) {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "lt", value: age1cond });
+            }
+            if (age2cond) {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "lt", value: age2cond + 1 });
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "gt", value: age2cond - 1 });
+            }
+            if (age3cond) {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "gt", value: age3cond });
+            }
+            $('#popupage').modal('hide');
+        }
+
+
+        function onSearchStastus() {
+            var number = $('#searchId').val();
+            if (number == '8') {
+                var searchStatus = $('#statusSearch').val().toLowerCase();
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "TaskDetail.STATUS", operator: "contains", value: searchStatus });
+                $('#statusSearch').val("");
+            }
+            $('#popupstatus').modal('hide');
+        }
+
+        function onSearchPriority() {
+            var number = $('#searchId').val();
+            if (number == '10') {
+                var searchPriority = $('#prioritySearch').val().toLowerCase();
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "TaskDetail.PRIORITY", operator: "contains", value: searchPriority });
+                $('#prioritySearch').val("");
+            }
+            $('#popuppriority').modal('hide');
+        }
+
+        function onSearchInspector(inspector) {
+            var number = $('#searchId').val();
+            if (number == '9') {
+                var searchStatus = $('#inspectorId').val().toLowerCase();
+                console.log(searchStatus)
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "INSPECTOR", operator: "contains", value: searchStatus });
+                $('#statusSearch').val("");
+            }
+            $('#popupinspector').modal('hide');
+        }
+        function onStatus(status) {
+            $('#search').text(status);
+            $('#statusSearch').val(status);
+        }
+        function onPriority(priority) {
+            $('#search').text(priority);
+            $('#prioritySearch').val(priority);
+        }
+
+        //var mygrid = $("#gridNCR").kendoGrid({
+        //    selectable: true
+        //});
+        //select row data catch status
+        $("#gridNCR").on("click", ".RefNUMBER", function (e) {
+            var grid = $("#gridNCR").data("kendoGrid");
+            var model = grid.dataItem($(e.target).closest("tr"));
+            var Task = model.TaskDetail.TaskID;
+             window.open('@Url.Action("EditTaskManagementNcr", "TaskManagement")' + "?taskID=" + Task, '_blank');
+        });
+        function onFindStatus(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Status') {
+                $('#statusSearch').show();
+                $('#searchId').val(8);
+                $('#popupstatus').modal('show');
+            }
+        }
+
+        function onFindPriority(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Priority') {
+                $('#prioritySearch').show();
+                $('#searchId').val(10);
+                $('#popuppriority').modal('show');
+            }
+        }
+
+        function onFindInspector(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Inspector') {
+                $('#inspectorSearch').show();
+                $('#searchId').val(9);
+                $('#popupinspector').modal('show');
+            }
+        }
+
+        function onFindDate(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Created Date') {
+                $('#searchId').val(3);
+                $('#popupdate').modal('show');
+            }
+        }
+
+        function onSearchDate() {
+            var number = $('#searchId').val();
+            if (number == '3') {
+                var datefrom = $('#datefrom').val().toLowerCase();;
+                var dateto = $('#dateto').val().toLowerCase();;
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "INS_DATE", operator: "gte", value: datefrom },
+                    { field: "INS_DATE", operator: "lte", value: dateto });
+                $('#datefrom').val("");
+                $('#dateto').val("");
+            }
+            $('#popupdate').modal('hide');
+        }
+
+        function ChangeStatus(status) {
+            //Common: Approver = 1, Complete = 2, Reject = 3, Reopen = 4, Cancel = 5
+            $.blockUI();
+            var kgrid = $("#gridNCR").data("kendoGrid");
+            var checkedItems = [];
+            var entityGrid = $("#gridNCR").data("kendoGrid");
+            var rows = entityGrid.select();
+            rows.each(function (index, row) {
+                checkedItems.push(entityGrid.dataItem(row).TaskDetail.TaskID);
+            });
+
+            if (checkedItems.length > 0) {
+                $.ajax({
+                    url: "@Url.Action("ChangeStatusTaskMan", "TaskManagement")",
+                    type: "POST",
+                    data: { "id": checkedItems, "status": status },
+                    error: function (data) {
+                        alert("Error")
+                    },
+                    success: function (data) {
+                        if (data) {
+                            location.reload();
+                            bootbox.alert("Update Status Success");
+
+                        } else {
+                            bootbox.alert("Update Status Fail");
+                        }
+                    }
+                }).always(function () {
+                    $.unblockUI();
+                })
+            }
+            else {
+                $.unblockUI();
+                bootbox.alert("Choose a TaskManagement");
+            }
+        }
+
+        function DeleteTask() {
+            $.blockUI();
+            var kgrid = $("#gridNCR").data("kendoGrid");
+            var checkedItems = [];
+            var entityGrid = $("#gridNCR").data("kendoGrid");
+            var rows = entityGrid.select();
+            rows.each(function (index, row) {
+                checkedItems.push(entityGrid.dataItem(row).TaskDetail.TaskID);
+            });
+            if (checkedItems.length > 0) {
+                var isDelete = confirm("Are you sure to delete?");
+                if (isDelete == true) {
+                    $.ajax({
+                        url: "@Url.Action("DeleteTaskMan", "TaskManagement")",
+                        type: "POST",
+                        data: { "id": checkedItems },
+                        error: function (data) {
+                            alert("Error")
+                        },
+                        success: function (data) {
+                            if (data) {
+                                location.reload();
+                                bootbox.alert("Delete Success");
+
+                            } else {
+                                bootbox.alert("Delete Fail");
+                            }
+                        }
+                    }).always(function () {
+                        $.unblockUI();
+                    })
+                }
+                else {
+                    $.unblockUI();
+                }
+            }
+            else {
+                $.unblockUI();
+                bootbox.alert("Choose a TaskManagement");
+            }
+        }
+
+        $("#clear").click(function () {
+            $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "TaskDetail.OWNER", operator: "contains", value: "" });
+            $("#gridNCR").data("kendoGrid").dataSource.sort({ field: "TaskDetail.EstimateStartDate", dir: "asc" });
+            $('#search').val("");
+            $('a.k-grid-filter').removeClass('k-state-active')
+            //location.reload();
+        })
+    </script>
+}

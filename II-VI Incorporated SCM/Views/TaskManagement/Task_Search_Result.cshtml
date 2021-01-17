@@ -1,0 +1,178 @@
+﻿
+@using II_VI_Incorporated_SCM.Models.TaskManagement
+@using II_VI_Incorporated_SCM.Services
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Task Search";
+}
+
+<style>
+    .RefNUMBER:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .RefNUMBER:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .RefNUMBER {
+        color: blue;
+    }
+
+    .RefNUMBER {
+        color: blue;
+    }
+
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+
+    .TaskID {
+        color: blue;
+    }
+</style>
+<h3>Task Management </h3>
+<div class="form-group row" style="text-align:right">
+    <label class="col-md-4" id="lbDept">Key Word<span style="color: red">*</span> : </label>
+    <div class="col-md-4">
+        @Html.TextBox("KeyWord", "", new { @class = "form-control",id="KeyWord" })
+    </div>
+</div>
+<div class="form-group col-md-12" style="text-align:center">
+    <button class="btn btn-sm btn-success" id="search">Search</button>
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<TaskmanagementViewmodel>()
+                                                                              .Name("gridTask")
+                                                                              .Columns(columns =>
+                                                                              {
+                                                                                  //columns.Bound(p => p.RefNUMBER).Title("RefNUMBER").HtmlAttributes(new { @class = "RefNUMBER" }).Width(150);
+                                                                                  columns.Bound(p => p.TaskDetailID).Title("TaskID").HtmlAttributes(new { @class = "TaskID" }).Width(150);
+                                                                                  columns.Bound(p => p.Taskname).Title("Name").HtmlAttributes(new { @class = "Taskname" }).Width(200);
+                                                                                  columns.Bound(p => p.TaskDescription).Title("Description").Width(200);
+                                                                                  columns.Bound(p => p.Owner).Title("Requester").Width(100);
+                                                                                  columns.Bound(p => p.Assignee).Title("Assignee").Width(100);
+                                                                                  columns.Bound(p => p.Approve).Title("Approve").Width(100);
+                                                                              //   columns.Bound(p => p.Priority).Title("Priority").Width(100);
+                                                                              columns.Bound(p => p.Status).Title("Status").Width(100);
+                                                                              //  columns.Bound(p => p.StartDay).Format("{0:MM/dd/yyyy}").Title("StartDay");
+                                                                              //  columns.Bound(p => p.DueDate).Format("{0:MM/dd/yyyy}").Title("DueDate");
+                                                                              //  columns.Bound(p => p.ActualStarDay).Format("{0:MM/dd/yyyy}").Title("ActualStarDay");
+                                                                              //  columns.Bound(p => p.ActualEndDay).Format("{0:MM/dd/yyyy}").Title("ActualEndDay");
+                                                                              columns.Bound(p => p.Taskno).Title("Taskno").Hidden();
+                                                                                  columns.Bound(p => p.TaskDetailID).Title("Taskno").Hidden();
+                                                                                  columns.Bound(p => p.INSDATEs).Title("Taskno").Hidden();
+                                                                                  columns.Bound(p => p.TopicID).Hidden();
+
+
+                                                                              })
+                                                                                   .ToolBar(tools => tools.Excel())
+                                                                                      .Excel(excel => excel
+                                                                        .FileName("TaskManagement.xlsx")
+                                                                        .Filterable(true)
+                                                                        .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+                                                                                  )
+                                                                              .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                                                                              .Sortable()
+                                                                              .Scrollable()
+                                                                              .Filterable()
+                                                                               .HtmlAttributes(new { style = "height:550px;" })
+                                                                              // .HtmlAttributes(new { @class = "cursorLink", @style = "height:auto;" })
+                                                                              .DataSource(dataSource => dataSource
+                                                                                  .Ajax()
+                                                                                  .PageSize(10)
+                                                                                   //.Read(read => read.Action("SearchListTaskMant", "TaskManagement"))
+                                                                                   .Sort(sort => sort.Add("INSDATEs").Descending())
+                                                                              ))
+        </div>
+    </div>
+</div>
+
+
+<input type="hidden" id="name" />
+
+
+
+
+
+@section scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var id = '@User.Identity.GetUserId()';
+
+        })
+
+        $("#gridTask").on("click", ".RefNUMBER", function (e) {
+            var grid = $("#gridTask").data("kendoGrid");
+            var model = grid.dataItem($(e.target).closest("tr"));
+            var NCR_NUM = model.RefNUMBER;
+            $.post('@Url.Action("GetUrlViewTask", "TaskManagement")', { TaskNum: NCR_NUM }, function (result) {
+              let urlaction=  result.url + NCR_NUM ;
+                //   location.href = urlaction ;
+                window.open(urlaction, '_blank')
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });
+
+
+        });
+        $("#gridTask").on("click", ".Taskname", function (e) {
+            var grid = $("#gridTask").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+            var NCR_NUM = model.TaskDetailID;
+        window.open('@Url.Action("EditTaskManagementNcr", "TaskManagement")' + "?taskID="+ NCR_NUM, '_blank');
+        });
+        $("#gridTask").on("click", ".TaskID", function (e) {
+            var grid = $("#gridTask").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+            var NCR_NUM = model.Taskno;
+        window.open('@Url.Action("ViewTaskListID", "TaskManagement")' + "?taskID="+ NCR_NUM, '_blank');
+        });
+
+        $("#search").on('click', function () {
+        $.blockUI();
+        debugger;
+
+            let KeyWord = $("#KeyWord").val();
+        
+            if (KeyWord == "") {
+                alert("Please input KeyWord to query!");
+            return;
+        }
+        else {
+                $("#gridTask").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("SearchListTaskMant", "TaskManagement")?keyword=' + KeyWord;
+                $("#gridTask").data("kendoGrid").dataSource.read();         
+           
+        }
+     $.unblockUI();
+    })
+
+    </script>
+}

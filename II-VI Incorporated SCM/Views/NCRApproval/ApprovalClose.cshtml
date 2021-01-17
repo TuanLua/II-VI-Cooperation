@@ -1,0 +1,313 @@
+﻿
+@{
+    ViewBag.Title = "CloseApproval";
+}
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box">
+            <div class="portlet-title">
+                <div class="caption">
+                    <a class="btn btn-success btn-sm bt-close">OK</a>
+                    <a class="btn btn-danger btn-sm bt-close">Close</a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                    <thead>
+                        <tr>
+                            <th colspan="2">MI PART NO.</th>
+                            <th> REV</th>
+                            <th>PO NUMBER</th>
+                            <th>TRAVELLER NO./ ARM NO. /LOT#.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX">
+                            <td>12345680</td>
+                            <td></td>
+                            <td>Y</td>
+                            <td>7009709</td>
+                            <td>26123456;2678678</td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td colspan="2">
+                                <b>	DECRIPTION OF MATERRIAL</b>
+                                <br />
+                                PS-GOLD PLATED 030X.030X-068
+                            </td>
+                            <td><b>MODAL OR  SERIAL NO.</b></td>
+                            <td>
+                                <b>REC.INSP</b>
+                                <br>
+                                <input type="checkbox" class="checkboxes" value="1" disabled="disabled" />
+                            </td>
+                            <td>
+                                <b>INPROCESS</b>
+                                <br>
+                                <input type="checkbox" class="checkboxes" value="1" disabled="disabled" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                    <thead>
+                        <tr>
+                            <th colspan="6">INSSPECTION PLAN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX">
+                            <td rowspan="4">VENDOR</td>
+                            <td rowspan="2">
+                                <b>NAME OF VENDOR</b>
+                                <br />
+                                MARLOW INDUTRIES,INC.
+                            </td>
+                            <td>
+                                <b>SAMPLE INSC</b>
+                                <br />
+                                <input type="checkbox" class="checkboxes" value="1" />
+                                <label>AQL</label><input type=text value="0.65"disabled="disabled" /> LEVEL <input type=text value="0" disabled="disabled" />
+                            </td>
+                            <td>
+                                <b>100%</b>
+                                <br />
+                                INSP
+                                <input type="checkbox" class="checkboxes" value="1" disabled="disabled" />
+                            </td>
+                            <td colspan="2">
+                                <b>FIRT ARTICAL</b>
+                                <br />
+                                <input type="checkbox" class="checkboxes" value="0"  disabled="disabled"/>
+                            </td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td colspan="5">
+                                <b>	QUANTITY</b>
+                            </td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td>
+                                <b>	STREET ADDRESS</b>
+                                <br />
+                                10451 VISA PART ROAD,DALLAT TEXAS,72583
+                            </td>
+                            <td>
+                                <b>RECIVED</b>
+                                <br />
+                                4500
+                            </td>
+                            <td>
+                                <b>INSPECTED</b>
+                                <br />
+                                96
+                            </td>
+                            <td>
+                                <b>REJECTED</b>
+                                <br />
+                                11
+                            </td>
+                            <td>11.46%</td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td>
+                                <b>	CITY STATE ZIP CODE</b>
+                            </td>
+                            <td>
+                                <b>REPORT WRITTEN BY </b>
+                                Nguyen Thi Luong
+                            </td>
+                            <td colspan="3">
+                                <b>DATE</b>
+                                <br />
+                                05-stem-2017
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                    <thead>
+                        <tr>
+                            <th>ITEM</th>
+                            <th>QTY</th>
+                            <th>DEFECT</th>
+                            <th>DECRIPTION</th>
+                            <th>REMARK</th>
+                            <th>RESPON</th>
+                            <th>DISPN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX">
+                            <td>1</td>
+                            <td>6</td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>Damaged</option>
+                                        <option>Damaged 2</option>
+                                        <option>Damaged 3</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>Cutiong wrong</option>
+                                        <option>Cutiong 2</option>
+                                        <option>Cutiong 3</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>1.Vendor</option>
+                                        <option>Vendor 2</option>
+                                        <option>Vendor 3</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>G.Describe</option>
+                                        <option>Describe 2</option>
+                                        <option>Describe 3</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td>2</td>
+                            <td>6</td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>Plating</option>
+                                        <option>Plating 2</option>
+                                        <option>Plating 3</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>Missing place</option>
+                                        <option>Mising 2</option>
+                                        <option>Minsing 3</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>1.Vendor</option>
+                                        <option>Vendor 2</option>
+                                        <option>Vendor 3</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>G.Describe</option>
+                                        <option>G. 1</option>
+                                        <option>G. 3</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              
+                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                    <thead>
+                        <tr>
+                            <th colspan="5">SET APPROVAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX">
+                            <td>
+                                <b>QUALITY</b>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>1</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td><b>DATE</b></td>
+                            <td>
+                                <b>Engineering</b>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>Mr.Hung</option>
+                                        <option>Mr.Hung</option>
+                                        <option>Ms.Hoa</option>
+                                        <option>Mr.Tuan</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td><b>DATE</b></td>
+                        </tr>
+                        <tr class="odd gradeX">
+                            <td>
+                                <b>MFG/ASY</b>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>2</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td><b>DATE</b></td>
+                            <td>
+                                <b> PUCHARSING</b>
+                                <div class="form-group">
+                                    <select class="form-control" disabled="disabled">
+                                        <option>MR.Tuoi</option>
+                                        <option>MR.Tuoi</option>
+                                        <option>Mr.Hue</option>
+                                        <option>Ms.Tung</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td><b>DATE</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="responsive" class="modal fade " tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4> class="modal-title">Accept form</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="scroller" style="height:150px" data-always-visible="1" data-rail-visible1="1">
+                            <label>Password</label>
+                            <input type="password" required="required">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-success">OK</button>
+                        <button type="button" data-dismiss="modal" class="btn dark btn-outline">Cancel</button>
+                        <!-- <button type="button" class="btn green">Create NCR</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/backend/approval.js"></script>

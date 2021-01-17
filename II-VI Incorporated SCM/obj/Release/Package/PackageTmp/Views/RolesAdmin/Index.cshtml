@@ -1,0 +1,44 @@
+﻿@model IEnumerable<II_VI_Incorporated_SCM.Models.Account.ApplicationRole>
+
+@{
+    ViewBag.Title = "Roles Management";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New Role", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Role Name
+            </th>
+            <th>
+                Module
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Group)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

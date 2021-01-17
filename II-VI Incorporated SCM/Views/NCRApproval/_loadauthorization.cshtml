@@ -1,0 +1,254 @@
+﻿@model II_VI_Incorporated_SCM.Models.NCR.NCRManagementViewModel
+@using II_VI_Incorporated_SCM.Services;
+@using II_VI_Incorporated_SCM.Models;
+@using II_VI_Incorporated_SCM.Models.NCR;
+
+<div class="portlet grey col-md-12">
+    <div class="row margin-left-right-0">
+        <div class="form-group" style="padding-left:20px;padding-right:20px">
+            <div id="div-Approver" class="cblockUI">
+                <h4 style="font-weight: bold">MARLOW MRB AUTHORIZATION</h4>
+                <table class="table table-striped table-bordered table-checkable order-column">
+                    <thead>
+                        <tr>
+                            <th width="30%">Role Name</th>
+                            <th width="45%">User Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="append-data-approver">
+                        @*tuanlua sua*@
+                        @if (Model.STATUS.Trim() == StatusInDB.Submitted@*|| Model.STATUS.Trim() == StatusInDB.WaitingForDisposition*@)
+{
+var listUser = (List<UserDispositionModelView>)ViewBag.ListUser;
+int count = 0;
+if (Model.ListUSerAppr != null)
+{
+foreach (var approver in Model.ListUSerAppr)
+{
+var UserOfRole = listUser.Where(x => x.RoleId == approver.RoleId).ToList();
+                    <tr id="" class="tr-approver">
+                        <td>
+                            @Html.DropDownListFor(n => n.ListUSerAppr.FirstOrDefault(x => x.RoleId == approver.RoleId).RoleId, new SelectList(ViewBag.ListRole2, "Value", "Text", approver.RoleId), "Select Role",
+                                new { id = "old-approver-edit-rolename" + count, name = "UserApprove["+count+"].RoleId", @onchange = "onChangeRole('"+approver.Id+"', '"+approver.RoleId+"', this, "+count+")" })
+                            <input type="hidden" name="RoleIDs" value="@approver.Id" id="RoleIDs_@count" />
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(n => n.ListUSerAppr.FirstOrDefault(x => x.RoleId == approver.RoleId).IdUser, new SelectList(UserOfRole, "UserId", "RoleName", approver.IdUser), "Select User",
+                                new { id = "old-approver-edit-fullname" + count, name = "UserApprove[" + count + "].UserId", @onchange = "onChangeUser('"+ approver.Id + "','"+ approver.FullName + "', this, " + count + ")" })
+                        </td>
+                        <td>
+                            @*<button type="button" class="btn btn-danger pull-right" onclick="deleteApprover(this)">Delete</button>*@
+                        </td>
+                    </tr>
+                    count++;
+                }
+            }
+        }
+        else if (Model.STATUS.Trim() == StatusInDB.WaitingForDispositionApproval)
+        {
+            if (Model.ListUSerAppr != null)
+            {
+                foreach (var approver in Model.ListUSerAppr)
+                {
+                    <tr>
+                        <td>@approver.RoleName</td>
+                        <td>@approver.FullName</td>
+                        @if (approver.IsAppr)
+                        {
+                            <td class="note note-statusbar">
+                                <h1>Approved</h1>
+                                <span>@approver.DateAppr</span>
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="display:flex; border: unset !important">
+                                <button type="button" onclick="Approve('@approver.Id', '@approver.IdUser', '@approver.FullName')" class="btn btn-success pull-left">Approve</button>
+                                <button type="button" onclick="Reject('@approver.Id', '@approver.IdUser', true)" class="btn btn-warning pull-right">Reject</button>
+                                <button type="button" onclick="ReAssign('@approver.RoleId', '@approver.IdUser', '@approver.Id', true)" class="btn btn-danger pull-right">Re-Assign</button>
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+        }
+        else if (Model.STATUS.Trim() == StatusInDB.WaitingForDisposition)
+        {
+
+            var listUser = (List<UserDispositionModelView>)ViewBag.ListUser;
+            int count = 0;
+            if (Model.ListUSerAppr != null)
+            {
+                foreach (var approver in Model.ListUSerAppr)
+                {
+                    var UserOfRole = listUser.Where(x => x.RoleId == approver.RoleId).ToList();
+                    <tr id="" class="tr-approver">
+                        <td>
+                            @Html.DropDownListFor(n => n.ListUSerAppr.FirstOrDefault(x => x.RoleId == approver.RoleId).RoleId, new SelectList(ViewBag.ListRole2, "Value", "Text", approver.RoleId), "Select Role",
+                                new { id = "old-approver-edit-rolename" + count, name = "UserApprove["+count+"].RoleId", @onchange = "onChangeRole('"+approver.Id+"', '"+approver.RoleId+"', this, "+count+")" })
+                            <input type="hidden" name="RoleIDs" value="@approver.Id" id="RoleIDs_@count" />
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(n => n.ListUSerAppr.FirstOrDefault(x => x.RoleId == approver.RoleId).IdUser, new SelectList(UserOfRole, "UserId", "RoleName", approver.IdUser), "Select User",
+                                new { id = "old-approver-edit-fullname" + count, name = "UserApprove[" + count + "].UserId", @onchange = "onChangeUser('"+ approver.Id + "','"+ approver.FullName + "', this, " + count + ")" })
+                        </td>
+                        <td style="display:flex; border: unset !important">
+                            <button type="button" onclick="RejectEng('@approver.Id', '@approver.IdUser', true)" class="btn btn-warning pull-right " id="rejectENg">Reject</button>
+                            <button type="button" onclick="ReAssignEng('@approver.RoleId', '@approver.IdUser', '@approver.Id', true)" class="btn btn-danger pull-right " id="rejectAssign">Re-Assign</button>
+                        </td>
+                    </tr>
+                    count++;
+                }
+            }
+        }
+        else if (Model.STATUS.Trim() == StatusInDB.DispositionApproved || Model.STATUS.Trim() == StatusInDB.Close)
+        {
+            if (Model.ListUSerAppr != null)
+            {
+                foreach (var approver in Model.ListUSerAppr)
+                {
+                    <tr>
+                        <td>@approver.RoleName</td>
+                        <td>@approver.FullName</td>
+                        <td class="note note-statusbar">
+                            <h1>Approved</h1>
+                            <span>@approver.DateAppr</span>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+
+                    </tbody>
+                </table>
+                @if (Model.STATUS.Trim() != StatusInDB.DispositionApproved & Model.STATUS.Trim() != StatusInDB.Close & Model.STATUS.Trim() != StatusInDB.Submitted)
+                {
+                    <button id="btn-add-approver" type="button" class="btn btn-success pull-right" style="margin-top:-20px;margin-bottom:10px;">Add</button>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<br />
+<script>
+    $(document).ready(function () {
+        $('.tr-approver').each(function (i,e) {
+            $('#old-approver-edit-rolename' + i).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+            $('#old-approver-edit-fullname' + i).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+        });
+
+        if ('@Model.STATUS' === '@StatusInDB.WaitingForDispositionApproval') {
+            console.log('MARLOW MRB AUTHORIZATION - Waiting For Disposition Approval');
+            $('div#div-Approver button#btn-add-approver').hide();
+        }
+
+    });
+
+    function onChangeUser(id, old, vm, i) {
+        console.log($(vm).val());
+        if ($(vm).val() === '') {
+            bootbox.alert("Please select User");
+            return;
+        }
+        let newname = $('#' + $(vm).attr('id') + ' :selected').text();
+        bootbox.confirm('Are you sure update "'+old+'" to "' + newname+'"!', function (res) {
+            if (res) {
+                var value = $(vm).val();
+                $.blockUI();
+                $.post('@Url.Action("UpdateUser", "NCRApproval")', {id: id, userId: value }, function (result) {
+                    if (result.success) {
+                        if (result.obj > 0) {
+                            $('#RoleIDs_' + i).val(result.obj);
+                            bootbox.alert('Update userapproval sucess!');
+                        }
+                    } else {
+                        if (result.obj > 0)
+                            $('#RoleIDs_' + i).val(result.obj);
+                        bootbox.alert(result.message);
+                    }
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            }
+        });
+    }
+
+    function onChangeRole(id, old, vm, i) {
+        if ($(vm).val() === '') {
+            bootbox.alert("Please select Role");
+            return;
+        }
+        console.log($(vm).val());
+        $.get('@Url.Action("GetUserByRole", "NCRApproval")?role=' + $(vm).val())
+            .success(function (data) {
+                $('#old-approver-edit-fullname' + i).show();
+                $('#old-approver-edit-fullname' + i).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+                $('#old-approver-edit-fullname' + i).multiselect('dataprovider', data);
+            });
+    }
+
+    
+        $('#btn-add-approver').click(function () {
+
+            let listRow = $('.tr-Approver-new');
+            let rowlength = listRow.length;
+
+            for (let i = 0; i < rowlength; i++) {
+                var ListColumns = listRow[i].children;
+                ListColumns[0].children[0].name = "UserApprove[" + i + "].RoleId";
+                ListColumns[1].children[0].name = "UserApprove[" + i + "].UserId";
+            }
+
+            let selectRole = $('#ListRoleTemplate').html();
+            let trtemplate = '<tr class="tr-Approver-new" >' + 
+                '<td width="40%"><select id="option-role-approve-new-' + rowlength +'" name="UserApprove[' + rowlength + '].RoleId">' + selectRole +'</select></td>' +
+                '<td width="40%"><select id="option-user-approve-new-' + rowlength + '" style="display:none" name="UserApprove[' + rowlength +'].UserId"><option value="">Select Approver</option></select></td>'+
+                '<td><button onclick="deleteApprover(this)" type="button" class="btn btn-danger pull-right">Delete</button></td></tr>';
+            $("tbody#append-data-approver").append(trtemplate);
+
+            $("#option-role-approve-new-" + rowlength).multiselect({
+                dropUp: true,
+                enableFiltering: true, enableCaseInsensitiveFiltering: true,
+                onChange: function (option, checked) {
+                    
+                    console.log(checked + ' - ' + option + ' - ' + $("#option-role-approve-new-" + rowlength).val());
+                    $.get('@Url.Action("GetUserByRole", "NCRApproval")?role=' + $("#option-role-approve-new-" + rowlength).val())
+                        .success(function (data) {
+                            $('#option-user-approve-new-' + rowlength).show();
+                            $('#option-user-approve-new-' + rowlength).multiselect({
+                                dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true,
+                                onChange: function (option, checked) {
+                                    
+                                    console.log($(option).val());
+                                }
+                            });
+                            $('#option-user-approve-new-' + rowlength).multiselect('dataprovider', data);
+                        });
+                    
+                }
+            });
+        });
+
+        function deleteApprover(btndelete) {
+            let tr = $($(btndelete).parent().parent());
+            let tbody = $(tr.parent());
+            tr.remove();
+
+            let listRow = $('#' + $(tbody).attr('id') + ' tr.tr-Approver-new');
+            let rowlength = listRow.length;
+
+            for (let i = 0; i < rowlength; i++) {
+                var ListColumns = listRow[i].children;
+                ListColumns[0].children[0].children[0].name = "UserApprove[" + i + "].RoleId";
+                ListColumns[1].children[0].children[0].name = "UserApprove[" + i + "].UserId";
+
+                ListColumns[0].children[0].children[0].id = "option-role-approve-new-" + i;
+                ListColumns[1].children[0].children[0].id = "option-user-approve-new-" + i;
+            }
+        }
+
+</script>

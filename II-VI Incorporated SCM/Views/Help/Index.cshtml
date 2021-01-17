@@ -1,0 +1,170 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+<style>
+
+</style>
+<div>
+    <br />
+    <a style="color:blue;" id="Flowclick">Lưu đồ hoạt động của 1 NCR (Flowchart of an NCR)</a>
+  <p></p>
+    <a style="color:blue;" id="CreateIQCclick">	Viết NCR của IQC (NCR  for IQC)</a>
+    <p></p>
+    <a style="color:blue;" id="CreateINPROclick">Viết NCR Buy Part tại qui trinh (NCR for In process)</a>
+    <br />
+    <br />
+    <a style="color:blue;" id="CreateINPROMakeclick">Viết NCR Make Part tại qui trình (NCR for In process)</a>
+    <br />
+    <br />
+    <a style="color:blue;">	Submit NCR</a>
+    <br />
+    <br />
+    <a style="color:blue;">		Xác nhận của WH (WH Confirmation)</a>
+    <br />
+    <br />
+    <a style="color:blue;">	Giải quyết NCR (NCR Disposition)</a>
+    <br />
+    <br />
+    <a style="color:blue;">Phê duyệt NCR (NCR Approval)</a>
+    <br />
+    <br />
+    <a style="color:blue;">Xem danh sách các NCR đang chờ giải quyết (NCR waiting for Disposition)</a>
+    <br />
+    <br />
+    <a style="color:blue;"> 	Xem danh sách các NCR đang chờ ký duyệt (NCR waiting for Approval)</a>
+    <br />
+    <br />
+    <a style="color:blue;"> 	Xem danh sách các NCR (NCR Management)</a>
+    <br />
+    <br />
+    <a style="color:blue;"> 	Tìm kiếm NCR (Find NCR)</a>
+    <br />
+    <br />
+    <a style="color:blue;">	Submit Change Item</a>
+    <br />
+    <br />
+    <a style="color:blue;">	Tạo/xừ lý Task của NCR (Task Management)</a>
+</div>
+<br />
+<div id="Flow">
+    <br /><br />
+    <br />
+    <h4 style="color:blue">Lưu đồ hoạt động của 1 NCR</h4>
+    <img src="~/Content/Helps/Flowcharts/Flowchart11.jpg" />
+    <img src="~/Content/Helps/Flowcharts/Flowchart21.jpg" />
+</div>
+<div id="CreateIQC" class="text-left">
+    <br />
+    <br />
+    <br />
+    <br />
+    <h4 style="color:blue;text-decoration: underline;">Viết NCR của IQC (NCR  for IQC)</h4>
+    Sử hướng dẫn này để viết 1 NCR của IQC
+    <br />
+    <a style="color:blue;text-decoration: underline;"> Bước 1:</a> xác định NCR của nhà máy TEM hay nhà máy MCUBED
+    <br />
+    Thực hiện các bước đánh số trên hình để xác định TEM hoặc MCUBED:
+    <br>
+    <img src="~/Content/Helps/CCN/CCNListfrm.jpg" />
+    <br />
+    <a style="color:blue;text-decoration: underline;">
+        Bước 2:
+    </a>Lựa chọn Receiver để viết NCR
+    <br />
+    Thưc hiện theo hình để tìm kiểm thông tin
+    <br />
+    <img src="~/Content/Helps/CreateNCRIQC/NCRIQC1.jpg" />
+    <br />
+    Chọn
+    <b style="color:red ;">
+        (3)
+    </b>
+    “For IQC” và nhấn nút
+    <b style="color:red ;">
+        (4)
+    </b>
+    để tìm kiếm thông tin cần viết NCR
+    <br />
+    <a style="color:blue;text-decoration: underline;">
+        4a/ Tìm thông tin theo  <b style="color:red ;"> Receiver:</b>
+    </a>
+    <br />
+    Chọn <b style="color:red">(5)</b>, nhập vào receiver và Part Number ở <b style="color:red">
+        (6)
+    </b> và <b style="color:red">
+        (7)
+    </b> sau đó nhấn  <b style="color:red">
+        (8) “Go”
+    </b>
+    <br />
+    Các thông tin liên quan sẽ hiển thị ở <b style="color:red">
+        (9)
+    </b>. Kiểm tra thông tin
+    <br />
+    <b style="color:red ;">(10) “OK”</b> bắt đầu viết NCR
+
+    <b style="color:red">(11) “Close”</b>
+    thoát, không viết NCR
+    <br />
+    <img src="~/Content/Helps/CreateNCRIQC/NCRIQC_Receiver.jpg" />
+    <br />
+    <a style="color:blue;text-decoration: underline;">
+        4b/ Tìm thông tin theo <b style="color:red"> Receiver:</b>
+    </a>
+        <br />
+        Chọn <b style="color:red">
+            (5)
+        </b>, nhập vào receiver và Part Number ở <b style="color:red">
+            (6)
+        </b> và  <b style="color:red">
+            (7)
+        </b> sau đó nhấn <b style="color:red">
+    (8)“Go”
+</b> 
+        <br />
+        Các thông tin liên quan sẽ hiển thị ở <b style="color:red">
+    (9)</b>. Kiểm tra thông tin
+    <br />
+    <b style="color:red">
+        (10) “OK”
+    </b> bắt đầu viết NCR
+    <br />
+    <b style="color:red">
+        (11) “Close”
+    </b> thoát, không viết NCR
+    <br />
+    <a style="color:blue;text-decoration: underline;">
+        Bước 3:
+    </a> Viết NCR
+    <br />
+    <img src="~/Content/Helps/CreateNCRIQC/NCRIQC.jpg" />
+</div>
+<div id="CreateINPRO"> <h4 style="color:blue">Viết NCR Buy Part tại qui trinh (NCR for In process) </h4></div>
+<div id="CreateINPROMake"><h4 style="color:blue">Viết NCR Make Part tại qui trình (NCR for In process)</h4></div>
+<script>
+    $('#Flowclick').click(function () {
+        $('html, body').animate({
+            scrollTop: $("#Flow").offset().top
+        }, 1)
+    }),
+        $('#CreateIQCclick').click(function () {
+            $('html, body').animate({
+                scrollTop: $("#CreateIQC").offset().top
+            }, 1)
+        })
+    $('#CreateINPROclick').click(function () {
+        $('html, body').animate({
+            scrollTop: $("#CreateINPRO").offset().top
+        }, 1)
+    })
+    $('#CreateINPROMakeclick').click(function () {
+        $('html, body').animate({
+            scrollTop: $("#CreateINPROMake").offset().top
+        }, 1)
+    })
+</script>

@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Redirect";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .page-content {
+    min-height:unset;
+    }
+</style>
+<script>
+    //function iframeLoaded() {
+    //    var iFrameID = document.getElementById('iframe1');
+    //    if (iFrameID) {
+    //        // here you can make the height, I delete it first, then I make it again
+    //        iFrameID.height = "";
+    //        iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+    //    }
+    //}
+    $(document).ready(function () {
+
+        $('#div-iframe').block({ message: 'Loading ...' }); 
+
+        $('#iframe1').on('load', function () {
+            $('#div-iframe').unblock();
+        });
+    });
+</script>
+<div style="height:800px" id="div-iframe" class="embed-responsive embed-responsive-16by9">
+    <iframe id="iframe1" class="embed-responsive-item" src="@ViewBag.Url"></iframe>
+</div>
+
+@section styles{
+
+}

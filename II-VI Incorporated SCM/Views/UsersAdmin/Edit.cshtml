@@ -1,0 +1,142 @@
+﻿@model II_VI_Incorporated_SCM.Models.Account.EditUserViewModel
+@{
+    ViewBag.Title = "Edit User Account";
+}
+@*<h2>Edit.</h2>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Edit User Form.</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                   @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                   @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("This User belongs to the following Groups", new { @class = "control-label col-md-2" })
+                <span class=" col-md-10">
+                    @foreach (var item in Model.GroupsList)
+                    {
+                        <div>
+                            <input type="checkbox" name="selectedGroups" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                            @Html.Label(item.Text, new { @class = "control-label" })
+                        </div>
+                    }
+                </span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+@using (Html.BeginForm("Edit", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h2>@ViewBag.Title.</h2>
+    <hr />
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Fullname, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.Fullname, new { @class = "form-control" })
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">
+            This User belongs to the following Groups
+        </label>
+        <div class="col-md-10">
+            @foreach (var item in Model.GroupsList)
+            {
+                <div>
+                    <input type="checkbox" id="@item.Text" name="selectedGroups" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                    @Html.Label(item.Text, new { @class = "control-label" })
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="form-group hidden" id="OPEOwn">
+        @Html.Label("OPELabel", "Owner Inspector", new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.DropDownListFor(m => m.OPE, Model.OPEUserList,"Please Select", new { @class = "form-control" })
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ValidationSummary("", new { @class = "help-block text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-warning" value="Save" />
+            </div>
+        </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+</div>
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
+<script>
+    var $cbxInspector = $('input:checkbox[id="Inspector"]');
+    $(document).ready(function () {
+        $('#OPE').val(ope);
+        if ($cbxInspector.is(':checked')) {
+            $('#OPEOwn').removeClass("hidden");
+        } else {
+          //    $('#OPE').val('');
+            //$('#OPE').val(ope);
+            $('#OPEOwn').addClass("hidden");
+        }
+    });
+    $cbxInspector.change(function () {
+        if ($(this).is(':checked')) {
+            $('#OPEOwn').removeClass("hidden");
+        } else {
+           // $('#OPE').val('');
+            $('#OPEOwn').addClass("hidden");
+        }
+    });
+</script>

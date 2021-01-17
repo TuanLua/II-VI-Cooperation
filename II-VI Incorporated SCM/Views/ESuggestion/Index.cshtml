@@ -1,0 +1,535 @@
+﻿@using II_VI_Incorporated_SCM.Models
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .k-treelist .k-command-cell .k-button {
+        min-width: 0px;
+        padding: 10px 10px 10px 10px;
+    }
+
+    .RefNUMBER:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .RefNUMBER:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .RefNUMBER {
+        color: blue;
+    }
+
+    .RefNUMBER {
+        color: blue;
+    }
+
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+
+    .modal-open .select2-dropdown {
+        z-index: 10060;
+    }
+
+    .modal-open .select2-close-mask {
+        z-index: 10055;
+    }
+</style>
+
+<div class="container-fluid">
+    <a class="btn btn-success btn-sm" href="@Url.Action("Create","ESuggestion")" target="_blank">Create</a>
+</div>
+<div id="popupSearch" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control boder-opal" id="search">
+                            <select class="form-control" id="roleSearch">
+                                <option>Projects I own</option>
+                                <option> Projects I am a member</option>
+                                <option>Projects I need to review</option>
+                                <option>Project I coach</option>
+                                <option>All</option>
+                            </select>
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearch()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="role">
+<div class="actions" align="right">
+    <div class="btn-group">
+        <button type="button" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+            <i class="fa"></i> Find By
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="javascript:;" id="clear"> Clear Filter</a>
+            </li>
+            <li>
+                <a href="javascript:;" onclick="onFind('Role')"> Role </a>
+            </li>
+            <li>
+                <a href="javascript:;" onclick="onFind('SuggestionID')"> SuggestionID </a>
+            </li>
+            <li>
+                <a href="javascript:;" onclick="onFind('Suggestion Title')"> Suggestion Title</a>
+            </li>
+            <li>
+                <a href="javascript:;" onclick="onFindDate('Created Date')"> Created Date </a>
+            </li>
+            <li>
+                <a href="javascript:;" onclick="onFind('Owner')"> Advance Search  </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<sp_Inv_SugList_Result>()
+                                                                                                                      .Name("gridNCR")
+                                                                                                                       .Events(x => x.ExcelExport("excelExport"))
+                                                                                                                      .Columns(columns =>
+                                                                                                                      {
+                                                                                                                          columns.Bound(p => p.Sug_ID).Title("Suggestion ID").HtmlAttributes(new { @class = "RefNUMBER" }).Width(120);
+                                                                                                                          columns.Bound(p => p.Sug_title).Title("Title").Width(300); ;
+                                                                                                                          columns.Bound(p => p.Submit_date).Format("{0:dd-MMM-yyyy}").Title("Submit Date").Width(100);
+                                                                                                                          columns.Bound(p => p.Rqtor_name).Title("Rqtor_name");
+                                                                                                                          columns.Bound(p => p.Exp_Start_Date).Format("{0:dd-MMM-yyyy}").Title("Expected Start Date").Width(100);
+                                                                                                                          columns.Bound(p => p.Exp_End_date).Format("{0:dd-MMM-yyyy}").Title("Expected End Date").Width(100);
+                                                                                                                          columns.Bound(p => p.Sponsor).Title("Sponoser").Hidden(true);
+                                                                                                                          columns.Bound(p => p.Director).Title("Director").Hidden(true);
+                                                                                                                          columns.Bound(p => p.Pro_Leader).Title("Pro_Leader").Hidden(true);
+                                                                                                                          columns.Bound(p => p.Step_Status).Title("Step Status");
+                                                                                                                          columns.Bound(p => p.Next_Approver).Title("Next Approver");
+                                                                                                                          columns.Bound(p => p.Action_Date).Title("Finish Date");
+                                                                                                                          columns.Bound(p => p.Requestor).Title("Aging");
+                                                                                                                          columns.Bound(p => p.Cur_Step).Title("Cur_Step").Hidden(true);
+                                                                                                                          columns.Bound(p => p.Step_Status).Title("Step").Hidden(true);
+                                                                                                                          columns.Bound(p => p.Coacher).Title("Coacher").Hidden(true);
+                                                                                                                          columns.Bound(p => p.Member).Title("Member").Hidden(true);
+                                                                                                                          columns.Bound(p => p.Sug_Type).Title("Sug_Type").Hidden(true);
+                                                                                                                          columns.Bound(p => p.Cur_prob).Title("Cur_prob").Hidden(true);
+                                                                                                                          columns.Bound(p => p.Idea_impr).Title("Idea_impr").Hidden(true);
+                                                                                                                          columns.Bound(p => p.Req_Dept).Title("Req_Dept").Hidden(true);
+                                                                                                                      })
+                                                                      .ToolBar(tools => tools.Excel())
+                                                                                                              .Excel(excel => excel
+                                                                                                        .FileName("eSuggestion.xlsx")
+                                                                                                        .Filterable(true)
+                                                                                                        .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+                                                                                                              )
+                                                                                                                      .Pageable()
+                                                                                                                    .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 150, 1200, "All" }).Refresh(true))
+                                                                                                                      .Sortable()
+                                                                                                                      .Scrollable()
+                                                                                                                      .Filterable()
+                                                                                                                      .HtmlAttributes(new { style = "height:1050px;" })
+                                                                                                                      .DataSource(dataSource => dataSource
+                                                                                                                          .Ajax()
+                                                                                                                          .PageSize(15)
+                                                                                                                          .Read(read => read.Action("ReadDataE_Suggestion", "ESuggestion"))
+                                                                                                                          .Sort(sort => sort.Add("Submit_date").Descending())
+                                                                                                                      ))
+        </div>
+    </div>
+</div>
+
+<div id="popup" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><b> <input id="Title" style="border:0px;text-align:right" />-</b> <b style="color:blue"><input style="border:0px;text-align:left" id="ESNum" /></b>  </h4>
+                <h5><button class="btn btn-sm btn-success" style="float:right" id="ViewDetail">View detail</button> </h5>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("SaveLeader", "ESuggestion", FormMethod.Post, new
+                {
+                    @class = "form-inline",
+                    @role = "form",
+                    @id = "form-leader"
+                }))
+                {
+                    <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <td align="center">
+                                    Project Member:
+                                </td>
+                                <td>
+                                    @Html.DropDownList("Member", (IEnumerable<SelectListItem>)ViewBag.ListUser, new { @class = "form-control", id = "listuser", required = "required", style = "width:100%", multiple = "multiple" })
+                                    <input type="hidden" id="SuggestionID" name="Sug_ID" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button class="btn btn-success btn-sm" id="save">Save</button>
+                        <button class="btn btn-sm btn-info" id="accept">Accept</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var id = '@User.Identity.GetUserId()';
+
+    $(document).ready(function () {
+        debugger;
+	//Check Browser before run this module
+	 let userAgentString = navigator.userAgent;
+        let chromeAgent = userAgentString.indexOf("Chrome") > -1;
+        if (!chromeAgent) {
+            alert("This module just work well on GOOGLE CHROME, please change your browser!");
+            window.history.back();
+        }
+        $.post('@Url.Action("getRoleByUserID", "ESuggestion")', { UserID: id },
+            function (result) {
+                $('#role').val(result);
+                var role = result;
+
+                if (role == "CIManager")
+                    $("#gridNCR").data("kendoGrid").dataSource.filter({
+                        logic: "or",
+                        filters: [
+                            { field: "Submitter", operator: "eq", value: id },
+                            { field: "Cur_Step", operator: "eq", value: "1" }
+                            //,{ field: "Step_status", operator: "contains", value: "Task" }
+                        ]
+                    });
+                else
+                    if (role == "Sponsor")
+                        $("#gridNCR").data("kendoGrid").dataSource.filter({
+                            logic: "or",
+                            filters: [
+                                { field: "Submitter", operator: "eq", value: id },
+                                {
+                                    logic: "and", filters: [
+                                        { field: "Sponsor", operator: "eq", value: id },
+                                        { field: "Cur_Step", operator: "eq", value: "2" },
+                                        { field: "Step_status",operator:"contains",value: "Approv"}
+                                    ]
+                                }
+
+                            ]
+                        });
+                    else
+                        if (role == "Director")
+                            $("#gridNCR").data("kendoGrid").dataSource.filter({
+                                logic: "or",
+                                filters: [
+                                    { field: "Submitter", operator: "eq", value: id },
+                                    {
+                                        logic: "and", filters: [
+                                            { field: "Director", operator: "contains", value: id },
+                                            { field: "Cur_Step", operator: "eq", value: "3" }
+                                            , { field: "Step_status", operator: "contains", value: "Approved" }
+                                        ]
+                                    }
+
+                                ]
+                            });
+                        else $("#gridNCR").data("kendoGrid").dataSource.filter({
+                            logic: "or",
+                            filters: [
+                                { field: "Submitter", operator: "eq", value: id },
+                                {
+                                    logic: "and", filters: [
+                                    { field: "Pro_Leader", operator: "eq", value: id },
+                                    { field: "Cur_Step", operator: "eq", value: "4" },
+                                    { field: "Step_status", operator: "contains", value: "Approv" }
+                                    ]
+                                }
+                            ]
+
+        });
+        $('#listuser').select2({ width: '100%' });
+                });
+        //if (role = "CIManager") {
+        //    $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Cur_Step", operator: "contains", value: "1" });
+        //}
+        });
+
+    var Sug_ID = "";
+    var UserID;
+
+
+
+    $("#gridNCR").on("click", ".RefNUMBER", function (e) {
+        var grid = $("#gridNCR").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        debugger;
+        var ID = model.Sug_ID;
+        var TT = model.Sug_title;
+        var role = $('#role').val();
+        let step = model.Cur_Step;
+        let idsponser = model.Sponsor;
+        let idProLeader = model.Pro_Leader;
+        let idDirector = model.Director;
+        let Step_status = model.Step_Status;
+            $('#SuggestionID').val(ID);
+            $('#ESNum').val(ID);
+            $('#Title').val(TT);
+
+        if (Step_status.indexOf('Reject')>0) {
+            window.open('@Url.Action("Management", "ESuggestion")' + "?SuggestionID=" + ID, '_blank');
+            return;
+        }
+        //will add more condition: sugg stion is kicked off and all task of its close
+        if (role == "CIEngineer") {
+            if (Step_status.indexOf("Step 5") > -1 && Step_status.indexOf("Approve") > -1)
+                //window.open('@Url.Action("CostSaving", "ESuggestion")' + "?SuggestionID=" + ID, '_blank');
+                window.location.href ='@Url.Action("CostSaving", "ESuggestion")' + '?SuggestionID=' + ID;
+            else {
+                //alert("Project isn't kicked off!");
+                //window.open('@Url.Action("Management", "ESuggestion")' + "?SuggestionID=" + ID, '_blank');
+                window.location.href ='@Url.Action("Management", "ESuggestion")' + '?SuggestionID=' + ID;
+            }
+        } else
+        if (step == "4" && idProLeader==id) {
+              //  step5
+            Sug_ID = ID;
+            $('#listuser option:selected').remove();
+
+                $.post('@Url.Action("getvaluesetselected", "ESuggestion")', { ID: ID },
+                    function (result) {
+                        $.each(result.result, function (i, item) {
+                            $('#listuser').append($('<option>', {
+                    value: item.Value,
+                                text: item.Text,
+                                selected: true
+                            }));
+                            $('#listuser').select2();
+                        });
+
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                        $.unblockUI();
+            });
+                $("#popup").modal('show');
+        }
+	//after assign task, no need to do any things, so remove condition "(Step_status.indexOf("Task") > 0 && role == "CIManager")"
+        //else if ((step == "1" && role == "CIManager") || (Step_status.indexOf("Task") > 0 && role == "CIManager")) {//role == "CIApproval"
+	else if ((step == "1" && role == "CIManager")) {//role == "CIApproval"
+                                     //step2
+            if (idsponser!=null && idsponser != "")
+                //window.open('@Url.Action("EditProcessing", "ESuggestion")' + "?SuggestionID=" + ID);
+                window.location.href ='@Url.Action("EditProcessing", "ESuggestion")' + '?SuggestionID=' + ID;
+            else
+            //window.open('@Url.Action("SearchSimilar", "ESuggestion")' + "?SuggestionID=" + ID, '_blank');
+                window.location.href ='@Url.Action("SearchSimilar", "ESuggestion")' + '?SuggestionID=' + ID;
+        }
+        else if ((step == "2" &&  id == idsponser)|| (step == "3" && id == idsponser && Step_status=="Step 3 -- Pending")) {
+            //step3: remove check role == "Sponsor", It's unnecessary
+            if (idProLeader!=null && idProLeader != "")
+                //window.open('@Url.Action("EditSponsor", "ESuggestion")' + "?SuggestionID=" + ID);
+                window.location.href ='@Url.Action("EditSponsor", "ESuggestion")' + '?SuggestionID=' + ID;
+            else
+            //window.open('@Url.Action("SponsorSuggestion", "ESuggestion")' + "?SuggestionID=" + ID, '_blank');
+                window.location.href ='@Url.Action("SponsorSuggestion", "ESuggestion")' + '?SuggestionID=' + ID;
+
+            }
+
+        else if (step == "3"  && idDirector.indexOf(id) > 0)
+            //step4: remove check role == "Director", It's unnecessary
+            //window.open('@Url.Action("BoardDirectorSuggestion", "ESuggestion")' + "?SuggestionID=" + ID, '_blank');
+            window.location.href ='@Url.Action("BoardDirectorSuggestion", "ESuggestion")' + '?SuggestionID=' + ID;
+        else window.open('@Url.Action("Management", "ESuggestion")' + "?SuggestionID=" + ID, '_blank');
+
+        })
+        var $formleader = $('#form-leader');
+        $('#save').on('click', function () {
+            let member = $('#listuser').val();
+            if (member == null) {
+                bootbox.alert('Please select member!');
+            }
+            else {
+                $formleader.submit();
+            }
+        })
+        $('#accept').on('click', function () {
+            let member = $('#listuser').val();
+            if (member == null) {
+                bootbox.alert('Please select member!');
+            }
+            else {
+                var input = $("<input>", { type: "hidden", name: "Status", value: "Approve" });
+                $formleader.append(input);
+                $formleader.submit();
+            }
+        })
+    $('#ViewDetail').on('click', function () {
+        window.open('@Url.Action("Management", "ESuggestion")' + "?SuggestionID=" + Sug_ID, '_blank');
+    })
+    $("#clear").click(function () {
+        $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Sug_ID", operator: "contains", value: "" });
+    });
+</script>
+@section scripts {
+    <script type="text/javascript">
+        function onFind(condition) {
+            debugger;
+            $('.searchField').text(condition);
+
+            if (condition == 'SuggestionID') {
+                $('#searchId').val(0);
+                $('#search').show();
+                $('#roleSearch').hide();
+            }
+            else if (condition == 'Suggestion Title') {
+                $('#searchId').val(2);
+                $('#search').show();
+                $('#roleSearch').hide();
+            }
+            else if (condition == 'Role') {
+                $('#searchId').val(3);
+                $('#search').hide();
+                $('#roleSearch').show();
+            }
+            $('#popupSearch').modal('show');
+        }
+        function onSearch() {
+            debugger;
+            var searchText = $('#search').val().toLowerCase();
+            var number = $('#searchId').val();
+            var num;
+
+            if (number == '0') {
+                num = 0;
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Sug_ID", operator: "contains", value: searchText });
+                $('#search').val("");
+                $('#search').show();
+                $('#roleSearch').hide();
+            }
+            else if (number == '2') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Sug_Title", operator: "contains", value: searchText });
+                $('#search').val("");
+                $('#search').show();
+                $('#roleSearch').hide();
+            }
+            else if (number == 3) {
+
+                if ($('#roleSearch').val() == 'Projects I need to review') {
+                    if ($('#role').val() == "CIManager")
+                        $("#gridNCR").data("kendoGrid").dataSource.filter({
+                            logic: "or",
+                            filters: [
+
+
+                                { field: "Cur_Step", operator: "eq", value: "1" }
+                            ]
+                        });
+                    else
+                        if ($('#role').val() == "Sponsor")
+                            $("#gridNCR").data("kendoGrid").dataSource.filter({
+                                logic: "and",
+                                filters: [
+
+                                    { field: "Sponsor", operator: "eq", value: id },
+                                    { field: "Cur_Step", operator: "eq", value: "2" },
+                                    { field: "Step_status", operator: "contains", value: "Approv" }
+                                ]
+                            });
+                        else
+                            if ($('#role').val() == "Director")
+                                $("#gridNCR").data("kendoGrid").dataSource.filter({
+                                    logic: "and",
+                                    filters: [
+                                        { field: "Director", operator: "contains", value: id },
+                                        { field: "Cur_Step", operator: "eq", value: "3" }
+                                        , { field: "Step_status", operator: "contains", value: "Approved" }
+                                    ]
+                                });
+                            else $("#gridNCR").data("kendoGrid").dataSource.filter({
+                                logic: "and",
+                                filters: [
+
+                                    { field: "Pro_Leader", operator: "eq", value: id }
+                                ]
+                            });
+                }
+                else
+                    if ($('#roleSearch').val() == 'Projects I own') {
+                        $("#gridNCR").data("kendoGrid").dataSource.filter({
+                            filters: [{ field: "Submitter", operator: "eq", value: id }]
+                        });
+                    }
+                    else if ($('#roleSearch').val() == 'Project I coach') {
+                        $("#gridNCR").data("kendoGrid").dataSource.filter({
+                            filters: [{ field: "Coacher", operator: "eq", value: id }]
+                        });
+                    }
+                    else if ($('#roleSearch').val() == 'Projects I am a member') {
+                        $("#gridNCR").data("kendoGrid").dataSource.filter({
+                            filters: [{ field: "Member", operator: "contains", value: id }]
+                        });
+                    }
+            }
+
+            $('#popupSearch').modal('hide');
+        }
+        var exportFlag = false;
+        function excelExport(e) {
+            if (!exportFlag) {
+                e.sender.showColumn("Sug_Type");
+                e.sender.showColumn("Cur_prob");
+                e.sender.showColumn("Idea_impr");
+                e.sender.showColumn("Req_Dept");
+                e.preventDefault();
+                exportFlag = true;
+                setTimeout(function () {
+                    e.sender.saveAsExcel();
+                });
+            } else {
+                e.sender.hideColumn("Sug_Type");
+                e.sender.hideColumn("Cur_prob");
+                e.sender.hideColumn("Idea_impr");
+                e.sender.hideColumn("Req_Dept");
+                exportFlag = false;
+            }
+        }
+    </script>
+}

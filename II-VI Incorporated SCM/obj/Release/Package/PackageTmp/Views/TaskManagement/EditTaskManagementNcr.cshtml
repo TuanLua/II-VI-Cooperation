@@ -1,0 +1,1518 @@
+﻿@model II_VI_Incorporated_SCM.Models.TaskManagement.TaskManagementNCRViewModel
+@using II_VI_Incorporated_SCM.Models.Account;
+@{
+    ViewBag.Title = "EditTaskManagementNcr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    #centered_buttons {
+        /*margin: 0 auto;
+        width: 800px;
+        float: none;*/
+        margin: 0 auto;
+        width: 40%;
+    }
+
+    .input-validation-error {
+        border: 1px solid red !important;
+        background-color: #fee !important;
+    }
+
+    ul.multiselect-container {
+        padding-left: 25px !important;
+        max-height: 150px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        margin-top: 1px !important;
+    }
+</style>
+
+@using (Html.BeginForm("SaveTaskManagementNCR", "TaskManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "form-data", @id = "uploadFormTaskMan", @*@onsubmit = "return validateTask()"*@ }))
+{
+<div class="container-fluid" id="TaskManagerCreate">
+    <div class="row">
+        <label class="col-md-8"><strong>List/Form: </strong>Task Managerment</label>
+        <label class="col-md-4"><strong>Type: </strong>@Model.TaskList.TYPE</label>
+        @Html.TextBoxFor(m => m.TaskList.TopicID, new
+   {
+       @id = "TaskID",
+       @class = "form-control",
+       @type = "hidden"
+   })
+        @Html.TextBoxFor(m => m.TaskDetail.TaskID, new
+   {
+       @id = "TaskDetailID",
+       @class = "form-control",
+       @type = "hidden"
+   })
+        @Html.TextBoxFor(m => m.TaskList.TYPE, new
+ {
+    // @id = "TaskDetailID",
+     @class = "form-control",
+     @type = "hidden",
+     @value=Model.TaskList.TYPE
+ })
+    </div>
+    @*<label class="row col-md-12">
+                    <strong>Task No: </strong>AIL000013-4
+                    <a href="javascript:void(0)">Show URL</a>
+        </label>*@
+
+    <div class="form-group">
+        <div class="row">
+            <label class="col-md-2" style="text-align: right">Topic: </label>
+            <div class="col-md-9">
+                @*@Html.TextBox("TaskNo", "", new { @class = "form-control" })*@
+                @Html.TextBoxFor(m => m.TaskList.Topic, new
+           {
+               @id = "TaskNo",
+               @class = "form-control",
+               @readonly = "readonly"
+           })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <label class="col-md-2" style="text-align: right">Task ID: </label>
+            <div class="col-md-9">
+                @*@Html.TextBox("TaskNo", "", new { @class = "form-control" })*@
+                @Html.TextBoxFor(m => m.TaskDetail.TaskID, new
+           {
+               @id = "TaskNo",
+               @class = "form-control",
+               @readonly = "readonly"
+           })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <label class="col-md-2" style="text-align: right">Task Name<span style="color: red">*</span> : </label>
+            <div class="col-md-9">
+                @*@Html.TextBox("TaskName", "", new { @class = "form-control" })*@
+                @Html.TextBoxFor(m => m.TaskDetail.TASKNAME, new
+           {
+               @id = "TaskName",
+               @class = "form-control"
+           })
+                @Html.ValidationMessageFor(model => model.TaskDetail.TASKNAME, null, new { @class = "help-block text-danger", @style = "margin: 1px" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <label class="col-md-2" style="text-align: right">Description: </label>
+            <div class="col-md-9">
+                @*@Html.TextArea("Description", "", new { @class = "form-control", @rows = "3" })*@
+                @Html.TextBoxFor(m => m.TaskDetail.DESCRIPTION, new
+           {
+               @id = "Description",
+               @class = "form-control",
+               @rows = "3"
+           })
+            </div>
+        </div>
+    </div>
+    @{
+        List<AspNetUserViewModel> user = (List<AspNetUserViewModel>)@ViewBag.ListUser;
+    }
+    <div class="row">
+        <div class="col-md-2">
+            @Html.TextBoxFor(m => m.TaskDetail.OWNER, new
+       {
+           @class = "form-control",
+           @style = "display: none;"
+       })
+            <label id="OwnerID"><strong>Owner: </strong>@user.Where(m => m.Id == Model.TaskDetail.OWNER).FirstOrDefault().FullName
+           @* @Model.OwnerName*@
+            </label>
+        </div>
+        @if (Model.TaskDetail.OWNER == ViewBag.CurrentUserID)
+        {
+            <div class="col-md-4">
+                <label class="col-md-4"><strong>Assignee<span style="color: red">*</span> : </strong></label>
+                <div class="col-md-8">
+                    @Html.DropDownListFor(m => m.TaskDetail.ASSIGNEE, new SelectList((IEnumerable<AspNetUserViewModel>)ViewBag.ListUser, "Id", "FullName"), "None selected", new
+                   {
+                       @class = "form-control",
+                       @id="assigne"
+                   })
+                    @Html.ValidationMessageFor(model => model.TaskDetail.ASSIGNEE, null, new { @class = "help-block text-danger", @style = "margin: 1px" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.TaskDetail.ASSIGNEE, new
+               {
+                   @class = "form-control",
+                   @style = "display: none;"
+               })
+                <label id="OwnerID"><strong>Assignee<span style="color: red">*</span> : </strong>@user.Where(m => m.Id == Model.TaskDetail.ASSIGNEE).FirstOrDefault().FullName
+                @*@Model.AssigneeName*@ 
+                </label>
+            </div>
+        }
+        @if (Model.TaskDetail.OWNER == ViewBag.CurrentUserID)
+        {
+            <div class="col-md-6">
+                <label class="col-md-2" style="text-align:right"><strong>Approve<span style="color: red">*</span> : </strong></label>
+                <div class="col-md-10">
+                    <select id="approve" name="ListApprove" multiple="multiple" required></select>
+                    @Html.ValidationMessageFor(model => model.ListApprove, null, new { @class = "help-block text-danger", @style = "margin: 1px" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-6">
+                @*<select id="approve" name="ListApprove" multiple="multiple" required></select>*@
+                @Html.TextAreaFor(m => m.TaskDetail.APPROVE, new
+               {
+                   @class = "form-control",
+                   @style = "display: none;"
+               })
+                <label id="OwnerID"><strong>Approve<span style="color: red">*</span> : </strong>@ViewBag.ApproveName</label>
+            </div>
+        }
+    </div>
+    <br />
+
+    <table class="table table-bordered">
+        <tr>
+            <td class="col-md-3">
+                <div class="form-group">
+                    <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                        <label class="col-md-4">Estimate Start Date : </label>
+                        <div class="col-md-8 date">
+                            @*<div class="input-group input-append date" id="datePicker">
+                                     @Html.TextBoxFor(model => model.TaskDetail.STARTDATE, new
+                                {
+                                    @class = "form-control",
+                                })
+                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                 </div>*@
+
+                            <div class="input-group date" data-provide="datepicker" data-date-format="dd-M-yy">
+                                @*@Html.TextBoxFor(model => model.TaskDetail.EstimateStartDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "datePickerSta" })*@
+                                @Html.TextBoxFor(model => model.TaskDetail.EstimateStartDate, "{0:dd-M-yyyy}", new { @class = "form-control", @id = "datePickerSta" })
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.TaskDetail.EstimateStartDate, null, new { @class = "help-block text-danger", @style = "margin: 1px" })
+                            <label style="color:red" id="ErrSta"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                        <label class="col-md-4">Estimate End Date<span style="color: red">*</span> : </label>
+                        <div class="col-md-8 date">
+                            <div class="input-group date" data-provide="datepicker" data-date-format="dd-M-yy">
+                                @Html.TextBoxFor(model => model.TaskDetail.EstimateEndDate, "{0:dd-M-yyyy}", new { @class = "form-control", @id = "datePickerDue" })
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.TaskDetail.EstimateEndDate, null, new { @class = "help-block text-danger", @style = "margin: 1px" })
+                            <label style="color:red" id="ErrDue"></label>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="col-md-3">
+                <div class="form-group">
+                    <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                        <label class="col-md-4">Actual Start Date: </label>
+                        <div class="col-md-8 date">
+                            <div class="input-group date" data-provide="datepicker" data-date-format="dd-M-yy">
+                                @Html.TextBoxFor(model => model.TaskDetail.ActualStartDate, "{0:dd-M-yyyy}", new { @class = "form-control", @id = "datePickerCorrSta" })
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                            <label style="color:red" id="ErrCorrSta"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                        <label class="col-md-4">Actual End date: </label>
+                        <div class="col-md-8 date">
+                            <div class="input-group date" data-provide="datepicker" data-date-format="dd-M-yy">
+                                @Html.TextBoxFor(model => model.TaskDetail.ActualEndDate, "{0:dd-M-yyyy}", new { @class = "form-control", @id = "datePickerCorrEnd" })
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                            <label style="color:red" id="ErrCorrEnd"></label>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            @* <td class="col-md-3">*@
+            @*<div class="form-group">
+                    <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                        <label class="col-md-4">Progess (%) : </label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.TaskDetail.PROCESS, new
+                       {
+                           @id = "progess",
+                           @class = "form-control",
+                           @onkeypress = "return keypress(event)"
+                       })
+                        </div>
+                    </div>
+                </div>*@
+            @*<div class="form-group">
+                    <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                        <label class="col-md-4">Est. Completion Date<span style="color: red">*</span> : </label>
+                        <div class="col-md-8 date">
+                            <div class="input-group date" data-provide="datepicker">
+                                @Html.TextBoxFor(model => model.TaskDetail.EST_COMPLETEIONDATE, new { @class = "form-control", @id = "datePickerEst" })
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.TaskDetail.EST_COMPLETEIONDATE, null, new { @class = "help-block text-danger", @style = "margin: 1px" })
+                            <label style="color:red" id="ErrEst"></label>
+                        </div>
+                    </div>
+                </div>*@
+            @*  </td>*@
+            <td class="col-md-3">
+                <div class="form-group">
+                    <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                        <label class="col-md-4">Status<span style="color: red">*</span> : </label>
+                        @*<div class="col-md-8">@Html.DropDownList("StatusID", new SelectList(ViewBag.Status, "Key", "Value"), new { @class = "form-control" })</div>*@
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(m => m.TaskDetail.STATUS, new SelectList(ViewBag.Status, "Key", "Value")@*, "Select Status"*@, new
+                            {
+                                @class = "form-control",
+                                @id = "status",
+                                @disabled = "disabled"
+                            })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                        <label class="col-md-4">Priority<span style="color: red">*</span> : </label>
+                        @*<div class="col-md-8">@Html.DropDownList("PriorityID", new SelectList(ViewBag.Priority, "Key", "Value"), new { @class = "form-control" })</div>*@
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(m => m.TaskDetail.PRIORITY, new SelectList(ViewBag.Priority, "Key", "Value", "Normal")@*, "Select Status"*@, new
+                            {
+                                @class = "form-control",
+                            })
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table class="table">
+        @*@{
+                List<AspNetUserViewModel> user = (List<AspNetUserViewModel>)@ViewBag.ListUser;
+            }*@
+        @foreach (var item in Model.TaskComments)
+        {
+            <tr>
+                <td class="row">
+                    <input data-val="true" name="TaskComments.ID" type="hidden" value="@item.ID">
+                    <p class="row" id="CommContent">
+                        <strong id="commUser">@user.Where(m => m.Id == item.WRITTENBY).FirstOrDefault().FullName</strong>
+                        <span id="commDate" style="font-size:10px">Comment on @item.WRITEDATE.Value.ToString("MM/dd/yyyy")</span>
+                    <p class="row" style="padding-left: 15px">
+                        @Html.Raw(item.CONTENTCOMMENT)
+                    </p>
+                </td>
+            </tr>
+        }
+        <tbody id="listComment"></tbody>
+    </table>
+    <div class="message">
+        <label>Comment: </label>
+        <div class="row">
+            <div class="col-md-11">
+                @Html.TextAreaFor(m=>m.LastComment, new { @class = "form-control",
+           @style = "margin: 0px; height: 120px; width: 100%;"
+       })
+            </div>
+            @*<div class="col-md-1">
+                    <input type="button" class="btn btn-default btn-sm" onclick="CreateComm()" value="Send">
+                </div>*@
+        </div>
+    </div>
+
+    @*<label class="row col-md-12">
+            <strong>Setting: </strong>Not Ressignable, Public, Non-recuring
+        </label>*@
+
+    <div class="row">
+        <div class="col-md-8">
+            <label><strong>Attactments</strong></label>
+        </div>
+        <div class="col-md-4" style="float: left">
+            @*<a href="javascript:void(0)" style="float: right" onclick="dowloadAllFile()">Dowload all</a>*@
+            <a href="javascript:void(0)" style="float: right; margin-left:10px; margin-right:10px" onclick="showUploadFile()">Upload</a>
+            @*<a href="javascript:void(0)" style="float: right">Find</a>*@
+        </div>
+    </div>
+
+    <table class="table table-condensed" id="gridDoc" name="gridDoc">
+        <thead>
+            <tr>
+                <th hidden></th>
+                <th></th>
+                <th>Name</th>
+                <th>Rev</th>
+                <th>LastModified</th>
+                <th>Size</th>
+                <th>Owner</th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.TaskDocuments)
+        {
+            @*<tr>
+                    <td hidden><input data-val="true" name="TaskComments.ID" type="hidden" value="@item.ID"></td>
+                    <td class="msg-cont"><p id="CommContent">@item.CONTENTCOMMENT</p></td>
+                    <td class="name">
+                        <strong id="commUser">@temp.Where(m => m.Id == item.WRITTENBY).FirstOrDefault().FullName</strong>
+                        <span class="date" id="commDate">Comment on @item.WRITEDATE.Value.ToString("yyyy-MM-dd")</span>
+                    </td>
+                </tr>*@
+
+            <tr class='DefectRow'>
+                <td hidden><input data-val="true" name="TaskDocuments.ID" type="hidden" value="@item.ID"></td>
+                <td>
+                    @if (ViewBag.UserCreateFile == true)
+                    {
+                        <a onclick="EditFile(@item.ID, this)"><i class='fa fa-edit'></i></a>
+                    }
+                    <a onclick="DownloadFile(@item.ID)"><i class='fa fa-download'></i></a>
+                </td>
+                <td>@item.FILENAME</td>
+                <td class="filePath_@item.ID" hidden>@item.FILEPATH</td>
+                <td class="name_@item.ID" hidden>@item.FILENAME</td>
+                <td class="desc_@item.ID" hidden>@item.DESCRIPTION</td>
+                <td class="rev_@item.ID">@item.REV</td>
+                <td class="revC_@item.ID" hidden>@item.REVCOMMENT</td>
+                <td class="dateMod_@item.ID">@item.DATEMODIFY.Value.ToString("MM/dd/yyyy")</td>
+                <td>@item.SIZE KB</td>
+                <td>@user.Where(m => m.Id == item.WRITTENBY).FirstOrDefault().FullName</td>
+                <td>
+                    @if (ViewBag.UserCreateFile == true)
+                    {
+                        <a onclick="DeleteFile(@item.ID, this)"><i class='fa fa-trash'></i></a>
+                    }
+                </td>
+            </tr>
+        }
+        <tbody id="listFile"></tbody>
+    </table>
+    <div class="form-group" id="centered_buttons">
+        @if (ViewBag.Owner == true)
+        {
+            if (Model.TaskDetail.STATUS == "Un-Assigned" || Model.TaskDetail.STATUS == "In-Process" || Model.TaskDetail.STATUS == "Late")
+            {
+                <button type="button" id="DelTaskMan" class="btn btn-sm btn-danger" onclick="DeleteTask()"><i class="fa fa-close"></i> Delete</button>
+                <button type="button" id="Cancel" class="btn btn-sm btn-danger"><i class="fa fa-close"></i> Cancel</button>
+                <button type="button" id="Hold" class="btn btn-sm btn-warning"><i class="fa fa-close"></i> Hold</button>
+            }
+            @*<button type="button" class="btn btn-danger btn-sm" onclick="ForceComTask()"><i class="fa fa-forward"></i> Force Complete</button>*@
+            //  }
+
+            if (Model.TaskDetail.STATUS == "Hold")
+            {
+                <button type="button" id="Reopen" class="btn btn-sm btn-success"><i class="fa fa-close"></i> ReOpen</button>
+
+            }
+        }
+        @if (ViewBag.Owner == true  || ViewBag.Assignee == true)
+        {
+            if (Model.TaskDetail.STATUS == "Un-Assigned" || Model.TaskDetail.STATUS == "In-Process" || Model.TaskDetail.STATUS == "Late" || Model.TaskDetail.STATUS == "Completed")
+            {
+                <button @*type="submit"*@ id="SaveTask" class="btn btn-info btn-sm"><i class="fa fa-save"></i> Save</button>
+            }
+
+        }
+        @if (ViewBag.Assignee == true)
+        {
+           
+            if (Model.TaskDetail.STATUS == "Un-Assigned" || Model.TaskDetail.STATUS == "In-Process" || Model.TaskDetail.STATUS == "Late")
+            {
+                <button id="Completed" class="btn btn-info btn-sm"><i class="fa fa-save"></i> Completed</button>
+               // <button @*type="submit"*@ id="SaveTask" class="btn btn-info btn-sm"><i class="fa fa-save"></i> Save</button>
+            }
+        }
+        @*@if (ViewBag.CanDeleteAndForceCom == "True")
+        {
+            if (Model.TaskDetail.STATUS == "Approve" || Model.TaskDetail.STATUS == "Reject")
+            {
+
+            }
+            else
+            {
+                <button type="button" class="btn btn-warning btn-sm" onclick="ForceComTask()"><i class="fa fa-forward"></i> Force Complete</button>
+            }
+        }
+        else
+        {
+            <button type="button" class="btn btn-warning btn-sm" disabled><i class="fa fa-forward"></i> Force Complete</button>
+        }*@
+        @if (ViewBag.Approve == true)
+        {
+            if (Model.TaskDetail.STATUS == "Completed")
+            {
+                <button type="button" id="Approve" class="btn btn-sm btn-warning"><i class="fa fa-close"></i> Approve</button>
+                <button type="button" id="Reject" class="btn btn-sm btn-warning"><i class="fa fa-close"></i> Reject</button>
+            }
+        }
+        <button type="button" onclick="window.location ='@Url.Action("TaskManagementNcr", "TaskManagement", new { taskID = Model.TaskList.TopicID })'" class="btn btn-success btn-sm"><i class="fa fa-close"></i> Close Window</button>
+    </div>
+</div>
+}
+
+<div class="modal fade" id="ModalUploadFile" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Document</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("UploadFileTaskMan", "TaskManagement", FormMethod.Post, new { role = "form", @enctype = "multipart/form-data", @id = "uploadFormFile" }))
+                {
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="docFileID" name="TaskDocument.ID">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input accept="application/pdf" class="form-control valid" data-val="true" data-val-maximumfilesize="File Upload can not be larger than 10 MB" data-val-maximumfilesize-size="10" data-val-required="The File Upload field is required." data-val-validfiletype="File Upload must be one of the following file types: pdf,PDF" data-val-validfiletype-filetypes="pdf,PDF" id="File_Upload" multiple="multiple" name="File_Upload" type="file" value="" aria-required="true" aria-describedby="File_Upload-error" aria-invalid="false" />
+                            </div>
+                            <div class="col-md-9" style="margin: 1px">
+                                <a id="docFileLoad" target="_blank"></a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="color:red" id="ErrFile"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">
+                            Name<span style="color: red">*</span> :
+                        </label>
+                        <input type="text" class="form-control" id="name" name="TaskDocument.FILENAME" @*required maxlength="50"*@>
+                        <label style="color:red" id="ErrName"></label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="desc">
+                            Description:
+                        </label>
+                        <textarea class="form-control" type="textarea" name="TaskDocument.DESCRIPTION"
+                                  id="desc" placeholder="Your Description Here"
+                                  maxlength="6000" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="rev">
+                            Revision<span style="color: red">*</span> :
+                        </label>
+                        @*<input type="text" class="form-control" onkeypress="return keypress(event);"
+                        id="rev" name="TaskDocument.REV" />
+                        <label style="color:red" id="ErrRev"></label>*@
+                        @*Remove onkeypress: allow any character input*@
+                        <input type="text" class="form-control"
+                               id="rev" name="TaskDocument.REV" />
+                        <label style="color:red" id="ErrRev"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="revComm">
+                            Revision Comment:
+                        </label>
+                        <textarea class="form-control" type="textarea" name="TaskDocument.REVCOMMENT"
+                                  id="revComm" placeholder="Your Revision Comment Here"
+                                  maxlength="6000" rows="4"></textarea>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="submit" id="UploadFile" value="submit" class="btn btn-info" @*onclick="AddDocument()*@ ">Upload File</button>
+                @*<button type="submit" class="btn btn-info" value="Submit"><i class="fa fa-save"></i> Save</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div id="model-hold-task" class="modal fade" role="dialog" disposition-role="">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" style="font-weight: bold">Hold Task</h3>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Please provide a reason for hold </label> <span style="color:red"> * </span>
+                        </div>
+                        <div class="col-md-12">
+                            <textarea class="form-control" id="txt-hold-task" rows="10"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="SubmitHold()">OK</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="model-reject-task" class="modal fade" role="dialog" disposition-role="">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" style="font-weight: bold">Reject Task</h3>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Please provide a reason for reject </label> <span style="color:red"> * </span>
+                        </div>
+                        <div class="col-md-12">
+                            <textarea class="form-control" id="txt-reject-task" rows="10"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="SubmitReject()">OK</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    var $formUploadFile = $('#uploadFormFile');
+    var $formUploadTask = $('#uploadFormTaskMan');
+    var datalistUser;
+
+    $(document).ready(function () {
+        $('#assigne').select2();
+        $('.date').datepicker({
+            autoclose: true,
+            format:"dd-M-yyyy"
+        });
+        $("#UploadFile").click(function () {
+            var name = $("#name").val();
+            if (validateFileUpload()) {
+                $formUploadFile.submit();
+            }
+        });
+       
+        $.post('@Url.Action("GetDropdownListUserEdit", "TaskManagement", new { taskDetailID = Model.TaskDetail.TaskID})',
+                 function (result) {
+                     $("#approve").multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true});
+                     $('#approve').multiselect('dataprovider', result);
+                 }).fail(function () {
+                     bootbox.alert('Please contact to Administrator!');
+                 }).always(function () {
+                     $.unblockUI();
+                 });
+    });
+
+    $('#Cancel').on('click', function (e) {
+        e.preventDefault();
+        let comment = $("#LastComment").val();
+        if (comment == "") {
+            $("#LastComment").addClass("input-validation-error");
+            return false;
+        }
+        var input = $("<input>", { type: "hidden", name: "TaskDetail.STATUS", value: "Cancel" });
+        $formUploadTask.append(input);
+        if (validateTask()) {
+            $formUploadTask.submit();
+        }
+    })
+    $('#Hold').on('click', function (e) {
+        e.preventDefault();
+        let comment = $("#LastComment").val();
+        if (comment == "") {
+            $("#LastComment").addClass("input-validation-error");
+            return false;
+        }
+        var input = $("<input>", { type: "hidden", name: "TaskDetail.STATUS", value: "Hold" });
+        $formUploadTask.append(input);
+        if (validateTask()) {
+            $formUploadTask.submit();
+        }
+    })
+    $('#Reject').on('click', function (e) {
+        e.preventDefault();
+        let comment = $("#LastComment").val();
+        if (comment == "") {
+            $("#LastComment").addClass("input-validation-error");
+            return false;
+        }
+        var input = $("<input>", { type: "hidden", name: "TaskDetail.STATUS", value: "Reject" });
+        $formUploadTask.append(input);
+        if (validateTask()) {
+            $formUploadTask.submit();
+        }
+    })
+    $('#Reopen').on('click', function (e) {
+        e.preventDefault();
+        //let comment = $("#LastComment").val();
+        //if (comment == "") {
+        //    $("#LastComment").addClass("input-validation-error");
+        //    return false;
+        //}
+        var input = $("<input>", { type: "hidden", name: "TaskDetail.STATUS", value: "Reopen" });
+        $formUploadTask.append(input);
+        if (validateTask()) {
+            $formUploadTask.submit();
+        }
+    })
+    $('#Completed').on('click', function (e) {
+        e.preventDefault();
+        var dateCorrEnd = $("#datePickerCorrEnd").val();
+        if (dateCorrEnd == "") {
+            $("#datePickerCorrEnd").addClass("input-validation-error");
+            return false;
+        }
+        var input = $("<input>", { type: "hidden", name: "TaskDetail.STATUS", value: "Completed" });
+        $formUploadTask.append(input);
+        if (validateTask()) {
+            $formUploadTask.submit();
+        }
+    })
+    $('#Approve').on('click', function (e) {
+        e.preventDefault();
+        var input = $("<input>", { type: "hidden", name: "TaskDetail.STATUS", value: "Closed" });
+        $formUploadTask.append(input);
+        if (validateTask()) {
+            $formUploadTask.submit();
+        }
+    })
+    $('#SaveTask').on('click', function (e) {
+        e.preventDefault();
+        var dt_now = new Date();
+        //var date = dt_now.getDate() + "";
+        //if (date.length === 1) {
+        //    date = "0" + date;
+        //}
+        //var month = (dt_now.getMonth() + 1) + "";
+        //if (month.length === 1) {
+        //    month = "0" + month;
+        //}
+        //var i = 1;
+        //var dt_string = month + '/' + date + '/' + dt_now.getFullYear();
+        var dt_string = DateFomartConvert_YYYMMDD(dt_now);
+        var dateCorrEnd = DateFomartConvert_YYYMMDD($("#datePickerCorrEnd").val());
+        if (dateCorrEnd != "" && dateCorrEnd > dt_string) {
+            $('#datePickerCorrEnd').addClass("input-validation-error");
+            $("#ErrCorrEnd").append("ActualEndDate must equal or less than DatetimeNow");
+            $('#datePickerCorrEnd').focus();
+            return false;
+        }
+        var input = $("<input>", { type: "hidden", name: "TaskDetail.STATUS", value: "Created" });
+        $formUploadTask.append(input);
+        if (validateTask()) {
+            $formUploadTask.submit();
+        }
+    })
+    //var dem = 0;
+    $formUploadFile.submit(function (e) {
+        debugger;
+        $.blockUI();
+        var data = new FormData(this);
+        var $fromObj = $(this);
+        var urlAction = $fromObj.attr('action');
+        $.ajax({
+            url: urlAction,
+            type: 'POST',
+            dataType: "Json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: data,
+            fail: function () {
+                bootbox.alert('Please contact to Administrator!');
+            }
+        }).always(function () {
+            $.unblockUI();
+        }).success(function (result) {
+            if (result.success) {
+                var data = result.documentTask;
+                var idfiledoc = $('#docFileID').val();
+
+                let nameFile = $("#File_Upload").val().replace(/^.*[\\\/]/, '');
+                let fileSize = Math.round(result.documentTask.SIZE / 1024);
+                let name = $("#name").val();
+                let desc = $("#desc").val();
+                let rev = $("#rev").val();
+                let revComm = $("#revComm").val();
+                if (data.ID == idfiledoc) {
+                    var listRow = $(".DefectRow");
+                    _dem = listRow.length;
+                    for (let i = 0; i < _dem; i++) {
+                        var ListColumns = listRow[i].children;
+                        console.log(data);
+                        if (ListColumns[0].children[0].value == idfiledoc) {
+                            $(ListColumns[0].children[0]).parent().parent().remove()
+                        }
+                    }
+                }
+                var markup = "<tr class='DefectRow'><td hidden><input data-val='true' name='TaskDocuments[0].ID' type='hidden' value='" + data.ID + "'></td>" +
+                    "<td><a onclick='EditFile(" + data.ID + ", this)'><i class='fa fa-edit'></i></a> <a onclick='DownloadFile(" + data.ID + ")'><i class='fa fa-download'></i></a></td>" +
+                    "<td>" + data.FILENAME + "</td>" +
+                    "<td class='filePath_" + data.ID + "' hidden>" + data.FILEPATH + "</td>" +
+                    "<td class='name_" + data.ID + "' hidden>" + data.FILENAME + "</td>" +
+                    "<td class='desc_" + data.ID + "' hidden>" + data.DESCRIPTION + "</td>" +
+                    "<td class='rev_" + data.ID + "'>" + rev + "</td>" +
+                    "<td class='revC_" + data.ID + "' hidden>" + data.REVCOMMENT + "</td>" +
+                    "<td class='dateMod_" + data.ID + "'>" + ConvertJsonDatetime(data.DATEMODIFY) + "</td>" +
+                    "<td>" + fileSize + " KB</td>" +
+                    "<td>" + '@ViewBag.CurrentUserCreate' + "</td>" +
+                    "<td><a onclick='DeleteFile(" + data.ID + ", this)'><i class='fa fa-trash'></i></a></td></tr>";
+                $("#listFile").append(markup);
+                //dem++;
+                SetNameAfterEdit()
+
+                bootbox.alert('Upload File Successful');
+                $('#ModalUploadFile').modal('hide');
+            } else {
+                bootbox.alert('Error');
+            }
+        });
+        e.preventDefault();
+    });
+
+    function showUploadFile() {
+        $.blockUI();
+        ClearPopUpData();
+        $('.modal-title').text("Create Document");
+        $('#ModalUploadFile').modal('show');
+        $.unblockUI();
+    }
+
+    var dem = 0;
+    function CreateComm() {
+        $.blockUI();
+        var comment = $("#CommentContent").val();
+        if (comment != null) {
+            let commContent = comment;
+            if (commContent != "") {
+                var formData = new FormData();
+                formData.append('CONTENTCOMMENT', comment);
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("UploadCommentTaskMan", "TaskManagement")",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 600000,
+                    success: function (data) {
+                        console.log(data);
+                        if (data.success) {
+                            var markup = "<tr><td hidden><input data-val='true' name='TaskComments[" + dem + "].ID' type='hidden' value='" + data.commentTask.ID + "'></td>" +
+                            "<td class='msg-cont'><p id='CommContent'>" + data.commentTask.CONTENTCOMMENT + "</p></td>" +
+                            "<td class='name'>" +
+                            "<strong id='commUser'>" + '@ViewBag.CurrentUser' + " </strong>" +
+                            "<span class='date' id='commDate'>Comment on " + ConvertJsonDatetime(data.commentTask.WRITEDATE) + "</span></td></tr>"
+
+                            var markup1 = "<tr><td class='row'>" +
+                                "<input data-val='true' name='TaskComments[" + dem + "].ID' type='hidden' value='" + data.commentTask.ID + "'>" +
+                                "<p class='row' id='CommContent'>" +
+                                "<strong id='commUser'>" + data.userName + " </strong>" +
+                                "<span id='commDate' style='font-size:10px'>Comment on " + ConvertJsonDatetime(data.commentTask.WRITEDATE) + "</span>" +
+                                "<p class='row' style='padding-left: 15px'>" + data.commentTask.CONTENTCOMMENT + "</p>" +
+                                "</td></tr>"
+
+
+                            $("#listComment").append(markup1);
+
+                            dem++;
+                            document.getElementById("CommentContent").value = "";
+
+                        }
+                        else {
+                            bootbox.alert("Have error");
+                        }
+                    },
+                    error: function (e) {
+                        bootbox.alert("Have error");
+                    }
+                });
+            }
+            else {
+                bootbox.alert("Please input your comment");
+            }
+        }
+        $.unblockUI();
+    }
+
+    var counterDoc = 1;
+    var listDoc = [];
+    function AddDocument() {
+        $.blockUI();
+        let nameFile = $("#File_Upload").val().replace(/^.*[\\\/]/, '');
+        //var form = $('#frmFile');
+
+        if (nameFile != "") {
+            // Create an FormData object
+            var formData = new FormData();
+            if ($('#File_Upload')[0].files[0] != null) {
+                var lstfile = $('#File_Upload')[0].files[0];
+                let name = $("#name").val();
+                let desc = $("#desc").val();
+                let rev = $("#rev").val();
+                let revComm = $("#revComm").val();
+                formData.append('lstfile', lstfile);
+                //formData.append('FILENAME', name);
+                ////formData.append('userAF', desc);
+                //formData.append('REV', rev);
+                //formData.append('REVCOMMENT', revComm);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("UploadFiles", "FileUpload")',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    enctype: 'multipart/form-data',
+                    cache: false,
+                    timeout: 600000,
+                    success: function (data) {
+                        if (data) {
+                            //$("#myFile").val(data.filename);
+                            //$(".upload-name").val(justNameFile);
+                            bootbox.alert("Upload file success");
+                            location.reload();
+                        }
+                        else {
+                            //$("#myFile").val("");
+                            //$(".upload-name").val('');
+                            bootbox.alert("Have error when upload file");
+                        }
+
+                    },
+                    error: function (e) {
+                        //$("#myFile").val("");
+                        $(".File_Upload").val('');
+                        bootbox.alert("Have error when upload file");
+                    }
+                });
+            }
+            else {
+                //$("#myFile").val("");
+                $(".File_Upload").val('');
+            }
+        }
+        else {
+            bootbox.alert("Fail");
+        }
+        $.unblockUI();
+    }
+
+    function DownloadFile(fileId) {
+        $.blockUI();
+        location.href = "@Url.Action("DownloadFile", "TaskManagement")" + "?fileId=" + fileId;
+        $.unblockUI();
+    }
+
+    function dowloadAllFile() {
+        $.blockUI();
+        var listRow = $(".DefectRow");
+        _dem = listRow.length;
+        for (let i = 0; i < _dem; i++) {
+            var ListColumns = listRow[i].children;
+
+            var fileID = ListColumns[0].children[0].value
+            window.open("@Url.Action("DownloadFile", "TaskManagement")" + "?fileId=" + fileID, '_blank');
+        }
+        $.unblockUI();
+    }
+
+    function ClearPopUpData() {
+        $("#docFileLoad").text("");
+        $("#docFileLoad").attr("href", "");
+        document.getElementById("docFileID").value = "";
+        document.getElementById("File_Upload").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("desc").value = "";
+        document.getElementById("rev").value = "";
+        document.getElementById("revComm").value = "";
+    }
+
+    function EditFile(fileId, element) {
+        $.blockUI();
+        $('#ModalUploadFile').modal('show');
+        $('.modal-title').text("Update Document");
+        ClearPopUpData();
+
+        var $path = $('.filePath_' + fileId).text();
+        var $name = $('.name_' + fileId).text();
+        var $desc = $('.desc_' + fileId).text();
+        var $rev = $('.rev_' + fileId).text();
+        var $revC = $('.revC_' + fileId).text();
+
+        if ($path != null) {
+            $("#docFileLoad").text($path);
+            $("#docFileLoad").attr("href", "@Url.Action("DownloadFile", "TaskManagement")" + "?fileId=" + fileId);
+        }
+        $('#docFileID').val(fileId);
+        $('#name').val($name);
+        if ($desc != null) {
+            $('#desc').val($desc);
+        }
+        $('#rev').val($rev);
+        if ($revC != null) {
+            $('#revComm').val($revC);
+        }
+        $.unblockUI();
+    }
+
+    function DeleteFile(fileId, element) {
+        $(element).parent().parent().remove();
+        $.blockUI();
+        $.post('@Url.Action("DeleteFile", "TaskManagement")', { fileId: fileId },
+            function (result) {
+                if (result.success) {
+                    bootbox.alert('Delete File Success!');
+                }
+                else {
+                    bootbox.alert('Delete File Fail!');
+                }
+            }).fail(function () {
+                bootbox.alert('Delete File Fail!');
+            }).always(function () {
+                $.unblockUI();
+            });
+        SetNameAfterEdit();
+    }
+
+    function SetNameAfterEdit() {
+        var listRow = $(".DefectRow");
+        _dem = listRow.length;
+        for (let i = 0; i < _dem; i++) {
+            var ListColumns = listRow[i].children;
+            ListColumns[0].children[0].name = "TaskDocuments[" + i + "].ID";
+        }
+    }
+
+    function keypress(e) {
+        debugger
+        var keypressed = null;
+        if (window.event) {
+            keypressed = window.event.keyCode; //IE
+        }
+        else {
+
+            keypressed = e.which; //NON-IE, Standard
+        }
+        if (keypressed < 48 || keypressed > 57) {
+            if (keypressed == 8 || keypressed == 127) {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    function validateFileUpload() {
+        var file = $("#File_Upload").val();
+        var fileName = $("#name").val();
+        var rev = $("#rev").val();
+        var docID = $("#docFileID").val();
+
+        $('#File_Upload').removeClass("input-validation-error");
+        $("#ErrFile").empty();
+        $('#name').removeClass("input-validation-error");
+        $("#ErrName").empty();
+        $('#rev').removeClass("input-validation-error");
+        $("#ErrRev").empty();
+
+        if (file == "" || file == null) {
+            if (docID == "" || docID == null) {
+                $('#File_Upload').addClass("input-validation-error");
+                $("#ErrFile").append("The FILE UPLOAD field is required.");
+                $('#File_Upload').focus();
+                return false;
+            }
+        }
+        if (fileName == "" || fileName == null) {
+            $('#name').addClass("input-validation-error");
+            $("#ErrName").append("The NAME field is required.");
+            $('#name').focus();
+            return false;
+        }
+        if (rev == "" || rev == null) {
+            $('#rev').addClass("input-validation-error");
+            $("#ErrRev").append("The REVISION field is required.");
+            $('#rev').focus();
+            return false;
+        }
+        return true;
+    }
+    function DateFomartConvert_YYYMMDD(datepara)
+    {
+        if (datepara == "") return datepara;
+        var date = new Date(datepara);
+        var day = date.getDate();
+        if (String(day).length === 1) {
+            day = "0" + day;
+        }
+
+        var month = (date.getMonth() + 1) ;
+        if (String(month).length === 1) {
+            month = "0" + month;
+        }
+        var i = 1;
+        var dt_string = date.getFullYear() + '/' + month + '/' + day;
+        return dt_string;
+    }
+    function validateTask() {
+        var dt_now = new Date();
+        //var date = dt_now.getDate() + "";
+        //if (date.length === 1) {
+        //    date = "0" + date;
+        //}
+        //    var month = (dt_now.getMonth() + 1) + "";
+        //    if (month.length === 1) {
+        //        month = "0" + month;
+        //    }
+        //    var i = 1;
+        //var dt_string = month + '/' + date + '/' + dt_now.getFullYear();
+        var dt_string = DateFomartConvert_YYYMMDD(dt_now);
+        debugger;
+        var taskNo = $("#TaskNo").val();
+        var taskName = $("#TaskName").val();
+        var desc = $("#Description").val();
+        var dateSta = DateFomartConvert_YYYMMDD($("#datePickerSta").val());        
+        var dateDue = DateFomartConvert_YYYMMDD($("#datePickerDue").val());
+        var dateCorrSta = DateFomartConvert_YYYMMDD($("#datePickerCorrSta").val());
+        var dateCorrEnd = DateFomartConvert_YYYMMDD($("#datePickerCorrEnd").val());
+        //var dateEst = DateFomartConvert_YYYMMDD($("#datePickerEst").val());
+        var progess = $("#progess").val();
+        var status = $("#status").val();
+        var listFile = $(".DefectRow");
+        _fileCount = listFile.length;
+
+        $('#datePickerDue').removeClass("input-validation-error");
+        $("#ErrDue").empty();
+        //$('#datePickerEst').removeClass("input-validation-error");
+        $("#ErrEst").empty();
+        $('#datePickerCorrSta').removeClass("input-validation-error");
+        $("#ErrCorrSta").empty();
+        $('#datePickerCorrEnd').removeClass("input-validation-error");
+        $("#ErrCorrEnd").empty();
+
+        if (dateDue < dateSta) {
+            $('#datePickerDue').addClass("input-validation-error");
+            $("#ErrDue").append("DUEDATE must equal or greater than STARTDATE");
+            $('#datePickerDue').focus();
+            return false;
+        }
+        //if (dateEst < dateSta) {
+        //    $('#datePickerEst').addClass("input-validation-error");
+        //    $("#ErrEst").append("EST.COMPLETIONDATE must equal or greater than STARTDATE");
+        //    $('#datePickerEst').focus();
+        //    return false;
+        //}
+        if (dateCorrSta != "" && dateCorrSta < dateSta) {
+            $('#datePickerCorrSta').addClass("input-validation-error");
+            $("#ErrCorrSta").append("CORRECTSTARTDATE must equal or greater than STARTDATE");
+            $('#datePickerCorrSta').focus();
+            return false;
+        }
+        if (dateCorrEnd != "" && dateCorrEnd < dateCorrSta) {
+            $('#datePickerCorrEnd').addClass("input-validation-error");
+            $("#ErrCorrEnd").append("CORRECTENDDATE must equal or greater than CORRECTSTARTDATE");
+            $('#datePickerCorrEnd').focus();
+            return false;
+        }
+        debugger;
+        if (dateCorrEnd > dt_string @*&& ("@Model.TaskDetail.STATUS" == "Un-Assigned" || "@Model.TaskDetail.STATUS" == "In-Process")*@) {
+            $('#datePickerCorrEnd').addClass("input-validation-error");
+            $("#ErrCorrEnd").append("ActualEndDate must equal or greater than DatetimeNow");
+            $('#datePickerCorrEnd').focus();
+            return false;
+        }
+
+        if (progess > 100 || progess < 0) {
+            bootbox.alert("Progess from 0% to 100%");
+            $('#progess').focus();
+            return false;
+        }
+        //if (status == "Complete" && _fileCount == 0) {
+        //    bootbox.alert("Can not complete when not upload file yet");
+        //    $('#status').focus();
+        //    return false;
+        //}
+        $("button.input-validation-error").removeClass("input-validation-error");
+        $("button[title='None selected']").addClass("input-validation-error");
+        return true;
+    }
+
+    function ConvertJsonDatetime(time) {
+        let currentTime = new Date(time.match(/\d+/)[0] * 1);
+        return (currentTime.getMonth() + 1) + '/' + currentTime.getDate() + '/' + currentTime.getFullYear();
+    }
+
+    $('#File_Upload').bind('change', function () {
+        $('#File_Upload').removeClass("input-validation-error");
+        $("#ErrFile").empty();
+        if (document.getElementById('File_Upload').files[0].size > 10240 * 1024) {
+            //bootbox.alert('File Upload less than 10MB');
+            $('#File_Upload').addClass("input-validation-error");
+            $("#ErrFile").append("The FILE UPLOAD field size less than 10MB");
+            //$('#File_Upload').focus();
+            document.getElementById("File_Upload").value = "";
+        }
+    });
+    function DeleteTask() {
+        var lsItems = [];
+        lsItems.push(@Model.TaskDetail.TaskID);
+        if (lsItems.length > 0) {
+            bootbox.confirm({
+                message: "Are you sure to delete?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes, delete this',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-success'
+                    }
+                },
+                closeButton: false,
+                callback: function (result) {
+                    $.blockUI();
+                    if (result) {
+                        $.ajax({
+                            url: "@Url.Action("DeleteTaskMan", "TaskManagement")",
+                            type: "POST",
+                            data: { "id": lsItems },
+                            error: function (data) {
+                                bootbox.alert("Error")
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    window.location = '@Url.Action("TaskManagementNcr", "TaskManagement", new { taskID = Model.TaskList.TopicID })'
+                                    bootbox.alert("Delete Success");
+
+                                } else {
+                                    bootbox.alert("Delete Fail");
+                                }
+                            }
+                        }).always(function () {
+                            $.unblockUI();
+                        })
+                    }
+                    else {
+                        $.unblockUI();
+                    }
+                }
+            });
+        }
+        else {
+            $.unblockUI();
+        }
+    }
+
+    function ForceComTask() {
+        //Common: Approver = 1, Complete = 2, Reject = 3, Reopen = 4, Cancel = 5
+        var lsItems = [];
+        lsItems.push(@Model.TaskDetail.TaskID);
+        if (lsItems.length > 0) {
+            bootbox.confirm({
+                message: "Are you sure to force complete this?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes, force complete',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-success'
+                    }
+                },
+                closeButton: false,
+                callback: function (result) {
+                    $.blockUI();
+                    if (result) {
+                        $.ajax({
+                            url: "@Url.Action("ChangeStatusTaskMan", "TaskManagement")",
+                            type: "POST",
+                            data: { "id": lsItems, "status": 2 },
+                            error: function (data) {
+                                bootbox.alert("Error")
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    window.location = '@Url.Action("TaskManagementNcr", "TaskManagement", new { taskID = Model.TaskList.TopicID })'
+                                    bootbox.alert("Update Status Success");
+
+                                } else {
+                                    bootbox.alert("Update Status Fail");
+                                }
+                            }
+                        }).always(function () {
+                            $.unblockUI();
+                        })
+                    }
+                    else {
+                        $.unblockUI();
+                    }
+                }
+            });
+        }
+        else {
+            $.unblockUI();
+            bootbox.alert("Choose a TaskManagement");
+        }
+
+    }
+    //tuan lua add
+     function CancelTask() {
+        var lsItems = [];
+        lsItems.push(@Model.TaskDetail.TaskID);
+        if (lsItems.length > 0) {
+            bootbox.confirm({
+                message: "Are you sure to cancel?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes, cancel this',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-success'
+                    }
+                },
+                closeButton: false,
+                callback: function (result) {
+                    $.blockUI();
+                    if (result) {
+                        $.ajax({
+                            url: "@Url.Action("CancelTaskMan", "TaskManagement")",
+                            type: "POST",
+                            data: { "id": lsItems },
+                            error: function (data) {
+                                bootbox.alert("Error")
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    window.location = '@Url.Action("TaskManagementNcr", "TaskManagement", new { taskID = Model.TaskList.TopicID })'
+                                    bootbox.alert("Cancel Success");
+
+                                } else {
+                                    bootbox.alert("Cancel Fail");
+                                }
+                            }
+                        }).always(function () {
+                            $.unblockUI();
+                        })
+                    }
+                    else {
+                        $.unblockUI();
+                    }
+                }
+            });
+        }
+        else {
+            $.unblockUI();
+        }
+    }
+    //$('#Hold').click(function () {
+    //    $('#txt-hold-task').val('');
+    //    $('#model-hold-task').modal('show');
+    //});
+    
+    function SubmitHold() {
+        debugger;
+        let comment = $('#txt-hold-task').val();
+        if (comment == "") {
+            bootbox.alert('The reason of Hold Task is required');
+            return;
+        }
+        var lsItems = [];
+        lsItems.push(@Model.TaskDetail.TaskID);
+                    $.blockUI();
+                        $.ajax({
+                            url: "@Url.Action("HoldTaskMan", "TaskManagement")",
+                            type: "POST",
+                            data: { "id": lsItems, comment: comment },
+                            error: function (data) {
+                                bootbox.alert("Error")
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    window.location = '@Url.Action("TaskManagementNcr", "TaskManagement", new { taskID = Model.TaskList.TopicID })'
+                                    bootbox.alert("Cancel Success");
+
+                                } else {
+                                    bootbox.alert("Cancel Fail");
+                                }
+                            }
+                        }).always(function () {
+                            $.unblockUI();
+                        })
+    }
+    //$('#Reject').click(function () {
+    //    $('#txt-reject-task').val('');
+    //    $('#model-reject-task').modal('show');
+    //});
+     function SubmitReject() {
+        let comment = $('#txt-reject-task').val();
+        if (comment == "") {
+            bootbox.alert('The reason of reject Task is required');
+            return;
+        }
+        var lsItems = [];
+        lsItems.push(@Model.TaskDetail.TaskID);
+                    $.blockUI();
+                        $.ajax({
+                            url: "@Url.Action("RejectTaskMan", "TaskManagement")",
+                            type: "POST",
+                            data: { "id": lsItems, comment: comment },
+                            error: function (data) {
+                                bootbox.alert("Error")
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    window.location = '@Url.Action("TaskManagementNcr", "TaskManagement", new { taskID = Model.TaskList.TopicID })'
+                                    bootbox.alert("Reject Success");
+
+                                } else {
+                                    bootbox.alert("Reject Fail");
+                                }
+                            }
+                        }).always(function () {
+                            $.unblockUI();
+                        })
+    }
+    @*$('#Reopen').on('click', function () {
+         var lsItems = [];
+        lsItems.push(@Model.TaskDetail.TaskID);
+        if (lsItems.length > 0) {
+            bootbox.confirm({
+                message: "Are you sure to reopen?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes, reopen this',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-success'
+                    }
+                },
+                closeButton: false,
+                callback: function (result) {
+                    $.blockUI();
+                    if (result) {
+                        $.ajax({
+                            url: "@Url.Action("ReopenTaskMan", "TaskManagement")",
+                            type: "POST",
+                            data: { "id": lsItems },
+                            error: function (data) {
+                                bootbox.alert("Error")
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    window.location = '@Url.Action("TaskManagementNcr", "TaskManagement", new { taskID = Model.TaskList.TopicID })'
+                                    bootbox.alert("Cancel Success");
+
+                                } else {
+                                    bootbox.alert("Cancel Fail");
+                                }
+                            }
+                        }).always(function () {
+                            $.unblockUI();
+                        })
+                    }
+                    else {
+                        $.unblockUI();
+                    }
+                }
+            });
+        }
+        else {
+            $.unblockUI();
+        }
+    })*@
+
+     @*$('#Approve').on('click', function () {
+         var lsItems = [];
+        lsItems.push(@Model.TaskDetail.TaskID);
+        if (lsItems.length > 0) {
+            bootbox.confirm({
+                message: "Are you sure to Approve?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes, Approve this',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-success'
+                    }
+                },
+                closeButton: false,
+                callback: function (result) {
+                    $.blockUI();
+                    if (result) {
+                        $.ajax({
+                            url: "@Url.Action("ApproveTaskMan", "TaskManagement")",
+                            type: "POST",
+                            data: { "id": lsItems },
+                            error: function (data) {
+                                bootbox.alert("Error")
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    window.location = '@Url.Action("TaskManagementNcr", "TaskManagement", new { taskID = Model.TaskList.TopicID })'
+                                    bootbox.alert("Cancel Success");
+
+                                } else {
+                                    bootbox.alert("Cancel Fail");
+                                }
+                            }
+                        }).always(function () {
+                            $.unblockUI();
+                        })
+                    }
+                    else {
+                        $.unblockUI();
+                    }
+                }
+            });
+        }
+        else {
+            $.unblockUI();
+        }
+    })*@
+    
+</script>

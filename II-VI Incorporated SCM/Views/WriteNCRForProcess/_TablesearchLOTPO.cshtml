@@ -1,0 +1,75 @@
+﻿@model List<II_VI_Incorporated_SCM.Models.NCR.NcrSearchViewModelProcess>
+@using II_VI_Incorporated_SCM.Models
+
+@{
+    var count = 1;
+    foreach (var item in Model)
+    {
+<tr class="item_no" id="item_no_@count" rev="@count">
+    <td id="RECEIVER_@count">@item.RECEIVER</td>
+    <td id="PO_NUM_@count">@item.PO_NUM</td>
+    <td id="ITEM_@count">@item.ITEM</td>
+    <td id="QTY_@count" hidden>@item.QTY</td>
+    <td id="LOT_@count" hidden>@item.LOT.Trim()</td>
+    <td id="POSTING_DATE_@count">@item.POSTING_DATE.ToString("dd/MM/yyyy")</td>
+    <td id="ITEM_DESC_@count" hidden>@item.ITEM_DESC</td>
+    <td id="STOCK_UM_@count" hidden>@item.STOCK_UM</td>
+    <td id="VENDOR_@count" hidden>@item.VENDOR</td>
+    <td id="VEN_NAME_@count" hidden>@item.VEN_NAME</td>
+    <td id="PO_LINE_@count" hidden>@item.PO_LINE</td>
+    <td id="QS_STAT_@count" hidden>@item.QS_STAT</td>
+    <td id="REC_LINE_@count" hidden>@item.REC_LINE</td>
+    @*<td id="MODEL_NO_@count"hidden >@item.MODEL_NO</td>*@
+    <td id="LOT_@count" hidden>@item.LOT</td>
+    <td id="HALT_@count" hidden>@item.HALT</td>
+    <td id="USER_@count" hidden>@item.USER_</td>
+    <td id="USER_DATE_@count" hidden>@item.USER_DATE</td>
+    <td id="PC_NAME_@count" hidden>@item.PC_NAME</td>
+    <td id="SAMPLING_VISUAL_@count" hidden>@item.SAMPLING_VISUAL</td>
+    <td id="SAMPLING_MEASURE_@count" hidden>@item.SAMPLING_MEASURE</td>
+    <td id="SEC_@count" hidden>@item.SEC</td>
+    <td id="SERIAL_CTL_@count" hidden>@item.SERIAL_CTL</td>
+    <td id="SKIP_LOT_PLAN_@count" hidden>@item.SKIP_LOT_PLAN</td>
+    <td id="SKIP_LOT_LEVEL_@count" hidden>@item.SKIP_LOT_LEVEL</td>
+    <td id="INSP_STAT_@count" hidden>@item.INSP_STAT</td>
+    <td id="DOC_REQ_@count" hidden>@item.DOC_REQ</td>
+    <td id="STATUS_@count" hidden>@item.STATUS</td>
+    <td id="QUAL_@count" hidden>@item.QUAL</td>
+    <td id="SKIP_LEVEL_@count" hidden>@item.SKIP_LEVEL</td>
+    <td id="LOT_SKIP_@count" hidden>@item.LOT_SKIP</td>
+    <td id="AQL_VISUAL_@count" hidden>@item.AQL_VISUAL</td>
+    <td id="AQL_MEASURE_@count" hidden>@item.AQL_MEASURE</td>
+    <td id="TEST_ROSH_REQUIRED_@count" hidden>@item.TEST_ROSH_REQUIRED</td>
+    <td id="CCN_@count" hidden>@item.CCN</td>
+    <td id="PartialAcc_@count" hidden>@item.PartialAcc</td>
+    <td id="PartialRej_@count" hidden>@item.PartialRej</td>
+    <td id="PartialIns_@count" hidden>@item.PartialIns</td>
+    <td id="ADDRESS_@count" hidden>@item.ADDRESS</td>
+    <td id="STATE_@count" hidden>@item.STATE</td>
+    <td id="ZIP_@count" hidden>@item.ZIP</td>
+    <td id="Inspector_@count" hidden>@item.Inspector</td>
+    <td id="CTRY_@count" hidden>@item.CTRY</td>
+    <td id="DRAW_REV_@count" hidden>@item.DRAW_REV</td>
+</tr>
+        count++;
+    }
+}
+
+<script>
+    $(document).ready(function () {
+        let i = 1;
+        $('tr.item_no').on('click', function () {
+                rowSelect($(this));
+            });
+    });
+
+    function rowSelect(selected) {
+        $('tr.item_no').each(function (imp) {
+            $(this).removeClass('rowActive');
+        });
+        selected.addClass('rowActive');
+        SEND_PONUM = selected.context.cells[0];
+        SEND_PARTNUM = selected.context.cells[1];
+        SEND_RECEIVER = selected.context.cells[2];
+    }
+</script>

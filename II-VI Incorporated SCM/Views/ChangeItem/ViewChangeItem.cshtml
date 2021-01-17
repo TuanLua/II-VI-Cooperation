@@ -1,0 +1,417 @@
+﻿@model II_VI_Incorporated_SCM.Models.NCR.ChangeItemViewmodel
+@{
+    ViewBag.Title = "ViewChangeItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>ViewChangeItem</h3>
+<div style="text-align:right">
+    @if ((bool)ViewBag.IsWHMRB && Model.CRStatus.Trim() == "Approve" && Model.DateChairMain != null)
+    {
+        <button class="btn btn-success" id="acknow">Acknowleged Change Item</button>
+    }
+    @if ((bool)ViewBag.IsChairm && Model.CRStatus.Trim() == "Created")
+    {
+        <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">ChairMain Reject</button>
+        <button class="btn btn-success" id="chairmainaprroval">ChairMain Approval</button>
+    }
+    <a class="btn btn-info btn-sm " id="bt-close">Back to list</a>
+</div>
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <td colspan="1">
+                <form class="well form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">CR NumBer <span style="color: red">*</span></label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></i></span>
+                                @Html.TextBoxFor(m => m.CRNo, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @required= "@required",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">REF NumBer <span style="color: red">*</span></label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></i></span>
+                                @Html.TextBoxFor(m => m.REF_NUM, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @required= "@required",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">SubmitterName</label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                @Html.TextBoxFor(m => m.Submitername, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @required = "@required",
+                               @readonly= "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Status</label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                @Html.TextBoxFor(m => m.CRStatus, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @required = "@required",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Brief Description of the change <span style="color: red">*</span></label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                @Html.TextAreaFor(m => m.Brief, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @required = "@required",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Date submmit</label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group date">
+                                @Html.TextBoxFor(model => model.DateSubmitted, new { @class = "form-control", @id = "datePickerSta", @readonly = "readonly" })
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Date Required</label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group date">
+                                @Html.TextBoxFor(model => model.DateRequired, new { @class = "form-control", @id = "datePickerEnd", @readonly = "readonly" })
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Priority <span style="color: red">*</span></label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                @Html.TextBoxFor(m => m.Priority, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Reason for Change <span style="color: red">*</span></label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                @Html.TextAreaFor(m => m.Reason, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Other Artifacts Impacted:</label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                @Html.TextAreaFor(m => m.OtherAtifact, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Comments</label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                @Html.TextAreaFor(m => m.Comments, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Chairmain Comments</label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                @Html.TextAreaFor(m => m.Chermaincomment, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Date Chairmain </label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                @Html.TextAreaFor(m => m.DateChairMain, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Chairmain Name</label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></i></span>
+                                @Html.TextAreaFor(m => m.Chermainname, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">WHMRB</label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                @Html.TextAreaFor(m => m.WHMRBname, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">WHMRB Date</label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                @Html.TextAreaFor(m => m.WHacnowledDate, new
+                           {
+                               @data_val = "true",
+                               @class = "form-control",
+                               @readonly = "readonly"
+                           })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Attachments</label>
+                        <div class="col-md-10 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                <input placeholder="Attachments" class="form-control" required="required" value="" type="file" disabled="disabled">
+                                <a  target="_blank" id="filenamepro"></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Reject change item</h4>
+            </div>
+            <div class="modal-body">
+                <label class="col-md-4">Comments</label>
+                <textarea class="form-control" id="comment" required="required"> </textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="chairmaireject" class="btn btn-warning">Ok</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script>
+   var creditFile = '@Model.Linkactack';
+    var arayfile = creditFile.split("/");
+    var namefile = arayfile[arayfile.length - 1];
+    $('#filenamepro').html(namefile);
+    $('#chairmainaprroval').click(function () {
+
+        bootbox.confirm({
+            message: "Do you want approval CR?",
+            buttons: {
+                confirm: {
+                    label: 'Yes, approval this CR',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            closeButton: false,
+            callback: function (result) {
+                if (result) {
+                    var ncnum = "@Model.REF_NUM";
+                    var crno = $('#CRNo').val();
+                    $.blockUI();
+                    $.post('@Url.Action("ApprovalChangeSubmitItem", "ChangeItem")',
+                        { crno: crno, ncnum: ncnum },
+                        function (result) {
+                            if (result = true) {
+                                bootbox.alert("Approval success!", function () { window.location = '@Url.Action("Index", "ChangeItem")' });
+                                $('#myModal').modal('hide');
+                            }
+                        }).fail(function () {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function () {
+                            $.unblockUI();
+                        });
+                }
+            }
+        })
+    })
+    $('#chairmaireject').click(function () {
+        var comment = $('#comment').val();
+        if (comment == " ") {
+            bootbox.alert("Please input comment!");
+        }
+        else {
+        bootbox.confirm({
+            message: "Do you want Reject NCR?",
+            buttons: {
+                confirm: {
+                    label: 'Yes, reject this NCR',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            closeButton: false,
+            callback: function (result) {
+                if (result) {
+                      var comment = $('#comment').val();
+                      var crno = $('#CRNo').val();
+                      var ncnum = "@Model.REF_NUM";
+                    $.blockUI();
+                    $.post('@Url.Action("RejectChangeSubmitItem", "ChangeItem")',
+                        { comment: comment, crno: crno, ncnum: ncnum},
+                            function (result) {
+                                if (result = true) {
+                                    bootbox.alert("Reject success!" ,function (){ window.location = '@Url.Action("Index", "ChangeItem")' });
+                                    
+                                }
+                        }).fail(function() {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function() {
+                            $.unblockUI();
+                        });
+
+                };
+            }
+            });
+        }
+    })
+      $('#acknow').click(function () {
+        bootbox.confirm({
+            message: "Do you want acknowleged CR?",
+            buttons: {
+                confirm: {
+                    label: 'Yes, acknowleged this NCR',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            closeButton: false,
+            callback: function (result) {
+                if (result) {
+                      var comment = $('#comment').val();
+                      var crno = $('#CRNo').val();
+                    var ncnum = "@Model.REF_NUM";
+                    var status = "@Model.CRStatus";
+                    $.blockUI();
+                    $.post('@Url.Action("AcknowlegedChangeSubmitItem", "ChangeItem")',
+                        { comment: comment, crno: crno, ncnum: ncnum,status:status.trim()},
+                        function (result) {
+                            if (result = true) {
+                                bootbox.alert("Acknowledge success!", function () { window.location = '@Url.Action("Index", "ChangeItem")' });
+                            }
+                            else {
+                                 bootbox.alert(result.message);
+                            }
+                        }).fail(function() {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function() {
+                            $.unblockUI();
+                        });
+
+                };
+            }
+        });
+    })
+       $('#bt-close').click(function() {
+            window.location = '@Url.Action("Index", "ChangeItem")';
+    });
+     var fileid = '@Model.idfile';
+     $('#filenamepro').attr("href", '@Url.Action("DownloadFile", "ChangeItem")' + "?fileId=" + fileid);
+</script>

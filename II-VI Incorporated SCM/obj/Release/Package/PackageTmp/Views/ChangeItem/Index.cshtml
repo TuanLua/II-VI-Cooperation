@@ -1,0 +1,210 @@
+﻿@using II_VI_Incorporated_SCM.Models.NCR
+@using II_VI_Incorporated_SCM.Services
+@{
+    ViewBag.Title = "NCR Management";
+}
+<style>
+    .CRNo:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Refnum:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Refnum {
+        color: blue;
+    }
+
+    .CRNo {
+        color: blue;
+    }
+    .history {
+        color: blue;
+    }
+</style>
+<h3>Change Item Management </h3>
+<div class="portlet box">
+    <div class="portlet-title">
+        <div class="actions">
+            <div class="btn-group">
+                <button type="button" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                    <i class="fa"></i> Find By
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:;" id="clear"> Clear Filter</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFindStatus()"> CR Status </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<ChangeItemViewmodel>()
+                                                      .Name("gridNCR")
+                                                      .Columns(columns =>
+                                                      {
+                                                          columns.Bound(p => p.REF_NUM).Title("History").HtmlAttributes(new { @class = "history" }).Width(120);
+                                                          columns.Bound(p => p.CRNo).Title("CR NO").HtmlAttributes(new { @class = "CRNo" }).Width(150);
+                                                          columns.Bound(p => p.REF_NUM).Title("Ref Number").HtmlAttributes(new { @class = "Refnum" }).Width(120);
+                                                          columns.Bound(p => p.Brief).Title("Brief Description of the change").Width(300);
+                                                          columns.Bound(p => p.Submitername).Title("User Submit").Width(150);
+                                                          columns.Bound(p => p.Priority).Title("Priority").Width(100);
+                                                          columns.Bound(p => p.CRStatus).Title("Status").Width(100);
+                                                          columns.Bound(p => p.DateSubmitted).Title("Date Submitted").Format("{0:dd-MMM-yy}").Width(150);
+                                                          columns.Bound(p => p.DateRequired).Title("Date Required").Format("{0:dd-MMM-yy}").Width(150);
+                                                      })
+                                                      .Sortable()
+                                                      .Scrollable()
+                                                      .Filterable()
+                                                         .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                                                      .HtmlAttributes(new { style = "height:550px;" })
+                                                      .DataSource(dataSource => dataSource
+                                                          .Ajax()
+                                                          .PageSize(10)
+                                                          .Read(read => read.Action("NCRChangeItem", "ChangeItem"))
+                                                       .Sort(sort => sort.Add("DateSubmitted").Descending())
+
+                                                      ))
+        </div>
+    </div>
+</div>
+
+<div id="popupstatus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <input id="statusSearch" type="text" class="dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Created')"> Created </a>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Approve')"> Approve</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Reject')">Reject</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Acknowledged')">Acknowledged</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchStastus()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //var grid = $("#gridNCR").data("kendoGrid");
+    //grid.thead.kendoTooltip({
+    //    filter: "th",
+    //    content: function (e) {
+    //        var target = e.target; // element for which the tooltip is shown
+    //        return $(target).text();
+    //    }
+    //});
+     @*var mygrid = $("#gridNCR").kendoGrid({
+            selectable: true
+        });
+        //select row data catch status
+        mygrid.on("click", "tr", function () {
+            var grid = $("#gridNCR").data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+            var ncrnum = selectedItem.CRNo;
+            window.open('@Url.Action("ViewChangeItem", "ChangeItem")' + "?CR_NUMBER=" + ncrnum, '_blank');
+        });*@
+
+    $(".k-header").kendoTooltip({
+        content: function (e) {
+            var target = e.target; // element for which the tooltip is shown
+            return $(target).text();
+        },
+        position: "top"
+    });
+
+    function onSearchStastus() {
+        var number = $('#searchId').val();
+        if (number == '5') {
+            var searchStatus = $('#statusSearch').val().toLowerCase();
+            $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "CRStatus", operator: "contains", value: searchStatus });
+            $('#statusSearch').val("");
+        }
+        $('#popupstatus').modal('hide');
+    }
+    function onFindStatus() {
+            $('#statusSearch').show();
+            $('#searchId').val(5);
+            $('#popupstatus').modal('show');
+    }
+    function onStatus(status) {
+        $('#search').text(status);
+        $('#statusSearch').val(status);
+    }
+    $("#gridNCR").on("click", ".Refnum", function (e) {
+        var grid = $("#gridNCR").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        var NCR_NUM = model.REF_NUM
+                if (NCR_NUM != null) {
+                    window.open('@Url.Action("ViewApproval", "NCRApproval")' + "?NCR_NUM=" + NCR_NUM,'_blank');
+                } else {
+                    bootbox.alert('NCR_NUM does not exist!');
+                }
+    });
+    $("#gridNCR").on("click", ".history", function (e) {
+        debugger;
+        var grid = $("#gridNCR").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        var NCR_NUM = model.REF_NUM;
+        var CRNO = model.CRNo;
+        var status = model.CRStatus;
+        if (status.trim() =='Acknowledged') {
+                    window.open('@Url.Action("ViewApprovalHistory", "NCRApproval")' + "?NCR_NUM=" + NCR_NUM + '&CRNo=' + CRNO,'_blank');
+                } else {
+                    bootbox.alert('NCR_NUM does not history!');
+                }
+    });
+    $("#gridNCR").on("click", ".CRNo", function (e) {
+        var grid = $("#gridNCR").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        var NCR_NUM = model.CRNo;
+        window.open('@Url.Action("ViewChangeItem", "ChangeItem")' + "?CR_NUMBER=" + NCR_NUM, '_blank');
+    });
+
+    $("#clear").click(function () {
+        $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "CRNo", operator: "contains", value: "" });
+        $('#search').val("");
+        $('a.k-grid-filter').removeClass('k-state-active')
+    })
+</script>

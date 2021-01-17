@@ -1,0 +1,2797 @@
+﻿@using System.Activities.Statements
+@using II_VI_Incorporated_SCM.Models
+@using II_VI_Incorporated_SCM.Services;
+@using Microsoft.AspNet.Identity
+@using System.Globalization;
+@model II_VI_Incorporated_SCM.Models.NCR.NCRManagementViewModel
+@{
+    ViewBag.Title = "View NCR";
+    List<SelectListItem> lstAllUsers = new List<SelectListItem>();
+    foreach (var item in (List<AspNetUser>)ViewBag.ListAllUsers)
+    {
+        lstAllUsers.Add(new SelectListItem { Value = item.Id, Text = item.FullName });
+    }
+}
+<style>
+    .multiselect-container {
+        max-height: 300px !important;
+        max-width: 300px !important;
+        padding-left: 30px !important;
+    }
+
+    .display-none {
+        display: none;
+    }
+
+    .style-form-add {
+        border-top: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+        padding: 8px !important;
+    }
+
+    table, td, th {
+        border: 1px solid #252323 !important;
+    }
+</style>
+
+<input hidden value="@Model.RECEIVER" id="dataForLstDefect" />
+<input hidden value="@ViewBag.SEC" id="SEC" />
+@using (Html.BeginForm("ViewApproval", "NCRApproval", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "form-data", @id = "Create" }))
+{
+    <input type="hidden" id="STT" value="@ViewBag.STT" />
+    @Html.HiddenFor(model => model.NCR_NUM)
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet box">
+                <div class="portlet-title">
+                    <div class="caption">
+                        @if ((bool)ViewBag.IsMRBTeam && ViewBag.Status == StatusInDB.WaitingForDisposition)
+                        {
+                            <a class="btn btn-success btn-sm" onclick="submitApprDispo()" id="btn-dispo">Disposition</a>
+                            <a class="btn btn-success btn-sm display-none" id="btn-okdispo" onclick="saveDataDispo()">OK</a>
+                        }
+                        @if ((bool)ViewBag.IsWHMRB && ViewBag.Status == StatusInDB.Submitted) 
+                        {
+                            <a class="btn btn-success btn-sm " onclick="submitApprConfirm()" id="btn-confirm">Confim NCR</a>
+                        }
+                        @if ((bool)ViewBag.IsOPE && ViewBag.isOPEOwner && ViewBag.Status == StatusInDB.Created)
+                        {
+                            <a class="btn btn-success btn-sm " onclick="EditNCR()" id="btn-edit">Edit</a>
+                            <input type="hidden" id="ROLEOFUSER" value="OPE" />
+                            <button type="button" class="btn btn-success btn-sm" id="submit" onclick="submitApprcreate()">Submit</button>
+                            @*<button type="button" class="btn btn-success btn-sm" style="display: none" id="savesubmit" onclick="submitApprcreate()">Save</button>*@
+                        }
+                        <a class="btn btn-success btn-sm " id="bt-close">Back to list</a>
+                    </div>
+
+                    <div class="actions" style="margin-top: 0px;">
+                        @if ((ViewBag.IsSQE @*|| ViewBag.IsBuyer*@) && ViewBag.HasVendor && @Model.requered == "checked" && ViewBag.Status == StatusInDB.DispositionApproved)
+                        {
+                            <a class="btn btn-success btn-sm" onclick="createSCAR('@Model.NCR_NUM')" id="btn-scar">SCAR</a>
+                        }
+                        <a class="btn btn-success btn-sm" style="margin-right: 10px;" href="PrintNCR?NCR_NUM=@Model.NCR_NUM" target="_blank">
+                            Print
+                        </a>
+                        @if ((bool)ViewBag.IsOPE && ViewBag.Status == StatusInDB.Created)
+                        {
+                            <a class="btn btn-success btn-sm" id="void" onclick="submitApprVoid()">
+                                Void
+                            </a>
+                        }
+                        @if ((bool)ViewBag.IsChairm && ViewBag.Status == StatusInDB.DispositionApproved)
+                        {
+                            <a class="btn btn-danger btn-sm" id="closencr" onclick="closencr()">
+                                Close NCR
+                            </a>
+                        }
+                    </div>
+
+                </div>
+                <p style="text-align:right; padding:0px; margin:0px; font-size:20px;">NO.<span style="color: red"> @Model.NCR_NUM</span></p>
+                <div class="table-responsive" style="overflow: hidden">
+                    <table class="table table-striped table-bordered table-hover">
+                        <colgroup>
+                            <col width="30%" />
+                            <col width="10%" />
+                            <col width="30%" />
+                            <col width="15%" />
+                            <col width="15%" />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p><b>MI PART NO.</b></p>
+                                    @Model.MI_PART_NO
+                                </td>
+                                <td>
+                                    <p><b>REV</b></p>
+                                    @Model.DRAW_REV
+                                </td>
+                                <td>
+                                    <p><b>PO NUMBER</b></p>
+                                    @Model.PO_NUM
+                                </td>
+                                <td colspan="2">
+                                    <p><b>TRAVELER NO./ ARM NO. /LOT#.</b></p>
+                                    @Model.LOT
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p><b>DESCRIPTION OF MATERIAL</b></p>
+                                    @Model.ITEM_DESC
+                                </td>
+                                <td>
+                                    <p><b>MODEL OR  SERIAL NO.</b></p>
+                                    @Model.MODEL_NO
+                                </td>
+                                @if (@Model.TYPE_NCR == "IQC")
+                                {
+                                <td>
+                                    <p><b>REC.INSP</b></p>
+                                    <input type="checkbox" disabled="disabled" class="checkboxes" checked="checked" />
+                                </td>
+                                <td>
+                                    <p><b>IN PROCESS</b></p>
+                                    <input type="checkbox" class="checkboxes" disabled="disabled" readonly="readonly" />
+                                </td>
+                                }
+
+                                else if (@Model.TYPE_NCR == "PROCESS")
+                                {
+                                <td>
+                                    <p><b>REC.INSP</b></p>
+                                    <input type="checkbox" id="Type_Insp" class="checkboxes" disabled="disabled" />
+                                </td>
+                                <td>
+                                    <p><b>INPROCESS</b></p>
+                                    <input type="checkbox" id="inprocess" class="checkboxes" disabled="disabled" checked="checked" />
+                                </td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped table-bordered table-hover" id="sample_3">
+                        <thead>
+                            <tr>
+                                <th colspan="6" class="text-center">INSPECTION PLAN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="4" style="vertical-align:middle">VENDOR</td>
+                                <td rowspan="2">
+                                    <p><b>NAME OF VENDOR</b></p>
+                                    @Model.VEN_NAME
+                                </td>
+                                @if (@Model.SAMPLE_INSP == true)
+                                {
+                                <td colspan="2">
+                                    <p><b>SAMPLE INSC</b></p>
+                                    <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                                    <label>AQL</label> 0.65 LEVEL C=0
+                                </td>
+                                }
+                                else
+                                {
+                                <td colspan="2">
+                                    <p><b>SAMPLE INSP</b></p>
+                                    <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                    <label>AQL</label>  LEVEL
+                                </td>
+                                }
+                                @if (@Model.PERCENT_INSP == true)
+                                {
+                                <td>
+                                    <p><b>100%</b></p>
+                                    INSP
+                                    <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                                </td>
+                                }
+                                else
+                                {
+                                <td>
+                                    <p><b>100%</b></p>
+                                    INSP
+                                    <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                </td>
+
+                                }
+                                @if (Model.FIRST_ARTICLE == true)
+                                {
+                                <td colspan="2">
+                                    <p><b>FIRST ARTICLE</b></p>
+                                    <input type="checkbox" class="checkboxes" checked="checked" disabled="disabled" />
+                                </td>
+                                }
+                                else
+                                {
+                                <td colspan="2">
+                                    <p><b>FIRST ARTICLE</b></p>
+                                    <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                </td>
+                                }
+
+
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <p style="text-align: center"><b>QUANTITY</b></p>
+                                </td>
+                            </tr>
+                            <tr class="odd gradeX">
+                                <td>
+                                    <p><b>STREET ADDRESS</b></p>
+                                    @Model.VEN_ADD
+                                </td>
+                                <td>
+                                    <p><b>RECEIVED</b></p>
+                                    @Model.REC_QTY
+                                </td>
+                                <td>
+                                    <p><b>INSPECTED</b></p>
+                                    @Model.INS_QTY
+                                </td>
+                                <td>
+                                    <p><b>DEFECTIVE</b></p>
+                                    @Model.defect
+                                </td>
+                                <td>
+                                    <p> <b>REJECTED</b></p>
+                                    @Model.REJ_QTY
+                                </td>
+                            </tr>
+                            <tr class="odd gradeX">
+                                <td style="text-align: left">
+                                    <p>
+                                        <b>CITY :</b> @Model.CITY
+                                        <b>STATE:</b> @Model.STATE <b> ZIP CODE:</b> @Model.ZIP_CODE
+                                    </p>
+                                </td>
+                                <td>
+                                    <p><b>REPORT WRITTEN BY </b></p>
+                                    @Model.INSPECTOR
+                                </td>
+                                <td colspan="3">
+                                    <p><b>DATE</b></p>
+                                    @(Model.INS_DATE.HasValue ? Model.INS_DATE.Value.ToString("MM/dd/yyyy") : "")
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="float: right">
+                        <label class="control-label">Attach Evidence(PDF)</label>
+                        <a target="_blank" id="filenamepro"> </a>
+                    </div>
+                    <div class="portlet grey col-md-12">
+                        <div class="row margin-left-right-0">
+                            <div class="form-group" style="padding-left:50px;padding-right:50px">
+                                <h4 style="font-weight: bold">Non-Comformity:</h4>
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-res">
+                                    <thead>
+                                        <tr>
+                                            <th>ITEM</th>
+                                            <th>QTY</th>
+                                            <th>DEFECT</th>
+                                            <th>DESCRIPTION</th>
+                                            <th>REMARK</th>
+                                            <th>RESPON</th>
+                                            <th>DISP'N</th>
+                                            <th id="datede"> DATE APPROVAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var count = 1;
+                                            foreach (var item in Model.ListdefectprocessString)
+                                            {
+                                                <tr class="odd data-confirmity" id="data-confirmity-@count" rev="@item.ITEM">
+                                                    <td style="width:60px">@count</td>
+                                                    <td id="dataqty_@count">@item.QTY</td>
+                                                    <td>@item.DEFECT_STRING</td>
+                                                    <td>
+                                                        @item.NC_DESC_STRING
+                                                    </td>
+                                                    <td>@item.REMARK</td>
+                                                    <td id="reponsedrop">
+                                                        @Html.DropDownList("dd_respon_" + count, new SelectList(Model.ListRespon, "ID", "NAME"), new { @class = "form-control dd_respon display-none", @onchange = "changeRespon(" + count + ")" })
+                                                        <span class="display-none hasRespon">@item.RESPONSENAME</span>
+                                                    </td>
+                                                    <td id="depositiondrop">
+                                                        @Html.DropDownList("dd_disp_" + count, new SelectList(Model.ListDispo, "ID", "NAME"), new { @class = "form-control dd_respon display-none", @onchange = "changeDisplay(" + count + ")", onfocus = "this.selectedIndex = -1;" })
+                                                        <span class="display-none hasDis">@item.DISPOSITIONNAME</span>
+                                                    </td>
+                                                    <td class="adddet">
+                                                        @(item.DATEAPPROVAL.HasValue ? item.DATEAPPROVAL.Value.ToString("MM/dd/yyyy") : "")
+                                                    </td>
+                                                </tr>
+                                                count++;
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <div id="divAddIns" class="display-none">
+                                    <h4 style="font-weight: bold">ADDITIONALS INSTRUCTIONS</h4>
+                                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table-add-ins">
+                                        <thead>
+                                            <tr>
+                                                <th>ITEM</th>
+                                                <th>QTY</th>
+                                                <th>ADDITIONALS INSTRUCTIONS</th>
+                                                <th>REMARK</th>
+                                                <th>INSP.</th>
+                                                <th>DATE</th>
+                                            </tr>
+                                        </thead>
+                                        @{
+                                            List<SelectListItem> listItem = new List<SelectListItem>();
+                                            var dem = 1;
+                                            foreach (var item in Model.ListdefectprocessString)
+                                            {
+                                                listItem.Add(new SelectListItem { Value = dem.ToString(), Text = dem.ToString() });
+                                                dem++;
+                                            }
+                                        }
+                                        <tbody id="append-data-addins">
+                                            <tr>
+                                                <td style="width:60px">
+                                                    @*@Html.TextBox("add_raw_item", null, new { maxlength = 80, size = 10, @class = "form-control", @style = "width: 50px; margin-left: 6px;" })*@
+                                                    @Html.DropDownList("add_raw_item", listItem, new { @class = "form-control" })
+                                                </td>
+                                                <td>@Html.TextBox("add_raw_qty", null, new { maxlength = 80, @class = "form-control", onkeypress = "return keypress(event)" })</td>
+                                                <td>
+                                                    @Html.DropDownList("add_raw_addins", new SelectList(Model.ListAddition, "ID", "NAME"), new { @class = "form-control", @onchange = "add_raw_addins_onchange(this)", @onfocus = "this.selectedIndex = -1;" })
+                                                </td>
+                                                <td>@Html.TextBox("add_raw_remark", null, new { maxlength = 80, size = 10, @class = "form-control" })</td>
+                                                <td>
+                                                    @* @Html.TextBox("add_raw_inp", null, new { maxlength = 80, size = 10, @class = "form-control" })*@
+                                                    @Html.DropDownList("add_raw_inp", lstAllUsers, new { maxlength = 80, @class = "form-control", @onfocus = "this.selectedIndex = -1;" })
+                                                </td>
+                                                <td>@DateTime.Now.ToString("MM/dd/yyyy")</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button type="button" class="btn btn-success pull-right" style="margin-top:-20px;margin-bottom:10px;" onclick="addNewRaw()">Add</button>
+
+                                    <h4 style="font-weight: bold" id="remain-sum">REMAINING</h4>
+                                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table-remain">
+                                        <thead>
+                                            <tr>
+                                                <th>ITEM</th>
+                                                <th>QTY</th>
+                                                <th>DISP'N</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="append-data-remain"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+                                            if ((bool)ViewBag.IsOPE && ViewBag.isOPEOwner && ViewBag.Status == StatusInDB.Created)
+                                            {
+                                                <div class="row" id="modelSubmit" style="display: none">
+                                                    <div class="col-md-12">
+                                                        @Html.Partial("~/Views/WriteNcrForIqc/_SelectUserApprPartial.cshtml", (List<SelectList>)ViewBag.List)
+                                                    </div>
+                                                </div>
+                                                }
+                                            }
+@*Tuong - Dev - Appr*@
+<div id="modalForAppr">
+    @* Modal Rework *@
+    <div id="modelRework" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" style="font-weight: bold">Rework Cost</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            An estimate rework cost
+                        </div>
+                        <div class="col-md-12">
+                            <input class="form-control" id="txt_rework" onkeypress="return keypress(event);" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveRework()">OK</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @*Modal Scrap*@
+    <div id="modelScrap" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" style="font-weight: bold">SCRAP</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            REASON
+                        </div>
+                        <div class="col-md-12">
+                            <textarea class="form-control" id="area_scrap" rows="20" style="resize: vertical; overflow-y:auto"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveScrap()">OK</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @* Modal Additional instruction*@
+    <div id="modelAddInstruct" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" style="font-weight: bold">ADDITIONAL INSTRUCTIONS</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                                <thead>
+                                    <tr>
+                                        <th>ITEM</th>
+                                        <th>QTY</th>
+                                        <th>ADDITIONAL INSTRUCTIONS</th>
+                                        <th>REMARK</th>
+                                        <th>INSP.</th>
+                                        <th>DATE</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data-addIns"></tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-12 style-form-add">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 style="font-weight: bold">FORM</h4>
+                                </div>
+                            </div>
+                            <div class="row form-horizontal">
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-4">
+                                        <label class="control-label">QTY</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="number" class="form-control" id="txt_add_qty" onkeypress="return keypress(event);" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-4">
+                                        <label class="control-label" style="text-align: left">ADDITIONAL INSTRUCTIONS</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("lstAdditions", new SelectList(Model.ListAddition, "ID", "NAME"), new { @class = "form-control", @onchange = "lstAdditions_onchange(this)", @onfocus = "this.selectedIndex = -1;" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-4">
+                                        <label class="control-label">REMARK</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control" id="txt_add_remark" rows="10" style="resize: vertical; overflow-y:auto"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-4">
+                                        <label class="control-label">INSP.</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("lstAllUsers", lstAllUsers, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-12" style="text-align: right">
+                                        <button class="btn btn-success" id="btn-add-ins" onclick="addIns()">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveIns()">OK</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    @*get pass word*@
+    <div id="modelpassword" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                    <h3 class="modal-title" style="font-weight: bold">Accept Form</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            Password
+                        </div>
+                        <div class="col-md-8">
+                            <input type="password" id="pass" required="required" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-sm" id="getpass" @*onclick="getpass()"*@>OK</button>
+                    <button type="button" class="btn btn-danger btn-sm ms-uncheck" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @* Hidden Data Save *@
+    <div class="saveData">
+        <div hidden id="divRework">
+            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table-scrap">
+                <thead>
+                    <tr>
+                        <th>NCR_NUM</th>
+                        <th>ITEM</th>
+                        <th>REWORK</th>
+                    </tr>
+                </thead>
+                <tbody id="append-data-rework"></tbody>
+            </table>
+        </div>
+        <div hidden id="divScrap">
+            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table-scrap">
+                <thead>
+                    <tr>
+                        <th>NCR_NUM</th>
+                        <th>ITEM</th>
+                        <th>REASON</th>
+                    </tr>
+                </thead>
+                <tbody id="append-data-scrap"></tbody>
+            </table>
+        </div>
+        <div class="portlet grey col-md-12 display-none" id="disposhow">
+            <div class="row margin-left-right-0">
+                <div class="row margin-left-right-0">
+                    <div class="form-group" style="padding-left:35px;padding-right:35px">
+                        <h4 style="font-weight: bold">ADDITIONALS INSTRUCTIONS</h4>
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column display-none" id="table-show-ins">
+                            <thead>
+                                <tr>
+                                    <th>ITEM</th>
+                                    <th>QTY</th>
+                                    <th>ADDITIONALS INSTRUCTIONS</th>
+                                    <th>REMARK</th>
+                                    <th>INSP.</th>
+                                    <th>INS DATE</th>
+                                    <th id="add-tradition">DATE APPROVAL</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-show-ins">
+                                @{
+                                    int tmp = 1;
+                                    foreach (var item in Model.ListAdditional)
+                                    {
+                                        var rev = item.ITEM+"_"+item.ADD_INS;
+                                        <tr class="tr_remain_row_@item.ITEM" rev="@item.ITEM">
+                                            <td id="@item.ITEM">@item.ITEM</td>
+                                            <td id="ins_qty_@item.ITEM">@Html.TextBox(string.Format("txt_qty_{0}_{1}", item.ITEM, item.ADD_INS), item.QTY.ToString(), new { @maxlength = 80, size = 10, @class = "form-control", @onkeypress = "return keypress(event)", @readonly=true })</td>
+                                            <td id="tb_remain_addins_@item.ITEM" rev="@item.ADD_INS" rev-item="@rev">@item.ADD_INS_NAME</td>
+                                            <td id="tb_remain_remark_@item.ITEM">@Html.TextBox(string.Format("txt_rem_{0}_{1}", item.ITEM, item.ADD_INS), item.REMARK, new { @class = "form-control", @readonly = true })</td>
+                                            <td id="tb_remain_inspector_@item.ITEM" rev="">@item.INSPECTOR</td>
+                                            <td id="tb_remain_date_@item.ITEM">@(item.INS_DATE.HasValue ? item.INS_DATE.Value.ToString("MM'/'dd'/'yyyy") : "")</td>
+                                            <td class="add-date">@(item.DATEAPPROVAL.HasValue ? item.DATEAPPROVAL.Value.ToString("MM'/'dd'/'yyyy") : "")</td>
+                                            <td class="add-date">
+                                                @{ 
+                                                    var btndelete = string.Format("<input ncrnum='{0}' item='{1}' addins='{2}' class='btn btn-danger pull-right' type='button' onclick='deleteAdditional(this)' value='Delete' />",
+                                                        Model.NCR_NUM, item.ITEM, item.ADD_INS);
+                                                    var btnedit = string.Format("<input ncrnum='{0}' item='{1}' addins='{2}'  role='edit' onclick='saveChange(this)' class='btn btn-success pull-left' type='button' value='Edit'", Model.NCR_NUM, item.ITEM, item.ADD_INS);
+                                                }
+                                                @if (item.DATEAPPROVAL.HasValue){ @Html.Raw("")}
+                                                else { @Html.Raw(btndelete + btnedit);}
+                                            </td>
+                                        </tr>
+                                        tmp++;
+                                    }
+                                }
+                                @{
+                                    List<SelectListItem> listItem1 = new List<SelectListItem>();
+                                    var dem1 = 1;
+                                    foreach (var item in Model.ListdefectprocessString)
+                                    {
+                                        listItem1.Add(new SelectListItem { Value = dem1.ToString(), Text = dem1.ToString() });
+                                        dem1++;
+                                    }
+                                }
+                                <tr id="add-dispo">
+                                    <td>
+                                        @*@Html.TextBox("add_raw_item", null, new { maxlength = 80, size = 10, @class = "form-control", @style = "width: 50px; margin-left: 6px;" })*@
+                                        @Html.DropDownList("add_raw_item1", listItem1, new { @class = "form-control" })
+                                    </td>
+                                    <td>@Html.TextBox("add_raw_qty1", null, new { maxlength = 80, @class = "form-control", onkeypress = "return keypress(event)" })</td>
+                                    <td>
+                                        @Html.DropDownList("add_raw_addins1", new SelectList(Model.ListDispo, "ID", "NAME"), new { @class = "form-control", @onfocus = "this.selectedIndex = -1;", @onchange = "lstAdditions1_onchange(this)" })
+
+                                    </td>
+                                    <td>@Html.TextBox("add_raw_remark1", null, new { maxlength = 80, size = 10, @class = "form-control" })</td>
+                                    <td>
+                                        @* @Html.TextBox("add_raw_inp", null, new { maxlength = 80, size = 10, @class = "form-control" })*@
+                                        @Html.DropDownList("add_raw_inp1", lstAllUsers, new { maxlength = 80, @class = "form-control", @onfocus = "this.selectedIndex = -1;" })
+                                    </td>
+                                    <td>@DateTime.Now.ToString("MM/dd/yyyy")</td>
+                                    <td></td><td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" id="bt-add" class="btn btn-success pull-right" style="margin-top:-20px;margin-bottom:10px;" onclick="addNewRaw()">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4 style="font-weight: bold" class="display-none" id="remainshow">REMAINING</h4>
+        <table class="table table-striped table-bordered table-hover table-checkable order-column display-none" id="table-remain-dispo">
+            <thead>
+                <tr>
+                    <th>ITEM</th>
+                    <th>QTY</th>
+                    <th>DISP'N</th>
+                </tr>
+            </thead>
+            <tbody id="append-data-remain"></tbody>
+        </table>
+    </div>
+    <div id="show-data-watting" style="display: none">
+        <div class="col-md-12">
+            CORRECTIVE ACTION:
+            <input type="radio" disabled="disabled" class="checkbox-inline" @Model.Notrequered /> NOT REQUIRED
+            <input type="radio" disabled="disabled" class="checkbox-inline" @Model.requered />  REQUIRED
+            <input type="radio" disabled="disabled" class="checkbox-inline" @Model.notification /> NOTIFCATION
+            <br />
+            FOLLOW UP NOTES:@Model.FOLLOW_UP_NOTES
+
+        </div>
+        <div class="col-md-12">
+            ISSUED CA REQUEST NO:@Model.ISSUED_REQUEST_NO  DATE: @(Model.ISSUED_REQUEST_DATE.HasValue ? Model.ISSUED_REQUEST_DATE.Value.ToShortDateString() : "")
+        </div>
+        <div class="col-md-12">
+            ACCTG, USE ONLY
+            <br />
+            REMOVED FROM :@Model.REMOVED_FROM
+            <br /> BOOK INV : @Model.BOOK_INV
+        </div>
+    </div>
+    <div class="row" id="modelDisposition" style="display: none">
+        @Html.Partial("_DepositionPartial")
+    </div>
+</div>
+<div id="author" style="display: none">
+    <div class="col-md-12">
+        @Html.Partial("_loadauthorization", Model)
+    </div>
+</div>
+@*<div id="printf" hidden>
+        @Html.Action("PrintNCR","NCRApproval")
+    </div>*@
+<div class="show_footer" style="display: none">
+    <div class="row">
+        <div class="col-md-4">
+            <b>SHIPPING METHOD</b>
+        </div>
+        <div class="col-md-8">
+            <input class="form-control" id="txt_shipping" />
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            <b>RETURN MATERIAL AUTHORIZATION NUMBER</b>
+        </div>
+        <div class="col-md-8">
+            <input class="form-control" id="txt_material" />
+        </div>
+    </div>
+</div>
+
+@*<div class="row" id="modelSubmitStatus">
+        @Html.Partial("~/Views/WriteNcrForIqc/_SelectUserApprPartial.cshtml", (SelectList)ViewBag.ListMRBTeam)
+    </div>*@
+@Scripts.Render("~/bundles/jqueryval")
+<script>
+    var homeUrl = '@Url.Action("Index", "NCR")';
+    var Url = '@Url.Action("GetdropdownDefect", "WriteNcrForProcess")';
+    var UrlChange = '@Url.Action("GetdropdownDeCript", "WriteNcrForProcess")';
+    var UrlChangeIQC = '@Url.Action("GetdropdownDeCript", "WriteNcrForIqc")';
+    var UrlChangeIQCByList = '@Url.Action("GetDropdownlistIQC", "WriteNcrForIqc")';
+    var dem = 0;
+    var IdUser = '@User.Identity.GetUserId()';
+    var Name = '@User.Identity.GetUserName()';
+    var final = false;
+</script>
+@section scripts {
+    <script type="text/javascript">
+        var $myform = $('#Create');
+        var defectData = null;
+        var UrlChange = '@Url.Action("GetdropdownDeCript", "WriteNcrForProcess")';
+        // global rowId of Conformity
+        var ROWID = 1;
+        var GLOBAL_QTY = 0;
+        var qty = 0;
+
+        function EditNCR() {
+            let NCR_NUM = $("#NCR_NUM").val();
+            let type = $("#dataForLstDefect").val();
+            if (!$('#inprocess').is(":checked")) {
+
+                window.location = '@Url.Action("EditNCRForIQC", "NCRApproval")' + "?NCR_NUM=" + NCR_NUM;
+            } else {
+                window.location = '@Url.Action("EditNCRForProcess", "WriteNcrForProcess")' + "?ncrnum=" + NCR_NUM;
+            }
+        }
+
+        $(document).ready(function() {
+
+            var receiver = $("#dataForLstDefect").val();
+            $.blockUI();
+
+            $.post('@Url.Action("GetdropdownDefect", "WriteNcrForProcess")',
+                { receiver: receiver },
+                function(result) {
+                    defectData = result;
+                    var count = 1;
+                    $(".dd_defect").each(function(item) {
+                        $("#dd_defect_" + count).multiselect({ dropUp: true });
+                        $("#dd_defect_" + count).multiselect('dataprovider', result);
+                        //   $('.multiselect').addClass('disabled');
+                        count++;
+                    });
+                }).fail(function() {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function() {
+                    $.unblockUI();
+                });
+            $.blockUI();
+
+            $.post('@Url.Action("GetListDefect", "NCRApproval")',
+                { receiver: receiver },
+                function(data) {
+                    createListDescript(data.result);
+                }).fail(function() {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function() {
+                    $.unblockUI();
+                });
+
+            $(".dd_defect").on('change',
+                function() {
+                    var tmp = $(this).attr('rev');
+                    var listcheck = $("#dd_defect_" + tmp).val();
+                    $.blockUI();
+
+                    $.post('@Url.Action("GetdropdownDeCript", "WriteNcrForProcess")',
+                        { id: listcheck },
+                        function(result) {
+                            $('#dd_descript_' + tmp).multiselect('dataprovider', result);
+
+                        }).fail(function() {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function() {
+                            $.unblockUI();
+                        });
+                });
+            //catch status submit view confirm
+            var STT = ('@Model.STATUS');
+            if (STT.trim() == "a") {
+                $('#modelSubmit').css('display', 'inherit');
+            } else {
+                $('#author').css('display', 'inherit');
+            }
+
+            //catch status view watting
+            var wh = ('@Model.STATUS');
+            if (wh == "wh") {
+                //$('#btn-dispo').css('display', 'unset');
+                $('#btn-edit').css('display', 'none');
+                $('#submit').css('display', 'none');
+                $('#void').css('display', 'none');
+            }
+
+            //$('#txt_add_qty').on('keydown',
+            //    function(e) {
+            //        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+            //            // Allow: Ctrl+A
+            //            (e.keyCode == 65 && e.ctrlKey === true) ||
+            //            // Allow: Ctrl+V
+            //            //(e.keyCode == 86 && e.ctrlKey === true) ||
+            //            // Allow: home, end, left, right, down, up
+            //            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            //            // let it happen, don't do anything
+            //            return;
+            //        }
+            //        // Ensure that it is a number and stop the keypress
+            //        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            //            e.preventDefault();
+            //        }
+
+            //        if (parseInt($(this).val()) == 0) {
+            //            $(this).val('');
+            //        }
+
+            //    });
+
+            //$('#add_raw_qty').on('keydown',
+            //    function(e) {
+            //        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+            //            // Allow: Ctrl+A
+            //            (e.keyCode == 65 && e.ctrlKey === true) ||
+            //            // Allow: Ctrl+V
+            //            //(e.keyCode == 86 && e.ctrlKey === true) ||
+            //            // Allow: home, end, left, right, down, up
+            //            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            //            // let it happen, don't do anything
+            //            return;
+            //        }
+            //        // Ensure that it is a number and stop the keypress
+            //        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            //            e.preventDefault();
+            //        }
+
+            //        if (parseInt($(this).val()) == 0) {
+            //            $(this).val('');
+            //        }
+
+            //    });
+
+
+            //$('#txt_rework').on('keydown',
+            //    function(e) {
+            //        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+            //            // Allow: Ctrl+A
+            //            (e.keyCode == 65 && e.ctrlKey === true) ||
+            //            // Allow: Ctrl+V
+            //            //(e.keyCode == 86 && e.ctrlKey === true) ||
+            //            // Allow: home, end, left, right, down, up
+            //            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            //            // let it happen, don't do anything
+            //            return;
+            //        }
+            //        // Ensure that it is a number and stop the keypress
+            //        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            //            e.preventDefault();
+            //        }
+
+            //        if (parseInt($(this).val()) == 0) {
+            //            $(this).val('');
+            //        }
+
+            //    });
+
+            ///
+        });
+
+        function createListDescript(lstDefect) {
+            $.each(lstDefect,
+                function(i) {
+                    $.blockUI();
+                    $.post('@Url.Action("GetDropdownlistIQC", "WriteNcrForIqc")',
+                        { id: lstDefect[i].Non_Conformances },
+                        function(result) {
+                            defectData = result;
+                            $("#dd_descript_" + (i + 1)).multiselect({ dropUp: true });
+                            $("#dd_descript_" + (i + 1)).multiselect('dataprovider', result);
+                            //   $('.multiselect').addClass('disabled');
+                        }).fail(function() {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function() {
+                            $.unblockUI();
+                        });
+                });
+        }
+
+        $('#btn-save').click(function() {
+            $myform.submit();
+        });
+        $('#bt-close').click(function() {
+            window.location = '@Url.Action("Index", "NCR")';
+        });
+        $myform.submit(function(e) {
+            $.blockUI();
+            var data = new FormData(this);
+            var $fromObj = $(this);
+            var urlAction = $fromObj.attr('action');
+            $.ajax({
+                url: urlAction,
+                type: 'POST',
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: data,
+                fail: function() {
+                    bootbox.alert('Please contact to Administrator!');
+                }
+            }).always(function() {
+                $.unblockUI();
+            }).success(function(result) {
+                if (result.success) {
+                } else {
+                    bootbox.alert('Please contact to Administrator!');
+                }
+            });
+            e.preventDefault();
+        });
+
+        function afterSubmitcreate() {
+            bootbox.confirm({
+                message: "Do you want submit?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-success'
+                    }
+                },
+                callback: function(result) {
+                    if (result) {
+                        $("#submit").css('display', 'none');
+                        $("#savesubmit").css('display', 'unset');
+                    }
+                }
+            });
+        }
+
+        function submitApprcreate() {
+            bootbox.confirm({
+                message: "Do you want submit NCR?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes, submit this NCR',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                closeButton: false,
+                callback: function(result) {
+                    if (result) {
+                        ncrnumber = $("#NCR_NUM").val();
+                        let userquality = $("#qualityAss").val();
+                        let userengineer = $("#engineer").val();
+                        let userafg = $("#afgassy").val();
+                        let userpurchange = $("#purchasing").val();
+                        let selectedsubmituser = 0;
+                        if (userquality.length > 1 ) {
+                            selectedsubmituser++;
+                        }
+                        if (userengineer.length > 1 ) {
+                            selectedsubmituser++;
+                        }
+                        if(selectedsubmituser == 2){
+                            var datapost = {
+                                ncrnumber: ncrnumber,
+                                userquality: userquality,
+                                userengineer: userengineer,
+                                userafg: userafg,
+                                userpurchange: userpurchange,
+                                stt: status
+                            }
+                            $.blockUI();
+                            $.post('@Url.Action("ChooseUserSubmit", "WriteNcrForIqc")',
+                                datapost,
+                                function(data) {
+                                    if (data.result) {
+                                        bootbox.alert("Submit Successful");
+                                        @*$.blockUI();
+                                        $.post('@Url.Action("SentMailRequired", "WriteNcrForIqc")',
+                                            { userengineer: userengineer, userquality: userquality,userafg:userafg, userpurchange:userpurchange,ncrnumber:ncrnumber},
+                                            function(data) {
+                                                if (data.result) {
+                                                } else {
+                                                    bootbox.alert("Please contact to Administrator!");
+                                                }
+                                            }).fail(function() {
+                                                bootbox.alert('Please contact to Administrator!');
+                                            }).always(function() {
+                                                $.unblockUI();
+                                            });*@
+                                        window.location = '@Url.Action("Index", "NCR")';
+                                    } else {
+                                        bootbox.alert("Please contact to Administrator!");
+                                    }
+                                }).fail(function() {
+                                    bootbox.alert('Please contact to Administrator!');
+                                }).always(function() {
+                                    $.unblockUI();
+                                });
+                        }else {
+                            bootbox.alert('Please select MARLOW MRB AUTHORIZATION!');
+                        }
+                    }
+                }
+            });
+        }
+
+        function changeRespon(rowid) {
+            setDisbaleRequired();
+            removeTableAdditions();
+            removeTableRemains();
+            ROWID = rowid;
+            GLOBAL_QTY = parseInt($("input#item_QTY_" + rowid).val());
+            if ($("#dd_respon_" + rowid).val().trim() == '@CONFIRMITY_RESPON.ID_DESCRIBE') {
+                openAdditionalInstructionByRowId(rowid);
+                @*if ($("#dd_disp_" + rowid).val().trim() == '@CONFIRMITY_DISPN.DESCRIBE') {
+                    openAdditionalInstructionByRowId(rowid);
+                }*@
+                //  else {
+                //      openAdditionalInstruction();
+                ///  }
+            }
+        }
+
+        function changeDisplay(rowid) {
+            setDisbaleRequired();
+            ROWID = rowid;
+            GLOBAL_QTY = parseInt($("input#item_QTY_" + rowid).val());
+            removeRework();
+            removeScrap();
+            removeTableAdditions();
+            removeTableRemains();
+            if ($("#dd_disp_" + rowid).val().trim() == '@CONFIRMITY_DISPN.ID_REWORK') {
+                openModalRework();
+            }
+
+            if ($("#dd_disp_" + rowid).val().trim() == '@CONFIRMITY_DISPN.ID_SCRAP') {
+                openModalScrap();
+            }
+            if ($("#dd_disp_" + rowid).val().trim() == '@CONFIRMITY_DISPN.ID_DESCRIBE') {
+                openAdditionalInstructionByRowId(rowid);
+                //} else {
+                //    openAdditionalInstruction();
+                //}
+            }
+        }
+
+        function setDisbaleRequired() {
+            let chk = false;
+            let count = 1;
+            $.each($(".data-confirmity"),
+                function(k, v) {
+                    if ($("#dd_respon_" + count).val() == '@CONFIRMITY_RESPON.ID_VENDOR') {
+                        chk = true;
+                    }
+                    count++;
+                });
+            if (chk) {
+                $("#chkb_required").prop('disabled', false);
+            } else {
+                $("#chkb_required").prop('disabled', true);
+                $("#chkb_required").attr('checked', false);
+            }
+        }
+
+        // handle Additional Instructions
+        function openAdditionalInstruction() {
+            removeAdditions();
+            $("#modelAddInstruct").modal('show');
+        }
+
+        function openAdditionalInstructionByRowId(rowId) {
+            removeAdditions();
+            let data = '';
+            $.each($("tr#ins_row_" + rowId),
+                function() {
+                    let tmp = '<tr id="ins_row_' + rowId + '">' + $(this).html() + '</tr>';
+                    data = data + tmp;
+                });
+
+            $('#data-addIns').html(data);
+            $("#modelAddInstruct").modal('show');
+        }
+
+        function addIns() {
+            lstAdditions_onchange($('#lstAdditions'));
+            if ($('#btn-add-ins').hasClass('disabled')) return;
+            var status = '@Model.STATUS';
+            var DEFECTIVE = @Model.defect;
+            var REJECTED = @Model.REJ_QTY;
+            if (status.trim() == '@StatusInDB.WaitingForDisposition') {
+                let total_qty = 0;
+                qty = parseInt($("#dataqty_" + ROWID).text());
+                $.each($("#sample_3 td#ins_qty_" + ROWID),
+                    function() {
+                        total_qty = total_qty + parseInt($(this).text());
+                    });
+
+                if ($("input#txt_add_qty").val() == "" || $("input#txt_add_qty").val() == null || $("input#txt_add_qty").val() == "0") {
+                    bootbox.alert("Please input QTY");
+                    //$("input#txt_add_qty").focus();
+                    //$("input#txt_add_qty").val("");
+                    return;
+                }
+                if ($("#lstAllUsers").val() == "" || $("#lstAllUsers").val() == null) {
+                    bootbox.alert("Please input INSP");
+                    return;
+                }
+                if ($('#lstAdditions').val() == null) {
+                    bootbox.alert("Please input ADDITIONAL INSTRUCTIONS");
+                    return;
+                }
+                //if ($("input#txt_add_qty").val() > GLOBAL_QTY) {
+                //    bootbox.alert("QTY can not greater than " + GLOBAL_QTY);
+                //    return;
+                //}
+                total_qty = total_qty + parseInt($("input#txt_add_qty").val());
+                if (total_qty > qty) {
+                    bootbox.alert("Total QTY can not greater than " + qty);
+                    return;
+                }
+                //else if (DEFECTIVE != REJECTED && total_qty < qty) {
+                //    bootbox.alert("Total QTY not less than " + qty + ", must be equal to " + qty);
+                //    return;
+                //}
+
+
+                let data = $('#data-addIns').html();
+                let res = createDataIns();
+                data = data + res;
+                $('#data-addIns').html(data);
+                removeInputIns();
+            } else if (status.trim() == "@StatusInDB.WaitingForDispositionApproval") {
+              
+                let total_qty = 0;
+                let addold = '';
+                let addin = $('#lstAdditions').text();
+                qty = parseInt($("#dataqty_" + ROWID).text());
+                $.each($("#sample_3 td#ins_qty_" + ROWID),
+                    function() {
+                        total_qty = total_qty + parseInt($(this).text());
+                    });
+                if ($("input#txt_add_qty").val() == "" || $("input#txt_add_qty").val() == null || $("input#txt_add_qty").val() == '0') {
+                    bootbox.alert("Please input QTY");
+                    return;
+                }
+                if ($("#lstAllUsers").val() == "" || $("#lstAllUsers").val() == null) {
+                    bootbox.alert("Please input INSP");
+                    return;
+                }
+                total_qty = total_qty + parseInt($("input#txt_add_qty").val());
+                if (total_qty > qty) {
+                    bootbox.alert("Total QTY can not greater than " + qty);
+                    return;
+                }
+                let data = $('#data-addIns').html();
+                $.each($("#sample_3 td#ins_addition_" + ROWID),
+                    function() {
+                        addold = $(this).text();
+                    });
+                if (addold.trim() == addin.trim()) {
+                    bootbox.alert("Please select another ADDITIONAL INSTRUCTIONS");
+                    return;
+                }
+                let res = createDataIns();
+                data = data + res;
+                $('#data-addIns').html(data);
+                removeInputIns();
+            }
+
+        }
+
+        function removeAdditions() {
+            removeInputIns();
+            $('#data-addIns').html('');
+        }
+
+        function removeTableAdditions() {
+            let count = 1;
+            $.each($(".data-confirmity"),
+                function(k, v) {
+                    if ($("#dd_respon_" + count).val() != '@CONFIRMITY_RESPON.ID_DESCRIBE' &&
+                        $("#dd_disp_" + count).val() != '@CONFIRMITY_DISPN.ID_DESCRIBE') {
+                        $.each($("tr#ins_row_" + count),
+                            function(k, v) {
+                                $(this).remove();
+                            });
+                    }
+                    count++;
+                });
+        }
+
+        function removeTableRemains() {
+            let count = 1;
+            $.each($(".data-confirmity"),
+                function(k, v) {
+                    if ($("#dd_respon_" + count).val() != '@CONFIRMITY_RESPON.ID_DESCRIBE' &&
+                        $("#dd_disp_" + count).val() != '@CONFIRMITY_DISPN.ID_DESCRIBE') {
+                        $("tr#remain_row_" + count).remove();
+                    }
+                    count++;
+                });
+        }
+
+        function removeInputIns() {
+            $("input#txt_add_qty").val('');
+            $("#lstAdditions").val('@CONFIRMITY_DISPN.ID_VENEXP');
+            $("textarea#txt_add_remark").val('');
+            $("#lstAllUsers").val('');
+        }
+
+        function addRemainShow(useQty, qty) {
+            if (useQty == qty) return;
+            let res = createDataRemain(useQty, qty);
+            let data = $("#append-data-remain").html();
+            data = data + res;
+            $("#append-data-remain").html(data);
+            $("#remain_row_").css('display', 'none');
+            removeAdditions();
+        }
+
+        function createDataRemain(useQty, qty) {
+            let res = '<tr id="remain_row_' + ROWID + '" rev="' + $("#data-confirmity-" + ROWID).attr('rev') + '">';
+            res = res + '<td id="remain_item_' + ROWID + '">' + ROWID + '</td>';
+            res = res + '<td id="remain_qty_' + ROWID + '">' + (qty - useQty) + '</td>';
+            res = res + '<td><a onclick="openAdditional(' + ROWID + ')">DISP&rsquo;N</a></td></tr>';
+            return res;
+        }
+
+        function createDataIns() {
+            let dt_now = new Date();
+            var month = (dt_now.getMonth() + 1) + "";
+            if (month.length == 1) {
+                month = "0" + month;
+            }
+            let i = 1;
+            let dt_string = month + '/' + dt_now.getDate() + '/' + dt_now.getFullYear();
+            let res = '<tr id="ins_row_' + ROWID + '">';
+            res = res +
+                '<td id="ins_item_' +
+                ROWID +
+                '"  rev="' +
+                $("#data-confirmity-" + ROWID).attr('rev') +
+                '">' +
+                ROWID +
+                '</td>';
+            res = res + '<td id="ins_qty_' + ROWID + '">' + $("input#txt_add_qty").val() + '</td>';
+            res = res +
+                '<td id="ins_addition_' +
+                ROWID +
+                '" rev="' +
+                $("select#lstAdditions").val() +
+                '" rev-item="' + ROWID + '_' + $("select#lstAdditions").val() + '" rev="' + $("select#lstAdditions").val()+'">' +
+                   $("select#lstAdditions option:selected").text() +
+                '</td>';
+            res = res + '<td id="ins_remark_' + ROWID + '">' + $("textarea#txt_add_remark").val() + '</td>';
+            res = res +
+                '<td id="ins_insp_' +
+                ROWID +
+                '" rev="' +
+                $("select#lstAllUsers").val() +
+                '">' +
+                $("select#lstAllUsers option:selected").text() +
+                '</td>';
+            res = res + '<td id="ins_date_' + ROWID + '">' + dt_string + '</td></tr>';
+            return res;
+        }
+        // handle Scrap
+        function openModalScrap() {
+            $("textarea#area_scrap").val("");
+            $("#modelScrap").modal('show');
+        }
+
+        function saveScrap() {
+            let data = $("tbody#append-data-scrap").html();
+            let res = createDataScrap();
+            data = data + res;
+            $("tbody#append-data-scrap").html(data);
+            $("#modelScrap").modal('hide');
+        }
+        function removeScrap() {
+            let count = 1;
+            $.each($(".data-confirmity"),
+                function(k, v) {
+                    if ($("#dd_disp_" + count).val() != '@CONFIRMITY_DISPN.ID_SCRAP') {
+                        $("tr#scrap_item_" + count).remove();
+                    }
+                    count++;
+                });
+        }
+
+        function createDataScrap() {
+            let res = '<tr id="scrap_item_' + ROWID + '" rev="' + $("#data-confirmity-" + ROWID).attr('rev') + '">';
+            res = res + '<td></td>';
+            res = res + '<td>' + ROWID + '</td>';
+            res = res + '<td id="scrap_reason_' + ROWID + '">' + $("textarea#area_scrap").val() + '</td></tr>';
+            return res;
+        }
+
+        // handle Rework
+        function openModalRework() {
+            $("input#txt_rework").val('');
+            $("#modelRework").modal('show');
+        }
+
+        function saveRework() {
+            let data = $("tbody#append-data-rework").html();
+            let res = createDataReword();
+            data = data + res;
+            $("tbody#append-data-rework").html(data);
+            $("#modelRework").modal('hide');
+        }
+
+        function removeRework() {
+            let count = 1;
+            $.each($(".data-confirmity"),
+                function(k, v) {
+                    if ($("#dd_disp_" + count).val() != '@CONFIRMITY_DISPN.ID_REWORK') {
+                        $("tr#rework_item_" + count).remove();
+                    }
+                    count++;
+                });
+        }
+
+        function createDataReword() {
+            let res = '<tr id="rework_item_' + ROWID + '" rev="' + $("#data-confirmity-" + ROWID).attr('rev') + '">';
+            res = res + '<td></td>';
+            res = res + '<td>' + ROWID + '</td>';
+            res = res + '<td id="rework_remark_' + ROWID + '">' + $("input#txt_rework").val() + '</td></tr>';
+            return res;
+        }
+
+        //Save Form dispo
+        function saveDataDispo() {
+            var DEFECTIVE = @Model.defect;
+            var REJECTED = @Model.REJ_QTY;
+            let lstResDis = [];
+            let count = 1;
+            ncrnumber = $("#NCR_NUM").val();
+            let dt_now = new Date();
+            var qlity = '@Model.ListUSerAppr[0].IdUser';
+            var eng = '@Model.ListUSerAppr[1].IdUser';
+            var afg = '@Model.ListUSerAppr[2].IdUser';
+            var pur = '@Model.ListUSerAppr[3].IdUser';
+            let lstrespon = [];
+            var qty = 0;
+            let total_qty = 0;
+            let ckempty = 0;
+            $('#tbl-res tbody tr').each(function (key, value) {
+                let i = key + 1;
+                if ($('#dd_respon_' + i).val() == '' || $('#dd_disp_' + i).val() == null) {
+                    ckempty = ckempty + 1;
+                }
+                var text = $("#dataqty_" + ++key).text();
+                qty = qty + parseInt(text);
+            });
+            if (ckempty != 0) {
+                bootbox.alert("The RESPON or DISP'N not be empty !!!");
+                return;
+            }
+            $.each($(".data-confirmity"),
+                function() {
+                    let tmp = {
+                        item: $(this).attr('rev'),
+                        respon: $("#dd_respon_" + count).val(),
+                        display: $("#dd_disp_" + count).val()
+                    }
+                    lstResDis.push(tmp);
+                    count++;
+                });
+
+            let model = {
+                NCR_NUM: $("#NCR_NUM").val(),
+                NOT_REQUIRED: $("#chkb_notrequired").prop('checked'),
+                REQUIRED: $("#chkb_required").prop('checked'),
+                NOTIFICATION_ONLY: $("#chkb_notification").prop('checked'),
+                ISSUED_REQUEST_NO: $("#txt_issuecorrective").val(),
+                ISSUED_REQUEST_DATE: $("#txt_issuedate").val(),
+                FOLLOW_UP_NOTES: $('#txt_followup').val(),
+                REMOVED_FROM: $("#txt_removedfrom").val(),
+                BOOK_INV: $("#txt_boxinv").val(),
+                ISSUE_MEMO_NO: $("#txt_nodebit").val(),
+                ISSUE_MEMO_DATE: $("#txt_nodebit").val(),
+                NOTES: $("#txt_datedebit").val(),
+                SHIPPING_METHOD: $("#txt_shipping").val(),
+                RETURN_NUMBER: $("#txt_material").val(),
+
+                lstResDis: lstResDis
+            }
+
+            let lstRework = [];
+            $.each($("tbody#append-data-rework tr"),
+                function() {
+                    let item = $(this).attr('rev');
+                    let tmp = $(this).find('td');
+                    let rework = {
+                        ID: 0,
+                        NCR_NUMBER: $("#NCR_NUM").val(),
+                        ITEM: item,
+                        COST: tmp.eq(2).text()
+                    }
+                    lstRework.push(rework);
+                });
+
+            let lstScrap = [];
+            $.each($("tbody#append-data-scrap tr"),
+                function() {
+                    let item = $(this).attr('rev');
+                    let tmp = $(this).find('td');
+                    let scrap = {
+                        ID: 0,
+                        NCR_NUMBER: $("#NCR_NUM").val(),
+                        ITEM: item,
+                        REASON: tmp.eq(2).text()
+                    }
+                    lstScrap.push(scrap);
+                });
+
+            let lstDis = [];
+            $.each($("tbody#append-data-addins tr"),
+                function() {
+                    let tmp = $(this).find('td');
+                    let dis = {
+                        NCR_NUM: $("#NCR_NUM").val(),
+                        SEC: $("#SEC").val(),
+                        ITEM: tmp.eq(0).text(),
+                        QTY: tmp.eq(1).text(),
+                        ADD_INS: tmp.eq(2).attr('rev'),
+                        INSPECTOR: tmp.eq(4).attr('rev'),
+                        INS_DATE: dt_now.toISOString(),
+                        REMARK: tmp.eq(3).text(),
+                        MFG: null,
+                        QUALITY: null,
+                        PURCHASING: null,
+                        PURCHASING: null,
+                        DATEAPPROVAL: null
+                    }
+                    lstDis.push(dis);
+                    total_qty += parseInt(tmp.eq(1).text() != "" ? tmp.eq(1).text() : '0');
+                });
+            if (DEFECTIVE != REJECTED && total_qty < qty) {
+                bootbox.alert("ADDITIONALS INSTRUCTIONS - QTY not less than " + qty + ", must be equal to " + qty);
+                    return;
+            }
+            $.blockUI();
+            $.post('@Url.Action("SaveDisposition", "NCRApproval")',
+                { model: model, lstRework: lstRework, lstDis: lstDis, lstScrap: lstScrap,
+                    qlity:qlity,eng:eng,afg:afg,pur:pur},
+                function(data) {
+                    if (data.success) {
+                        bootbox.alert("Disposition Successful");
+                        window.location = '@Url.Action("Index", "NCR")';
+                    } else {
+                        bootbox.alert("Save not successful");
+                    }
+                }).fail(function() {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function() {
+                    $.unblockUI();
+                });
+        }
+
+        function submitApprConfirm() {
+            bootbox.confirm({
+                message: "Do you want confirm NCR?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes, confirm this NCR',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                closeButton: false,
+                callback: function(result) {
+                    if (result) {
+                        let userquality = $("#qualityAss1").val();
+                        let userengineer = $("#engineer1").val();
+                        let userafg = $("#afgassy1").val();
+                        let userpurchange = $("#purchasing1").val();
+                        let selectedsubmituser = 0;
+                        if (userquality.length > 1 ) {
+                            selectedsubmituser++;
+                        }
+                        if (userengineer.length > 1 ) {
+                            selectedsubmituser++;
+                        }
+                        if(selectedsubmituser == 2)
+                        {
+                            $("#modelSubmitStatus").show();
+                            ncrnumber = $("#NCR_NUM").val();
+                            var datapost = {
+                                ncrnumber: ncrnumber,
+                            }
+                            $.blockUI();
+                            $.post('@Url.Action("ChooseUserSubmitConfim", "WriteNcrForIqc")',
+                                datapost,
+                                function(data) {
+                                    if (data.result) {
+
+                                        bootbox.alert("Confim Successful");
+                                        window.location = homeUrl;
+                                    } else {
+                                        bootbox.alert("Please contact to Administrator!");
+                                    }
+                                }).fail(function() {
+                                    bootbox.alert('Please contact to Administrator!');
+                                }).always(function() {
+                                    $.unblockUI();
+                                });
+                        }
+                        else{
+                            bootbox.alert('Please select MARLOW MRB AUTHORIZATION!');
+                        }
+                    }
+                }
+            });
+        }
+
+        function submitApprVoid() {
+            //$("#modelSubmitStatus").show();
+            bootbox.confirm({
+                message: "Do you want void NCR?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes, Void this NCR',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                closeButton: false,
+                callback: function(result) {
+                    if (result) {
+                        ncrnumber = $("#NCR_NUM").val();
+                        var datapost = {
+                            ncrnumber: ncrnumber,
+                        }
+                        $.blockUI();
+                        $.post('@Url.Action("ChooseUserSubmitVoid", "WriteNcrForIqc")',
+                            datapost,
+                            function(data) {
+                                if (data.result) {
+                                    bootbox.alert("Confim Successful");
+                                    window.location = '@Url.Action("Index", "NCR")';
+                                } else {
+                                    bootbox.alert("Please contact to Administrator!");
+                                }
+                            }).fail(function() {
+                                bootbox.alert('Please contact to Administrator!');
+                            }).always(function() {
+                                $.unblockUI();
+                            });
+
+                    }
+                }
+            });
+
+        }
+
+        function submitApprDispo() {
+            var qty = $('#qualityAss1').val();
+            var eng = $('#engineer1').val();
+            var afg = $('#afgassy1').val();
+            var purch = $('#purchasing1').val();
+            //   console.log(qty + " " + eng + " " + afg + " " + purch + " " + IdUser)
+            if (IdUser == eng) {
+                $("#modelDisposition").css('display', 'inherit');
+                $("#btn-dispo").addClass('display-none');
+                $('#divAddIns').removeClass('display-none');
+                $("#btn-okdispo").removeClass('display-none');
+                $('#hasRespon').addClass('display-none');
+                $("#hasDis").addClass('display-none');
+                //moi them vao de hien thi "" khi chon
+                $("#add_raw_addins").val("");
+                $('.show_footer').css('display', 'inherit');
+                $.each($(".dd_respon"),
+                    function() {
+                        $(this).removeClass('display-none');
+                    });
+
+                $.each($(".dd_disp"),
+                    function() {
+                        $(this).removeClass('display-none');
+                    });
+            } else {
+                bootbox.alert('You are not permitted');
+                return false;
+            }
+        }
+
+        function changeStatusDispo() {
+            // $("#modelSubmitStatus").show();
+            ncrnumber = $("#NCR_NUM").val();
+            var datapost = {
+                ncrnumber: ncrnumber,
+            }
+            $.blockUI();
+            $.post('@Url.Action("ChooseUserSubmitDispo", "WriteNcrForIqc")',
+                datapost,
+                function(data) {
+                    if (data.result) {
+                        bootbox.alert("Confim Successful");
+                        window.location = '@Url.Action("Index", "NCR")';
+                    } else {
+                        bootbox.alert("Please contact to Administrator!");
+                    }
+                }).fail(function() {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function() {
+                    $.unblockUI();
+                });
+        }
+
+        $(document).ready(function() {
+            var isMRBWH='@((bool)ViewBag.IsWHMRB && ViewBag.Status == StatusInDB.Submitted)' == 'True' ;
+            var stastus = '@Model.STATUS';
+            if (stastus.trim() == '@StatusInDB.DispositionApproved') {
+                if (@Model.ListUSerAppr.Count == 4) {
+                    var qty = '@Model.ListUSerAppr[0].IdUser';
+                    var eng = '@Model.ListUSerAppr[1].IdUser';
+                    var afg = '@Model.ListUSerAppr[2].IdUser';
+                    var pur = '@Model.ListUSerAppr[3].IdUser';
+                    $('#qualityAss1').val(qty);
+                    $('#engineer1').val(eng);
+                    $('#afgassy1').val(afg);
+                    $('#purchasing1').val(pur);
+                }
+                $('#table-add-ins').css('display', 'none');
+                $('#table-show-ins').removeClass('display-none');
+                $('.check-box-user').css('display', 'inherit');
+                $('#show-data-watting').css('display', 'inherit');
+                // $('#table-remain-dispo').removeClass('display-none');
+                $('#remain').removeClass('display-none');
+                $('#disposhow').removeClass('display-none');
+                $('th#datede').removeClass('display-none');
+                $('th#add-tradition').removeClass('display-none');
+                $('#bt-add').addClass('display-none');
+                $('#add-dispo').addClass('display-none');
+                $.each($('.add-date'),
+                    function() {
+                        $(this).removeClass('display-none');
+                    });
+                $.each($('.adddet'),
+                    function() {
+                        $(this).removeClass('display-none');
+                    });
+                //  $('#remainshow').removeClass('display-none');
+
+                $.each($(".hasRespon"),
+                    function() {
+                        $(this).removeClass('display-none');
+                    });
+                $.each($(".hasDis"),
+                    function() {
+                        $(this).removeClass('display-none');
+                    });
+            }
+            if (stastus.trim() == '@StatusInDB.Created') {
+                let userquality = $("#qualityAss").val("");
+                let userengineer = $("#engineer").val("");
+                let userafg = $("#afgassy").val("");
+                let userpurchange = $("#purchasing").val("");
+            }
+            if (stastus.trim() == '@StatusInDB.WaitingForDispositionApproval') {
+                if (qty == IdUser || eng == IdUser || afg == IdUser || pur == IdUser) {
+                    $('#qualityAss1').prop('disabled', false);
+                    $('#engineer1').prop('disabled', false);
+                    $('#afgassy1').prop('disabled', false);
+                    $('#purchasing1').prop('disabled', false);
+                }
+            }
+            if (stastus.trim() == '@StatusInDB.Submitted') {
+                if (@Model.ListUSerAppr.Count == 4) {
+                    var qty = '@Model.ListUSerAppr[0].IdUser';
+                    var eng = '@Model.ListUSerAppr[1].IdUser';
+                    var afg = '@Model.ListUSerAppr[2].IdUser';
+                    var pur = '@Model.ListUSerAppr[3].IdUser';
+                    $('#qualityAss1').val(qty);
+                    $('#engineer1').val(eng);
+                    $('#afgassy1').val(afg);
+                    $('#purchasing1').val(pur);
+                    if(isMRBWH){
+                        $('#qualityAss1').prop('disabled', false);
+                        $('#engineer1').prop('disabled', false);
+                        $('#afgassy1').prop('disabled', false);
+                        $('#purchasing1').prop('disabled', false);
+                    }
+
+                }
+            }
+            if (stastus.trim() == '@StatusInDB.WaitingForDisposition') {
+                if (@Model.ListUSerAppr.Count == 4) {
+                    var qty = '@Model.ListUSerAppr[0].IdUser';
+                    var eng = '@Model.ListUSerAppr[1].IdUser';
+                    var afg = '@Model.ListUSerAppr[2].IdUser';
+                    var pur = '@Model.ListUSerAppr[3].IdUser';
+                    $('#qualityAss1').val(qty);
+                    $('#engineer1').val(eng);
+                    $('#afgassy1').val(afg);
+                    $('#purchasing1').val(pur);
+                }
+                //$('#qualityAss1').prop('disabled', false);
+                //$('#engineer1').prop('disabled', false);
+                //$('#afgassy1').prop('disabled', false);
+                //$('#purchasing1').prop('disabled', false);
+            }
+            if (stastus.trim() == '@StatusInDB.WaitingForDispositionApproval') {
+                if (@Model.ListUSerAppr.Count == 4) {
+                    var qty = '@Model.ListUSerAppr[0].IdUser';
+                    var eng = '@Model.ListUSerAppr[1].IdUser';
+                    var afg = '@Model.ListUSerAppr[2].IdUser';
+                    var pur = '@Model.ListUSerAppr[3].IdUser';
+                    $('#qualityAss1').val(qty);
+                    $('#engineer1').val(eng);
+                    $('#afgassy1').val(afg);
+                    $('#purchasing1').val(pur);
+                }
+                $('#table-add-ins').css('display', 'none');
+                $('#table-show-ins').removeClass('display-none');
+                $('.check-box-user').css('display', 'inherit');
+                $('#show-data-watting').css('display', 'inherit');
+                $('#table-remain-dispo').removeClass('display-none');
+                $('#remain').removeClass('display-none');
+                $('#disposhow').removeClass('display-none');
+                $('#remainshow').removeClass('display-none');
+
+                $.each($(".hasRespon"),
+                    function() {
+                        $(this).removeClass('display-none');
+                    });
+                $.each($(".hasDis"),
+                    function() {
+                        $(this).removeClass('display-none');
+                    });
+                var dataDET = new Array();
+                $('#tbl-res tr').each(function(row, tr) {
+                    dataDET[row] = {
+                        "Item": $(tr).find('td:eq(0)').text(),
+                        "Qty": $(tr).find("td:eq(1)").text()
+                    }
+                });
+
+                var dataDIS = new Array();
+                $('#table-show-ins tr').each(function(row, tr) {
+                    dataDIS[row] = {
+                        "Item": $(tr).find('td:eq(0)').text(),
+                        "Qty": $($(tr).find("td:eq(1)").html()).val()
+                    }
+                });
+                dataDIS.splice(-1, 1);
+                if (dataDET.length > 0) {
+                    delete dataDET[0];
+                }
+                if (dataDIS.length > 0) {
+                    delete dataDIS[0];
+                }
+
+                dataDET.forEach(function(item) {
+                    var remain = parseInt(item.Qty);
+                    dataDIS.forEach(function(item1) {
+                        if (item1.Item.trim() == item.Item.trim()) {
+                            var qtyadd= (parseInt(item1.Qty));
+                            remain = remain - qtyadd;
+                        }
+                    });
+                    if (remain != parseInt(item.Qty) && remain != 0) {
+                        var res = createRowRemain(item.Item, remain)
+                        let data = $("#table-remain-dispo #append-data-remain").html();
+                        data = data + res;
+                        $("#table-remain-dispo #append-data-remain").html(data);
+                    }
+                    openAdditionalshow(item.Item,0);
+                });
+                var htmldata = $('#table-remain-dispo #append-data-remain').html();
+                if (htmldata == "") {
+                    $('#table-remain-dispo').css('display', 'none');
+                    $('#remainshow').css('display', 'none');
+                }
+            }
+        });
+
+        function createRowRemain(item, useQty) {
+            let res = '<tr id="remain_row_' + item + '" rev="' + $("#data-confirmity-" + item).attr('rev') + '">';
+            res = res + '<td>' + item + '</td>';
+            res = res + '<td id="useQty_' + item + '">' + useQty + '</td>';
+            res = res + '<td><a onclick="openAdditionalshow(' + item + ')">DISP&rsquo;N</a></td></tr>';
+            return res;
+        }
+
+        function openAdditional(rowId) {
+            $('#txt_add_qty').val("");
+            let data = '';
+            var status = '@Model.STATUS';
+            ROWID = rowId;
+            GLOBAL_QTY = $('#useQty_' + rowId).text()
+            var array = new Array();
+            $('#table-add-ins tr').each(function(row, tr) {
+                array[row] = {
+                    "Item": $(tr).find('td:eq(0)').text(),
+                    "Qty": $(tr).find("td:eq(1)").text(),
+                    "Addins": $(tr).find("td:eq(2)").text(),
+                    "Vadd": $(tr).find("td:eq(2)").attr('rev'),
+                    "AIS": $(tr).find("td:eq(2)").attr('rev-item'),
+                    "Remark": $(tr).find("td:eq(3)").text(),
+                    "Insp": $(tr).find("td:eq(4)").text(),
+                    "Iduser": $(tr).find("td:eq(4)").attr('rev'),
+                    "Date": $(tr).find("td:eq(5)").text()
+                }
+            });
+            array.forEach(function(item) {
+                if (item.Item == (rowId + "")) {
+                    data = data +
+                        '<tr id="ins_row_' +
+                        rowId +
+                        '"><td id="ins_item_' +
+                        rowId +
+                        '" >' +
+                        rowId +
+                        '</td><td id="ins_qty_' +
+                        rowId +
+                        '">' +
+                        item.Qty +
+                        '</td><td id="ins_addition_' +
+                        rowId +
+                        '" rev-item="' + item.AIS + '" rev="' + item.Vadd + '">' +
+                        item.Addins +
+                        '</td><td id="ins_remark_' +
+                        rowId +
+                        '">' +
+                        item.Remark +
+                        '</td><td id="ins_insp_' +
+                        rowId +
+                        '" rev="' +
+                        item.Iduser +
+                        '">' +
+                        item.Insp +
+                        '</td><td id="ins_date_' +
+                        rowId +
+                        '">' +
+                        item.Date +
+                        '</td></tr>';
+                }
+            });
+            $('#data-addIns').empty();
+            $('#data-addIns').html(data);
+            $("#modelAddInstruct").modal('show');
+        }
+        function openAdditionalshow(rowId, tmp) {
+            $('#txt_add_qty').val("");
+            let data1 = '';
+            ROWID = rowId;
+            GLOBAL_QTY = $('#useQty_' + rowId).text();
+            var arrayshow = new Array();
+            $('#table-show-ins tr.tr_remain_row_' + rowId).each(function(row, tr) {
+                arrayshow[row] = {
+                    "Item": $(tr).find('td:eq(0)').text(),
+                    "Qty": $($(tr).find("td:eq(1)").html()).val(),
+                    "Addins": $(tr).find("td:eq(2)").text(),
+                    "Remark": $(tr).find("td:eq(3)").text(),
+                    "Insp": $(tr).find("td:eq(4)").text(),
+                    "Date": $(tr).find("td:eq(5)").text(),
+                    "RITEM": $(tr).find("td:eq(2)").attr('rev-item'),
+                    "INS": $(tr).find("td:eq(2)").attr('rev')
+                }
+            });
+            arrayshow.forEach(function(item1) {
+                if (item1.Item.trim() == (rowId + "")) {
+                    data1 = data1 +
+                        '<tr id="ins_row_' +
+                        rowId +
+                        '"><td id="ins_item_' +
+                        rowId +
+                        '" >' +
+                        rowId +
+                        '</td><td id="ins_qty_' +
+                        rowId +
+                        '">' +
+                        item1.Qty +
+                        '</td><td id="ins_addition_' +
+                        rowId +
+                        '" rev-item="' + item1.RITEM + '" rev="' + item1.INS + '" >' +
+                        item1.Addins +
+                        '</td><td id="ins_remark_' +
+                        rowId +
+                        '">' +
+                        item1.Remark +
+                        '</td><td id="ins_insp_' +
+                        rowId +
+                        '">' +
+                        item1.Insp +
+                        '</td>' +
+                        '<td id="ins_date_' +
+                        rowId +
+                        '">' +
+                        item1.Date +
+                        '</td></tr>';
+                }
+            });
+            $('#data-addIns').empty();
+            $('#data-addIns').html(data1);
+            if (tmp != 0)
+                $("#modelAddInstruct").modal('show');
+        }
+
+        function saveIns() {
+            var status = '@Model.STATUS';
+            if (status.trim() == "@StatusInDB.WaitingForDisposition") {
+                let total_qty = 0;
+                qty = parseInt($("#dataqty_" + ROWID).text());
+                $.each($("#sample_3 td#ins_qty_" + ROWID),
+                    function() {
+                        total_qty = total_qty + parseInt($(this).html());
+                    });
+
+                if (total_qty < qty) {
+                    bootbox.confirm({
+                        message: "Quantity not equal",
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function(result) {
+
+                            if (result) {
+                                $.each($("tbody#append-data-addins tr#ins_row_" + ROWID),
+                                    function() {
+                                        $(this).remove();
+                                    });
+                                $("tr#remain_row_" + ROWID).remove();
+                                let res = $("#data-addIns").html();
+                                let data = $("#append-data-addins").html();
+                                //   console.log(data);
+                                data = res + data;
+                                $("#append-data-addins").html(data);
+
+                                $.each($("tbody#tbody-show-ins tr#tr_remain_row_" + ROWID),
+                                    function() {
+                                        $(this).remove();
+                                    });
+
+                                addRemainShow(total_qty, qty);
+                                //   $("#tbody-show-ins").html(data);
+                                //hide table remain
+
+                                $("#modelAddInstruct").modal('hide');
+                            }
+                        }
+                    });
+                } else {
+                    $.each($("tbody#append-data-addins tr#ins_row_" + ROWID),
+                        function() {
+                            $(this).remove();
+                        });
+                    $("tr#remain_row_" + ROWID).remove();
+                    let res = $("#data-addIns").html();
+                    let data = $("#append-data-addins").html();
+                    data = res + data;
+                    $("#append-data-addins").html(data);
+                    removeAdditions();
+                    if (total_qty - qty == 0) {
+                        $('#remain-sum').css('display', 'none');
+                        $('#table-remain').css('display', 'none');
+                    }
+                    $("#modelAddInstruct").modal('hide');
+                }
+            } else if (status.trim() == "@StatusInDB.WaitingForDispositionApproval") {
+                let dt_now = new Date();
+                let lstDis = [];
+                $.each($("#sample_3 #data-addIns tr"),
+                    function() {
+                        let tmp = $(this).find('td');
+                        let dis = {
+                            NCR_NUM: $("#NCR_NUM").val(),
+                            SEC: $("#SEC").val(),
+                            ITEM: ROWID,
+                            QTY: tmp.eq(1).text(),
+                            ADD_INS: $(tmp.eq(2)).attr('rev'),
+                            INSPECTOR: tmp.eq(4).attr('rev'),
+                            INS_DATE: dt_now.toISOString(),
+                            REMARK: tmp.eq(3).text(),
+                            MFG: null,
+                            QUALITY: null,
+                            PURCHASING: null,
+                            PURCHASING: null,
+                            DATEAPPROVAL: null
+                        }
+                        lstDis.push(dis);
+                    });
+                $.blockUI();
+                $.post('@Url.Action("SaveDispo", "NCRApproval")',
+                    { lstDis: lstDis },
+                    function(data) {
+                        if (data.success) {
+                            $("#modelAddInstruct").modal('hide');
+                            location.reload();
+                        } else {
+                            bootbox.alert("Save not successful,Please select another ADDITIONALS INSTRUCTIONS");
+                        }
+                    }).fail(function() {
+                        bootbox.alert('Please select another ADDITIONALS INSTRUCTIONS');
+                    }).always(function() {
+                        $.unblockUI();
+                    });
+            }
+        }
+
+        function addNewRaw() {
+            
+            var status = '@Model.STATUS';
+            var DEFECTIVE = @Model.defect;
+            var REJECTED = @Model.REJ_QTY;
+            
+            if (status.trim() == '@StatusInDB.WaitingForDisposition') {
+                add_raw_addins_onchange();
+                if ($('button.btn.btn-success.pull-right').hasClass('disabled')) return;
+                if ($('button#bt-add').hasClass('disabled')) return;
+                ROWID = $('#add_raw_item').val();
+                let total_qty = 0;
+                qty = parseInt($("#dataqty_" + ROWID).text());
+                $.each($("#table-add-ins td#ins_qty_" + ROWID),
+                    function() {
+                        total_qty = total_qty + parseInt($(this).text());
+                    });
+                if ($("#add_raw_qty").val() == "" || $("#add_raw_qty").val() == null || $("#add_raw_qty").val().trim() == "0") {
+                    bootbox.alert("Please input QTY");
+                    return;
+                }
+
+                if ($("#add_raw_inp").val() == "" || $("#add_raw_inp").val() == null) {
+                    bootbox.alert("Please input INSP");
+                    return;
+                }
+                total_qty = total_qty + parseInt($("#add_raw_qty").val());
+                if (total_qty > qty) {
+                    bootbox.alert("Total QTY can not greater than " + qty);
+                    return;
+                }
+                
+                let data = $('#append-data-addins').html();
+                let res = createDataIns1();
+                data = res + data;
+
+                $('#append-data-addins tbody tr').remove();
+                $("tr#remain_row_" + ROWID).remove();
+                $("#append-data-addins").html(data);
+                $.each($("tbody#tbody-show-ins tr#tr_remain_row_" + ROWID),
+                    function() {
+                        $(this).remove();
+                    });
+                addRemainShow(total_qty, qty);
+                //hide table remain
+                if (total_qty - qty == 0) {
+                    $('#remain-sum').css('display', 'none');
+                    $('#table-remain').css('display', 'none');
+                }
+                else {
+                    $('#remain-sum').css('display', 'table');
+                    $('#table-remain').css('display', 'table');
+                }
+                //$("#tbody-show-ins").html(data);
+
+                $("#modelAddInstruct").modal('hide');
+            }
+            //add luc da disposition
+            if (status.trim() == '@StatusInDB.WaitingForDispositionApproval') {
+                ROWID = $('#add_raw_item1').val();
+                let total_qty = 0;
+                let lsIns = [];
+                qty = parseInt($("#dataqty_" + ROWID).text());
+                $.each($("#table-show-ins td#ins_qty_" + ROWID +" input"),
+                    function() {
+                        total_qty = total_qty + parseInt($(this).val());
+                    });
+                let valueAddInsNew = $("#add_raw_addins1 option:selected").text();
+                $.each($("#table-show-ins td#tb_remain_inspector_" + ROWID),
+                    function() {
+                        //let value = $("#tb_remain_addins_" + ROWID).html();
+                        //console.log(value);
+                        //lsIns.push(value);
+
+                        let valueAddInsOld = $("#tb_remain_addins_" + ROWID).html();
+                        console.log(valueAddInsNew);
+                        console.log(valueAddInsOld);
+                        
+                        if($("#add_raw_addins1 option:selected").text() == $("#tb_remain_addins_" + ROWID).html()){
+                            bootbox.alert("ADDITIONALS exist. Please select another ADDITIONALS INSTRUCTIONS");
+                            return; 
+                        }
+                    });
+                //console.log(lsIns);
+                //let addInsNew = $("#add_raw_addins1 option:selected").text();
+                //if(jQuery.inArray(addInsNew, lsIns)) {
+                //    bootbox.alert("ADDITIONALS exist. Please select another ADDITIONALS INSTRUCTIONS");
+                //    return;                    
+                //}
+                if ($("#add_raw_qty1").val() == "" || $("#add_raw_qty1").val() == null) {
+                    bootbox.alert("Please input QTY");
+                    return;
+                }
+                if ($("#add_raw_inp1").val() == "" || $("#add_raw_qty1").val() == null || $("#add_raw_qty1").val() == '0') {
+                    bootbox.alert("Please input INSP");
+                    return;
+                }
+                total_qty = total_qty + parseInt($("#add_raw_qty1").val());
+                if (total_qty > qty) {
+                    bootbox.alert("Total QTY can not greater than " + qty);
+                    return;
+                }
+                //else if (DEFECTIVE != REJECTED && total_qty < qty) {
+                //    bootbox.alert("Total QTY not less than " + qty + ", must be equal to " + qty);
+                //    return;
+                //}
+                let data = $('#tbody-show-ins').html();
+                let res = createDataIns2();
+                let lstDis = [];
+                let dis = {
+
+                    NCR_NUM: $("#NCR_NUM").val(),
+                    SEC: $("#SEC").val(),
+                    ITEM: ROWID,
+                    QTY: $('#add_raw_qty1').val(),
+                    ADD_INS: $("#add_raw_addins1 option:selected").val(),
+                    INSPECTOR:  $('#add_raw_inp1').val(),
+                    INS_DATE: null,
+                    REMARK: $('#add_raw_remark1').val(),
+                    MFG: null,
+                    QUALITY: null,
+                    PURCHASING: null,
+                    PURCHASING: null,
+                    DATEAPPROVAL: null
+                }
+                lstDis.push(dis);
+                console.log(lstDis);
+                $.blockUI();
+                $.post('@Url.Action("SaveDispo", "NCRApproval")',
+                    { lstDis: lstDis },
+                    function(data) {
+                        if (data.success) {
+                            $("#modelAddInstruct").modal('hide');
+                            location.reload();
+                        } else {
+                            bootbox.alert("Save not successful, Please select another ADDITIONALS INSTRUCTIONS");
+                        }
+                    }).fail(function() {
+                        bootbox.alert('Please select another ADDITIONALS INSTRUCTIONS');
+                    }).always(function() {
+                        $.unblockUI();
+                    });
+                data = res + data;
+                $('#tbody-show-ins tbody tr').remove();
+                $("tr#remain_row_" + ROWID).remove();
+                $("#tbody-show-ins").html(data);
+                $.each($("tbody#tbody-show-ins tr#tr_remain_row_" + ROWID),
+                    function() {
+                        $(this).remove();
+                    });
+                addRemainShow(total_qty, qty);
+                if (total_qty - qty == 0) {
+                    $('#remain-sum').css('display', 'none');
+                    $('#table-remain').css('display', 'none');
+                }
+                //  $("#tbody-show-ins").html(data);
+                //  $("#modelAddInstruct").modal('hide');
+            }
+
+            function createDataIns1() {
+                let dt_now = new Date();
+                var month = (dt_now.getMonth() + 1) + "";
+                if (month.length == 1) {
+                    month = "0" + month;
+                }
+                let dt_string = month + '/' + dt_now.getDate() + '/' + dt_now.getFullYear();
+                let res = '<tr id="ins_row_' + $("#add_raw_item").val() + '">';
+                res = res +
+                    '<td id="ins_item_' +
+                    $("#add_raw_item").val() +
+                    '"  rev="' +
+                    $("#add_raw_item").val() +
+                    '">' +
+                    $("#add_raw_item").val() +
+                    '</td>';
+                res = res + '<td id="ins_qty_' + $("#add_raw_item").val() + '">' + $("#add_raw_qty").val() + '</td>';
+                res = res +
+                    '<td id="ins_addition_' +
+                    $("#add_raw_item").val() +
+                    '" rev="' +
+                    $("select#add_raw_addins").val() +
+                    '" rev-item="' + $("#add_raw_item").val() + '_' + $("select#add_raw_addins").val() + '" rev="' + $("select#add_raw_addins").val() +'">' +
+                    $("select#add_raw_addins option:selected").text() +
+                    '</td>';
+                res = res +
+                    '<td id="ins_remark_' +
+                    $("#add_raw_item").val() +
+                    '">' +
+                    $("#add_raw_remark").val() +
+                    '</td>';
+                res = res +
+                    '<td id="ins_insp_' +
+                    $("#add_raw_item").val() +
+                    '" rev="' +
+                    $("select#add_raw_inp").val() +
+                    '">' +
+                    $("select#add_raw_inp option:selected").text() +
+                    '</td>';
+                res = res + '<td id="ins_date_' + $("#add_raw_item").val() + '">' + dt_string + '</td></tr>';
+                return res;
+            }
+            //do 2 hàm khac nhau nen phai viet khác
+            function createDataIns2() {
+                let dt_now = new Date();
+                var month = (dt_now.getMonth() + 1) + "";
+                if (month.length == 1) {
+                    month = "0" + month;
+                }
+                let dt_string = month  + '/' + dt_now.getDate() + '/' + dt_now.getFullYear();
+                let res = '<tr id="ins_row_' + $("#add_raw_item1").val() + '">';
+                res = res +
+                    '<td id="ins_item_' +
+                    $("#add_raw_item1").val() +
+                    '"  rev="' +
+                    $("#add_raw_item1").val() +
+                    '">' +
+                    $("#add_raw_item1").val() +
+                    '</td>';
+                res = res + '<td id="ins_qty_' + $("#add_raw_item1").val() + '">' + $("#add_raw_qty1").val() + '</td>';
+                res = res +
+                    '<td id="ins_addition_' +
+                    $("#add_raw_item1").val() +
+                    '" rev="' +
+                    $("select#add_raw_addins1").val() +
+                    '">' +
+                    $("select#add_raw_addins1 option:selected").text() +
+                    '</td>';
+                res = res +
+                    '<td id="ins_remark_' +
+                    $("#add_raw_item1").val() +
+                    '">' +
+                    $("#add_raw_remark1").val() +
+                    '</td>';
+                res = res +
+                    '<td id="ins_insp_' +
+                    $("#add_raw_item1").val() +
+                    '" rev="' +
+                    $("select#add_raw_inp1").val() +
+                    '">' +
+                    $("select#add_raw_inp1 option:selected").text() +
+                    '</td>';
+                res = res + '<td id="ins_date_' + $("#add_raw_item1").val() + '">' + dt_string + '</td><td></td></tr>';
+                return res;
+            }
+        }
+
+        function createSCAR(ncrNUM) {
+            window.open('@Url.Action("CreateSCARForNCR", "SCAR")' + "?NCR_NUM=" + ncrNUM)
+            @*window.location = '@Url.Action("CreateSCARForNCR", "SCAR")' + "?NCR_NUM=" + ncrNUM;*@
+        }
+        //get name down load file
+        var creditFile = '@Model.URL';
+        var arayfile = creditFile.split("/");
+        var namefile = arayfile[arayfile.length - 1];
+        $('#filenamepro').html(namefile);
+        var fileid = '@Model.Idfile';
+        $('#filenamepro').attr("href", '@Url.Action("DownloadFile", "NCRApproval")' + "?fileId=" + fileid);
+        $('.check-box-user').click(function(e)
+        {
+            if ($(this).is(':checked')) {
+                var DEFECTIVE = @Model.defect;
+            var REJECTED = @Model.REJ_QTY;
+            let sum = 0;
+            $('#tbl-res tbody tr').each(function (key, value) {
+                var text = $("#dataqty_" + ++key).text();
+                sum = sum + parseInt(text);
+            });
+            let qtytmp = 0;
+            $.each($("tbody#tbody-show-ins tr"),
+                function () {
+                    let tmp = $(this).find('td');
+                    if ($(tmp.eq(1).html()).val() != "") {
+                        qtytmp = qtytmp + parseInt($(tmp.eq(1).html()).val());
+                    }
+                });
+            if (sum > qtytmp & DEFECTIVE != REJECTED) {
+                $('.check-box-user').prop('checked',false);
+                bootbox.alert("Total QTY not less than " + sum + ", must be equal to " + sum);
+                return;
+            }
+            //console.log($(e.target)[0].offsetParent.nextElementSibling);
+            var idUser = $(e.target).attr('rev');
+            if(idUser != ""){
+                if (idUser!= IdUser.trim()) {
+                    $('#modelpassword').modal('show');
+                    $(".ms-uncheck").unbind( "click");
+                    $('.ms-uncheck').on('click',function(){
+                        $(e.target).attr('checked', false);
+                        $('#pass').val("");
+                        e.preventDefault();
+                        e.stopPropagation();
+                    });
+                    $("#getpass").unbind( "click");
+                    $('#getpass').on('click', function() {
+                        var Userid = idUser;
+                        var ncrnum = $("#NCR_NUM").val();
+                        var pass = $('#pass').val();
+                        var datapost = {
+                            IdUser: Userid,
+                            ncrnum: ncrnum,
+                            password: pass,
+                        };
+                        $.blockUI();
+                        $.post('@Url.Action("SaveUserAprroval", "NCRApproval")', datapost, function (data) {
+                            if (data.Approval != undefined | data.Approval != null) {
+                                if (data.Approval.IsAllApproval || data.Approval.IsApproval) {
+                                    location.reload();
+                                    return;
+                                }
+
+                                $('#cb_chooseuser_1').prop('disabled', data.Approval.QUALITY);
+                                $('#cb_chooseuser_2').prop('disabled', data.Approval.ENGIEERING);
+                                $('#cb_chooseuser_3').prop('disabled', data.Approval.MFG);
+                                $('#cb_chooseuser_4').prop('disabled', data.Approval.PURCHASING);
+
+                                $('#cb_chooseuser_1').prop('checked', data.Approval.QUALITY);
+                                $('#cb_chooseuser_2').prop('checked', data.Approval.ENGIEERING);
+                                $('#cb_chooseuser_3').prop('checked', data.Approval.MFG);
+                                $('#cb_chooseuser_4').prop('checked', data.Approval.PURCHASING);
+
+                                bootbox.alert("Check approval Successful");
+                                $('#cb_chooseuser_1_date').html(data.Approval.QUALITYDATE);
+                                $('#cb_chooseuser_2_date').html(data.Approval.ENGIEERINGDATE);
+                                $('#cb_chooseuser_3_date').html(data.Approval.MFGDATE);
+                                $('#cb_chooseuser_4_date').html(data.Approval.PURCHASINGDATE);
+                                $("#modelpassword").modal('hide');
+                                $('#pass').val("");
+                            } else {
+                                bootbox.alert(data.message);
+                                $('#pass').val("");
+                                e.preventDefault();
+                                e.stopPropagation();
+                            }
+                        }).fail(function() {
+                            bootbox.alert(data.message);
+
+                        }).always(function() {
+                            $.unblockUI();
+                        });
+                    });
+                }
+                else {
+                    $.blockUI();
+                    $.post('@Url.Action("SaveUserAprroval", "NCRApproval")',
+                        {
+                            IdUser: idUser,
+                            ncrnum: $("#NCR_NUM").val(),
+                        },
+                        function (data) {
+                            if (data.Approval != undefined || data.Approval.IsApproval) {
+                                if (data.Approval.IsAllApproval){
+                                    location.reload();
+                                    return;
+                                }
+                                bootbox.alert("Check approval Successful");
+                                $('#cb_chooseuser_1').prop('disabled', data.Approval.QUALITY);
+                                $('#cb_chooseuser_2').prop('disabled', data.Approval.ENGIEERING);
+                                $('#cb_chooseuser_3').prop('disabled', data.Approval.MFG);
+                                $('#cb_chooseuser_4').prop('disabled', data.Approval.PURCHASING);
+
+                                $('#cb_chooseuser_1').prop('checked', data.Approval.QUALITY);
+                                $('#cb_chooseuser_2').prop('checked', data.Approval.ENGIEERING);
+                                $('#cb_chooseuser_3').prop('checked', data.Approval.MFG);
+                                $('#cb_chooseuser_4').prop('checked', data.Approval.PURCHASING);
+
+                                $('#cb_chooseuser_1_date').html(data.Approval.QUALITYDATE);
+                                $('#cb_chooseuser_2_date').html(data.Approval.ENGIEERINGDATE);
+                                $('#cb_chooseuser_3_date').html(data.Approval.MFGDATE);
+                                $('#cb_chooseuser_4_date').html(data.Approval.PURCHASINGDATE);
+
+                            } else {
+                                bootbox.alert("Please contact to Administrator!");
+                            }
+                        }).fail(function() {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function() {
+                            $.unblockUI();
+                        });
+                }
+            }
+            }
+        });
+
+        function keypress(e) {
+            var keypressed = null;
+            if (window.event) {
+                keypressed = window.event.keyCode; //IE
+            }
+            else {
+
+                keypressed = e.which; //NON-IE, Standard
+            }
+            if (keypressed < 48 || keypressed > 57) {
+                if (keypressed == 8 || keypressed == 127) {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        function add_raw_addins_onchange() {
+            var check = 0;
+            var _this = $("select#add_raw_addins");
+            var value = _this.val();
+            var item = $("#add_raw_item").val();
+            var value_check = item + '_' + value;
+            if (value == '' | value == null) {
+                bootbox.alert('Please select ADDITIONALS INSTRUCTIONS!');
+                return;
+            }
+            if (value.trim() == '@CONFIRMITY_DISPN.ID_REWORK') {
+                $("#modelAddInstruct").modal('hide');
+                openModalRework();
+            }
+
+            if (value.trim() == '@CONFIRMITY_DISPN.ID_SCRAP') {
+                $("#modelAddInstruct").modal('hide');
+                openModalScrap();
+            }
+            @*if (value.trim() == '@CONFIRMITY_DISPN.ID_DESCRIBE') {
+                $("#modelAddInstruct").modal('hide');
+                openAdditionalInstructionByRowId(rowid);
+            }*@
+            $('td#ins_addition_' + item).each(function (index, value) {
+                if ($(value).attr('rev-item') == value_check) {
+                    bootbox.alert({
+                        title: 'Duplicate Additionals Instructions',
+                        message: 'Item ' + $("#add_raw_item").val() + ' exists ' + $("select#add_raw_addins option:selected").text()
+                    });
+                    $('button.btn.btn-success.pull-right').addClass('disabled');
+                    check++;
+                }
+            });
+            if (check == 0)
+                $('button.btn.btn-success.pull-right').removeClass('disabled');
+        }
+
+        function lstAdditions_onchange(select) {
+            var check = 0;
+            var _this = $(select);
+            var value = _this.val();
+            var item = $("#data-confirmity-" + ROWID).attr('rev');
+            var value_check = ROWID + '_' + value;
+            if ($(select).val() == '' | $(select).val() == null) {
+                bootbox.alert('Please select ADDITIONALS INSTRUCTIONS!');
+                return;
+            }
+            if ($(select).val().trim() == '@CONFIRMITY_DISPN.ID_REWORK') {
+                $("#modelAddInstruct").modal('hide');
+                openModalRework();
+            }
+
+            if ($(select).val().trim() == '@CONFIRMITY_DISPN.ID_SCRAP') {
+                $("#modelAddInstruct").modal('hide');
+                openModalScrap();
+            }
+            @*if ($(select).val().trim() == '@CONFIRMITY_DISPN.ID_DESCRIBE') {
+                $("#modelAddInstruct").modal('hide');
+                openAdditionalInstructionByRowId(rowid);
+            }*@
+            $('td#ins_addition_' + ROWID).each(function (index, val) {
+                //console.log(index + ' - ' + $(value).attr('rev-item'));
+                if ($(val).attr('rev-item') == value_check) {
+                    bootbox.alert({
+                        title: 'Duplicate Additionals Instructions',
+                        message: 'Item ' + ROWID + ' exists ' + $(val).text()
+                    });
+                    $('#btn-add-ins').addClass('disabled');
+                    check++;
+                }
+            });
+            if (check == 0)
+                $('#btn-add-ins').removeClass('disabled');
+        }
+
+        function lstAdditions1_onchange(select) {
+            var check = 0;
+            var _this = $(select);
+            var value = _this.val();
+            let ROWID = $("#add_raw_item1").val();
+            var value_check = ROWID + '_' + value;
+            if ($(select).val() == '' | $(select).val() == null) {
+                bootbox.alert('Please select ADDITIONALS INSTRUCTIONS!');
+                return;
+            }
+            if ($(select).val().trim() == '@CONFIRMITY_DISPN.ID_REWORK') {
+                $("#modelAddInstruct").modal('hide');
+                openModalRework();
+            }
+
+            if ($(select).val().trim() == '@CONFIRMITY_DISPN.ID_SCRAP') {
+                $("#modelAddInstruct").modal('hide');
+                openModalScrap();
+            }
+            if ($(select).val().trim() == '@CONFIRMITY_DISPN.ID_DESCRIBE') {
+                $("#modelAddInstruct").modal('hide');
+                openAdditionalInstructionByRowId(rowid);
+            }
+            $('td#tb_remain_addins_' + ROWID).each(function (index, val) {
+                //console.log(index + ' - ' + $(value).attr('rev-item'));
+                if ($(val).attr('rev-item') == value_check) {
+                    bootbox.alert({
+                        title: 'Duplicate Additionals Instructions',
+                        message: 'Item ' + ROWID + ' exists ' + $(val).text()
+                    });
+                    $('#bt-add').addClass('disabled');
+                    console.log(val);
+                    console.log($(val).attr('rev-item'));
+                    check++;
+                }
+            });
+            if (check == 0)
+                $('#bt-add').removeClass('disabled');
+        }
+
+        function deleteAdditional(input) {
+            var ncr_num = $(input).attr('ncrnum');
+            var item = $(input).attr('item');
+            var addins = $(input).attr('addins');
+
+            bootbox.confirm({
+                message: "Are you sure want to delete?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-success'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        $.blockUI();
+                        $.post('@Url.Action("DeleteAddIns", "NCRApproval")',
+                        {
+                            ncrnum: ncr_num,
+                            item: item,
+                            addins: addins
+                        },
+                        function(data) {
+                            if (data.success) {
+                                window.location.reload();
+                            } else {
+                                bootbox.alert("Please contact to Administrator!");
+                            }
+                        }).fail(function() {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function() {
+                            $.unblockUI();
+                        });
+                    }
+                }
+            });
+
+            
+        }
+        function saveChange(input) {
+            var ncr_num = $(input).attr('ncrnum');
+            var item = $(input).attr('item');
+            var addins = $(input).attr('addins');
+            var role = $(input).attr('role');
+            var sum = parseInt($("#dataqty_" + item).text());
+            let qtytmp = 0;
+            $.each($("tr.tr_remain_row_" + item + ">td#ins_qty_" + item+" input"),
+                function () {
+                    qtytmp = qtytmp + parseInt($(this).val());
+                });
+            if (role == 'edit') {
+                $(input).val('Save');
+                $(input).attr('role', 'save');
+                $('#txt_qty_' + item + '_' + addins).attr('readonly', false);
+                $('#txt_rem_' + item + '_' + addins).attr('readonly', false);
+            }
+            else {
+                if (qtytmp > sum) { bootbox.alert("Total QTY can not greater than " + sum); return; }
+
+                bootbox.confirm({
+                message: "Are you sure want to save change?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-success'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        $.blockUI();
+                        $.post('@Url.Action("EditAddIns", "NCRApproval")',
+                        {
+                            ncrnum: ncr_num,
+                            item: item,
+                            addins: addins,
+                            qty: $('#txt_qty_' + item + '_' + addins).val(),
+                            remark: $('#txt_rem_' + item + '_' + addins).val()
+                        },
+                        function(data) {
+                            if (data.success) {
+                                $('#txt_qty_' + item + '_' + addins).attr('value', $('#txt_qty_' + item + '_' + addins).val());
+                                $(input).val('Edit');
+                                $(input).attr('role', 'edit');
+                                $('#txt_qty_' + item + '_' + addins).attr('readonly', true);
+                                $('#txt_rem_' + item + '_' + addins).attr('readonly', true);
+                                let tmp = 0;
+                                $.each($("tr.tr_remain_row_" + item + ">td#ins_qty_" + item + " input"),
+                                    function () {
+                                        tmp = tmp + parseInt($(this).val());
+                                    });
+                                
+                                bootbox.alert("Edit Additional instruction successful !", function () {
+                                    if (sum - tmp == 0) {
+                                        $('#table-remain-dispo').css('display', 'none');
+                                        $('#remainshow').css('display', 'none');
+                                    }
+                                    else {
+                                        location.reload();
+                                    }
+                                });
+                            } else {
+                                bootbox.alert("Please contact to Administrator!");
+                            }
+                        }).fail(function() {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function() {
+                            $.unblockUI();
+                        });
+                    }
+                }
+            });
+            }
+        }
+
+        function checkApproval() {
+            var ncr_num = '@Model.NCR_NUM.Trim()';
+            $.blockUI();
+            $.post('@Url.Action("CheckApproal", "NCRApproval")',
+            {
+                ncrnum: ncr_num,
+            },
+            function(data) {
+                if (data.Approval != undefined) {
+                    if (data.Approval.IsAllApproval) {
+                        $('#cb_chooseuser_1').prop('disabled', true);
+                        $('#cb_chooseuser_2').prop('disabled', true);
+                        $('#cb_chooseuser_3').prop('disabled', true);
+                        $('#cb_chooseuser_4').prop('disabled', true);
+
+                        $('#cb_chooseuser_1').prop('checked', true);
+                        $('#cb_chooseuser_2').prop('checked', true);
+                        $('#cb_chooseuser_3').prop('checked', true);
+                        $('#cb_chooseuser_4').prop('checked', true);
+
+                        $('#cb_chooseuser_1_date').html(data.Approval.QUALITYDATE);
+                        $('#cb_chooseuser_2_date').html(data.Approval.ENGIEERINGDATE);
+                        $('#cb_chooseuser_3_date').html(data.Approval.MFGDATE);
+                        $('#cb_chooseuser_4_date').html(data.Approval.PURCHASINGDATE);
+                        return;
+                    }
+
+                    $('#cb_chooseuser_1').prop('disabled', data.Approval.QUALITY);
+                    $('#cb_chooseuser_2').prop('disabled', data.Approval.ENGIEERING);
+                    $('#cb_chooseuser_3').prop('disabled', data.Approval.MFG);
+                    $('#cb_chooseuser_4').prop('disabled', data.Approval.PURCHASING);
+
+                    $('#cb_chooseuser_1').prop('checked', data.Approval.QUALITY);
+                    $('#cb_chooseuser_2').prop('checked', data.Approval.ENGIEERING);
+                    $('#cb_chooseuser_3').prop('checked', data.Approval.MFG);
+                    $('#cb_chooseuser_4').prop('checked', data.Approval.PURCHASING);
+
+                    $('#cb_chooseuser_1_date').html(data.Approval.QUALITYDATE);
+                    $('#cb_chooseuser_2_date').html(data.Approval.ENGIEERINGDATE);
+                    $('#cb_chooseuser_3_date').html(data.Approval.MFGDATE);
+                    $('#cb_chooseuser_4_date').html(data.Approval.PURCHASINGDATE);
+
+                } else {
+                    bootbox.alert("Please contact to Administrator!");
+                }
+            }).fail(function() {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function() {
+                $.unblockUI();
+            });
+        }
+        checkApproval();
+
+        function closencr() {
+            let ncr_num = '@Model.NCR_NUM';
+            bootbox.confirm({
+                message: "Are you sure want to Close?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-success'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        $.blockUI();
+                        $.get('@Url.Action("CloseNCR", "NCRApproval")',
+                        {
+                            NCR_NUM: ncr_num,
+                        },
+                        function(data) {
+                            if (!data.res) {
+                                bootbox.alert("Close NCR " + ncr_num + " successful !", function () { window.location.reload(); });
+                            } else {
+                                bootbox.alert("NCR " + ncr_num + " exsits task in task managerment !");
+                            }
+                        }).fail(function() {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function() {
+                            $.unblockUI();
+                        });
+                    }
+                }
+            });
+
+        }
+    </script>
+}
+
+    

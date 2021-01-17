@@ -1,0 +1,46 @@
+﻿@model II_VI_Incorporated_SCM.Models.Producttranfer.ProductViewModel
+@using II_VI_Incorporated_SCM.Models.Producttranfer
+<fieldset class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="form-body">
+                <label class="col-md-2 control-label" style="text-align:left">Part Number <span style="color: red">*</span></label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.Part_Num, new
+               {
+                   @class = "form-control",
+                   @required = "required"
+               })
+                </div>
+                <label class="col-md-2 control-label">Description</label>
+                <div class="col-md-5">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @required = "required" })
+                </div>
+            </div>
+            <br />
+            <div class="form-body">
+                <label class="col-md-2 control-label" style="text-align:left">Planning Type<span style="color: red">*</span></label>
+                <div class="col-md-3">
+                    <select class="form-control" name="Plan_Type" id="Plane" required="required">
+                        <option selected value="">Select</option>
+                        <option value="Buy Part">Buy Part</option>
+                        <option value="Make Part">Make Part</option>
+                    </select>
+                </div>
+                <label class="col-md-2 control-label">Date Input<span style="color: red">*</span></label>
+                <div class="col-md-5">
+                    <input class="form-control" readonly="readonly" name="Date" id="date" value="@String.Format("{0:dd-MMM-yy}", Model.Date)" />
+                </div>
+            </div>
+            <br />
+            <div class="form-body">
+                <label class="col-md-2 control-label" style="text-align:left">Note</label>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.Initial_Note, new { @class = "form-control", })
+                </div>
+            </div>
+        </div>
+    </div>
+
+</fieldset>
+

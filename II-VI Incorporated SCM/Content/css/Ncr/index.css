@@ -1,0 +1,17 @@
+﻿body {
+}
+
+.btnCreate {
+    border-radius: 3px !important;
+    background-color: #32c5d2;
+    border: none;
+    font-size: 13px;
+    padding: 8px 15px;
+    color: white;
+    box-shadow: none;
+    font-family: "Open Sans",sans-serif;
+}
+
+    .btnCreate:hover {
+        background-color: #2b97a0;
+    }

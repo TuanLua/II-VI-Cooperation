@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<FourPanel>
+  <PPM begin="A54">
+    <!--<Month begin="A54" end="A65" />
+    <RecQty begin="B54" end="B65" />
+    <RejQty begin="C54" end="C65" />
+    <Target begin="D54" end="D65" />
+    <PPMYTD begin="E54" end="E65" />-->
+  </PPM>
+  <OTD begin="B70">
+    <!--<Month begin="A70" end="A81" />
+    <Early begin="B70" end="B81" />
+    <Late begin="C70" end="C81" />
+    <OnTime begin="D70" end="D81" />
+    <Total begin="E70" end="E81" />
+    <Target begin="F70" end="F81" />
+    <Actual begin="G70" end="G81" />-->
+  </OTD>
+  
+</FourPanel>

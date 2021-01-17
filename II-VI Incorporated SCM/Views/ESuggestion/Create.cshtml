@@ -1,0 +1,650 @@
+﻿@using II_VI_Incorporated_SCM.Services
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity
+@model II_VI_Incorporated_SCM.Models.ESuggestion.E_SuggestionCreateViewmodel
+@{
+    ViewBag.Title = "Create E-Suggestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("SaveESuggestion", "ESuggestion", FormMethod.Post, new
+{
+    @class = "form-inline",
+    @role = "form",
+    @enctype = "multipart/form-data",
+    @id = "Create"
+}))
+{
+    <div class="table-responsive" style="overflow: hidden">
+        <table class="table table-striped table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <td>
+                        <b>Emp No </b>
+                        <b>(Mã Nhân Viên)<span style="color:red">*</span></b>
+                    </td>
+                    <td>
+                        @*@Html.TextBoxFor(m => m.Requestor, new
+        {
+            @class = "form-control",
+            @style = "min-width: 100%;resize:vertical",
+            @required = "required"
+        })*@
+                        <input type="text" name="Requestor" id="Requestor" onkeypress="GetRequestorInfo(event);" />
+                        <label style="color:red" id="ErrCorrRqtor"></label>
+<td>
+                        <input type="text" name="rqtor_name" id="rqtor_name" readonly="readonly"/>
+                    </td>
+
+                    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+
+                    @*@Html.DropDownList("Requestor", (IEnumerable<SelectListItem>)ViewBag.ListUser, "Select", new { @class = "form-control", id = "Requestor", required = "required", style = "width:100%", name = "Requestor", onchange = "javascript:get_Dept()" })
+                        @Html.ValidationMessageFor(m => m.Requestor, null, new { @class = "help-block text-danger", @style = "margin: 1px" })*@
+                    </td>
+                    <td>
+                        <b>Department</b>
+                        <b>(Bộ Phận)<span style="color:red">*</span></b>
+
+                    </td>
+                    <td>
+                        @*<input id="Req_Dept" name="Req_Dept" style="width: 40px;resize:horizontal" type="text">*@
+
+                        @Html.TextBoxFor(m => m.Req_Dept, new
+                   {
+                       @class = "form-control",
+                       @style = "min-width: 100%;resize:vertical",
+                       @required = "required",
+                       @readonly = "readonly",
+                       @id = "Req_Dept"
+                   })
+
+                    </td>
+                    <td>
+                        <b>Email Address: </b>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Req_Email, new
+                   {
+                       @class = "form-control",
+                       @style = "min-width: 100%;resize:vertical",
+                       @required = "required",
+                       @placeholder="Email",
+                       @id="Email"
+                   })
+                        @*  <input type="email" name="Req_Email" class="form-control" style="min-width:100%;resize:vertical" placeholder="Email" />*@
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <b>Expected Start Date</b>
+                        <b>(Ngày mong muốn bắt đầu) </b>
+                    </td>
+                    <td colspan="2">
+                        @*<input style="min-width: 100%;resize:vertical" type="text" id="Exp_Start_Date" name="Exp_Start_Date" class="datepicker">*@
+                        <div class="input-group date" data-provide="datepicker">
+                            @Html.TextBoxFor(m => m.Exp_Start_Date, new { @class = "form-control", @id = "Imp_Start", onchange = "javascript:Compare_StartDate()" })
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <b>Expected End Date: </b>
+                        <b>(Ngày mong muốn kết thúc) </b>
+                    </td>
+                    <td colspan="2">
+                        @*<input style="min-width: 100%;resize:vertical" type="text" name="Exp_End_date" class="datepicker">
+                                 @Html.TextBoxFor(m => m.Exp_End_date,new
+                            {
+                                @class = "form-control",
+                                @style = "min-width: 100%;resize:vertical",
+                            })*@
+                        <div class="input-group date" data-provide="datepicker">
+                            @Html.TextBoxFor(m => m.Exp_End_date, new { @class = "form-control", @id = "Imp_End", onchange = "javascript:Compare_StartDate()" })
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-striped table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <td>
+                        <b>Suggestion Title</b>
+                        <b>(Ý tưởng đề xuất)<span style="color:red">*</span></b>
+                    </td>
+                    <td colspan="4">
+                        @Html.TextBoxFor(m => m.Sug_title, new
+            {
+                @class = "form-control",
+                @style = "min-width: 100%;resize:vertical",
+                @required = "required",
+                @id="Sug_title"
+            })
+                        @*      <input required="required" name="Sug_title" class="form-control" style="min-width:100%;resize:vertical" />*@
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="6" style="vertical-align:middle">
+                        <p><b>(Loại ý tưởng)</b></p><p><b>Ideas Type<span style="color:red">*</span> </b></p>
+                    </td>
+                    <td>
+                        <b>Increase Productivity</b>
+                        <b>(Tăng năng suất)</b>
+                    </td>
+                    <td width="50px">
+                        <input id="product" name="Sug_Type" value="Increase Productivity" style="width:20px" type="radio" checked="checked" class="form-control" />
+                    </td>
+                    <td>
+                        <b>Improve environmental</b>
+                        <b> (Cải thiện môi trường)</b>
+                    </td>
+                    <td>
+                        <input id="envi" value="Improve environmental" name="Sug_Type" style="width:20px" type="radio" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Reduce waste</b>
+                        <b> (Giảm lãng phí)</b>
+                    </td>
+                    <td>
+                        <input id="waste" name="Sug_Type" value="Reduce waste" style="width:20px" type="radio" class="form-control" />
+                    </td>
+                    <td>
+                        <b> Improve service</b>
+                        <b>(Cải thiện dịch vụ)</b>
+                    </td>
+                    <td>
+                        <input id="Improve" name="Sug_Type" value="Improve service" style="width:20px" type="radio" class="form-control" />
+                    </td>
+                </tr>
+                <tr class="odd gradeX">
+                    <td>
+                        <b>Increase Quality</b>
+                        <b> (Tăng chất lượng)</b>
+                    </td>
+                    <td>
+                        <input id="reduce" name="Sug_Type" value="Increase Quality" style="width:20px" type="radio" class="form-control" />
+                    </td>
+                    <td>
+                        <b>Safety</b>
+                        <b>(An Toàn)</b>
+                    </td>
+                    <td style="width:50px">
+                        <input style="width:20px" name="Sug_Type" value="Safety" type="radio" class="form-control" />
+                    </td>
+                </tr>
+                <tr class="odd gradeX">
+                    <td>
+                        <b>Improve technology</b>
+                        <b> (Cải tiến công nghệ)</b>
+                    </td>
+                    <td>
+                        <input id="reduce" name="Sug_Type" value="Improve technology" style="width:20px" type="radio" class="form-control" />
+                    </td>
+                    <td>
+                        <b>Others</b>
+                        <b>(Khác)</b>
+                    </td>
+                    <td style="width:50px">
+                        <input style="width:20px" name="Sug_Type" value="Others" type="radio" class="form-control" />
+                    </td>
+                </tr>
+                <tr class="odd gradeX">
+                    <td>
+                        <b>Reduce process variation</b>
+                        <b> (Giảm biến động quy trình)</b>
+                    </td>
+                    <td>
+                        <input id="reduce" name="Sug_Type" value="Reduce process variation" style="width:20px" type="radio" class="form-control" />
+                    </td>
+                    <td></td>
+                    <td style="width:50px"></td>
+                </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-striped table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <td>
+                        <b>Current Status</b>
+                        <b>(Tình trạng hiện tại)<span style="color:red"> *</span></b>
+                    </td>
+                    <td width="550px" colspan="3">
+                        @Html.TextAreaFor(m => m.Cur_prob, new
+                   {
+                       @class = "form-control",
+                       @style = "min-width: 100%;resize:vertical",
+                       @rows = "3",
+                       @required = "required",
+                       @id= "Cur_prob"
+                   })
+                    </td>
+                    @*Add list attach file into combobox*@
+                    @*<td  width="50px" id="td-save-files">Attach File: <input type="file" onchange="Addmutil(this)" id="file-save-1" name="file_save_ideal_1" /></td>*@
+                    <td style="width: 500px">
+                        <fieldset class="ms-showdata-iqc">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbEvidenceIQC">
+                                @*<thead>
+                                        <tr>
+                                            <th width="350px">File Name</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>*@
+                                <tbody id="tbodyEvidenceIQC"></tbody>
+                            </table>
+                            <button type="button" class="btn btn-sm btn-success pull-right" id="btnAddEvidentIQC">Add File</button>
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="30px">
+                        <b>Suggestion Idea</b>
+                        <b>(Ý tưởng cải tiến)<span style="color:red"> *</span></b>
+                    </td>
+                    <td colspan="3">
+                        @Html.TextAreaFor(m => m.Idea_impr, new
+                   {
+                       @class = "form-control",
+                       @style = "min-width: 100%;resize:vertical",
+                       @rows = "3",
+                       @required = "required",
+                       @id= "Idea_impr"
+                   })
+                        @*      <textarea required="required" name="Idea_impr" class="form-control" rows="5" style="min-width:100%;resize:vertical"> </textarea>*@
+                    </td>
+                    @*<td width="10px" id="td-save-files-2" style="display:none">Attach File: <input type="file" onchange="Addmutil1(this)" id="file-save-2" name="file_save_ideal_2" multiple /></td>
+                        <td width="50px"><button type="button" id="buttonfile-1">Choose Files: </button> </td>
+                        <td>
+                            Attach List File:
+                            <select id="fileattack1" style="width: 500px !important" name="ModelEvidence" multiple="multiple">
+                                <option value="null">Select</option>
+                            </select>
+                        </td>*@
+                    <td style="width: 500px">
+                        <fieldset class="ms-showdata-iqc">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbEvidenceIdea">
+                                @*<thead>
+                                        <tr>
+                                            <th width="350px">File Name</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>*@
+                                <tbody id="tbodyEvidenceIdea"></tbody>
+                            </table>
+                            <button type="button" class="btn btn-sm btn-success pull-right" id="btnAddEvidentIdea">Add File</button>
+                        </fieldset>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row" align="center">
+            <button class="btn btn-sm btn-warning" id="save" style="margin:20px">Submit</button>
+            <button class="btn btn-sm btn-danger" id="cancel">Cancel</button>
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $('#fileattack').select2();
+        $('#fileattack1').select2();
+            $(function () {
+                $('.date').datepicker({
+                    format: 'dd-M-yy',
+                    //endDate: '+0d',
+                    autoclose: true
+                });
+        });
+        $("#Requestor").html($('#Requestor option').sort(function (x, y) {
+            return $(x).text() < $(y).text() ? -1 : 1;
+        }))
+        $("#Requestor").get(0).selectedIndex = 0;
+    });
+    var $form = $('#Create');
+    debugger;
+    $('#buttonfile').on('click', function () {
+    debugger;
+        //$($('#td-save-files input').last()).trigger('click');
+        $('#file-save-' + $('#td-save-files input').length).trigger('click');
+    })
+    $('#buttonfile-1').on('click', function () {
+    debugger;
+        //$($('#td-save-files input').last()).trigger('click');
+        let td = $('#file-save-2').trigger('click');
+        console.log(td);
+    })
+    function GetRequestorInfo(e) {
+        if (e.keyCode === 13) {
+        debugger;
+        e.preventDefault();
+        var opid = $('#Requestor').val();
+            $.post('@Url.Action("GetRequestorInfo", "ESuggestion")', { UserID: opid },
+                function (result) {
+                    var  fields = result.split('#');
+                    $('#rqtor_name').val(fields[0]);
+                    $('#Req_Dept').val(fields[1]);
+                    $('#Email').val(fields[2]);
+                });
+    }
+}
+    function Addmutil(e) {
+        debugger;
+        var test_value = $(e).val();
+        let name = test_value.substring(test_value.lastIndexOf("\\") + 1, test_value.length);
+        if (name != '') {
+            $('#fileattack').append($('<option>', {
+                value: e.id,
+                text: name,
+                selected: true,
+            })
+            );
+
+            let template = '<input type="file" onchange="Addmutil(this)" id="file-save-template"  name="file_save_ideal_1" />';
+            $('#td-save-files').append(template);
+            $('#file-save-template').attr('id', 'file-save-' + $('#td-save-files input').length);
+            $('#file-save-template').attr('name', 'file_save_ideal_' + $('#td-save-files input').length);
+        }
+        $('#fileattack').select2();
+
+
+    }
+
+    $('#fileattack').on('select2:unselect', function (e) {
+        debugger
+        var data = e.params.data;
+        console.log(data);
+        $('#' + data.id).remove();
+        $('#td-save-files input').each(function (i, e) {
+            let ind = i + 1;
+            $(e).attr('id', 'file-save-' + ind);
+        });
+    });
+    function Addmutil1(e) {
+        debugger;
+        var test_value = $(e).val();
+        let name = test_value.substring(test_value.lastIndexOf("\\") + 1, test_value.length);
+        if (name != '') {
+
+            $('#fileattack1').append($('<option>', {
+                value: e.id,
+                text: name,
+                selected: true,
+            })
+            );
+
+            let template = '<input type="file" onchange="Addmutil1(this)" id="file-save-template-1"  name="file_save_ideal_2" />';
+            $('#td-save-files-2').append(template);
+            $('#file-save-template-1').attr('id', 'file-save-1' + $('#td-save-files-2 input').length);
+            $('#file-save-template-1').attr('name', 'file_save_ideal-2_' + $('#td-save-files-2 input').length);
+        }
+        $('#fileattack1').select2();
+    }
+    function get_Dept() {
+        debugger
+        var id = $('#Requestor').val();
+            $.post('@Url.Action("GetDeptByUserID", "ESuggestion")', { UserID: id },
+                function (result) {
+
+                    $('#Req_Dept').val(result);
+                });
+    }
+    function Compare_StartDate() {
+        //try {
+        //    debugger
+        //    var monthNames = [
+        //        "January", "February", "March",
+        //        "April", "May", "June", "July",
+        //        "August", "September", "October",
+        //        "November", "December"
+        //    ];
+        //    var dt_now = new Date();
+        //    var date = dt_now.getDate() + "";
+        //    if (date.length === 1) {
+        //        date = "0" + date;
+        //    }
+        //    var month = monthNames[dt_now.getMonth()];
+
+
+        //    var dt_string = date + '-' + month + '-' + dt_now.getFullYear().toString().substr(-2);
+
+        //    var dateSta = $("#Exp_Start_Date").val();
+        //    if (dateSta < dt_string)
+        //    {
+        //        //$("#Exp_Start_Date").Val('');
+        //        alert("Start date cannot earlier than today!");
+        //        return false;
+        //    }
+        //    var dateDue = $("#datePickerEnd").val();
+        //    if (dateDue == "") return true;
+        //    $('#Exp_Start_Date').removeClass("input-validation-error");
+        //    if (dateDue < dateSta) {
+        //        $('#datePickerEnd').addClass("input-validation-error");
+        //        alert('End date cannot earlier than start date');
+        //        $('#datePickerEnd').focus();
+        //        return false;
+        //    }
+        //}
+        //catch (error) {}
+        try {
+            debugger;
+
+            var dt_now = new Date();
+            var date = dt_now.getDate() + "";
+            if (date.length === 1) {
+                date = "0" + date;
+            }
+            var month = (dt_now.getMonth() + 1) + "";
+            if (month.length === 1) {
+                month = "0" + month;
+            }
+
+            var dt_string = dt_now.getFullYear().toString().substr(-2) + '-' + month + '-' + date;
+
+            var dateSta = new Date($("#Imp_Start").val());
+            date = dateSta.getDate() + "";
+            if (date.length === 1) {
+                date = "0" + date;
+            }
+            month = (dateSta.getMonth() + 1) + "";
+            if (month.length === 1) {
+                month = "0" + month;
+            }
+
+            var start_str = dateSta.getFullYear().toString().substr(-2) + '-' + month + '-' + date;
+            //Get end day with format
+            var dateDue = new Date($("#Imp_End").val());
+            date = dateDue.getDate() + "";
+            if (date.length === 1) {
+                date = "0" + date;
+            }
+            month = ((dateDue.getMonth()) + 1) + "";
+            if (month.length === 1) {
+                month = "0" + month;
+            }
+            var End_str = dateDue.getFullYear().toString().substr(-2) + '-' + month + '-' + date;
+            
+            if (start_str!="aN-NaN-NaN" && start_str < dt_string) {
+               
+                $("#Imp_Start").datepicker({
+                    dateFormat: 'D dd M yy',
+                    minDate: 0,
+                    highlightWeek: true,
+                    showAnim: "scale",
+                    showOptions: {
+                        origin: ["top", "left"]
+                    }
+                }).val('');
+                start_str = "";
+                alert("Start date cannot earlier than today!");
+                return false;
+            }
+            if (End_str != "aN-NaN-NaN" && End_str < dt_string) {
+
+                $("#Imp_End").datepicker({
+                    dateFormat: 'D dd M yy',
+                    minDate: 0,
+                    highlightWeek: true,
+                    showAnim: "scale",
+                    showOptions: {
+                        origin: ["top", "left"]
+                    }
+                }).val('');
+                End_str = "";
+                alert("End date cannot earlier than today!");
+                return false;
+            }
+            
+            
+            if (End_str == "aN-NaN-NaN" || start_str == "aN-NaN-NaN") return true;
+
+            if (End_str < start_str) {
+                $("#Imp_End").datepicker({
+                    dateFormat: 'D dd M yy',
+                    minDate: 0,
+                    highlightWeek: true,
+                    showAnim: "scale",
+                    showOptions: {
+                        origin: ["top", "left"]
+                    }
+                }).val('');
+                alert('End date cannot earlier than start date');
+                //  $('#Imp_End').focus();
+                return false;
+            }
+            return true;
+        }
+        catch (error) { return false; }
+    }
+    $('#save').on('click', function (e) {
+        debugger;
+        e.preventDefault();
+        if (!confirm("Do you really want to SUBMIT?")) return;        
+        if (!ValidateData()) return;
+        Compare_StartDate();
+        $form.submit();
+    })
+    $('#cancel').on('click', function (e) {
+        if (!confirm("Do you really want to CANCEL?")) return;
+        e.preventDefault();
+        window.location.href ="Index";
+    })
+
+    //add mutiple file--24-08
+
+     $('#btnAddEvidentIQC').click(function () {
+        //ModelEvidence
+        debugger;
+        let listRow = $('#tbEvidenceIQC tbody tr');
+        let rowlength = listRow.length;
+
+        for (let i = 0; i < rowlength; i++) {
+            var ListColumns = listRow[i].children;
+            ListColumns[0].children[0].name = "ModelEvidence[" + i + "].EvidenceFile";
+            ListColumns[1].children[0].name = "ModelEvidence[" + i + "].IsPrint";
+        }
+
+        //let template = '<tr> <td width="20%"><input /*onchange="ViewFileEvidence(this)"*/ accept="image/png,image/jpeg,image/bmp,application/pdf,application/PDF" type="file" class="form-control" name="ModelEvidence[' + rowlength + '].EvidenceFile"></td> <td><button onclick="deleteEvedenceRowIQC(this)" type="button" class="btn btn-sm btn-danger pull-right">Delete</button></td> </tr>';
+         let template = '<tr> <td width="20%"><input /*onchange="ViewFileEvidence(this)"*/ type="file" class="form-control" name="ModelEvidence[' + rowlength + '].EvidenceFile"></td> <td><button onclick="deleteEvedenceRowIQC(this)" type="button" class="btn btn-sm btn-danger pull-right">Delete</button></td> </tr>';
+        $('#tbodyEvidenceIQC').append(template);
+    });
+    $('#btnAddEvidentIdea').click(function () {
+        //ModelEvidenceIdea
+        debugger;
+        let listRow = $('#tbEvidenceIdea tbody tr');
+        let rowlength = listRow.length;
+
+        for (let i = 0; i < rowlength; i++) {
+            var ListColumns = listRow[i].children;
+            ListColumns[0].children[0].name = "ModelEvidenceIdea[" + i + "].EvidenceFile";
+            ListColumns[1].children[0].name = "ModelEvidenceIdea[" + i + "].IsPrint";
+        }
+
+        let template = '<tr> <td width="20%"><input /*onchange="ViewFileEvidence(this)"*/ accept="image/png,image/jpeg,image/bmp,application/pdf,application/PDF" type="file" class="form-control" name="ModelEvidenceIdea[' + rowlength + '].EvidenceFile"></td> <td><button onclick="deleteEvedenceRowIdea(this)" type="button" class="btn btn-sm btn-danger pull-right">Delete</button></td> </tr>';
+        $('#tbodyEvidenceIdea').append(template);
+    });
+
+    function deleteEvedenceRowIQC(e) {
+        $(e).parent().parent().remove();
+        let listRow = $('#tbEvidenceIQC tbody tr');
+        let rowlength = listRow.length;
+        for (let i = 0; i < rowlength; i++) {
+            var ListColumns = listRow[i].children;
+            ListColumns[0].children[0].name = "ModelEvidence[" + i + "].EvidenceFile";
+            ListColumns[1].children[0].name = "ModelEvidence[" + i + "].IsPrint";
+        }
+    }
+    function deleteEvedenceRowIdea(e) {
+        $(e).parent().parent().remove();
+        let listRow = $('#tbEvidenceIdea tbody tr');
+        let rowlength = listRow.length;
+        for (let i = 0; i < rowlength; i++) {
+            var ListColumns = listRow[i].children;
+            ListColumns[0].children[0].name = "ModelEvidenceIdea[" + i + "].EvidenceFile";
+            ListColumns[1].children[0].name = "ModelEvidenceIdea[" + i + "].IsPrint";
+        }
+    }
+    var testevi = null;
+    //var arrExtension = ['png', 'pdf', 'jpeg', 'jpg', 'bmp'];
+      function ViewFileEvidence(evi_file) {
+            var test_value = $(evi_file).val();
+            var extension = test_value.split('.').pop().toLowerCase();
+            debugger
+            if ($.inArray(extension, arrExtension) === -1 & test_value !== '') {
+                bootbox.alert("Invalid file !");
+                evi_file.value = '';
+                return;
+            }
+            //if (evi_file.files[0].size > 10485760) {
+            //    bootbox.alert('File is too big, more than 10mb !!!');
+            //    evi_file.value = '';
+            //    return;
+            //}
+
+            var formData = new FormData();
+
+            formData.append('ReviewFile', evi_file.files[0]);
+            console.log(formData);
+            $.ajax({
+                url: '@Url.Action("SaveFileReview", "NCRApproval")',
+                type: "POST",
+                dataType: 'json',
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: formData,
+                success: function (result) {
+                    window.open(result, '_blank');
+                },
+                error: function (err) {
+                    window.open(err.responseText, '_blank');
+                }
+            });
+    }
+    function ValidateData() {
+        if ($('#rqtor_name').val() === "") {
+            alert("Please input EMP ID and press Enter to get Requestor Name!");
+            return false;
+        }
+        if ($('#Sug_title').val() === "") {
+            alert("Please input suggestion title!");
+            return false;
+        }
+        if ($('#Cur_prob').val() === "") {
+            alert("Please input current problem!");
+            return false;
+        }
+        if ($('#Idea_impr').val() === "") {
+            alert("Please input improvement idea!");
+            return false;
+        }
+        return true;
+    }
+
+</script>

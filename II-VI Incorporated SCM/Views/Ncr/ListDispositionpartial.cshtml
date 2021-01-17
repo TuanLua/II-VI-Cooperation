@@ -1,0 +1,160 @@
+﻿@using II_VI_Incorporated_SCM.Models.NCR
+@using II_VI_Incorporated_SCM.Services
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Disposition Partial";
+}
+<style>
+    .NCR_NUM:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .NCR_NUM {
+        color: blue;
+    }
+</style>
+<h4>List NCR Disposition Partial </h4>
+
+<div class="container-fluid">
+    <div class="actions" style="float:right">
+        <div class="btn-group">
+            <button type="button" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                <i class="fa"></i> Find By
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="javascript:;" id="clear"> Clear Filter</a>
+                </li>
+                <li>
+
+                    <a href="javascript:;" onclick="onFind('NCR Number')"> NCR Number </a>
+                </li>
+                <li>
+                    <a href="javascript:;" onclick="onFind('UserDispo')"> User Dispo </a>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<NCRManagementViewModel>()
+                                                                      .Name("gridNCR")
+                                                                      .Columns(columns =>
+                                                                      {
+                                                                          columns.Bound(p => p.CCN).Title("CCN").Width(90);
+                                                                          columns.Bound(p => p.NCR_NUM).Title("NCR Number").HtmlAttributes(new { @class = "NCR_NUM" }).Width(120);
+                                                                          columns.Bound(p => p.Amount).Format("{0:c}").Title("Amount").Width(90);
+                                                                          columns.Bound(p => p.DATESUBMIT).Format("{0:dd-MMM-yy}").Title("Date Submit").Width(120);
+                                                                          columns.Bound(p => p.USERSUBMIT).Title("User Dispo").Width(120);
+                                                                          columns.Bound(p => p.MI_PART_NO).Title("Part Number").Width(120);
+                                                                          columns.Bound(p => p.PO_NUM).Title("PO").Width(100);
+                                                                          columns.Bound(p => p.INS_DATE).Format("{0:dd-MMM-yy}").Title("INS Date").Width(120);
+                                                                          columns.Bound(p => p.RECEIVER).Title("Receiver").Hidden();
+                                                                          columns.Bound(p => p.VENDOR).Title("VENDOR").Width(120);
+
+                                                                      })
+
+                                                                      .Sortable()
+                                                                      .Scrollable()
+                                                                      .Filterable()
+                                                                        .Pageable()
+                                                                        .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 150, 1200, "All" }).Refresh(true))
+                                                                      .HtmlAttributes(new { style = "height:550px;" })
+                                                                      .DataSource(dataSource => dataSource
+                                                                          .Ajax()
+                                                                          .PageSize(10)
+                                                                          .Read(read => read.Action("getListDispositionpartial", "NCR"))
+                                                                         .Sort(sort => sort.Add("INS_DATE").Descending())
+                                                                      ))
+        </div>
+    </div>
+</div>
+<div id="popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control boder-opal" id="search">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearch()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var tdSearch;
+        $(document).ready(function () {
+            $('#inspectorId').select2({  width: '100%'  });
+        $('#vendor').select2({  width: '400%' } );
+            $("#datefrom").datepicker();
+            $("#dateto").datepicker();
+        })
+        function onFind(condition) {
+            $('.searchField').text(condition);
+
+            if (condition == 'NCR Number') {
+                $('#search').val();
+                $('#searchId').val(1);
+            }
+            else if (condition == 'UserDispo') {
+                $('#searchId').val(4);
+            }
+           
+            $('#popup').modal('show');
+        }
+        function onSearch() {
+            var searchText = $('#search').val().toLowerCase();
+            var number = $('#searchId').val();
+            if (number == '1') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "NCR_NUM", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            
+            else if (number == '4') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "USERSUBMIT", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            
+            $('#popup').modal('hide');
+
+        }
+        $("#gridNCR").on("click", ".NCR_NUM", function (e) {
+            var grid = $("#gridNCR").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+              var ncrnum = model.NCR_NUM;
+              var status = model.STATUS;
+        if (status != '@Status.Void') {
+                window.open('@Url.Action("ViewApproval", "NCRApproval")' + "?NCR_NUM=" + ncrnum, '_blank');
+            }
+    });
+        $("#clear").click(function () {
+            $("#gridNCR").data('kendoGrid').dataSource.filter({
+                field: "INSPECTOR",
+                operator: "contains",
+                value: ""
+            });
+            $('a.k-grid-filter').removeClass('k-state-active');
+        });
+    </script>
+}

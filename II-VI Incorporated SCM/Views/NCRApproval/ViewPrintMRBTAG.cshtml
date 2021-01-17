@@ -1,0 +1,109 @@
+﻿@model II_VI_Incorporated_SCM.Models.NCR_HDR
+
+@{
+    ViewBag.Title = "PrintMRBTAG";
+    Layout = null;
+}
+<link href='https://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
+<script src="@Url.Content("~/Content/kendo/2017.2.621/js/jquery.min.js")"></script>
+<script src="@Url.Content("~/Content/kendo/2017.2.621/js/kendo.all.min.js")"></script>
+<script src="@Url.Content("~/Content/kendo/2017.2.621/js/kendo.aspnetmvc.min.js")"></script>
+
+<style>
+    html, body, table {
+        width: 100%;
+        height: 100%;
+    }
+
+    #tbMrbTag td {
+        /*font-family: Lekton !important;*/
+        vertical-align: text-top;
+    }
+
+    .title {
+        font-weight: bold;
+        font-size: 50px;
+    }
+
+    .text {
+        font-size: 40px;
+        text-overflow: ellipsis;
+    }
+</style>
+<table style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;" id="tbMrbTag">
+    <tr>
+        <th width="50%" ><span style="font-size:60px; font-weight:bold">MRB TAG</span></th>
+        <td style="float:right">
+
+            @(Html.Kendo().Barcode().Name("barcode_" + Model.NCR_NUM.Trim())
+                            .Value(Model.NCR_NUM.Trim())
+                            .Encoding(BarcodeSymbology.Code128)
+                            .Width(450).Height(120)
+                            .Checksum(false))
+            <span class="title" style="width: 30%">Ref:</span> <span class="text">@Model.NCR_NUM </span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span class="title">Part#:</span> <span class="text">@Model.MI_PART_NO</span> 
+        </td>
+        <td>
+            @(Html.Kendo().Barcode().Name("barcode5_" + Model.MI_PART_NO.Trim())
+                    .Value(Model.MI_PART_NO.Trim())
+                    .Encoding(BarcodeSymbology.Code128)
+                    .Width(450).Height(120)
+                    .Checksum(false))
+        </td>
+    </tr>
+    <tr>
+        <td ><span class="title">Lot#:</span> <span class="text">@Model.LOT</span></td>
+        <td >
+            @(Html.Kendo().Barcode().Name("barcode6_" + "LOT")
+                            .Value(Model.LOT.Trim())
+                            .Encoding(BarcodeSymbology.Code128)                            
+                            .Width(450).Height(120)
+                            .Checksum(false))
+        </td>
+    </tr>
+    <tr>
+        <td  colspan="2"><span class="title">Desc: </span> <span class="text"> @(Model.ITEM_DESC.Length > 42 ? Model.ITEM_DESC.Substring(0,42)+ "...": Model.ITEM_DESC) </span></td>
+    </tr>
+    <tr>
+        <td width="40%"><span class="title">Process code:</span>&nbsp;&nbsp; <span class="text">@(Model.NCR_NUM.Trim()[0] == 'I' ? "IQC" : "Process")</span></td>
+        <td width="60%"><span class="title">Insp.Date:</span> <span class="text">@Model.INS_DATE.Value.ToString("dd MMM yy", System.Globalization.CultureInfo.InvariantCulture)</span></td>
+    </tr>
+    <tr>
+        <td><span class="title">Emp#: </span> <span class="text">@ViewBag.EMP</span></td>
+        <td>
+            <span class="title">Q'ty:</span> <span class="text">@Model.REJ_QTY</span>
+
+        </td>
+        
+    </tr>
+    <tr>
+        <td>
+            <span class="title">Defect:</span> <span class="text">@Html.Raw(ViewBag.NCR_DET_DESC)</span>
+        </td>
+        <td rowspan="4">
+            @(Html.Kendo().Barcode().Name("barcode7_" + Model.REJ_QTY)
+                                         .Value(Model.REJ_QTY.ToString())
+                                         .Encoding(BarcodeSymbology.Code128)
+                                         .Width(450).Height(120)
+                                         .Checksum(false))
+        </td>
+    </tr>
+</table>
+<script>
+    //$("#tbMrbTag").printThis();
+    $(function () {
+        $('text').hide();
+    });
+
+    //var myVar = setInterval(myFn, 500);
+    //function myFn() {
+    //    console.log(1);
+    //    $('text').hide();
+    //    if ($('text').css('display') === 'none')
+    //        clearInterval(myVar);
+    //}
+</script>

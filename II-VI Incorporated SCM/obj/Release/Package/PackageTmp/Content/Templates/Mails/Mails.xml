@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    All Key used in email
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@@str_NCRNUMBER@@ : NCR bumber
+@@str_RecipientName@@ : User's name
+@@link_NCRNUMBER|xxx@@ : statickey|Text to show in email
+@@str_Comment@@: comment 
+@@str_form@@: html string of form 
+@@str_reason@@: reason 
+-->
+<Templates>
+  <Emails>
+    <Email>
+      <MailName>1</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>NCR Number: @@str_NCRNUMBER@@ - Pending your Submit</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@, 
+        The NCR Number @@str_NCRNUMBER@@ is waiting for your Submit 
+        @@link_NCRNUMBER|Click here to open NCR@@ 
+        @@str_Comment@@
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>2</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>NCR Number: @@str_NCRNUMBER@@ - Pending your approval</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        The NCR Number @@str_NCRNUMBER@@ is waiting for your approval
+        @@link_NCRNUMBER|Click here to open NCR@@
+        @@str_Comment@@
+        @@str_user@@
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>3</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject> NCR Number: @@str_NCRNUMBER@@ - Approved</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@, 
+        The NCR Number @@str_NCRNUMBER@@  was approved. Please check your task list to complete the task (if any) 
+        @@link_NCRNUMBER|Click here to open NCR@@ 
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>4</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject> NCR Number: @@str_NCRNUMBER@@ - required SCAR</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@, 
+        The NCR Number @@str_NCRNUMBER@@  was approved. Please create SCAR and task list to complete the task (if any) 
+        @@link_NCRNUMBER|Click here to open NCR@@ 
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>5</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject> NCR Number: @@str_NCRNUMBER@@ - Rejected</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        The NCR Number @@str_NCRNUMBER@@  was rejected. Please do Disposition again.
+        @@link_NCRNUMBER|Click here to open NCR@@
+        Be noted: @@str_reason@@
+        Rejected by: @@str_user@@
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>6</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject> NCR Number: @@str_NCRNUMBER@@ - Rejected</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        Sorry be informed the NCR Number @@str_NCRNUMBER@@ was rejected.
+        @@link_NCRNUMBER|Click here to open NCR@@
+        Be noted:   @@str_reason@@
+        Rejected by: @@str_user@@
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>7</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>CR Number: @@str_NCRNUMBER@@ - Submit Change Item – Pending your approval</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@, 
+        The CR Number @@str_NCRNUMBER@@ was submitted change item and is waiting for your approval.
+        @@link_NCRNUMBER|Click here to open CR@@ 
+        
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>8</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>CR Number: @@str_NCRNUMBER@@ - Submit Change Item – Pending your acknowledge</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@, 
+        The CR Number @@str_NCRNUMBER@@ was submitted change item and is waiting for your acknowledge.
+        @@link_NCRNUMBER|Click here to open CR@@ 
+
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>9</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>CR Number: @@str_NCRNUMBER@@ - Submit Change item approved</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        The CR Number @@str_NCRNUMBER@@ change item was approved.
+        @@link_NCRNUMBER|Click here to open CR@@
+
+        @@str_form@@
+
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>10</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>CR Number: @@str_NCRNUMBER@@ - Submit Change item rejected</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        The CR Number @@str_NCRNUMBER@@ change item was rejected.
+        @@link_NCRNUMBER|Click here to open CR@@
+        @@str_reason@@
+        
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>NotifyNCRtoSupplier</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject> NCR Number: @@str_NCRNUMBER@@ - Approved</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        The NCR Number @@str_NCRNUMBER@@  was approved. Please create Notify NCR to Supplier and task list to complete the task (if any)
+        @@link_NCRNUMBER|Click here to open NCR@@
+        Thank You !
+      </Body>
+    </Email>
+	 <Email>
+      <MailName>11</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>NCR Number: @@str_NCRNUMBER@@ - Pending your disposition</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        The NCR Number @@str_NCRNUMBER@@ is waiting for your disposition
+        @@link_NCRNUMBER|Click here to open NCR@@
+        @@str_Comment@@
+        @@str_user@@
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>12</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>Task : @@str_NCRNUMBER@@ - Pending your approve</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        The Task @@str_NCRNUMBER@@ is waiting for your approve
+        @@link_NCRNUMBER|Click here to open Task@@
+        @@str_Comment@@
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>13</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>Task : @@str_NCRNUMBER@@ - Pending your completion</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        The Task @@str_NCRNUMBER@@ is waiting for your completion
+        @@link_NCRNUMBER|Click here to open Task@@
+        @@str_Comment@@
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>14</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>Task : @@str_NCRNUMBER@@ - approved.</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        The Task @@str_NCRNUMBER@@ was approved.
+        @@link_NCRNUMBER|Click here to open Task@@
+        @@str_Comment@@
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>15</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>Task : @@str_NCRNUMBER@@ - rejected.</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        The Task @@str_NCRNUMBER@@ was rejected. Please do completion again.
+        @@link_NCRNUMBER|Click here to open Task@@
+        @@str_Comment@@
+        @@str_user@@
+        Thank You !
+      </Body>
+    </Email>
+    <Email>
+      <MailName>16</MailName>
+      <ProfileName>IQC</ProfileName>
+      <Subject>Task : @@str_NCRNUMBER@@ - reopen.</Subject>
+      <BodyFormat>HTML</BodyFormat>
+      <Body>
+        Dear Mr/Mrs @@str_RecipientName@@,
+        The Task @@str_NCRNUMBER@@ was reopen. Task waiting for your completion
+        @@link_NCRNUMBER|Click here to open Task@@
+        @@str_Comment@@
+        Thank You !
+      </Body>
+    </Email>
+  </Emails>
+</Templates>

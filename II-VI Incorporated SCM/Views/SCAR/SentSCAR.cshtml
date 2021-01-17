@@ -1,0 +1,391 @@
+﻿@model II_VI_Incorporated_SCM.Models.SCAR.SCARInfoViewModel
+
+@{
+    ViewBag.Title = "SCAR";
+}
+
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .email:hover {
+        background-color: cornflowerblue;
+    }
+</style>
+
+@using (Html.BeginForm("SentEmail", "SCAR", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "multipart/form-data", @id = "SentMailForm" }))
+{
+
+    <div class="container">
+    </div>
+
+    <button type="button" class="btn btn-warning" onclick="sendEmail()">Send</button>
+    <button type="button" class="btn btn-warning" onclick="editSCAR()">Edit</button>
+    <button type="button" class="btn btn-success" onclick="backToIndex()">Close</button>
+    <button type="button" class="btn btn-warning" style="float:right" onclick="markAsSent()">Mark as sent</button>
+
+    <div class="row top-buffer">
+        <label class="col-md-2 control-label">Sent To:</label>
+        <div class="col-md-10 dropdown">
+            @Html.TextBox("SENTTO", "", new { @class = "form-control" })
+            <span class="help-block text-danger requiredBox"></span>
+            <div class="dropdown-content">
+                @foreach (var item in ViewBag.ListSuggestEmail)
+                {
+                    <p class="email" onclick="selectEmail('@item')">@item</p>
+                }
+                @*<p class="email" onclick="selectEmail('Hello')">Hello</p>
+                    <p class="email" onclick="selectEmail('GoodBye')">GoodBye</p>*@
+            </div>
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <label class="col-md-2 control-label">CC:</label>
+        <div class="col-md-10">
+            @Html.TextBox("CC", "", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <label class="col-md-2 control-label">Subject:</label>
+        <div class="col-md-10">
+            @Html.TextBox("SUBJECT", "", new { @class = "form-control" })
+            <span class="help-block text-danger requiredBox"></span>
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <label class="col-md-2 control-label">Content:</label>
+        <div class="col-md-10">
+            @Html.TextArea("CONTENT", "", new { @class = "form-control", @rows = 5 })
+            <span class="help-block text-danger requiredBox"></span>
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <label class="col-md-2 control-label">SCAR Form File:</label>
+        <div class="col-md-8">
+            @Html.Hidden("FILESCAR")
+            <a target="_blank" id="SCARFILE" @*class="scroll-style-7" style="overflow-y:scroll;max-height:100px;"*@><i class='fa fa-file-excel-o' id="FILENAME"></i></a>
+            @Html.Raw(ViewBag.NCRPdf != null ? ViewBag.NCRPdf : "")
+            @Html.Hidden("NCRFILE", (string)ViewBag.NCRFILEs)
+        </div>
+        <div class="col-md-2">
+            <button type="button" onclick="ReviewSCAR()" class="btn btn-success" style="float:right">Review</button>
+        </div>
+    </div>
+
+    <div align="center"><h2><strong>SUPPLIER CORRECTIVE ACTION REQUEST (SCAR)</strong></h2></div>
+    <div>
+        <table class="table table-striped table-bordered table-hover" border="1">
+            <tr>
+                <td colspan="2">
+                    &nbsp;
+                </td>
+                <td>Form: 005-0206 Rev </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="row top-buffer">
+                        <label class="col-md-2 control-label">Supplier:</label>
+                        <div class="col-md-10">
+                            @Html.TextBox("VEN_NAM", (string)ViewBag.SupplierInfo.VEN_NAM, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="row top-buffer">
+                        <label class="col-md-2 control-label">Address:</label>
+                        <div class="col-md-10">
+                            @Html.TextBox("ADDRESS", (string)ViewBag.SupplierInfo.ADDRESS, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="row top-buffer">
+                        <label class="col-md-2 control-label">Contact:</label>
+                        <div class="col-md-10">
+                            @Html.TextBox("CONTACT", (string)ViewBag.SupplierInfo.CONTACT, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="row top-buffer">
+                        <label class="col-md-2 control-label">Email:</label>
+                        <div class="col-md-10">
+                            @Html.TextBox("EMAIL", (string)ViewBag.SupplierInfo.EMAIL, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="row top-buffer">
+                        <label class="col-md-2 control-label">Tel:</label>
+                        <div class="col-md-10">
+                            @Html.TextBox("TEL", (string)ViewBag.SupplierInfo.TEL, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="row top-buffer">
+                        <label class="col-md-2 control-label">Fax:</label>
+                        <div class="col-md-10">
+                            @Html.TextBox("FAX", (string)ViewBag.SupplierInfo.FAX, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="row top-buffer">
+                        <label class="col-md-4 control-label">SCAR #:</label>
+                        <div class="col-md-8">
+                            @Html.TextBox("SCAR_ID", Model.SCAR_ID, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="row top-buffer">
+                        <label class="col-md-4 control-label">Noncomforming Qty:</label>
+                        <div class="col-md-8">
+                            @Html.TextBox("NON_QTY", Model.NON_QTY, new { @class = "form-control", @readonly = "readonly" })
+                            <span id="Err_NonConfQty" class="help-block text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row top-buffer">
+                        <label class="col-md-4 control-label">II-VI Marlow NCR #:</label>
+                        <div class="col-md-8">
+                            @Html.TextBox("NCR_NUMBER", Model.NCR_NUMBER, new { @class = "form-control digital-led", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="row top-buffer">
+                        <label class="col-md-4 control-label">NC:</label>
+                        <div class="col-md-8">
+                            <input value="@ViewBag.NCCodeValue" readonly class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row top-buffer">
+                        <label class="col-md-4 control-label">RMA#:</label>
+                        <div class="col-md-8">
+                            @Html.TextBox("RMA", Model.RMA, new { @class = "form-control", @readonly = "readonly" })
+                            <span id="Err_RMA" class="help-block text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row top-buffer">
+                        <label class="col-md-4 control-label">CATEGORY:</label>
+                        <div class="col-md-8">
+                            <input value="@ViewBag.Category" readonly class="form-control" />
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="row top-buffer">
+                        <label class="col-md-5 control-label">Requested By:</label>
+                        <div class="col-md-7">
+                        </div>
+                    </div>
+
+                    <div class="row top-buffer">
+                        <label class="col-md-3 control-label">Buyer:</label>
+                        <div class="col-md-9">
+                            @Html.TextBox("BUYER", Model.BUYER, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="row top-buffer">
+                        <label class="col-md-3 control-label">Quality:</label>
+                        <div class="col-md-9">
+                            @Html.TextBox("QUALITY", Model.QUALITY, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="row top-buffer">
+                        <div class="col-md-12">
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr style="background-color:gray">
+                                    <td colspan="2" align="center">
+                                        For II-VI Marlow Use Only:
+                                    </td>
+                                </tr>
+                                <tr style="background-color:gray">
+                                    <td>
+                                        VN SCAR #:
+                                    </td>
+                                    <td>@Html.TextBox("VN_SCAR", Model.VN_SCAR, new { @class = "form-control", @readonly = "readonly" })</td>
+                                </tr>
+                                <tr style="background-color:gray">
+                                    <td>
+                                        VN NCR #:
+                                    </td>
+                                    <td>@Html.TextBox("VN_NCR", Model.VN_NCR, new { @class = "form-control", @readonly = "readonly" })</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Purchase Order Number:	@Html.TextBox("PO_NUMBER", Model.PO_NUMBER, new { @class = "form-control", @readonly = "readonly" })
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    II-VI Marlow Part Number: @Html.TextBox("MI_PART_NO", Model.MI_PART_NO, new { @class = "form-control", @readonly = "readonly" })
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2"><b>CUSTOMER CONCERN:</b></td>
+                <td colspan="2">
+                    <div class="row" style="float:left">
+                        <label class="col-md-3 control-label">Date</label>
+                        <div class="col-md-9">
+                            @Html.TextBox("DATEPROBLEM", String.Format("{0:dd-MMM-yy}", Model.DATEPROBLEM), new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Recurring Problem?
+                    @Html.TextBox("RECURING_PROBLEM", Model.RECURING_PROBLEM, new {@readonly = "readonly" })
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    @Html.TextArea("PROBLEM", Model.PROBLEM, new { @class = "form-control", @rows = 5, @readonly = "readonly" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    The above material was found to be non-compliant with the II-VI Marlow specification or purchase order.  Please identify the cause of the defect and the corrective and preventive action taken.  A response should be returned by the given date (below).  Should you require additional time, please contact the II-VI Marlow Supplier Quality Department prior to the due date to request an extension.  (Attach objective evidence as proof of actions taken.)
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    Please Respond By:
+                </td>
+                <td>@Html.TextBox("DATERESPOND", String.Format("{0:dd-MMM-yy}", Model.DATERESPOND), new { @class = "form-control", @readonly = "readonly", @style = "background-color:yellow" })</td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+}
+
+    <script>
+    var SCARID = '@Request.Params["SCARID"]';
+    var VERSION = '@Request.Params["VERSION"]';
+    var $SentMail = $('#SentMailForm');
+
+        $(document).ready(function () {
+
+            if ($('[type="date"]').prop('type') !== 'date') {
+                $('[type="date"]').datepicker();
+            }
+            $("#SCARFILE").attr("href",  '@Url.Action("DownloadFile", "SCAR", new { file = "SCAR_" + Request.Params["SCARID"] + "_" + Request.Params["VERSION"] + ".xlsx"})');
+            $('#FILENAME').html(" SCAR_" + SCARID + "_" + VERSION + ".xlsx");
+            $('#FILESCAR').val("SCAR_" + SCARID + "_" + VERSION + ".xlsx");
+        });
+    function selectEmail(param) {
+        $('#SENTTO').val(param);
+        console.log(param);
+    }
+
+    function backToIndex() {
+        window.location = '@Url.Action("Index", "SCAR")';
+    }
+
+    function markAsSent() {
+        $.blockUI();
+        $.post("@Url.Action("UpdateStatusSCAR", "SCAR")", { status: "Sent to Supplier", SCARID: SCARID }, function (result) {
+            if (result.success) {
+                window.location = '@Url.Action("Index", "SCAR")';
+            } else {
+                bootbox.alert('Action failed. Please contact admin');
+            }
+        }).fail(function () {
+            bootbox.alert('Action failed. Please contact admin');
+        }).always(function () {
+            $.unblockUI();
+        });
+    }
+
+    function sendEmail() {
+        if ($('#SENTTO').val() === "" || $('#SUBJECT').val() === "" || $('#CONTENT').val() === "") {
+            $('.requiredBox').html("This field is required!");
+        } else {
+            $('.requiredBox').html("");
+            $SentMail.submit();
+        }
+    }
+
+    function editSCAR() {
+        window.location = '@Url.Action("EditSCAR", "SCAR")' + "?SCARID=" + SCARID + "&STATUS=Sent to Supplier";
+    }
+
+    $SentMail.submit(function (e) {
+        $.blockUI();
+        var data = new FormData(this);
+        var $fromObj = $(this);
+        var urlAction = $fromObj.attr('action');
+        $.ajax({
+            url: urlAction,
+            type: 'POST',
+            dataType: "Json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: data,
+            fail: function () {
+                bootbox.alert('Please contact to Administrator!');
+            }
+        }).always(function () {
+            $.unblockUI();
+        }).success(function (result) {
+            if (result.success) {
+                bootbox.alert('Email has been sent',
+                    function (result1) {
+                        window.location = '@Url.Action("Index", "SCAR")';
+                    });
+            } else {
+                bootbox.alert('Email cannot be sent because of the total of attached files  size are greater than 5 Mb.Please use other methods to send your attached file!');
+            }
+        });
+        e.preventDefault();
+
+    });
+
+    function ReviewSCAR() {
+        window.open("../Content/FolderSCAR/SCAR_" + SCARID + "_" + VERSION + ".xlsx")
+    }
+
+        $(function () {
+            var NCRFILEs = '@ViewBag.NCRFILEs';
+            $('.a-download-evidence').each(function (i, e) {
+                $.blockUI();
+                if ($(e).attr('ncr') !== undefined) {
+                    $.ajax({
+                        type: "GET",
+                        url: '@Url.Action("CreateNCREvident", "NCRApproval")', //call your controller and action
+                        data: { NCR_NUM: $(e).attr('ncr') }
+
+                    }).done(function (data) {
+                        console.log(data);
+                    });
+                }
+                $.unblockUI();
+
+            });
+    });
+    </script>

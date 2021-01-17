@@ -1,0 +1,369 @@
+﻿
+@using System.ServiceModel.Channels
+@using Kendo.Mvc
+@using Kendo.Mvc.Extensions
+@using Microsoft.AspNet.Identity
+@model List<II_VI_Incorporated_SCM.Models.NCR.NCRManagementViewModel>
+@{
+    Layout = null;
+    bool part = true;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @*<title>PrintNCR | NCR</title>*@
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="image/png" href="@Url.Content("~/Theme/assets/global/icons/favicon-32x32.png")" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .page-break {
+            page-break-after: always;
+        }
+
+        [class*="col-"] {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        .table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+            border: 1px solid;
+            padding: 2px;
+        }
+
+        .table-bordered {
+            border: 1px solid;
+        }
+
+        .removeBorder {
+            border: 0px !important;
+        }
+
+        .remove-boder-top {
+            border-top: 1px !important;
+            /*padding-left: 2px;*/
+        }
+
+        .remove-boder-rigth {
+            border-right: 1px !important;
+            /*padding-left: 2px;*/
+        }
+
+        .remove-boder-bottom {
+            border-bottom: 1px !important;
+            /*padding-left: 2px;*/
+        }
+
+        .remove-boder-left {
+            border-left: 1px !important;
+            /*padding-left: 2px;*/
+        }
+
+        .style-border {
+            border: 1px solid;
+            /*padding-right: 0px;*/
+        }
+
+        .padding-left-right-0 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .margin-left-right-0 {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .row {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .wid-hei-chkbox {
+            height: 20px;
+            width: 20px;
+        }
+
+        .sizefont {
+            font-size: 12px;
+        }
+
+        @@media print {
+            body.modal-open {
+                visibility: hidden;
+            }
+
+                body.modal-open .modal .modal-body {
+                    visibility: visible;
+                }
+        }
+    </style>
+</head>
+@for (int i = 1; i < Model.Count; i++)
+{
+    if (Model[i].MI_PART_NO != Model[0].MI_PART_NO)
+    {
+        part = false;
+        break;
+    }
+}
+@if (part == true)
+{
+    <div class="row">
+        <div class="col-xs-7">
+            <img class="img-responsive" src="@Url.Content("~/Theme/assets/layouts/layout6/img/II-VI(2).jpg")" style="width: 100%" />
+        </div>
+        <div class="col-xs-5">
+            <h4>
+                <b> NON-CONFORMANCE COVER SHEET </b>
+            </h4>
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 ChangeHeight1 style-border " style="height: 61px;border: solid 1px;">
+            <p><b>MI PART NO: </b></p>
+            <p>@Model[0].MI_PART_NO</p>
+        </div>
+        <div class="col-xs-2 ChangeHeight1 style-border remove-boder-rigth remove-boder-left ">
+            <p><b>REV:</b></p>
+            <p>@Model[0].DRAW_REV</p>
+        </div>
+        <div class="col-xs-6 ChangeHeight1 style-border ">
+            <p><b>DESCRIPTION OF MATERIAL</b></p>
+            <p>@Model[0].ITEM_DESC</p>
+        </div>
+    </div>
+    <div class="table-responsive" style="margin-bottom: -18px; overflow: hidden">
+        <table class="table table-bordered ">
+            <tbody>
+                <tr>
+                    <td rowspan="4" style="vertical-align: middle">
+                        <p style="margin-left: 2px;">
+                            <b>V<br>E<br>N<br>D<br>O<br>R<br></b>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <b>NAME OF VENDOR</b>
+                        </p>
+                        @Model[0].VEN_NAME
+                    </td>
+                    <td>
+                        <p>
+                            <b>REPORT WRITTEN BY </b>
+                        </p>
+                        <span style="width: 100%;" id="nameuser" value="@ViewBag.Writeln">@ViewBag.Writeln</span>
+                    </td>
+                    <td>
+                        <p>
+                            <b>DATE</b>
+                        </p>
+                        @DateTime.Now.ToString("dd-MMM-yy")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            <b>STREET ADDRESS</b>
+                        </p>
+                        @Model[0].VEN_ADD
+                    </td>
+                </tr>
+                <tr class="odd gradeX">
+                    <td style="text-align: center">
+                        <p>
+                            <b>CITY :</b>@Model[0].CITY
+                            <b>STATE:</b> @Model[0].STATE <b> ZIP CODE:</b> @Model[0].ZIP_CODE
+                        </p>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <div>
+        <table class="table table-bordered ">
+            <tbody>
+                <tr>
+                    <td>#</td>
+                    <td>NCR Num</td>
+                    <td>Inspected Date </td>
+                    <td>Inspect Qty </td>
+                    <td>Reject Qty </td>
+                </tr>
+            </tbody>
+
+            @foreach (var item in Model)
+                {
+                <tr>
+                    <td></td>
+                    <td> @item.NCR_NUM</td>
+                    <td>  @(item.INS_DATE.HasValue ? item.INS_DATE.Value.ToString("dd/MMM/yy") : "")</td>
+                    <td>@item.INS_QTY</td>
+                    <td>@item.REJ_QTY</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-xs-7">
+            <img class="img-responsive" src="@Url.Content("~/Theme/assets/layouts/layout6/img/II-VI(2).jpg")" style="width: 100%" />
+        </div>
+        <div class="col-xs-5">
+            <h4>
+                <b> NON-CONFORMANCE COVER SHEET </b>
+            </h4>
+            <br />
+        </div>
+    </div>
+    <div class="table-responsive" style="margin-bottom: -18px; overflow: hidden">
+        <table class="table table-bordered ">
+            <tbody>
+                <tr>
+                    <td rowspan="4" style="vertical-align: middle">
+                        <p style="margin-left: 2px;">
+                            <b>V<br>E<br>N<br>D<br>O<br>R<br></b>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <b>NAME OF VENDOR</b>
+                        </p>
+                        @Model[0].VEN_NAME
+                    </td>
+                    <td>
+                        <p>
+                            <b>REPORT WRITTEN BY </b>
+                        </p>
+                        <span style="width: 100%;"  id="nameuser" value="@ViewBag.Writeln">@ViewBag.Writeln</span>
+                    </td>
+                    <td>
+                        <p>
+                            <b>DATE</b>
+                        </p>
+                        @DateTime.Now.ToString("dd-MMM-yy")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            <b>STREET ADDRESS</b>
+                        </p>
+                        @Model[0].VEN_ADD
+                    </td>
+                </tr>
+                <tr class="odd gradeX">
+                    <td style="text-align: left">
+                        <p>
+                            <b>CITY :</b>@Model[0].CITY
+                            <b>STATE:</b> @Model[0].STATE <b> ZIP CODE:</b> @Model[0].ZIP_CODE
+                        </p>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <div>
+        <table class="table table-bordered ">
+            <tbody>
+                <tr>
+                    <td>#</td>
+                    <td>MI Part No</td>
+                    <td>REV </td>
+                    <td>Description of Material </td>
+                    <td>NCR Num</td>
+                    <td>Inspected Date </td>
+                    <td>Inspect Qty </td>
+                    <td>Reject Qty </td>
+                </tr>
+            </tbody>
+            @foreach (var item in Model)
+                {
+                <tr>
+                    <td></td>
+                    <td>@item.MI_PART_NO</td>
+                    <td>@item.DRAW_REV</td>
+                    <td>@item.ITEM_DESC</td>
+                    <td> @item.NCR_NUM</td>
+                    <td>  @(item.INS_DATE.HasValue ? item.INS_DATE.Value.ToString("dd-MMM-yy") : "")</td>
+                    <td>@item.INS_QTY</td>
+                    <td>@item.REJ_QTY</td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+<div class="page-break">
+
+</div>
+<body style="width: 940px; margin: auto;"></body>
+
+<!--Backup Print multiple: backupPrintMulti.cshtml-->
+</html>
+<script src="~/Scripts/printThis/printThis.js"></script>
+<script>
+    $(document).ready(function () {
+        window.print();
+        //$("#printDiv").printThis({
+        //    importCSS: true,
+        //    importStyle: true,
+        //});
+        @*var id = '@User.Identity.GetUserId()';
+        $.post('@Url.Action("Getnamebyid", "WriteNCRForIQC")', { id: id },
+            function (result) {
+                $('#nameuser').val(result);
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                //$.unblockUI();
+                window.print();
+            });*@
+    });
+    //function PrintModal() {
+    //    $("#printDiv").printThis({
+    //        importCSS: true,
+    //        importStyle: true,
+    //        header: null,
+    //        footer: null
+    //    });
+    //}
+    $(function () {
+        SetMaxHeight($(".ChangeHeight1"));
+        SetMaxHeight($(".ChangeHeight2"));
+        SetMaxHeight($(".ChangeHeight3"));
+        SetMaxHeight($(".ChangeHeight4"));
+    });
+
+    function SetMaxHeight(list) {
+
+        let max = 0;
+        for (let i = 0; i < list.length; i++) {
+
+            if ($(list[i]).height() > max) {
+                max = $(list[i]).height();
+            };
+        }
+        for (let i = 0; i < list.length; i++) {
+
+            $(list[i]).height(max);
+        }
+
+        //return max;
+    }
+   function signature_err(img) {
+        $(img).attr('src', '@Url.Content("~/Theme/assets/layouts/layout6/img/nosignature.png")');
+    }
+</script>

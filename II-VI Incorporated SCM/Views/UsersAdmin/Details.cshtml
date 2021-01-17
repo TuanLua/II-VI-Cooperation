@@ -1,0 +1,56 @@
+﻿@model II_VI_Incorporated_SCM.Models.Account.ApplicationUser
+
+@{
+    ViewBag.Title = "Details User Account";
+}
+<div>
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+    </dl>
+</div>
+<h4>List of Groups this user belongs to:</h4>
+@if (ViewBag.GroupNames.Count == 0)
+{
+    <hr />
+    <p>No Groups found for this user.</p>
+}
+
+<table class="table">
+
+    @foreach (var item in ViewBag.GroupNames)
+    {
+        <tr>
+            <td>
+                @item
+            </td>
+        </tr>
+    }
+</table>
+<div class="row">
+    <div class="col-md-offset-1 col-md-11">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" }) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
+    </div>
+</div>
+
+
+

@@ -1,0 +1,137 @@
+﻿
+@using II_VI_Incorporated_SCM.Models.NCR
+@using II_VI_Incorporated_SCM.Services
+@{
+            ViewBag.Title = "NCR_RTV";
+}
+<h4>NCR RTV </h4>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<NCRManagementViewModel>()
+                              .Name("gridNCR")
+                              .Columns(columns =>
+                              {
+                                  columns.Bound(p => p.NCR_NUM).Title("NCR Number");
+                                  columns.Bound(p => p.DATESUBMIT).Format("{0:MM/dd/yyyy}").Title("Date Submit");
+                                  columns.Bound(p => p.USERSUBMIT).Title("User Submit");
+                                  columns.Bound(p => p.MI_PART_NO).Title("Part Number");
+                                  columns.Bound(p => p.PO_NUM).Title("PO");
+                                  columns.Bound(p => p.INS_DATE).Format("{0:MM/dd/yyyy}").Title("INS Date");
+                                  //  columns.Bound(p => p.TYPE_NCR).Title("Type NCR");
+                                  columns.Bound(p => p.RECEIVER).Title("Receiver").Hidden();
+                                  //  columns.Bound(p => p.INS_QTY).Title("INS QTY");
+                                  //   columns.Bound(p => p.REC_QTY).Title("REC QTY");
+                                  columns.Bound(p => p.STATUS).Title("Status");
+                                  columns.Bound(p => p.AGE).Title("Age").Hidden();
+                              })
+                              .Pageable()
+                              .Sortable()
+                              .Scrollable()
+                              .Filterable()
+                              .HtmlAttributes(new { style = "height:550px;" })
+                              .DataSource(dataSource => dataSource
+                                  .Ajax()
+                                  .PageSize(10)
+                                  .Read(read => read.Action("NCR_RTVList", "NCRRTV"))
+                                  .Sort(sort => sort.Add("INS_DATE").Descending())
+                              ))
+        </div>
+    </div>
+</div>
+
+
+
+<div id="popupinspector" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField"></label>
+                        <div class="col-md-6">
+                            <div class="actions">
+                                <select class="form-control toolbarInput input-opal" id="inspectorId" name="ComSubCode">
+                                    @foreach (var itemList in ViewBag.ListInspector)
+                                    {
+                                        <option value="@itemList.Id">@itemList.FullName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchInspector()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var mygrid = $("#gridNCR").kendoGrid({
+        selectable: true
+    });
+    //select row data catch status
+    mygrid.on("click",
+        "tr",
+        function() {
+            var grid = $("#gridNCR").data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+            var ncrnum = selectedItem.NCR_NUM;
+            $.blockUI();
+            $.post('@Url.Action("ViewNCRRTV", "NCRRTV")',
+                { NCR_NUM: ncrnum },
+                function(response) {
+                    if (response.jcheck == false) {
+                        window.location = '@Url.Action("NewRTV", "NCRRTV")' + "?NCR_NUM=" + ncrnum;
+                    } else {
+                        // status == process
+                        if (response.jstt == 'Process') {
+                            window.location = '@Url.Action("ProcessRTV", "NCRRTV")' + "?NCR_NUM=" + ncrnum;
+                        } else if (response.jstt == 'Close') {
+                            window.location = '@Url.Action("CloseRTV", "NCRRTV")' + "?NCR_NUM=" + ncrnum;
+                        }
+                        $.unblockUI();
+                    };
+                });
+        });
+            @*$.ajax({
+                async: false,
+                type: "POST",
+                url:  "/NCR_RTV/ViewNCR_RTV?NCR_NUM",
+                data: "NCR_NUM=" + ncrnum,
+                success: function (response) {
+                    if (response.jcheck == false) {
+                        window.location =  '@Url.Action("ViewNCR_RTV", "NCR_RTV")'+'?NCR_NUM='+ncrnum;
+                        $.unblockUI();
+                    }
+
+                    else {
+                        // status == process
+                        if (response.jstt == 'Process')
+                        {
+                            window.location.href = '@Url.Action("ProcessRTV", "NCR_RTV")'+'?NCR_NUM=' + ncrnum ;
+                        }
+                        else if (response.jstt == 'Close')
+                        {
+                            window.location.href ='@Url.Action("CloseRTV", "NCR_RTV")'+'?NCR_NUM=' + ncrnum;
+                        }
+                        $.unblockUI();
+                    }
+                },
+            });
+        });*@
+
+
+</script>
+
+

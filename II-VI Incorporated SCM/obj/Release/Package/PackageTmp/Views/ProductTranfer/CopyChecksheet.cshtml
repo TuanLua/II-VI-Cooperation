@@ -1,0 +1,78 @@
+﻿@using II_VI_Incorporated_SCM.Models.Producttranfer
+<h3>"Copy checksheet from:@ViewBag.PartTT </h3>
+<div align="right">
+    <button id="btnreload" class="btn btn-success btn-sm">Back to Save </button>
+</div>
+<div class="form-group row" style="text-align:right">
+    <label class="col-md-4">Select Part Num<span style="color: red">*</span> : </label>
+    <div class="col-md-4 date">
+        @Html.DropDownList("Part", (IEnumerable<SelectListItem>)ViewBag.PartNumCopy, "Select" ,new { @class = "form-control", id = "partnumCopy" })
+    </div>
+    <div class="col-md-2">
+        <input type="submit" id="savecheksheet" class="btn btn-info" value="Save" />
+    </div>
+</div>
+
+<div class="col-xs-18 col-md-12">
+    @(Html.Kendo().Grid<ProductViewModel>()
+                                                              .Name("gridProductCopy")
+                                                              .Columns(columns =>
+                                                              {
+                                                                  columns.Bound(p => p.Part_Num).Title("Part_Num").Width(90);
+                                                                  columns.Bound(p => p.Item_Desc).Title("Check Item").HtmlAttributes(new { @class = "NCR_NUM" }).Width(120);
+                                                                  columns.Bound(p => p.Data_Type).Title("Type").Width(120);
+                                                                  columns.Bound(p => p.Is_Require).Title("Required").Width(120);
+                                                              })
+                                                              .Sortable()
+                                                              .Scrollable()
+                                                              .Filterable()
+                                                                .Pageable()
+                                                                .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 150, 1200, "All" }).Refresh(true))
+                                                              .HtmlAttributes(new { style = "height:550px;" })
+                                                              .DataSource(dataSource => dataSource
+                                                                  .Ajax()
+                                                                  .PageSize(10)
+                                                                  .Read(read => read.Action("GetchecksheetbyPart", "ProductTranfer"))
+                                                              ))
+</div>
+<script>
+          var homeUrl = '@Url.Action("Index", "ProductTranfer")';
+    $(document).ready(function () {
+        $('#partnumCopy').select2();
+    });
+    $('#partnumCopy').on('change', function () {
+        let part = $('#partnumCopy').val();
+        let DisitionDayGrid = $("#gridProductCopy").data("kendoGrid");
+         DisitionDayGrid.dataSource.transport.options.read.url = '@Url.Action("GetchecksheetbyPart", "ProductTranfer")?part=' + part ;
+         DisitionDayGrid.dataSource.read();
+    })
+    $('#savecheksheet').on('click', function () {
+        let part = $('#partnumCopy').val();
+        let partcurr = '@ViewBag.PartTT';
+        if (part == '') {
+            bootbox.alert('Please select part!');
+            return;
+        }
+        else {
+      $.post('@Url.Action("SaveCopyChechSheetbypart", "ProductTranfer")', {
+          Part: part,
+          PartCurrent: partcurr
+            }, function (res) {
+                if (res) {
+                    bootbox.alert("Save sucessfull!", function () {
+                   //   window.location.href = homeUrl;
+                    })
+                }
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+                });
+        }
+    })
+       $('#btnreload').on('click', function (e) {
+        let part = "@ViewBag.PartTT";
+        e.preventDefault();
+           window.open('@Url.Action("CreateProductranfer", "ProductTranfer")' + "?PartNum=" + part, '_blank');
+    })
+</script>

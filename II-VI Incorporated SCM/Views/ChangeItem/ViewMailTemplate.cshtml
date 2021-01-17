@@ -1,0 +1,95 @@
+﻿@model II_VI_Incorporated_SCM.Models.NCR.ChangeItemViewmodel
+<table class="table table-striped" style="border-width:1px">
+<tbody>
+    <tr>
+        <td>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">CR NumBer <span style="color: red">*</span></label>
+                    <div class="col-md-8 ">
+                        @Model.CRNo
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">REF NumBer <span style="color: red">*</span></label>
+                    <div class="col-md-8 ">
+                        @Model.REF_NUM
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">SubmitterName</label>
+                    <div class="col-md-8 ">
+                        @Model.Submitername
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Brief Description of the change <span style="color: red">*</span></label>
+                    <div class="col-md-8 ">
+                        @Model.Brief
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Date submmit</label>
+                    <div class="col-md-8 ">
+                        @Model.DateSubmitted
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Date Required</label>
+                    <div class="col-md-8 ">
+                        @Model.DateRequired
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Reason for Change <span style="color: red">*</span></label>
+                    <div class="col-md-8 ">
+                        @Model.Reason
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Other Artifacts Impacted:</label>
+                    <div class="col-md-8 ">
+                        @Model.OtherAtifact
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Comments</label>
+                    <div class="col-md-8 ">
+                        @Model.Comments
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Status</label>
+                    <div class="col-md-8 ">
+                        @Model.CRStatus
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label"> ChairMain Comments</label>
+                    <div class="col-md-8 ">
+                        @Model.Chermaincomment
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Date ChairMain Approval</label>
+                    <div class="col-md-8 ">
+                        @Model.DateChairMain
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Date ChairMain Approval</label>
+                    <div class="col-md-8 ">
+                        @Model.WHMRBname
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Date ChairMain Approval</label>
+                    <div class="col-md-8 ">
+                        @Model.WHacnowledDate
+                    </div>
+                </div>
+            </fieldset>
+        </td>
+    </tr>
+</tbody>
+</table>

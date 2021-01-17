@@ -1,0 +1,12 @@
+---VN Onwer . thêm role-> r?i get user theo role
+---Click rows qua bên create r?i m?i check role 
+---Button add task trên màn hình task management
+-- Onwer là VNOnwer, Assign DEP_PIC, Approve là VNOner
+
+
+Yield:number
+ GM : Text
+ là required
+
+
+n?u có value thì ko cho edit ho?c delete

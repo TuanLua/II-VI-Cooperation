@@ -1,0 +1,96 @@
+﻿@model II_VI_Incorporated_SCM.Models.Producttranfer.ProductViewModel
+
+@if ((bool)ViewBag.UserOner && Model.StatusInfo == "In Process" && ViewBag.Step4 == false && ViewBag.Step2 == true)
+{
+    <button type="button" class="btn btn-sm btn-success" id="Create_NewChecklist"> Create Edit CheckSheet</button>
+    <button type="button" class="btn btn-sm btn-success" id="Copy_Checklist"> Copy CheckSheet</button>
+}
+
+<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbEvidenceInProcess">
+    <thead>
+        <tr>
+            <th>Part</th>
+            <th>Description</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Checklist)
+        {
+            <tr>
+                <td> @item.Part_Num</td>
+                <td> @item.Item_Desc</td>
+                <td>
+                    <input type="hidden" value="@item.Item_Idx" />
+                    @Html.Raw(II_VI_Incorporated_SCM.Services.ExcelSupport.generateHtml(item.Data_Type, "Tesy", "", item.Item_Value, item.Item_Remark, item.Is_Require.Value))
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if ((bool)ViewBag.UserOner && Model.StatusInfo == "In Process" && ViewBag.Step4 == false)
+{
+
+    <div align="center">
+        <button type="button" class="btn btn-success" id="btncccccc"> Save </button>
+    </div>
+}
+@using (Html.BeginForm("SaveUpdateCheckSheetConlusion", "ProductTranfer", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "multipart/form-data", @id = "frmConlusion" }))
+{
+    <input hidden name="Part_Num" value="@ViewBag.PartNum" />
+    <fieldset class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-body">
+                    <label class="col-md-2 control-label" style="text-align:left">Yield <span style="color: red">*</span></label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.Yield, new
+                   {
+                       @class = "form-control",
+                       @type="number"
+                   })
+                    </div>
+                    <label class="col-md-2 control-label">GM<span style="color: red">*</span></label>
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(m => m.GM, new { @class = "form-control" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-body">
+                    <label class="col-md-2 control-label" style="text-align:left">Conclusion<span style="color: red">*</span></label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.Conlusion, new { @class = "form-control" })
+                    </div>
+                    <label class="col-md-2 control-label">File</label>
+                    <div class="col-md-5">
+                        <input class="form-control" type="file" name="File" />
+                        @if (Model.filename != null && Model.filename != "")
+                        {
+                            <a href="@Url.Action("DownloadFile", "ProductTranfer", new { fileId = ViewBag.PartNum ,filename= Model.filename})"><i class="fa fa-file-pdf-o"> &nbsp; @Model.filename.Split('/')[1] </i></a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    if ((bool)ViewBag.UserOner && Model.StatusInfo == "In Process" && ViewBag.Step4 == false)
+    {
+
+        <div align="center">
+            <button type="button" class="btn btn-success" id="btnCompl"> Completed Product Tranfer</button>
+            <button type="button" class="btn btn-danger" id="btnCancel"> Cancel Product Tranfer</button>
+        </div>
+        }
+    }
+    <script>
+      let part = "@ViewBag.PartNum";
+    $('#Create_NewChecklist').on('click', function () {
+        window.open('@Url.Action("CreateCheckSheet", "ProductTranfer")' + "?PartNum=" + part, '_blank');
+
+    })
+    $('#Copy_Checklist').on('click', function () {
+           window.open('@Url.Action("CopyChecksheet", "ProductTranfer")' + "?PartNum=" + part, '_blank');
+    })
+    </script>

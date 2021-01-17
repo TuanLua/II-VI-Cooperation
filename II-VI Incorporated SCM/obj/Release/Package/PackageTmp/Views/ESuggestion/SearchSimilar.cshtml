@@ -1,0 +1,298 @@
+﻿@using II_VI_Incorporated_SCM.Models
+@{
+    ViewBag.Title = "SearchSimilar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div class="container-fluid">
+    <style>
+        .k-grid-header .k-header {
+            height: 20px;
+            padding: 0;
+        }
+
+        .k-grid tbody tr {
+            line-height: 4px;
+        }
+
+        .k-grid tbody td {
+            padding: 0;
+        }
+    </style>
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<tbl_Inv_Step1_SubmitSuggestion>
+                                    ()
+                                    .Name("CurrentEsuggestion")
+                                    .Columns(columns =>
+                                    {
+                                        columns.Bound(p => p.Sug_ID).Title("Suggestion ID").HtmlAttributes(new { @class = "RefNUMBER" }).Width(300);
+                                        columns.Bound(p => p.Sug_title).Title("Title");
+                                        columns.Bound(p => p.Idea_impr).Title("Suggestion Idea");
+                                        columns.Bound(p => p.Submit_date).Format("{0:dd-MMM-yyyy}").Title("DateCreate");
+                                        columns.Bound(p => p.Rqtor_name).Title("Requestor");
+                                    })
+                                    .Pageable()
+                                    .Sortable()
+                                    .Scrollable()
+                                    .Filterable()
+                                    .HtmlAttributes(new { style = "height:200px;" })
+                                    .DataSource(dataSource => dataSource
+                                    .Ajax()
+                                    .PageSize(1)
+                                    .Read(read => read.Action("ReadDataE_SuggestionSimilar", "ESuggestion", new { title = @ViewBag.titi, ideal = "" }))
+                                    .Sort(sort => sort.Add("Submit_date").Descending())
+                                    ))
+            <style>
+                .k-grid-header .k-header {
+                    height: 20px;
+                    padding: 0;
+                }
+
+                .k-grid tbody tr {
+                    line-height: 4px;
+                }
+
+                .k-grid tbody td {
+                    padding: 0;
+                }
+            </style>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="col-xs-8">
+        @*<div class="col-xs-3" align="right">
+            <label>Title</label>
+        </div>
+        <div class="col-xs-9">
+            <input type="text" id="Cur_title" />
+        </div>
+        <br />
+
+        <div class="col-xs-3" align="right">
+            <label>Suggestion Ideal</label>
+        </div>
+
+        <div class="col-xs-9">
+            <textarea type="text" rows="3" id="Cur_idea" cols="500" class ="form-control"></textarea>
+        </div>
+        <br />*@
+
+        @*User just want to search keyword for both Title and Idea content so hide idea and change "title" "keyword"*@
+
+        @*create space between Textarea*@
+        <div class="col-xs-3" align="right"></div>
+        <br />
+        <div class="col-xs-9" align="right"></div>
+        <div class="col-xs-3" align="right"></div>
+        <br />
+        <div class="col-xs-9" align="right"></div>
+        <div class="col-xs-3" align="right"></div>
+        <br />
+        <div class="col-xs-9" align="right"></div>
+        <br />
+        <div class="col-xs-3" align="right">
+            <label>Key Words</label>
+        </div>
+        <div class="col-xs-9" align="right">
+            <input type="text" class="form-control" id="title" />
+        </div>
+        <br />
+
+        <div class="col-xs-3" align="right" hidden="hidden">
+            <label>Suggestion Ideal</label>
+        </div>
+        <br />
+        <div class="col-xs-9" hidden="hidden">
+            <textarea type="text" rows="5" id="ideal" class="form-control"></textarea>
+        </div>
+        <br />
+        @*<div class="col-xs-9" align="right">
+            <button class="btn btn-warning" id="search">Search</button>
+        </div>*@
+    </div>
+    <div class="col-xs-4">
+        <div class="col-xs-3" align="right"></div>
+        <br />
+        <div class="col-xs-9" align="right"></div>
+        <div class="col-xs-3" align="right"></div>
+        <br />
+        <div class="col-xs-9" align="right"></div>
+        <div class="col-xs-3" align="right"></div>
+        <br />
+        <div class="col-xs-9" align="right"></div>
+        <div class="col-xs-3" align="right"></div>
+        <br />
+        <div class="col-xs-9" align="right"></div>
+        <div class="col-xs-4" align="justify">
+            <button class="btn btn-warning" id="search">Search</button>
+        </div>
+    </div>
+
+</div>
+<br /><br /><br /><br /><br /><br /><br /><br />
+<script id="template" type="text/x-kendo-template">
+    <tr class=#:Sug_ID = =" @ViewBag.IDSuggestion" ? "red" : "white" #" data-uid="#= uid #"></tr>
+    @*<td>#: MAC  #</td><td>#:Time  #</td><td>#:Message#</td>*@
+</script>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<tbl_Inv_Step1_SubmitSuggestion>
+                    ()
+                    .Name("gridEsuggestion")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.Sug_ID).Title("Suggestion ID").HtmlAttributes(new { @class = "RefNUMBER" }).Width(300);
+                        columns.Bound(p => p.Sug_title).Title("Title");
+                        columns.Bound(p => p.Idea_impr).Title("Suggestion Idea");
+                        columns.Bound(p => p.Submit_date).Format("{0:dd-MMM-yyyy}").Title("DateCreate");
+                        columns.Bound(p => p.Rqtor_name).Title("Requestor");
+                    })
+                    .Pageable()
+                    .Sortable()
+                    .Scrollable()
+                    .Filterable()
+                    .HtmlAttributes(new { style = "height:450px;" })
+                    .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .PageSize(10)
+                    .Read(read => read.Action("ReadDataE_SuggestionSimilar", "ESuggestion", new { title = @ViewBag.titi, ideal = "" }))
+                    .Sort(sort => sort.Add("Submit_date").Descending())
+                    ))
+        </div>
+    </div>
+</div>
+<br />
+<div align="center">
+    <button class="btn btn-danger" id="similar">Similar to another</button>
+    <button id="newsuggest" class="btn btn-success">New Suggestion</button>
+    @*<button id="addTask" class="btn btn-info">Add TaskManagement</button>*@
+    <a class="btn btn-info" id="addTask" target="_blank" href="@Url.Action("CreateTaskManagementNcrByTaskNo", "TaskManagement", new { taskNO = ViewBag.IDSuggestion, type = "eSuggestion" })">
+        Add TaskManagement
+    </a>
+    @*<div class="col-xs-6" align="right">
+               <button class="btn btn-danger" id="similar">Similar to another</button>
+           </div>
+           <div class="col-xs-6" align="center">
+               <button id="newsuggest" class="btn btn-success">New Suggestion</button>
+           </div>
+
+           <div class="col-xs-6" align="left">
+               <button id="addTask" class="btn btn-info">Add Task</button>
+               <a class="btn btn-info" id="addTask" target="_blank" href="@Url.Action("CreateTaskManagementNcrByTaskNo", "TaskManagement", new { taskNO = ViewBag.IDSuggestion, type = "eSuggestion" })">
+                   Add Task
+               </a>
+
+        </div>*@
+</div>
+<script>
+    $(document).ready(function () {
+        debugger;
+        let cur_step = '@ViewBag.Step';
+        if (cur_step == '2') {
+            $('#newsuggest').prop('disabled', true);
+            $('#similar').prop('disabled', true);
+        }
+
+        var dataSource = $("#gridEsuggestion").data("kendoGrid").dataSource;
+        dataSource.fetch(function () {
+            var data = dataSource.data();
+            var model = data[0];
+            model.Sug_title = "." + model.Sug_title;
+            $('#Cur_title').val(model.Sug_title);
+            $('#Cur_idea').val(model.Idea_impr);
+            $("#gridEsuggestion").data("kendoGrid").dataSource.filter({ field: "Sug_ID", operator: "neq", value: "@ViewBag.IDSuggestion" });
+        });
+
+
+    });
+    $('#newsuggest').on('click', function (e) {
+        let id = "@ViewBag.IDSuggestion";
+        e.preventDefault();
+        window.open('@Url.Action("ProcessingSuggestion", "ESuggestion")' + "?SuggestionID=" + id);
+    })
+     $('#search').on('click', function (e) {
+         e.preventDefault();
+         let title = $('#title').val();
+         //let ideal = $('#ideal').val();
+         let ideal = title;
+         if (title == "" && ideal == "") {
+             bootbox.alert('Please input at least information!');
+         }
+         else {
+             $("#gridEsuggestion").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadDataE_SuggestionSimilar", "ESuggestion")?title=' + title + '&ideal=' + ideal;
+             $("#gridEsuggestion").data("kendoGrid").dataSource.read();
+             $("#gridEsuggestion").data("kendoGrid").dataSource.filter({ field: "Sug_ID", operator: "neq", value: "@ViewBag.IDSuggestion" });
+         }
+    })
+    $('#gridEsuggestion').on("click", ".RefNUMBER", function (e) {
+        var grid = $("#gridEsuggestion").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        var ID = model.Sug_ID;
+        window.open('@Url.Action("Management", "ESuggestion")' + "?SuggestionID=" + ID, '_blank');
+    });
+    
+    $('#CurrentEsuggestion').on("click", ".RefNUMBER", function (e) {
+        var grid = $("#CurrentEsuggestion").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        var ID = model.Sug_ID;
+        window.open('@Url.Action("Management", "ESuggestion")' + "?SuggestionID=" + ID, '_blank');
+    });
+    @*$('#addTask').on('click', function (e) {
+        e.preventDefault();
+        debugger;
+        let id = "@ViewBag.IDSuggestion";
+        let tasktype = "eSuggestion";
+        let href = "@Url.Action("CreateTaskManagementNcrByTaskNo", "TaskManagement", new { taskNO = ViewBag.IDSuggestion, type = "eSuggestion" })";
+        if (id == "") {
+            bootbox.alert("Please contact IT!");
+            return;
+        }
+        else {
+            window.location.href = href;
+            //Thi.nguyen 12-Nov-2019: No need below code because system update suggestion approve status after save task
+            $.post('@Url.Action("UpdateStatusEsuggestion", "ESuggestion")',
+                { id: id, status: "AssignedTask", comment: "AddTask" },
+                        function (result) {
+                            if (result) {
+                            
+                            }
+                        }).fail(function() {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function() {
+                            $.unblockUI();
+                        });
+            //End edit
+        }
+    })*@
+
+    $('#similar').on('click', function (e) {
+        e.preventDefault();
+        debugger;
+        let id = "@ViewBag.IDSuggestion";
+        if (id == "") {
+            bootbox.alert("Please contact IT!");
+            return;
+        }
+        else {
+            var comment = prompt("Please enter similar reason", "");
+
+            if (comment != null && comment.trim()!="")//comment = "";
+                    $.post('@Url.Action("UpdateStatusEsuggestion", "ESuggestion")',
+                        { id: id, status: "Reject", comment: comment },
+                        function (result) {
+                            if (result) {
+                            window.open('@Url.Action("index", "ESuggestion")');
+                            }
+                        }).fail(function() {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function() {
+                            $.unblockUI();
+                        });
+        }
+    })
+</script>

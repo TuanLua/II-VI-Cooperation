@@ -1,0 +1,768 @@
+﻿@using Microsoft.AspNet.Identity
+@model II_VI_Incorporated_SCM.Models.Producttranfer.ProductViewModel
+@using II_VI_Incorporated_SCM.Models.Producttranfer
+@{
+    ViewBag.Title = "CreateProductranfer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreateProductransfer-@ViewBag.PartNum</h2>
+<div align="right">
+    <button class="btn btn-success btn-sm" id="backtoindex">Back to index</button>
+</div>
+<div class="portlet-title tabbable-line">
+    <div class="caption">
+        <ul class="nav nav-tabs">
+            <li id="initailinfotab">
+                <a href="#initailinfo" data-toggle="tab" class="green" aria-expanded="true" id="create">Initail Infor</a>
+            </li>
+            <li id="updateinfotab">
+                <a href="#updateinfo" data-toggle="tab" class="green" aria-expanded="false" id="update">Update Infor</a>
+            </li>
+            <li>
+                <a href="#task" data-toggle="tab" class="green" aria-expanded="true" id="task1">Task Management</a>
+            </li>
+            <li id="vienamtab">
+                <a href="#vienam" data-toggle="tab" class="green" aria-expanded="false" id="ownerjob">VN owner Job</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="portlet-body form">
+    <div class="tab-content">
+        <div class="tab-pane" id="initailinfo">
+            @using (Html.BeginForm("SaveInitailinfo", "ProductTranfer", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "frmcreate" }))
+            {
+                @Html.Partial("~/Views/ProductTranfer/Initailinfo.cshtml")
+            }
+
+            <div align="center">
+                @if ((bool)ViewBag.UserCreateInitiator && ViewBag.Step1 == false)
+                {
+                    <button type="button" class="btn btn-sm btn-success" id="saveedit">Save</button>
+                    <button type="button" class="btn btn-sm btn-info" id="submitedit">Submit</button>
+                    using (Html.BeginForm("GetValueFile", "ProductTranfer", FormMethod.Post, new { id = "ExcelData", role = "form", enctype = "multipart/form-data", style = "display: inline-block;" }))
+                    {
+                        <input type="file" name="File" class="btn btn-sm btn-warning" id="excel" />
+                    }
+
+                    <div class="row">
+
+                        @(Html.Kendo().Grid<ProductViewModel>()
+                                                                                                .Name("GridAA")
+                                                                                                .Columns(columns =>
+                                                                                                {
+                                                                                                    columns.Bound(p => p.Part_Num).Title("Part_Num").HtmlAttributes(new { @class = "NCR_NUM" }).Width(120);
+                                                                                                    columns.Bound(p => p.Description).Title("Description").Width(150);
+                                                                                                    columns.Bound(p => p.Plan_Type).Width(120); ;
+                                                                                                    columns.Bound(p => p.Date).Format("{0:dd-MMM-yy}").Title("Date").Width(120);
+                                                                                                })
+                                                                                               .Sortable()
+                                                                                                                                  .Scrollable()
+                                                                                                                                  .Filterable()
+                                                                                                                                    .Pageable()
+                                                                                                .PersistSelection()
+                                                                                                   .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 150, 1200, "All" }).Refresh(true))
+                                                                                              .HtmlAttributes(new { style = "height:350px;" })
+                                                                                                   .DataSource(dataSource => dataSource
+                                                                                                    .Ajax()
+                                                                                                    .Model(model => model.Id(p => p.Part_Num))
+                                                                                                    .Read(read => read.Action("ListPartByUserCreate", "ProductTranfer"))
+                                                                                                     .Sort(sort => sort.Add("Date").Descending())
+                                                                                                )
+                        )
+                    </div>
+                }
+                else if ((bool)ViewBag.CreateFlag == true && (bool)ViewBag.IsInitiator && Model.StatusInfo != "In Process")
+                {
+                    <button type="button" class="btn btn-sm btn-success" id="savecreate">Save</button>
+                    <button type="button" class="btn btn-sm btn-info" id="submitcreate">Submit</button>
+                    using (Html.BeginForm("GetValueFile", "ProductTranfer", FormMethod.Post, new { id = "ExcelData", role = "form", enctype = "multipart/form-data", style = "display: inline-block;" }))
+                    {
+                        <input type="file" name="File" class="btn btn-sm btn-warning" id="excel" />
+                    }
+
+                    <div class="row">
+
+                        @(Html.Kendo().Grid<ProductViewModel>()
+                                                                                                        .Name("GridAA")
+                                                                                                        .Columns(columns =>
+                                                                                                        {
+                                                                                                            columns.Bound(p => p.Part_Num).Title("Part_Num").HtmlAttributes(new { @class = "NCR_NUM" }).Width(120);
+                                                                                                            columns.Bound(p => p.Description).Title("Description").Width(150);
+                                                                                                            columns.Bound(p => p.Plan_Type).Width(120); ;
+                                                                                                            columns.Bound(p => p.Date).Format("{0:dd-MMM-yy}").Title("Date").Width(120);
+                                                                                                        })
+                                                                                                       .Sortable()
+                                                                                                                                          .Scrollable()
+                                                                                                                                          .Filterable()
+                                                                                                                                            .Pageable()
+                                                                                                        .PersistSelection()
+                                                                                                           .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 150, 1200, "All" }).Refresh(true))
+                                                                                                      .HtmlAttributes(new { style = "height:350px;" })
+                                                                                                           .DataSource(dataSource => dataSource
+                                                                                                            .Ajax()
+                                                                                                            .Model(model => model.Id(p => p.Part_Num))
+                                                                                                            .Read(read => read.Action("ListPartByUserCreate", "ProductTranfer"))
+                                                                                                             .Sort(sort => sort.Add("Date").Descending())
+                                                                                                        )
+                        )
+                    </div>
+                }
+
+            </div>
+          
+        </div>
+        <div class="tab-pane" id="updateinfo">
+            @using (Html.BeginForm("SaveUpdate", "ProductTranfer", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "form-data", @id = "frmUpdate" }))
+            {
+                @Html.AntiForgeryToken()
+                <input hidden value="@ViewBag.PartNum" name="Part_Num" />
+                @Html.Partial("~/Views/ProductTranfer/Updateinfo.cshtml")
+            }
+            @if ((bool)ViewBag.UpdateFlag == true && (bool)ViewBag.PE && Model.StatusInfo == "In Process")
+            {
+                <div align="center">
+                    <button type="button" class="btn btn-sm btn-success" id="saveupdate">Save </button>
+                    <button type="button" class="btn btn-sm btn-info" id="submitupdate">Submit </button>
+                </div>
+            }
+            else if ((bool)ViewBag.UserUpdate && Model.StatusInfo == "In Process" && ViewBag.Step2 == false)
+            {
+                <div align="center">
+                    <button type="button" class="btn btn-sm btn-success" id="saveupdate">Save</button>
+                    <button type="button" class="btn btn-sm btn-info" id="submitupdate">Submit</button>
+                </div>
+            }
+        </div>
+        <div class="tab-pane" id="task">
+            @Html.Partial("~/Views/ProductTranfer/TaskProductView.cshtml")
+        </div>
+        <div class="tab-pane" id="vienam">
+            @Html.Partial("~/Views/ProductTranfer/CheckSheet.cshtml")
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+         var homeUrl = '@Url.Action("Index", "ProductTranfer")';
+        var PartNum = '@Request.Params["PartNum"]';
+        $(document).ready(function () {
+            debugger;
+            $('#ListTask').select2();
+            //set tab by role
+            var roleuser = '@ViewBag.Roled'.replace(/&quot;/g, '"');
+            var parsedTest = JSON.parse(roleuser);
+            var rolecheck = parsedTest.includes('');
+            if (parsedTest.includes('Initiator')) {
+                $('#initailinfotab').addClass('active');
+                $('#initailinfo').addClass('active');
+            }
+            else if (parsedTest.includes('PE')) {
+                $('#updateinfo').addClass('active');
+                $('#updateinfotab').addClass('active');
+            }
+            else if (parsedTest.includes('VN Owner')) {
+                $('#vienam').addClass('active');
+                $('#vienamtab').addClass('active');
+            }
+            else {
+                $('#initailinfo').addClass('active');
+            }
+
+            if ('@ViewBag.CheckEdit' === 'False') {
+                $('#Part_Num').attr('readonly', 'readonly');
+            }
+            $('.date').datepicker({
+                autoclose: true
+
+            });
+
+            $('#date').datepicker({ autoclose: true });
+            
+               var id = '@User.Identity.GetUserId()';
+            $.blockUI();
+            $.post('@Url.Action("Getnamebyid", "WriteNCRForIQC")', { id: id },
+                function (result) {
+               $("#name").val(result);
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            $('.k-grid-content').attr('style', 'height:350px');
+            debugger
+            var PartNum = '@Request.Params["PartNum"]';
+            if (PartNum == '') {
+                $('#updateinfo').attr('style', 'display:none');
+                $('#task').attr('style', 'display:none');
+                $('#vienam').attr('style', 'display:none');
+            }
+            else {
+                $('#updateinfo').removeAttr('style', 'display:none');
+                $('#task').removeAttr('style', 'display:none');
+                $('#vienam').removeAttr('style', 'display:none');
+            }
+        });
+        var $formcreate = $('#frmcreate');
+        var $formupdate = $('#frmUpdate');
+        $('#savecreate').on('click', function (e) {
+            
+            e.preventDefault();
+            $('#date').datepicker('setDate', 'today');
+            if (validateform()) {
+                $formcreate.submit();
+            }
+        })
+        //submit add type vao form
+        $('#submitcreate').on('click', function (e) {
+            e.preventDefault();
+            $('#date').datepicker('setDate', 'today');
+            var input = $("<input>", { type: "hidden", name: "type", value: "Submit" });
+            $formcreate.append(input);
+            if (validatesubmit()) {
+                $formcreate.submit();
+            }
+        })
+        function validateform() {
+            let part = $('#Part_Num').val();
+            let plan = $('#Plane').val();
+            let date = $('#date').val()
+            if (part == "") {
+                bootbox.alert("Please input PartNum!");
+                return false;
+            }
+            if (plan == "") {
+                bootbox.alert("Please select Planning Type!");
+                return false;
+            }
+            return true;
+    }
+    function validatesubmit() {
+        debugger;
+        var data = $("#GridAA").data().kendoGrid.dataSource.data();
+        if (data.length == 0) {
+            bootbox.alert("Please save info before submit!");
+            return false;
+        }
+        return true;
+        }
+        $('#addTaskList').on('click', function (e) {
+            $("#popupListTask").modal('show')
+        })
+        var $formListTask = $('#form-ListTask');
+        $('#saveListTask').on('click', function (e) {
+            $formListTask.submit();
+        })
+        $('#saveedit').on('click', function (e) {
+            e.preventDefault();
+            var input = $("<input>", { type: "hidden", name: "type", value: "Edit" });
+            $formcreate.append(input);
+            if (validateform()) {
+                $formcreate.submit();
+            }
+        })
+        $('#submitedit').on('click', function (e) {
+            e.preventDefault();
+            var input = $("<input>", { type: "hidden", name: "type", value: "Edit" });
+            var input1 = $("<input>", { type: "hidden", name: "edit", value: "submit" });
+            $formcreate.append(input);
+            $formcreate.append(input1);
+            if (validatesubmit()) {
+                $formcreate.submit();
+            }
+        })
+        $formcreate.submit(function (e) {
+            debugger;
+            e.preventDefault();
+            $.blockUI();
+            var data = new FormData(this);
+            var $fromObj = $(this);
+            var urlAction = $fromObj.attr('action');
+            $.ajax({
+                url: urlAction,
+                type: 'POST',
+                dataType: "Json",
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: data,
+                fail: function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }
+            }).always(function () {
+                $.unblockUI();
+            }).success(function (result) {
+                if (result.success && result.message == 'submit') {
+                    bootbox.alert('Submit Product Tranfer successfully',
+                        function (result) {
+                            window.location.reload();
+                        });
+                } else {
+                    bootbox.alert('Save Product Tranfer successfully',
+                        function (result) {
+                            window.location.reload();
+                        });
+
+                }
+            });
+        })
+        //update
+
+        $('#saveupdate').on('click', function (e) {
+            e.preventDefault();
+
+            if (validateformupdate()) {
+                $formupdate.submit();
+            }
+
+        })
+        //submit add type vao form
+        $('#submitupdate').on('click', function (e) {
+            e.preventDefault();
+            var input = $("<input>", { type: "hidden", name: "type", value: "Submit" });
+            $formupdate.append(input);
+            if (validateformupdate()) {
+                $formupdate.submit();
+            }
+        })
+        function validateformupdate() {
+            let build = $('#Build_Loc').val();
+            let wordk = $('#Wc').val();
+            let owner = $('#VNowner').val();
+            let yield1 = $('#Plan_Yield').val();
+            let section = $('#Section').val();
+            if (build == "") {
+                bootbox.alert("Please select Build to Location!");
+                return false;
+            }
+            if (wordk == "") {
+                bootbox.alert("Please select Work Center!");
+                return false;
+            }
+            if (owner == "") {
+                bootbox.alert("Please select VN Owner!");
+                return false;
+            }
+            if (yield1 == "") {
+                bootbox.alert("Please input Yield!");
+                return false;
+            }
+            if (section == "") {
+                bootbox.alert("Please input Section!");
+                return false;
+            }
+            return true;
+
+        }
+        $formupdate.submit(function (e) {
+            e.preventDefault();
+            $.blockUI();
+            var data = new FormData(this);
+            var $fromObj = $(this);
+            var urlAction = $fromObj.attr('action');
+            $.ajax({
+                url: urlAction,
+                type: 'POST',
+                dataType: "Json",
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: data,
+                fail: function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }
+            }).always(function () {
+                $.unblockUI();
+            }).success(function (result) {
+                if (result.success && result.message == 'submit' ) {
+                    bootbox.alert('Submit Product Tranfer successfully',
+                        function (result) {
+                            window.location.reload();
+                        });
+                } else {
+                    bootbox.alert('Save Product Tranfer successfully',
+                        function (result) {
+                            window.location.reload();
+                        });
+
+                }
+            });
+        })
+    $('#btncccccc').click(function (e) {
+            e.preventDefault();
+            let part = "@ViewBag.PartNum";
+            //data
+            let data = [];
+
+        $('#tbEvidenceInProcess tbody tr').each(function (i, e) {
+            let item;
+            //alert($(e).children().last().children().last().className);
+            //if ($(e).children().last().children().last().val() == "on") {
+            //    item = {
+            //        key: $(e).children().last().children().first().val(),
+            //        value: "False"
+            //    };
+            //}else
+            item = {
+                key: $(e).children().last().children().first().val(),
+                value: $(e).children().last().children().last().val()
+            };
+            data.push(item);
+        });
+       
+            if ($('#tbEvidenceInProcess tbody tr').length > 0) {
+                if (c_validate()) {
+                    $.post('@Url.Action("SaveCheckSheet", "ProductTranfer")', {
+                        listresult: data,
+                        partnum: part
+                    }, function (res) {
+                        if (res) {
+                            bootbox.alert("Save sucessfull!");
+                            window.location.reload();
+                        }
+                    }).fail(function () {
+                        bootbox.alert('Please contact to Administrator!');
+                    }).always(function () {
+                        $.unblockUI();
+                    });
+                }
+            }
+            else {
+                bootbox.alert("CheckSheet does not have content please create before save!")
+            }
+
+        });
+
+        $('#Plane').val('@Model.Plan_Type');
+        function onFindName() {
+            var filter = $("#name").val();
+            $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Assignee", operator: "contains", value: filter });
+        }
+        var tdSearch;
+        function onFind(condition) {
+            $('.searchField').text(condition);
+
+            if (condition == 'RefNUMBER') {
+                $('#search').val();
+                $('#searchId').val(0);
+            }
+            else if (condition == 'Owner') {
+                $('#searchId').val(1);
+            }
+            else if (condition == 'Assignee') {
+                $('#searchId').val(2);
+            }
+            else if (condition == 'Priority') {
+                $('#searchId').val(6)
+            }
+            else if (condition == 'TaskName') {
+                $('#searchId').val(4)
+            }
+            else if (condition == 'TaskID') {
+                $('#searchId').val(5)
+            }
+            $('#popup').modal('show');
+        }
+        function onSearch() {
+            var searchText = $('#search').val().toLowerCase();
+            var number = $('#searchId').val();
+            var num;
+            if (number == '0') {
+                num = 0;
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "RefNUMBER", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '1') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Owner", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '2') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Assignee", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '3') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Priority", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '4') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Taskname", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '5') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "TaskID", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            $('#popup').modal('hide');
+
+        }
+        function onSearchPriority() {
+            var number = $('#searchId').val();
+            if (number == '6') {
+                var searchPriority = $('#prioritySearch').val().toLowerCase();
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Priority", operator: "contains", value: searchPriority });
+                $('#prioritySearch').val("");
+            }
+            $('#popuppriority').modal('hide');
+        }
+
+        function onSearchStastus() {
+            var number = $('#searchId').val();
+            if (number == '8') {
+                var searchStatus = $('#statusSearch').val().toLowerCase();
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "STATUS", operator: "contains", value: searchStatus });
+                $('#statusSearch').val("");
+            }
+            $('#popupstatus').modal('hide');
+        }
+
+        function onSearchInspector(inspector) {
+            var number = $('#searchId').val();
+            if (number == '9') {
+                var searchStatus = $('#inspectorId').val().toLowerCase();
+                console.log(searchStatus)
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "INSPECTOR", operator: "contains", value: searchStatus });
+                $('#statusSearch').val("");
+            }
+            $('#popupinspector').modal('hide');
+        }
+           function onFindPriority(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Priority') {
+                $('#prioritySearch').show();
+                $('#searchId').val(6);
+                $('#popuppriority').modal('show');
+            }
+        }
+
+        function onPriority(priority) {
+            $('#search').text(priority);
+            $('#prioritySearch').val(priority);
+        }
+        function onStatus(status) {
+            $('#search').text(status);
+            $('#statusSearch').val(status);
+        }
+        var mygrid = $("#gridNCR").kendoGrid({
+            selectable: true
+        });
+        //select row data catch status
+        function onFindStatus(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Status') {
+                $('#statusSearch').show();
+                $('#searchId').val(8);
+                $('#popupstatus').modal('show');
+            }
+        }
+        $("#clear").click(function () {
+            $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Owner", operator: "contains", value: "" });
+            $('#search').val("");
+            $('a.k-grid-filter').removeClass('k-state-active')
+        })
+        $("#gridNCR").on("click", ".Taskname", function (e) {
+        var grid = $("#gridNCR").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+            var NCR_NUM = model.TaskDetailID;
+        window.open('@Url.Action("EditTaskManagementNcr", "TaskManagement")' + "?taskID="+ NCR_NUM, '_blank');
+        });
+
+
+        //vustom validation
+        function c_validate() {
+            let res = true;
+            $('[c-required="True"]').each(function (i, e) {
+                console.log($(e).val() === '');
+                if ($(e).val() === '' || $(e).val() === null) {
+                    res = false;
+                    $(e).css('border', '1px solid red');
+                    return;
+                }
+                else $(e).css('border', 'unset');
+            });
+
+            return res;
+        }
+        //conlusion
+
+        var $formconlusion = $('#frmConlusion');
+        $('#btnCompl').on('click', function (e) {
+            debugger;
+            alert($('#File').val());
+            e.preventDefault();
+            if ($('#File').val() == undefined) {
+                if (!confirm("You've not attached file yet, Continue to complete transfer?")) return;   
+            }
+            if (ValidateConlusion()) {
+                $formconlusion.submit();
+            }
+        })
+        $('#btnCancel').on('click', function (e) {
+            e.preventDefault();
+            bootbox.confirm({
+                message: " Do you want Cancel Product Tranfer?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        var input = $("<input>", { type: "hidden", name: "type", value: "Cancel" });
+                        $formconlusion.append(input);
+                        if (ValidateConclusionss()) {
+                            $formconlusion.submit();
+                        }
+                    }
+                    else {
+                    }
+                }
+            });
+           
+    })
+    function ValidateConclusionss() {
+
+        let conlusion = $('#Conlusion').val();
+        if (conlusion == "") {
+            bootbox.alert("Please input Conclusion!");
+            return false;
+        }
+        return true;
+    }
+    //
+        function ValidateConlusion() {
+            let Yield = $('#Yield').val();
+            let GM = $('#GM').val();
+            let conlusion = $('#Conlusion').val();
+            if (Yield == "") {
+                bootbox.alert("Please input Yield!");
+                return false;
+            }
+            if (GM == "") {
+                bootbox.alert("Please input GM!");
+                return false;
+            }
+            if (conlusion == "") {
+                bootbox.alert("Please input Conclusion!");
+                return false;
+            }
+            return true;
+        }
+
+        $formconlusion.submit(function (e) {
+            e.preventDefault();
+            $.blockUI();
+            var data = new FormData(this);
+            var $fromObj = $(this);
+            var urlAction = $fromObj.attr('action');
+            $.ajax({
+                url: urlAction,
+                type: 'POST',
+                dataType: "Json",
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: data,
+                fail: function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }
+            }).always(function () {
+                $.unblockUI();
+            }).success(function (result) {
+                if (result.success && result.message == "Cancel") {
+                    bootbox.alert('Cancel Product Tranfer successfully',
+                        function (result) {
+                            window.location.href = homeUrl;
+                        });
+                } else {
+                    if (result.message) {
+                        bootbox.alert(result.message);
+                    } else {
+                        bootbox.alert('Error!.Please check your informations!');
+
+                    }
+
+                }
+            });
+        })
+        //Add check list
+        $('#backtoindex').on('click', function (e) {
+            e.preventDefault();
+            window.location.href = homeUrl;
+        })
+    @*$('#submitupdatelist').on('click', function (e) {
+        e.preventDefault();
+        if()
+            let url = '@Url.Action("SubmitMutilple", "ProductTranfer")?' + 'StringListncrnum=' + JSON.stringify(checkedItems);
+            window.open(url);
+        });*@
+
+
+
+
+    //file excel
+
+    var $form = $('#ExcelData');
+    $('#excel').on('change', function (e) {
+        debugger;
+        e.preventDefault();
+        $form.submit();
+    });
+    $("#ExcelData").submit(function (e) {
+        e.preventDefault();
+        debugger
+        var file = $('#excel').val();
+        if (file == "") {
+            bootbox.alert("Vui lòng chọn file");
+            e.preventDefault();
+            return false;
+        }
+        else {
+            var dataString = new FormData($form[0]);
+
+            $.blockUI();
+            $.ajax({
+                url: $form.attr('action'),  //Server script to process data
+                type: 'POST',
+                //Ajax events
+                success: function (result) {
+                    if (result.success === 2) {
+                        bootbox.alert("Please check data your file input!!");
+                    }
+                    else if (result.success === 1) {
+                        $.unblockUI();
+                        bootbox.alert("Upload and save change successfully!!", function () { location.reload(); });
+                        window.location.href = homeUrl;
+                    }
+                    else if (result.success === 0) {
+                        $.unblockUI();
+                        bootbox.alert("Upload and save change unsuccessfully!!", function () { location.reload(); });
+                        window.location.href = homeUrl;
+                    }
+                },
+                error: function () {
+                    bootbox.alert('Please contact to Administrator!');
+                },
+                complete: function () {
+                    $.unblockUI();
+                },
+                // Form data
+                data: dataString,
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+        }
+    });
+    </script>
+}
+
+
+

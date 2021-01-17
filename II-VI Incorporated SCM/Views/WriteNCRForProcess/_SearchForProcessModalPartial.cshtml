@@ -1,0 +1,600 @@
+﻿@using Microsoft.AspNet.Identity
+<style>
+    .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td {
+        background-color: #5CB85C !important;
+    }
+
+    .rowActive {
+        background-color: #5CB85C !important;
+    }
+
+    .blockUI {
+        z-index: 100051 !important;
+    }
+</style>
+<div class="row">
+    <div class="portlet light bordered">
+        <div class="portlet-title tabbable-line">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#portlet_tab_PO" data-toggle="tab" aria-expanded="true">PO Number</a>
+                </li>
+                <li class="">
+                    <a href="#portlet_tab_WO" data-toggle="tab" aria-expanded="false">WO Number</a>
+                </li>
+                <li class="">
+                    <a href="#portlet_tab_Serial" data-toggle="tab" aria-expanded="false">Serial</a>
+                </li>
+            </ul>
+        </div>
+        <div class="portlet-body form">
+            <div class="tab-content">
+                <div class="tab-pane" id="portlet_tab_Serial">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Serial</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="serial_num" required="required" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label ">Part Number</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control ms-cor" id="serial_partnum" required="required" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label ">LOT</label>
+                                <div class="col-md-4">
+                                    <select class="form-control ms-lor" disabled="disabled" id="lot-serial"></select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-4 col-md-4">
+                                    <button type="button" class="btn green" id="btnSearchSerial" disabled><i class="fa fa-search"></i> Go</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="portlet_tab_WO">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">WO</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="wo_num" required="required" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label ms-co">Part Number</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="wo_partnum" required="required" class="form-control" />
+                                </div>
+                                @*<div class="col-md-offset-4 col-md-4">
+                                        <button type="button" class="btn green" id="btnLotByWO">Get Lot</button>
+                                    </div>*@
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">LOT</label>
+                                <div class="col-md-4">
+                                    <select class="form-control ms-lox" id="lot-wo" disabled="disabled"></select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-4 col-md-4">
+                                    <button type="button" class="btn green" id="btnSearchWO" disabled><i class="fa fa-search"></i> Go</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane active" id="portlet_tab_PO">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label ms-co">Part Number</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="po_partnum" required="required" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">LOT</label>
+                                <div class="col-md-4">
+                                    @*<input type="text" class="form-control" required="required" id="lot_num" value="" />*@
+                                    <select class="form-control ms-po" id="lot_num" disabled="disabled">
+                                     
+                                    </select>
+                                             
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label ms-co">PO</label>
+                                <div class="col-md-4">
+                                    <select class="form-control ms-po" id="po_num" @*disabled="disabled*@ ></select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-4 col-md-4">
+                                    <button type="button" class="btn green" id="btnSearchPO" disabled><i class="fa fa-search"></i> Go</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" style="padding-left: 30px">
+        <table class="table table-striped table-bordered table-hover" id="table-show">
+            <thead>
+                <tr>
+                    <th>Receiver</th>
+                    <th>PO Number</th>
+                    <th>Part #</th>
+                    @*th>Rec Qty</th>*@
+                    <th>Rec DATE</th>
+                </tr>
+            </thead>
+            <tbody id="data-append"></tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    var SEND_PONUM = "";
+    var SEND_PARTNUM = "";
+    var SEND_RECEIVER = "";
+    var UrlPO = '@Url.Action("GetDataInputIQCInProcessByPONumAndPartNum", "WriteNCRForIQC")'
+    $(document).ready(function () {
+        $("#btnSearchPO").on('click', function (evt) {
+            seachByPO();
+        });
+        var lot = document.getElementById("lot_num");
+        lot.selectedIndex=1;
+        $("#btnSearchWO").on('click', function (evt) {
+            searchByWO();
+        });
+
+        $("#btnSearchSerial").on('click', function (evt) {
+            searchBySerial();
+        });
+        $("#lot_num").on('change', function () {
+            if (isBlank($("#lot_num").val())) {
+                $("#po_num").empty();
+                $("#po_num").prop("disabled", true);
+                $("#btnSearchPO").prop("disabled", true);
+            }
+            else {
+                $("#btnSearchPO").prop("disabled", false);
+                GetPObyLOT();
+            }
+        });
+        $("#po_partnum").on('keyup', function () {
+            if (isBlank($("#po_partnum").val())) {
+                $("#po_num").empty();
+              //  $("#po_num").prop("disabled", true);
+               // $("#btnSearchPO").prop("disabled", true);
+            }
+            else {
+             //   $("#btnSearchPO").prop("disabled", false);
+                GetLOTbyPN();
+            }
+        });
+
+        //$("#po_partnum").on('keyup', function () {
+        //    if (isBlank($("#po_partnum").val())) {
+        //        $("#btnSearchPO").prop("disabled", true);
+        //    }
+        //    else {
+        //        $("#btnSearchPO").prop("disabled", false);
+        //    }
+        //});
+
+        $("#wo_num").on('keyup', function () {
+            if (isBlank($("#wo_num").val())) {
+                $("#btnSearchWO").prop("disabled", true);
+                $("#lot-wo").empty();
+                $("#lot-wo").prop("disabled", true);
+            }
+            else {
+                $("#btnSearchWO").prop("disabled", false);
+                GetLotByWOAndPartNum();
+            }
+        });
+
+        $("#wo_partnum").on('keyup', function () {
+            if (isBlank($("#wo_partnum").val())) {
+                $("#btnSearchWO").prop("disabled", true);
+                $("#lot-wo").empty();
+                $("#lot-wo").prop("disabled", true);
+            }
+            else {
+                $("#btnSearchWO").prop("disabled", false);
+                GetLotByWOAndPartNum();
+            }
+        });
+
+        //$("#serial_num").on('keyup', function () {
+        //    debugger;
+        //    if (isBlank($("#serial_num").val())) {
+        //        $("#btnSearchSerial").prop("disabled", true);
+        //        $("#lot-serial").empty();
+        //        $("#lot-serial").prop("disabled", true);
+        //    }
+        //    else {
+        //        $("#btnSearchSerial").prop("disabled", false);
+        //        GetLotBySerialAndPartNum();
+        //    }
+        //});
+
+        $("#serial_partnum").on('keyup', function () {
+            if (isBlank($("#serial_partnum").val())) {
+                $("#btnSearchSerial").prop("disabled", true);
+                $("#lot-serial").empty();
+                $("#lot-serial").prop("disabled", true);
+            }
+            else {
+                $("#btnSearchSerial").prop("disabled", false);
+                GetLotBySerialAndPartNum();
+            }
+        });
+    })
+
+    function GetPObyLOT() {
+        let lot = $("#lot_num").val();
+        let po = $("#po_num").val();
+        let pn = $("#po_partnum").val();
+        $.post('@Url.Action("GetListPOByLOT", "WriteNcrForProcess")', { lot: lot, po: po, pn: pn}, function (result) {
+            if (result.success) {
+                $("#po_num").prop("disabled", false);
+                let lstData = result.data;
+                let option = "";
+                $.each(lstData, function () {
+                    let tmp = this;
+                        option = option + '<option  value="' + tmp + '">' + tmp + '</option>';
+                });
+                $("#po_num").html(option);
+            }
+        }).fail(function () {
+            bootbox.alert('Please contact to Administrator!');
+        }).always(function () {
+            $.unblockUI();
+        });
+    }
+
+    function GetLOTbyPN() {
+        let partnum = $("#po_partnum").val();
+        let ccn = '@ViewBag.ID_CCN';
+        $.post('@Url.Action("GetLOTbyPN", "WriteNcrForProcess")', { pn: partnum,CCN:ccn}, function (result) {
+            if (result.success) {
+                let lstData = result.data;
+                $("#lot_num").prop("disabled", false);
+                let option = "<option value='null'>--Select--</option>";
+                $.each(lstData,
+                    function () {
+                        let tmp = this;
+                            option = option + '<option value="' + tmp + '">' + tmp + '</option>';
+                    });
+                $("#lot_num").html(option);
+                $('#lot_num').change();
+            } else {
+                bootbox.alert("Please check input information!");
+            }
+        }).fail(function () {
+            bootbox.alert('Please contact to Administrator!');
+        }).always(function () {
+            $.unblockUI();
+        });
+    }
+    function GetLotByWOAndPartNum() {
+        let wo = $("#wo_num").val();
+        let partnum = $("#wo_partnum").val();
+        let ccn = '@ViewBag.ID_CCN';
+        $.blockUI();
+        $.post('@Url.Action("GetListLOTByWOAndPartnum", "WriteNcrForProcess")', { wo: wo, partnum: partnum}, function (result) {
+            if (result.success) {
+                $("#lot-wo").prop("disabled", false);
+                let lstData = result.data;
+                let option = "";
+                $.each(lstData,
+                    function () {
+                        let tmp = this;
+                        option = option + '<option value="' + tmp + '">' + tmp + '</option>';
+                    });
+                $("#lot-wo").html(option);
+            } else {
+                bootbox.alert("Please check input information!");
+            }
+        }).fail(function () {
+            bootbox.alert('Please contact to Administrator!');
+        }).always(function () {
+            $.unblockUI();
+        });
+    }
+    function GetLotBySerialAndPartNum() {
+        let serial = $("#serial_num").val();
+        let partnum = $("#serial_partnum").val();
+        $.blockUI();
+        $.post('@Url.Action("GetListLOTBySerialAndPartnum", "WriteNcrForProcess")', { serial: serial, partnum: partnum }, function (result) {
+            if (result.success) {
+                $("#lot-serial").prop("disabled", false);
+                let lstData = result.data;
+                let option = "";
+                $.each(lstData, function () {
+                    let tmp = this;
+                    option = option + '<option value="' + tmp + '">' + tmp + '</option>';
+                });
+                $("#lot-serial").html(option);
+            }
+        }).fail(function () {
+            bootbox.alert('Please contact to Administrator!');
+        }).always(function () {
+            $.unblockUI();
+        });
+    }
+
+    function SelectValPro() {
+        debugger;//tuanlua-2901
+        $('#div-vendor').removeAttr('style');
+        $('#div-main').removeAttr('style');
+        $("#MI_PART_NO").attr('readonly', true);
+        $("#DRAW_REV").attr('readonly', true);
+        $("#MODEL_NO").attr('readonly', true);
+        $("#PO_NUM").attr('readonly', true);
+
+       // $("#LOT").attr('readonly', true);
+        $("#RECEIVER").attr('readonly', true);
+        $("#ITEM_DESC").attr('readonly', true);
+        $("#VEN_NAME").attr('readonly', true);
+        $("#VEN_ADD").attr('readonly', true);
+        $("#VENDOR").attr('readonly', true);
+        $("#STATE").attr('readonly', true);
+        $("#ZIP_CODE").attr('readonly', true);
+        $("#INSPECTOR").attr('readonly', true);
+        $("#CITY").attr('readonly', true);
+        $('#DRAW_REV').attr('readonly', true);
+        $('#RECEIVER').removeAttr('style');
+        $('#PO_NUM').removeAttr('style');
+        $('.labelreceiver').removeAttr('style');
+        $('.labelpo').removeAttr('style');
+        //
+        $('#labellot').removeClass('labaelmake');
+       // $('#labellot').addClass('llabellot');
+        $('#tbodyEvidenceInProcess tr').remove();
+        let checkTab = 1;
+        if ($("#portlet_tab_WO").hasClass('active')) {
+            checkTab = 2;
+        }
+        if ($("#portlet_tab_Serial").hasClass('active')) {
+            checkTab = 3;
+        }
+        $myformForProcess[0].reset();
+        var id = '@User.Identity.GetUserId()';
+        $.blockUI();
+        $.post('@Url.Action("Getnamebyid", "WriteNCRForIQC")', { id: id },
+            function (result) {
+                $("#InspectorName").val(result);
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });
+        switch (checkTab) {
+            case 1:
+                SendDataByPO();
+                break;
+            case 2:
+                SendDataByWO();
+                break;
+            default:
+                SendDataBySerial();
+        }
+        // Reset form create NCR for Proccess
+        let listRow = $(".DefectRow");
+        for (let i = 0; i < listRow.length; i++) {
+            $(listRow[i]).remove();
+        }
+        $("#Err_Receiver").html("");
+        isExistReceiver = true;
+        dem = 0;
+    }
+
+    function SendDataByPO() {
+        let tmp = $(".item_no.rowActive");
+        let idx = tmp.attr('rev');
+        let lot = $("#LOT_" + idx).text();
+        if (lot == "") {
+            $('#LOT').attr('readonly', false);
+        }
+        let rev = $("#DRAW_REV_" + idx).text();
+        if (rev == "") {
+            $('#DRAW_REV').val("N/A");
+        }
+        else {
+            $('#DRAW_REV').val($("#DRAW_REV_" + idx).text());
+        }
+        $("#MI_PART_NO").val($("#ITEM_" + idx).text());
+        $("#MODEL_NO").val($("#MODEL_NO_" + idx).text());
+        $("#PO_NUM").val($("#PO_NUM_" + idx).text());
+        $("#LOT").val($("#LOT_" + idx).text());
+        $("#RECEIVER").val($("#RECEIVER_" + idx).text());
+        $("#ITEM_DESC").val($("#ITEM_DESC_" + idx).text());
+        $("#VEN_NAME").val($("#VEN_NAME_" + idx).text());
+        $("#VEN_ADD").val($("#ADDRESS_" + idx).text());
+        $("#VENDOR").val($("#VENDOR_" + idx).text());
+        $("#STATE").val($("#STATE_" + idx).text());
+        $("#ZIP_CODE").val($("#ZIP_" + idx).text());
+        $("#INSPECTOR").val($("#Inspector_" + idx).text());
+        $("#CITY").val($("#CTRY_" + idx).text());
+      //  $('#DRAW_REV').val($("#DRAW_REV_" + idx).text());
+        document.getElementById("VNMaterialTraceability").value = "";
+        $("#responsivprocess").modal('hide');
+        if ($("#VENDOR_" + idx).text() !== '') {
+            $('#DRAW_REV').attr('required', true);
+        }
+    }
+    function SendDataByWO() {
+        let tmp = $(".item_no.rowActive");
+        let idx = tmp.attr('rev');
+        let lot = $("#LOT_" + idx).text();
+        if (lot == "") {
+            $('#LOT').attr('readonly', false);
+        }
+        let rev = $("#DRAW_REV_" + idx).text();
+        if (rev = "") {
+            $('#DRAW_REV').val("N/A");
+        }
+        else {
+            $('#DRAW_REV').val($("#DRAW_REV_" + idx).text());
+        }
+        $("#MI_PART_NO").val($("#ITEM_" + idx).text());
+        //$("#DRAW_REV").val($("#REC_LINE_" + idx).text());
+        $("#PO_NUM").val($("#PO_NUM_" + idx).text());
+        $("#LOT").val($("#LOT_" + idx).text());
+        $("#VENDOR").val($("#VENDOR_" + idx).text());
+        $("#MODEL_NO").val($("#MODEL_NO_" + idx).text());
+        $("#ITEM_DESC").val($("#ITEM_DESC_" + idx).text());
+        $("#RECEIVER").val($("#RECEIVER_" + idx).text());
+        $("#VEN_NAME").val($("#VEN_NAME_" + idx).text());
+        $("#VEN_ADD").val($("#ADDRESS_" + idx).text());
+        $("#STATE").val($("#STATE_" + idx).text());
+        $("#ZIP_CODE").val($("#ZIP_" + idx).text());
+        $("#INSPECTOR").val($("#Inspector_" + idx).text());
+        $("#CITY").val($("#CTRY_" + idx).text());
+        document.getElementById("VNMaterialTraceability").value = "";
+        $("#responsivprocess").modal('hide');
+        if ($("#VENDOR_" + idx).text() !== '') {
+            $('#DRAW_REV').attr('required', true);
+        }
+    }
+
+    function SendDataBySerial() {
+        let tmp = $(".item_no.rowActive");
+        let idx = tmp.attr('rev');
+        let lot = $("#LOT_" + idx).text();
+        if (lot == "") {
+            $('#LOT').attr('readonly', false);
+        }
+        let rev = $("#DRAW_REV_" + idx).text();
+        if (rev = "") {
+            $('#DRAW_REV').val("N/A");
+        }
+        else {
+            $('#DRAW_REV').val($("#DRAW_REV_" + idx).text());
+        }
+        $("#MI_PART_NO").val($("#ITEM_" + idx).text());
+        //$("#DRAW_REV").val($("#REC_LINE_" + idx).text());
+        $("#PO_NUM").val($("#PO_NUM_" + idx).text());
+        $("#LOT").val($("#LOT_" + idx).text());
+        $("#VENDOR").val($("#VENDOR_" + idx).text());
+        $("#MODEL_NO").val($("#MODEL_NO_" + idx).text());
+        $("#ITEM_DESC").val($("#ITEM_DESC_" + idx).text());
+        $("#RECEIVER").val($("#RECEIVER_" + idx).text());
+        $("#VEN_NAME").val($("#VEN_NAME_" + idx).text());
+        $("#VEN_ADD").val($("#ADDRESS_" + idx).text());
+        $("#STATE").val($("#STATE_" + idx).text());
+        $("#ZIP_CODE").val($("#ZIP_" + idx).text());
+        $("#INSPECTOR").val($("#Inspector_" + idx).text());
+        $("#CITY").val($("#CTRY_" + idx).text());
+        document.getElementById("VNMaterialTraceability").value = "";
+        $("#responsivprocess").modal('hide');
+        if ($("#VENDOR_" + idx).text() !== '') {
+            $('#DRAW_REV').attr('required', true);
+        }
+    }
+
+    function seachByPO() {
+        let po = $("#po_num").val();
+        let pn = $("#po_partnum").val();
+        let lot = $("#lot_num").val();
+        let CCN = $('#CCN').val();
+        if (isBlank(po)) {
+            $('#po_num').addClass("input-validation-error");
+            return;
+        } else {
+            $('#po_num').removeClass("input-validation-error");
+        }
+
+        if (isBlank(lot)) {
+            $('#lot_num').addClass("input-validation-error");
+            return;
+        } else {
+            $('#lot_num').removeClass("input-validation-error");
+        }
+        $.blockUI();
+        $.post(UrlPO, { po: po, lot: lot ,pn:pn,CCN:CCN}, function (data) {
+            isWriteNCRForProcess = true;
+            $("#data-append").html(data);
+        }).fail(function () {
+            isWriteNCRForProcess = false;
+            bootbox.alert('Please contact to Administrator!');
+        }).always(function () {
+            $.unblockUI();
+        });
+    }
+
+    function searchByWO() {
+        let lotWo = $("#lot-wo").val();
+        let wo_partnum = $("#wo_partnum").val();
+        let CCN = $('#CCN').val();
+        if (isBlank(wo_partnum)) {
+            $('#wo_partnum').addClass("input-validation-error");
+            return;
+        } else {
+            $('#wo_partnum').removeClass("input-validation-error");
+        }
+
+        if (isBlank(lotWo)) {
+            $('#lot-wo').addClass("input-validation-error");
+            return;
+        } else {
+            $('#lot-wo').removeClass("input-validation-error");
+        }
+
+        $.blockUI();
+        $.post('@Url.Action("GetDataInputIQCInProcessByLOTAndPartNum", "WriteNcrForIqc")', { lot: lotWo, partnum: wo_partnum ,CCN:CCN}, function (data) {
+            isWriteNCRForProcess = true;
+            $("#data-append").html(data);
+        }).fail(function () {
+            isWriteNCRForProcess = false;
+            bootbox.alert('Please contact to Administrator!');
+        }).always(function () {
+            $.unblockUI();
+        });
+    }
+
+    function searchBySerial() {
+        let lotSerial = $("#lot-serial").val();
+        let serial_partnum = $("#serial_partnum").val();
+        let CCN = $('#CCN').val();
+        if (isBlank(serial_partnum)) {
+            $('#serial_partnum').addClass("input-validation-error");
+            return;
+        } else {
+            $('#serial_partnum').removeClass("input-validation-error");
+        }
+
+        if (isBlank(lotSerial)) {
+            $('#lot-serial').addClass("input-validation-error");
+            return;
+        } else {
+            $('#lot-serial').removeClass("input-validation-error");
+        }
+
+
+        $.blockUI();
+        $.post('@Url.Action("GetDataInputIQCInProcessByLOTAndPartNum", "WriteNcrForIqc")', { lot: lotSerial, partnum: serial_partnum ,CCN:CCN}, function (data) {
+            isWriteNCRForProcess = true;
+            $("#data-append").html(data);
+        }).fail(function () {
+            isWriteNCRForProcess = false;
+            bootbox.alert('Please contact to Administrator!');
+        }).always(function () {
+            $.unblockUI();
+        });
+    }
+
+</script>

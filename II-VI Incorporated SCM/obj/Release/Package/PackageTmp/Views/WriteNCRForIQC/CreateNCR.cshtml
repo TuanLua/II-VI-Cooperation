@@ -1,0 +1,1132 @@
+﻿@using II_VI_Incorporated_SCM.Services
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Write NCR for IQC";
+}
+@using II_VI_Incorporated_SCM.Models
+<style>
+    .input-validation-error {
+        border: 1px solid red !important;
+        background-color: #fee !important;
+    }
+
+    ul.multiselect-container {
+        padding-left: 25px !important;
+        max-height: 150px !important;
+    }
+
+    .llabellot {
+        float: left;
+        margin-left: 375px;
+    }
+    .labaelmake {
+        margin-left: 260px;
+    }
+    .inputlot {
+        float: right
+    }
+</style>
+<div class="row">
+    @if ((bool)ViewBag.IsOPE)
+    {
+        <button type="button" class="btn btn-success btn-sm" id="saveNCRForOPE">Save</button>
+        <button type="button" class="btn btn-success btn-sm" id="submitNCRForOPE" style="display: none;">Submit</button>
+    }
+    else
+    {
+        <button type="button" class="btn btn-success btn-sm" id="saveNCR">Save</button>
+    }
+    <button class="btn btn-danger btn-sm btn-close">Cancel</button>
+    <div class="portlet light bordered">
+        <div class="portlet-title tabbable-line">
+            <div class="caption">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#WriteNCRForIQC" data-toggle="tab" class="green" aria-expanded="true" id="iqcTab">For IQC</a>
+                    </li>
+                    <li class="">
+                        <a href="#WriteNCRForProcess" data-toggle="tab" class="green" aria-expanded="false" id="In-ProcessTab">In-Process</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <div class="tab-content">
+                <div class="tab-pane active" id="WriteNCRForIQC">
+                    <div align="right">
+                        <a data-toggle="modal" href="#responsiveriqc" class="btn green"><i class="fa fa-search"></i></a>
+                    </div>
+                    @using (Html.BeginForm("SaveNCRForIQC", "WriteNCRForIQC", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "form-data", @id = "forIQC" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="CCN" id="CCN" value="@ViewBag.ID_CCN" />
+                        <input type="hidden" name="CCN1" value="@ViewBag.ID_CCN" />
+                        @Html.Partial("~/Views/WriteNCRForIQC/_WriteNCRForIQC.cshtml")
+                        if ((bool)ViewBag.IsOPE)
+                        {
+                            <div class="row" id="modelSubmitStatusIQC" style="display: none;">
+                                <div class="clearfix"></div>
+                                <div id="select-MRBAuthorizationIQC" class="row top-buffer ms-showdata-iqc" style="display: none;     margin-left: 5px;">
+                                    <br /> <br />
+                                    <fieldset class="ms-showdata-iqc" style="display: none">
+                                        <legend>MRB Authorization</legend>
+                                        <div class="">
+                                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbMRBAuthorizationIQC">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Role name</th>
+                                                        <th>User name</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyApprovarIQC"></tbody>
+                                            </table>
+                                            <button type="button" class="btn btn-success pull-right" id="btnApproverIQC">Add Approver</button>
+                                        </div>
+
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <input type="hidden" name="Comment" id="iqc-submit-comt" value="" />
+                        }
+                    }
+                </div>
+                <div class="tab-pane" id="WriteNCRForProcess">
+                    <a class="btn green" id="makepart">Create NCR for Make Part</a>
+                    <a data-toggle="modal" href="#responsivprocess" class="btn green" id="buypart">Create NCR for Buy Part</a>
+                    @*<div align="right">
+                            <a data-toggle="modal" href="#responsivprocess" class="btn green"><i class="fa fa-search"></i></a>
+                        </div>*@
+                    @using (Html.BeginForm("SaveNCRForProcess", "WriteNCRForProcess", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "form-data", @id = "forProcess" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="CCN" value="@ViewBag.ID_CCN" />
+                        @Html.Partial("~/Views/WriteNCRForProcess/_WriteNCRForProcess.cshtml")
+                        if ((bool)ViewBag.IsOPE)
+                        {
+                            <div class="row" id="modelSubmitStatusInProcess" style="display: none;">
+                                <fieldset class="col-md-12">
+                                    <legend>MRB Authorization</legend>
+                                    <div class="">
+                                        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbMRBAuthorizationInProcess">
+                                            <thead>
+                                                <tr>
+                                                    <th>Role name</th>
+                                                    <th>User name</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbodyApprovarInProcess"></tbody>
+                                        </table>
+                                        <button type="button" class="btn btn-success pull-right" id="btnApproverInProcess">Add Approver</button>
+                                    </div>
+
+                                </fieldset>
+                            </div>
+                            <input type="hidden" name="Comment" id="inprocess-submit-comt" value="" />
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="responsiveriqc" class="modal fade " tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Search for IQC</h4>
+            </div>
+            <div class="scroller" style="height:500px" data-always-visible="1" data-rail-visible1="1">
+                @Html.Partial("~/Views/WriteNCRForIQC/_SearchForIQC.cshtml")
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" onclick="SelectVal()">OK</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="responsivprocess" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Search for Process</h4>
+            </div>
+            <div class="scroller" style="height:500px" data-always-visible="1" data-rail-visible1="1">
+                @Html.Partial("~/Views/WriteNCRForProcess/_SearchForProcessModalPartial.cshtml")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="SelectValPro()">OK</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbMRBAuthorizationTemplate" style="display:none">
+    <thead>
+        <tr>
+            <th>Role name</th>
+            <th>User name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="tbodyApprovarTemplate">
+        <tr id="tr-ApproverTemplate">
+            <td>@Html.DropDownList("ListRoleTemplate", (SelectList)ViewBag.ListRole, "Select Role", new { id = "ListRoleTemplate" })</td>
+            <td><select id="ListUserTemplate"></select></td>
+            <td><button onclick="deleteApprover(this)" type="button" class="btn btn-danger pull-right">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+@section scripts {
+    <script type="text/javascript">
+        var $formForIQC = $('#forIQC');
+        var $myformForProcess = $('#forProcess');
+        var homeUrl = '@Url.Action("Index", "NCR")';
+        var UrlChange = '@Url.Action("GetdropdownDeCript", "WriteNcrForProcess")';
+        var UrlChangeIQC = '@Url.Action("GetdropdownDeCript", "WriteNcrForIqc")';
+        var UrlChangeIQCByList = '@Url.Action("GetDropdownlistIQC", "WriteNcrForIqc")';
+        var Urliqc = '@Url.Action("GetDetailNCRForIqcSearch", "WriteNcrForIqc")';
+        var dem = 0;
+        @*var fullName = '@((Request.IsAuthenticated && User.Identity != null) ? ((ClaimsIdentity) User.Identity).FindFirst("FullName").Value : "")';*@
+        // Global variable
+        var isWriteNCRForIQC = false;
+        var isWriteNCRForProcess = false;
+        var isExistNRCNumIQC = true;
+        var isExistNRCNumProccess = true;
+        var isExistReceiver = true;
+        var isExistVendor = true;
+        var dataDefect;
+        var ENGINEERINGRoleId = '@ViewBag.ENGINEERINGRoleId';
+        var CHAIRMANRoleId = '@ViewBag.CHAIRMANRoleId';
+
+        function ShowHtmlComponent() {
+            let selectedIQCTab = $("#iqcTab").attr("aria-expanded") === 'true';
+            if (selectedIQCTab) {
+                $("#modelSubmitStatusIQC").show();
+                $("#modelSubmitStatusInProcess").hide();
+            }
+            else {
+                $("#modelSubmitStatusIQC").hide();
+                $("#modelSubmitStatusInProcess").show();
+            }
+            $("#saveNCRForOPE").hide();
+            $("#submitNCRForOPE").show();
+            $("select.form-control").focus();
+        }
+
+        function ValidateForm(selectedIQCTab) {
+            debugger;
+            if (selectedIQCTab) { // For IQC
+
+                if ($formForIQC.valid()) { // check $formForIQC valid
+                    //let file = $('#VNMaterialTraceability').val();
+                    //if (file === "") {
+                    //    bootbox.alert("Input file VNMaterialTraceability!");
+                    //    return false;
+                    //}
+                    return true;
+                }
+                return false;
+            } else { // For InProcess
+                if ($myformForProcess.valid()) { // check $myformForProcess valid
+                    $("button.input-validation-error").removeClass("input-validation-error");
+                    if (!isExistReceiver) { // check Receiver valid
+                        bootbox.alert("Receiver not Existed");
+                        return false;
+                    }
+                    debugger;
+                    if (!CheckAllQuanity()) {
+                        bootbox.alert("Please check Non-conformity Information!");
+                        return false;
+                    }
+                    //let file = $('#VNMaterialTraceability').val();
+                    //if (file === "") {
+                    //    bootbox.alert("Input file VNMaterialTraceability!");
+                    //    return false;
+                    //}
+                    //else if (!CheckAllQuanity()) {
+                    //    bootbox.alert("Please check defect qty!");
+                    //    return false;
+                    //}
+                    return true;
+                }
+                $("button.input-validation-error").removeClass("input-validation-error");
+                $("button[title='None selected']").addClass("input-validation-error");
+                return false;
+            }
+        };
+
+        $("#saveNCRForOPE").click(function () {
+            debugger;
+            let isIQC = $("#iqcTab").attr("aria-expanded") === 'true';
+            let isprocess = $("#In-ProcessTab").attr("aria-expanded") === 'true';
+           // let isprocessseacrh = $("#In-ProcessTabSearch").attr("aria-expanded") === 'true';
+            // Validate submit form
+            //if (isIQC & $formForIQC.valid()) {
+            //    $formForIQC.submit();
+            //} else if ($myformForProcess.valid()) {
+            //    $myformForProcess.submit();
+            //}
+
+            if (isIQC) {
+                if ($formForIQC.valid()) { // check $formForIQC valid
+                    //let file = $('#VNMaterialTraceability').val();
+                    //if (file === "") {
+                    //    bootbox.alert("Input file Attach VNMaterialTraceability!");
+                    //    return false;
+                    //}
+                    Validate_SaveNCR();
+                }
+            } else {
+                if (ValidateForm(isIQC)) {
+                    Validate_SaveNCR();
+                }
+            }
+        }); // end click saveNCRForOPE
+
+        $("#submitNCRForOPE").click(function () {
+
+            bootbox.dialog({
+                title: 'Confirm submit NCR',
+                message: 'Do you want to submit NCR ?',
+                inputType: 'text',
+                buttons: {
+                    csubmit: {
+                        label: 'Yes, submit and approve without meeting',
+                        className: 'btn btn-info',
+                        callback: function () {
+                            bootbox.prompt({
+                                title: "Leave The Message",
+                                inputType: 'textarea',
+                                callback: function (result) {
+                                    submitNCR(result);
+                                    console.log(result);
+                                }
+                            });
+                        }
+                    },
+                    confirm: {
+                        label: 'Yes, submit this NCR',
+                        className: 'btn-success',
+                        callback: function () {
+                            submitNCR(null);
+                        }
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                closeButton: false
+            });
+
+
+        }); // end click submitNCRForOPE
+
+        function submitNCR(msg)
+        {
+            if (msg !== null && msg !== '' && msg !== undefined) {
+                $('#inprocess-submit-comt').val(msg);
+                $('#iqc-submit-comt').val(msg);
+            }
+            let isIQC = $("#iqcTab").attr("aria-expanded") === 'true';
+
+            // Validate submit form
+            if (ValidateForm(isIQC)) {
+                //Check least have eng
+
+                if (isIQC) {
+                    let countEng = false;
+                    let countChairman = false;
+                    $('#tbodyApprovarIQC tr').each(function (i, e) {
+                        let role = $(e).children().first().children().children().first().val();
+                        if (role === ENGINEERINGRoleId) countEng = true;
+                        if (role === CHAIRMANRoleId) countChairman = true;
+                    });
+                    if (countEng && countChairman)
+                        $formForIQC.submit();
+                    else {
+                        bootbox.alert('Please select MARLOW MRB AUTHORIZATION!  -  ENGINEERING');
+                    }
+
+
+                } else {
+                    let countEng = false;
+                    let countChairman = false;
+                    $('#tbodyApprovarInProcess tr').each(function (i, e) {
+                        let role = $(e).children().first().children().children().first().val();
+                        if (role === ENGINEERINGRoleId) countEng = true;
+                        if (role === CHAIRMANRoleId) countChairman = true;
+                    });
+                    if (countEng && countChairman)
+                        $myformForProcess.submit();
+                    else {
+                        bootbox.alert('Please select MARLOW MRB AUTHORIZATION!  -  ENGINEERING');
+                    }
+                }
+
+            }
+        }
+
+
+        $(document).ready(function () {
+            debugger;
+         //   $('#responsiveriqc').modal('show');
+            let userquality = $("#qualityAss").val("");
+            let userengineer = $("#engineer").val("");
+            let userafg = $("#afgassy").val("");
+            let userpurchange = $("#purchasing").val("");
+            $("#INSPECTOR").val('@User.Identity.GetUserId()');
+            var id = '@User.Identity.GetUserId()';
+            $.blockUI();
+            $.post('@Url.Action("Getnamebyid", "WriteNCRForIQC")', { id: id },
+                function (result) {
+                    $("#InspectorName").val(result);
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            let ccn = $('#CCN').val();
+            console.log(ccn);
+            $.blockUI();
+            $.post('@Url.Action("GetdropdownDefect", "WriteNcrForProcess")', { ccn: ccn },
+                function (result) {
+                    dataDefect = result;
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            $("#RECEIVER").on('keyup copy paste cut',
+                function (evt) {
+                    checkExistRECEIVER();
+                });
+        });
+
+        function checkExistVendor() {
+            if ($("#VENDOR").val() == "") {
+                $("#div_Err_Vendor").hide();
+                isExistVendor = true;
+                return;
+            } else {
+                $.blockUI();
+                $.post("/NCR/IsnotExistVendor",
+                    { vendor: $("#VENDOR").val() },
+                    function (data) {
+                        if (data.result) {
+                            $("#div_Err_Vendor").hide();
+                            isExistVendor = true;
+                        } else {
+                            $("#div_Err_Vendor").show();
+                            $("#Err_Vendor").html(data.message);
+                            isExistVendor = false;
+                        }
+                    }).fail(function () {
+                        bootbox.alert('Please contact to Administrator!');
+                    }).always(function () {
+                        $.unblockUI();
+                    });
+            }
+        }
+
+        function checkExistRECEIVER() {
+            if ($("#RECEIVER").val() == "") {
+                isExistReceiver = true;
+                return;
+            } else {
+                $.blockUI();
+
+                $.post('@Url.Action("IsExistReceiver", "NCR")',
+                    { receiver: $("#RECEIVER").val() },
+                    function (data) {
+                        if (data.result) {
+                            $("#Err_Receiver").html("");
+                            isExistReceiver = true;
+                        } else {
+                            $("#Err_Receiver").html(data.message);
+                            isExistReceiver = false;
+                        }
+                    }).fail(function () {
+                        bootbox.alert('Please contact to Administrator!');
+                    }).always(function () {
+                        $.unblockUI();
+                    });
+            }
+        }
+
+        function Validate_SaveNCR() {
+            let isIQC = $("#iqcTab").attr("aria-expanded") == 'true';
+            // Validate submit form
+            if (isIQC) {
+                $formForIQC.submit();
+            } else {
+                $myformForProcess.submit();
+            }
+        }
+        //Save data
+        $('#saveNCR').click(function () {
+            let selectedIQCTab = $("#iqcTab").attr("aria-expanded") == 'true';
+            if (selectedIQCTab) {
+                if ($formForIQC.valid()) { // check $formForIQC valid
+                    //let file = $('#VNMaterialTraceability').val();
+                    //if (file === "") {
+                    //    bootbox.alert("Input file Attach VNMaterialTraceability!");
+                    //    return false;
+                    //}
+                    Validate_SaveNCR();
+                }
+            } else {
+                if (ValidateForm(selectedIQCTab)) {
+                    Validate_SaveNCR();
+                }
+            }
+        });
+
+        $formForIQC.on('keyup keypress',
+            function (e) {
+                var keyCode = e.keyCode || e.which;
+                if (keyCode === 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+        //$myformForProcess.on('keyup keypress',
+        //    function (e) {
+
+        //        var keyCode = e.keyCode || e.which;
+        //        if (keyCode === 13) {
+        //            e.preventDefault();
+        //            return false;
+        //        }
+        //    });
+
+
+        var isOPE = '@ViewBag.IsOPE' === 'True';
+        $formForIQC.submit(function (e) {
+            e.preventDefault();
+
+            //Check size of file in request
+            let sizeOfRequestInProcess = 0;
+            $("form#forIQC input[type='file']").each(function (i, e) {
+                sizeOfRequestInProcess += $(e)[0].files[0].size;
+            });
+
+            if (sizeOfRequestInProcess > 10485760) {
+                bootbox.alert('File is too big, more than 10mb !!!');
+                return;
+            }
+            else {
+                $.blockUI();
+                var data = new FormData(this);
+                var $fromObj = $(this);
+                var urlAction = $fromObj.attr('action');
+                $.ajax({
+                    url: urlAction,
+                    type: 'POST',
+                    dataType: "Json",
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: data,
+                    fail: function () {
+                        bootbox.alert('Please contact to Administrator!');
+                    }
+                }).always(function () {
+                    $.unblockUI();
+                }).success(function (result) {
+                    if (result.success) {
+                        if (isOPE) {
+                            bootbox.confirm({
+                                message: "Do you want submit NCR?",
+                                buttons: {
+                                    confirm: {
+                                        label: 'Yes, Submit this NCR',
+                                        className: 'btn-danger'
+                                    },
+                                    cancel: {
+                                        label: 'No, Just Save this NCR',
+                                        className: 'btn-success'
+                                    }
+                                },
+                                closeButton: false,
+                                callback: function (confirm) {
+                                    if (confirm) {
+                                        // Show select approval form and button submit
+                                        bootbox.alert('Create NCR successfully',
+                                            function () {
+                                                debugger;
+                                                window.location.href = '@Url.Action("ViewApproval", "NCRApproval")?NCR_NUM=' + result.obj + '&Pre=true';
+                                            });
+                                    } else {
+                                        // Just Save
+                                        bootbox.alert('Create NCR successfully',
+                                            function (result) {
+                                                window.location.href = homeUrl;
+                                            });
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            bootbox.alert('Create NCR successfully',
+                                function (result) {
+                                    window.location.href = homeUrl;
+                                });
+                        }
+                    } else {
+                        if (result.message) {
+                            bootbox.alert(result.message);
+                        } else {
+                            bootbox.alert('Error!.Please check your informations!');
+
+                        }
+
+                    }
+                });
+            }
+        });
+
+        $myformForProcess.submit(function (e) {
+            e.preventDefault();
+            debugger;
+            //Check size of file in request
+            let sizeOfRequestInProcess = 0;
+            $("form#forProcess input[type='file']").each(function (i, e) {
+                sizeOfRequestInProcess += $(e)[0].files[0].size;
+            });
+            let checkedAQL = $('#SAMPLE_INSP').is(":checked");
+            let check100 = $('#IN').is(":checked");
+            if (check100 == false && checkedAQL == false) {
+                bootbox.alert('Please check Inspection Plan!');
+                return;
+            }
+            let def = parseFloat($('#Defect_QTY').val());
+            let ckqty = 0;
+            $('.non-comqty').each(function (i, e) {
+                ckqty += parseFloat($(e).val());
+            })
+            if (ckqty !== def) {
+                bootbox.alert('Please check qty of Non-Comformity');
+                return;
+            }
+            else if (sizeOfRequestInProcess > 10485760) {
+                bootbox.alert('File is too big, more than 10mb !!!');
+                return;
+            }
+            else {
+
+                $.blockUI();
+                var data = new FormData(this);
+                var $fromObj = $(this);
+                var urlAction = $fromObj.attr('action');
+                $.ajax({
+                    url: urlAction,
+                    type: 'POST',
+                    dataType: "Json",
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: data,
+                    fail: function () {
+                        bootbox.alert('Please contact to Administrator!');
+                    }
+                }).always(function () {
+                    $.unblockUI();
+                }).success(function (result) {
+                    if (result.success) {
+                        if (isOPE) {
+                            bootbox.confirm({
+                                message: "Do you want submit NCR?",
+                                buttons: {
+                                    confirm: {
+                                        label: 'Yes, Submit this NCR',
+                                        className: 'btn-danger'
+                                    },
+                                    cancel: {
+                                        label: 'No, Just Save this NCR',
+                                        className: 'btn-success'
+                                    }
+                                },
+                                closeButton: false,
+                                callback: function (confirm) {
+                                    if (confirm) {
+                                        // Show select approval form and button submit
+                                        bootbox.alert('Create NCR successfully',
+                                            function () {
+                                                debugger;
+                                                window.location.href = '@Url.Action("ViewApproval", "NCRApproval")?NCR_NUM=' + result.obj + '&Pre=true';
+                                            });
+                                    } else {
+                                        // Just Save
+                                        bootbox.alert('Create NCR successfully',
+                                            function (result) {
+                                                window.location.href = homeUrl;
+                                            });
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            bootbox.alert('Create NCR successfully',
+                                function (result) {
+                                    window.location.href = homeUrl;
+                                });
+                        }
+                    } else {
+                        if (result.message) {
+                            bootbox.alert(result.message);
+                        } else {
+                            bootbox.alert('Error!.Please check your informations!');
+
+                        }
+
+                    }
+                });
+            }
+        });
+
+        function isNormalInteger(e) {
+
+            reg = /^-?\d+\.?\d*$/;
+            if (!reg.test(e)) {
+                return false;
+            }
+            if (parseFloat(e) <= 0) return false;
+            return true;
+            //var n = Math.floor(Number(str));
+            //return n !== Infinity && String(n) === str && n >= 0;
+            //return Number(n) === parseFloat(n);
+        }
+
+        function addNewRaw() {
+            let ccn = $('#CCN').val();
+            var tbody = $('#tablenonconf').find('tbody');
+            let tempId = dem; // FIXED if Id is exit the button Add can't run
+            while ($('#NCDESC' + tempId).length) // use this if you are using id to check
+            {
+                tempId++;
+            }
+            var html = createHtmlParaSub(dem, tempId);
+            tbody.append(html);
+            $('#NCDESC' + tempId).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+            $('#DEFECT' + tempId).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+            $('#DEFECT' + tempId).multiselect('dataprovider', dataDefect);
+            var func = "$('#DEFECT" +
+                tempId +
+                "').on('change', function () { var listcheck = $('#DEFECT" +
+                tempId +
+                "').val();" +
+                "$.post(UrlChange, { id: listcheck ,ccn:ccn}, function (result) { $('#DEFECT" +
+                tempId +
+                "').multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true }); " +
+                " $('#NCDESC" +
+                tempId +
+                "').multiselect('dataprovider', result); }).fail(function () {" +
+                " bootbox.alert('Please contact to Administrator'); }).always(function () { $.unblockUI(); }); })";
+            eval(func);
+            dem++;
+        }
+
+        function CheckAllQuanity() {
+            let sumdefectqty = parseFloat($('#Defect_QTY').val());
+            let sumrejectqty = parseFloat($('#REJ_QTY').val());
+            let sum = 0;
+
+            for (var i = 0; i < $(".DefectRow").length; i++) {
+                sum = sum + parseFloat($("#ListNCR" + i + "_QTY").val());
+            }
+            //AQL
+           //// let check = $('#SAMPLE_INSP').is(':checked');
+           // debugger;
+           // if (check == true) {
+           //     if (sum === sumrejectqty) {
+           //         return true;
+           //     }
+           //     else {
+           //         return false;
+           //     }
+           // }
+           // else {
+           //     debugger
+                if (sum === sumdefectqty) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+           // }
+        }
+
+        function createHtmlParaSub(dem, tempId) {
+            return '<tr class="DefectRow"><td>' +
+                '<input data-val="true" name="ListNCR_DET[' +
+                dem +
+                '].ITEM" type="hidden" value="' +
+                dem +
+                '">' +
+                (dem + 1) +
+                '</td><td><input data-val="true" id="ListNCR' +
+                tempId +
+                '_QTY" class="form-control input-validation-error non-comqty" name="ListNCR_DET[' +
+                dem +
+                '].QTY"  onchange = "ValidateNumberInput(this)";  type="text" required></td>' +
+                '<td><select id="DEFECT' +
+                tempId +
+                '" name="ListNCR_DET[' +
+                dem +
+                '].DEFECT" multiple="multiple" required >' +
+                '</select></td><td>' +
+                '<select id="NCDESC' +
+                tempId +
+                '" name="ListNCR_DET[' +
+                dem +
+                '].NC_DESC" multiple="multiple" required ></select></td><td><input data-val="true" id="ListNCR_DET[' +
+                tempId +
+                '].REMARK" name="ListNCR_DET[' +
+                dem +
+                '].REMARK" class="form-control" type="text" value=""></td><td><a class="btn btn-danger btn-sm" onclick="deleterow(this)"> <i class="fa fa-trash"></i></a> </td></tr>';
+        }
+
+        function SeletedDefect(selectedDefect, selectedIQCTab) {
+            for (var i = 0; i < dataDefect.length; i++) {
+                if (selectedDefect.indexOf(dataDefect[i].value) != -1) {
+                    dataDefect[i].selected = true;
+                } else {
+                    dataDefect[i].selected = false;
+                }
+                if (!selectedIQCTab) {
+                    dataDefect[i].disabled = false;
+                }
+            }
+            return dataDefect;
+        }
+
+        function SeletedDescription(ListDesc, selectedDecriptT, selectedIQCTab) {
+            for (var j = 0; j < ListDesc.length; j++) { // Defect
+                for (var u = 0; u < ListDesc[j].children.length; u++) { // Description
+                    if (selectedDecriptT.indexOf(ListDesc[j].children[u].value) != -1) {
+                        ListDesc[j].children[u].selected = true;
+                    } else {
+                        ListDesc[j].children[u].selected = false;
+                    }
+                    if (!selectedIQCTab) {
+                        ListDesc[j].children[u].disabled = false;
+                    }
+                }
+            }
+            return ListDesc;
+        }
+
+        function addRowTableiqc(lstDefect) {
+            selectedIQCTab = $("#iqcTab").attr("aria-expanded") === 'true';
+            $('tr.odd1').each(function () {
+                $(this).remove();
+            });
+            $.each(lstDefect,
+                function (i) {
+                    var tbody = $('#tbl-rev').find('tbody');
+                    var html = createHtmlParaSub3(i, lstDefect[i]);
+                    tbody.append(html);
+                });
+            function createHtmlParaSub3(dem, qty) {
+                return '<tr class="odd1"><td width="10%"><input data-val="true" name="nonComformity[' +
+                    dem +
+                    '].ITEM" type="hidden" value="' + dem + '">' + (dem + 1) + '</td>' +
+                    '<td width="10%"> <input class="form-control" name="nonComformity[' + dem + '].QTY" value="' + qty.NC_Qty + '" readonly="readonly" style= "width:50px;"/></td>' +
+                    '<td width="20%"><label>' + qty.DEFECT_STRING + ' </label> <input class="form-control" style="border:0px;" type="hidden" name="nonComformity[' + dem + '].DEFECT" value="' + qty.Defect + '"/></td>' +
+                    '<td width="20%"> <input style="border:0px;" type="hidden" name="nonComformity[' + dem + '].NC_DESC" value="' + qty.Non_Conformances + '"/><label>' + qty.NC_DESC_STRING + ' </label> </td>' +
+                    '<td width="20%"><input type="text" class="form-control" name="nonComformity[' + dem + '].REMARK"/></td></tr>';
+            }
+        }
+
+        $('.btn-close').click(function () {
+            window.location = '@Url.Action("Index", "NCR")';
+        });
+
+        //search
+        function SelectVal() {
+            $('#tbodyEvidenceIQC tr').remove();
+            var reciver = $('#RECC').val();
+            var po = $('.ms-poser').val();
+            var lot = $('.ms-lotser').val();
+            let CCN = $('#CCN').val();
+            let isRec = $("#iqcReceiver").attr("aria-expanded") == 'true';
+            if (isRec) {
+                var partnum = $(".ms-pniqcsearch").val();
+                $.blockUI();
+                $.post(Urliqc,
+                    { reciver: reciver, partnum: partnum, po: po, lot: lot,CCN:CCN },
+                    function (result) {
+                        if (result.success) {
+                            $("#LOT1").val(result.model.LOT.trim());
+                            $("#REC").val(result.model.RECEIVER1);
+                            $("#QTY").val(result.model.REC_QTY);
+                            $("#REJ").val(result.model.REJ_QTY);
+                            $("#PO").val(result.model.PO_NUM);
+                            $("#ITEM").val(result.model.ITEM);
+                            $("#AQLV").val(result.model.AQL_VISUAL);
+                            $("#SPLV").val(result.model.SAMPLING_VISUAL);
+                            $("#AQLM").val(result.model.AQL_MEASURE);
+                            $("#SPLM").val(result.model.SAMPLING_MEASURE);
+                            $("#INSP1").val(result.model.INS_QTY);
+                            $("#Ven").val(result.model.VENDOR);
+                            $("#VenName").val(result.model.VEN_NAME);
+                            $("#ItemDes").val(result.model.ITEM_DESC);
+                            $("#Draw").val(result.model.DRAW_REV);
+                            $("#DEFECT").val(result.model.defective);
+                            $("#tbl-res").val(result.model.Listdefect);
+                            $("#tbl-rev").val(result.model.Listdefect);
+                            addRowTableiqc(result.model.Listdefect);
+                            $('.ms-showdata-iqc').show();
+                        } else {
+                            bootbox.alert('Please check your informations!');
+                        }
+                    });
+                $('#responsiveriqc').modal('hide');
+                $.unblockUI();
+            } else {
+                var partnum1 = $(".ms-pnser").val();
+                $.blockUI();
+                $.post(Urliqc,
+                    { reciver: "", partnum: partnum1, po: po, lot: lot ,CCN:CCN},
+                    function (result) {
+                        if (result.success) {
+                            $("#LOT1").val(result.model.LOT.trim());
+                            $("#REC").val(result.model.RECEIVER1);
+                            $("#QTY").val(result.model.REC_QTY);
+                            $("#REJ").val(result.model.REJ_QTY);
+                            $("#PO").val(result.model.PO_NUM);
+                            $("#ITEM").val(result.model.ITEM);
+                            $("#AQLV").val(result.model.AQL_VISUAL);
+                            $("#SPLV").val(result.model.SAMPLING_VISUAL);
+                            $("#AQLM").val(result.model.AQL_MEASURE);
+                            $("#SPLM").val(result.model.SAMPLING_MEASURE);
+                            $("#INSP1").val(result.model.INS_QTY);
+                            $("#Ven").val(result.model.VENDOR);
+                            $("#VenName").val(result.model.VEN_NAME);
+                            $("#ItemDes").val(result.model.ITEM_DESC);
+                            $("#Draw").val(result.model.DRAW_REV);
+                            $("#DEFECT").val(result.model.defective);
+                            $("#tbl-res").val(result.model.Listdefect);
+                            $("#tbl-rev").val(result.model.Listdefect);
+                            addRowTableiqc(result.model.Listdefect);
+                            //$('.show-data').show();
+                            $('.ms-showdata-iqc').show();
+                            //  $('.multiselect').addClass('disabled');
+                        } else {
+                            bootbox.alert('Please check your informations!');
+                        }
+                    });
+                $('#responsiveriqc').modal('hide');
+                $.unblockUI();
+            }
+        }
+        function deleterow(element) {
+            $(element).parent().parent().remove();
+            var listRow = $(".DefectRow");
+            dem = listRow.length;
+            for (let i = 0; i < dem; i++) {
+                var ListColumns = listRow[i].children;
+                //console.log(ListColumns);
+                // Set ITEM value &  Set Hidden field Name
+                ListColumns[0].innerHTML = "<input name='ListNCR_DET[" + i + "].ITEM' type='hidden' value='" + i + "'>" + (i + 1);
+                // Set QTY id and name
+                ListColumns[1].children[0].name = "ListNCR_DET[" + i + "].QTY";
+                ListColumns[1].children[0].id = "ListNCR" + i + "_QTY";
+                // Set DEFECT name
+                ListColumns[2].children[0].children[0].name = "ListNCR_DET[" + i + "].DEFECT";
+                // Set DESCRIPTION name
+                ListColumns[3].children[0].children[0].name = "ListNCR_DET[" + i + "].NC_DESC";
+                // Set REMARK name
+                ListColumns[4].children[0].name = "ListNCR_DET[" + i + "].REMARK";
+            }
+        }
+        var testevi = null;
+        var arrExtension = ['png', 'pdf', 'jpeg', 'jpg', 'bmp'];
+        function ViewFileEvidence(evi_file) {
+            var test_value = $(evi_file).val();
+            var extension = test_value.split('.').pop().toLowerCase();
+            debugger
+            if ($.inArray(extension, arrExtension) === -1 & test_value !== '') {
+                bootbox.alert("Invalid file !");
+                evi_file.value = '';
+                return;
+            }
+            if (evi_file.files[0].size > 10485760) {
+                bootbox.alert('File is too big, more than 10mb !!!');
+                evi_file.value = '';
+                return;
+            }
+
+            var formData = new FormData();
+
+            formData.append('ReviewFile', evi_file.files[0]);
+            console.log(formData);
+            $.ajax({
+                url: '@Url.Action("SaveFileReview", "NCRApproval")',
+                type: "POST",
+                dataType: 'json',
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: formData,
+                success: function (result) {
+                    window.open(result, '_blank');
+                },
+                error: function (err) {
+                    window.open(err.responseText, '_blank');
+                }
+            });
+        }
+
+        //$(document).ready(function () {
+        //    $('#ListRoleTemplate').multiselect({
+        //        dropUp: true,
+        //        onChange: function (option, checked, select) {
+        //            alert('Changed option ' + $(option).val() + '.');
+        //        }
+        //    });
+        //});
+        $('#btnApproverIQC').click(function () {
+
+            let listRow = $('#tbMRBAuthorizationIQC tbody tr');
+            let rowlength = listRow.length;
+
+            for (let i = 0; i < rowlength; i++) {
+                var ListColumns = listRow[i].children;
+                ListColumns[0].children[0].name = "UserApprove[" + i + "].RoleId";
+                ListColumns[1].children[0].name = "UserApprove[" + i + "].UserId";
+            }
+
+            let selectRole = $('#ListRoleTemplate').html();
+            let trtemplate = '<tr id="tr-ApproverIQC-"' + rowlength +'>' +
+                '<td width="40%"><select id="option-role-approve-' + rowlength +'" name="UserApprove[' + rowlength + '].RoleId">' + selectRole +'</select></td>' +
+                '<td width="40%"><select id="option-user-approve-' + rowlength + '" style="display:none" name="UserApprove[' + rowlength +'].UserId"><option value="">Select Approver</option></select></td>'+
+                '<td><button onclick="deleteApprover(this)" type="button" class="btn btn-danger pull-right">Delete</button></td></tr>';
+            $("#tbMRBAuthorizationIQC tbody").append(trtemplate);
+
+            $("#option-role-approve-" + rowlength).multiselect({
+                dropUp: true,
+                enableFiltering: true, enableCaseInsensitiveFiltering: true,
+                onChange: function (option, checked) {
+
+                    console.log(checked + ' - ' + option + ' - ' + $("#option-role-approve-" + rowlength).val());
+                    $.get('@Url.Action("GetUserByRole", "NCRApproval")?role=' + $("#option-role-approve-" + rowlength).val())
+                        .success(function (data) {
+                            $('#option-user-approve-' + rowlength).show();
+                            $('#option-user-approve-' + rowlength).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+                            $('#option-user-approve-' + rowlength).multiselect('dataprovider', data);
+                        });
+
+                }
+            });
+        });
+
+        $('#btnApproverInProcess').click(function () {
+
+            let listRow = $('#tbMRBAuthorizationInProcess tbody tr');
+            let rowlength = listRow.length;
+            if (rowlength === 2) $(this).hide();
+            for (let i = 0; i < rowlength; i++) {
+                var ListColumns = listRow[i].children;
+                ListColumns[0].children[0].name = "UserApprove[" + i + "].RoleId";
+                ListColumns[1].children[0].name = "UserApprove[" + i + "].UserId";
+            }
+
+            let selectRole = $('#ListRoleTemplate').html();
+            let trtemplate = '<tr id="tr-ApproverInProcess-"' + rowlength +'>' +
+                '<td width="40%"><select id="option-role-approve-' + rowlength +'" name="UserApprove[' + rowlength + '].RoleId">' + selectRole +'</select></td>' +
+                '<td width="40%"><select id="option-user-approve-' + rowlength + '" style="display:none" name="UserApprove[' + rowlength +'].UserId"><option value="">Select Approver</option></select></td>'+
+                '<td><button onclick="deleteApprover(this)" type="button" class="btn btn-danger pull-right">Delete</button></td></tr>';
+            $("#tbMRBAuthorizationInProcess tbody").append(trtemplate);
+
+            $("#option-role-approve-" + rowlength).multiselect({
+                dropUp: true,
+                enableFiltering: true, enableCaseInsensitiveFiltering: true,
+                onChange: function (option, checked) {
+
+                    console.log(checked + ' - ' + option + ' - ' + $("#option-role-approve-" + rowlength).val());
+                    $.get('@Url.Action("GetUserByRole", "NCRApproval")?role=' + $("#option-role-approve-" + rowlength).val())
+                        .success(function (data) {
+                            $('#option-user-approve-' + rowlength).show();
+                            $('#option-user-approve-' + rowlength).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+                            $('#option-user-approve-' + rowlength).multiselect('dataprovider', data);
+                        });
+
+                }
+            });
+        });
+
+        function deleteApprover(btndelete) {
+            let tr = $($(btndelete).parent().parent());
+            let tbody = $(tr.parent());
+            tr.remove();
+
+            let listRow = $('#' + $(tbody).attr('id') + ' tr');
+            let rowlength = listRow.length;
+
+            if (rowlength <= 2) $('#btnApproverInProcess').show();
+
+            for (let i = 0; i < rowlength; i++) {
+                var ListColumns = listRow[i].children;
+                ListColumns[0].children[0].children[0].name = "UserApprove[" + i + "].RoleId";
+                ListColumns[1].children[0].children[0].name = "UserApprove[" + i + "].UserId";
+
+                ListColumns[0].children[0].children[0].id = "option-role-approve-" + i;
+                ListColumns[1].children[0].children[0].id = "option-user-approve-" + i;
+            }
+        }
+        //tuasnlua
+        $('#makepart').on('click', function (e) {
+  $("#INSPECTOR").val('@User.Identity.GetUserId()');
+            var id = '@User.Identity.GetUserId()';
+            $.blockUI();
+            $.post('@Url.Action("Getnamebyid", "WriteNCRForIQC")', { id: id },
+                function (result) {
+                    $("#InspectorName").val(result);
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            e.preventDefault();
+            $('#div-main').removeAttr('style');
+            $('#div-vendor').attr('style','display:none');
+            $myformForProcess[0].reset();
+            $("#MI_PART_NO").attr('readonly', false);
+            $("#DRAW_REV").attr('readonly', false);
+            $("#MODEL_NO").attr('readonly', false);
+            $("#PO_NUM").attr('readonly', false);
+            $("#LOT").attr('readonly', false);
+            $("#RECEIVER").attr('readonly', false);
+            $("#ITEM_DESC").attr('readonly', false);
+            $("#VEN_NAME").attr('readonly', false);
+            $("#VEN_ADD").attr('readonly', false);
+            $("#VENDOR").attr('readonly', false);
+            $("#STATE").attr('readonly', false);
+            $("#ZIP_CODE").attr('readonly', false);
+            $("#INSPECTOR").attr('readonly', false);
+            $("#CITY").attr('readonly', false);
+            $('#DRAW_REV').attr('readonly', false);
+            $('#RECEIVER').attr('style', 'display:none');
+            $('#PO_NUM').attr('style', 'display:none');
+            $('.labelreceiver').attr('style', 'display:none');
+            $('.labelpo').attr('style', 'display:none');
+            $('#labellot').removeClass('llabellot');
+            $('#labellot').addClass('labaelmake');
+            $("#lotinput").addClass('inputlot');
+
+
+        })
+        $('#buypart').on('click', function () {
+            $('#div-main').attr('style', 'display:none');
+        })
+    </script>
+}

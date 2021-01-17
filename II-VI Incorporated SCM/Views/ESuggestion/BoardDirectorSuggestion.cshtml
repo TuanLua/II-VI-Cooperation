@@ -1,0 +1,201 @@
+﻿@using II_VI_Incorporated_SCM.Services
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity
+@model II_VI_Incorporated_SCM.Models.ESuggestion.BoardirectorViewmodel
+@{
+    ViewBag.Title = "BoardDirectorSuggestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 align="center">
+    <b>
+        <input id="titi" value="@ViewBag.titi" style="border:0px;text-align:right" />-
+    </b> <b style="color:blue"><input style="border:0px;text-align:left" id="ESNum" /></b>
+</h2>
+<h3> <button class="btn btn-sm btn-success" id="detail" style="float:right">View detail</button></h3>
+@using (Html.BeginForm("SaveBoardESuggestion", "ESuggestion", FormMethod.Post, new
+{
+    @class = "form-inline",
+    @role = "form",
+    @enctype = "multipart/form-data",
+    @id = "form-board"
+}))
+{
+    <input type="hidden" value="@ViewBag.ID" name="Sug_ID" />
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr>
+                <td width="80px" align="right">
+                    @*   <input type="checkbox" checked="checked" id="appli" class="form-control" />*@
+                    @Html.CheckBoxFor(m => m.App_eva, new
+               {
+                   @class = "form-control",
+                   @rows = "3",
+                   @id = "appli",
+                   @checked = "checked",
+                   @style = "display:none"
+               })
+                    <input id="appli_Y" name="App_evaR" value="Yes" style="width:20px" type="radio" class="form-control" /> Yes
+                    <input id="appli_N" name="App_evaR" value="No" style="width:20px" type="radio" class="form-control" />  No
+                    @*<input type='hidden' value='0' name="App_eva" id="App_eva" class="form-control">*@
+                </td>
+                <td width="350px">
+                    <br />
+                    Is there applicability?
+                </td>
+                <td>
+                    @Html.TextAreaFor(m => m.App_com, new
+               {
+                   @class = "form-control",
+                   @style = "min-width: 100%;resize:vertical",
+                   @rows = "3",
+                   @id = "eva"
+               })
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    @Html.CheckBoxFor(m => m.Stra_Link, new
+               {
+                   @class = "form-control",
+                   @rows = "3",
+                   @id = "link",
+                   @checked = "checked",
+                   @style = "display:none"
+               })
+                    <input id="link_Y" name="Stra_LinkR" value="Yes" style="width:20px" type="radio" class="form-control" /> Yes
+                    <input id="link_N" name="Stra_LinkR" value="No" style="width:20px" type="radio" class="form-control" />  No
+                    @*<input type="hidden" value="0" name="Stra_Link" id="Stra_Link" class="form-control"/>*@
+                </td>
+                <td>
+                    <br />
+                    Is there link to company's strategy?
+                </td>
+                <td>
+                    @Html.TextAreaFor(m => m.Stra_com, new
+               {
+                   @class = "form-control",
+                   @style = "min-width: 100%;resize:vertical",
+                   @rows = "3",
+                   @id = "linkcom"
+               })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr>
+                <td width="388px">
+                    <label>Comment:</label>
+                </td>
+                <td colspan="3">
+                    @Html.TextAreaFor(m => m.Comment, new
+               {
+                   @class = "form-control",
+                   @style = "min-width: 100%;resize:vertical",
+                   @rows = "3",
+                   @id = "Comment"
+               })
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <div align="center">
+        <button class="btn btn-success btn-sm" id="approve">Approve</button>
+        <button class="btn btn-danger btn-sm" id="reject">  Reject     </button>
+    </div>
+}
+<script>
+            $(document).ready(function () {
+        $('#ESNum').val('@ViewBag.ID');
+    });
+        var $form = $('#form-board');
+    $('#approve').on('click', function (e) {
+    e.preventDefault();
+        if (!confirm("Do you really want to APPROVE?")) return;
+        debugger;
+
+        var input = $("<input>", { type: "hidden", name: "Status", value: "Approve" });
+        $form.append(input);
+        var inputcheck = $("<input>", { type: "hidden", name: "Apr_Status", value: 1 });
+        $form.append(inputcheck);
+
+        var apply = document.getElementsByName('App_evaR');        
+        if ((apply[0].checked == false) && (apply[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Applicability evalution!');
+            return;
+        }
+            //let apply = $('#appli:checkbox:checked');
+            //let link = $('#link:checkbox:checked');
+        
+        
+        if (apply[0].checked == false && $('#eva').val() == "") {
+            bootbox.alert('Please input Applicability evalution!');
+            return;
+        }
+
+        var link = document.getElementsByName('Stra_LinkR');
+        if ((link[0].checked == false) && (link[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Linked to companys strategy!');
+            return;
+        }
+        if (link[0].checked == false && $('#linkcom').val() == "") {
+            bootbox.alert('Please input Linked to companys strategy!');
+            return;
+            }
+        else {
+
+            //$('#App_eva').val(apply[0].checked);
+            //$('#Stra_link').val(link[0].checked);
+            $('#appli:checkbox').val(apply[0].checked);
+            $('#link:checkbox').val(link[0].checked);
+            $form.submit();
+            }
+        })
+    $('#reject').on('click', function (e) {
+    e.preventDefault();
+        if (!confirm("Do you really want to REJECT?")) return;
+
+            var input = $("<input>", { type: "hidden", name: "Status", value: "Reject" });
+            $form.append(input);
+            var inputcheck = $("<input>", { type: "hidden", name: "Apr_Status", value: 0 });
+            $form.append(inputcheck);
+            let comment = $('#Comment').val();
+            if (comment == "") {
+                bootbox.alert('Please input comment!');
+                return;
+            }
+        //var apply = document.getElementsByName('App_evaR');
+        //if ((apply[0].checked == false) && (apply[1].checked == false)) {
+        //    bootbox.alert('Please choose YES or NO for Applicability evalution!');
+        //    return;
+        //}
+        
+        //if (apply[0].checked == false && $('#eva').val() == "") {
+        //    bootbox.alert('Please input Applicability evalution!');
+        //    return;
+        //}
+
+        //var link = document.getElementsByName('Stra_LinkR');
+        //if ((link[0].checked == false) && (link[1].checked == false)) {
+        //    bootbox.alert('Please choose YES or NO for Linked to companys strategy!');
+        //    return;
+        //}
+        //if (link[0].checked == false && $('#linkcom').val() == "") {
+        //    bootbox.alert('Please input Linked to companys strategy!');
+        //    return;
+        //}
+        //else {
+
+        //    $('#appli:checkbox').val(apply[0].checked);
+        //    $('#link:checkbox').val(link[0].checked);
+        //    $form.submit();
+        //}
+        $form.submit();
+        })
+        $('#detail').on('click', function () {
+            let id = "@ViewBag.ID";
+                window.open('@Url.Action("Management", "ESuggestion")' + "?SuggestionID=" + id);
+        })
+</script>

@@ -1,0 +1,139 @@
+﻿@using II_VI_Incorporated_SCM.Models.NCR
+@using II_VI_Incorporated_SCM.Services
+@using II_VI_Incorporated_SCM.Models
+@using II_VI_Incorporated_SCM.Models.NCRReport
+@{
+    ViewBag.Title = "4 panel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>Import Excel OTD</h3>
+<br />
+@using (Html.BeginForm("GetValueFile4panel", "NCRReport", FormMethod.Post, new { id = "4panel", role = "form", enctype = "multipart/form-data" }))
+{
+    <div class="form-group row" style="text-align:right">
+        <label class="col-md-4">Select Transaction History For EscapePPM of the month<span style="color: red">*</span> : </label>
+        <div class="col-md-4">
+            <input type="file" class="form-control" id="FILE" name="FILE" />
+            <input type="hidden" value="false" name="check" id="check" />
+        </div>
+    </div>
+    <div class="row" style="text-align:right">
+        <div class="form-group">
+            <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                <label class="col-md-4">MONTH <span style="color: red">*</span>  </label>
+                <div class="col-md-4">
+                    <div class="input-group date" data-provide="datepicker">
+                        <input class="form-control" name="date" id="datePickerStaT" />
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12" style="text-align:center">
+            <button type="submit" id="getfile" class="btn btn-info">Save </button>
+        </div>
+    </div>
+
+}
+<script>
+    $(document).ready(function () {
+        $('.date').datepicker({ autoclose: true });
+    });
+    var $form = $('#4panel');
+    $('#4panel').submit(function (e) {
+        e.preventDefault();
+        var file = $('#FILE').val();
+        var date = $('#datePicker').val();
+        if (file == "") {
+            bootbox.alert("Vui lòng chọn file");
+            e.preventDefault();
+            return false;
+        }
+        else if (date == "") {
+            bootbox.alert("Vui lòng chọn month!");
+            e.preventDefault();
+            return false;
+        }
+        else {
+            var dataString = new FormData($form[0]);
+            $.blockUI();
+            $.ajax({
+                url: $form.attr('action'),  //Server script to process data
+                type: 'POST',
+                //Ajax events
+                success: function (result) {
+                    if (result.success === 2) {
+                        $.unblockUI();
+                        bootbox.confirm({
+                            message: "File " + $('#4panel #FILE')[0].files[0].name + " is duplicate! Are you sure save data ?",
+                            buttons: {
+                                confirm: {
+                                    label: 'Yes',
+                                    className: 'btn-success'
+                                },
+                                cancel: {
+                                    label: 'No',
+                                    className: 'btn-danger'
+                                }
+                            },
+                            callback: function (result) {
+                                if (result === true) {
+                                    $('#4panel #check').val("true");
+                                    $.ajax({
+                                        url: $form.attr('action'),
+                                        type: 'post',
+                                        data: new FormData($('#4panel')[0]),
+                                        cache: false,
+                                        contentType: false,
+                                        processData: false,
+                                        success: function (result) {
+                                            if (result.success === 1) {
+                                                $.unblockUI();
+                                                bootbox.alert("Upload and save change successfully!!", function () {location.href='@Url.Action("Report4panel", "NCRReport")'; });
+                                            }
+                                            else {
+                                                $.unblockUI();
+                                                bootbox.alert("Upload and save change unsuccessfully!!");
+                                            }
+                                        },
+                                        error: function () {
+                                            bootbox.alert('Please contact to Administrator!');
+                                        },
+                                        complete: function () {
+                                            $.unblockUI();
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    else if (result.success === 1) {
+                        $.unblockUI();
+                        bootbox.alert("Upload and save change successfully!!", function () { location.href='@Url.Action("Report4panel", "NCRReport")'; });
+                    }
+                    else if (result.success === 0) {
+                        $.unblockUI();
+                        bootbox.alert("Upload and save change unsuccessfully!!");
+                    }
+                },
+                error: function () {
+                    bootbox.alert('Please contact to Administrator!');
+                },
+                complete: function () {
+                    $.unblockUI();
+                },
+                // Form data
+                data: dataString,
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+        }
+    })
+
+</script>

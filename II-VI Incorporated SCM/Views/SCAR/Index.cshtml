@@ -1,0 +1,399 @@
+﻿@using II_VI_Incorporated_SCM.Models.SCAR
+@using II_VI_Incorporated_SCM.Services
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "SCAR Management";
+}
+<style>
+    .ScarId:hover {
+        color:white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .NCR_Number:hover {
+        color:white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .NCR_Number{
+        color:blue;
+    }
+    .ScarId{
+        color:blue;
+    }
+</style>
+
+<div class="portlet box">
+    <div class="portlet-title">
+        <div class="caption">
+            <div class="btn-group">
+                <button type="button" class="btn green dropdown-toggle btn-sm" onclick="createSCAR()">
+                    <i class="fa fa-plus"></i> Create
+                </button>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="btn-group">
+                <button type="button" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                    <i class="fa"></i> Find By
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:;" id="clear"> Clear Filter</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('SCAR ID')"> SCAR ID </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFindDate('Written Date')"> Written Date </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('Written By')"> Written By </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('Supplier')"> Supplier  </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFindStatus('Status')"> Status </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('Version')"> Version </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('NCR Number')"> NCR Number </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('KeyWord')"> KeyWord </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<SCARInfoViewModel>()
+                .Name("GridSCAR")
+                .Columns(columns =>
+                {
+                    columns.Bound(p => p.SCAR_ID).Title("SCAR ID").HtmlAttributes(new { @class = "ScarId" }).Width(150);
+                    columns.Bound(p => p.WRITTENDATE).Format("{0:dd-MMM-yy}").Title("Written Date").Width(150);
+                    columns.Bound(p => p.WRITTENNAMEBY).Title("Written By").Width(150);
+                    columns.Bound(p => p.VEN_NAME).Title("Supplier").Width(150);
+                    columns.Bound(p => p.CATEGORY).Title("CATEGORY").Width(150);
+                    columns.Bound(p => p.VENDOR).Title("VENDOR").Hidden();
+                    columns.Bound(p => p.STATUS).Title("Status").Width(150);
+                    columns.Bound(p => p.VERSION).Title("Version").Width(150);
+                    columns.Bound(p => p.LstNCRNum.ToString()).Title("NCR_Number").Width(150);
+                    //   columns.Bound(p => p.LstNCRNum).Title(" List NCR Number").HtmlAttributes(new { @class = "NCR_Number digital-led" }).Width(150);
+                    columns.Bound(p => p.MI_PART_NO).Title("Part Number").Width(150);
+                    columns.Bound(p => p.PO_NUMBER).Title("PO Number").Width(150);
+                    columns.Bound(p => p.LOT).Title("LOT").Width(150);
+                    columns.Bound(p => p.SUPPLIER_REPRESENTATIVE).Title("SUP").Hidden();
+                    columns.Bound(p => p.PROBLEM).Title("KeyWord").Hidden();
+                    columns.Bound(p => p.NCR_NUMBER).Title("NCR Number").HtmlAttributes(new { @class = "NCR_Number digital-led" }).Width(150).ClientTemplate("#= NCR_NUMBER #");
+                })
+                   .ToolBar(tools => tools.Excel())
+                                              .Excel(excel => excel
+                                .FileName("SCARManagement.xlsx")
+                                .Filterable(true)
+                                .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+                                          )
+                .Events(x => x.DataBound("onDataBound"))
+                .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                .Sortable()
+                .Scrollable()
+                .Filterable()
+                .HtmlAttributes(new { style = "height:550px;" })
+                .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(10)
+                .Read(read => read.Action("GetListSCAR", "SCAR"))
+                .Sort(sort => sort.Add("ID").Descending())
+                )
+            )
+        </div>
+    </div>
+</div>
+
+<div id="popupSearch" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control boder-opal" id="search">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearch()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popupStatus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <input id="statusSearch" type="text" class="dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Created')"> Created </a>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Sent to Supplier')"> Sent to Supplier</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Accepted')"> Accepted by Supplier </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Verification')">Verification </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Closed')"> Close </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Voided')"> Void </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchStastus()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupdate" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <table>
+                            <tr>
+                                <td style="display: none"><input type="hidden" class="form-control boder-opal" id="searchId" /></td>
+                                <td>From</td>
+                                <td>&nbsp;</td>
+                                <td><input type="text" class="form-control" id="datefrom"></td>
+                                <td>&nbsp;</td>
+                                <td>To</td>
+                                <td><input type="text" class="form-control" id="dateto"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchDate()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        var tdSearch;
+        $(document).ready(function () {
+            $("#datefrom").datepicker();
+            $("#dateto").datepicker();
+
+            $("#GridSCAR").on("click", ".ScarId", function (e) {
+                var grid = $("#GridSCAR").data("kendoGrid");
+                var model = grid.dataItem($(e.target).closest("tr"));
+                if (model.STATUS == "Created") {
+                    window.open ( '@Url.Action("SentSCAR", "SCAR")' + "?SCARID=" + model.SCAR_ID + "&VERSION=" + model.VERSION, '_blank');
+                }
+                if (model.STATUS == "Sent to Supplier") {
+                    window.open( '@Url.Action("AcceptSCAR", "SCAR")' + "?SCARID=" + model.SCAR_ID + "&VERSION=" + model.VERSION, '_blank');
+                }
+                if (model.STATUS == "Accepted by Supplier") {
+                    window.open( '@Url.Action("AcceptSCAR", "SCAR")' + "?SCARID=" + model.SCAR_ID + "&STATUS=" + model.STATUS + "&VERSION=" + model.VERSION, '_blank');
+                }
+                if (model.STATUS == "Verification") {
+                       window.open( '@Url.Action("AcceptSCAR", "SCAR")' + "?SCARID=" + model.SCAR_ID + "&STATUS=" + model.STATUS + "&VERSION=" + model.VERSION, '_blank');
+               }
+                @*if (model.STATUS == "Completed All") {
+                      window.open( '@Url.Action("AcceptSCAR", "SCAR")' + "?SCARID=" + model.SCAR_ID + "&STATUS=" + model.STATUS + "&VERSION=" + model.VERSION, '_blank');
+                    @*window.open ( '@Url.Action("CompletedAllSCAR", "SCAR")' + "?SCARID=" + model.SCAR_ID, '_blank');
+                }*@
+                if (model.STATUS == "Closed") {
+                    window.open ( '@Url.Action("ClosedSCAR", "SCAR")' + "?SCARID=" + model.SCAR_ID, '_blank');
+                }
+                if (model.STATUS == "Void") {
+                    window.open ( '@Url.Action("VoidSCAR", "SCAR")' + "?SCARID=" + model.SCAR_ID, '_blank');
+                }
+            });
+
+            @*$("#GridSCAR").on("click", ".NCR_Number", function (e) {
+                var grid = $("#GridSCAR").data("kendoGrid");
+                var model = grid.dataItem($(e.target).closest("tr"));
+                var NCR_NUM = model.NCR_NUMBER;
+                console.log(NCR_NUM)
+                if (NCR_NUM != null) {
+                    window.open( '@Url.Action("ViewApproval", "NCRApproval")' + "?NCR_NUM=" + NCR_NUM ,'_blank');
+                } else {
+                    bootbox.alert('NCR_NUM does not exist!');
+                }
+            });*@
+        })
+
+        function createSCAR() {
+            window.location = '@Url.Action("CreateSCARForSupplier", "SCAR")';
+        }
+
+        function onFind(condition) {
+            $('.searchField').text(condition);
+
+            if (condition == 'SCAR ID') {
+                $('#searchId').val(0);
+            }
+            else if (condition == 'Written By') {
+                $('#searchId').val(2);
+            }
+            else if (condition == 'Supplier') {
+                $('#searchId').val(3)
+            }
+            else if (condition == 'Version') {
+                $('#searchId').val(5)
+            }
+            else if (condition == 'NCR Number') {
+                $('#searchId').val(6)
+            }
+            else if (condition == 'KeyWord') {
+                $('#searchId').val(7)
+            }
+
+            $('#popupSearch').modal('show');
+        }
+
+        function onFindDate(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Written Date') {
+                $('#searchId').val(3);
+                $('#popupdate').modal('show');
+            }
+        }
+        function onSearchDate() {
+            var number = $('#searchId').val();
+            if (number == '3') {
+                var datefrom = $('#datefrom').val().toLowerCase();;
+                var dateto = $('#dateto').val().toLowerCase();;
+                $("#GridSCAR").data("kendoGrid").dataSource.filter([{ field: "WRITTENDATE", operator: "gte", value: datefrom },
+                    { field: "WRITTENDATE", operator: "lte", value: dateto }]);
+                $('#datefrom').val("");
+                $('#dateto').val("");
+            }
+            $('#popupdate').modal('hide');
+        }
+
+        function onSearch() {
+            debugger;
+            var searchText = $('#search').val().toLowerCase();
+            var number = $('#searchId').val();
+            var num;
+
+            if (number == '0') {
+                num = 0;
+                $("#GridSCAR").data("kendoGrid").dataSource.filter({ field: "SCAR_ID", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '2') {
+                $("#GridSCAR").data("kendoGrid").dataSource.filter({ field: "WRITTENNAMEBY", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '3') {
+                $("#GridSCAR").data("kendoGrid").dataSource.filter({ field: "SUPPLIER_REPRESENTATIVE", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '5') {
+                $("#GridSCAR").data("kendoGrid").dataSource.filter({ field: "VERSION", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '6') {
+                $("#GridSCAR").data("kendoGrid").dataSource.filter({ field: "NCR_NUMBER", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '7') {
+                $("#GridSCAR").data("kendoGrid").dataSource.filter({ field: "PROBLEM", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+
+            $('#popupSearch').modal('hide');
+        }
+
+        function onFindStatus(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Status') {
+                $('#statusSearch').show();
+                $('#searchId').val(4);
+                $('#popupStatus').modal('show');
+            }
+        }
+
+        function onSearchStastus() {
+            var number = $('#searchId').val();
+            if (number == '4') {
+                var searchStatus = $('#statusSearch').val().toLowerCase();
+                $("#GridSCAR").data("kendoGrid").dataSource.filter({ field: "STATUS", operator: "contains", value: searchStatus });
+                $('#statusSearch').val("");
+            }
+            $('#popupStatus').modal('hide');
+        }
+
+        function onStatus(status) {
+            $('#search').text(status);
+            $('#statusSearch').val(status);
+        }
+
+        function onDataBound(e) {
+            $("#GridSCAR").find("tr").click(function (e) {
+                var dataItem = $("#GridSCAR").data("kendoGrid").dataItem(this);
+                if (e.ctrlKey)
+                    alert('Ctrl + click on ' + dataItem.column1);
+            });
+        };
+        $("#clear").click(function () {
+            $("#GridSCAR").data("kendoGrid").dataSource.filter({ field: "SCAR_ID", operator: "contains", value: "" });
+            $('#search').val("");
+            $('a.k-grid-filter').removeClass('k-state-active')
+        })
+    </script>
+}

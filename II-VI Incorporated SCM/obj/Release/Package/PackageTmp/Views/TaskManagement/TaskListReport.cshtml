@@ -1,0 +1,190 @@
+﻿@using II_VI_Incorporated_SCM.Models
+@using II_VI_Incorporated_SCM.Models.TaskManagement
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "TaskListReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .k-chart {
+        height: 600px;
+        width: 100%;
+    }
+</style>
+<h2>Task List Report</h2>
+@*<div class="form-group row" style="text-align:right">
+    <label class="col-md-4">Choose Report Type<span style="color: red">*</span> : </label>
+    <div class="col-md-4">
+        <select class="form-control" id="ReportType">
+            <option>Statistical Task By Status</option>
+            <option>List Task</option>
+        </select>
+    </div>
+</div>*@
+<div class="form-group row" style="text-align:right">
+    <label class="col-md-4" id="lbDept">Department<span style="color: red">*</span> : </label>
+    <div class="col-md-4">
+        @Html.DropDownList("DeptList", (IEnumerable<SelectListItem>)ViewBag.DeptList, "", new { @class = "form-control", id = "DeptList" })
+    </div>
+</div>
+<div class="form-group row" style="text-align:right">
+    <label class="col-md-4" id="lbStatus">Status<span style="color: red">*</span> : </label>
+    <div class="col-md-4">
+        <select class="form-control" id="status">
+            <option>All</option>
+            <option>Open</option>
+            <option>Close</option>
+        </select>
+    </div>
+</div>
+<div class="row" style="text-align:right">
+    <div class="form-group">
+        <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+            <label class="col-md-4">From<span style="color: red">*</span> : </label>
+            <div class="col-md-4 ">
+                <div class="input-group date" data-provide="datepicker">
+                    <input class="form-control" id="datePickerSta" />
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+            <label class="col-md-4">To<span style="color: red">*</span> : </label>
+            <div class="col-md-4 ">
+                <div class="input-group date" data-provide="datepicker">
+                    <input class="form-control" id="datePickerTo" />
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-12" style="text-align:center">
+        <button class="btn btn-sm btn-success" id="search">Search</button>
+    </div>
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<sp_TaskList_Report_Result>()
+                            .Name("gridTaskList")
+                            .Columns(columns =>
+                            {
+                                columns.Bound(p => p.Department).Title("Department").Width(120);
+                                columns.Bound(p => p.TASKNAME).Title("TASKNAME").HtmlAttributes(new { @class = "RefNUMBER" }).Width(300); ;
+                                columns.Bound(p => p.Topic).Title("Topic").Width(100);
+                                columns.Bound(p => p.TYPE).Title("TYPE").Width(100);
+                                columns.Bound(p => p.STATUS).Title("STATUS").Width(100);
+                                columns.Bound(p => p.Aging).Title("Aging").Width(100);
+                                columns.Bound(p => p.EstimateEndDate).Format("{0:dd-MMM-yyyy}").Title("Expected End Date").Width(100).Hidden(true);
+                            })
+                            .Pageable()
+                            .Sortable()
+                            .Scrollable()
+                            .Filterable()
+                            .HtmlAttributes(new { style = "height:1050px;" })
+                            .DataSource(dataSource => dataSource
+                                .Ajax()
+                                .PageSize(15)
+                            //.Read(read => read.Action("get_TaskList_Report", "TaskManagement", new { Dept = "", TaskStatus = "", DateFrom = DateTime.Now, DateTo = DateTime.Now }))
+
+                            ))
+        </div>
+    </div>
+</div>
+@*<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<sp_TaskStatistical_Report_Result>()
+                                .Name("gridTaskStatistical")
+                                .Columns(columns =>
+                                {
+                                    columns.Bound(p => p.Department).Title("Department").Width(150);
+                                    columns.Bound(p => p.Late).Title("Late").Width(150);
+                                    columns.Bound(p => p.Open).Title("Open").Width(150);
+                                    columns.Bound(p => p.Closed).Title("Closed").Width(150);
+
+                                })
+                                    .ToolBar(tools => tools.Excel())
+                                        .Excel(excel => excel
+                        .FileName("TaskStatistical_Report.xlsx")
+                        .Filterable(true)
+                        .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+                                    )
+                                .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                                .Sortable()
+                                .Scrollable()
+                                .Filterable()
+                                .HtmlAttributes(new { style = "height:550px;" })
+                                // .HtmlAttributes(new { @class = "cursorLink", @style = "height:auto;" })
+                                .DataSource(dataSource => dataSource
+                                    .Ajax()
+                                    .PageSize(10)
+                                //.Read(read => read.Action("get_TaskStatistical_Report", "TaskManagement", new { Dept = "", TaskStatus = "",DateFrom= DateTime.Now, DateTo = DateTime.Now }))
+
+                                ))
+        </div>
+    </div>
+</div>*@
+<script>
+    //$('#ReportType').change(function (event) {
+    //    debugger;
+    //        if ($('#ReportType').val() == "List Task") {
+    //            $("#gridTaskList").show();
+    //            $('#DeptList').show();
+    //            $('#lbDept').show();
+    //            $('#lbStatus').show();
+    //            $('#status').show();
+    //            $("#gridTaskStatistical").hide();
+    //        }
+    //        else {
+    //            $("#gridTaskList").hide();
+    //            $('#DeptList').hide();
+    //            $('#lbDept').hide();
+    //            $('#lbStatus').hide();
+    //            $('#status').hide();
+    //            $("#gridTaskStatistical").show();
+    //        }
+    //});
+    $("#search").on('click', function () {
+        $.blockUI();
+        debugger;
+        let datefrom = $("#datePickerSta").val();
+        let dateto = $("#datePickerTo").val();
+        let DeptList = $("#DeptList").val();
+        let status = $("#status").val();
+        if (dateto == "") {
+            alert("Please choose day!");
+            return;
+        }
+        else if (datefrom == "") {
+            alert("Please choose day!");
+            return;
+        }
+        else {
+                $("#gridTaskList").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("get_TaskList_Report", "TaskManagement")?Dept=' + DeptList + '&TaskStatus=' + status + '&DateFrom=' + datefrom + '&DateTo=' + dateto;
+                $("#gridTaskList").data("kendoGrid").dataSource.read();
+            @*if ($('#ReportType').val() == "List Task") {
+
+                $("#gridTaskList").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("get_TaskList_Report", "TaskManagement")?Dept=' + DeptList + '&TaskStatus=' + status + '&DateFrom=' + datefrom + '&DateTo=' + dateto;
+                $("#gridTaskList").data("kendoGrid").dataSource.read();
+
+            }
+            else
+            {
+                $("#gridTaskStatistical").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("get_TaskStatistical_Report", "TaskManagement")?Dept=' + DeptList + '&TaskStatus=' + status + '&DateFrom=' + datefrom + '&DateTo=' + dateto;
+                $("#gridTaskStatistical").data("kendoGrid").dataSource.read();
+            }*@
+            $.unblockUI();
+        }
+    })
+</script>
+
+

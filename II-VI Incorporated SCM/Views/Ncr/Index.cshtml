@@ -1,0 +1,474 @@
+﻿@using II_VI_Incorporated_SCM.Models.NCR
+@using II_VI_Incorporated_SCM.Services
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "NCR Management";
+}
+<style>
+    .NCR_NUM:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .NCR_NUM {
+        color: blue;
+    }
+</style>
+<div class="portlet box">
+    <div class="portlet-title">
+        <div class="caption">
+            <div class="btn-group">
+                <button type="button" class="btn green dropdown-toggle btn-sm PopupCreateNCR">
+                    <i class="fa fa-plus"></i> Create
+                </button>
+            </div>
+            @if ((bool)ViewBag.IsWHMRB && ViewBag.Status == StatusInDB.DispositionApproved)
+            {
+                <div class="btn-group">
+                    <a class="btn btn-success btn-sm ">
+                        <i class="fa fa-plus"></i> ADD TASK
+                    </a>
+                </div>
+            }
+
+        </div>
+        <div class="actions">
+            <div class="btn-group">
+                <button type="button" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                    <i class="fa"></i> Find By
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:;" id="clear"> Clear Filter</a>
+                    </li>
+                    <li>
+
+                        <a href="javascript:;" onclick="onFind('NCR Number')"> NCR Number </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('Part Number')"> Part Number </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFindDate('Created Date')"> Created Date </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('Owner')"> Owner  </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFindStatus('STATUS')"> STATUS </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('Receiver')"> Receiver </a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" onclick="onFindInspector('Inspector')"> Inspector </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFindVendor('Vendor')"> Vendor </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<NCRManagementViewModel>()
+                                              .Name("gridNCR")
+                                              .Columns(columns =>
+                                              {
+                                                  columns.Bound(p => p.CCN).Title("CCN").Width(90);
+                                                  columns.Bound(p => p.NCR_NUM).Title("NCR Number").HtmlAttributes(new { @class = "NCR_NUM" }).Width(120);
+                                                  columns.Bound(p => p.Amount).Format("{0:c}").Title("Amount").Width(90);
+                                                  columns.Bound(p => p.DATESUBMIT).Format("{0:dd-MMM-yy}").Title("Date Submit").Width(120);
+                                                  columns.Bound(p => p.USERSUBMIT).Title("User Submit").Width(120);
+                                                  columns.Bound(p => p.DateConform).Format("{0:dd-MMM-yy}").Title("Date Confim").Width(120);
+                                                  columns.Bound(p => p.MI_PART_NO).Title("Part Number").Width(120);
+                                                  columns.Bound(p => p.PO_NUM).Title("PO").Width(100);
+                                                  columns.Bound(p => p.LOT).Title("LOT").Width(120);
+                                                  columns.Bound(p => p.INS_DATE).Format("{0:dd-MMM-yy}").Title("INS Date").Width(120);
+                                                  columns.Bound(p => p.RECEIVER).Title("Receiver").Hidden();
+                                                  columns.Bound(p => p.STATUS).Title("Status").Width(250);
+                                                  columns.Bound(p => p.AGE).Title("Age").Hidden();
+                                                  columns.Bound(p => p.VENDOR).Title("VENDOR").Width(120);
+
+                                              })
+                                                  .ToolBar(tools => tools.Excel())
+                                              .Excel(excel => excel
+                                .FileName("NCRManagement.xlsx")
+                                .Filterable(true)
+                                .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+                                          )
+                                              .Sortable()
+                                              .Scrollable()
+                                              .Filterable()
+                                                .Pageable()
+                                                .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 150, 1200, "All" }).Refresh(true))
+                                              .HtmlAttributes(new { style = "height:550px;" })
+                                              .DataSource(dataSource => dataSource
+                                                  .Ajax()
+                                                  .PageSize(10)
+                                                  .Read(read => read.Action("ListNCR", "NCR"))
+                                                 .Sort(sort => sort.Add("INS_DATE").Descending())
+                                              ))
+        </div>
+    </div>
+</div>
+<div id="popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control boder-opal" id="search">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearch()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupstatus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <input id="statusSearch" type="text" class="dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Created')"> Created </a>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Submitted')"> Submitted</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Waiting for Disposition')">Waiting for Disposition</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Waiting for Disposition Approval')">Waiting for Disposition Approval</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Disposition Approved')"> Disposition Approved </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Closed')"> Closed </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Open')"> Open </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Voided')"> Voided </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchStastus()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popupvendor" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <div class="col-md-4">
+                                        @Html.DropDownList("VENDOR", (IEnumerable<SelectListItem>)ViewBag.VendorList, new { @class = "form-control", id = "vendor" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchvendor()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="popupinspector" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-2 lbWT searchField"></label>
+                        <div class="col-md-10">
+                            <select class="form-control toolbarInput input-opal col-md-12" id="inspectorId" name="ComSubCode">
+                                @foreach (var itemList in ViewBag.ListInspector)
+                                {
+                                    <option value="@itemList.Id">@itemList.FullName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchInspector()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupdate" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <table>
+                            <tr>
+                                <td style="display: none"><input type="hidden" class="form-control boder-opal" id="searchId" /></td>
+                                <td>From</td>
+                                <td>&nbsp;</td>
+                                <td><input type="text" class="form-control" id="datefrom"></td>
+                                <td>&nbsp;</td>
+                                <td>To</td>
+                                <td><input type="text" class="form-control" id="dateto"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchDate()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        var tdSearch;
+        $(document).ready(function () {
+            $('#inspectorId').select2({  width: '100%'  });
+        $('#vendor').select2({  width: '400%' } );
+            $("#datefrom").datepicker();
+            $("#dateto").datepicker();
+        })
+        function onFind(condition) {
+            $('.searchField').text(condition);
+
+            if (condition == 'NCR Number') {
+                $('#search').val();
+                $('#searchId').val(0);
+            }
+            else if (condition == 'Owner') {
+                $('#searchId').val(2);
+            }
+            else if (condition == 'Part Number') {
+                $('#searchId').val(3);
+            }
+            else if (condition == 'Receiver') {
+                $('#searchId').val(6)
+            }
+            $('#popup').modal('show');
+        }
+        function onSearch() {
+            var searchText = $('#search').val().toLowerCase();
+            var number = $('#searchId').val();
+            if (number == '0') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "NCR_NUM", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '3') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "MI_PART_NO", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '2') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "USERSUBMIT", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '6') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "RECEIVER", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            $('#popup').modal('hide');
+
+        }
+        function onSearchAge() {
+            var age1cond = $('#age1').val();
+            var age2cond = $('#age2').val();
+            var age3cond = $('#age3').val();
+            if (age1cond) {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "lt", value: age1cond });
+            }
+            if (age2cond) {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "lt", value: age2cond + 1 });
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "gt", value: age2cond - 1 });
+            }
+            if (age3cond) {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "gt", value: age3cond });
+            }
+            $('#popupage').modal('hide');
+        }
+
+        function onSearchStastus() {
+            var number = $('#searchId').val();
+            if (number == '8') {
+                var searchStatus = $('#statusSearch').val().toLowerCase();
+                if (searchStatus === "open") {
+                    var checked = new Array("Submitted", "Waiting for Disposition", "Waiting for Disposition Approval", "Disposition Approved");
+
+                    var filter = {
+                        logic: "or",
+                        filters: $.map(checked, function (value) {
+                            return {
+                                operator: "contains",
+                                field: "STATUS",
+                                value: value
+                            };
+                        })
+                    };
+                    var scheduler = $("#gridNCR").data("kendoGrid");
+                    scheduler.dataSource.filter(filter);
+                    $('#popupstatus').modal('hide');
+                    return;
+                }
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "STATUS", operator: "contains", value: searchStatus });
+                $('#statusSearch').val("");
+            }
+            $('#popupstatus').modal('hide');
+        }
+        function onSearchvendor() {
+                var searchStatus = $('#vendor').val().toLowerCase();
+            $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "VENDOR", operator: "contains", value: searchStatus });
+            $('#popupvendor').modal('hide');
+        }
+        function onSearchInspector(inspector) {
+            var number = $('#searchId').val();
+            if (number == '9') {
+                var searchStatus = $('#inspectorId').val().toLowerCase();
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "INSPECTOR", operator: "contains", value: searchStatus });
+                $('#statusSearch').val("");
+            }
+            $('#popupinspector').modal('hide');
+        }
+        function onStatus(status) {
+            $('#search').text(status);
+            $('#statusSearch').val(status);
+        }
+        $("#gridNCR").on("click", ".NCR_NUM", function (e) {
+            var grid = $("#gridNCR").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+              var ncrnum = model.NCR_NUM;
+              var status = model.STATUS;
+        if (status != '@Status.Void') {
+                window.open('@Url.Action("ViewApproval", "NCRApproval")' + "?NCR_NUM=" + ncrnum, '_blank');
+            }
+    });
+        function onFindStatus(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'STATUS') {
+                $('#statusSearch').show();
+                $('#searchId').val(8);
+                $('#popupstatus').modal('show');
+            }
+        }
+        function onFindVendor(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Vendor') {
+                $('#searchId').val(7);
+                $('#popupvendor').modal('show');
+            }
+        }
+        function onFindInspector(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Inspector') {
+                $('#inspectorSearch').show();
+                $('#searchId').val(9);
+                $('#popupinspector').modal('show');
+            }
+        }
+        function onFindDate(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Created Date') {
+                $('#searchId').val(3);
+                $('#popupdate').modal('show');
+            }
+        }
+        function onSearchDate() {
+            var number = $('#searchId').val();
+            if (number == '5') {
+                var datefrom = $('#datefrom').val().toLowerCase();;
+                var dateto = $('#dateto').val().toLowerCase();;
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "INS_DATE", operator: "gte", value: datefrom },
+                    { field: "INS_DATE", operator: "lte", value: dateto });
+                $('#datefrom').val("");
+                $('#dateto').val("");
+            }
+            $('#popupdate').modal('hide');
+        }
+        $("#clear").click(function () {
+            $("#gridNCR").data('kendoGrid').dataSource.filter({
+                field: "INSPECTOR",
+                operator: "contains",
+                value: ""
+            });
+            $('a.k-grid-filter').removeClass('k-state-active');
+        });
+    </script>
+}

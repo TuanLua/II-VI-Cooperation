@@ -1,0 +1,123 @@
+﻿@using II_VI_Incorporated_SCM.Controllers.NCR
+@using II_VI_Incorporated_SCM.Models
+@using II_VI_Incorporated_SCM.Models.NCR
+@using Microsoft.AspNet.Identity
+@using II_VI_Incorporated_SCM.Services
+@{
+    ViewBag.Title = "List NCR Approval";
+}
+<style>
+    .NCR_NUM:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .NCR_NUM {
+        color: blue;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet-body">
+            <h4>NCR APPROVAL <span style="color: red"></span> </h4>
+            <div class="portlet box">
+                <div class="portlet-title">
+                    <div class="actions">
+                        @*<div class="btn-group">
+                            <input id="search" type="text" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false"  readonly>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="javascript:;" onclick="onFindName('My Approval')"> My Approval </a>
+                                </li>
+                            </ul>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-18 col-md-12">
+                        @(Html.Kendo().Grid<NCR_HDR>()
+                                      .Name("gridApproval")
+                                      .Columns(columns =>
+                                      {
+                                          columns.Bound(p => p.NCR_NUM).HtmlAttributes(new { @class = "NCR_NUM" }).Width(150); ;
+                                          columns.Bound(p => p.DATESUBMIT).Format("{0:dd-MMM-yy}").Title("Date Submit");
+                                       //   columns.Bound(p => p.USERSUBMIT).Title("User Submit");
+                                          columns.Bound(p => p.MI_PART_NO);
+                                          //   columns.Bound(p => p.VENDOR);
+                                          columns.Bound(p => p.PO_NUM);
+                                          columns.Bound(p => p.INS_DATE).Format("{0:dd-MMM-yy}");
+                                          //   columns.Bound(p => p.TYPE_NCR);
+                                          columns.Bound(p => p.RECEIVER).Hidden();
+                                          //   columns.Bound(p => p.INS_QTY);
+                                          //  columns.Bound(p => p.REC_QTY);
+                                       //   columns.Bound(p => p.INSPECTOR);
+                                          columns.Bound(p => p.STATUS).Hidden();
+                                      //    columns.Bound(p => p.Userapproval).Hidden();
+                                      })
+                                       .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                                      .Sortable()
+                                      .Scrollable()
+                                      .Filterable()
+                                      .HtmlAttributes(new { style = "height:550px;" })
+                                      .DataSource(dataSource => dataSource
+                                          .Ajax()
+                                          .PageSize(10)
+                                          .Read(read => read.Action("NcrApprovalList", "NcrApproval"))
+                                      ))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var name = '@User.Identity.GetUserId()';
+</script>
+@section scripts {
+    <script type="text/javascript">
+           $(document).ready(function () {
+            var id = '@User.Identity.GetUserId()';
+            $.blockUI();
+            $.post('@Url.Action("Getnamebyid", "WriteNCRForIQC")', { id: id },
+                function (result) {
+               $("#name").val(result);
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+        })
+        var mygrid = $("#gridApproval").kendoGrid({
+            selectable: true
+        });
+        //select row data catch status
+        @*mygrid.on("click", "tr", function () {
+            var grid = $("#gridApproval").data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+            var ncrnum = selectedItem.NCR_NUM;
+            var status = selectedItem.STATUS;
+            if (status != '@Status.Void') {
+                window.open('@Url.Action("ViewApproval", "NCRApproval")' + "?NCR_NUM=" + ncrnum, '_blank');
+            }
+        });*@
+        var filter = "";
+        $("#clear").click(function () {
+            $("#gridApproval").data("kendoGrid").dataSource.filter({ field: "Inspector", operator: "contains", value: "" });
+            $('#search').val("");
+            $('a.k-grid-filter').removeClass('k-state-active')
+        })
+        function onFindName() {
+            var filter = name;
+            $("#gridApproval").data("kendoGrid").dataSource.filter({ field: "Userapproval", operator: "contains", value: filter });
+        }
+        $("#gridApproval").on("click", ".NCR_NUM", function (e) {
+            var grid = $("#gridApproval").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+              var ncrnum = model.NCR_NUM; 
+                window.open('@Url.Action("ViewApproval", "NCRApproval")' + "?NCR_NUM=" + ncrnum, '_blank');
+    });
+    </script>
+}

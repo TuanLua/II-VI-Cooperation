@@ -1,0 +1,475 @@
+﻿@using II_VI_Incorporated_SCM.Models.TaskManagement
+@using II_VI_Incorporated_SCM.Services
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Task Management";
+}
+
+<style>
+    .RefNUMBER:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .RefNUMBER:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .RefNUMBER {
+        color: blue;
+    }
+
+    .RefNUMBER {
+        color: blue;
+    }
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+</style>
+<h3>Task Management </h3>
+<div class="portlet box">
+    @*<div class="caption">
+        <div class="btn-group">
+            <button type="button" class="btn green dropdown-toggle btn-sm PopupcreateTask">
+                <i class="fa fa-plus"></i> Create
+            </button>
+        </div>
+    </div>*@
+    <div class="portlet-title">
+        <div class="actions">
+            <div class="btn-group">
+                <button type="button" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                    <i class="fa"></i> Find By
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:;" id="clear"> Clear Filter</a></li>
+                    <li><a href="javascript:;" onclick="onFind('RefNUMBER')"> RefNUMBER  </a></li>
+                    <li><a href="javascript:;" onclick="onFind('TaskName')"> TaskName  </a></li>
+                    <li><a href="javascript:;" onclick="onFind('Owner')"> Owner  </a></li>
+                    <li><a href="javascript:;" onclick="onFind('Assignee')"> Assignee  </a></li>
+                    <li><a href="javascript:;" onclick="onFind('TaskID')"> TaskID  </a></li>
+                    <li><a href="javascript:;" onclick="onFindStatus('Status')"> Status </a></li>
+                    <li><a href="javascript:;" onclick="onFindPriority('Priority')"> Priority </a></li>
+                    <li>
+                        <a href="javascript:;" onclick="onFindName()"> My Task </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<TaskmanagementViewmodel>()
+                                      .Name("gridNCR")
+                                      .Columns(columns =>
+                                      {
+                                          columns.Bound(p => p.RefNUMBER).Title("RefNUMBER").HtmlAttributes(new { @class = "RefNUMBER" }).Width(100);
+                                          columns.Bound(p => p.TaskDetailID).Title("TaskID").HtmlAttributes(new { @class = "Taskname" }).Width(150);
+                                          columns.Bound(p => p.Taskname).Title("Taskname").HtmlAttributes(new { @class = "Taskname" }).Width(150);
+                                          columns.Bound(p => p.TaskDescription).Title("TaskDescription").Width(300);
+                                          columns.Bound(p => p.Owner).Title("Requester").Width(100);
+                                          columns.Bound(p => p.Assignee).Title("Assignee").Width(100);
+                                          columns.Bound(p => p.Approve).Title("Approve").Width(100);
+                                          columns.Bound(p => p.Priority).Title("Priority").Width(100);
+                                          columns.Bound(p => p.Status).Title("Status").Width(100);
+                                          //  columns.Bound(p => p.StartDay).Format("{0:MM/dd/yyyy}").Title("StartDay");
+                                          //  columns.Bound(p => p.DueDate).Format("{0:MM/dd/yyyy}").Title("DueDate");
+                                          //  columns.Bound(p => p.ActualStarDay).Format("{0:MM/dd/yyyy}").Title("ActualStarDay");
+                                          //  columns.Bound(p => p.ActualEndDay).Format("{0:MM/dd/yyyy}").Title("ActualEndDay");
+                                          columns.Bound(p => p.Taskno).Title("Taskno").Hidden();
+                                          columns.Bound(p => p.TaskDetailID).Title("Taskno").Hidden();
+
+
+                                      })
+                                           .ToolBar(tools => tools.Excel())
+                                              .Excel(excel => excel
+                                .FileName("TaskManagement.xlsx")
+                                .Filterable(true)
+                                .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+                                          )
+                                      .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                                      .Sortable()
+                                      .Scrollable()
+                                      .Filterable()
+                                       .HtmlAttributes(new { style = "height:550px;" })
+                                      // .HtmlAttributes(new { @class = "cursorLink", @style = "height:auto;" })
+                                      .DataSource(dataSource => dataSource
+                                          .Ajax()
+                                          .PageSize(10)
+                                          .Read(read => read.Action("ReadListTaskMantNCR", "TaskManagement"))
+                                           .Sort(sort => sort.Add("StartDay").Descending())
+                                      ))
+        </div>
+    </div>
+</div>
+<div id="popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control boder-opal" id="search">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearch()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupstatus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <input id="statusSearch" type="text" class="dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Created')"> Created </a>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Approve')"> Approve</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Completed')">Completed</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Reject')">Reject </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Reopen')"> Reopen </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Cancel')"> Cancel </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Delete')"> Delete </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchStastus()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="name" />
+<div id="popuppriority" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <input id="prioritySearch" type="text" class="dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Low')"> Low </a>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Normal')"> Normal</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('High')">High</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Urgent')">Urgent </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onPriority('Immediate')"> Immediate </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchPriority()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="CreateTask" class="modal fade" tabindex="-1" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Create Task</h4>
+            </div>
+            <div class="modal-body">
+            <label>Name</label>
+                <input />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn green" onclick="CreateTaskList()">
+                    Save
+                </button>
+
+                <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div id="popupinspector" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title searchField"></h4>
+                </div>
+                <div class="modal-body">
+                    <br />
+                    <div class="form-horizontal col-md-offset-1">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 lbWT searchField"></label>
+                            <div class="col-md-6">
+                                <div class="actions">
+                                    <select class="form-control toolbarInput input-opal" id="inspectorId" name="ComSubCode">
+                                        @foreach (var itemList in ViewBag.ListInspector)
+                                        {
+                                            <option value="@itemList.Id">@itemList.FullName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="onSearchInspector()" class="btn btn-success">Find</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+@section scripts {
+  
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var id = '@User.Identity.GetUserId()';
+            $.blockUI();
+            $.post('@Url.Action("Getnamebyid", "WriteNCRForIQC")', { id: id },
+                function (result) {
+               $("#name").val(result);
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+        })
+        function onFindName() {
+            var filter = $("#name").val();
+            $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Assignee", operator: "contains", value: filter });
+        }
+        var tdSearch;
+        function onFind(condition) {
+            $('.searchField').text(condition);
+
+            if (condition == 'RefNUMBER') {
+                $('#search').val();
+                $('#searchId').val(0);
+            }
+            else if (condition == 'Owner') {
+                $('#searchId').val(1);
+            }
+            else if (condition == 'Assignee') {
+                $('#searchId').val(2);
+            }
+            else if (condition == 'Priority') {
+                $('#searchId').val(6)
+            }
+            else if (condition == 'TaskName') {
+                $('#searchId').val(4)
+            }
+            else if (condition == 'TaskID') {
+                $('#searchId').val(5)
+            }
+            $('#popup').modal('show');
+        }
+        function onSearch() {
+            var searchText = $('#search').val().toLowerCase();
+            var number = $('#searchId').val();
+            var num;
+            if (number == '0') {
+                num = 0;
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "RefNUMBER", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '1') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Owner", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '2') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Assignee", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '3') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Priority", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '4') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Taskname", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            else if (number == '5') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "TaskID", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+            $('#popup').modal('hide');
+
+        }
+        function onSearchPriority() {
+            var number = $('#searchId').val();
+            if (number == '6') {
+                var searchPriority = $('#prioritySearch').val().toLowerCase();
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Priority", operator: "contains", value: searchPriority });
+                $('#prioritySearch').val("");
+            }
+            $('#popuppriority').modal('hide');
+        }
+
+        function onSearchStastus() {
+            var number = $('#searchId').val();
+            if (number == '8') {
+                var searchStatus = $('#statusSearch').val().toLowerCase();
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "STATUS", operator: "contains", value: searchStatus });
+                $('#statusSearch').val("");
+            }
+            $('#popupstatus').modal('hide');
+        }
+
+        function onSearchInspector(inspector) {
+            var number = $('#searchId').val();
+            if (number == '9') {
+                var searchStatus = $('#inspectorId').val().toLowerCase();
+                console.log(searchStatus)
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "INSPECTOR", operator: "contains", value: searchStatus });
+                $('#statusSearch').val("");
+            }
+            $('#popupinspector').modal('hide');
+        }
+           function onFindPriority(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Priority') {
+                $('#prioritySearch').show();
+                $('#searchId').val(6);
+                $('#popuppriority').modal('show');
+            }
+        }
+
+        function onPriority(priority) {
+            $('#search').text(priority);
+            $('#prioritySearch').val(priority);
+        }
+        function onStatus(status) {
+            $('#search').text(status);
+            $('#statusSearch').val(status);
+        }
+        var mygrid = $("#gridNCR").kendoGrid({
+            selectable: true
+        });
+        //select row data catch status
+        @*mygrid.on("click", "tr", function () {
+            var grid = $("#gridNCR").data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+            var ncrnum = selectedItem.TaskDetailID;
+            var status = selectedItem.STATUS;
+            if (status != '@Status.Void') {
+                window.location = '@Url.Action("EditTaskManagementNcr", "TaskManagement")' + "?taskID=" + ncrnum;
+            }
+        });*@
+        function onFindStatus(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Status') {
+                $('#statusSearch').show();
+                $('#searchId').val(8);
+                $('#popupstatus').modal('show');
+            }
+        }
+        $("#clear").click(function () {
+            $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Owner", operator: "contains", value: "" });
+            $('#search').val("");
+            $('a.k-grid-filter').removeClass('k-state-active')
+            //location.reload();
+        })
+        $("#gridNCR").on("click", ".RefNUMBER", function (e) {
+        var grid = $("#gridNCR").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+            var NCR_NUM = model.RefNUMBER;
+            window.open('@Url.Action("ViewApproval", "NCRApproval")' + "?NCR_NUM=" + NCR_NUM, '_blank');
+        });
+        $("#gridNCR").on("click", ".Taskname", function (e) {
+        var grid = $("#gridNCR").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+            var NCR_NUM = model.TaskDetailID;
+        window.open('@Url.Action("EditTaskManagementNcr", "TaskManagement")' + "?taskID="+ NCR_NUM, '_blank');
+        });
+        $('.PopupcreateTask').click(function () {
+            $("#CreateTask").modal('show');
+        });
+    </script>
+}

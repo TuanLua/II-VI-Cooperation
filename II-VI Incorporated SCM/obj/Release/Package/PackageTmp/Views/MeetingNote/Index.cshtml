@@ -1,0 +1,194 @@
+﻿@using II_VI_Incorporated_SCM.Services
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity
+@model II_VI_Incorporated_SCM.Models.MeetingNote.MeetingNoteViewmodel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SaveMeetingNote", "MeetingNote", FormMethod.Post , new
+{
+    @class = "form-inline",
+    role = "form",
+   // @enctype = "form-data",
+    enctype = "multipart/form-data",
+    @id = "uploadFormTaskMan",@*@onsubmit = "return validateTask()"*@ }))
+{
+    <div class="table-responsive" style="overflow: hidden">
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th colspan="2" class="text-center"><h1><b style="color:cornflowerblue">MEETING NOTE</b></h1></th>
+                <th rowspan="2" width="350px">
+                    <p>MeetingNote Number:    N/A</p>
+                    <p>Created Date:          N/A</p>
+                    <p>Created By:            N/A</p>
+                    <p>Status:                Created</p>
+                    <p>Meeting Date: <input type="text" name="MEETING_DATE" required="required"  class="datepicker"></p>  
+                </th>
+                @* <th></th>*@
+            </tr>
+            <tr>
+                <td width="50px">
+                    <p><b>Subject</b></p>
+                </td>
+                <td>
+                    @Html.TextAreaFor(m => m.SUBJECT, new
+               {
+                   @class = "form-control",
+                   @style = "min-width: 100%;resize:vertical",
+                   @rows = "3",
+                   @required = "required"
+               })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><b>Attendent</b></p>
+                </td>
+                <td colspan="2">
+                    @*<select id="attendent" name="ATTENDANT" multiple="multiple" required style="width:100%"></select>*@
+                    @Html.DropDownList("ATTENDANT", (IEnumerable<SelectListItem>)ViewBag.ListUser,new { @class = "form-control", id = "listuser", multiple = "multiple", required="required", style = "width:100%" })
+                    @Html.ValidationMessageFor(model => model.ATTENDANT, null, new { @class = "help-block text-danger", @style = "margin: 1px" })
+
+                </td>
+            </tr>
+            <tr>
+                <td width="50px">
+                    <p><b>Content</b></p>
+                </td>
+                <td colspan="2">
+                    @Html.TextAreaFor(m => m.MINUTES_CONTENT, new
+               {
+                   @class = "form-control",
+                   @style = "min-width: 100%;resize:vertical",
+                   @rows = "10",
+                   @required="required"
+               })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><b>Attachment</b></p>
+                </td>
+                <td colspan="2">
+                    <fieldset class="ms-showdata-iqc">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbEvidenceIQC">
+                                <thead>
+                                    <tr>
+                                        <th width="350px">File Name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyEvidenceIQC"></tbody>
+                            </table>
+                            <button type="button" class="btn btn-sm btn-success pull-right" id="btnAddEvidentIQC">Add File</button>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div align="center">
+        <button class="btn btn-sm btn-success" type="submit">Save</button>
+        <button class="btn btn-sm btn-danger" id="Close">Close</button>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $('.datepicker').datepicker({
+                format: 'dd-MM-yy',
+                endDate: '+0d',
+                autoclose: true
+            });
+        });
+        $('#listuser').select2();
+        var id = '@User.Identity.GetUserId()';
+            @*$.post('@Url.Action("GetDropdownListUser", "MeetingNote")',
+                function (result) {
+                   // $('#approve').multiselect('dataprovider', result);
+                    $("#attendent").multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true});
+                    $('#attendent').multiselect('dataprovider', result);
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });*@
+    });
+     $('#Close').on('click', function (e) {
+                e.preventDefault();
+                 window.location.href = '@Url.Action("MeetingNoteManagement", "MeetingNote")';
+            })
+    $('#savedata').on('click', function () {
+        let other = $('#other').is(':checked');
+        if (other == true) {
+            $('#textother').prop('required', true);
+        }
+        else {
+            $('#textother').prop('required', false);
+        }
+    })
+    $('#btnAddEvidentIQC').click(function () {
+        //ModelEvidence
+        debugger;
+        let listRow = $('#tbEvidenceIQC tbody tr');
+        let rowlength = listRow.length;
+
+        for (let i = 0; i < rowlength; i++) {
+            var ListColumns = listRow[i].children;
+            ListColumns[0].children[0].name = "ModelEvidence[" + i + "].EvidenceFile";
+            ListColumns[1].children[0].name = "ModelEvidence[" + i + "].IsPrint";
+        }
+
+        let template = '<tr> <td width="20%"><input onchange="ViewFileEvidence(this)" accept="image/png,image/jpeg,image/bmp,application/pdf,application/PDF" type="file" class="form-control" name="ModelEvidence[' + rowlength + '].EvidenceFile"></td> <td><button onclick="deleteEvedenceRowIQC(this)" type="button" class="btn btn-sm btn-danger pull-right">Delete</button></td> </tr>';
+        $('#tbodyEvidenceIQC').append(template);
+    });
+
+    function deleteEvedenceRowIQC(e) {
+        $(e).parent().parent().remove();
+        let listRow = $('#tbEvidenceIQC tbody tr');
+        let rowlength = listRow.length;
+        for (let i = 0; i < rowlength; i++) {
+            var ListColumns = listRow[i].children;
+            ListColumns[0].children[0].name = "ModelEvidence[" + i + "].EvidenceFile";
+            ListColumns[1].children[0].name = "ModelEvidence[" + i + "].IsPrint";
+        }
+    }
+    var testevi = null;
+    var arrExtension = ['png', 'pdf', 'jpeg', 'jpg', 'bmp'];
+      function ViewFileEvidence(evi_file) {
+            var test_value = $(evi_file).val();
+            var extension = test_value.split('.').pop().toLowerCase();
+            debugger
+            if ($.inArray(extension, arrExtension) === -1 & test_value !== '') {
+                bootbox.alert("Invalid file !");
+                evi_file.value = '';
+                return;
+            }
+            //if (evi_file.files[0].size > 10485760) {
+            //    bootbox.alert('File is too big, more than 10mb !!!');
+            //    evi_file.value = '';
+            //    return;
+            //}
+
+            var formData = new FormData();
+
+            formData.append('ReviewFile', evi_file.files[0]);
+            console.log(formData);
+            $.ajax({
+                url: '@Url.Action("SaveFileReview", "NCRApproval")',
+                type: "POST",
+                dataType: 'json',
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: formData,
+                success: function (result) {
+                    window.open(result, '_blank');
+                },
+                error: function (err) {
+                    window.open(err.responseText, '_blank');
+                }
+            });
+        }
+</script>
+

@@ -1,0 +1,659 @@
+﻿@using II_VI_Incorporated_SCM.Models
+@model II_VI_Incorporated_SCM.Models.NCR.NCRManagementViewModel
+@{
+    ViewBag.Title = "Edit NCR";
+}
+<style>
+    .multiselect-container {
+        max-height: 300px !important;
+        max-width: 300px !important;
+        padding-left: 30px !important;
+    }
+</style>
+@{
+    List<SelectListItem> lstUserAppr = new List<SelectListItem>();
+    foreach (var item in (List<AspNetUser>)ViewBag.LstUsers)
+    {
+        SelectListItem tmp = new SelectListItem { Text = item.FullName, Value = item.Id };
+        lstUserAppr.Add(tmp);
+    }
+}
+<input hidden value="@Model.RECEIVER" id="dataForLstDefect" />
+@using (Html.BeginForm("EditApproval", "NCRApproval", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "form-data", @id = "EditIQC" }))
+{
+    <form>
+        @Html.HiddenFor(model => model.NCR_NUM)
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet box">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <a class="btn btn-success btn-sm " id="btn-save">Save</a>
+                            @if (User.IsInRole("SubmitNCR"))
+                            {
+                                <input type="hidden" id="ROLEOFUSER" value="OPE" />
+                                <button type="button" class="btn btn-success btn-sm" onclick="submitApprEdit()" style="display: none">Submit</button>
+                            }
+                            <a class="btn btn-danger btn-sm " id="bt-close">Close</a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <colgroup>
+                                <col width="30%" />
+                                <col width="10%" />
+                                <col width="30%" />
+                                <col width="15%" />
+                                <col width="15%" />
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p><b>MI PART NO.</b></p>
+                                        @Model.MI_PART_NO
+                                    </td>
+                                    <td>
+                                        <p><b>REV</b></p>
+                                        @Model.DRAW_REV
+                                    </td>
+                                    <td>
+                                        <p><b>PO NUMBER</b></p>
+                                        @Model.PO_NUM
+                                    </td>
+                                    <td colspan="2">
+                                        <p><b>TRAVELLER NO./ ARM NO. /LOT#.</b></p>
+                                        @Model.LOT
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <p><b>DECRIPTION OF MATERRIAL</b></p>
+                                        @Model.ITEM_DESC
+                                    </td>
+                                    <td>
+                                        <p><b>MODAL OR  SERIAL NO.</b></p>
+                                        @Model.MODEL_NO
+                                    </td>
+                                    @if (@Model.TYPE_NCR == "IQC")
+                                    {
+                                        <td>
+                                            <p><b>REC.INSP</b></p>
+                                            <input type="checkbox" disabled="disabled" class="checkboxes" checked="checked" />
+                                        </td>
+                                        <td>
+                                            <p><b>INPROCESS</b></p>
+                                            <input type="checkbox" class="checkboxes" disabled="disabled" readonly="readonly" />
+                                        </td>
+                                    }
+
+                                    else if (@Model.TYPE_NCR == "PROCESS")
+                                    {
+                                        <td>
+                                            <p><b>REC.INSP</b></p>
+                                            <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                        </td>
+                                        <td>
+                                            <p><b>INPROCESS</b></p>
+                                            <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                                        </td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-hover" id="sample_3">
+                            <thead>
+                                <tr>
+                                    <th colspan="6" class="text-center">INSSPECTION PLAN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="4" style="vertical-align:middle">VENDOR</td>
+                                    <td rowspan="2">
+                                        <p><b>NAME OF VENDOR</b></p>
+                                        @Model.VEN_NAME
+                                    </td>
+                                    @if (@Model.AQL_VISUAL == "AQL")
+                                    {
+                                        <td colspan="2">
+                                            <p><b>SAMPLE INSC</b></p>
+                                            <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                                            <label>AQL</label> 0.65 LEVEL C=0
+                                        </td>
+                                    }
+                                    else
+                                    {
+
+                                        <td colspan="2">
+                                            <p><b>SAMPLE INSP</b></p>
+                                            <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                            <label>AQL</label>  LEVEL
+                                        </td>
+                                    }
+                                    @if (@Model.AQL == "100%")
+                                    {
+                                        <td>
+                                            <p><b>100%</b></p>
+                                            INSP
+                                            <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <p><b>100%</b></p>
+                                            INSP
+                                            <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                        </td>
+
+                                    }
+                                    <td colspan="2">
+                                        <p><b>FIRT ARTICAL</b></p>
+                                        <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                        <p style="text-align: center"><b>QUANTITY</b></p>
+                                    </td>
+                                </tr>
+                                <tr class="odd gradeX">
+                                    <td>
+                                        <p><b>STREET ADDRESS</b></p>
+                                        @Model.VEN_ADD
+                                    </td>
+                                    <td>
+                                        <p><b>RECIVED</b></p>
+                                        @Model.REC_QTY
+                                    </td>
+                                    <td>
+                                        <p><b>INSPECTED</b></p>
+                                        @Model.INS_QTY
+                                    </td>
+                                    <td>
+                                        <p><b>REJECTED</b></p>
+                                        @Model.REJ_QTY
+                                    </td>
+                                    <td>@Model.PERCENT%</td>
+                                </tr>
+                                <tr class="odd gradeX">
+                                    <td style="text-align: center">
+                                        <p>
+                                            <b>CITY :</b> @Model.CITY
+                                            <b>STATE:</b> @Model.STATE <b> ZIP CODE:</b> @Model.ZIP_CODE
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p><b>REPORT WRITTEN BY </b></p>
+                                        @Model.INSPECTOR
+                                    </td>
+                                    <td colspan="3">
+                                        <p><b>DATE</b></p>
+                                        @Model.INS_DATE
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-res">
+                            <thead>
+                                <tr>
+                                    <th>ITEM</th>
+                                    <th>QTY</th>
+                                    <th>DEFECT</th>
+                                    <th>DECRIPTION</th>
+                                    <th>REMARK</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var count = 1;
+                                    foreach (var item in Model.Listdefect)
+                                    {
+                                        <tr class="odd">
+                                            <td>@count</td>
+                                            <td>@Html.TextBox("item.Qty", item.NC_Qty, new { @data_val = "true", @class = "form-control", @disabled = "disabled" })</td>
+                                            <td>
+                                                <span class="multiselect-native-select">
+                                                    <select id="dd_defect_@count" multiple="multiple" class="dd_defect"></select>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="multiselect-native-select">
+                                                    <select multiple="multiple" id="dd_descript_@count"></select>
+                                                </span>
+                                            </td>
+                                            <td>@Html.TextBox("item.Remark", item.Remark, new { @data_val = "true", @class = "form-control", @readonly = "readonly" })</td>
+                                        </tr>
+                                        count++;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <div style="display: none">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                                <thead>
+                                    <tr>
+                                        <th colspan="6">INSSPECTION PLAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd gradeX">
+                                        <td rowspan="4">VENDOR</td>
+                                        <td rowspan="2">
+                                            <b>NAME OF VENDOR</b>
+                                            <br />
+                                            @Model.VEN_NAME
+                                        </td>
+                                        @if (@Model.AQL_VISUAL == "AQL")
+                {
+                                            <td>
+                                                <b>SAMPLE INSC</b>
+                                                <br />
+                                                <input type="checkbox" class="checkboxes" checked="checked" />
+                                                <label>AQL</label> 0.65 LEVEL C=0
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <b>SAMPLE INSC</b>
+                                                <br />
+                                                <input type="checkbox" class="checkboxes" />
+                                                <label>AQL</label>  LEVEL
+                                            </td>
+                                        }
+                                        @if (@Model.AQL_VISUAL == "100%")
+                {
+                                            <td>
+                                                <b>100%</b>
+                                                <br />
+                                                INSP
+                                                <input type="checkbox" class="checkboxes" checked="checked" />
+                                            </td>
+
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <b>100%</b>
+                                                <br />
+                                                INSP
+                                                <input type="checkbox" class="checkboxes" />
+                                            </td>
+
+                                        }
+                                        <td colspan="2">
+                                            <b>FIRT ARTICAL</b>
+                                            <br />
+                                            <input type="checkbox" class="checkboxes" />
+                                        </td>
+                                    </tr>
+                                    <tr class="odd gradeX">
+                                        <td colspan="5">
+                                            <b>	QUANTITY</b>
+                                        </td>
+                                    </tr>
+                                    <tr class="odd gradeX">
+                                        <td>
+                                            <b>	STREET ADDRESS</b>
+                                            <br />
+                                            @Model.VENDOR
+                                        </td>
+                                        <td>
+                                            <b>RECIVED</b>
+                                            <br />
+                                            @Model.QTY
+                                        </td>
+                                        <td>
+                                            <b>INSPECTED</b>
+                                            <br />
+                                            @Model.PartialIns
+                                        </td>
+                                        <td>
+                                            <b>REJECTED</b>
+                                            <br />
+                                            @Model.PartialRej
+                                        </td>
+                                        <td>@Model.PERCENT%</td>
+                                    </tr>
+                                    <tr class="odd gradeX">
+                                        <td>
+                                            <b>	CITY STATE ZIP CODE</b>
+                                        </td>
+                                        <td>
+                                            <b>REPORT WRITTEN BY </b>
+                                            <b>@Model.INSPECTOR</b>
+                                        </td>
+                                        <td colspan="3">
+                                            <b>DATE</b>
+                                            <br />
+                                            @Model.INS_DATE
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="display: none">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                                <thead>
+                                    <tr>
+                                        <th>ITEM</th>
+                                        <th>QTY</th>
+                                        <th>ADITIONAL INTRUCSTION</th>
+                                        <th>REMARK</th>
+                                        <th>ISNP</th>
+                                        <th>DATE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd gradeX">
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select class="form-control">
+                                                    <option>Scrap</option>
+                                                    <option>Scrap 1</option>
+                                                    <option>Scrap 3</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>Release</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select class="form-control">
+                                                    <option>Ms.Truc</option>
+                                                    <option>Ms. Hoa</option>
+                                                    <option>Ms. Huynh</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            05/01/2017
+                                        </td>
+                                    </tr>
+                                    <tr class="odd gradeX">
+                                        <td>2</td>
+                                        <td>4</td>
+                                        <td>
+                                            <div class="form-group">
+
+                                                <select class="form-control">
+                                                    <option>D. Use as is</option>
+                                                    <option>Use as is 1</option>
+                                                    <option>Use as is 2</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>Release</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select class="form-control">
+                                                    <option>Mr.Tung</option>
+                                                    <option>Mr.Huy</option>
+                                                    <option>Mr.Trong</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            05/01/2017
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                                <thead>
+                                    <tr>
+                                        <th colspan="5">SET APPROVAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd gradeX">
+                                        <td>
+                                            <b>QUALITY</b>
+                                            <div class="form-group">
+                                                <select class="form-control">
+                                                    <option>--Choose--</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td><b>DATE</b></td>
+                                        <td>
+                                            <b>Engineering</b>
+                                            <div class="form-group">
+                                                <select class="form-control">
+                                                    <option>--Choose--</option>
+                                                    <option>Mr.Hung</option>
+                                                    <option>Ms.Hoa</option>
+                                                    <option>Mr.Tuan</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td><b>DATE</b></td>
+                                    </tr>
+                                    <tr class="odd gradeX">
+                                        <td>
+                                            <b>MFG/ASY</b>
+                                            <div class="form-group">
+                                                <select class="form-control">
+                                                    <option>--Choose--</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td><b>DATE</b></td>
+                                        <td>
+                                            <b> PUCHARSING</b>
+                                            <div class="form-group">
+                                                <select class="form-control">
+                                                    <option>--Choose--</option>
+                                                    <option>MR.Tuoi</option>
+                                                    <option>Mr.Hue</option>
+                                                    <option>Ms.Tung</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td><b>DATE</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row" id="modelSubmitStatus" hidden>
+        @Html.Partial("~/Views/WriteNcrForIqc/_SelectUserApprPartial.cshtml", (SelectList)ViewBag.ListMRBTeam);
+    </div>
+                                    }
+<script>
+    var homeUrl = '@Url.Action("Index", "NCR")'
+    var Url = '@Url.Action("GetdropdownDefect", "WriteNcrForProcess")'
+    var UrlChange = '@Url.Action("GetdropdownDeCript", "WriteNcrForProcess")'
+    var UrlChangeIQC = '@Url.Action("GetdropdownDeCript", "WriteNcrForIqc")'
+    var UrlChangeIQCByList = '@Url.Action("GetDropdownlistIQC", "WriteNcrForIqc")'
+    var dem = 0;
+</script>
+@section scripts {
+    <script type="text/javascript">
+        var $myform = $('#EditIQC');
+        var defectData = null;
+        var UrlChange = '@Url.Action("GetdropdownDeCript", "WriteNcrForProcess")';
+        $(document).ready(function () {
+            var receiver = $("#dataForLstDefect").val();
+            $.post("/WriteNcrForProcess/GetdropdownDefect",
+                { receiver: receiver },
+                function (result) {
+                    defectData = result;
+                    var count = 1;
+                    $(".dd_defect").each(function (item) {
+                        $("#dd_defect_" + count).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true, buttonWidth: '100%' });
+                        $("#dd_defect_" + count).multiselect('dataprovider', result);
+                        $('.multiselect').addClass('disabled');
+                        count++;
+                    });
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            $.post("/NCRApproval/GetListDefect",
+                { receiver: receiver },
+                function (data) {
+                    createListDescript(data.result);
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            $(".dd_defect").on('change',
+                function () {
+                    var tmp = $(this).attr('rev');
+                    var listcheck = $("#dd_defect_" + tmp).val();
+                    $.post("/WriteNcrForProcess/GetdropdownDeCript",
+                        { id: listcheck },
+                        function (result) {
+                            $('#dd_descript_' + tmp).multiselect('dataprovider', result);
+                        }).fail(function () {
+                            bootbox.alert('Please contact to Administrator!');
+                        }).always(function () {
+                            $.unblockUI();
+                        });
+                });
+        });
+
+        function createListDescript(lstDefect) {
+            $.each(lstDefect, function (i) {
+                $.post("/WriteNcrForIqc/GetDropdownlistIQC", { id: lstDefect[i].Non_Conformances }, function (result) {
+                    defectData = result;
+                    $("#dd_descript_" + (i + 1)).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true, buttonWidth: '100%' });
+                    $("#dd_descript_" + (i + 1)).multiselect('dataprovider', result);
+                    $('.multiselect').addClass('disabled');
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            });
+        }
+        $('#btn-save').click(function () {
+            $myform.submit();
+        });
+        $('#bt-close').click(function () {
+            window.location = "/NCR/index";
+        });
+        $myform.submit(function (e) {
+            $.blockUI();
+            var data = new FormData(this);
+            var $fromObj = $(this);
+            var urlAction = $fromObj.attr('action');
+            $.ajax({
+                url: urlAction,
+                type: 'POST',
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: data,
+                fail: function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }
+            }).always(function () {
+                $.unblockUI();
+            }).success(function (result) {
+                if (result.success) {
+                    afterSubmitEdit();
+                } else {
+                    bootbox.alert('Please contact to Administrator!');
+                }
+            });
+            e.preventDefault();
+        });
+        function afterSubmitEdit() {
+            bootbox.confirm({
+                message: "Do you want submit?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        $("#modelSubmitStatus").show();
+                        $("#submitApprEdit").css('display', 'unset');
+                        $("#btn-save").css('display', 'none');
+                    }
+                }
+            });
+        }
+        function submitApprEdit() {
+
+            ncrnumber = $("#NCR_NUM").val();
+            let userquality = $("#qualityAss").val();
+            let userengineer = $("#engineer").val();
+            let userafg = $("#afgassy").val();
+            let userpurchange = $("#purchasing").val();
+
+            if (userquality == userengineer) {
+                bootbox.alert("Please select another <b>QUALITY ASSURANCE</b> or <b>ENGINEERING</b>");
+                return;
+            }
+            if (userquality == userafg) {
+                bootbox.alert('Please select another <b>QUALITY ASSURANCE</b> or <b>AFG/ASSYE</b>');
+                return;
+            }
+
+            if (userquality == userpurchange) {
+                bootbox.alert('Please select another <b>QUALITY ASSURANCE</b> or <b>PURCHASING</b>');
+                return;
+            }
+
+            if (userengineer == userafg) {
+                bootbox.alert('Please select another <b>ENGINEERING</b> or <b>AFG/ASSYE</b>');
+                return;
+            }
+
+            if (userengineer == userpurchange) {
+                bootbox.alert('Please select another <b>ENGINEERING</b> or <b>PURCHASING</b>');
+                return;
+            }
+
+            if (userafg == userpurchange) {
+                bootbox.alert('Please select another <b>AFG/ASSYE</b> or <b>PURCHASING</b>');
+                return;
+            }
+
+            var datapost = {
+                ncrnumber: ncrnumber,
+                userquality: userquality,
+                userengineer: userengineer,
+                userafg: userafg,
+                userpurchange: userpurchange
+            }
+
+            $.post("/WriteNcrForIqc/ChooseUserSubmit", datapost, function (data) {
+                if (data.result) {
+                    bootbox.alert(" Successful");
+                }
+                else {
+                    bootbox.alert("Please contact to Administrator!");
+                }
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });
+        }
+    </script>
+}

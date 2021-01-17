@@ -1,0 +1,192 @@
+﻿@using II_VI_Incorporated_SCM.Services
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Innovation/Views/Shared/_LayoutIdea.cshtml";
+}
+<form class="form-inline">
+    <button class="btn btn-sm btn-success" id="savedata">
+        Save(Lưu nháp)
+    </button>
+    <button class="btn btn-sm btn-info">Submit (Gửi đi)</button>
+    <br />
+    <div class="table-responsive" style="overflow: hidden">
+        <table class="table table-striped table-bordered table-hover">
+            <colgroup>
+                <col style="width:30%" />
+                <col style="width:10%" />
+                <col style="width:30%" />
+                <col style="width:10%" />
+                <col style="width:30%" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <p><b>Idea suggestion</b></p>
+                        <p><b>(Ý tưởng đề xuất)</b></p>
+                    </td>
+                    <td colspan="4">
+                        <textarea class="form-control" rows="5" style="min-width: 100%;resize:vertical"></textarea>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p><b>Initiator/Requestor</b></p>
+                        <p><b>(Người đề xuất)</b></p>
+
+                    </td>
+                    <td colspan="3">
+                        <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <input class="form-control" style="min-width:100%;resize:vertical" type="text" placeholder="Employee Code " id="employeecode" />
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="form-control" style="min-width:100%;resize:vertical" readonly="readonly" id="nameemploy" />
+                            </div>
+                        </div>
+
+                    </td>
+                    <td>
+                        <p><b>Date(Ngày)</b></p>
+                        <input id="datePicker" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="5" colspan="2" style="vertical-align:middle">
+                        <p><b>Ideas Type </b></p>
+                        <p><b>(Loại ý tưởng)</b></p>
+                    </td>
+                    <td>
+                        <p><b>Increase Productivity</b></p>
+                        <p><b>(Tăng năng suất)</b></p>
+                    </td>
+                    <td>
+                        <input type="checkbox" class="form-control" />
+                    </td>
+                    <td>
+                        <p><b>Improve environmental</b> </p>
+                        <p><b> (Cải thiện môi trường)</b></p>
+                    </td>
+                    <td style="width:115px">
+                        <input type="checkbox" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><b>Increase Quality</b></p>
+                        <p><b>(Tăng chất lượng)</b></p>
+                    </td>
+                    <td>
+                        <input type="checkbox" class="form-control" />
+                    </td>
+                    <td>
+                        <p><b>Safety </b></p>
+                        <p><b>(An toàn)</b></p>
+                    </td>
+                    <td>
+                        <input type="checkbox" class="form-control" />
+                    </td>
+                </tr>
+                <tr class="odd gradeX">
+                    <td>
+                        <p><b>Reduce waste </b></p>
+                        <p><b> (Giảm lãng phí)</b></p>
+                    </td>
+                    <td>
+                        <input type="checkbox" class="form-control" />
+                    </td>
+                    <td>
+                        <p><b> Improve service </b></p>
+                        <p><b>(Cải thiện dịch vụ)</b></p>
+                    </td>
+                    <td>
+                        <input type="checkbox" class="form-control" />
+                    </td>
+                </tr>
+                <tr class="odd gradeX">
+                    <td style="text-align: left">
+                        <p><b>Reduce process variation</b></p>
+                        <p><b> (Giảm biến động quy trình)</b></p>
+                    </td>
+                    <td>
+                        <input type="checkbox" class="form-control" />
+                    </td>
+                    <td>
+                        <p><b>Others</b></p>
+                        <p><b> (Khác)</b></p>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="other" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6"><textarea class="form-control" id="textother" rows="3" style="min-width: 100%;resize:vertical"></textarea></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th colspan="2" class="text-center">Proposal Summary (Mô tả tóm tắt đề xuất)</th>
+            </tr>
+            <tr>
+                <td width="250px">
+                    <p><b>Current status</b></p>
+                    <p><b>(Tình trạng hiện tại)</b></p>
+                </td>
+                <td>
+                    <textarea class="form-control" rows="5" style="min-width: 100%;resize:vertical"> </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><b>Improvement idea (if have)</b></p>
+                    <p><b>(Ý tưởng cải tiến /nếu có)</b></p>
+                </td>
+                <td>
+                    <textarea class="form-control" rows="5" style="min-width: 100%;resize:vertical"> </textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+<script>
+    $(document).ready(function () {
+        $('#datePicker').datepicker({
+            autoclose: true,
+            readonly: true,
+            format: 'dd-MMM-yy'
+        })
+         var id = '@User.Identity.GetUserId()';
+    });
+   
+    $('#savedata').on('click', function () {
+        let other = $('#other').is(':checked');
+        if (other == true) {
+            $('#textother').prop('required', true);
+        }
+        else {
+            $('#textother').prop('required', false);
+        }
+    })
+    $("#employeecode").on('keyup', function () {
+        GetNameOperator();
+    });
+    function GetNameOperator() {
+        let Code = $('#employeecode').val();
+        $.blockUI();
+        $.post('@Url.Action("GetNameOperatorByCode", "Improvementideals")', { Code:Code }, function (result) {
+            if (result.success) {
+                $("#nameemploy").val(result.result);
+            }
+        }).fail(function () {
+            bootbox.alert('Please contact to Administrator!');
+        }).always(function () {
+            $.unblockUI();
+        });
+    }
+</script>
+
+

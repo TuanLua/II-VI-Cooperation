@@ -1,0 +1,69 @@
+﻿@model II_VI_Incorporated_SCM.Models.Account.GroupViewModel
+@{
+    ViewBag.Title = "Create New Group Role";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+            </div>
+          
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                @Html.ValidationMessageFor(model => model.Description, null, new { @class = "help-block text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Select Group Roles
+            </label>
+            <div class="col-md-4">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Role Name</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in (List<II_VI_Incorporated_SCM.Models.Account.ApplicationRole>)ViewBag.RolesList)
+                        {
+                            <tr>
+                                <td><input type="checkbox" name="SelectedRoles" value="@item.Name" class="checkbox-inline" /></td>
+                                <td>@Html.Label(item.Name, new { @class = "control-label" })</td>
+                                <td>@Html.Label(item.Group, new { @class = "control-label" })</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+</div>
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

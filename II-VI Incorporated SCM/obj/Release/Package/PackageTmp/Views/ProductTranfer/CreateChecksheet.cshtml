@@ -1,0 +1,214 @@
+﻿@using II_VI_Incorporated_SCM.Models.Producttranfer
+@{
+    ViewBag.Title = "CreateChecksheet";
+    List<SelectList> Type = new List<SelectList>();
+
+}
+<h3> Create Check List :@ViewBag.PartTT </h3>
+<div align="right">
+    <button id="btnreload" class="btn btn-info btn-sm">Back to Save </button>
+</div>
+<div class="row">
+    <label class="control-label col-xs-1">Item Check<span style="color: red">*</span></label>
+    <div class="col-xs-6">
+        <textarea id="Itemcheck" class="form-control"></textarea>
+    </div>
+    <label class="col-xs-1">Type<span style="color: red">*</span> </label>
+    <div class="col-xs-3">
+        <select class="form-control" id="supplierselect" >
+            <option value="">Select</option>
+            <option value="Date">Date</option>
+            <option value="Text">Text</option>
+            <option value="DrownDown">DropdownList</option>
+            <option value="YN">CheckBox</option>
+        </select>
+    </div>
+</div>
+<br />
+<div class="row">
+    <label class="control-label col-xs-1">Remark</label>
+    <div class="col-xs-6">
+        <input type="text" readonly="readonly" id="Remark" placeholder="Please input data value/value/value" class="form-control" />
+    </div>
+    <label class="col-xs-1">Required </label>
+    <div class="col-xs-1">
+        <input type="checkbox" class="form-control" id="check" value="fasle"/>
+    </div>
+    <div class="col-xs-2" align="center">
+        <button class="btn btn-success" id="btnAddChecklist">Add</button>
+    </div>
+</div>
+<br />
+<div class="col-xs-18 col-md-12">
+    @(Html.Kendo().Grid<ProductViewModel>()
+                                                                                                          .Name("ProductTranfer")
+                                                                                                          .Columns(columns =>
+                                                                                                          {
+                                                                                                              columns.Bound(p => p.Part_Num).Title("Part_Num").Width(90);
+                                                                                                              columns.Bound(p => p.Item_Desc).Title("Check Item").HtmlAttributes(new { @class = "NCR_NUM" }).Width(120);
+                                                                                                              columns.Bound(p => p.Data_Type).Title("Type").Width(120);
+                                                                                                              columns.Bound(p => p.Item_Value).Title("Value").Width(120);
+                                                                                                              columns.Bound(p => p.Item_Index).Title("Value").Width(120).Hidden();
+                                                                                                              columns.Command(command => command.Custom("Delete").Click("deleteRow")).Width(50);
+                                                                                                              columns.Command(command => command.Custom("Edit").Click("EditRow")).Width(50);
+
+                                                                                                          })
+                                                                                                          .Sortable()
+                                                                                                              .Editable(editable => editable.Mode(GridEditMode.InCell))
+                                                                                                            .Scrollable()
+                                                                                                          .Filterable()
+                                                                                                            //    .Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("test").DisplayDeleteConfirmation("Test"))
+                                                                                                            .Pageable()
+                                                                                                            .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 150, 1200, "All" }).Refresh(true))
+                                                                                                          .HtmlAttributes(new { style = "height:550px;" })
+                                                                                                          .DataSource(dataSource => dataSource
+                                                                                                              .Ajax()
+                                                                                                              .PageSize(10)
+                                                                                                              .Read(read => read.Action("GetchecksheetbyPart", "ProductTranfer", new { part = ViewBag.PartTT }))
+                                                                                                                                                                       .ServerOperation(false)
+
+                                                                                                    .Model(model =>
+                                                                                                    {
+                                                                                                        model.Id(p => p.Part_Num);
+                                                                                                        model.Field(p => p.Part_Num).Editable(false);
+                                                                                                        model.Field(p => p.Item_Value).Editable(false);
+                                                                                                        model.Field(p => p.Data_Type).Editable(false);
+                                                                                                    })
+                                                                                                     //    .Destroy(update => update.Action("DeleteDestroy", "ProductTranfer"))
+                                                                                                     .Update(update => update.Action("EditingInline_Update", "ProductTranfer"))
+                                                                                                   ))
+   
+</div>
+<script type="text/javascript">
+        var homeUrl = '@Url.Action("Index", "ProductTranfer")';
+        $("#check").on('change', function () {
+            if ($(this).is(':checked')) {
+                $(this).attr('value', 'true');
+            } else {
+                $(this).attr('value', 'false');
+            }
+        });
+
+        $('#supplierselect').on('change', function () {
+            let type = $('#supplierselect').val();
+            if (type == "DrownDown") {
+                $('#Remark').attr("readonly", false);
+            }
+            else {
+                $('#Remark').attr("readonly", true);
+            }
+        })
+        $('#btnAddChecklist').on('click', function (e) {
+            debugger;
+            e.preventDefault();
+
+            let item = $('#Itemcheck').val();
+            let required = $("input[type='checkbox']").val();
+            let remark = $('#Remark').val();
+            let type = $('#supplierselect').val();
+            let part = '@ViewBag.PartTT';
+            if (item == "") {
+                bootbox.alert("Please select check item!");
+                return;
+            }
+            if (type == "") {
+                bootbox.alert("Please select type!");
+                return;
+            }
+            if (type == "DrownDown" && remark == "") {
+                $('#Remark').removeAttr('readonly', 'readonly');
+                bootbox.alert("Please input remark!");
+                return;
+            }
+            else {
+                $.post('@Url.Action("SaveAddCheckList", "ProductTranfer")', {
+                    item: item,
+                    required: required,
+                    remark: remark,
+                    partnum: part,
+                    type: type
+                }, function (res) {
+                    if (res) {
+                        bootbox.alert("Save sucessfull!")
+                        window.location.reload();
+
+                    }
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            }
+        })
+
+        function deleteRow(e) {
+            debugger;
+            e.preventDefault ? e.preventDefault() : e.returnValue = false;
+            var grid = $("#ProductTranfer").data("kendoGrid");
+            var model = grid.dataItem($(e.target).closest("tr"));
+            var part = model.Part_Num;
+            var Item_Desc = model.Item_Desc;
+            var Index = model.Item_Index;
+            var value = model.Item_Value;
+            if (value !== null && value !== '') {
+                bootbox.alert("Item has value can't delete!");
+                return;
+            }
+            else {
+                if (confirm("Are you sure you want to delete the selected record(s)?")) {
+                    $.post('@Url.Action("DeleteDestroy", "ProductTranfer")', {
+                        part: part,
+                        Item_Desc: Item_Desc,
+                        Index: Index,
+                    }, function (res) {
+                        if (res) {
+                            bootbox.alert("Deleted sucessfull!")
+                            grid.removeRow($(e.target).closest("tr")); // remove the row
+                        }
+                    }).fail(function () {
+                        bootbox.alert('Please contact to Administrator!');
+                    }).always(function () {
+                        $.unblockUI();
+                    });
+                }
+                else {
+                }
+            }
+
+        }
+        function EditRow(e) {
+            debugger;
+            e.preventDefault ? e.preventDefault() : e.returnValue = false;
+            var grid = $("#ProductTranfer").data("kendoGrid");
+            var model = grid.dataItem($(e.target).closest("tr"));
+            var part = model.Part_Num;
+            var Item_Desc = model.Item_Desc;
+            var Index = model.Item_Index;
+            var value = model.Item_Value;
+            if (value !== null && value !== '') {
+                bootbox.alert("Item has value can't Edit!");
+                return;
+            }
+            else {
+                $.post('@Url.Action("Editchecklistingrid", "ProductTranfer")', {
+                    part: part,
+                    Item_Desc: Item_Desc,
+                    Index: Index,
+                }, function (res) {
+                    if (res) {
+                        bootbox.alert("Edit sucessfull!")
+                    }
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            }
+
+        }
+        $('#btnreload').on('click', function (e) {
+            let part = "@ViewBag.PartTT";
+            e.preventDefault();
+            window.open('@Url.Action("CreateProductranfer", "ProductTranfer")' + "?PartNum=" + part, '_blank');
+        })
+</script>

@@ -1,0 +1,192 @@
+﻿@using II_VI_Incorporated_SCM.Models
+@using II_VI_Incorporated_SCM.Models.TaskManagement
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "StatisticalByUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .k-chart {
+        height: 600px;
+        width: 100%;
+    }
+    .Closed:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Closed:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Closed {
+        color: blue;
+    }
+
+    .Closed {
+        color: blue;
+    }
+
+    .Late:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Late {
+        color: blue;
+    }
+
+    .ActionNear:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .ActionNear {
+        color: blue;
+    }
+
+    .ActionIndue:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .ActionIndue {
+        color: blue;
+    }
+
+    .Person:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Person {
+        color: blue;
+    }
+</style>
+<h2>Task Statistical By User</h2>
+
+<div class="form-group row" style="text-align:right">
+    <label class="col-md-4" id="lbDept">Person<span style="color: red">*</span> : </label>
+    <div class="col-md-4">
+        @Html.DropDownList("UserList", (IEnumerable<SelectListItem>)ViewBag.UserList, "", new { @class = "form-control", id = "UserList" })
+    </div>
+</div>
+<div class="form-group col-md-12" style="text-align:center">
+    <button class="btn btn-sm btn-success" id="search">Search</button>
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<sp_Task_Statistical_ByUser_Result>()
+                                    .Name("gridTaskUser")
+                                    .Columns(columns =>
+                                    {
+                                        columns.Bound(p => p.ASSIGNEE).Title("Person").HtmlAttributes(new { @class = "Person" }).Width(200);
+                                        columns.Bound(p => p.Closed).Title("Closed").HtmlAttributes(new { @class = "Closed" }).Width(100); ;
+                                        columns.Bound(p => p.Late).Title("Late").HtmlAttributes(new { @class = "Late" }).Width(100);
+                                        columns.Bound(p => p.ActionNear).Title("ActionNear").HtmlAttributes(new { @class = "ActionNear" }).Width(100);
+                                        columns.Bound(p => p.ActionIndue).Title("ActionIndue").HtmlAttributes(new { @class = "ActionIndue" }).Width(100);
+                                        //columns.Bound(p => p.MaxAging).Title("MaxAging").Width(100);
+
+                                    })
+                                    .Pageable()
+                                    .Sortable()
+                                    .Scrollable()
+                                    .Filterable()
+                                    .HtmlAttributes(new { style = "height:1050px;" })
+                                    .DataSource(dataSource => dataSource
+                                        .Ajax()
+                                        .PageSize(15)
+                                    //.Read(read => read.Action("get_TaskList_Report", "TaskManagement", new { Dept = "", TaskStatus = "", DateFrom = DateTime.Now, DateTo = DateTime.Now }))
+
+                                    ))
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var id = '@User.Identity.GetUserId()';  
+        let element = document.getElementById('UserList');
+        element.value = id;
+        //$("#UserList").val=id;
+
+        $("#UserList").select2();
+        $("#gridTaskUser").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("Get_Task_Statistical_ByUser", "TaskManagement")?user=' + id;
+        $("#gridTaskUser").data("kendoGrid").dataSource.read();
+
+    });
+    $("#search").on('click', function () {
+        $.blockUI();
+        debugger;
+
+        let UserList = $("#UserList").val();
+        
+        if (UserList == "") {
+            alert("Please choose person to query!");
+            return;
+        }
+        else {
+            $("#gridTaskUser").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("Get_Task_Statistical_ByUser", "TaskManagement")?user=' + UserList;
+            $("#gridTaskUser").data("kendoGrid").dataSource.read();         
+           
+        }
+     $.unblockUI();
+    })
+    $("#gridTaskUser").on("click", ".Closed", function (e) {
+        
+        var grid = $("#gridTaskUser").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        let UserList = $("#UserList").val();
+        var taskstatus = 'Closed';
+        var searchtype = 'EMP';              
+        window.open('@Url.Action("Task_Statistical_ByDetail", "TaskManagement")' + "?SearchType=" + searchtype + "&SearchValue=" + UserList + "&TaskStatus=" + taskstatus, '_blank');
+    }); 
+    $("#gridTaskUser").on("click", ".Late", function (e) {
+        
+        var grid = $("#gridTaskUser").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        let UserList = $("#UserList").val();
+        var taskstatus = 'Late';
+        var searchtype = 'EMP';              
+        window.open('@Url.Action("Task_Statistical_ByDetail", "TaskManagement")' + "?SearchType=" + searchtype + "&SearchValue=" + UserList + "&TaskStatus=" + taskstatus, '_blank');
+    });
+    $("#gridTaskUser").on("click", ".ActionNear", function (e) {
+        
+        var grid = $("#gridTaskUser").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        let UserList = $("#UserList").val();
+        var taskstatus = 'ActionNear';
+        var searchtype = 'EMP';              
+        window.open('@Url.Action("Task_Statistical_ByDetail", "TaskManagement")' + "?SearchType=" + searchtype + "&SearchValue=" + UserList + "&TaskStatus=" + taskstatus, '_blank');
+    }); 
+    $("#gridTaskUser").on("click", ".ActionIndue", function (e) {
+        
+        var grid = $("#gridTaskUser").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        let UserList = $("#UserList").val();
+        var taskstatus = 'ActionIndue';
+        var searchtype = 'EMP';              
+        window.open('@Url.Action("Task_Statistical_ByDetail", "TaskManagement")' + "?SearchType=" + searchtype + "&SearchValue=" + UserList + "&TaskStatus=" + taskstatus, '_blank');
+    }); 
+    $("#gridTaskUser").on("click", ".Person", function (e) {
+        
+        var grid = $("#gridTaskUser").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        let UserList = $("#UserList").val();
+        var taskstatus = 'All';
+        var searchtype = 'EMP';              
+        window.open('@Url.Action("Task_Statistical_ByDetail", "TaskManagement")' + "?SearchType=" + searchtype + "&SearchValue=" + UserList + "&TaskStatus=" + taskstatus, '_blank');
+    }); 
+</script>
+
+

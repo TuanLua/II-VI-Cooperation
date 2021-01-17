@@ -1,0 +1,609 @@
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll.config
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.pdb
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Antlr3.Runtime.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Autofac.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EntityFramework.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\evohtmltopdf.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EvoPdfToHtml.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\IronPdf.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\itextsharp.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Kendo.Mvc.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Web.Infrastructure.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Newtonsoft.Json.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Owin.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Helpers.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Mvc.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Optimization.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Razor.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\WebGrease.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Antlr3.Runtime.pdb
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Autofac.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EntityFramework.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\evohtmltopdf.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EvoPdfToHtml.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\IronPdf.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\itextsharp.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Kendo.Mvc.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Newtonsoft.Json.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Helpers.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Mvc.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Optimization.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Razor.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.xml
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\bg-BG\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\cs-CZ\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\da-DK\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\de-DE\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\es-ES\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\fr-CA\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\fr-FR\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\he-IL\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\it-IT\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\nl-NL\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\pl-PL\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\pt-BR\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\pt-PT\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\ro-RO\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\ru-RU\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\sk-SK\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\sv-SE\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\tr-TR\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\uk-UA\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\zh-CN\Kendo.Mvc.resources.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\evointernal.dat
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\evopdftohtml.dat
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CoreCompileInputs.cache
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CopyComplete
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.dll
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.pdb
+E:\Project\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csprojAssemblyReference.cache
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll.config
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.pdb
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Antlr3.Runtime.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Autofac.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EntityFramework.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\evohtmltopdf.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EvoPdfToHtml.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\IronPdf.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\itextsharp.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Kendo.Mvc.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Web.Infrastructure.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Newtonsoft.Json.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Owin.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Helpers.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Mvc.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Optimization.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Razor.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\WebGrease.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Antlr3.Runtime.pdb
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Autofac.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EntityFramework.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\evohtmltopdf.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\EvoPdfToHtml.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\IronPdf.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\itextsharp.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Kendo.Mvc.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\Newtonsoft.Json.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Helpers.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Mvc.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Optimization.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.Razor.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.xml
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\bg-BG\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\cs-CZ\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\da-DK\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\de-DE\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\es-ES\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\fr-CA\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\fr-FR\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\he-IL\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\it-IT\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\nl-NL\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\pl-PL\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\pt-BR\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\pt-PT\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\ro-RO\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\ru-RU\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\sk-SK\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\sv-SE\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\tr-TR\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\uk-UA\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\zh-CN\Kendo.Mvc.resources.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\evointernal.dat
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\bin\evopdftohtml.dat
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CoreCompileInputs.cache
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CopyComplete
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.dll
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.pdb
+D:\II_VIinGIT\NCR_System\SourceCode\II-VI Incorporated SCM\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csprojAssemblyReference.cache
+F:\New folder\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll.config
+F:\New folder\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll
+F:\New folder\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.pdb
+F:\New folder\II-VI Incorporated SCM\bin\Antlr3.Runtime.dll
+F:\New folder\II-VI Incorporated SCM\bin\Autofac.dll
+F:\New folder\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.dll
+F:\New folder\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.dll
+F:\New folder\II-VI Incorporated SCM\bin\EntityFramework.dll
+F:\New folder\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.dll
+F:\New folder\II-VI Incorporated SCM\bin\evohtmltopdf.dll
+F:\New folder\II-VI Incorporated SCM\bin\EvoPdfToHtml.dll
+F:\New folder\II-VI Incorporated SCM\bin\IronPdf.dll
+F:\New folder\II-VI Incorporated SCM\bin\itextsharp.dll
+F:\New folder\II-VI Incorporated SCM\bin\Kendo.Mvc.dll
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.dll
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.dll
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.Owin.dll
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.dll
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.dll
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.dll
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.dll
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.Web.Infrastructure.dll
+F:\New folder\II-VI Incorporated SCM\bin\Newtonsoft.Json.dll
+F:\New folder\II-VI Incorporated SCM\bin\Owin.dll
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.Helpers.dll
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.Mvc.dll
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.Optimization.dll
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.Razor.dll
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.dll
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.WebPages.dll
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.dll
+F:\New folder\II-VI Incorporated SCM\bin\WebGrease.dll
+F:\New folder\II-VI Incorporated SCM\bin\Antlr3.Runtime.pdb
+F:\New folder\II-VI Incorporated SCM\bin\Autofac.xml
+F:\New folder\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.xml
+F:\New folder\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.xml
+F:\New folder\II-VI Incorporated SCM\bin\EntityFramework.xml
+F:\New folder\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.xml
+F:\New folder\II-VI Incorporated SCM\bin\evohtmltopdf.xml
+F:\New folder\II-VI Incorporated SCM\bin\EvoPdfToHtml.xml
+F:\New folder\II-VI Incorporated SCM\bin\IronPdf.xml
+F:\New folder\II-VI Incorporated SCM\bin\itextsharp.xml
+F:\New folder\II-VI Incorporated SCM\bin\Kendo.Mvc.xml
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.xml
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.xml
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.Owin.xml
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.xml
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.xml
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.xml
+F:\New folder\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.xml
+F:\New folder\II-VI Incorporated SCM\bin\Newtonsoft.Json.xml
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.Helpers.xml
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.Mvc.xml
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.Optimization.xml
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.Razor.xml
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.WebPages.xml
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.xml
+F:\New folder\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.xml
+F:\New folder\II-VI Incorporated SCM\bin\bg-BG\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\cs-CZ\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\da-DK\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\de-DE\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\es-ES\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\fr-CA\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\fr-FR\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\he-IL\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\it-IT\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\nl-NL\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\pl-PL\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\pt-BR\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\pt-PT\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\ro-RO\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\ru-RU\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\sk-SK\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\sv-SE\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\tr-TR\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\uk-UA\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\zh-CN\Kendo.Mvc.resources.dll
+F:\New folder\II-VI Incorporated SCM\bin\evointernal.dat
+F:\New folder\II-VI Incorporated SCM\bin\evopdftohtml.dat
+F:\New folder\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csprojAssemblyReference.cache
+F:\New folder\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CoreCompileInputs.cache
+F:\New folder\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CopyComplete
+F:\New folder\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.dll
+F:\New folder\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.pdb
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll.config
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.pdb
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Antlr3.Runtime.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Autofac.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\EntityFramework.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\evohtmltopdf.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\EvoPdfToHtml.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\IronPdf.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\itextsharp.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Kendo.Mvc.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.Owin.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.Web.Infrastructure.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Newtonsoft.Json.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Owin.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.Helpers.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.Mvc.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.Optimization.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.Razor.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.WebPages.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\WebGrease.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Antlr3.Runtime.pdb
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Autofac.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\EntityFramework.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\evohtmltopdf.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\EvoPdfToHtml.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\IronPdf.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\itextsharp.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Kendo.Mvc.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.Owin.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\Newtonsoft.Json.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.Helpers.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.Mvc.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.Optimization.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.Razor.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.WebPages.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.xml
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\bg-BG\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\cs-CZ\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\da-DK\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\de-DE\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\es-ES\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\fr-CA\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\fr-FR\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\he-IL\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\it-IT\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\nl-NL\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\pl-PL\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\pt-BR\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\pt-PT\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\ro-RO\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\ru-RU\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\sk-SK\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\sv-SE\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\tr-TR\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\uk-UA\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\zh-CN\Kendo.Mvc.resources.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\evointernal.dat
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\bin\evopdftohtml.dat
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CoreCompileInputs.cache
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CopyComplete
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.dll
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.pdb
+C:\THI NGUYEN\Source Code\DMS Web\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csprojAssemblyReference.cache
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll.config
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.pdb
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Antlr3.Runtime.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\evohtmltopdf.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\EvoPdfToHtml.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\IronPdf.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\itextsharp.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Kendo.Mvc.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Web.Infrastructure.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Newtonsoft.Json.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Owin.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Helpers.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Mvc.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Optimization.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Razor.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\WebGrease.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Antlr3.Runtime.pdb
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\evohtmltopdf.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\EvoPdfToHtml.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\IronPdf.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\itextsharp.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Kendo.Mvc.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\Newtonsoft.Json.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Helpers.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Mvc.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Optimization.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Razor.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.xml
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\bg-BG\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\cs-CZ\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\da-DK\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\de-DE\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\es-ES\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\fr-CA\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\fr-FR\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\he-IL\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\it-IT\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\nl-NL\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\pl-PL\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\pt-BR\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\pt-PT\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\ro-RO\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\ru-RU\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\sk-SK\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\sv-SE\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\tr-TR\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\uk-UA\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\zh-CN\Kendo.Mvc.resources.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\evointernal.dat
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\bin\evopdftohtml.dat
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csprojAssemblyReference.cache
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CoreCompileInputs.cache
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CopyComplete
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.dll
+\\iivivn03\DMSWeb\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.pdb
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll.config
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.pdb
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Antlr3.Runtime.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\evohtmltopdf.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\EvoPdfToHtml.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\IronPdf.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\itextsharp.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Kendo.Mvc.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Web.Infrastructure.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Newtonsoft.Json.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Owin.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Helpers.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Mvc.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Optimization.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Razor.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\WebGrease.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Antlr3.Runtime.pdb
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\evohtmltopdf.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\EvoPdfToHtml.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\IronPdf.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\itextsharp.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Kendo.Mvc.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\Newtonsoft.Json.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Helpers.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Mvc.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Optimization.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Razor.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.xml
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\bg-BG\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\cs-CZ\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\da-DK\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\de-DE\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\es-ES\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\fr-CA\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\fr-FR\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\he-IL\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\it-IT\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\nl-NL\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\pl-PL\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\pt-BR\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\pt-PT\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\ro-RO\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\ru-RU\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\sk-SK\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\sv-SE\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\tr-TR\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\uk-UA\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\zh-CN\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\evointernal.dat
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\bin\evopdftohtml.dat
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csprojAssemblyReference.cache
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CoreCompileInputs.cache
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CopyComplete
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.dll
+\\vnmbi-nas01\data01\Software\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.pdb
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll.config
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\II_VI_Incorporated_SCM.pdb
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Antlr3.Runtime.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\evohtmltopdf.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\EvoPdfToHtml.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\IronPdf.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\itextsharp.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Kendo.Mvc.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Web.Infrastructure.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Newtonsoft.Json.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Owin.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Helpers.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Mvc.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Optimization.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Razor.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\WebGrease.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Antlr3.Runtime.pdb
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Autofac.Integration.Mvc.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\DocumentFormat.OpenXml.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\EntityFramework.SqlServer.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\evohtmltopdf.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\EvoPdfToHtml.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\IronPdf.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\itextsharp.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Kendo.Mvc.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Core.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.AspNet.Identity.Owin.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.Cookies.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Microsoft.Owin.Security.OAuth.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\Newtonsoft.Json.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Helpers.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Mvc.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Optimization.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.Razor.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Deployment.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\System.Web.WebPages.Razor.xml
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\bg-BG\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\cs-CZ\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\da-DK\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\de-DE\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\es-ES\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\fr-CA\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\fr-FR\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\he-IL\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\it-IT\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\nl-NL\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\pl-PL\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\pt-BR\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\pt-PT\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\ro-RO\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\ru-RU\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\sk-SK\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\sv-SE\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\tr-TR\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\uk-UA\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\zh-CN\Kendo.Mvc.resources.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\evointernal.dat
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\bin\evopdftohtml.dat
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csprojAssemblyReference.cache
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CoreCompileInputs.cache
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.csproj.CopyComplete
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.dll
+\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\obj\Debug\II_VI_Incorporated_SCM.pdb

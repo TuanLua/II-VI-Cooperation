@@ -1,0 +1,52 @@
+﻿@model II_VI_Incorporated_SCM.Models.Producttranfer.ProductViewModel
+<fieldset class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <div class="form-body">
+                <label class="col-md-2 control-label" style="text-align:left">Build to Location <span style="color: red">*</span></label>
+                <div class="col-md-4">
+                    @Html.DropDownList("Build_Loc", (IEnumerable<SelectListItem>)ViewBag.Build, "Please select", new { @class = "form-control", id = "Build_Loc" })
+                </div>
+                <label class="col-md-2 control-label">Work Center<span style="color: red">*</span></label>
+                <div class="col-md-4">
+                    @Html.DropDownList("Wc", (IEnumerable<SelectListItem>)ViewBag.WC, "Please select", new { @class = "form-control", id = "Wc" })
+                </div>
+            </div>
+            <div class="form-body">
+                <label class="col-md-2 control-label" style="text-align:left">Plan Yield<span style="color: red">*</span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Plan_Yield, new
+                     {
+                         @class = "form-control",
+                         @required = "required",
+                         @type= "number"
+                     })
+                </div>
+                <label class="col-md-2 control-label">VN Owner<span style="color: red">*</span></label>
+                <div class="col-md-4">
+                    @Html.DropDownList("Vn_Owner", (IEnumerable<SelectListItem>)ViewBag.Owner, "Please select", new { @class = "form-control", id = "VNowner" })
+                </div>
+            </div>
+            <div class="form-body">
+                <label class="col-md-2 control-label" style="text-align:left">Section<span style="color: red">*</span></label>
+                <div class="col-md-4">
+                    @Html.DropDownList("Setion", (IEnumerable<SelectListItem>)ViewBag.Section, "Please select", new { @class = "form-control", id = "Section" })
+                </div>
+                <label class="col-md-2 control-label">Note</label>
+                <div class="col-md-4">
+                    @Html.TextAreaFor(m => m.PE_Note, new
+                 {
+                     @class = "form-control",
+                 })
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<script>
+    $('#Build_Loc').val('@Model.Build_Loc');
+    $('#Wc').val('@Model.Wc');
+    $('#VNowner').val('@Model.Vn_Owner');
+
+</script>

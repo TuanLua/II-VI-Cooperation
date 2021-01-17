@@ -1,0 +1,144 @@
+﻿@model II_VI_Incorporated_SCM.Models.NCR.NCRManagementViewModel
+@using II_VI_Incorporated_SCM.Services;
+
+<style>
+    .margin-left-right-0 {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .padding-left-right-0 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .wid-hei-chkbox {
+        height: 20px;
+        width: 20px;
+    }
+</style>
+<div class="portlet grey col-md-12">
+    <div class="row margin-left-right-0">
+        <div class="col-md-12 form-horizontal">
+            <div class="col-md-6 form-group">
+                <div class="col-md-12">
+                    <h3 style="font-weight: bold">CORRECTIVE ACTION</h3>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <div class="col-md-12">
+                    @Html.RadioButton("NOT_REQUIRED", "false", Model.NOT_REQUIRED.HasValue ? Model.NOT_REQUIRED.Value : false, new { @class = "checkbox-inline wid-hei-chkbox", @id = "chkb_notrequired" }) NOT REQUIRED
+                    @Html.RadioButton("REQUIRED", "false", Model.REQUIRED.HasValue ? Model.REQUIRED.Value : false, new { @class = "checkbox-inline wid-hei-chkbox", @id = "chkb_required" }) REQUIRED
+                    @Html.RadioButton("NOTIFICATION_ONLY", "false", Model.NOTIFICATION_ONLY.HasValue ? Model.NOTIFICATION_ONLY.Value : false, new { @class = "checkbox-inline wid-hei-chkbox", @id = "chkb_notification" }) NOTIFCATION
+                    @*<input type="radio" name="NOT_REQUIRED" class="checkbox-inline wid-hei-chkbox" id="chkb_notrequired" value="no" /> NOT REQUIRED
+                    <input type="radio" name="REQUIRED" class="checkbox-inline wid-hei-chkbox" id="chkb_required" value="yes" /> REQUIRED
+                    <input type="radio" name="NOTIFICATION_ONLY" class="checkbox-inline wid-hei-chkbox" id="chkb_notification" value="noti" /> NOTIFCATION*@
+                </div>
+            </div>
+
+            <div class="col-md-12 form-group display-none" id="showrequired">
+                <div class="col-md-12 padding-left-right-0">
+                    <div class="col-md-8">
+                        ISSUED CORRECTIVE ACTION REQUEST NO:
+                    </div>
+                    <div class="col-md-4">
+                        DATE
+                    </div>
+                    <div class="col-md-8">
+                        <input class="form-control" id="txt_issuecorrective" name="ISSUED_REQUEST_NO" />
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" name="ISSUED_REQUEST_DATE" id="txt_issuedate" readonly />
+                    </div>
+                </div>
+                @*<div class="col-md-12 padding-left-right-0">
+                        <div class="col-md-8">
+                            FOLLOW UP NOTES
+                        </div>
+                        <div class="col-md-8">
+                            <input class="form-control" id="txt_followup" />
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="portlet grey col-md-12 display-none" id="showread">
+    <div class="row margin-left-right-0">
+        <div class="col-md-12 form-horizontal">
+            <div class="col-md-6 form-group">
+                <div class="col-md-12">
+                    <h3 style="font-weight: bold">ACCTG USE ONLY</h3>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <div class="col-md-2">
+                    REMOVED FROM
+                </div>
+                <div class="col-md-4">
+                    <input name="REMOVED_FROM" class="form-control" id="txt_removedfrom" />
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <div class="col-md-2">
+                    BOOK INV
+                </div>
+                <div class="col-md-4">
+                    <input name="BOOK_INV" class="form-control" id="txt_boxinv" />
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <div class="col-md-12">
+                    ISSUE DEBIT MEMO
+                </div>
+            </div>
+            <div class="col-md-12 form-inline form-group">
+                <div class="col-md-6">
+                    <label class="control-label">DATE    </label>
+                    <input name="ISSUE_MEMO_DATE" class="form-control" id="txt_datedebit" readonly />
+                    <label class="control-label">NO.     </label>
+                    <input class="form-control" name="ISSUE_MEMO_NO" id="txt_nodebit" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        let today = new Date();
+        let str_today = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+        $("input#txt_datedebit").datepicker();
+        $("input#txt_issuedate").datepicker();
+        //$("input#txt_datedebit").val(str_today);
+        //$("input#txt_issuedate").val(str_today);
+    });
+    $('#chkb_required').on('click',
+        function () {
+            $('#chkb_required').prop('value', 'True');
+            $('#chkb_notrequired').prop('value', 'False');
+            $('#chkb_notification').prop('value', 'False');
+            $('#chkb_notrequired').prop('checked', false);
+            $('#chkb_notification').prop('checked', false);
+            $('#showrequired').removeClass('display-none');
+            $('#showread').removeClass('display-none');
+        });
+    $('#chkb_notification').on('click', function () {
+        $('#chkb_required').prop('value', 'False');
+        $('#chkb_notrequired').prop('value', 'False');
+        $('#chkb_notification').prop('value', 'True');
+        $('#chkb_notrequired').prop('checked', false);
+        $('#chkb_required').prop('checked', false);
+        $('#showrequired').addClass('display-none');
+        $('#showread').addClass('display-none');
+    });
+    $('#chkb_notrequired').on('click', function () {
+        $('#chkb_required').prop('value', 'False');
+        $('#chkb_notification').prop('value', 'False');
+        $('#chkb_notrequired').prop('value', 'True');
+        $('#chkb_notification').prop('checked', false);
+        $('#chkb_required').prop('checked', false);
+        $('#showrequired').addClass('display-none');
+        $('#showread').addClass('display-none');
+    });
+</script>

@@ -1,0 +1,679 @@
+﻿@model II_VI_Incorporated_SCM.Models.NCR.NCRManagementViewModel
+@{
+    ViewBag.Title = "Edit NCR";
+}
+<input hidden value="@Model.NCR_NUM" id="dataForLstDefect" />
+<style>
+    .multiselect-container {
+        max-height: 300px !important;
+        max-width: 300px !important;
+        padding-left: 30px !important;
+    }
+
+    .input-validation-error {
+        border: 1px solid red !important;
+        background-color: #fee !important;
+    }
+
+</style>
+<form id="EditNCRForm">
+    @Html.HiddenFor(model => model.NCR_NUM)
+    @Html.HiddenFor(model => model.Comment)
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet box">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <input type="hidden" id="GROUP" value="MBR" />
+                        <a class="btn btn-success btn-sm" id="btn-SaveEdit">Save</a>
+                        <a class="btn btn-danger btn-sm " id="bt-close">Close</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <colgroup>
+                            <col width="30%" />
+                            <col width="10%" />
+                            <col width="30%" />
+                            <col width="15%" />
+                            <col width="15%" />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p><b>MI PART NO.</b></p>
+                                    @Html.TextBoxFor(m => m.MI_PART_NO, new { @class = "form-control", @data_val = "true", @readonly = "readonly" })
+                                </td>
+                                <td>
+                                    <p><b>REV</b></p>
+                                    @Model.DRAW_REV
+                                </td>
+                                <td>
+                                    <p><b>PO NUMBER</b></p>
+                                    @Html.TextBoxFor(model => model.PO_NUM, new { @class = "form-control", @readonly = "readonly" })
+                                </td>
+                                <td colspan="2">
+                                    <p><b>TRAVELER NO./ ARM NO. /LOT#.</b></p>
+                                    @Html.TextBoxFor(model => model.LOT, new { @class = "form-control", @readonly = "readonly" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p><b>DESCRIPTION OF MATERRIAL</b></p>
+                                    @Model.ITEM_DESC
+                                </td>
+                                <td>
+                                    <p><b>MODEL OR  SERIAL NO.</b></p>
+                                    @Model.MODEL_NO
+                                </td>
+                                @if (@Model.TYPE_NCR == "IQC")
+                                {
+                                    <td>
+                                        <p><b>REC.INSP</b></p>
+                                        <input type="checkbox" disabled="disabled" class="checkboxes" checked="checked" />
+                                    </td>
+                                    <td>
+                                        <p><b>IN PROCESS</b></p>
+                                        <input type="checkbox" class="checkboxes" disabled="disabled" readonly="readonly" />
+                                    </td>
+                                }
+
+                                else if (@Model.TYPE_NCR == "PROCESS")
+                                {
+                                    <td>
+                                        <p><b>REC.INSP</b></p>
+                                        <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                    </td>
+                                    <td>
+                                        <p><b>IN PROCESS</b></p>
+                                        <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                                    </td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped table-bordered table-hover" id="sample_3">
+                        <thead>
+                            <tr>
+                                <th colspan="6" class="text-center">INSSPECTION PLAN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="4" style="vertical-align:middle">VENDOR</td>
+                                <td rowspan="2">
+                                    <p><b>NAME OF VENDOR</b></p>
+                                    @Model.VEN_NAME
+                                </td>
+                                @if (@Model.SAMPLE_INSP == true)
+                                {
+                                    <td colspan="2">
+                                        <p><b>SAMPLE INSC</b></p>
+                                        <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                                        <label>AQL</label> 0.65 LEVEL C=0
+                                    </td>
+                                }
+                                else
+                                {
+
+                                    <td colspan="2">
+                                        <p><b>SAMPLE INSP</b></p>
+                                        <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                        <label>AQL</label>  LEVEL
+                                    </td>
+                                }
+                                @if (@Model.PERCENT_INSP == true)
+                                {
+                                    <td>
+                                        <p><b>100%</b></p>
+                                        INSP
+                                        <input type="checkbox" class="checkboxes" disabled="disabled" checked="checked" />
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <p><b>100%</b></p>
+                                        INSP
+                                        <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                    </td>
+
+                                }
+                                @if (Model.FIRST_ARTICLE == true)
+                                {
+                                    <td colspan="2">
+                                        <p><b>FIRST ARTICLE</b></p>
+                                        <input type="checkbox" class="checkboxes" checked="checked" disabled="disabled" />
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td colspan="2">
+                                        <p><b>FIRST ARTICLE</b></p>
+                                        <input type="checkbox" class="checkboxes" disabled="disabled" />
+                                    </td>
+                                }
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <p style="text-align: center"><b>QUANTITY</b></p>
+                                </td>
+                            </tr>
+                            <tr class="odd gradeX">
+                                <td>
+                                    <p><b>STREET ADDRESS</b></p>
+                                    @Model.VENDOR
+                                </td>
+                                <td>
+                                    <p><b>RECEIVED</b></p>
+                                    @Model.REC_QTY
+                                </td>
+                                <td>
+                                    <p><b>INSPECTED</b></p>
+                                    @Model.INS_QTY
+                                </td>
+                                <td>
+                                    <p><b>DEFECTIVE</b></p>
+                                    <input type="hidden" value="@Model.defect" id="defectqty1" />
+                                    @Model.defect
+                                </td>
+                                <td>
+                                    <p><b>REJECTED</b></p>
+                                    <input type="hidden" value="@Model.REJ_QTY" id="rejected1" />
+                                    @Model.REJ_QTY
+                                </td>
+                            </tr>
+                            <tr class="odd gradeX">
+                                <td>
+                                    <p><b>CITY STATE ZIP CODE</b></p>
+                                </td>
+                                <td>
+                                    <p><b>REPORT WRITTEN BY </b></p>
+                                    @Model.INSPECTOR
+                                </td>
+                                <td colspan="3">
+                                    <p><b>DATE</b></p>
+                                    @(Model.INS_DATE.HasValue ? Model.INS_DATE.Value.ToShortDateString() : "")
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <fieldset class="col-md-12">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">
+                                    <span>VN Material Traceability</span> <span style="color: red">* &nbsp;&nbsp;&nbsp;<a href="@Url.Action("DownloadVNMaterialTraceability", "NCRApproval", new { id = Model.OldVNMaterialTraceability})"><i class="fa fa-file-pdf-o">View </i></a></span>
+                                    <p style="margin:0;"><a target="_blank" href="@ViewBag.VNMaterialTraceabilityLink">Link to eCQ “VN Material Traceability”</a></p>
+                                </label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(m => m.VNMaterialTraceability, new { @class = "form-control", type = "file", accept = "application/pdf" })
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.ValidationMessageFor(m => m.VNMaterialTraceability, null, new { @class = "help-block text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <legend>Attach Evidence</legend>
+                        <div class="">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbEvidenceInProcess">
+                                <thead>
+                                    <tr>
+                                        <th>File Name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyEvidenceInProcess">
+                                    @if (Model.OldEvidence.Count > 0)
+                                    {
+                                        int i = 0;
+                                        foreach (var evi in Model.OldEvidence)
+                                        {
+                                            <tr>
+                                                <td width="80%;" style="text-align: left !important;">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <a href="@Url.Action("DownloadFile", "NCRApproval", new { fileId = evi.EVI_ID })"><i class="fa fa-file-pdf-o"> &nbsp; @evi.EVI_PATH.Split('/')[1] </i></a>
+                                                    <input type="hidden" name="EVIID" value="@evi.EVI_ID" class="old-evi" sizeoffile ="@Model.SizeOfOldEvidence[i]" />
+                                                </td>
+                                                <td><button onclick="deleteEvedenceRowInProcess(this)" type="button" class="btn btn-danger pull-right">Delete</button></td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-success pull-right" id="btnAddEvidentInProcess">Add File</button>
+                        </div>
+
+                    </fieldset>
+                    <table id="tablenonconf" class="table table-striped table-bordered table-hover table-checkable order-column">
+                        <thead>
+                            <tr>
+                                <th width="10%">ITEM</th>
+                                <th width="10%">QTY</th>
+                                <th width="25%">DEFECT</th>
+                                <th width="25%">DESCRIPTION</th>
+                                <th width="20%">REMARK</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="getqty">
+                            @{
+                                var count = 0;
+                                if (Model != null && Model.Listdefectprocess != null && Model.Listdefectprocess.Count > 0)
+                                {
+                                    foreach (var item in Model.Listdefectprocess)
+                                    {
+                                        int _item = count + 1;
+                                        <tr class="DefectRow">
+                                            <td>
+                                                <span>@_item</span>
+                                                @Html.TextBox("ListNCR_DET[" + count + "].ITEM", item.ITEM, new { @data_val = "true", @type = "hidden", id = "item_QTY_" + count })
+                                            </td>
+                                            <td>@Html.TextBox("ListNCR_DET[" + count + "].QTY", item.QTY, new { @data_val = "true", @class = "form-control checkQTY", @onchange = "changeqty1(this)", @type = "text", @required = "required" })</td>
+                                            <td>
+                                                <select id="ListNCR_DET_DEFECT_@count" multiple="multiple" rev="@count" name="ListNCR_DET[@count].DEFECT" class="dd_defectpro" required></select>
+                                            </td>
+                                            <td>
+                                                <select multiple="multiple" id="ListNCR_DET_NC_DESC_@count" name="ListNCR_DET[@count].NC_DESC" required></select>
+                                            </td>
+                                            <td>@Html.TextBox("ListNCR_DET[" + count + "].REMARK", item.REMARK, new { @data_val = "true", @class = "form-control" })</td>
+                                            <td><a class="btn btn-danger btn-sm" onclick="deleterow1(this)"> <i class="fa fa-trash"></i></a> </td>
+                                        </tr>
+                                        count++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @*<div class="row">*@
+                    <button type="button" class="btn btn-success pull-right" style="margin-right:15px;" onclick="addNewRaw()">Add</button>
+                    @*</div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    var homeUrl = '@Url.Action("Index", "NCR")';
+    var Url = '@Url.Action("GetdropdownDefect", "WriteNcrForProcess")';
+    var isAQL = '@Model.SAMPLE_INSP' === 'True';
+    var SizeLength = parseFloat('@ViewBag.SizeLength');
+</script>
+@section scripts
+{
+    <script>
+        var $EditForm = $('#EditNCRForm');
+        var dataDefect = null;
+        $(document).ready(function () {
+            let ccn = '@Model.CCN';
+            $.post(Url, { ccn: ccn },
+                function (result) {
+                    dataDefect = result;
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            var NCR_NUM = $("#dataForLstDefect").val();
+            $.blockUI();
+            $.post('@Url.Action("GetdropdownDefectForPro", "WriteNcrForProcess")', { ncrnum: NCR_NUM,CCN:ccn}, function (result) {
+                var count = 0;
+                $('.DefectRow').each(function (i, e) {
+
+                    console.log($('#ListNCR_DET_DEFECT_' + count));
+                    $('#ListNCR_DET_DEFECT_' + count).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+                    $('#ListNCR_DET_DEFECT_' + count).multiselect('dataprovider', result[count]);
+                    count++;
+                });
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+                });
+            $.blockUI();
+            $.post('@Url.Action("GetListDefectProcess", "NCRApproval")', { NCR_NUM: NCR_NUM, CCN:ccn}, function (data) {
+                createListDescript(data);
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });
+
+            $(".dd_defectpro").on('change', function () {
+                var tmp = $(this).attr('rev');
+                var listcheck = $("#ListNCR_DET_DEFECT_" + tmp).val();
+                $.blockUI();
+
+                $.post('@Url.Action("GetDropdownlistDecriptByIdDefect", "NCRApproval")', { id: listcheck ,CCN:ccn}, function (result) {
+                    $('#ListNCR_DET_NC_DESC_' + tmp).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+                    $('#ListNCR_DET_NC_DESC_' + tmp).multiselect('dataprovider', result);
+
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            });
+            //btn confirm NCR
+            $("#btn-confirm").on('click', function () {
+                $.blockUI();
+                $.post('@Url.Action("ChangeStatusToWaitForConfirm", "WriteNcrForProcess")', { ncrnum: $('#NCR_NUM').val() }, function (result) {
+                    if (result.success) {
+                        bootbox.alert('Edit Successful', function () {
+                            window.location = '@Url.Action("Index", "NCR")';
+                        });
+                    }
+                    else {
+                        bootbox.alert('Please contact to Administrator!');
+                    }
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            });
+
+            $("#btn-edit").on('click',
+                function () {
+                    window.location.href = '@Url.Action("EditNCRForProcess", "WriteNcrForProcess")' +
+                        "?ncrnum=" +
+                        $('#NCR_NUM').val();
+                });
+
+            $("#btn-SaveEdit").on('click', function () {
+                if (CheckAllQuanity() === false) {
+                    bootbox.alert("Please check Non-conformity Information!");
+                }
+                else {
+                    if (!$EditForm.valid()) {
+                        $("button.input-validation-error").removeClass("input-validation-error");
+                        $("button[title='None selected']").addClass("input-validation-error");
+                        return;
+                    }
+                    
+                    $EditForm.submit();
+                    @*$.post('@Url.Action("EditNcrProcess", "WriteNcrForProcess")', { data: $EditForm.serializeArray() }, function (result) {
+                        if (result.success) {
+                            bootbox.alert('Edit NCR Successful', function () {
+                                window.location = '@Url.Action("Index", "NCR")';
+                            });
+                        }
+                        else {
+                            bootbox.alert(result.message);
+                        }
+                    }).fail(function () {
+                        bootbox.alert('Please contact to Administrator!');
+                    }).always(function () {
+                        $.unblockUI();
+                    });*@
+                }
+            });
+        });
+
+        $EditForm.submit(function (e) {
+            e.preventDefault();
+
+            //Check size of file in request
+
+            let sizeold = 0;
+            $('.old-evi').each(function (i, e) {
+                sizeold += parseFloat($(e).attr('sizeoffile'));
+            });
+
+            let sizeOfRequestInProcess = 0;
+            $("form#EditNCRForm input[type='file']").each(function (i, e) {
+                if ($(e).val() !== '') sizeOfRequestInProcess += parseFloat($(e)[0].files[0].size);
+            });
+
+            sizeOfRequestInProcess += sizeold;
+
+            if (sizeOfRequestInProcess <= 10485760) {
+                //bootbox.alert('File is too big, more than 10mb !!!');
+
+                $.blockUI();
+                    var data = new FormData(this);
+                    var $fromObj = $(this);
+                    var urlAction = '@Url.Action("EditNcrProcess", "WriteNcrForProcess")';
+                    $.ajax({
+                        url: urlAction,
+                        type: 'POST',
+                        dataType: "Json",
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: data,
+                        fail: function () {
+                            bootbox.alert('Please contact to Administrator!');
+                        }
+                    }).always(function () {
+                        $.unblockUI();
+                    }).success(function (result) {
+                        if (result.success) {
+                            bootbox.alert('Edit NCR Successful', function () {
+                                afterSubmitEdit();
+                            });
+                        }
+                        else {
+                            bootbox.alert(result.message);
+                        }
+                    });
+            }
+            else {
+                bootbox.alert('File is too big, more than 10mb !!!');
+            }
+            return false;
+        });
+        function afterSubmitEdit() {
+            bootbox.confirm({
+                message: "Do you want submit?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        window.location = '@Url.Action("ViewApproval", "NCRApproval", new { NCR_NUM  = Model.NCR_NUM})&Pre=true';
+                    }
+                }
+            });
+        }
+        function createListDescript(lstDefect) {
+            let ccn = '@Model.CCN';
+            $.each(lstDefect, function (i) {
+                $.blockUI();
+                $.post('@Url.Action("GetDropdownlistDesForPro", "NCRApproval")', { id: lstDefect[i].NC_DESC,CCN :ccn}, function (result) {
+                    $("#ListNCR_DET_NC_DESC_" + i).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+                    $("#ListNCR_DET_NC_DESC_" + i).multiselect('dataprovider', result);
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            });
+        }
+
+        function isNormalInteger(e) {
+            reg = /^-?\d+\.?\d*$/;
+            if (!reg.test(e)) {
+                return false;
+            }
+            if (parseFloat(e) <= 0) return false;
+            return true;
+            //var n = Math.floor(Number(str));
+            //return n !== Infinity && String(n) === str && n >= 0;
+        }
+
+        function changeqty1(element) {
+            if (isNormalInteger(element.value) === false) {
+                $(element).addClass("input-validation-error");
+                element.focus();
+                element.value = '';
+            }
+        }
+
+        function CheckAllQuanity() {
+            debugger;
+            if (isAQL) {
+                let sumrejectedqty = parseFloat($('#defectqty1').val());
+                let sum = 0;
+
+                $('.checkQTY ').each(function (i, e) {
+                    sum += parseFloat($(e).val());
+                });
+
+                //for (var i = 0; i < $(".DefectRow").length; i++) {
+                //    sum = sum + parseInt($("#item_QTY_" + i).val());
+                //}
+                if (sum === sumrejectedqty) {
+                    return true;
+                }
+                return false;
+            }
+            else {
+                let sumdefectqty = parseFloat($('#defectqty1').val());
+                let sum = 0;
+
+                $('.checkQTY ').each(function (i, e) {
+                    sum += parseFloat($(e).val());
+                });
+
+                //for (var i = 0; i < $(".DefectRow").length; i++) {
+                //    sum = sum + parseInt($("#item_QTY_" + i).val());
+                //}
+                if (sum === sumdefectqty) {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        function createHtmlParaSub(dem) {
+            let tmp = dem + 1;
+            return '<tr class="DefectRow"><td><span>' + tmp + '</span> <input data-val="true" id="item_QTY_' + dem + '" name="ListNCR_DET[' + dem + '].ITEM" type="hidden" value="' + dem + '"></td><td><input data-val="true" onchange = "changeqty1(this)" name="ListNCR_DET[' + dem + '].QTY" id="item_QTY_' + dem + '" type="text" value="" class="form-control checkQTY input-validation-error" required /></td>' +
+                '<td><select name="ListNCR_DET[' + dem + '].DEFECT" id="dd_defectpro_' + dem + '" class="dd_defectpro" multiple="multiple"  required></select></td> ' +
+                '<td><select name="ListNCR_DET[' + dem + '].NC_DESC" id="dd_descriptpro_' + dem + '" multiple="multiple" required></select></td>' +
+                '<td><input data-val="true" name="ListNCR_DET[' + dem + '].REMARK" id="item_remark_' + dem + '"  class="form-control" type="text" value=""></td><td><a class="btn btn-danger btn-sm" onclick="deleterow1(this)"> <i class="fa fa-trash"></i></a> </td></tr>';
+        }
+        $('#bt-close').click(function () {
+            window.location = homeUrl;
+        });
+
+        function addNewRaw() {
+            let ddl = $(".DefectRow").length;
+            let tempId = ddl;
+
+            var tbody = $('#tablenonconf').find('tbody');
+            var html = createHtmlParaSub(ddl);
+            tbody.append(html);
+            $('#dd_descriptpro_' + tempId).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+            $('#dd_defectpro_' + tempId).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+            $('#dd_defectpro_' + tempId).multiselect('dataprovider', dataDefect);
+            $('#dd_defectpro_' + tempId).on('change', function () {
+                var listcheck = $("#dd_defectpro_" + tempId).val();
+                let CCN = '@Model.CCN';
+                $.blockUI();
+                $.post('@Url.Action("GetDropdownlistDecriptByIdDefect", "NCRApproval")', { id: listcheck,CCN:CCN }, function (result) {
+                    $('#dd_descriptpro_' + tempId).multiselect({ dropUp: true, enableFiltering: true, enableCaseInsensitiveFiltering: true });
+                    $('#dd_descriptpro_' + tempId).multiselect('dataprovider', result);
+
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+            });
+        }
+
+
+        function deleterow1(element) {
+            $(element).parent().parent().remove();
+            var listRow = $(".DefectRow");
+            for (let i = 0; i < listRow.length; i++) {
+                var ListColumns = listRow[i].children;
+                // Set ITEM value
+                ListColumns[0].children[0].innerHTML = (i + 1).toString();
+                ListColumns[0].children[1].name = 'ListNCR_DET[' + i + '].ITEM';
+                ListColumns[0].children[1].value = i.toString();
+                // Set QTY id
+                ListColumns[1].children[0].name = 'ListNCR_DET[' + i + '].QTY';
+                // Set DEFECT name
+                ListColumns[2].children[0].children[0].name = 'ListNCR_DET[' + i + '].DEFECT';
+                // Set DESCRIPTION name
+                ListColumns[3].children[0].children[0].name = 'ListNCR_DET[' + i + '].NC_DESC';
+                // Set REMARK name
+                ListColumns[4].children[0].name = 'ListNCR_DET[' + i + '].REMARK';
+            }
+        }
+
+        $('#btnAddEvidentInProcess').click(function () {
+            //ModelEvidence
+            let listRow = $('#tbEvidenceInProcess tbody tr.trEvidenceInProcess');
+            let rowlength = listRow.length;
+
+            for (let i = 0; i < rowlength; i++) {
+                var ListColumns = listRow[i].children;
+                ListColumns[0].children[0].name = "ModelEvidence[" + i + "].EvidenceFile";
+                ListColumns[1].children[0].name = "ModelEvidence[" + i + "].IsPrint";
+            }
+
+            let template = '<tr class="trEvidenceInProcess"> <td width="80%"><input onchange="ViewFileEvidence(this)"  accept="image/png,image/jpeg,image/bmp,application/pdf,application/PDF" type="file" class="form-control" name="ModelEvidence[' + rowlength + '].EvidenceFile"></td> <td><button onclick="deleteEvedenceRowInProcess(this)" type="button" class="btn btn-danger pull-right">Delete</button></td> </tr>';
+            $('#tbodyEvidenceInProcess').append(template);
+        });
+
+        function deleteEvedenceRowInProcess(e) {
+            $(e).parent().parent().remove();
+            let listRow = $('#tbEvidenceInProcess tbody tr.trEvidenceInProcess');
+            let rowlength = listRow.length;
+            for (let i = 0; i < rowlength; i++) {
+                var ListColumns = listRow[i].children;
+                ListColumns[0].children[0].name = "ModelEvidence[" + i + "].EvidenceFile";
+                ListColumns[1].children[0].name = "ModelEvidence[" + i + "].IsPrint";
+            }
+        }
+        var arrExtension = ['png', 'pdf', 'jpeg', 'jpg', 'bmp'];
+        function ViewFileEvidence(evi_file) {
+
+            var test_value = $(evi_file).val();
+            var extension = test_value.split('.').pop().toLowerCase();
+
+            if ($.inArray(extension, arrExtension) === -1 & test_value !== '') {
+                bootbox.alert("Invalid file !");
+                evi_file.value = '';
+                return;
+            }
+            if (evi_file.files[0].size > 10485760) {
+                bootbox.alert('File is too big, more than 10mb !!!');
+                evi_file.value = '';
+                return;
+            }
+
+            var formData = new FormData();
+
+            formData.append('ReviewFile', evi_file.files[0]);
+            console.log(formData);
+            $.ajax({
+                url: '@Url.Action("SaveFileReview", "NCRApproval")',
+                type: "POST",
+                dataType: 'json',
+                contentType: false, // Not to set any content header  
+                processData: false, // Not to process data  
+                data: formData,
+                success: function (result) {
+                    window.open(result, '_blank');
+                },
+                error: function (err) {
+                    window.open(err.responseText, '_blank');
+                }
+            });
+        }
+    </script>
+}

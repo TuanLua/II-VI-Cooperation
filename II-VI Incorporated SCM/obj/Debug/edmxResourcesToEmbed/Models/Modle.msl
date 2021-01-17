@@ -1,0 +1,3008 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NewIQCModelStoreContainer" CdmEntityContainer="NewIQCEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="NewIQCModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ADD_INS">
+      <EntityTypeMapping TypeName="NewIQCModel.ADD_INS">
+        <MappingFragment StoreEntitySet="ADD_INS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicationGroupRoles">
+      <EntityTypeMapping TypeName="NewIQCModel.ApplicationGroupRole">
+        <MappingFragment StoreEntitySet="ApplicationGroupRoles">
+          <ScalarProperty Name="ApplicationRoleId" ColumnName="ApplicationRoleId" />
+          <ScalarProperty Name="ApplicationGroupId" ColumnName="ApplicationGroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicationGroups">
+      <EntityTypeMapping TypeName="NewIQCModel.ApplicationGroup">
+        <MappingFragment StoreEntitySet="ApplicationGroups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicationUserGroups">
+      <EntityTypeMapping TypeName="NewIQCModel.ApplicationUserGroup">
+        <MappingFragment StoreEntitySet="ApplicationUserGroups">
+          <ScalarProperty Name="ApplicationUserId" ColumnName="ApplicationUserId" />
+          <ScalarProperty Name="ApplicationGroupId" ColumnName="ApplicationGroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APPROVALs">
+      <EntityTypeMapping TypeName="NewIQCModel.APPROVAL">
+        <MappingFragment StoreEntitySet="APPROVAL">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NCR_NUMBER" ColumnName="NCR_NUMBER" />
+          <ScalarProperty Name="QUALITY" ColumnName="QUALITY" />
+          <ScalarProperty Name="ENGIEERING" ColumnName="ENGIEERING" />
+          <ScalarProperty Name="MFG" ColumnName="MFG" />
+          <ScalarProperty Name="PURCHASING" ColumnName="PURCHASING" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APPROVAL_copy1">
+      <EntityTypeMapping TypeName="NewIQCModel.APPROVAL_copy1">
+        <MappingFragment StoreEntitySet="APPROVAL_copy1">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NCR_NUMBER" ColumnName="NCR_NUMBER" />
+          <ScalarProperty Name="QUALITY" ColumnName="QUALITY" />
+          <ScalarProperty Name="ENGIEERING" ColumnName="ENGIEERING" />
+          <ScalarProperty Name="MFG" ColumnName="MFG" />
+          <ScalarProperty Name="PURCHASING" ColumnName="PURCHASING" />
+          <ScalarProperty Name="MRBChairman" ColumnName="MRBChairman" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="NewIQCModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Group" ColumnName="Group" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="NewIQCModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="NewIQCModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="NewIQCModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="OPE" ColumnName="OPE" />
+          <ScalarProperty Name="Signature" ColumnName="Signature" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ATTACHMENTs">
+      <EntityTypeMapping TypeName="NewIQCModel.ATTACHMENT">
+        <MappingFragment StoreEntitySet="ATTACHMENT">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="FILE_NAME" ColumnName="FILE_NAME" />
+          <ScalarProperty Name="ATT_FILE" ColumnName="ATT_FILE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="TYPE_REQ" ColumnName="TYPE_REQ" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="OperatorID" ColumnName="OperatorID" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ATTCH_TEMP">
+      <EntityTypeMapping TypeName="NewIQCModel.ATTCH_TEMP">
+        <MappingFragment StoreEntitySet="ATTCH_TEMP">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="FILE_NAME" ColumnName="FILE_NAME" />
+          <ScalarProperty Name="ATT_FILE" ColumnName="ATT_FILE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCNs">
+      <EntityTypeMapping TypeName="NewIQCModel.CCN">
+        <MappingFragment StoreEntitySet="CCN">
+          <ScalarProperty Name="CCN1" ColumnName="CCN" />
+          <ScalarProperty Name="CCN_NAME" ColumnName="CCN_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CHANGED_SPL">
+      <EntityTypeMapping TypeName="NewIQCModel.CHANGED_SPL">
+        <MappingFragment StoreEntitySet="CHANGED_SPL">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="REASON" ColumnName="REASON" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChangeItems">
+      <EntityTypeMapping TypeName="NewIQCModel.ChangeItem">
+        <MappingFragment StoreEntitySet="ChangeItem">
+          <ScalarProperty Name="CRID" ColumnName="CRID" />
+          <ScalarProperty Name="UserSubmit" ColumnName="UserSubmit" />
+          <ScalarProperty Name="Brief" ColumnName="Brief" />
+          <ScalarProperty Name="DateSubmit" ColumnName="DateSubmit" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="CRPriority" ColumnName="CRPriority" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+          <ScalarProperty Name="MRBChairmanID" ColumnName="MRBChairmanID" />
+          <ScalarProperty Name="ChairmanConfirmDate" ColumnName="ChairmanConfirmDate" />
+          <ScalarProperty Name="MRBWHID" ColumnName="MRBWHID" />
+          <ScalarProperty Name="MRBWHConfirmDate" ColumnName="MRBWHConfirmDate" />
+          <ScalarProperty Name="ChairmanComment" ColumnName="ChairmanComment" />
+          <ScalarProperty Name="OtherArtifactsImpacted" ColumnName="OtherArtifactsImpacted" />
+          <ScalarProperty Name="CRType" ColumnName="CRType" />
+          <ScalarProperty Name="RefNumber" ColumnName="RefNumber" />
+          <ScalarProperty Name="CRStatus" ColumnName="CRStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CS">
+      <EntityTypeMapping TypeName="NewIQCModel.C">
+        <MappingFragment StoreEntitySet="CS">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_PLAN" ColumnName="SKIP_LOT_PLAN" />
+          <ScalarProperty Name="SKIP_LOT_LEVEL" ColumnName="SKIP_LOT_LEVEL" />
+          <ScalarProperty Name="INSP_STAT" ColumnName="INSP_STAT" />
+          <ScalarProperty Name="DOC_REQ" ColumnName="DOC_REQ" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="QUAL" ColumnName="QUAL" />
+          <ScalarProperty Name="SKIP_LEVEL" ColumnName="SKIP_LEVEL" />
+          <ScalarProperty Name="LOT_SKIP" ColumnName="LOT_SKIP" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="TEST_ROSH_REQUIRED" ColumnName="TEST_ROSH_REQUIRED" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETAILQUESTIONs">
+      <EntityTypeMapping TypeName="NewIQCModel.DETAILQUESTION">
+        <MappingFragment StoreEntitySet="DETAILQUESTION">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDQUESTION" ColumnName="IDQUESTION" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="WRTIEDATE" ColumnName="WRTIEDATE" />
+          <ScalarProperty Name="WRITEBY" ColumnName="WRITEBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIMENSION_STD_BY_PART">
+      <EntityTypeMapping TypeName="NewIQCModel.DIMENSION_STD_BY_PART">
+        <MappingFragment StoreEntitySet="DIMENSION_STD_BY_PART">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="DIMENSION" ColumnName="DIMENSION" />
+          <ScalarProperty Name="DIM_DESC" ColumnName="DIM_DESC" />
+          <ScalarProperty Name="LVALUE" ColumnName="LVALUE" />
+          <ScalarProperty Name="UVALUE" ColumnName="UVALUE" />
+          <ScalarProperty Name="UNIT" ColumnName="UNIT" />
+          <ScalarProperty Name="CRITIAL" ColumnName="CRITIAL" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DISPOSITIONs">
+      <EntityTypeMapping TypeName="NewIQCModel.DISPOSITION">
+        <MappingFragment StoreEntitySet="DISPOSITION">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EEP_REPORT">
+      <EntityTypeMapping TypeName="NewIQCModel.EEP_REPORT">
+        <MappingFragment StoreEntitySet="EEP_REPORT">
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="JUL" ColumnName="JUL" />
+          <ScalarProperty Name="AUG" ColumnName="AUG" />
+          <ScalarProperty Name="SEP" ColumnName="SEP" />
+          <ScalarProperty Name="OCT" ColumnName="OCT" />
+          <ScalarProperty Name="NOV" ColumnName="NOV" />
+          <ScalarProperty Name="DEC" ColumnName="DEC" />
+          <ScalarProperty Name="JAN" ColumnName="JAN" />
+          <ScalarProperty Name="FEB" ColumnName="FEB" />
+          <ScalarProperty Name="MAR" ColumnName="MAR" />
+          <ScalarProperty Name="APR" ColumnName="APR" />
+          <ScalarProperty Name="MAY" ColumnName="MAY" />
+          <ScalarProperty Name="JUN" ColumnName="JUN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESCAPING_PPM">
+      <EntityTypeMapping TypeName="NewIQCModel.ESCAPING_PPM">
+        <MappingFragment StoreEntitySet="ESCAPING_PPM">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="ANALYST" ColumnName="ANALYST" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="PERIOD" ColumnName="PERIOD" />
+          <ScalarProperty Name="DATEIMPORT" ColumnName="DATEIMPORT" />
+          <ScalarProperty Name="USERIMPORT" ColumnName="USERIMPORT" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FIRSTLOTs">
+      <EntityTypeMapping TypeName="NewIQCModel.FIRSTLOT">
+        <MappingFragment StoreEntitySet="FIRSTLOT">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DESCR" ColumnName="DESCR" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FIXTURE_STD_BY_PART_NoUse">
+      <EntityTypeMapping TypeName="NewIQCModel.FIXTURE_STD_BY_PART_NoUse">
+        <MappingFragment StoreEntitySet="FIXTURE_STD_BY_PART_NoUse">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="FIXTURE" ColumnName="FIXTURE" />
+          <ScalarProperty Name="FIXTURE_DESC" ColumnName="FIXTURE_DESC" />
+          <ScalarProperty Name="CRITIAL" ColumnName="CRITIAL" />
+          <ScalarProperty Name="EVA_METHOD" ColumnName="EVA_METHOD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FIXTURE_STD_BY_PART_OLD_NoUse">
+      <EntityTypeMapping TypeName="NewIQCModel.FIXTURE_STD_BY_PART_OLD_NoUse">
+        <MappingFragment StoreEntitySet="FIXTURE_STD_BY_PART_OLD_NoUse">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="FIXTURE" ColumnName="FIXTURE" />
+          <ScalarProperty Name="FIXTURE_DESC" ColumnName="FIXTURE_DESC" />
+          <ScalarProperty Name="CRITIAL" ColumnName="CRITIAL" />
+          <ScalarProperty Name="EVA_METHOD" ColumnName="EVA_METHOD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INS_RESULT">
+      <EntityTypeMapping TypeName="NewIQCModel.INS_RESULT">
+        <MappingFragment StoreEntitySet="INS_RESULT">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="STEP" ColumnName="STEP" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="INS_RESULT1" ColumnName="INS_RESULT" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="WAIVER_ECO_FILE" ColumnName="WAIVER_ECO_FILE" />
+          <ScalarProperty Name="FILE_CONTEXT_TYPE" ColumnName="FILE_CONTEXT_TYPE" />
+          <ScalarProperty Name="WAIVER_ECO_NUM" ColumnName="WAIVER_ECO_NUM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INS_RESULT_DEFECT">
+      <EntityTypeMapping TypeName="NewIQCModel.INS_RESULT_DEFECT">
+        <MappingFragment StoreEntitySet="INS_RESULT_DEFECT">
+          <ScalarProperty Name="receiver" ColumnName="receiver" />
+          <ScalarProperty Name="rec_line" ColumnName="rec_line" />
+          <ScalarProperty Name="PartialID" ColumnName="PartialID" />
+          <ScalarProperty Name="Non_Conformances" ColumnName="Non_Conformances" />
+          <ScalarProperty Name="NC_Qty" ColumnName="NC_Qty" />
+          <ScalarProperty Name="Defect" ColumnName="Defect" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="Disposition" ColumnName="Disposition" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="NCR_Num" ColumnName="NCR_Num" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INS_RESULT_FINAL">
+      <EntityTypeMapping TypeName="NewIQCModel.INS_RESULT_FINAL">
+        <MappingFragment StoreEntitySet="INS_RESULT_FINAL">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="ACC_QTY" ColumnName="ACC_QTY" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+          <ScalarProperty Name="INS_DATE" ColumnName="INS_DATE" />
+          <ScalarProperty Name="INSPECTOR" ColumnName="INSPECTOR" />
+          <ScalarProperty Name="SEQ" ColumnName="SEQ" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="DEC_QTY" ColumnName="DEC_QTY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INS_RESULT_MEASURE_BY_SAMPLING">
+      <EntityTypeMapping TypeName="NewIQCModel.INS_RESULT_MEASURE_BY_SAMPLING">
+        <MappingFragment StoreEntitySet="INS_RESULT_MEASURE_BY_SAMPLING">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="SPL_NUM" ColumnName="SPL_NUM" />
+          <ScalarProperty Name="EVALUATION" ColumnName="EVALUATION" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SERIAL_NUM" ColumnName="SERIAL_NUM" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="INSPECTOR" ColumnName="INSPECTOR" />
+          <ScalarProperty Name="Stat" ColumnName="Stat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INS_RESULT_PARTIAL">
+      <EntityTypeMapping TypeName="NewIQCModel.INS_RESULT_PARTIAL">
+        <MappingFragment StoreEntitySet="INS_RESULT_PARTIAL">
+          <ScalarProperty Name="receiver" ColumnName="receiver" />
+          <ScalarProperty Name="rec_line" ColumnName="rec_line" />
+          <ScalarProperty Name="PartialID" ColumnName="PartialID" />
+          <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+          <ScalarProperty Name="PartialIns" ColumnName="PartialIns" />
+          <ScalarProperty Name="PartialAcc" ColumnName="PartialAcc" />
+          <ScalarProperty Name="PartialRej" ColumnName="PartialRej" />
+          <ScalarProperty Name="Inspector" ColumnName="Inspector" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="VisualQty" ColumnName="VisualQty" />
+          <ScalarProperty Name="VisualDefQty" ColumnName="VisualDefQty" />
+          <ScalarProperty Name="VisualGoodQty" ColumnName="VisualGoodQty" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="PartialDefect" ColumnName="PartialDefect" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INS_RESULT_VIS_ITEM">
+      <EntityTypeMapping TypeName="NewIQCModel.INS_RESULT_VIS_ITEM">
+        <MappingFragment StoreEntitySet="INS_RESULT_VIS_ITEM">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="VIS_ITEM" ColumnName="VIS_ITEM" />
+          <ScalarProperty Name="VIS_PartialID" ColumnName="VIS_PartialID" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+          <ScalarProperty Name="EVALUATION" ColumnName="EVALUATION" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="NCGroup" ColumnName="NCGroup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INS_RESULT_VISUAL_PARTIAL">
+      <EntityTypeMapping TypeName="NewIQCModel.INS_RESULT_VISUAL_PARTIAL">
+        <MappingFragment StoreEntitySet="INS_RESULT_VISUAL_PARTIAL">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="receiver" ColumnName="receiver" />
+          <ScalarProperty Name="rec_line" ColumnName="rec_line" />
+          <ScalarProperty Name="VIS_PartialID" ColumnName="VIS_PartialID" />
+          <ScalarProperty Name="VISDate" ColumnName="VISDate" />
+          <ScalarProperty Name="Partial_Vis_Qty" ColumnName="Partial_Vis_Qty" />
+          <ScalarProperty Name="Partial_Vis_Acc" ColumnName="Partial_Vis_Acc" />
+          <ScalarProperty Name="Partial_Vis_Rej" ColumnName="Partial_Vis_Rej" />
+          <ScalarProperty Name="Inspector" ColumnName="Inspector" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SERIAL_NUM" ColumnName="SERIAL_NUM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LAST_BATCH_NO">
+      <EntityTypeMapping TypeName="NewIQCModel.LAST_BATCH_NO">
+        <MappingFragment StoreEntitySet="LAST_BATCH_NO">
+          <ScalarProperty Name="TASK" ColumnName="TASK" />
+          <ScalarProperty Name="LAST_BATCH_NO1" ColumnName="LAST_BATCH_NO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LAST_DRAW_REV">
+      <EntityTypeMapping TypeName="NewIQCModel.LAST_DRAW_REV">
+        <MappingFragment StoreEntitySet="LAST_DRAW_REV">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="LAST_DRAW_REV1" ColumnName="LAST_DRAW_REV" />
+          <ScalarProperty Name="LAST_REV" ColumnName="LAST_REV" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LAST_SKIP_LOT_LEVEL">
+      <EntityTypeMapping TypeName="NewIQCModel.LAST_SKIP_LOT_LEVEL">
+        <MappingFragment StoreEntitySet="LAST_SKIP_LOT_LEVEL">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="LAST_LOT_SKIP" ColumnName="LAST_LOT_SKIP" />
+          <ScalarProperty Name="JUDGEMENT" ColumnName="JUDGEMENT" />
+          <ScalarProperty Name="JUDGE_DATE" ColumnName="JUDGE_DATE" />
+          <ScalarProperty Name="LEVEL" ColumnName="LEVEL" />
+          <ScalarProperty Name="LAST_LOT" ColumnName="LAST_LOT" />
+          <ScalarProperty Name="INS_STAT" ColumnName="INS_STAT" />
+          <ScalarProperty Name="LAST_REC" ColumnName="LAST_REC" />
+          <ScalarProperty Name="LAST_REC_LINE" ColumnName="LAST_REC_LINE" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LAST_SKIP_LOT_LEVEL_bk">
+      <EntityTypeMapping TypeName="NewIQCModel.LAST_SKIP_LOT_LEVEL_bk">
+        <MappingFragment StoreEntitySet="LAST_SKIP_LOT_LEVEL_bk">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="LAST_LOT_SKIP" ColumnName="LAST_LOT_SKIP" />
+          <ScalarProperty Name="JUDGEMENT" ColumnName="JUDGEMENT" />
+          <ScalarProperty Name="JUDGE_DATE" ColumnName="JUDGE_DATE" />
+          <ScalarProperty Name="LEVEL" ColumnName="LEVEL" />
+          <ScalarProperty Name="LAST_LOT" ColumnName="LAST_LOT" />
+          <ScalarProperty Name="INS_STAT" ColumnName="INS_STAT" />
+          <ScalarProperty Name="LAST_REC" ColumnName="LAST_REC" />
+          <ScalarProperty Name="LAST_REC_LINE" ColumnName="LAST_REC_LINE" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOGINs">
+      <EntityTypeMapping TypeName="NewIQCModel.LOGIN">
+        <MappingFragment StoreEntitySet="LOGIN">
+          <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+          <ScalarProperty Name="PASS" ColumnName="PASS" />
+          <ScalarProperty Name="PERMIT" ColumnName="PERMIT" />
+          <ScalarProperty Name="ROLE" ColumnName="ROLE" />
+          <ScalarProperty Name="FNAME" ColumnName="FNAME" />
+          <ScalarProperty Name="USER_NET" ColumnName="USER_NET" />
+          <ScalarProperty Name="ENABLE" ColumnName="ENABLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MAINQUESTIONs">
+      <EntityTypeMapping TypeName="NewIQCModel.MAINQUESTION">
+        <MappingFragment StoreEntitySet="MAINQUESTION">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="WRITEDATE" ColumnName="WRITEDATE" />
+          <ScalarProperty Name="WRITEBY" ColumnName="WRITEBY" />
+          <ScalarProperty Name="PUBLICQUESTION" ColumnName="PUBLICQUESTION" />
+          <ScalarProperty Name="PUBLICDATE" ColumnName="PUBLICDATE" />
+          <ScalarProperty Name="PUBLICBY" ColumnName="PUBLICBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MEASUREMENT_STD_BY_PART">
+      <EntityTypeMapping TypeName="NewIQCModel.MEASUREMENT_STD_BY_PART">
+        <MappingFragment StoreEntitySet="MEASUREMENT_STD_BY_PART">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="MEASURE_PARA" ColumnName="MEASURE_PARA" />
+          <ScalarProperty Name="MEASURE_PARA_DESC" ColumnName="MEASURE_PARA_DESC" />
+          <ScalarProperty Name="EVA_METHOD" ColumnName="EVA_METHOD" />
+          <ScalarProperty Name="TOOL_FIXTURE" ColumnName="TOOL_FIXTURE" />
+          <ScalarProperty Name="LVALUE" ColumnName="LVALUE" />
+          <ScalarProperty Name="UVALUE" ColumnName="UVALUE" />
+          <ScalarProperty Name="UNIT" ColumnName="UNIT" />
+          <ScalarProperty Name="CRITIAL" ColumnName="CRITIAL" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NCs">
+      <EntityTypeMapping TypeName="NewIQCModel.NC">
+        <MappingFragment StoreEntitySet="NC">
+          <ScalarProperty Name="NC_CODE" ColumnName="NC_CODE" />
+          <ScalarProperty Name="NC_DESC" ColumnName="NC_DESC" />
+          <ScalarProperty Name="NC_GRP_CODE" ColumnName="NC_GRP_CODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NC_BY_PART">
+      <EntityTypeMapping TypeName="NewIQCModel.NC_BY_PART">
+        <MappingFragment StoreEntitySet="NC_BY_PART">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="DEF_CODE" ColumnName="DEF_CODE" />
+          <ScalarProperty Name="DEF_DESC" ColumnName="DEF_DESC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NC_BY_PART_OLD">
+      <EntityTypeMapping TypeName="NewIQCModel.NC_BY_PART_OLD">
+        <MappingFragment StoreEntitySet="NC_BY_PART_OLD">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="PRO" ColumnName="PRO" />
+          <ScalarProperty Name="DEF_CODE" ColumnName="DEF_CODE" />
+          <ScalarProperty Name="DEF_DESC" ColumnName="DEF_DESC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NC_BY_PRODUCT_GRP">
+      <EntityTypeMapping TypeName="NewIQCModel.NC_BY_PRODUCT_GRP">
+        <MappingFragment StoreEntitySet="NC_BY_PRODUCT_GRP">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="PRODUCT_GRP" ColumnName="PRODUCT_GRP" />
+          <ScalarProperty Name="DEF_CODE" ColumnName="DEF_CODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NC_CAT_NoUse">
+      <EntityTypeMapping TypeName="NewIQCModel.NC_CAT_NoUse">
+        <MappingFragment StoreEntitySet="NC_CAT_NoUse">
+          <ScalarProperty Name="CAT_CODE" ColumnName="CAT_CODE" />
+          <ScalarProperty Name="CAT_DESC" ColumnName="CAT_DESC" />
+          <ScalarProperty Name="PRO" ColumnName="PRO" />
+          <ScalarProperty Name="DEF_CODE" ColumnName="DEF_CODE" />
+          <ScalarProperty Name="DEF_DESC" ColumnName="DEF_DESC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NC_GROUP">
+      <EntityTypeMapping TypeName="NewIQCModel.NC_GROUP">
+        <MappingFragment StoreEntitySet="NC_GROUP">
+          <ScalarProperty Name="NC_GRP_CODE" ColumnName="NC_GRP_CODE" />
+          <ScalarProperty Name="NC_GRP_DESC" ColumnName="NC_GRP_DESC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NCR_DD_History">
+      <EntityTypeMapping TypeName="NewIQCModel.NCR_DD_History">
+        <MappingFragment StoreEntitySet="NCR_DD_History">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="ADD_INS" ColumnName="ADD_INS" />
+          <ScalarProperty Name="INSPECTOR" ColumnName="INSPECTOR" />
+          <ScalarProperty Name="INS_DATE" ColumnName="INS_DATE" />
+          <ScalarProperty Name="DATEAPPROVAL" ColumnName="DATEAPPROVAL" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="MRBChairman" ColumnName="MRBChairman" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="NC_DESC" ColumnName="NC_DESC" />
+          <ScalarProperty Name="DEFECT" ColumnName="DEFECT" />
+          <ScalarProperty Name="RESPONSE" ColumnName="RESPONSE" />
+          <ScalarProperty Name="DISPOSITION" ColumnName="DISPOSITION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NCR_DET">
+      <EntityTypeMapping TypeName="NewIQCModel.NCR_DET">
+        <MappingFragment StoreEntitySet="NCR_DET">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="NC_DESC" ColumnName="NC_DESC" />
+          <ScalarProperty Name="DEFECT" ColumnName="DEFECT" />
+          <ScalarProperty Name="RESPONSE" ColumnName="RESPONSE" />
+          <ScalarProperty Name="DISPOSITION" ColumnName="DISPOSITION" />
+          <ScalarProperty Name="MFG" ColumnName="MFG" />
+          <ScalarProperty Name="QUALITY" ColumnName="QUALITY" />
+          <ScalarProperty Name="PURCHASING" ColumnName="PURCHASING" />
+          <ScalarProperty Name="ENGIEERING" ColumnName="ENGIEERING" />
+          <ScalarProperty Name="DATEAPPROVAL" ColumnName="DATEAPPROVAL" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="TEXTFIELD" ColumnName="TEXTFIELD" />
+          <ScalarProperty Name="FILETEXTFIELD" ColumnName="FILETEXTFIELD" />
+          <ScalarProperty Name="TEXTFIELDBAK" ColumnName="TEXTFIELDBAK" />
+          <ScalarProperty Name="FILETEXTFIELDBAK" ColumnName="FILETEXTFIELDBAK" />
+          <ScalarProperty Name="MRBChairman" ColumnName="MRBChairman" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NCR_DIS">
+      <EntityTypeMapping TypeName="NewIQCModel.NCR_DIS">
+        <MappingFragment StoreEntitySet="NCR_DIS">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="ADD_INS" ColumnName="ADD_INS" />
+          <ScalarProperty Name="INSPECTOR" ColumnName="INSPECTOR" />
+          <ScalarProperty Name="INS_DATE" ColumnName="INS_DATE" />
+          <ScalarProperty Name="MFG" ColumnName="MFG" />
+          <ScalarProperty Name="QUALITY" ColumnName="QUALITY" />
+          <ScalarProperty Name="PURCHASING" ColumnName="PURCHASING" />
+          <ScalarProperty Name="ENGIEERING" ColumnName="ENGIEERING" />
+          <ScalarProperty Name="DATEAPPROVAL" ColumnName="DATEAPPROVAL" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="TEXTFIELD" ColumnName="TEXTFIELD" />
+          <ScalarProperty Name="FILETEXTFIELD" ColumnName="FILETEXTFIELD" />
+          <ScalarProperty Name="TEXTFIELDBAK" ColumnName="TEXTFIELDBAK" />
+          <ScalarProperty Name="FILETEXTFIELDBAK" ColumnName="FILETEXTFIELDBAK" />
+          <ScalarProperty Name="MRBChairman" ColumnName="MRBChairman" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NCR_EVI">
+      <EntityTypeMapping TypeName="NewIQCModel.NCR_EVI">
+        <MappingFragment StoreEntitySet="NCR_EVI">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="EVI_PATH" ColumnName="EVI_PATH" />
+          <ScalarProperty Name="EVI_ID" ColumnName="EVI_ID" />
+          <ScalarProperty Name="IsPrint" ColumnName="IsPrint" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NCR_HDR">
+      <EntityTypeMapping TypeName="NewIQCModel.NCR_HDR">
+        <MappingFragment StoreEntitySet="NCR_HDR">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="MI_PART_NO" ColumnName="MI_PART_NO" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="VEN_ADD" ColumnName="VEN_ADD" />
+          <ScalarProperty Name="INS_PLAN" ColumnName="INS_PLAN" />
+          <ScalarProperty Name="SKIP_LOT_LEVEL" ColumnName="SKIP_LOT_LEVEL" />
+          <ScalarProperty Name="FAI" ColumnName="FAI" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="INS_QTY" ColumnName="INS_QTY" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+          <ScalarProperty Name="INSPECTOR" ColumnName="INSPECTOR" />
+          <ScalarProperty Name="INS_DATE" ColumnName="INS_DATE" />
+          <ScalarProperty Name="CORRECT_ACTION" ColumnName="CORRECT_ACTION" />
+          <ScalarProperty Name="SCAR_NUM" ColumnName="SCAR_NUM" />
+          <ScalarProperty Name="SCAR_DATE" ColumnName="SCAR_DATE" />
+          <ScalarProperty Name="SCAR_BY" ColumnName="SCAR_BY" />
+          <ScalarProperty Name="FOLLOW_UP_NOTES" ColumnName="FOLLOW_UP_NOTES" />
+          <ScalarProperty Name="QA_PIC" ColumnName="QA_PIC" />
+          <ScalarProperty Name="QA_DATE" ColumnName="QA_DATE" />
+          <ScalarProperty Name="EN_PIC" ColumnName="EN_PIC" />
+          <ScalarProperty Name="MFG_PIC" ColumnName="MFG_PIC" />
+          <ScalarProperty Name="MFG_DATE" ColumnName="MFG_DATE" />
+          <ScalarProperty Name="PUR_PIC" ColumnName="PUR_PIC" />
+          <ScalarProperty Name="PUR_DATE" ColumnName="PUR_DATE" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="NOT_REQUIRED" ColumnName="NOT_REQUIRED" />
+          <ScalarProperty Name="REQUIRED" ColumnName="REQUIRED" />
+          <ScalarProperty Name="NOTIFICATION_ONLY" ColumnName="NOTIFICATION_ONLY" />
+          <ScalarProperty Name="ISSUED_REQUEST_NO" ColumnName="ISSUED_REQUEST_NO" />
+          <ScalarProperty Name="ISSUED_REQUEST_DATE" ColumnName="ISSUED_REQUEST_DATE" />
+          <ScalarProperty Name="RETURN_NUMBER" ColumnName="RETURN_NUMBER" />
+          <ScalarProperty Name="REMOVED_FROM" ColumnName="REMOVED_FROM" />
+          <ScalarProperty Name="BOOK_INV" ColumnName="BOOK_INV" />
+          <ScalarProperty Name="ISSUE_MEMO_NO" ColumnName="ISSUE_MEMO_NO" />
+          <ScalarProperty Name="ISSUE_MEMO_DATE" ColumnName="ISSUE_MEMO_DATE" />
+          <ScalarProperty Name="NOTES" ColumnName="NOTES" />
+          <ScalarProperty Name="SHIPPING_METHOD" ColumnName="SHIPPING_METHOD" />
+          <ScalarProperty Name="AQL" ColumnName="AQL" />
+          <ScalarProperty Name="SAMPLE_INSP" ColumnName="SAMPLE_INSP" />
+          <ScalarProperty Name="PERCENT_INSP" ColumnName="PERCENT_INSP" />
+          <ScalarProperty Name="FIRST_ARTICLE" ColumnName="FIRST_ARTICLE" />
+          <ScalarProperty Name="LEVEL" ColumnName="LEVEL" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="TYPE_NCR" ColumnName="TYPE_NCR" />
+          <ScalarProperty Name="MODEL_NO" ColumnName="MODEL_NO" />
+          <ScalarProperty Name="ZIP_CODE" ColumnName="ZIP_CODE" />
+          <ScalarProperty Name="CITY" ColumnName="CITY" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+          <ScalarProperty Name="DATESUBMIT" ColumnName="DATESUBMIT" />
+          <ScalarProperty Name="USERSUBMIT" ColumnName="USERSUBMIT" />
+          <ScalarProperty Name="DATEDISPO" ColumnName="DATEDISPO" />
+          <ScalarProperty Name="USERDISPO" ColumnName="USERDISPO" />
+          <ScalarProperty Name="DateApproval" ColumnName="DateApproval" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NCR_History">
+      <EntityTypeMapping TypeName="NewIQCModel.NCR_History">
+        <MappingFragment StoreEntitySet="NCR_History">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NCRNUM" ColumnName="NCRNUM" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NCRDispositionDays">
+      <EntityTypeMapping TypeName="NewIQCModel.NCRDispositionDay">
+        <MappingFragment StoreEntitySet="NCRDispositionDay">
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="JUL" ColumnName="JUL" />
+          <ScalarProperty Name="AUG" ColumnName="AUG" />
+          <ScalarProperty Name="SEP" ColumnName="SEP" />
+          <ScalarProperty Name="OCT" ColumnName="OCT" />
+          <ScalarProperty Name="NOV" ColumnName="NOV" />
+          <ScalarProperty Name="DEC" ColumnName="DEC" />
+          <ScalarProperty Name="JAN" ColumnName="JAN" />
+          <ScalarProperty Name="FEB" ColumnName="FEB" />
+          <ScalarProperty Name="MAR" ColumnName="MAR" />
+          <ScalarProperty Name="APR" ColumnName="APR" />
+          <ScalarProperty Name="MAY" ColumnName="MAY" />
+          <ScalarProperty Name="JUN" ColumnName="JUN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ONESUPPLLIER_PPMRB">
+      <EntityTypeMapping TypeName="NewIQCModel.ONESUPPLLIER_PPMRB">
+        <MappingFragment StoreEntitySet="ONESUPPLLIER_PPMRB">
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="JUL" ColumnName="JUL" />
+          <ScalarProperty Name="AUG" ColumnName="AUG" />
+          <ScalarProperty Name="SEP" ColumnName="SEP" />
+          <ScalarProperty Name="OCT" ColumnName="OCT" />
+          <ScalarProperty Name="NOV" ColumnName="NOV" />
+          <ScalarProperty Name="DEC" ColumnName="DEC" />
+          <ScalarProperty Name="JAN" ColumnName="JAN" />
+          <ScalarProperty Name="FEB" ColumnName="FEB" />
+          <ScalarProperty Name="MAR" ColumnName="MAR" />
+          <ScalarProperty Name="APR" ColumnName="APR" />
+          <ScalarProperty Name="MAY" ColumnName="MAY" />
+          <ScalarProperty Name="JUN" ColumnName="JUN" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PANEL_EXCEL">
+      <EntityTypeMapping TypeName="NewIQCModel.PANEL_EXCEL">
+        <MappingFragment StoreEntitySet="PANEL_EXCEL">
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="EARLY" ColumnName="EARLY" />
+          <ScalarProperty Name="LATE" ColumnName="LATE" />
+          <ScalarProperty Name="ONTIME" ColumnName="ONTIME" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="TARGET" ColumnName="TARGET" />
+          <ScalarProperty Name="ACTUAL" ColumnName="ACTUAL" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PANEL_RP">
+      <EntityTypeMapping TypeName="NewIQCModel.PANEL_RP">
+        <MappingFragment StoreEntitySet="PANEL_RP">
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="JUL" ColumnName="JUL" />
+          <ScalarProperty Name="AUG" ColumnName="AUG" />
+          <ScalarProperty Name="SEP" ColumnName="SEP" />
+          <ScalarProperty Name="OTC" ColumnName="OTC" />
+          <ScalarProperty Name="NOV" ColumnName="NOV" />
+          <ScalarProperty Name="DEC" ColumnName="DEC" />
+          <ScalarProperty Name="JAN" ColumnName="JAN" />
+          <ScalarProperty Name="FEB" ColumnName="FEB" />
+          <ScalarProperty Name="MAR" ColumnName="MAR" />
+          <ScalarProperty Name="APR" ColumnName="APR" />
+          <ScalarProperty Name="MAY" ColumnName="MAY" />
+          <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+          <ScalarProperty Name="JUN" ColumnName="JUN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PART_DRAW_Nouse">
+      <EntityTypeMapping TypeName="NewIQCModel.PART_DRAW_Nouse">
+        <MappingFragment StoreEntitySet="PART_DRAW_Nouse">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="DRAWING_IMG" ColumnName="DRAWING_IMG" />
+          <ScalarProperty Name="FILE_NAME" ColumnName="FILE_NAME" />
+          <ScalarProperty Name="FILE_REV" ColumnName="FILE_REV" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PART_DRW_OLD">
+      <EntityTypeMapping TypeName="NewIQCModel.PART_DRW_OLD">
+        <MappingFragment StoreEntitySet="PART_DRW_OLD">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="DRAWING_IMG" ColumnName="DRAWING_IMG" />
+          <ScalarProperty Name="FILE_NAME" ColumnName="FILE_NAME" />
+          <ScalarProperty Name="FILE_REV" ColumnName="FILE_REV" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PART_INFO">
+      <EntityTypeMapping TypeName="NewIQCModel.PART_INFO">
+        <MappingFragment StoreEntitySet="PART_INFO">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DESCR" ColumnName="DESCR" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="REC_RULE" ColumnName="REC_RULE" />
+          <ScalarProperty Name="INPUT" ColumnName="INPUT" />
+          <ScalarProperty Name="EMPLOYEE" ColumnName="EMPLOYEE" />
+          <ScalarProperty Name="ANALYST" ColumnName="ANALYST" />
+          <ScalarProperty Name="STAT" ColumnName="STAT" />
+          <ScalarProperty Name="PRODUCT_GRP" ColumnName="PRODUCT_GRP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PART_INFO_TEMP">
+      <EntityTypeMapping TypeName="NewIQCModel.PART_INFO_TEMP">
+        <MappingFragment StoreEntitySet="PART_INFO_TEMP">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DESCR" ColumnName="DESCR" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="REC_RULE" ColumnName="REC_RULE" />
+          <ScalarProperty Name="INPUT" ColumnName="INPUT" />
+          <ScalarProperty Name="EMPLOYEE" ColumnName="EMPLOYEE" />
+          <ScalarProperty Name="ANALYST" ColumnName="ANALYST" />
+          <ScalarProperty Name="PRODUCT_GRP" ColumnName="PRODUCT_GRP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PART_INS_REQ">
+      <EntityTypeMapping TypeName="NewIQCModel.PART_INS_REQ">
+        <MappingFragment StoreEntitySet="PART_INS_REQ">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="POL_GRP" ColumnName="POL_GRP" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_CTL" ColumnName="SKIP_LOT_CTL" />
+          <ScalarProperty Name="DOC_REQUIRED" ColumnName="DOC_REQUIRED" />
+          <ScalarProperty Name="TEST_ROSH_REQUIRED" ColumnName="TEST_ROSH_REQUIRED" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="DRAWING_PATH" ColumnName="DRAWING_PATH" />
+          <ScalarProperty Name="USER_APPROVE" ColumnName="USER_APPROVE" />
+          <ScalarProperty Name="APPROVED" ColumnName="APPROVED" />
+          <ScalarProperty Name="APPROVED_DATE" ColumnName="APPROVED_DATE" />
+          <ScalarProperty Name="PRODUCT_GRP" ColumnName="PRODUCT_GRP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PART_INS_REQ_APPROVE">
+      <EntityTypeMapping TypeName="NewIQCModel.PART_INS_REQ_APPROVE">
+        <MappingFragment StoreEntitySet="PART_INS_REQ_APPROVE">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="USER_APPROVE" ColumnName="USER_APPROVE" />
+          <ScalarProperty Name="APPROVED" ColumnName="APPROVED" />
+          <ScalarProperty Name="APPROVED_DATE" ColumnName="APPROVED_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PART_INS_REQ_DOC">
+      <EntityTypeMapping TypeName="NewIQCModel.PART_INS_REQ_DOC">
+        <MappingFragment StoreEntitySet="PART_INS_REQ_DOC">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="DOC" ColumnName="DOC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PART_INS_REQ_OLD">
+      <EntityTypeMapping TypeName="NewIQCModel.PART_INS_REQ_OLD">
+        <MappingFragment StoreEntitySet="PART_INS_REQ_OLD">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_CTL" ColumnName="SKIP_LOT_CTL" />
+          <ScalarProperty Name="DOC_REQUIRED" ColumnName="DOC_REQUIRED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PATHs">
+      <EntityTypeMapping TypeName="NewIQCModel.PATH">
+        <MappingFragment StoreEntitySet="PATH">
+          <ScalarProperty Name="DOC_TYPE" ColumnName="DOC_TYPE" />
+          <ScalarProperty Name="PATH1" ColumnName="PATH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PO_REV">
+      <EntityTypeMapping TypeName="NewIQCModel.PO_REV">
+        <MappingFragment StoreEntitySet="PO_REV">
+          <ScalarProperty Name="PONo" ColumnName="PONo" />
+          <ScalarProperty Name="POLine" ColumnName="POLine" />
+          <ScalarProperty Name="Item" ColumnName="Item" />
+          <ScalarProperty Name="Rev" ColumnName="Rev" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RECEIVERs">
+      <EntityTypeMapping TypeName="NewIQCModel.RECEIVER">
+        <MappingFragment StoreEntitySet="RECEIVER">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER1" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="BATCH_NO" ColumnName="BATCH_NO" />
+          <ScalarProperty Name="REC_COMMENT" ColumnName="REC_COMMENT" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RECEIVER_TEMP">
+      <EntityTypeMapping TypeName="NewIQCModel.RECEIVER_TEMP">
+        <MappingFragment StoreEntitySet="RECEIVER_TEMP">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESPONs">
+      <EntityTypeMapping TypeName="NewIQCModel.RESPON">
+        <MappingFragment StoreEntitySet="RESPON">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REWORK_COST">
+      <EntityTypeMapping TypeName="NewIQCModel.REWORK_COST">
+        <MappingFragment StoreEntitySet="REWORK_COST">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NCR_NUMBER" ColumnName="NCR_NUMBER" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RTVProcesses">
+      <EntityTypeMapping TypeName="NewIQCModel.RTVProcess">
+        <MappingFragment StoreEntitySet="RTVProcess">
+          <ScalarProperty Name="NCR_NUMBER" ColumnName="NCR_NUMBER" />
+          <ScalarProperty Name="Shipped" ColumnName="Shipped" />
+          <ScalarProperty Name="TypeRTV" ColumnName="TypeRTV" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="CreditNote" ColumnName="CreditNote" />
+          <ScalarProperty Name="CreditFile" ColumnName="CreditFile" />
+          <ScalarProperty Name="RTVStatus" ColumnName="RTVStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCAR_INFO_BACKUP">
+      <EntityTypeMapping TypeName="NewIQCModel.SCAR_INFO_BACKUP">
+        <MappingFragment StoreEntitySet="SCAR_INFO_BACKUP">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCAR_ID" ColumnName="SCAR_ID" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="NON_QTY" ColumnName="NON_QTY" />
+          <ScalarProperty Name="RMA" ColumnName="RMA" />
+          <ScalarProperty Name="NCR_NUMBER" ColumnName="NCR_NUMBER" />
+          <ScalarProperty Name="PO_NUMBER" ColumnName="PO_NUMBER" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="BUYER" ColumnName="BUYER" />
+          <ScalarProperty Name="QUALITY" ColumnName="QUALITY" />
+          <ScalarProperty Name="VN_SCAR" ColumnName="VN_SCAR" />
+          <ScalarProperty Name="VN_NCR" ColumnName="VN_NCR" />
+          <ScalarProperty Name="PROBLEM" ColumnName="PROBLEM" />
+          <ScalarProperty Name="DATEPROBLEM" ColumnName="DATEPROBLEM" />
+          <ScalarProperty Name="DATERESPOND" ColumnName="DATERESPOND" />
+          <ScalarProperty Name="WRITTENBY" ColumnName="WRITTENBY" />
+          <ScalarProperty Name="WRITTENDATE" ColumnName="WRITTENDATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+          <ScalarProperty Name="MI_PART_NO" ColumnName="MI_PART_NO" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="REASON" ColumnName="REASON" />
+          <ScalarProperty Name="WRITERREJECT" ColumnName="WRITERREJECT" />
+          <ScalarProperty Name="DATEREJECT" ColumnName="DATEREJECT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCAR_RESULT_D0">
+      <EntityTypeMapping TypeName="NewIQCModel.SCAR_RESULT_D0">
+        <MappingFragment StoreEntitySet="SCAR_RESULT_D0">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCAR_ID" ColumnName="SCAR_ID" />
+          <ScalarProperty Name="DATE_D0" ColumnName="DATE_D0" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="DATE_CREATE" ColumnName="DATE_CREATE" />
+          <ScalarProperty Name="WRITERBY" ColumnName="WRITERBY" />
+          <ScalarProperty Name="EDIVENCE" ColumnName="EDIVENCE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCAR_RESULT_D1">
+      <EntityTypeMapping TypeName="NewIQCModel.SCAR_RESULT_D1">
+        <MappingFragment StoreEntitySet="SCAR_RESULT_D1">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCAR_ID" ColumnName="SCAR_ID" />
+          <ScalarProperty Name="DATE_D1" ColumnName="DATE_D1" />
+          <ScalarProperty Name="LEADER" ColumnName="LEADER" />
+          <ScalarProperty Name="CHAMPION" ColumnName="CHAMPION" />
+          <ScalarProperty Name="MEMBER" ColumnName="MEMBER" />
+          <ScalarProperty Name="EXTERNAL_MEMBER" ColumnName="EXTERNAL_MEMBER" />
+          <ScalarProperty Name="EDIVENCE" ColumnName="EDIVENCE" />
+          <ScalarProperty Name="DATE_CREATE" ColumnName="DATE_CREATE" />
+          <ScalarProperty Name="WRITERBY" ColumnName="WRITERBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCAR_RESULT_D2">
+      <EntityTypeMapping TypeName="NewIQCModel.SCAR_RESULT_D2">
+        <MappingFragment StoreEntitySet="SCAR_RESULT_D2">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCAR_ID" ColumnName="SCAR_ID" />
+          <ScalarProperty Name="DATE_D2" ColumnName="DATE_D2" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="EDIVENCE" ColumnName="EDIVENCE" />
+          <ScalarProperty Name="DATE_CREATE" ColumnName="DATE_CREATE" />
+          <ScalarProperty Name="WRITERBY" ColumnName="WRITERBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCAR_RESULT_D3">
+      <EntityTypeMapping TypeName="NewIQCModel.SCAR_RESULT_D3">
+        <MappingFragment StoreEntitySet="SCAR_RESULT_D3">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCAR_ID" ColumnName="SCAR_ID" />
+          <ScalarProperty Name="DATE_D3" ColumnName="DATE_D3" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="WHO_IMPLEMENT" ColumnName="WHO_IMPLEMENT" />
+          <ScalarProperty Name="WHEN_IMPLEMENT" ColumnName="WHEN_IMPLEMENT" />
+          <ScalarProperty Name="EDIVENCE" ColumnName="EDIVENCE" />
+          <ScalarProperty Name="DATE_CREATE" ColumnName="DATE_CREATE" />
+          <ScalarProperty Name="WRITERBY" ColumnName="WRITERBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCAR_RESULT_D4">
+      <EntityTypeMapping TypeName="NewIQCModel.SCAR_RESULT_D4">
+        <MappingFragment StoreEntitySet="SCAR_RESULT_D4">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCAR_ID" ColumnName="SCAR_ID" />
+          <ScalarProperty Name="DATE_D4" ColumnName="DATE_D4" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="EDIVENCE" ColumnName="EDIVENCE" />
+          <ScalarProperty Name="DATE_CREATE" ColumnName="DATE_CREATE" />
+          <ScalarProperty Name="WRITERBY" ColumnName="WRITERBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCAR_RESULT_D5">
+      <EntityTypeMapping TypeName="NewIQCModel.SCAR_RESULT_D5">
+        <MappingFragment StoreEntitySet="SCAR_RESULT_D5">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCAR_ID" ColumnName="SCAR_ID" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="WHO_IMPLEMENT" ColumnName="WHO_IMPLEMENT" />
+          <ScalarProperty Name="WHEN_IMPLEMENT" ColumnName="WHEN_IMPLEMENT" />
+          <ScalarProperty Name="EDIVENCE" ColumnName="EDIVENCE" />
+          <ScalarProperty Name="DATE_CREATE" ColumnName="DATE_CREATE" />
+          <ScalarProperty Name="WRITERBY" ColumnName="WRITERBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCAR_RESULT_D6">
+      <EntityTypeMapping TypeName="NewIQCModel.SCAR_RESULT_D6">
+        <MappingFragment StoreEntitySet="SCAR_RESULT_D6">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCAR_ID" ColumnName="SCAR_ID" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="WHO_IMPLEMENT" ColumnName="WHO_IMPLEMENT" />
+          <ScalarProperty Name="WHEN_IMPLEMENT" ColumnName="WHEN_IMPLEMENT" />
+          <ScalarProperty Name="EDIVENCE" ColumnName="EDIVENCE" />
+          <ScalarProperty Name="DATE_CREATE" ColumnName="DATE_CREATE" />
+          <ScalarProperty Name="WRITERBY" ColumnName="WRITERBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCAR_RESULT_D7">
+      <EntityTypeMapping TypeName="NewIQCModel.SCAR_RESULT_D7">
+        <MappingFragment StoreEntitySet="SCAR_RESULT_D7">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCAR_ID" ColumnName="SCAR_ID" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="WHO_IMPLEMENT" ColumnName="WHO_IMPLEMENT" />
+          <ScalarProperty Name="WHEN_IMPLEMENT" ColumnName="WHEN_IMPLEMENT" />
+          <ScalarProperty Name="EDIVENCE" ColumnName="EDIVENCE" />
+          <ScalarProperty Name="DATE_CREATE" ColumnName="DATE_CREATE" />
+          <ScalarProperty Name="WRITERBY" ColumnName="WRITERBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCAREMAILs">
+      <EntityTypeMapping TypeName="NewIQCModel.SCAREMAIL">
+        <MappingFragment StoreEntitySet="SCAREMAIL">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCAR_ID" ColumnName="SCAR_ID" />
+          <ScalarProperty Name="SUBJECT" ColumnName="SUBJECT" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+          <ScalarProperty Name="SENTTO" ColumnName="SENTTO" />
+          <ScalarProperty Name="CC" ColumnName="CC" />
+          <ScalarProperty Name="SCARID" ColumnName="SCARID" />
+          <ScalarProperty Name="NCRFILE" ColumnName="NCRFILE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCARINFOes">
+      <EntityTypeMapping TypeName="NewIQCModel.SCARINFO">
+        <MappingFragment StoreEntitySet="SCARINFO">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="NON_QTY" ColumnName="NON_QTY" />
+          <ScalarProperty Name="RMA" ColumnName="RMA" />
+          <ScalarProperty Name="NCR_NUMBER" ColumnName="NCR_NUMBER" />
+          <ScalarProperty Name="PO_NUMBER" ColumnName="PO_NUMBER" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="BUYER" ColumnName="BUYER" />
+          <ScalarProperty Name="QUALITY" ColumnName="QUALITY" />
+          <ScalarProperty Name="VN_SCAR" ColumnName="VN_SCAR" />
+          <ScalarProperty Name="VN_NCR" ColumnName="VN_NCR" />
+          <ScalarProperty Name="PROBLEM" ColumnName="PROBLEM" />
+          <ScalarProperty Name="DATEPROBLEM" ColumnName="DATEPROBLEM" />
+          <ScalarProperty Name="DATERESPOND" ColumnName="DATERESPOND" />
+          <ScalarProperty Name="WRITTENBY" ColumnName="WRITTENBY" />
+          <ScalarProperty Name="WRITTENDATE" ColumnName="WRITTENDATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+          <ScalarProperty Name="SCAR_ID" ColumnName="SCAR_ID" />
+          <ScalarProperty Name="MI_PART_NO" ColumnName="MI_PART_NO" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="SUPPLIER_REPRESENTATIVE" ColumnName="SUPPLIER_REPRESENTATIVE" />
+          <ScalarProperty Name="DATE_D8" ColumnName="DATE_D8" />
+          <ScalarProperty Name="ACKNOWLEDGEMENT" ColumnName="ACKNOWLEDGEMENT" />
+          <ScalarProperty Name="SCAR_STATUS" ColumnName="SCAR_STATUS" />
+          <ScalarProperty Name="EDIVENCE_D8" ColumnName="EDIVENCE_D8" />
+          <ScalarProperty Name="DEFECTCODE" ColumnName="DEFECTCODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCARnNCRs">
+      <EntityTypeMapping TypeName="NewIQCModel.SCARnNCR">
+        <MappingFragment StoreEntitySet="SCARnNCR">
+          <ScalarProperty Name="ScarId" ColumnName="ScarId" />
+          <ScalarProperty Name="NCRId" ColumnName="NCRId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCRAP_REASON">
+      <EntityTypeMapping TypeName="NewIQCModel.SCRAP_REASON">
+        <MappingFragment StoreEntitySet="SCRAP_REASON">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NCR_NUMBER" ColumnName="NCR_NUMBER" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="REASON" ColumnName="REASON" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STATUS">
+      <EntityTypeMapping TypeName="NewIQCModel.STATUS">
+        <MappingFragment StoreEntitySet="STATUS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STDCODEs">
+      <EntityTypeMapping TypeName="NewIQCModel.STDCODE">
+        <MappingFragment StoreEntitySet="STDCODE">
+          <ScalarProperty Name="Part" ColumnName="Part" />
+          <ScalarProperty Name="StdCode1" ColumnName="StdCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUPPLIER_PPM">
+      <EntityTypeMapping TypeName="NewIQCModel.SUPPLIER_PPM">
+        <MappingFragment StoreEntitySet="SUPPLIER_PPM">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUPPLIER_PPM_RP">
+      <EntityTypeMapping TypeName="NewIQCModel.SUPPLIER_PPM_RP">
+        <MappingFragment StoreEntitySet="SUPPLIER_PPM_RP">
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="TYPEPARENT" ColumnName="TYPEPARENT" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="JUL" ColumnName="JUL" />
+          <ScalarProperty Name="AUG" ColumnName="AUG" />
+          <ScalarProperty Name="SEP" ColumnName="SEP" />
+          <ScalarProperty Name="OTC" ColumnName="OTC" />
+          <ScalarProperty Name="NOV" ColumnName="NOV" />
+          <ScalarProperty Name="DEC" ColumnName="DEC" />
+          <ScalarProperty Name="JAN" ColumnName="JAN" />
+          <ScalarProperty Name="FEB" ColumnName="FEB" />
+          <ScalarProperty Name="MAR" ColumnName="MAR" />
+          <ScalarProperty Name="APR" ColumnName="APR" />
+          <ScalarProperty Name="MAY" ColumnName="MAY" />
+          <ScalarProperty Name="JUN" ColumnName="JUN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="NewIQCModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TASKCOMMENTs">
+      <EntityTypeMapping TypeName="NewIQCModel.TASKCOMMENT">
+        <MappingFragment StoreEntitySet="TASKCOMMENT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TASKID_DETAIL" ColumnName="TASKID_DETAIL" />
+          <ScalarProperty Name="CONTENTCOMMENT" ColumnName="CONTENTCOMMENT" />
+          <ScalarProperty Name="WRITTENBY" ColumnName="WRITTENBY" />
+          <ScalarProperty Name="WRITEDATE" ColumnName="WRITEDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TASKDETAILs">
+      <EntityTypeMapping TypeName="NewIQCModel.TASKDETAIL">
+        <MappingFragment StoreEntitySet="TASKDETAIL">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TASKID" ColumnName="TASKID" />
+          <ScalarProperty Name="TASKNAME" ColumnName="TASKNAME" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="OWNER" ColumnName="OWNER" />
+          <ScalarProperty Name="ASSIGNEE" ColumnName="ASSIGNEE" />
+          <ScalarProperty Name="APPROVE" ColumnName="APPROVE" />
+          <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
+          <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
+          <ScalarProperty Name="CORRECTSTARTDATE" ColumnName="CORRECTSTARTDATE" />
+          <ScalarProperty Name="CORRECTENDDATE" ColumnName="CORRECTENDDATE" />
+          <ScalarProperty Name="PROCESS" ColumnName="PROCESS" />
+          <ScalarProperty Name="EST_COMPLETEIONDATE" ColumnName="EST_COMPLETEIONDATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TASKDOCUMENTs">
+      <EntityTypeMapping TypeName="NewIQCModel.TASKDOCUMENT">
+        <MappingFragment StoreEntitySet="TASKDOCUMENT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TASKID_DETAIL" ColumnName="TASKID_DETAIL" />
+          <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="DATEMODIFY" ColumnName="DATEMODIFY" />
+          <ScalarProperty Name="SIZE" ColumnName="SIZE" />
+          <ScalarProperty Name="WRITTENBY" ColumnName="WRITTENBY" />
+          <ScalarProperty Name="WRITEDATE" ColumnName="WRITEDATE" />
+          <ScalarProperty Name="REVCOMMENT" ColumnName="REVCOMMENT" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="FILEPATH" ColumnName="FILEPATH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TASKLISTs">
+      <EntityTypeMapping TypeName="NewIQCModel.TASKLIST">
+        <MappingFragment StoreEntitySet="TASKLIST">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TASKNO" ColumnName="TASKNO" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="WRITTENBY" ColumnName="WRITTENBY" />
+          <ScalarProperty Name="WRITEDATE" ColumnName="WRITEDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TbFixtures">
+      <EntityTypeMapping TypeName="NewIQCModel.TbFixture">
+        <MappingFragment StoreEntitySet="TbFixture">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Des" ColumnName="Des" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Line" ColumnName="Line" />
+          <ScalarProperty Name="YN" ColumnName="YN" />
+          <ScalarProperty Name="Kind" ColumnName="Kind" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="EquipType" ColumnName="EquipType" />
+          <ScalarProperty Name="YN_2" ColumnName="YN_2" />
+          <ScalarProperty Name="Frequency_2" ColumnName="Frequency_2" />
+          <ScalarProperty Name="Date_2" ColumnName="Date_2" />
+          <ScalarProperty Name="LinkData" ColumnName="LinkData" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBTOOLs">
+      <EntityTypeMapping TypeName="NewIQCModel.TBTOOL">
+        <MappingFragment StoreEntitySet="TBTOOL">
+          <ScalarProperty Name="FIX_ID" ColumnName="FIX_ID" />
+          <ScalarProperty Name="FIX_NAME" ColumnName="FIX_NAME" />
+          <ScalarProperty Name="FIX_DESC" ColumnName="FIX_DESC" />
+          <ScalarProperty Name="EVA_METHOD" ColumnName="EVA_METHOD" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LINE" ColumnName="LINE" />
+          <ScalarProperty Name="YN" ColumnName="YN" />
+          <ScalarProperty Name="KIND" ColumnName="KIND" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="FREQUENCY" ColumnName="FREQUENCY" />
+          <ScalarProperty Name="FIX_TYPE" ColumnName="FIX_TYPE" />
+          <ScalarProperty Name="YN_2" ColumnName="YN_2" />
+          <ScalarProperty Name="FREQUENCY_2" ColumnName="FREQUENCY_2" />
+          <ScalarProperty Name="DATE_2" ColumnName="DATE_2" />
+          <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TEMPLATE_DET">
+      <EntityTypeMapping TypeName="NewIQCModel.TEMPLATE_DET">
+        <MappingFragment StoreEntitySet="TEMPLATE_DET">
+          <ScalarProperty Name="TEMPLATE_NUM" ColumnName="TEMPLATE_NUM" />
+          <ScalarProperty Name="TEMPLATE" ColumnName="TEMPLATE" />
+          <ScalarProperty Name="MEASURE_PARA" ColumnName="MEASURE_PARA" />
+          <ScalarProperty Name="MEASURE_PARA_DESC" ColumnName="MEASURE_PARA_DESC" />
+          <ScalarProperty Name="EVA_METHOD" ColumnName="EVA_METHOD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TEMPLATE_HDR">
+      <EntityTypeMapping TypeName="NewIQCModel.TEMPLATE_HDR">
+        <MappingFragment StoreEntitySet="TEMPLATE_HDR">
+          <ScalarProperty Name="TEMPLATE_NUM" ColumnName="TEMPLATE_NUM" />
+          <ScalarProperty Name="TEMPLATE" ColumnName="TEMPLATE" />
+          <ScalarProperty Name="TEMPLATE_IMAGE" ColumnName="TEMPLATE_IMAGE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDispositionApprovals">
+      <EntityTypeMapping TypeName="NewIQCModel.UserDispositionApproval">
+        <MappingFragment StoreEntitySet="UserDispositionApproval">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NCR_DIS_ID" ColumnName="NCR_DIS_ID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DateApprove" ColumnName="DateApprove" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLogins">
+      <EntityTypeMapping TypeName="NewIQCModel.UserLogin">
+        <MappingFragment StoreEntitySet="UserLogin">
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="Func" ColumnName="Func" />
+          <ScalarProperty Name="Resigned" ColumnName="Resigned" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VARIABLE_ACT_BY_SPL">
+      <EntityTypeMapping TypeName="NewIQCModel.VARIABLE_ACT_BY_SPL">
+        <MappingFragment StoreEntitySet="VARIABLE_ACT_BY_SPL">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="FIXTURE" ColumnName="FIXTURE" />
+          <ScalarProperty Name="SPL_NUM" ColumnName="SPL_NUM" />
+          <ScalarProperty Name="SERIAL_NUM" ColumnName="SERIAL_NUM" />
+          <ScalarProperty Name="DIMENSION" ColumnName="DIMENSION" />
+          <ScalarProperty Name="LVALUE" ColumnName="LVALUE" />
+          <ScalarProperty Name="UVALUE" ColumnName="UVALUE" />
+          <ScalarProperty Name="ACT_VALUE" ColumnName="ACT_VALUE" />
+          <ScalarProperty Name="UNIT" ColumnName="UNIT" />
+          <ScalarProperty Name="CRITIAL" ColumnName="CRITIAL" />
+          <ScalarProperty Name="EVALUATION" ColumnName="EVALUATION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VARIABLE_STD_BY_PART_NoUse">
+      <EntityTypeMapping TypeName="NewIQCModel.VARIABLE_STD_BY_PART_NoUse">
+        <MappingFragment StoreEntitySet="VARIABLE_STD_BY_PART_NoUse">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="FIXTURE" ColumnName="FIXTURE" />
+          <ScalarProperty Name="DIMENSION" ColumnName="DIMENSION" />
+          <ScalarProperty Name="DIM_DESC" ColumnName="DIM_DESC" />
+          <ScalarProperty Name="LVALUE" ColumnName="LVALUE" />
+          <ScalarProperty Name="UVALUE" ColumnName="UVALUE" />
+          <ScalarProperty Name="UNIT" ColumnName="UNIT" />
+          <ScalarProperty Name="CRITIAL" ColumnName="CRITIAL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VENDORs">
+      <EntityTypeMapping TypeName="NewIQCModel.VENDOR">
+        <MappingFragment StoreEntitySet="VENDOR">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="VENDOR1" ColumnName="VENDOR" />
+          <ScalarProperty Name="PUR_LOC" ColumnName="PUR_LOC" />
+          <ScalarProperty Name="VEN_NAM" ColumnName="VEN_NAM" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+          <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+          <ScalarProperty Name="CTRY" ColumnName="CTRY" />
+          <ScalarProperty Name="CONTACT" ColumnName="CONTACT" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="FAX" ColumnName="FAX" />
+          <ScalarProperty Name="TEL" ColumnName="TEL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VNMaterialTraceabilities">
+      <EntityTypeMapping TypeName="NewIQCModel.VNMaterialTraceability">
+        <MappingFragment StoreEntitySet="VNMaterialTraceability">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NCRNUM" ColumnName="NCRNUM" />
+          <ScalarProperty Name="VNMaterialTraceability1" ColumnName="VNMaterialTraceability" />
+          <ScalarProperty Name="IsPrint" ColumnName="IsPrint" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attributes">
+      <EntityTypeMapping TypeName="NewIQCModel.Attribute">
+        <MappingFragment StoreEntitySet="Attribute">
+          <ScalarProperty Name="ID_auto1" ColumnName="ID-auto1" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Partial_date" ColumnName="Partial date" />
+          <ScalarProperty Name="Partial_Acc" ColumnName="Partial Acc" />
+          <ScalarProperty Name="Partial_Rej" ColumnName="Partial Rej" />
+          <ScalarProperty Name="Inspector" ColumnName="Inspector" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="A" ColumnName="A" />
+          <ScalarProperty Name="AA" ColumnName="AA" />
+          <ScalarProperty Name="B" ColumnName="B" />
+          <ScalarProperty Name="BB" ColumnName="BB" />
+          <ScalarProperty Name="C" ColumnName="C" />
+          <ScalarProperty Name="CC" ColumnName="CC" />
+          <ScalarProperty Name="D" ColumnName="D" />
+          <ScalarProperty Name="DD" ColumnName="DD" />
+          <ScalarProperty Name="E" ColumnName="E" />
+          <ScalarProperty Name="EE" ColumnName="EE" />
+          <ScalarProperty Name="F" ColumnName="F" />
+          <ScalarProperty Name="FF" ColumnName="FF" />
+          <ScalarProperty Name="De1" ColumnName="De1" />
+          <ScalarProperty Name="De2" ColumnName="De2" />
+          <ScalarProperty Name="De3" ColumnName="De3" />
+          <ScalarProperty Name="De4" ColumnName="De4" />
+          <ScalarProperty Name="De5" ColumnName="De5" />
+          <ScalarProperty Name="De6" ColumnName="De6" />
+          <ScalarProperty Name="Re1" ColumnName="Re1" />
+          <ScalarProperty Name="Re2" ColumnName="Re2" />
+          <ScalarProperty Name="Re3" ColumnName="Re3" />
+          <ScalarProperty Name="Re4" ColumnName="Re4" />
+          <ScalarProperty Name="Re5" ColumnName="Re5" />
+          <ScalarProperty Name="Re6" ColumnName="Re6" />
+          <ScalarProperty Name="Di1" ColumnName="Di1" />
+          <ScalarProperty Name="Di2" ColumnName="Di2" />
+          <ScalarProperty Name="Di3" ColumnName="Di3" />
+          <ScalarProperty Name="Di4" ColumnName="Di4" />
+          <ScalarProperty Name="Di5" ColumnName="Di5" />
+          <ScalarProperty Name="Di6" ColumnName="Di6" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CHANGED_SPL_BK">
+      <EntityTypeMapping TypeName="NewIQCModel.CHANGED_SPL_BK">
+        <MappingFragment StoreEntitySet="CHANGED_SPL_BK">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="REASON" ColumnName="REASON" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CS_HIS">
+      <EntityTypeMapping TypeName="NewIQCModel.CS_HIS">
+        <MappingFragment StoreEntitySet="CS_HIS">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_PLAN" ColumnName="SKIP_LOT_PLAN" />
+          <ScalarProperty Name="SKIP_LOT_LEVEL" ColumnName="SKIP_LOT_LEVEL" />
+          <ScalarProperty Name="INSP_STAT" ColumnName="INSP_STAT" />
+          <ScalarProperty Name="DOC_REQ" ColumnName="DOC_REQ" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="QUAL" ColumnName="QUAL" />
+          <ScalarProperty Name="SKIP_LEVEL" ColumnName="SKIP_LEVEL" />
+          <ScalarProperty Name="LOT_SKIP" ColumnName="LOT_SKIP" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="TEST_ROSH_REQUIRED" ColumnName="TEST_ROSH_REQUIRED" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FIXTURE_ACT_BY_SPL_NoUse">
+      <EntityTypeMapping TypeName="NewIQCModel.FIXTURE_ACT_BY_SPL_NoUse">
+        <MappingFragment StoreEntitySet="FIXTURE_ACT_BY_SPL_NoUse">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="SPL_NUM" ColumnName="SPL_NUM" />
+          <ScalarProperty Name="SERIAL_NUM" ColumnName="SERIAL_NUM" />
+          <ScalarProperty Name="FIXTURE" ColumnName="FIXTURE" />
+          <ScalarProperty Name="CRITIAL" ColumnName="CRITIAL" />
+          <ScalarProperty Name="EVALUATION" ColumnName="EVALUATION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INS_RESULT_HIS">
+      <EntityTypeMapping TypeName="NewIQCModel.INS_RESULT_HIS">
+        <MappingFragment StoreEntitySet="INS_RESULT_HIS">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="STEP" ColumnName="STEP" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="INS_RESULT" ColumnName="INS_RESULT" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INS_RESULT_VISUAL_LOT">
+      <EntityTypeMapping TypeName="NewIQCModel.INS_RESULT_VISUAL_LOT">
+        <MappingFragment StoreEntitySet="INS_RESULT_VISUAL_LOT">
+          <ScalarProperty Name="VIS_PartialID" ColumnName="VIS_PartialID" />
+          <ScalarProperty Name="Lot" ColumnName="Lot" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INSPECTORs">
+      <EntityTypeMapping TypeName="NewIQCModel.INSPECTOR">
+        <MappingFragment StoreEntitySet="INSPECTOR">
+          <ScalarProperty Name="Emp_Code" ColumnName="Emp_Code" />
+          <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+          <ScalarProperty Name="Resigned" ColumnName="Resigned" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MEASUREMENT_STD_BY_PART_CHANGED_SPL">
+      <EntityTypeMapping TypeName="NewIQCModel.MEASUREMENT_STD_BY_PART_CHANGED_SPL">
+        <MappingFragment StoreEntitySet="MEASUREMENT_STD_BY_PART_CHANGED_SPL">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="MEASURE_PARA" ColumnName="MEASURE_PARA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PART_INS_REQ_VISUAL">
+      <EntityTypeMapping TypeName="NewIQCModel.PART_INS_REQ_VISUAL">
+        <MappingFragment StoreEntitySet="PART_INS_REQ_VISUAL">
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="VISUAL_ITEM" ColumnName="VISUAL_ITEM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PARTIAL_INS_RESULT">
+      <EntityTypeMapping TypeName="NewIQCModel.PARTIAL_INS_RESULT">
+        <MappingFragment StoreEntitySet="PARTIAL_INS_RESULT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PartialID" ColumnName="PartialID" />
+          <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+          <ScalarProperty Name="PartialIns" ColumnName="PartialIns" />
+          <ScalarProperty Name="PartialAcc" ColumnName="PartialAcc" />
+          <ScalarProperty Name="PartialRej" ColumnName="PartialRej" />
+          <ScalarProperty Name="Inspector" ColumnName="Inspector" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PARTIAL_NC">
+      <EntityTypeMapping TypeName="NewIQCModel.PARTIAL_NC">
+        <MappingFragment StoreEntitySet="PARTIAL_NC">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PartialID" ColumnName="PartialID" />
+          <ScalarProperty Name="Non_Conformances" ColumnName="Non_Conformances" />
+          <ScalarProperty Name="NC_Qty" ColumnName="NC_Qty" />
+          <ScalarProperty Name="Defect" ColumnName="Defect" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="Disposition" ColumnName="Disposition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POes">
+      <EntityTypeMapping TypeName="NewIQCModel.PO">
+        <MappingFragment StoreEntitySet="PO">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PO1" ColumnName="PO" />
+          <ScalarProperty Name="PN" ColumnName="PN" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Supplier_code" ColumnName="Supplier_code" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="Rev" ColumnName="Rev" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="CoC" ColumnName="CoC" />
+          <ScalarProperty Name="Required_inspection" ColumnName="Required_inspection" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Report" ColumnName="Report" />
+          <ScalarProperty Name="AQLM" ColumnName="AQLM" />
+          <ScalarProperty Name="AQLV" ColumnName="AQLV" />
+          <ScalarProperty Name="SPL1" ColumnName="SPL1" />
+          <ScalarProperty Name="SPL2" ColumnName="SPL2" />
+          <ScalarProperty Name="Result1" ColumnName="Result1" />
+          <ScalarProperty Name="Result2" ColumnName="Result2" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Wide" ColumnName="Wide" />
+          <ScalarProperty Name="Thickness" ColumnName="Thickness" />
+          <ScalarProperty Name="Tab_gap" ColumnName="Tab gap" />
+          <ScalarProperty Name="Edge_gap" ColumnName="Edge gap" />
+          <ScalarProperty Name="Judgement" ColumnName="Judgement" />
+          <ScalarProperty Name="NCR" ColumnName="NCR" />
+          <ScalarProperty Name="Feedback_date" ColumnName="Feedback_date" />
+          <ScalarProperty Name="Feedback_to" ColumnName="Feedback_to" />
+          <ScalarProperty Name="SCAR" ColumnName="SCAR" />
+          <ScalarProperty Name="RMA" ColumnName="RMA" />
+          <ScalarProperty Name="Return_Qty" ColumnName="Return_Qty" />
+          <ScalarProperty Name="Credit_Qty" ColumnName="Credit_Qty" />
+          <ScalarProperty Name="Return_notes" ColumnName="Return_notes" />
+          <ScalarProperty Name="IQA_Status" ColumnName="IQA_Status" />
+          <ScalarProperty Name="Closed_Date" ColumnName="Closed_Date" />
+          <ScalarProperty Name="CA" ColumnName="CA" />
+          <ScalarProperty Name="Gen_Remark" ColumnName="Gen_Remark" />
+          <ScalarProperty Name="NCR_writen_Date" ColumnName="NCR_writen_Date" />
+          <ScalarProperty Name="Last_signed_Date" ColumnName="Last_signed_Date" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PO_BK">
+      <EntityTypeMapping TypeName="NewIQCModel.PO_BK">
+        <MappingFragment StoreEntitySet="PO_BK">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PO" ColumnName="PO" />
+          <ScalarProperty Name="PN" ColumnName="PN" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Supplier_code" ColumnName="Supplier_code" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="Rev" ColumnName="Rev" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="CoC" ColumnName="CoC" />
+          <ScalarProperty Name="Required_inspection" ColumnName="Required_inspection" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Report" ColumnName="Report" />
+          <ScalarProperty Name="AQLM" ColumnName="AQLM" />
+          <ScalarProperty Name="AQLV" ColumnName="AQLV" />
+          <ScalarProperty Name="SPL1" ColumnName="SPL1" />
+          <ScalarProperty Name="SPL2" ColumnName="SPL2" />
+          <ScalarProperty Name="Result1" ColumnName="Result1" />
+          <ScalarProperty Name="Result2" ColumnName="Result2" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Wide" ColumnName="Wide" />
+          <ScalarProperty Name="Thickness" ColumnName="Thickness" />
+          <ScalarProperty Name="Tab_gap" ColumnName="Tab gap" />
+          <ScalarProperty Name="Edge_gap" ColumnName="Edge gap" />
+          <ScalarProperty Name="Judgement" ColumnName="Judgement" />
+          <ScalarProperty Name="NCR" ColumnName="NCR" />
+          <ScalarProperty Name="Feedback_date" ColumnName="Feedback_date" />
+          <ScalarProperty Name="Feedback_to" ColumnName="Feedback_to" />
+          <ScalarProperty Name="SCAR" ColumnName="SCAR" />
+          <ScalarProperty Name="RMA" ColumnName="RMA" />
+          <ScalarProperty Name="Return_Qty" ColumnName="Return_Qty" />
+          <ScalarProperty Name="Credit_Qty" ColumnName="Credit_Qty" />
+          <ScalarProperty Name="Return_notes" ColumnName="Return_notes" />
+          <ScalarProperty Name="IQA_Status" ColumnName="IQA_Status" />
+          <ScalarProperty Name="Closed_Date" ColumnName="Closed_Date" />
+          <ScalarProperty Name="CA" ColumnName="CA" />
+          <ScalarProperty Name="Gen_Remark" ColumnName="Gen_Remark" />
+          <ScalarProperty Name="NCR_writen_Date" ColumnName="NCR_writen_Date" />
+          <ScalarProperty Name="Last_signed_Date" ColumnName="Last_signed_Date" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="receiver_bk">
+      <EntityTypeMapping TypeName="NewIQCModel.receiver_bk">
+        <MappingFragment StoreEntitySet="receiver_bk">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="BATCH_NO" ColumnName="BATCH_NO" />
+          <ScalarProperty Name="REC_COMMENT" ColumnName="REC_COMMENT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SKIP_LOT_LEVEL">
+      <EntityTypeMapping TypeName="NewIQCModel.SKIP_LOT_LEVEL">
+        <MappingFragment StoreEntitySet="SKIP_LOT_LEVEL">
+          <ScalarProperty Name="LEVEL" ColumnName="LEVEL" />
+          <ScalarProperty Name="NEXT_LEV1" ColumnName="NEXT_LEV1" />
+          <ScalarProperty Name="NEXT_LEV2" ColumnName="NEXT_LEV2" />
+          <ScalarProperty Name="RATE" ColumnName="RATE" />
+          <ScalarProperty Name="MAX_LOT" ColumnName="MAX_LOT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SKIP_LOT_LEVEL_bk">
+      <EntityTypeMapping TypeName="NewIQCModel.SKIP_LOT_LEVEL_bk">
+        <MappingFragment StoreEntitySet="SKIP_LOT_LEVEL_bk">
+          <ScalarProperty Name="LEVEL" ColumnName="LEVEL" />
+          <ScalarProperty Name="NEXT_LEV1" ColumnName="NEXT_LEV1" />
+          <ScalarProperty Name="NEXT_LEV2" ColumnName="NEXT_LEV2" />
+          <ScalarProperty Name="RATE" ColumnName="RATE" />
+          <ScalarProperty Name="MAX_LOT" ColumnName="MAX_LOT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbAQLSettings">
+      <EntityTypeMapping TypeName="NewIQCModel.tbAQLSetting">
+        <MappingFragment StoreEntitySet="tbAQLSetting">
+          <ScalarProperty Name="AQLName" ColumnName="AQLName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="LotFrom" ColumnName="LotFrom" />
+          <ScalarProperty Name="LotTo" ColumnName="LotTo" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Accept" ColumnName="Accept" />
+          <ScalarProperty Name="Reject" ColumnName="Reject" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TemporaryUpsizedTable2">
+      <EntityTypeMapping TypeName="NewIQCModel.TemporaryUpsizedTable2">
+        <MappingFragment StoreEntitySet="TemporaryUpsizedTable2">
+          <ScalarProperty Name="ID_auto1" ColumnName="ID-auto1" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Partial_date" ColumnName="Partial date" />
+          <ScalarProperty Name="Partial_Acc" ColumnName="Partial Acc" />
+          <ScalarProperty Name="Partial_Rej" ColumnName="Partial Rej" />
+          <ScalarProperty Name="Inspector" ColumnName="Inspector" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="A" ColumnName="A" />
+          <ScalarProperty Name="AA" ColumnName="AA" />
+          <ScalarProperty Name="B" ColumnName="B" />
+          <ScalarProperty Name="BB" ColumnName="BB" />
+          <ScalarProperty Name="C" ColumnName="C" />
+          <ScalarProperty Name="CC" ColumnName="CC" />
+          <ScalarProperty Name="D" ColumnName="D" />
+          <ScalarProperty Name="DD" ColumnName="DD" />
+          <ScalarProperty Name="E" ColumnName="E" />
+          <ScalarProperty Name="EE" ColumnName="EE" />
+          <ScalarProperty Name="F" ColumnName="F" />
+          <ScalarProperty Name="FF" ColumnName="FF" />
+          <ScalarProperty Name="De1" ColumnName="De1" />
+          <ScalarProperty Name="De2" ColumnName="De2" />
+          <ScalarProperty Name="De3" ColumnName="De3" />
+          <ScalarProperty Name="De4" ColumnName="De4" />
+          <ScalarProperty Name="De5" ColumnName="De5" />
+          <ScalarProperty Name="De6" ColumnName="De6" />
+          <ScalarProperty Name="Re1" ColumnName="Re1" />
+          <ScalarProperty Name="Re2" ColumnName="Re2" />
+          <ScalarProperty Name="Re3" ColumnName="Re3" />
+          <ScalarProperty Name="Re4" ColumnName="Re4" />
+          <ScalarProperty Name="Re5" ColumnName="Re5" />
+          <ScalarProperty Name="Re6" ColumnName="Re6" />
+          <ScalarProperty Name="Di1" ColumnName="Di1" />
+          <ScalarProperty Name="Di2" ColumnName="Di2" />
+          <ScalarProperty Name="Di3" ColumnName="Di3" />
+          <ScalarProperty Name="Di4" ColumnName="Di4" />
+          <ScalarProperty Name="Di5" ColumnName="Di5" />
+          <ScalarProperty Name="Di6" ColumnName="Di6" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USER_PERMIT">
+      <EntityTypeMapping TypeName="NewIQCModel.USER_PERMIT">
+        <MappingFragment StoreEntitySet="USER_PERMIT">
+          <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+          <ScalarProperty Name="FORMNAME" ColumnName="FORMNAME" />
+          <ScalarProperty Name="PERMIT" ColumnName="PERMIT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_Material_HadMake_FlupSerialNumber_Test">
+      <EntityTypeMapping TypeName="NewIQCModel.V_Material_HadMake_FlupSerialNumber_Test">
+        <MappingFragment StoreEntitySet="V_Material_HadMake_FlupSerialNumber_Test">
+          <ScalarProperty Name="WOCode" ColumnName="WOCode" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="Revision" ColumnName="Revision" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="LotNumber" ColumnName="LotNumber" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_WO_Issue_Test">
+      <EntityTypeMapping TypeName="NewIQCModel.V_WO_Issue_Test">
+        <MappingFragment StoreEntitySet="V_WO_Issue_Test">
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="WOCode" ColumnName="WOCode" />
+          <ScalarProperty Name="LotNumber" ColumnName="LotNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_AQL">
+      <EntityTypeMapping TypeName="NewIQCModel.v_AQL">
+        <MappingFragment StoreEntitySet="v_AQL">
+          <ScalarProperty Name="AQLName" ColumnName="AQLName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="LotFrom" ColumnName="LotFrom" />
+          <ScalarProperty Name="LotTo" ColumnName="LotTo" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Accept" ColumnName="Accept" />
+          <ScalarProperty Name="Reject" ColumnName="Reject" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_INS_RESULT">
+      <EntityTypeMapping TypeName="NewIQCModel.v_INS_RESULT">
+        <MappingFragment StoreEntitySet="v_INS_RESULT">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="INSP_STAT" ColumnName="INSP_STAT" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="INS_DATE" ColumnName="INS_DATE" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="ACC_QTY" ColumnName="ACC_QTY" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_Material_HadMake_FLupSerialNumber">
+      <EntityTypeMapping TypeName="NewIQCModel.V_Material_HadMake_FLupSerialNumber">
+        <MappingFragment StoreEntitySet="V_Material_HadMake_FLupSerialNumber">
+          <ScalarProperty Name="WOCode" ColumnName="WOCode" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="Revision" ColumnName="Revision" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="LotNumber" ColumnName="LotNumber" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_WO_Issue">
+      <EntityTypeMapping TypeName="NewIQCModel.V_WO_Issue">
+        <MappingFragment StoreEntitySet="V_WO_Issue">
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="WOCode" ColumnName="WOCode" />
+          <ScalarProperty Name="LotNumber" ColumnName="LotNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vNCR_DET">
+      <EntityTypeMapping TypeName="NewIQCModel.vNCR_DET">
+        <MappingFragment StoreEntitySet="vNCR_DET">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PartialID" ColumnName="PartialID" />
+          <ScalarProperty Name="Non_Conformances" ColumnName="Non_Conformances" />
+          <ScalarProperty Name="NC_Qty" ColumnName="NC_Qty" />
+          <ScalarProperty Name="Defect" ColumnName="Defect" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="Disposition" ColumnName="Disposition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vNCR_DET_2">
+      <EntityTypeMapping TypeName="NewIQCModel.vNCR_DET_2">
+        <MappingFragment StoreEntitySet="vNCR_DET_2">
+          <ScalarProperty Name="NCR" ColumnName="NCR" />
+          <ScalarProperty Name="RPT_DATE" ColumnName="RPT_DATE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PartialID" ColumnName="PartialID" />
+          <ScalarProperty Name="Non_Conformances" ColumnName="Non_Conformances" />
+          <ScalarProperty Name="NC_Qty" ColumnName="NC_Qty" />
+          <ScalarProperty Name="Defect" ColumnName="Defect" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="Disposition" ColumnName="Disposition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vNCR_HDR">
+      <EntityTypeMapping TypeName="NewIQCModel.vNCR_HDR">
+        <MappingFragment StoreEntitySet="vNCR_HDR">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PO" ColumnName="PO" />
+          <ScalarProperty Name="PN" ColumnName="PN" />
+          <ScalarProperty Name="DESCR" ColumnName="DESCR" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="Supplier_code" ColumnName="Supplier_code" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="RPT_DATE" ColumnName="RPT_DATE" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AQLM" ColumnName="AQLM" />
+          <ScalarProperty Name="AQLV" ColumnName="AQLV" />
+          <ScalarProperty Name="SPL1" ColumnName="SPL1" />
+          <ScalarProperty Name="SPL2" ColumnName="SPL2" />
+          <ScalarProperty Name="NCR" ColumnName="NCR" />
+          <ScalarProperty Name="IQA_Status" ColumnName="IQA_Status" />
+          <ScalarProperty Name="CA" ColumnName="CA" />
+          <ScalarProperty Name="NCR_writen_Date" ColumnName="NCR_writen_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="NewIQCModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionName="NewIQCModel.Store.f_NCR_DET_1" FunctionImportName="f_NCR_DET_1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.f_NCR_DET_1_Result">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="DEFECT" ColumnName="DEFECT" />
+          <ScalarProperty Name="response" ColumnName="response" />
+          <ScalarProperty Name="disposition" ColumnName="disposition" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="NewIQCModel.Store.SplitString" FunctionImportName="SplitString">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.SplitString_Result">
+          <ScalarProperty Name="Item" ColumnName="Item" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="NewIQCModel.Store.STRING_SPLIT" FunctionImportName="STRING_SPLIT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.STRING_SPLIT_Result">
+          <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pAQL_Cal" FunctionName="NewIQCModel.Store.pAQL_Cal" />
+    <FunctionImportMapping FunctionImportName="pCheck_Login" FunctionName="NewIQCModel.Store.pCheck_Login" />
+    <FunctionImportMapping FunctionImportName="pCheck_PART_INS_REQ" FunctionName="NewIQCModel.Store.pCheck_PART_INS_REQ" />
+    <FunctionImportMapping FunctionImportName="pCreate_INS_RESULT" FunctionName="NewIQCModel.Store.pCreate_INS_RESULT" />
+    <FunctionImportMapping FunctionImportName="pImp_Receiver" FunctionName="NewIQCModel.Store.pImp_Receiver" />
+    <FunctionImportMapping FunctionImportName="pImp_Receiver_test" FunctionName="NewIQCModel.Store.pImp_Receiver_test" />
+    <FunctionImportMapping FunctionImportName="pList_CHECKSHEET_by_Reverse" FunctionName="NewIQCModel.Store.pList_CHECKSHEET_by_Reverse">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.pList_CHECKSHEET_by_Reverse_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="RECEIVED_DATE" ColumnName="RECEIVED_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_PLAN" ColumnName="SKIP_LOT_PLAN" />
+          <ScalarProperty Name="Skip_Lot_Level" ColumnName="Skip_Lot_Level" />
+          <ScalarProperty Name="Doc_Req" ColumnName="Doc_Req" />
+          <ScalarProperty Name="QUAL" ColumnName="QUAL" />
+          <ScalarProperty Name="SKIP_LEVEL" ColumnName="SKIP_LEVEL" />
+          <ScalarProperty Name="LOT_SKIP" ColumnName="LOT_SKIP" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="INSP_STAT" ColumnName="INSP_STAT" />
+          <ScalarProperty Name="AGING" ColumnName="AGING" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pList_CHECKSHEET_by_SearchPartLotDate" FunctionName="NewIQCModel.Store.pList_CHECKSHEET_by_SearchPartLotDate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.pList_CHECKSHEET_by_SearchPartLotDate_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="RECEIVED_DATE" ColumnName="RECEIVED_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_PLAN" ColumnName="SKIP_LOT_PLAN" />
+          <ScalarProperty Name="Skip_Lot_Level" ColumnName="Skip_Lot_Level" />
+          <ScalarProperty Name="Doc_Req" ColumnName="Doc_Req" />
+          <ScalarProperty Name="QUAL" ColumnName="QUAL" />
+          <ScalarProperty Name="SKIP_LEVEL" ColumnName="SKIP_LEVEL" />
+          <ScalarProperty Name="LOT_SKIP" ColumnName="LOT_SKIP" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="INSP_STAT" ColumnName="INSP_STAT" />
+          <ScalarProperty Name="AGING" ColumnName="AGING" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pList_CHECKSHEET_by_Status" FunctionName="NewIQCModel.Store.pList_CHECKSHEET_by_Status">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.pList_CHECKSHEET_by_Status_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="RECEIVED_DATE" ColumnName="RECEIVED_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_PLAN" ColumnName="SKIP_LOT_PLAN" />
+          <ScalarProperty Name="Skip_Lot_Level" ColumnName="Skip_Lot_Level" />
+          <ScalarProperty Name="Doc_Req" ColumnName="Doc_Req" />
+          <ScalarProperty Name="QUAL" ColumnName="QUAL" />
+          <ScalarProperty Name="SKIP_LEVEL" ColumnName="SKIP_LEVEL" />
+          <ScalarProperty Name="LOT_SKIP" ColumnName="LOT_SKIP" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="INSP_STAT" ColumnName="INSP_STAT" />
+          <ScalarProperty Name="AGING" ColumnName="AGING" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pList_CHECKSHEET_by_Status_Web" FunctionName="NewIQCModel.Store.pList_CHECKSHEET_by_Status_Web">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.pList_CHECKSHEET_by_Status_Web_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="RECEIVED_DATE" ColumnName="RECEIVED_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_PLAN" ColumnName="SKIP_LOT_PLAN" />
+          <ScalarProperty Name="Skip_Lot_Level" ColumnName="Skip_Lot_Level" />
+          <ScalarProperty Name="Doc_Req" ColumnName="Doc_Req" />
+          <ScalarProperty Name="QUAL" ColumnName="QUAL" />
+          <ScalarProperty Name="SKIP_LEVEL" ColumnName="SKIP_LEVEL" />
+          <ScalarProperty Name="LOT_SKIP" ColumnName="LOT_SKIP" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="INSP_STAT" ColumnName="INSP_STAT" />
+          <ScalarProperty Name="AGING" ColumnName="AGING" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pList_Receiver_by_Status" FunctionName="NewIQCModel.Store.pList_Receiver_by_Status">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.pList_Receiver_by_Status_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="REC_COMMENT" ColumnName="REC_COMMENT" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pManual_Receiver" FunctionName="NewIQCModel.Store.pManual_Receiver" />
+    <FunctionImportMapping FunctionImportName="pManual_Receiver_ByReceiver" FunctionName="NewIQCModel.Store.pManual_Receiver_ByReceiver" />
+    <FunctionImportMapping FunctionImportName="pReceiver_Cal" FunctionName="NewIQCModel.Store.pReceiver_Cal" />
+    <FunctionImportMapping FunctionImportName="pSKIP_LOT_LEVEL" FunctionName="NewIQCModel.Store.pSKIP_LOT_LEVEL" />
+    <FunctionImportMapping FunctionImportName="pSKIP_LOT_LEVEL_BK" FunctionName="NewIQCModel.Store.pSKIP_LOT_LEVEL_BK" />
+    <FunctionImportMapping FunctionImportName="pUpdate_INS_RESULT" FunctionName="NewIQCModel.Store.pUpdate_INS_RESULT" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="NewIQCModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_ChartH" FunctionName="NewIQCModel.Store.sp_ChartH">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_ChartH_Result">
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="CountP" ColumnName="CountP" />
+          <ScalarProperty Name="UCL" ColumnName="UCL" />
+          <ScalarProperty Name="LCL" ColumnName="LCL" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_ChartHG" FunctionName="NewIQCModel.Store.sp_ChartHG">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_ChartHG_Result">
+          <ScalarProperty Name="Cpl" ColumnName="Cpl" />
+          <ScalarProperty Name="Cpk" ColumnName="Cpk" />
+          <ScalarProperty Name="Cpu" ColumnName="Cpu" />
+          <ScalarProperty Name="StdevPoint" ColumnName="StdevPoint" />
+          <ScalarProperty Name="Mean" ColumnName="Mean" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="USL" ColumnName="USL" />
+          <ScalarProperty Name="LSL" ColumnName="LSL" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_CheckAttRequireDOC" FunctionName="NewIQCModel.Store.sp_CheckAttRequireDOC" />
+    <FunctionImportMapping FunctionImportName="sp_CheckInputAttRequireDOC" FunctionName="NewIQCModel.Store.sp_CheckInputAttRequireDOC" />
+    <FunctionImportMapping FunctionImportName="sp_CheckMachine_Skill_Oper" FunctionName="NewIQCModel.Store.sp_CheckMachine_Skill_Oper" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="NewIQCModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="NewIQCModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_EscapePPMToComponent" FunctionName="NewIQCModel.Store.sp_EscapePPMToComponent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_EscapePPMToComponent_Result">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="MI_PART_NO" ColumnName="MI_PART_NO" />
+          <ScalarProperty Name="ANALYST" ColumnName="ANALYST" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="VEN_ADD" ColumnName="VEN_ADD" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="INS_QTY" ColumnName="INS_QTY" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+          <ScalarProperty Name="DATEAPPROVAL" ColumnName="DATEAPPROVAL" />
+          <ScalarProperty Name="DEFECT" ColumnName="DEFECT" />
+          <ScalarProperty Name="RESPONSE" ColumnName="RESPONSE" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="disposition" ColumnName="disposition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_EscapePPMToProduction" FunctionName="NewIQCModel.Store.sp_EscapePPMToProduction">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_EscapePPMToProduction_Result">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="MI_PART_NO" ColumnName="MI_PART_NO" />
+          <ScalarProperty Name="ANALYST" ColumnName="ANALYST" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="VEN_ADD" ColumnName="VEN_ADD" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="INS_QTY" ColumnName="INS_QTY" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+          <ScalarProperty Name="DATEAPPROVAL" ColumnName="DATEAPPROVAL" />
+          <ScalarProperty Name="DEFECT" ColumnName="DEFECT" />
+          <ScalarProperty Name="RESPONSE" ColumnName="RESPONSE" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="disposition" ColumnName="disposition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_EscapePPMToSystem" FunctionName="NewIQCModel.Store.sp_EscapePPMToSystem">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_EscapePPMToSystem_Result">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="MI_PART_NO" ColumnName="MI_PART_NO" />
+          <ScalarProperty Name="ANALYST" ColumnName="ANALYST" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="VEN_ADD" ColumnName="VEN_ADD" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="INS_QTY" ColumnName="INS_QTY" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+          <ScalarProperty Name="DATEAPPROVAL" ColumnName="DATEAPPROVAL" />
+          <ScalarProperty Name="DEFECT" ColumnName="DEFECT" />
+          <ScalarProperty Name="RESPONSE" ColumnName="RESPONSE" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="disposition" ColumnName="disposition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GET_ListNC" FunctionName="NewIQCModel.Store.sp_GET_ListNC">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_GET_ListNC_Result">
+          <ScalarProperty Name="NC_CODE" ColumnName="NC_CODE" />
+          <ScalarProperty Name="NC_DESC" ColumnName="NC_DESC" />
+          <ScalarProperty Name="NC_GRP_CODE" ColumnName="NC_GRP_CODE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GET_ListNC_BY_ListNCGroup" FunctionName="NewIQCModel.Store.sp_GET_ListNC_BY_ListNCGroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_GET_ListNC_BY_ListNCGroup_Result">
+          <ScalarProperty Name="NC_CODE" ColumnName="NC_CODE" />
+          <ScalarProperty Name="NC_DESC" ColumnName="NC_DESC" />
+          <ScalarProperty Name="NC_GRP_CODE" ColumnName="NC_GRP_CODE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GET_ListTool" FunctionName="NewIQCModel.Store.sp_GET_ListTool" />
+    <FunctionImportMapping FunctionImportName="sp_Get_Part" FunctionName="NewIQCModel.Store.sp_Get_Part">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_Get_Part_Result">
+          <ScalarProperty Name="KEYITEM" ColumnName="KEYITEM" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="DESCR" ColumnName="DESCR" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="REC_RULE" ColumnName="REC_RULE" />
+          <ScalarProperty Name="ANALYST" ColumnName="ANALYST" />
+          <ScalarProperty Name="REV" ColumnName="REV" />
+          <ScalarProperty Name="APPROVED" ColumnName="APPROVED" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="POL_GRP" ColumnName="POL_GRP" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_CTL" ColumnName="SKIP_LOT_CTL" />
+          <ScalarProperty Name="TEST_ROSH_REQUIRED" ColumnName="TEST_ROSH_REQUIRED" />
+          <ScalarProperty Name="DRAWING_PATH" ColumnName="DRAWING_PATH" />
+          <ScalarProperty Name="USER_APPROVE" ColumnName="USER_APPROVE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetDataInputIQCInProcessByLOT" FunctionName="NewIQCModel.Store.SP_GetDataInputIQCInProcessByLOT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.SP_GetDataInputIQCInProcessByLOT_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_PLAN" ColumnName="SKIP_LOT_PLAN" />
+          <ScalarProperty Name="SKIP_LOT_LEVEL" ColumnName="SKIP_LOT_LEVEL" />
+          <ScalarProperty Name="INSP_STAT" ColumnName="INSP_STAT" />
+          <ScalarProperty Name="DOC_REQ" ColumnName="DOC_REQ" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="QUAL" ColumnName="QUAL" />
+          <ScalarProperty Name="SKIP_LEVEL" ColumnName="SKIP_LEVEL" />
+          <ScalarProperty Name="LOT_SKIP" ColumnName="LOT_SKIP" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="TEST_ROSH_REQUIRED" ColumnName="TEST_ROSH_REQUIRED" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="PartialAcc" ColumnName="PartialAcc" />
+          <ScalarProperty Name="PartialIns" ColumnName="PartialIns" />
+          <ScalarProperty Name="PartialRej" ColumnName="PartialRej" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+          <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+          <ScalarProperty Name="CTRY" ColumnName="CTRY" />
+          <ScalarProperty Name="Inspector" ColumnName="Inspector" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetDataInputIQCInProcessByLOTAndPart" FunctionName="NewIQCModel.Store.SP_GetDataInputIQCInProcessByLOTAndPart">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.SP_GetDataInputIQCInProcessByLOTAndPart_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_PLAN" ColumnName="SKIP_LOT_PLAN" />
+          <ScalarProperty Name="SKIP_LOT_LEVEL" ColumnName="SKIP_LOT_LEVEL" />
+          <ScalarProperty Name="INSP_STAT" ColumnName="INSP_STAT" />
+          <ScalarProperty Name="DOC_REQ" ColumnName="DOC_REQ" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="QUAL" ColumnName="QUAL" />
+          <ScalarProperty Name="SKIP_LEVEL" ColumnName="SKIP_LEVEL" />
+          <ScalarProperty Name="LOT_SKIP" ColumnName="LOT_SKIP" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="TEST_ROSH_REQUIRED" ColumnName="TEST_ROSH_REQUIRED" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="PartialAcc" ColumnName="PartialAcc" />
+          <ScalarProperty Name="PartialIns" ColumnName="PartialIns" />
+          <ScalarProperty Name="PartialRej" ColumnName="PartialRej" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+          <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+          <ScalarProperty Name="CTRY" ColumnName="CTRY" />
+          <ScalarProperty Name="Inspector" ColumnName="Inspector" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetDataInputIQCInProcessByPONumAndPartNum" FunctionName="NewIQCModel.Store.SP_GetDataInputIQCInProcessByPONumAndPartNum">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.SP_GetDataInputIQCInProcessByPONumAndPartNum_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="QS_STAT" ColumnName="QS_STAT" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="HALT" ColumnName="HALT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+          <ScalarProperty Name="USER_" ColumnName="USER_" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="PC_NAME" ColumnName="PC_NAME" />
+          <ScalarProperty Name="SAMPLING_VISUAL" ColumnName="SAMPLING_VISUAL" />
+          <ScalarProperty Name="SAMPLING_MEASURE" ColumnName="SAMPLING_MEASURE" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SERIAL_CTL" ColumnName="SERIAL_CTL" />
+          <ScalarProperty Name="SKIP_LOT_PLAN" ColumnName="SKIP_LOT_PLAN" />
+          <ScalarProperty Name="SKIP_LOT_LEVEL" ColumnName="SKIP_LOT_LEVEL" />
+          <ScalarProperty Name="INSP_STAT" ColumnName="INSP_STAT" />
+          <ScalarProperty Name="DOC_REQ" ColumnName="DOC_REQ" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="QUAL" ColumnName="QUAL" />
+          <ScalarProperty Name="SKIP_LEVEL" ColumnName="SKIP_LEVEL" />
+          <ScalarProperty Name="LOT_SKIP" ColumnName="LOT_SKIP" />
+          <ScalarProperty Name="AQL_VISUAL" ColumnName="AQL_VISUAL" />
+          <ScalarProperty Name="AQL_MEASURE" ColumnName="AQL_MEASURE" />
+          <ScalarProperty Name="TEST_ROSH_REQUIRED" ColumnName="TEST_ROSH_REQUIRED" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="PartialAcc" ColumnName="PartialAcc" />
+          <ScalarProperty Name="PartialIns" ColumnName="PartialIns" />
+          <ScalarProperty Name="PartialRej" ColumnName="PartialRej" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+          <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+          <ScalarProperty Name="CTRY" ColumnName="CTRY" />
+          <ScalarProperty Name="Inspector" ColumnName="Inspector" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getDataReceiver_Defect" FunctionName="NewIQCModel.Store.sp_getDataReceiver_Defect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_getDataReceiver_Defect_Result">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="PARTIALID" ColumnName="PARTIALID" />
+          <ScalarProperty Name="INSDATE" ColumnName="INSDATE" />
+          <ScalarProperty Name="PARTIALINS" ColumnName="PARTIALINS" />
+          <ScalarProperty Name="PARTIALACC" ColumnName="PARTIALACC" />
+          <ScalarProperty Name="PARTIALREJ" ColumnName="PARTIALREJ" />
+          <ScalarProperty Name="INSPECTOR" ColumnName="INSPECTOR" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="VISUALQTY" ColumnName="VISUALQTY" />
+          <ScalarProperty Name="VISUALDEFQTY" ColumnName="VISUALDEFQTY" />
+          <ScalarProperty Name="VISUALGOODQTY" ColumnName="VISUALGOODQTY" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+          <ScalarProperty Name="PARTIALDEFECT" ColumnName="PARTIALDEFECT" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getDataReceiver_NC" FunctionName="NewIQCModel.Store.sp_getDataReceiver_NC">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_getDataReceiver_NC_Result">
+          <ScalarProperty Name="receiver" ColumnName="receiver" />
+          <ScalarProperty Name="rec_line" ColumnName="rec_line" />
+          <ScalarProperty Name="PartialID" ColumnName="PartialID" />
+          <ScalarProperty Name="Non_Conformances" ColumnName="Non_Conformances" />
+          <ScalarProperty Name="NC_Qty" ColumnName="NC_Qty" />
+          <ScalarProperty Name="Defect" ColumnName="Defect" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="Disposition" ColumnName="Disposition" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="NCR_Num" ColumnName="NCR_Num" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getDataReceiver_NC_AllPartial" FunctionName="NewIQCModel.Store.sp_getDataReceiver_NC_AllPartial">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_getDataReceiver_NC_AllPartial_Result">
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="PARTIALID" ColumnName="PARTIALID" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="NC_QTY" ColumnName="NC_QTY" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="NewIQCModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="NewIQCModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_ImportStdCode" FunctionName="NewIQCModel.Store.sp_ImportStdCode" />
+    <FunctionImportMapping FunctionImportName="sp_IMPROVEMENT_TRACKING" FunctionName="NewIQCModel.Store.sp_IMPROVEMENT_TRACKING">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_IMPROVEMENT_TRACKING_Result">
+          <ScalarProperty Name="NO" ColumnName="NO" />
+          <ScalarProperty Name="NC_NAME" ColumnName="NC_NAME" />
+          <ScalarProperty Name="JUL" ColumnName="JUL" />
+          <ScalarProperty Name="AUG" ColumnName="AUG" />
+          <ScalarProperty Name="SEP" ColumnName="SEP" />
+          <ScalarProperty Name="OCT" ColumnName="OCT" />
+          <ScalarProperty Name="NOV" ColumnName="NOV" />
+          <ScalarProperty Name="DEC" ColumnName="DEC" />
+          <ScalarProperty Name="JAN" ColumnName="JAN" />
+          <ScalarProperty Name="FEB" ColumnName="FEB" />
+          <ScalarProperty Name="MAR" ColumnName="MAR" />
+          <ScalarProperty Name="APR" ColumnName="APR" />
+          <ScalarProperty Name="MAY" ColumnName="MAY" />
+          <ScalarProperty Name="JUN" ColumnName="JUN" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_LAST_DRAW_REV_Update" FunctionName="NewIQCModel.Store.sp_LAST_DRAW_REV_Update" />
+    <FunctionImportMapping FunctionImportName="sp_LoadNC_Complete" FunctionName="NewIQCModel.Store.sp_LoadNC_Complete">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_LoadNC_Complete_Result">
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="NC_DESC" ColumnName="NC_DESC" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Onesupplier4panelRecQty" FunctionName="NewIQCModel.Store.sp_Onesupplier4panelRecQty">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_Onesupplier4panelRecQty_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Onesupplier4panelRecQtyDataRaw" FunctionName="NewIQCModel.Store.sp_Onesupplier4panelRecQtyDataRaw">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_Onesupplier4panelRecQtyDataRaw_Result">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="MI_PART_NO" ColumnName="MI_PART_NO" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="VEN_ADD" ColumnName="VEN_ADD" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="INS_QTY" ColumnName="INS_QTY" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+          <ScalarProperty Name="DATEAPPROVAL" ColumnName="DATEAPPROVAL" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="QtyNC" ColumnName="QtyNC" />
+          <ScalarProperty Name="DEFECT" ColumnName="DEFECT" />
+          <ScalarProperty Name="response" ColumnName="response" />
+          <ScalarProperty Name="disposition" ColumnName="disposition" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Onesupplier4panelRejQty" FunctionName="NewIQCModel.Store.sp_Onesupplier4panelRejQty">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_Onesupplier4panelRejQty_Result">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="MI_PART_NO" ColumnName="MI_PART_NO" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="VEN_ADD" ColumnName="VEN_ADD" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="INS_QTY" ColumnName="INS_QTY" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+          <ScalarProperty Name="DATEAPPROVAL" ColumnName="DATEAPPROVAL" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_PART_INS_REQ_APPROVE" FunctionName="NewIQCModel.Store.SP_PART_INS_REQ_APPROVE" />
+    <FunctionImportMapping FunctionImportName="SP_PART_INS_REQ_APPROVE_USER" FunctionName="NewIQCModel.Store.SP_PART_INS_REQ_APPROVE_USER" />
+    <FunctionImportMapping FunctionImportName="sp_PART_INS_REQ_Insert" FunctionName="NewIQCModel.Store.sp_PART_INS_REQ_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_PerAccess" FunctionName="NewIQCModel.Store.sp_PerAccess" />
+    <FunctionImportMapping FunctionImportName="sp_RemindFollowUpBy26Marlow" FunctionName="NewIQCModel.Store.sp_RemindFollowUpBy26Marlow" />
+    <FunctionImportMapping FunctionImportName="sp_RemindNCRApprove" FunctionName="NewIQCModel.Store.sp_RemindNCRApprove" />
+    <FunctionImportMapping FunctionImportName="sp_RemindSupplierResponse" FunctionName="NewIQCModel.Store.sp_RemindSupplierResponse" />
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="NewIQCModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_Report_LotRejectRate" FunctionName="NewIQCModel.Store.sp_Report_LotRejectRate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_Report_LotRejectRate_Result">
+          <ScalarProperty Name="RowN" ColumnName="RowN" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Report_ParetoOfNC" FunctionName="NewIQCModel.Store.sp_Report_ParetoOfNC">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_Report_ParetoOfNC_Result">
+          <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Accum" ColumnName="Accum" />
+          <ScalarProperty Name="Acc" ColumnName="Acc" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="NC_Code" ColumnName="NC_Code" />
+          <ScalarProperty Name="Cummulated" ColumnName="Cummulated" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Report_RejectLotBySupplier" FunctionName="NewIQCModel.Store.sp_Report_RejectLotBySupplier">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_Report_RejectLotBySupplier_Result">
+          <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Accum" ColumnName="Accum" />
+          <ScalarProperty Name="Acc" ColumnName="Acc" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="Cummulated" ColumnName="Cummulated" />
+          <ScalarProperty Name="Strategic" ColumnName="Strategic" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Reverse" FunctionName="NewIQCModel.Store.sp_Reverse" />
+    <FunctionImportMapping FunctionImportName="sp_SupplierPPMReportReceiverQTY" FunctionName="NewIQCModel.Store.sp_SupplierPPMReportReceiverQTY">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_SupplierPPMReportReceiverQTY_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SupplierPPMReportReceiverQTYDataRaw" FunctionName="NewIQCModel.Store.sp_SupplierPPMReportReceiverQTYDataRaw">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_SupplierPPMReportReceiverQTYDataRaw_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SupplierPPMReportReceiverQTYNon" FunctionName="NewIQCModel.Store.sp_SupplierPPMReportReceiverQTYNon">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_SupplierPPMReportReceiverQTYNon_Result">
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="STOCK_UM" ColumnName="STOCK_UM" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="PO_LINE" ColumnName="PO_LINE" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="REC_LINE" ColumnName="REC_LINE" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="POSTING_DATE" ColumnName="POSTING_DATE" />
+          <ScalarProperty Name="CCN" ColumnName="CCN" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SupplierPPMReportRejNonStratery" FunctionName="NewIQCModel.Store.sp_SupplierPPMReportRejNonStratery">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_SupplierPPMReportRejNonStratery_Result">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="MI_PART_NO" ColumnName="MI_PART_NO" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="VEN_ADD" ColumnName="VEN_ADD" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="INS_QTY" ColumnName="INS_QTY" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+          <ScalarProperty Name="DATEAPPROVAL" ColumnName="DATEAPPROVAL" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="QtyNC" ColumnName="QtyNC" />
+          <ScalarProperty Name="DEFECT" ColumnName="DEFECT" />
+          <ScalarProperty Name="response" ColumnName="response" />
+          <ScalarProperty Name="disposition" ColumnName="disposition" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SupplierPPMReportRejQTYDataRaw" FunctionName="NewIQCModel.Store.sp_SupplierPPMReportRejQTYDataRaw">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_SupplierPPMReportRejQTYDataRaw_Result">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="MI_PART_NO" ColumnName="MI_PART_NO" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="VEN_ADD" ColumnName="VEN_ADD" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="INS_QTY" ColumnName="INS_QTY" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+          <ScalarProperty Name="DATEAPPROVAL" ColumnName="DATEAPPROVAL" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="QtyNC" ColumnName="QtyNC" />
+          <ScalarProperty Name="DEFECT" ColumnName="DEFECT" />
+          <ScalarProperty Name="response" ColumnName="response" />
+          <ScalarProperty Name="disposition" ColumnName="disposition" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SupplierPPMReportRejStratery" FunctionName="NewIQCModel.Store.sp_SupplierPPMReportRejStratery">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NewIQCModel.sp_SupplierPPMReportRejStratery_Result">
+          <ScalarProperty Name="NCR_NUM" ColumnName="NCR_NUM" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="MI_PART_NO" ColumnName="MI_PART_NO" />
+          <ScalarProperty Name="DRAW_REV" ColumnName="DRAW_REV" />
+          <ScalarProperty Name="PO_NUM" ColumnName="PO_NUM" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="LOT" ColumnName="LOT" />
+          <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VEN_NAME" ColumnName="VEN_NAME" />
+          <ScalarProperty Name="VEN_ADD" ColumnName="VEN_ADD" />
+          <ScalarProperty Name="REC_QTY" ColumnName="REC_QTY" />
+          <ScalarProperty Name="INS_QTY" ColumnName="INS_QTY" />
+          <ScalarProperty Name="REJ_QTY" ColumnName="REJ_QTY" />
+          <ScalarProperty Name="DATEAPPROVAL" ColumnName="DATEAPPROVAL" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="QtyNC" ColumnName="QtyNC" />
+          <ScalarProperty Name="DEFECT" ColumnName="DEFECT" />
+          <ScalarProperty Name="response" ColumnName="response" />
+          <ScalarProperty Name="disposition" ColumnName="disposition" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TEMP_PDF_PART_Insert" FunctionName="NewIQCModel.Store.sp_TEMP_PDF_PART_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_TEMP_PDF_PART_Insert_AttachDOC" FunctionName="NewIQCModel.Store.sp_TEMP_PDF_PART_Insert_AttachDOC" />
+    <FunctionImportMapping FunctionImportName="SP_UPDATE_PART_INS_REQ" FunctionName="NewIQCModel.Store.SP_UPDATE_PART_INS_REQ" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="NewIQCModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="spSendEmail" FunctionName="NewIQCModel.Store.spSendEmail" />
+    <FunctionImportMapping FunctionImportName="VisualResult_Search_Item" FunctionName="NewIQCModel.Store.VisualResult_Search_Item" />
+  </EntityContainerMapping>
+</Mapping>

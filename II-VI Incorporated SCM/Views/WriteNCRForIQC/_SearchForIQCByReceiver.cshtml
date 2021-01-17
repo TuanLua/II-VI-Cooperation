@@ -1,0 +1,148 @@
+﻿<div class="form-horizontal" role="form">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-4 control-label">Receiver</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control ms-rciqcsearch" required="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">Part Number</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control ms-pniqcsearch" required="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-4">
+                <button class="btn green ms-go-reciver" type="button"><i class="fa fa-search "></i> Go</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ms-update-data" style="display: none">
+    <div class="row top-buffer">
+        <div class="col-md-4 text-center">
+            <b>Receiver:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="RECEVER" style="text-align: center" id="RECC" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>PO Number:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="PO_NUM" style="text-align: center" id="POC" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>Part Number:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="ITEM" style="text-align: center" id="ITEMC" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>LOT Number:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="LOT" style="text-align: center" id="LOTC" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>REC Quantity:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="" style="text-align: center" id="QTYC" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4 text-center">
+            <b>Unit:</b>
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>AQL Visual:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="AQL_VISUAL" style="text-align: center" id="AQLVC" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>SPL Visual:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="SAMPLING_VISUAL" style="text-align: center" id="SPLVC" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4 text-center">
+            <b>AQL MEASURE:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="AQL_MEASURE" style="text-align: center" id="AQLMC" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>SPL MEASURE:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" style="text-align: center" name="SAMPLING_MEASURE" id="SPLMC" />
+        </div>
+    </div>
+</div>
+<script>
+    function isBlank(str) {
+        return (!str || /^\s*$/.test(str));
+    }
+    var urlpo = '@Url.Action("GetDetailNCRForIqcSearch", "WriteNcrForIqc")';
+    $('.ms-go-reciver').on('click', function () {
+        var reciver = $('.ms-rciqcsearch').val();
+        var partnum = $('.ms-pniqcsearch').val();
+        var CCN = $('#CCN').val();
+        if (isBlank(reciver)) {
+            $('.ms-rciqcsearch').addClass("input-validation-error");
+            return;
+        } else {
+            $('.ms-rciqcsearch').removeClass("input-validation-error");
+        }
+        if (isBlank(partnum)) {
+            $('.ms-pniqcsearch').addClass("input-validation-error");
+            return;
+        } else {
+            $('.ms-pniqcsearch').removeClass("input-validation-error");
+        }
+
+        $.blockUI();
+        $.post(urlpo,
+            { reciver: reciver, partnum: partnum ,CCN:CCN},
+            function (result) {
+                if (result.success) {
+                    $("#LOTC").val(result.model.LOT.trim());
+                    $("#RECC").val(result.model.RECEIVER1);
+                    $("#QTYC").val(result.model.REC_QTY);
+                    $("#POC").val(result.model.PO_NUM);
+                    $("#ITEMC").val(result.model.ITEM);
+                    $("#AQLVC").val(result.model.AQL_VISUAL);
+                    $("#SPLVC").val(result.model.SAMPLING_VISUAL);
+                    $("#AQLMC").val(result.model.AQL_MEASURE);
+                    $("#SPLMC").val(result.model.SAMPLING_MEASURE);
+                    $('.ms-update-data').show();
+                }
+                else {
+                    bootbox.alert(result.message);
+                }
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });
+    })
+</script>

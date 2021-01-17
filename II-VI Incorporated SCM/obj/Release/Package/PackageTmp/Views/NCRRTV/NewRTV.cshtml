@@ -1,0 +1,628 @@
+﻿@model II_VI_Incorporated_SCM.Models.RTV.RTVProccessViewModel
+@{
+    ViewBag.Title = "NewRTV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .input-validation-error {
+        border: 1px solid red !important;
+        background-color: #fee !important;
+    }
+
+    #body {
+        margin-top: 50px;
+    }
+
+    #contain {
+        margin: 0px 20px 0px 20px;
+    }
+</style>
+
+<div id="contain">
+    <button type="button" class="btn btn-sm btn-success" id="savenew">Save</button> &nbsp;
+    <button type="button" class="btn btn-sm btn-danger btn-close">Cancel</button>
+
+    <div id="body">
+        <div class="well well-lg" style="padding: 20px;">
+            <div class="panel panel-default" style="width: 200px; margin:-37px -10px; padding: 0px 0px">
+                <div class="panel-body" style="padding: 8px;">NCR Information</div>
+            </div>
+            <div class="well" style="background-color: #ffffff; margin: 50px 0px 0px -10px; padding: 30px 20px;">
+                NCR No : @ViewBag.NCR_NUM
+                <br><br>
+                Qty : @ViewBag.defect
+            </div>
+        </div>
+    </div>
+
+
+    <div id="body">
+        <div class="well well-lg" style="padding: 20px;">
+            <div class="panel panel-default" style="width: 200px; margin:-37px -10px; padding: 0px 0px">
+                <div class="panel-body" style="padding: 8px;">RTV Information</div>
+            </div>
+            <div class="well" style="background-color: #ffffff; margin: 50px 0px 0px -10px; padding: 10px 20px;">
+
+                <div class="radio">
+                    <label><input type="radio" name="optradio" value="RTVREP">RTVREP</label>
+                </div>
+                <div class="container" id="idRTVREP" hidden>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="body" style="margin-top: 20px;">
+                                <div class="well well-lg" style="padding: 20px;">
+                                    <div class="panel panel-default" style="width: 90px; margin:-37px -10px; padding: 0px 0px">
+                                        <div class="panel-body" style="padding: 8px;">RTVREP</div>
+                                    </div>
+                                    <div class="well" style="background-color: #ffffff; margin: 50px 0px 0px -10px; padding: 10px 20px;">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p style="margin:6px;">Qty replace: <span style="color: red">*</span></p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="number" onchange="ValidateNumberInput(this)" class="form-control" style="width: 100%; margin-left:-15px;" id="qtyrtvrep">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p style="margin:6px;">Remark: </p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <textarea class="form-control" style="width: 100%; margin:10px 0px 0px -15px;" id="remarkrtvrep"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="radio">
+                    <label><input type="radio" name="optradio" value="SCRREP">SCRREP</label>
+                </div>
+                <div class="container" id="idSCRREP" hidden>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="body" style="margin-top: 20px;">
+                                <div class="well well-lg" style="padding: 20px;">
+                                    <div class="panel panel-default" style="width: 90px; margin:-37px -10px; padding: 0px 0px">
+                                        <div class="panel-body" style="padding: 8px;">SCRREP</div>
+                                    </div>
+                                    <div class="well" style="background-color: #ffffff; margin: 50px 0px 0px -10px; padding: 10px 20px;">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p style="margin:6px;">Qty replace: <span style="color: red">*</span></p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="number" class="form-control" style="width: 100%; margin-left:-15px;" id="qtyscrrep">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p style="margin:6px;">Remark: </p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <textarea class="form-control" style="width: 100%; margin:10px 0px 0px -15px;" id="remarkscrrep"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="radio">
+                    <label><input type="radio" name="optradio" value="RTVSCN">RTVSCN</label>
+                </div>
+                <div class="container" id="idRTVSCN" hidden>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="body" style="margin-top: 20px;">
+                                <div class="well well-lg" style="padding: 20px;">
+                                    <div class="panel panel-default" style="width: 90px; margin:-37px -10px; padding: 0px 0px">
+                                        <div class="panel-body" style="padding: 8px;">RTVSCN</div>
+                                    </div>
+                                    <div class="well" style="background-color: #ffffff; margin: 50px 0px 0px -10px; padding: 10px 20px;">
+                                        @using (Html.BeginForm("addRTVProcess", "NCRRTV", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "multipart/form-data", id = "RTVSCN" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="TypeRTV" value="RTVSCN" />
+                                            <input type="hidden" name="Shipped" value="false" />
+                                            <input type="hidden" name="RTVStatus" value="Process" />
+                                            <input type="hidden" name="NCR_NUMBER" value="@ViewBag.NCR_NUM" />
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <p style="margin: 6px;">Qty replace: <span style="color: red">*</span></p>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    @Html.TextBoxFor(m => m.Qty, new
+                                               {
+                                                   @style = "width: 100%; margin-left: -15px;",
+                                                   @data_val = "true",
+                                                   @data_val_length_max = "30",
+                                                   @class = "form-control",
+                                                   @type = "number",
+                                                   @onchange = "ValidateNumberInput(this)"
+                                               })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <p style="margin: 6px;">Remark: </p>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    @Html.TextBoxFor(m => m.Remark, new
+                                               {
+                                                   @style = "width: 100%; margin: 10px 0px 0px -15px;",
+                                                   @data_val = "true",
+                                                   @data_val_length_max = "30",
+                                                   @class = "form-control",
+                                               })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <p style="margin: 6px;">Credit Note: <span style="color: red">*</span></p>
+                                                </div>
+                                                <div class="col-md-9" style="margin-top: 6px;">
+                                                    @Html.TextBoxFor(m => m.CreditNote, new
+                                               {
+
+                                                   @style = "width: 100%; margin-left: -15px;",
+                                                   @data_val = "true",
+                                                   @data_val_length_max = "30",
+                                                   @class = "form-control",
+                                               })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p style="margin: 6px;">Attach Credit Note: <span style="color: red">*</span></p>
+                                                </div>
+                                                <div class="col-md-7" style="margin: 6px 0px 0px -15px;">
+                                                    <input type="file" name="File_Upload" id="File_Upload" accept="application/pdf" class="form-control valid" data-val="true" data-val-maximumfilesize="File Upload can not be larger than 10 MB" data-val-maximumfilesize-size="10" data-val-required="The File Upload field is required." data-val-validfiletype="File Upload must be one of the following file types: pdf,PDF" data-val-validfiletype-filetypes="pdf,PDF" value="" aria-required="true" aria-describedby="File_Upload-error" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="radio">
+                    <label><input type="radio" name="optradio" value="SCRCRN">SCRCRN</label>
+                </div>
+                <div class="container" id="idSCRCRN" hidden>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="body" style="margin-top: 20px;">
+                                <div class="well well-lg" style="padding: 20px;">
+                                    <div class="panel panel-default" style="width: 90px; margin:-37px -10px; padding: 0px 0px">
+                                        <div class="panel-body" style="padding: 8px;">SCRCRN</div>
+                                    </div>
+                                    <div class="well" style="background-color: #ffffff; margin: 50px 0px 0px -10px; padding: 10px 20px;">
+                                        @using (Html.BeginForm("addRTVProcess", "NCRRTV", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "multipart/form-data", id = "SCRCRN" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="TypeRTV" value="SCRCRN" />
+                                            <input type="hidden" name="Shipped" value="false" />
+                                            <input type="hidden" name="RTVStatus" value="Process" />
+                                            <input type="hidden" name="NCR_NUMBER" value="@ViewBag.NCR_NUM" />
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <p style="margin: 6px;">Qty replace: <span style="color: red">*</span></p>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    @Html.TextBoxFor(m => m.Qty, new
+                                               {
+                                                   @style = "width: 100%; margin-left: -15px;",
+                                                   @data_val = "true",
+                                                   @data_val_length_max = "30",
+                                                   @class = "form-control",
+                                                   @type = "number",
+                                                   @onchange = "ValidateNumberInput(this)",
+                                                   @id = "SCRCRN_Qty"
+                                               })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <p style="margin: 6px;">Remark: </p>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    @Html.TextBoxFor(m => m.Remark, new
+                                               {
+                                                   @style = "width: 100%; margin: 10px 0px 0px -15px;",
+                                                   @data_val = "true",
+                                                   @data_val_length_max = "30",
+                                                   @class = "form-control",
+                                               })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <p style="margin: 6px;">Credit Note: <span style="color: red">*</span></p>
+                                                </div>
+                                                <div class="col-md-9" style="margin-top: 6px;">
+                                                    @Html.TextBoxFor(m => m.CreditNote, new
+                                               {
+
+                                                   @style = "width: 100%; margin-left: -15px;",
+                                                   @data_val = "true",
+                                                   @data_val_length_max = "30",
+                                                   @class = "form-control",
+                                                   @id = "SCRCRN_CreditNote"
+                                               })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p style="margin: 6px;">Attach Credit Note: <span style="color: red">*</span></p>
+                                                </div>
+                                                <div class="col-md-7" style="margin: 6px 0px 0px -15px;">
+                                                    @*<input type="file" name="File_Upload1" id="File_Upload1" accept="application/pdf" multiple="multiple" class="input-file form-control" required="" aria-required="true">*@
+                                                    <input accept="application/pdf" class="form-control valid" data-val="true" data-val-maximumfilesize="File Upload can not be larger than 10 MB" data-val-maximumfilesize-size="10" data-val-required="The File Upload field is required." data-val-validfiletype="File Upload must be one of the following file types: pdf,PDF" data-val-validfiletype-filetypes="pdf,PDF" id="File_Upload1" name="File_Upload1" type="file" value="" aria-required="true" aria-describedby="File_Upload1-error" aria-invalid="false">
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="radio">
+                    <label><input type="radio" name="optradio" value="SHIPPED">SHIPPED</label>
+                </div>
+                <div class="container" id="idSHIPPED" hidden>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="body" style="margin-top: 20px;">
+                                <div class="well well-lg" style="padding: 20px;">
+                                    <div class="panel panel-default" style="width: 150px;margin:-37px -10px;padding: 0px 0px;">
+                                        <div class="panel-body" style="padding: 8px;">SHIPPED Information</div>
+                                    </div>
+                                    <div class="well" style="background-color: #ffffff; margin: 50px 0px 0px -10px; padding: 10px 20px;">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p style="margin:6px;">RMA: <span style="color: red">*</span></p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" style="width: 100%; margin-left:-15px;" id="rmashipped">
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top:6px;">
+                                            <div class="col-md-3">
+                                                <p style="margin:6px;">Qty Ship: <span style="color: red">*</span></p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="number" onchange="ValidateNumberInput(this)" class="form-control" style="width: 100%; margin-left:-15px;" id="qtyshipped">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="radio">
+                                            <label><input type="radio" name="shipoptradio" value="shipRTVREP">RTVREP</label>
+                                        </div>
+
+                                        <div class="radio">
+                                            <label><input type="radio" name="shipoptradio" value="shipSCRREP">SCRREP</label>
+                                        </div>
+
+                                        <div class="radio">
+                                            <label><input type="radio" name="shipoptradio" value="shipRTVSCN">RTVSCN</label>
+                                        </div>
+
+                                        <div class="radio">
+                                            <label><input type="radio" name="shipoptradio" value="shipSCRCRN">SCRCRN</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var $form = $('#RTVSCN');
+    var $form1 = $('#SCRCRN');
+    $(document).ready(function () {
+        $('input[type=radio][name=optradio]').change(function () {
+            showDiv(this.value);
+        });
+    });
+
+    function showDiv(valueid) {
+        if (valueid == 'RTVREP') {
+            $("#idRTVREP").show();
+            $("#idSCRREP").hide();
+            $("#idRTVSCN").hide();
+            $("#idSCRCRN").hide();
+            $("#idSHIPPED").hide();
+        }
+        else if (valueid == 'SCRREP') {
+            $("#idSCRREP").show();
+            $("#idRTVREP").hide();
+            $("#idRTVSCN").hide();
+            $("#idSCRCRN").hide();
+            $("#idSHIPPED").hide();
+        }
+        else if (valueid == 'RTVSCN') {
+            $("#idRTVSCN").show();
+            $("#idRTVREP").hide();
+            $("#idSCRREP").hide();
+            $("#idSCRCRN").hide();
+            $("#idSHIPPED").hide();
+        }
+        else if (valueid == 'SCRCRN') {
+            $("#idSCRCRN").show();
+            $("#idRTVREP").hide();
+            $("#idSCRREP").hide();
+            $("#idRTVSCN").hide();
+            $("#idSHIPPED").hide();
+        }
+        else if (valueid == 'SHIPPED') {
+            $("#idSHIPPED").show();
+            $("#idRTVREP").hide();
+            $("#idSCRREP").hide();
+            $("#idRTVSCN").hide();
+            $("#idSCRCRN").hide();
+        }
+    };
+
+    function isBlank(str) {
+        return (!str || /^\s*$/.test(str));
+    }
+
+    function isNormalInteger(str) {
+        var n = Math.floor(Number(str));
+        return n !== Infinity && String(n) === str && n >= 0;
+    }
+
+    function ValidateNumberInput(element) {
+        if (isNormalInteger(element.value) == false) {
+            $(element).addClass("input-validation-error");
+            element.focus();
+            element.value = '';
+        } else {
+            $(element).removeClass("input-validation-error");
+        }
+    }
+
+    $("#savenew").click(function () {
+        var ncr_num = '@ViewBag.NCR_NUM';
+        if ($("input[name='optradio'][value='RTVREP']").prop("checked")) {
+
+            let qtyrtvrep = $("#qtyrtvrep").val();
+            let remarkrtvrep = $("#remarkrtvrep").val();
+            if (isBlank(qtyrtvrep)) {
+                $('#qtyrtvrep').addClass("input-validation-error");
+                return;
+            } else {
+                $('#qtyrtvrep').removeClass("input-validation-error");
+            }
+            var data0 = {
+                NCR_NUMBER: ncr_num, Shipped: "false", TypeRTV: "RTVREP", Qty: qtyrtvrep, Remark: remarkrtvrep,
+                CreditNote: "null", RTVStatus: "Process"
+            };
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("addRTVProcess", "NCRRTV")',
+                data: JSON.stringify(data0),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (insert) {
+                    if (insert.success == true) {
+                        bootbox.alert("Create RTV successfully!!", function () { window.location = '@Url.Action("Index", "NCRRTV")' });
+                    } else {
+                        bootbox.alert("Create RTV unsuccessfully!!");
+                    }
+                },
+                error: function () {
+                    bootbox.alert('Please contact to Administrator!');
+                },
+                complete: function () {
+                    $.unblockUI();
+                },
+            });
+        }
+
+        else if ($("input[name='optradio'][value='SCRREP']").prop("checked")) {
+            let qtyscrrep = $("#qtyscrrep").val();
+            if (isBlank(qtyscrrep)) {
+                $('#qtyscrrep').addClass("input-validation-error");
+                return;
+            } else {
+                $('#qtyscrrep').removeClass("input-validation-error");
+            }
+            let remarkscrrep = $("#remarkscrrep").val();
+            var data1 = {
+                NCR_NUMBER: ncr_num, Shipped: "false", TypeRTV: "SCRREP", Qty: qtyscrrep, Remark: remarkscrrep,
+                CreditNote: "null", RTVStatus: "Process"
+            };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("addRTVProcess", "NCRRTV")',
+                data: JSON.stringify(data1),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (insert) {
+                    if (insert.success == true) {
+                        bootbox.alert("Create RTV successfully!!", function () { window.location = '@Url.Action("Index", "NCRRTV")' });
+                    } else {
+                        bootbox.alert("Create RTV unsuccessfully!!");
+                    }
+                },
+                error: function () {
+                    bootbox.alert('Please contact to Administrator!');
+                },
+                complete: function () {
+                    $.unblockUI();
+                }
+            });
+        }
+        else if ($("input[name='optradio'][value='RTVSCN']").prop("checked")) {
+            if (isBlank($('#Qty').val())) {
+                $('#Qty').addClass("input-validation-error");
+                return;
+            } else {
+                $('#Qty').removeClass("input-validation-error");
+            }
+            if (isBlank($('#CreditNote').val())) {
+                $('#CreditNote').addClass("input-validation-error");
+                return;
+            } else {
+                $('#CreditNote').removeClass("input-validation-error");
+            }
+            if (isBlank($('#File_Upload').val()) || $('#File_Upload')[0].files == undefined) {
+                $('#File_Upload').addClass("input-validation-error");
+                return;
+            } else {
+                if ($('#File_Upload')[0].files[0].size > (10240 * 1024)) {
+                    bootbox.alert("The Attach Credit Note size less than 10MB");
+                    $('#File_Upload').addClass("input-validation-error");
+                    return;
+                }
+                $('#File_Upload').removeClass("input-validation-error");
+            }
+            var dataString = new FormData($form[0]);
+            $.blockUI();
+            $.ajax({
+                url: $form.attr('action'),  //Server script to process data
+                type: 'POST',
+                //Ajax events
+                success: function () {
+                    bootbox.alert("Create RTV successfully!!", function () { window.location = '@Url.Action("Index", "NCRRTV")' });
+                },
+                error: function () {
+                    bootbox.alert('Create RTV unsuccessfully!');
+                },
+                complete: function () {
+                    $.unblockUI();
+                },
+                // Form data
+                data: dataString,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        }
+        else if ($("input[name='optradio'][value='SCRCRN']").prop("checked")) {
+            if (isBlank($('#SCRCRN_Qty').val())) {
+                $('#SCRCRN_Qty').addClass("input-validation-error");
+                return;
+            } else {
+                $('#SCRCRN_Qty').removeClass("input-validation-error");
+            }
+            if (isBlank($('#SCRCRN_CreditNote').val())) {
+                $('#SCRCRN_CreditNote').addClass("input-validation-error");
+                return;
+            } else {
+                $('#SCRCRN_CreditNote').removeClass("input-validation-error");
+            }
+            if (isBlank($('#File_Upload1').val()) || $('#File_Upload1')[0].files == undefined) {
+                $('#File_Upload1').addClass("input-validation-error");
+                return;
+            } else {
+                if ($('#File_Upload1')[0].files[0].size > (10240 * 1024)) {
+                    bootbox.alert("The Attach Credit Note size less than 10MB");
+                    $('#File_Upload1').addClass("input-validation-error");
+                    return;
+                }
+                $('#File_Upload1').removeClass("input-validation-error");
+            }
+            var dataString = new FormData($form1[0]);
+            $.blockUI();
+            $.ajax({
+                url: $form1.attr('action'),  //Server script to process data
+                type: 'POST',
+                //Ajax events
+                success: function () {
+                    bootbox.alert("Create RTV successfully!!", function () { window.location = '@Url.Action("Index", "NCRRTV")' });
+                },
+                error: function () {
+                    bootbox.alert('Create RTV unsuccessfully!');
+                },
+                complete: function () {
+                    $.unblockUI();
+                },
+                // Form data
+                data: dataString,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        }
+        else if ($("input[name='optradio'][value='SHIPPED']").prop("checked")) {
+            let rmashipped = $("#rmashipped").val();
+            if (isBlank(rmashipped)) {
+                $('#rmashipped').addClass("input-validation-error");
+                return;
+            } else {
+                $('#rmashipped').removeClass("input-validation-error");
+            }
+            let qtyshipped = $("#qtyshipped").val();
+            if (isBlank(qtyshipped)) {
+                $('#qtyshipped').addClass("input-validation-error");
+                return;
+            } else {
+                $('#qtyshipped').removeClass("input-validation-error");
+            }
+            if ($("input[name='shipoptradio'][value='shipRTVREP']").prop("checked")) {
+                var type = "RTVREP";
+            }
+            else if ($("input[name='shipoptradio'][value='shipSCRREP']").prop("checked")) {
+                var type = "SCRREP";
+            }
+            else if ($("input[name='shipoptradio'][value='shipRTVSCN']").prop("checked")) {
+                var type = "RTVSCN";
+            }
+            else if ($("input[name='shipoptradio'][value='shipSCRCRN']").prop("checked")) {
+                var type = "SCRCRN";
+            }
+            var data4 = {
+                NCR_NUMBER: ncr_num, Shipped: "true", TypeRTV: type, Qty: qtyshipped, Remark: rmashipped,
+                CreditNote: "null", RTVStatus: "Process"
+            };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("addRTVProcess", "NCRRTV")',
+                data: JSON.stringify(data4),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (insert) {
+                    if (insert.success == true) {
+                        bootbox.alert("Create RTV successfully!!", function () { window.location = '@Url.Action("Index", "NCRRTV")' });
+                    } else {
+                        bootbox.alert("Create RTV unsuccessfully!!");
+                    }
+                },
+                error: function () {
+                    bootbox.alert('Please contact to Administrator!');
+                },
+                complete: function () {
+                    $.unblockUI();
+                }
+            });
+        } else {
+            bootbox.alert("Please select RTV Information!");
+        }
+    });
+
+    $('.btn-close').on('click', function () {
+        window.location = '@Url.Action("Index", "NCRRTV")';
+    })
+</script>

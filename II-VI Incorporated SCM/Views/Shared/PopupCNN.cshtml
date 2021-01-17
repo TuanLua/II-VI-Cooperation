@@ -1,0 +1,67 @@
+﻿<div id="ccnmenu" class="modal fade" tabindex="-1" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">List CCN</h4>
+                <div style="float:right"><button type="button" class="btn btn-xs green" onclick="help()">
+                    Help?
+                </button></div>
+                
+            </div>
+            <div class="modal-body">
+                <div class="scroller" style="height: 300px" data-always-visible="1" data-rail-visible1="1">
+                    <div class="table-responsive mailbox-messages">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>CCN Name</th>
+                                </tr>
+                            </thead>
+                            <tbody id="append-dataCCN"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn green" onclick="postSelectedCCN()">
+                    Next
+                </button>
+               
+                <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var UrlGetCCN = '@Url.Action("GetCCN", "CCN")';
+    $('.PopupCreateNCR').click(function () {
+        $.blockUI();
+        $.post(UrlGetCCN, function (result) {
+            let htmlDDL = '';
+            $.each(result.data, function (key, value) {
+                htmlDDL = htmlDDL + '<tr><td><input type="radio" class="ms-check" name="ccn" data-id="' + value.CCN1 + '"/> ' + value.CCN1 + '</td><td>' + value.CCN_NAME + '</td></tr>';
+            });
+            $("#append-dataCCN").html(htmlDDL);
+            $("#ccnmenu").modal('show');
+        }).fail(function () {
+            bootbox.alert('Please contact to Administrator!');
+        }).always(function () {
+            $.unblockUI();
+        });
+    });
+    function postSelectedCCN() {
+        var SelectedCCN = $("input[name=ccn]:checked").data('id');
+        var URlCreateNCR = "@Url.Action("CreateNCR", "WriteNCRForIQC", new {id=""})";
+        if (SelectedCCN != null) {
+            window.open(URlCreateNCR + "/" + SelectedCCN, 'target=_blank');
+            $("#ccnmenu").modal('hide');
+        } else {
+            bootbox.alert('Please Select CCN');
+        }
+    }
+    function help() {
+       // $("#help").modal('show');
+    }
+</script>

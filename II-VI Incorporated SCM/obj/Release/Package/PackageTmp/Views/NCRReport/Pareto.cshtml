@@ -1,0 +1,230 @@
+﻿
+@model II_VI_Incorporated_SCM.Models.NCRReport.PoretoViewModel
+@{
+    ViewBag.Title = "Pareto by PartNum";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .k-chart {
+        height: 600px;
+        width: 100%;
+    }
+</style>
+<h3>  Pareto by Part Number </h3>
+<br />
+<br/>
+<div class="form-group row" style="text-align:right">
+    <label class="col-md-4">Part Number<span style="color: red">*</span> : </label>
+    <div class="col-md-4">
+        <input class="form-control" id="ncrnumber" placeholder="Input PartNum " />
+    </div>
+</div>
+<div class="row" style="text-align:right">
+    <div class="form-group">
+        <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+            <label class="col-md-4">From<span style="color: red">*</span> : </label>
+            <div class="col-md-4">
+                <div class="input-group date" data-provide="datepicker" data-date-format="dd-M-yy">
+                    <input class="form-control" id="datePickerSta" />
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+            <label class="col-md-4">To<span style="color: red">*</span> : </label>
+            <div class="col-md-4">
+                <div class="input-group date" data-provide="datepicker" data-date-format="dd-M-yy">
+                    <input class="form-control" id="datePickerTo" />
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-12" style="text-align:center">
+        <button class="btn btn-sm btn-success" id="submit">Search</button>
+    </div>
+</div>
+<br />
+<br />
+<div class="demo-section k-content wide">
+    @(Html.Kendo().Chart<II_VI_Incorporated_SCM.Models.NCRReport.PoretoViewModel>()
+                                .Name("chartPorento")
+                                .Title("Poreto chart by Part Number")
+                                .Legend(legend => legend
+                                    .Position(ChartLegendPosition.Top)
+                                )
+                                 .DataSource(ds => ds.Read(read => read.Action("ReadParetoPartNum", "NCRReport")))
+                                .Series(series =>
+                                {
+                                    series.Column(model => model.TotalQty).Name("DefectCode").CategoryField("Description").Gap(5).Spacing(5).Axis("TotalQty");
+                                    series.Line(model => model.PercenAccQty).Name("Percent").CategoryField("Description").Axis("PercenAccQty"); ;
+                                })
+                                .CategoryAxis(axis => axis
+                                   .Labels(labels => labels.Rotation(-60))
+                                    .AxisCrossingValue(0, 10000000)
+
+                                )
+                                 .ValueAxis(axis => axis
+                                    .Numeric("TotalQty")
+                                        .Title("Quantity")
+                                           .Color("#0066FF")
+
+                                )
+                                .ValueAxis(axis => axis
+                                    .Numeric("PercenAccQty")
+                                        .Title("Percent")
+                                        .Color("#a0a700")
+                                         .Min(0).Max(100)
+
+                                )
+                                 .Tooltip(tooltip => tooltip
+                                    .Visible(true)
+                                    .Format("{0:No}")
+                                )
+    )
+</div>
+<br />
+<h3 style="text-align:center"> DATA MANAGEMENT SYSTEM REPORT</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<II_VI_Incorporated_SCM.Models.NCRReport.PoretoViewModel>()
+                                                              .Name("gridPorento")
+                                                          .Columns(columns =>
+                                                          {
+                                                              columns.Bound(p => p.Description).Title("NC_DESC");
+                                                              columns.Bound(p => p.TotalQty).Title("QTY").HtmlAttributes(new { @class = "ClickGrid" });
+                                                              columns.Bound(p => p.TotalAccQty).Title("ACCQTY").HtmlAttributes(new { @class = "ClickGrid" });
+                                                              columns.Bound(p => p.PercenAccQty).Title("ACC(%)");
+                                                              //columns.Bound(p => p.NCR_NUM).Title("NCR_NUM");
+
+                                                          })
+                                                        .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                                                          .Sortable()
+                                                              .Scrollable()
+                                                          .Filterable()
+                                                      //    .ToolBar(t => t.Template("<a class='k-button k-button-icontext' onclick='customCommand();' href='\\#'></span>Cutom Command</a>"))
+                                                          //.Excel(excel => excel
+                                                          //.FileName(" DATA RAW SYSTEM REPORT Export.xlsx")
+                                                          //.Filterable(true)
+                                                          //.ProxyURL(Url.Action("Excel_Export_Save", "NCRReport"))
+                                                          //  )
+                                                          ////.HtmlAttributes(new { style = "height:550px;" })
+                                                          .DataSource(dataSource => dataSource
+                                                              .Ajax()
+                                                          //.PageSize(10)
+                                                          //   .Read("ReadPareto", "NCRReport", new { datefrom = "01/10/2018", dateto ="20/10/2018", partnum ="535-2631-001"})
+                                                          //  .Sort(sort => sort.Add("RECEIVER").Ascending())
+                                                          ))
+        </div>
+    </div>
+</div>
+<br />
+<h3 style="text-align:center"> DATA RAW SYSTEM REPORT</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<II_VI_Incorporated_SCM.Models.NCR.NCR_DETViewModel>()
+                                              .Name("gridPorentoraw")
+                                              .Columns(columns =>
+                                              {
+                                                  columns.Bound(p => p.NCR_NUM).Title("NCR_NUM");
+                                                  columns.Bound(p => p.SEC).Title("SEC").HtmlAttributes(new { @class = "ClickGrid" });
+                                                  columns.Bound(p => p.PARTNUM).Title("PartNum").HtmlAttributes(new { @class = "ClickGrid" });
+                                              //    columns.Bound(p => p.ITEM).Title("ITEM").HtmlAttributes(new { @class = "ClickGrid" });
+                                              columns.Bound(p => p.QTY).Title("QTY").HtmlAttributes(new { @class = "ClickGrid" });
+                                                  columns.Bound(p => p.DEFECT_STRING).Title("DEFECT").HtmlAttributes(new { @class = "ClickGrid" });
+                                                  columns.Bound(p => p.NC_DESC_STRING).Title("NC_DESC");
+                                              //columns.Bound(p => p.NCR_NUM).Title("NCR_NUM");
+
+                                          })
+                                              .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                                              .Sortable()
+                                         //     .ToolBar(tools => tools.Excel())
+                                              .Filterable()
+                                              .Excel(excel => excel
+                                                 .FileName(" DATA RAW SYSTEM REPORT Export.xlsx")
+                                             .Filterable(true)
+                                          .ProxyURL(Url.Action("Excel_Export_Save", "NCRReport"))
+                                                             )
+                                              ////.HtmlAttributes(new { style = "height:550px;" })
+                                              .DataSource(dataSource => dataSource
+                                                  .Ajax()
+                                              .PageSize(10)
+                                              //   .Read("ReadPareto", "NCRReport", new { datefrom = "01/10/2018", dateto ="20/10/2018", partnum ="535-2631-001"})
+                                              //  .Sort(sort => sort.Add("RECEIVER").Ascending())
+                                              ))
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.date').datepicker({ autoclose: true });
+        var grid = $("#gridPorento").data("kendoGrid");
+        grid.bind("dataBound", function () {
+            var promises = [
+                $.Deferred(),
+                $.Deferred(),
+            ];
+            $("#export").click(function (e) {
+         
+                e.preventDefault();
+                $("#gridPorento").data("kendoGrid").saveAsExcel();
+                $.when.apply(null, promises)
+                    .then(function (otdsWorkbook) {
+
+                        // create a new workbook using the sheets of the products and orders workbooks
+                        var sheets = [
+                            otdsWorkbook.sheets[0],
+                        ];
+                        sheets[0].title = "Grid ";
+                        var workbook = new kendo.ooxml.Workbook({
+                            sheets: sheets
+                        });
+                        kendo.saveAs({
+                            dataURI: workbook.toDataURL(),
+                            fileName: "Pareto.xlsx"
+                        })
+                    });
+            });
+        });
+    });
+
+    function customCommand() {
+        var parentGrid = $("#gridPorento").data("kendoGrid");
+        parentGrid.saveAsExcel();
+    }
+    function products_excelExport(e) {
+        e.preventDefault();
+        promises[0].resolve(e.workbook);
+    }
+    $("#submit").on('click', function () {
+        let datefrom = $("#datePickerSta").val();
+        let dateto = $("#datePickerTo").val();
+        let partnum = $("#ncrnumber").val()
+        if (partnum == "") {
+            bootbox.alert("Please select PartNum!");
+        }
+        else if (dateto == "") {
+            bootbox.alert("Please choose day!");
+        }
+        else if (datefrom == "") {
+            bootbox.alert("Please choose day!");
+        }
+        $("#gridPorento").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadParetoGridforPartNum", "NCRReport")?datefrom=' + datefrom + '&dateto=' + dateto + '&partnum=' + partnum;
+        $("#chartPorento").data("kendoChart").dataSource.transport.options.read.url = '@Url.Action("ReadParetoPartNum", "NCRReport")' + '?datefrom=' + datefrom + '&dateto=' + dateto + '&partnum=' + partnum;
+        $("#gridPorentoraw").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadParetoGridRawdatabypartnum", "NCRReport")?datefrom=' + datefrom + '&dateto=' + dateto + '&partnum=' + partnum;
+        $("#gridPorento").data("kendoGrid").dataSource.read();
+        $("#chartPorento").data("kendoChart").dataSource.read();
+        $("#gridPorentoraw").data("kendoGrid").dataSource.read();
+    })
+
+
+
+</script>

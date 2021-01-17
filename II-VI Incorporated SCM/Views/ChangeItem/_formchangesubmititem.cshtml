@@ -1,0 +1,222 @@
+﻿@model II_VI_Incorporated_SCM.Models.NCR.ChangeItemViewmodel
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <td colspan="1">
+                    @using (Html.BeginForm("SaveChangeItem", "ChangeItem", FormMethod.Post, new { @class = "well form-horizontal", role = "form", @enctype = "multipart/form-data", @id = "frm-submit-changeItem" }))
+                    {
+                        <input type="hidden" name="RefNumber" id="ncrnum_" />
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">REF NumBer <span style="color: red">*</span></label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"></span>
+                                        @Html.TextBoxFor(m => m.REF_NUM, new
+                                   {
+                                       @data_val = "true",
+                                       @class = "form-control",
+                                       @readonly = "readonly"
+                                   })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">SubmitterName</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"></span>
+                                        @Html.TextBoxFor(m => m.Submitername, new
+                                   {
+                                       @data_val = "true",
+                                       @class = "form-control",
+                                       @required = "@required",
+                                       @readonly = "readonly",
+                                       @value = ViewBag.Fullname
+                                   })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Brief Description of the change <span style="color: red">*</span></label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"></span>
+                                        @Html.TextAreaFor(m => m.Brief, new
+                                   {
+                                       @data_val = "true",
+                                       @class = "form-control",
+                                       @required = "@required"
+                                   })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Date submmit</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group date">
+                                        @Html.TextBoxFor(model => model.DateSubmitted, new { @class = "form-control", @id = "datePickerSta", @disabled = "disabled" })
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Date Required</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group date1">
+                                        @Html.TextBoxFor(model => model.DateRequired, new { @class = "form-control", @id = "datePickerEnd" })
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Priority <span style="color: red">*</span></label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" style="max-width: 100%;"></span>
+                                        <select class="selectpicker form-control" name="Priority">
+                                            <option value="Low">Low</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="High Mandatory">High Mandatory</option>
+                                            <option value="Mandatory">Mandatory</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Reason for Change <span style="color: red">*</span></label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"></span>
+                                        @Html.TextAreaFor(m => m.Reason, new
+                                   {
+                                       @data_val = "true",
+                                       @class = "form-control",
+                                       @required = "@required"
+                                   })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Other Artifacts Impacted:</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"></span>
+                                        @Html.TextAreaFor(m => m.OtherAtifact, new
+                                   {
+                                       @data_val = "true",
+                                       @class = "form-control",
+                                   })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Comments</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"></span>
+                                        @Html.TextAreaFor(m => m.Comments, new
+                                   {
+                                       @data_val = "true",
+                                       @class = "form-control",
+                                   })
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Attachments</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"></span>
+                                        @*<input placeholder="Attachments" class="form-control" name="Attacment" type="file">*@
+                                        @Html.TextBoxFor(m => m.Attacment, new { @class = "form-control", type = "file" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.Attacment, null, new { @class = "help-block text-danger" })
+                            </div>
+                            <div class="form-group" style="text-align:right">
+                                <button id="submitchange" class="btn btn-success">Submit</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </fieldset>
+                    }
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    $(function () {
+        var currentDate = new Date();
+        $('#datePickerSta').datepicker({
+            inline: true,
+            showOtherMonths: true,
+            dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            dateFormat: 'dd/mm/yy'
+        });
+        $("#datePickerSta").datepicker("setDate", currentDate);
+        $("#datePickerEnd").datepicker("setDate", currentDate);
+    });
+    var a= $('#NCR_NUM').val();
+    $('#REF_NUM').val(a);
+    var $form = $('#frm-submit-changeItem');
+    function validate() {
+        if ($form.valid()) { // check $formForIQC valid
+          
+            return true;
+        }
+        return false;
+    }
+    $('#submitchange').click(function (e) {
+        e.preventDefault();
+        var datestart = $('#datePickerSta').val();
+        var dateend = $('#datePickerEnd').val();
+        if (dateend < datestart) {
+            bootbox.alert('Date required must equal or greater than date submit!');
+            return false;
+        }
+        else {
+            $form.submit();
+        }
+    })
+    $form.submit(function (e) {
+        e.preventDefault();
+        if ($form.valid()) { // check $formForIQC valid
+         
+            $.blockUI();
+            let data = new FormData(this);
+            let urlAction = $(this).attr('action');
+            $.ajax({
+                url: urlAction,
+                type: 'POST',
+                dataType: "Json",
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: data,
+                fail: function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }
+            }).always(function () {
+                $.unblockUI();
+            }).success(function (result) {
+                if (result.success) {
+                    bootbox.alert(result.message,
+                        function (result) {
+                            window.location.reload();
+                        });
+                } else {
+                    bootbox.alert(result.message);
+                }
+            });
+        }
+    });
+   
+</script>

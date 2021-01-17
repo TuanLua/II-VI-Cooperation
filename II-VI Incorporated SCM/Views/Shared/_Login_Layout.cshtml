@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <title>@ViewBag.Title | NCR</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="Supplier Management System | NCR" name="description" />
+    <meta content="II-VI Incorporated" name="author" />
+    @Styles.Render("~/bundles/allcssloggin")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="shortcut icon" type="image/png" href="~/Theme/assets/global/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" href="~/Theme/assets/global/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="~/Theme/assets/global/icons/favicon-16x16.png" sizes="16x16">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Theme/assets/global/icons/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Theme/assets/global/icons/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/Theme/assets/global/icons/apple-touch-icon-57-precomposed.png">
+</head>
+<!-- END HEAD -->
+
+<body class="login">
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+        <a target="_blank" href="http://ii-vi.com">
+            <img src="~/Theme/assets/layouts/layout6/img/iivilogo.png" alt="" />
+        </a>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        @RenderBody()
+    </div>
+    <!-- END LOGIN -->
+    <!-- BEGIN COPYRIGHT -->
+    <div class="copyright"> @DateTime.Now.Year &copy;  II-VI Incorporated - DMS Ver 1.0.0.0 </div>
+    <!-- END COPYRIGHT -->
+    <!--[if lt IE 9]>
+    <script src="/Theme/assets/global/plugins/respond.min.js"></script>
+    <script src="/Theme/assets/global/plugins/excanvas.min.js"></script>
+    <script src="/Theme/assets/global/plugins/ie8.fix.min.js"></script>
+    <![endif]-->
+    @Scripts.Render("~/bundles/bootstrapLogin")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

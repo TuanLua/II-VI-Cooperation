@@ -1,0 +1,49 @@
+﻿@model II_VI_Incorporated_SCM.Models.Account.RoleViewModel
+@{
+    ViewBag.Title = "Create New Role";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>@ViewBag.Title.</h2>
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                @Html.ValidationMessageFor(model => model.Name, null, new { @class = "help-block text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Group, new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.Group, new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="NCR", Value = "NCR" },
+                    new SelectListItem{ Text="SCAR", Value = "SCAR" },
+                    new SelectListItem{ Text="Report", Value = "Report" },
+                      new SelectListItem{ Text="ProductTranfer", Value = "ProductTranfer" },
+                 }, "- Please Select -", new { @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                @Html.ValidationMessageFor(model => model.Group, null, new { @class = "help-block text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+</div>
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

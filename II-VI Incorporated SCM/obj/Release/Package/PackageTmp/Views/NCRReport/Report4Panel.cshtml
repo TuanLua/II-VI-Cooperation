@@ -1,0 +1,819 @@
+﻿@using II_VI_Incorporated_SCM.Models.NCR
+@using II_VI_Incorporated_SCM.Services
+@using II_VI_Incorporated_SCM.Models
+@using II_VI_Incorporated_SCM.Models.NCRReport
+@{
+    ViewBag.Title = "4 panel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>Report 4 Panel </h3>
+@*<br />
+    @using (Html.BeginForm("GetValueFile4panel", "NCRReport", FormMethod.Post, new { id = "4panel", role = "form", enctype = "multipart/form-data" }))
+    {
+        <div class="form-group row" style="text-align:right">
+            <div class="col-md-6">
+                <label class="col-md-3">File<span style="color: red">*</span> : </label>
+                <div class="col-md-9 date">
+                    <input type="file" class="form-control" id="FILE" name="FILE" />
+                    <input type="hidden" value="false" name="check" id="check" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                        <label class="col-md-4">MONTH IMPORT<span style="color: red">*</span>  </label>
+                        <div class="col-md-8 date">
+                            <div class="input-group date" data-provide="datepicker">
+                                <input class="form-control" name="date" id="datePickerStaT" />
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <button type="submit" id="getfile" class="btn btn-info">Save </button>
+            </div>
+        </div>
+
+    }*@
+
+<br />
+<div class="col-md-12">
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                <label class="col-md-2">VENDOR<span style="color: red">*</span> </label>
+                <div class="col-md-10">
+                    @Html.DropDownList("VENDOR", (IEnumerable<SelectListItem>)ViewBag.VendorList, new { @class = "form-control", id = "vendor" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                <label class="col-md-2">MONTH<span style="color: red">*</span>  </label>
+                <div class="col-md-10">
+                    <div class="input-group date" data-provide="datepicker">
+                        <input class="form-control" id="datePicker" />
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                <label class="col-md-2"><span style="color: red"></span>  </label>
+                <div class="col-md-10">
+                    <button id="export" type="button" class="k-button"><span class="k-icon k-i-excel"></span>Export to Excel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                <label class="col-md-2">Top NC By Month<span style="color: red">*</span> : </label>
+                <div class="col-md-10">
+                    <input type="number" class="form-control" id="QTYMonth" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+                <label class="col-md-2">Top NC By Year<span style="color: red">*</span> : </label>
+                <div class="col-md-10">
+                    <input type="number" class="form-control" id="QTYYear" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group row" style="text-align:right">
+    <label class="col-md-5"> </label>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-info btn-block" id="Search">Go</button>
+    </div>
+</div>
+<br />
+<h4 style="text-align:center">PPM performance</h4>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<II_VI_Incorporated_SCM.Models.NCRReport.OneSupplierforPPM>()
+                                                                              .Name("gridOneSupplier")
+                                                                             //   .Events(e => e.ExcelExport("onesupplier_excelExport"))
+                                                                              .Columns(columns =>
+                                                                              {
+                                                                                  columns.Bound(p => p.TYPE).Width(50).Title("JUL").Editable("true");
+                                                                                  columns.Bound(p => p.JUL).Width(30).Title("JUL").Editable("false");
+                                                                                  columns.Bound(p => p.AUG).Width(30).Title("AUG").Editable("false");
+                                                                                  columns.Bound(p => p.SEP).Width(30).Title("SEP").Editable("false");
+                                                                                  columns.Bound(p => p.OCT).Width(30).Title("OCT").Editable("false");
+                                                                                  columns.Bound(p => p.NOV).Width(30).Title("NOV").Editable("false");
+                                                                                  columns.Bound(p => p.DEC).Width(30).Title("DEC").Editable("false");
+                                                                                  columns.Bound(p => p.JAN).Width(30).Title("JAN").Editable("false");
+                                                                                  columns.Bound(p => p.FEB).Width(30).Title("FEB").Editable("false");
+                                                                                  columns.Bound(p => p.MAR).Width(30).Title("MAR").Editable("false");
+                                                                                  columns.Bound(p => p.APR).Width(30).Title("APR").Editable("false");
+                                                                                  columns.Bound(p => p.MAY).Width(30).Title("MAY").Editable("false");
+                                                                                  columns.Bound(p => p.JUN).Width(30).Title("JUN").Editable("false");
+                                                                                  columns.Bound(p => p.IDVendor).Width(30).Hidden();
+                                                                                  columns.Bound(p => p.FY).Width(30).Hidden();
+                                                                              })
+                                                                                               .Editable(editable => editable.Mode(GridEditMode.InCell))
+                                                                                               .DataSource(dataSource => dataSource
+                                                                                               .Ajax()
+                                                                                               .Batch(true)
+                                                                                               .ServerOperation(false)
+                                                                                               .Events(events => events.Error("error_handler")
+                                                                                                               .Change("updateChart"))
+                                                                                               .Model(model => model.Id(p => p.FY))
+                                                                                               .Read("Report4Panelby1Supplier", "NCRReport", new { yearselect = DateTime.Now.Subtract(DateTime.ParseExact("01/07/" + DateTime.Now.Year, "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentCulture)).Minutes >= 0 ? DateTime.Now.AddYears(1).Year : DateTime.Now.Year })
+                                                                                                .Update("EditingNCRDispositionDay", "NCRReport")
+                                                                                               )
+            )
+        </div>
+    </div>
+</div>
+<br />
+<div style="text-align:center">
+    <button class="btn btn-sm btn-success" id="save">Save </button>
+</div>
+@*<div class="demo-section k-content wide">
+        @(Html.Kendo().Chart<II_VI_Incorporated_SCM.Models.NCRReport.OneSupChart>()
+                .Name("chartOneSupplier")
+                .Title("Supplier chart for PPM")
+                .Legend(legend => legend
+                    .Position(ChartLegendPosition.Top)
+                )
+                 .DataSource(ds => ds.Read(read => read.Action("Report4Panelby1Supplier", "NCRReport", new { yearselect = DateTime.Now.Subtract(DateTime.ParseExact("01/07/" + DateTime.Now.Year, "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentCulture)).Minutes >= 0 ? DateTime.Now.AddYears(1).Year : DateTime.Now.Year })))
+            .Series(series =>
+             {
+                 series.Line(model => model.Value).Name("PPMYTD").CategoryField("Month");
+             })
+            .CategoryAxis(axis => axis
+               .Labels(labels => labels.Rotation(-90))
+                .AxisCrossingValue(0, 40)
+            )
+             .ValueAxis(axis => axis
+                .Numeric("PPMYTD")
+                    .Title("PPM YTD")
+                       .Color("#0066FF")
+            )
+             .Tooltip(tooltip => tooltip
+                .Visible(true)
+                .Format("{0:N0}")
+            )
+        )
+    </div>*@
+<br />
+<div id="chartOneSupplier"></div>
+<br />
+
+<div class="demo-section k-content wide">
+    @(Html.Kendo().Chart<II_VI_Incorporated_SCM.Models.NCRReport.topmonthViewmodel>()
+                                                                        .Name("chartbymonth")
+                                                                        .Title("The Top NC by QTY and Part No.Month")
+                                                                       .Legend(legend => legend
+                                                                          .Position(ChartLegendPosition.Bottom)
+                                                                )
+                                                                .DataSource(ds => ds.Read(read => read.Action("TopNCbyMonth", "NCRReport")))
+                                                                 .SeriesDefaults(seriesDefaults =>
+                                                                    seriesDefaults.Bar().Stack(true)
+                                                                )
+                                                                .Series(series =>
+                                                                {
+                                                                    series.Bar(model => model.Value).Name("PartNum");
+                                                                })
+                                                                .CategoryAxis(axis => axis
+                                                                    .Categories(model => model.PartNum)
+                                                                    .MajorGridLines(lines => lines.Visible(false))
+                                                                )
+                                                                .ValueAxis(axis => axis.Numeric()
+                                                                    .Labels(labels => labels.Format("{0}"))
+
+                                                                    .Line(line => line.Visible(false))
+                                                                    .MajorGridLines(lines => lines.Visible(true))
+                                                                )
+                                                                .Tooltip(tooltip => tooltip
+                                                                    .Visible(true)
+                                                                    .Format("{0:N0}")
+                                                                )
+    )
+</div>
+<br />
+
+<div class="demo-section k-content wide">
+    @(Html.Kendo().Chart<II_VI_Incorporated_SCM.Models.NCRReport.topmonthViewmodel>()
+                                                                        .Name("chartbyyear")
+                                                                        .Title("The Top NC by QTY and Part No.Year")
+                                                                       .Legend(legend => legend
+                                                                          .Position(ChartLegendPosition.Bottom)
+                                                                )
+                                                                .DataSource(ds => ds.Read(read => read.Action("TopNCbyyear", "NCRReport")))
+                                                                 .SeriesDefaults(seriesDefaults =>
+                                                                    seriesDefaults.Bar().Stack(true)
+                                                                )
+                                                                .Series(series =>
+                                                                {
+                                                                    series.Bar(model => model.Value).Name("PartNum");
+                                                                })
+                                                                .CategoryAxis(axis => axis
+                                                                    .Categories(model => model.PartNum)
+                                                                    .MajorGridLines(lines => lines.Visible(false))
+                                                                )
+                                                                .ValueAxis(axis => axis.Numeric()
+                                                                    .Labels(labels => labels.Format("{0}"))
+
+                                                                    .Line(line => line.Visible(false))
+                                                                    .MajorGridLines(lines => lines.Visible(true))
+                                                                )
+                                                                .Tooltip(tooltip => tooltip
+                                                                    .Visible(true)
+                                                                    .Format("{0:N0}")
+                                                                )
+    )
+</div>
+<br />
+
+<h4 style="text-align:center">OTD Performance</h4>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<II_VI_Incorporated_SCM.Models.PANEL_RP>()
+                                                                              .Name("gridOTD")
+                                                                               //      .Events(e => e.ExcelExport("otd_excelExport"))
+                                                                              .Columns(columns =>
+                                                                              {
+                                                                                  columns.Bound(p => p.TYPE).Width(50).Title("TYPE").Editable("true");
+                                                                                  columns.Bound(p => p.JUL).Width(30).Title("JUL").Editable("false");
+                                                                                  columns.Bound(p => p.AUG).Width(30).Title("AUG").Editable("false");
+                                                                                  columns.Bound(p => p.SEP).Width(30).Title("SEP").Editable("false");
+                                                                                  columns.Bound(p => p.OTC).Width(30).Title("OCT").Editable("false");
+                                                                                  columns.Bound(p => p.NOV).Width(30).Title("NOV").Editable("false");
+                                                                                  columns.Bound(p => p.DEC).Width(30).Title("DEC").Editable("false");
+                                                                                  columns.Bound(p => p.JAN).Width(30).Title("JAN").Editable("false");
+                                                                                  columns.Bound(p => p.FEB).Width(30).Title("FEB").Editable("false");
+                                                                                  columns.Bound(p => p.MAR).Width(30).Title("MAR").Editable("false");
+                                                                                  columns.Bound(p => p.APR).Width(30).Title("APR").Editable("false");
+                                                                                  columns.Bound(p => p.MAY).Width(30).Title("MAY").Editable("false");
+                                                                                  columns.Bound(p => p.JUN).Width(30).Title("JUN").Editable("false");
+                                                                                  columns.Bound(p => p.Vendor).Width(30).Hidden();
+                                                                              //   columns.Bound(p => p.FYCurrent).Width(30).Title("FY").Editable("true");
+                                                                              columns.Bound(p => p.FY).Width(30).Hidden();
+                                                                              })
+                                                                                               .Editable(editable => editable.Mode(GridEditMode.InCell))
+                                                                                               .DataSource(dataSource => dataSource
+                                                                                               .Ajax()
+                                                                                               .Batch(true)
+                                                                                               .ServerOperation(false)
+                                                                                               .Events(events => events.Error("error_handler")
+                                                                                                               .Change("updateChart1"))
+                                                                                               .Model(model => model.Id(p => p.FY))
+                                                                                               .Read("ReadOTD", "NCRReport", new { yearselect = DateTime.Now.Subtract(DateTime.ParseExact("01/07/" + DateTime.Now.Year, "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentCulture)).Minutes >= 0 ? DateTime.Now.AddYears(1).Year : DateTime.Now.Year })
+                                                                                                .Update("EditingNCRDispositionDay", "NCRReport")
+                                                                                               )
+            )
+        </div>
+    </div>
+</div>
+<br />
+<div style="text-align:center">
+    <button class="btn btn-sm btn-success" id="saveOTD">Save </button>
+</div>
+<br />
+<div id="chartOTD"></div>
+<br />
+<h4 style="text-align:center">Improvement Tracking</h4>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<II_VI_Incorporated_SCM.Models.NCRReport.ImprovestrackingViewmodel>()
+                                                                              .Name("gridImprovestracking")
+                                                                              //          .Events(e => e.ExcelExport("orders_excelExport"))
+                                                                              .Columns(columns =>
+                                                                              {
+                                                                                  columns.Bound(p => p.No).Width(50).Title("Ref#").Editable("true");
+                                                                                  columns.Bound(p => p.NC_NAME).Width(50).Title("Description").Editable("true");
+                                                                                  columns.Bound(p => p.JUL).Width(30).Title("JUL").Editable("true");
+                                                                                  columns.Bound(p => p.AUG).Width(30).Title("AUG").Editable("true");
+                                                                                  columns.Bound(p => p.SEP).Width(30).Title("SEP").Editable("true");
+                                                                                  columns.Bound(p => p.OCT).Width(30).Title("OCT").Editable("true");
+                                                                                  columns.Bound(p => p.NOV).Width(30).Title("NOV").Editable("true");
+                                                                                  columns.Bound(p => p.DEC).Width(30).Title("DEC").Editable("true");
+                                                                                  columns.Bound(p => p.JAN).Width(30).Title("JAN").Editable("true");
+                                                                                  columns.Bound(p => p.FEB).Width(30).Title("FEB").Editable("true");
+                                                                                  columns.Bound(p => p.MAR).Width(30).Title("MAR").Editable("true");
+                                                                                  columns.Bound(p => p.APR).Width(30).Title("APR").Editable("true");
+                                                                                  columns.Bound(p => p.MAY).Width(30).Title("MAY").Editable("true");
+                                                                                  columns.Bound(p => p.JUN).Width(30).Title("JUN").Editable("true");
+                                                                                  columns.Bound(p => p.SUMYTD).Width(30).Title("YTD").Editable("true");
+                                                                                  columns.Bound(p => p.NC_NAME).Width(30).Hidden();
+                                                                              })
+                                                                                               .Editable(editable => editable.Mode(GridEditMode.InCell))
+                                                                                               .DataSource(dataSource => dataSource
+                                                                                               .Ajax()
+                                                                                               .Batch(true)
+                                                                                               .ServerOperation(false)
+                                                                                               .Model(model => model.Id(p => p.NC_NAME))
+                                                                                               .Read("ReadImproveStracking", "NCRReport", new { yearselect = DateTime.Now.Subtract(DateTime.ParseExact("01/07/" + DateTime.Now.Year, "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentCulture)).Minutes >= 0 ? DateTime.Now.AddYears(1).Year : DateTime.Now.Year })
+                                                                                                .Update("EditingNCRDispositionDay", "NCRReport")
+                                                                                               )
+            )
+        </div>
+    </div>
+</div>
+<br />
+
+<h4 style="text-align:center">SCAR PROBLEM</h4>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<II_VI_Incorporated_SCM.Models.NCRReport.Scarviewmodel>()
+                                                                                  .Name("gridScarproblem")
+                                                                             //        .Events(e => e.ExcelExport("products_excelExport"))
+                                                                                  .Columns(columns =>
+                                                                                  {
+                                                                                      columns.Bound(p => p.No).Width(50).Title("Corrective Action Description").Editable("true");
+                                                                                      columns.Bound(p => p.Corective).Width(50).Title("Corrective Action Description").Editable("true");
+                                                                                      columns.Bound(p => p.TargetDate).Width(30).Format("{0:MM/dd/yyyy}").Title("TargetDate").Editable("true");
+                                                                                      columns.Bound(p => p.ActualDate).Width(30).Format("{0:MM/dd/yyyy}").Title("Actual Date").Editable("true");
+                                                                                      columns.Bound(p => p.Status).Width(30).Format("{0:MM/dd/yyyy}").Title("Status").Editable("true");
+                                                                                      columns.Bound(p => p.Owner).Width(30).Title("Owner").Editable("true");
+                                                                                  })
+                                                                                                   .Editable(editable => editable.Mode(GridEditMode.InCell))
+                                                                                                   .DataSource(dataSource => dataSource
+                                                                                                   .Ajax()
+                                                                                                   .Batch(true)
+                                                                                                   .ServerOperation(false)
+                                                                                                    .Model(model => model.Id(p => p.Corective))
+                                                                                                   .Read("ReadSCARProblem", "NCRReport", new { yearselect = DateTime.Now.Subtract(DateTime.ParseExact("01/07/" + DateTime.Now.Year, "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentCulture)).Minutes >= 0 ? DateTime.Now.AddYears(1).Year : DateTime.Now.Year })
+                                                                                                   )
+            )
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+    $(document).ready(function () {
+        // settitle();
+        $('.date').datepicker({ autoclose: true });
+        $('#vendor').select2();
+        $('#save').click(function () {
+            var data = $("#gridOneSupplier").data("kendoGrid").dataSource.data();
+            var chartSeries = [];
+            data.forEach(function (item) {
+                chartSeries.push(item)
+            })
+            var abc = JSON.stringify(chartSeries);
+            $.blockUI();
+            $.post('@Url.Action("SaveReport4Panelby1Supplier", "NCRReport")', { ListDay: abc },
+                function (result) {
+                    if (result = true) {
+                        bootbox.alert('Save sucess!');
+                        $.unblockUI();
+                    }
+                }).fail(function () {
+                    $.unblockUI();
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+        });
+    });
+
+
+    //save OTD
+    $('#saveOTD').click(function () {
+        var data = $("#gridOTD").data("kendoGrid").dataSource.data();
+        var chartSeries = [];
+        data.forEach(function (item) {
+            chartSeries.push(item)
+        })
+        var abc = JSON.stringify(chartSeries);
+        $.blockUI();
+        $.post('@Url.Action("SaveReport4PanelOTD", "NCRReport")', { ListDay: abc },
+            function (result) {
+                if (result = true) {
+                    bootbox.alert('Save sucess!');
+                    $.unblockUI();
+                }
+            }).fail(function () {
+                $.unblockUI();
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });
+    });
+    function settitle() {
+        var yearselected = $("#changeyear option:selected").text();
+        let setyeartitle = yearselected.substring(2, 4);
+        let setyearFy1 = parseInt(setyeartitle) - 1;
+        let setyearFy2 = parseInt(setyeartitle) - 2;
+        let setyearFy3 = parseInt(setyeartitle) - 3;
+        let title = "FY";
+        let JUL = "JUL";
+        let AUG = "AUG";
+        let SEP = "SEP";
+        let OCT = "OCT";
+        let NOV = "NOV";
+        let DEC = "DEC";
+        let JAN = "JAN";
+        let FEB = "FEB";
+        let MAR = "MAR";
+        let APR = "APR";
+        let MAY = "MAY";
+        let JUN = "JUN";
+        $("#gridOneSupplier thead [data-field=JUL] .k-link").html(JUL + '-' + setyearFy1);
+        $("#gridOneSupplier thead [data-field=AUG] .k-link").html(AUG + '-' + setyearFy1);
+        $("#gridOneSupplier thead [data-field=SEP] .k-link").html(SEP + '-' + setyearFy1);
+        $("#gridOneSupplier thead [data-field=OCT] .k-link").html(OCT + '-' + setyearFy1);
+        $("#gridOneSupplier thead [data-field=NOV] .k-link").html(NOV + '-' + setyearFy1);
+        $("#gridOneSupplier thead [data-field=DEC] .k-link").html(DEC + '-' + setyearFy1);
+        $("#gridOneSupplier thead [data-field=JAN] .k-link").html(JAN + '-' + setyeartitle);
+        $("#gridOneSupplier thead [data-field=FEB] .k-link").html(FEB + '-' + setyeartitle);
+        $("#gridOneSupplier thead [data-field=MAR] .k-link").html(MAR + '-' + setyeartitle);
+        $("#gridOneSupplier thead [data-field=APR] .k-link").html(APR + '-' + setyeartitle);
+        $("#gridOneSupplier thead [data-field=MAY] .k-link").html(MAY + '-' + setyeartitle);
+        $("#gridOneSupplier thead [data-field=JUN] .k-link").html(JUN + '-' + setyeartitle);
+        $("#gridOneSupplier thead [data-field=FYCurrent] .k-link").html(title + '-' + setyeartitle);
+    }
+
+
+
+    //chart of supplier one
+    var months = ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN"];
+    $("#chartOneSupplier").kendoChart({
+        title: {
+            text: "PPM Chart"
+        },
+        seriesDefaults: {
+            type: "line",
+        },
+        tooltip: {
+            visible: true
+        },
+        categoryAxis: {
+            categories: months,
+            //Each month(column) is added as a category
+        }
+
+    });
+
+    function updateChart(dataSource) {
+        var data = $("#gridOneSupplier").data("kendoGrid").dataSource.data();
+        var dataItems = [];
+        dataItems.push(data[2]);
+        dataItems.push(data[3]);
+        var chartSeries = [];
+        var chartData = [];
+        dataItems.forEach(function (item) {
+            var data = [];
+            months.forEach(function (month) {
+                //Each month value is added to the data collection
+                function valueChart() {
+                    if (item[month] == 0)
+                        return null;
+                    else
+                        return item[month];
+                }
+                data.push(valueChart());
+            })
+
+            chartSeries.push({
+                data: data,
+                //we will be using the Year from the dataItem as name
+                name: item.TYPE
+            })
+        })
+        var chart = $("#chartOneSupplier").data("kendoChart");
+        var options = chart.options;
+        options.series = chartSeries; //setting the series with the new data to the options
+        chart.setOptions(options); //re-initializing the Chart
+    }
+
+    //chart OTD
+    var monthsOTD = ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", ];
+    $("#chartOTD").kendoChart({
+        title: {
+            text: "OTD Chart"
+        },
+        seriesDefaults: {
+            type: "line",
+        },
+        tooltip: {
+            visible: true
+        },
+        categoryAxis: {
+            categories: monthsOTD,
+        }
+
+    });
+
+    function updateChart1(dataSource) {
+        var data = $("#gridOTD").data("kendoGrid").dataSource.data();
+        var dataItems = [];
+        dataItems.push(data[4]);
+        dataItems.push(data[5]);
+        var chartSeries = [];
+        var chartData = [];
+        dataItems.forEach(function (item) {
+            var data = [];
+            monthsOTD.forEach(function (month) {
+                //Each month value is added to the data collection
+                function valueChart() {
+                    if (item[month] == 0)
+                        return null;
+                    else
+                        return item[month];
+                }
+                data.push(valueChart());
+            })
+
+            chartSeries.push({
+                data: data,
+                //we will be using the Year from the dataItem as name
+                name: item.TYPE
+            })
+        })
+        var chart = $("#chartOTD").data("kendoChart");
+        var options = chart.options;
+        options.series = chartSeries; //setting the series with the new data to the options
+        chart.setOptions(options); //re-initializing the Chart
+    }
+    $("#Search").on('click', function (e) {
+        e.preventDefault();
+        let vendor = $("#vendor").val();
+        let month = $('#datePicker').val();
+        let qty = $('#QTYMonth').val();
+        let qtyyear = $('#QTYYear').val();
+        if (vendor == "") {
+            bootbox.alert("Please select vendor!");
+        }
+        else if (month == "") {
+            bootbox.alert("Please choose year!");
+        }
+        else if (qty == "") {
+            bootbox.alert("Please input qty month!");
+        }
+        else if (qtyyear == "") {
+            bootbox.alert("Please input qty year!");
+        }
+        else {
+            $("#chartbyyear").data("kendoChart").dataSource.transport.options.read.url = '@Url.Action("TopNCbyyear", "NCRReport")' + '?year=' + month + '&qty=' + qtyyear + '&id=' + vendor;
+            $("#chartbymonth").data("kendoChart").dataSource.transport.options.read.url = '@Url.Action("TopNCbyMonth", "NCRReport")' + '?month=' + month + '&qty=' + qty + '&id=' + vendor;
+            $("#gridOneSupplier").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("Report4Panelby1Supplier", "NCRReport")' + '?yearselect=' + month + '&id=' + vendor ;
+            $("#gridOTD").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadOTD", "NCRReport")' + '?yearselect=' + month + '&vendor=' + vendor;
+            $("#gridImprovestracking").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadImproveStracking", "NCRReport")' + '?yearselect=' + month + '&vendor=' + vendor;
+         $("#gridScarproblem").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadSCARProblem", "NCRReport")' + '?yearselect=' + month + '&vendor=' + vendor;
+            $("#chartbymonth").data("kendoChart").dataSource.read();
+            $("#chartbyyear").data("kendoChart").dataSource.read();
+            $("#gridOneSupplier").data("kendoGrid").dataSource.read();
+            $("#gridOTD").data("kendoGrid").dataSource.read();
+            $("#gridImprovestracking").data("kendoGrid").dataSource.read();
+            $("#gridScarproblem").data("kendoGrid").dataSource.read();
+            //save file from excel
+        }
+    });
+    var $form = $('#4panel');
+    $('#4panel').submit(function (e) {
+        e.preventDefault();
+        var file = $('#FILE').val();
+        var date = $('#datePicker').val();
+        if (file == "" ) {
+            bootbox.alert("Vui lòng chọn file");
+            e.preventDefault();
+            return false;
+        }
+        else if (date == "") {
+            bootbox.alert("Vui lòng chọn month!");
+            e.preventDefault();
+            return false;
+        }
+        else {
+            var dataString = new FormData($form[0]);
+            $.blockUI();
+            $.ajax({
+                url: $form.attr('action'),  //Server script to process data
+                type: 'POST',
+                //Ajax events
+                success: function (result) {
+                    if (result.success === 2) {
+                        $.unblockUI();
+                        bootbox.confirm({
+                            message: "File " + $('#4panel #FILE')[0].files[0].name + " is duplicate! Are you sure save data ?",
+                            buttons: {
+                                confirm: {
+                                    label: 'Yes',
+                                    className: 'btn-success'
+                                },
+                                cancel: {
+                                    label: 'No',
+                                    className: 'btn-danger'
+                                }
+                            },
+                            callback: function (result) {
+                                if (result === true) {
+                                    $('#4panel #check').val("true");
+                                    $.ajax({
+                                        url: $form.attr('action'),
+                                        type: 'post',
+                                        data: new FormData($('#4panel')[0]),
+                                        cache: false,
+                                        contentType: false,
+                                        processData: false,
+                                        success: function (result) {
+                                            if (result.success === 1) {
+                                                $.unblockUI();
+                                                bootbox.alert("Upload and save change successfully!!", function () { location.reload(); });
+                                            }
+                                            else {
+                                                $.unblockUI();
+                                                bootbox.alert("Upload and save change unsuccessfully!!");
+                                            }
+                                        },
+                                        error: function () {
+                                            bootbox.alert('Please contact to Administrator!');
+                                        },
+                                        complete: function () {
+                                            $.unblockUI();
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    else if (result.success === 1) {
+                        $.unblockUI();
+                        bootbox.alert("Upload and save change successfully!!", function () { location.reload(); });
+                    }
+                    else if (result.success === 0) {
+                        $.unblockUI();
+                        bootbox.alert("Upload and save change unsuccessfully!!");
+                    }
+                },
+                error: function () {
+                    bootbox.alert('Please contact to Administrator!');
+                },
+                complete: function () {
+                    $.unblockUI();
+                },
+                // Form data
+                data: dataString,
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+        }
+        })
+
+
+    @*var promises = [
+        $.Deferred(),
+        $.Deferred(),
+        $.Deferred(),
+        $.Deferred()
+    ];
+    $("#export").click(function (e) {
+        //OTD
+        e.preventDefault();
+
+        $("#gridOneSupplier").data("kendoGrid").saveAsExcel();
+        $("#gridOTD").data("kendoGrid").saveAsExcel();
+        // trigger export of the products grid
+       $("#gridScarproblem").data("kendoGrid").saveAsExcel();
+        // trigger export of the orders grid
+        $("#gridImprovestracking").data("kendoGrid").saveAsExcel();
+
+        // wait for both exports to finish
+        $.when.apply(null, promises)
+            .then(function (otdsWorkbook, productsWorkbook, ordersWorkbook, onesuppliersWorkbook) {
+
+                // create a new workbook using the sheets of the products and orders workbooks
+                var sheets = [
+                    otdsWorkbook.sheets[0],
+                    productsWorkbook.sheets[0],
+                    ordersWorkbook.sheets[0],
+                    onesuppliersWorkbook.sheets[0]
+                ];
+                sheets[0].title = "OTD ";
+                sheets[1].title = "Improvement Tracking";
+               sheets[2].title = "Scar problem";
+                sheets[3].title = "One Supplier";
+                var workbook = new kendo.ooxml.Workbook({
+                    sheets: sheets
+                });
+
+                // save the new workbook,b
+                kendo.saveAs({
+                    dataURI: workbook.toDataURL(),
+                    fileName: "4PanelReport.xlsx"
+                })
+            });
+        var chartOTD = $("#chartOTD").getKendoChart();
+        chartOTD.exportImage().done(function (data) {
+            kendo.saveAs({
+                dataURI: data,
+                fileName: "chartOTD.png",
+                proxyURL: "@Url.Action("Export_Save", "NCRReport")"
+            });
+        });
+        var chartbymonth = $("#chartbymonth").getKendoChart();
+        chartbymonth.exportImage().done(function (data) {
+            kendo.saveAs({
+                dataURI: data,
+                fileName: "chartbymonth.png",
+                proxyURL: "@Url.Action("Export_Save", "NCRReport")"
+            });
+        });
+        var chartbyear = $("#chartbyyear").getKendoChart();
+        chartbyear.exportImage().done(function (data) {
+            kendo.saveAs({
+                dataURI: data,
+                fileName: "chartbyear.png",
+                proxyURL: "@Url.Action("Export_Save", "NCRReport")"
+            });
+        });
+        var chartOneSupplier = $("#chartOneSupplier").getKendoChart();
+        chartOneSupplier.exportImage().done(function (data) {
+            kendo.saveAs({
+                dataURI: data,
+                fileName: "chartOneSupplier.png",
+                proxyURL: "@Url.Action("Export_Save", "NCRReport")"
+            });
+        });
+
+    });
+    function products_excelExport(e) {
+        e.preventDefault();
+
+        promises[1].resolve(e.workbook);
+    }
+
+    function orders_excelExport(e) {
+        e.preventDefault();
+
+        promises[1].resolve(e.workbook);
+    }
+
+    function onesupplier_excelExport(e) {
+        e.preventDefault();
+
+        promises[2].resolve(e.workbook);
+    }
+    function otd_excelExport(e) {
+        e.preventDefault();
+
+        promises[0].resolve(e.workbook);
+    }*@
+
+
+    $("#export").click(function (e) {
+
+        let vendor = $("#vendor").val();
+        let month = $('#datePicker').val();
+        let qty = $('#QTYMonth').val();
+        let qtyyear = $('#QTYYear').val();
+        if (vendor == "") {
+            bootbox.alert("Please select vendor!");
+        }
+        else if (month == "") {
+            bootbox.alert("Please choose year!");
+        }
+        else if (qty == "") {
+            bootbox.alert("Please input qty month!");
+        }
+        else if (qtyyear == "") {
+            bootbox.alert("Please input qty year!");
+        }
+        else {
+            let url = "@Url.Action("Export", "NCRReport")" + "?yearselect=" + $('#datePicker').val() + "&vendor=" + $('#vendor').val() + "&mqty=" + $('#QTYMonth').val() + "&yqty=" + $('#QTYYear').val()
+            window.open(url, '_blank');
+
+        }
+        
+    });
+</script>

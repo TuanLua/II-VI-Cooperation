@@ -1,0 +1,502 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EvoPdfToHtml</name>
+    </assembly>
+    <members>
+        <member name="T:EvoPdf.PdfToHtml.ContextImpersonationLogonMode">
+            <summary>
+            The logon mode for impersonation
+            </summary>
+        </member>
+        <member name="F:EvoPdf.PdfToHtml.ContextImpersonationLogonMode.Automatic">
+            <summary>
+            Automatic logon
+            </summary>
+        </member>
+        <member name="F:EvoPdf.PdfToHtml.ContextImpersonationLogonMode.Explicit">
+            <summary>
+            Explicit logon
+            </summary>
+        </member>
+        <member name="T:EvoPdf.PdfToHtml.ContextImpersonationOptions">
+            <summary>
+            This class encapsulates the options to control the context impersonation during tool execution
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.ContextImpersonationOptions.CurrentUserImpersonation">
+            <summary>
+            A flag indicating if the tool should impersonate the current user during execution.
+            By default this property is false.
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.ContextImpersonationOptions.Username">
+            <summary>
+            The name of the user to logon before execution. The <see cref="P:EvoPdf.PdfToHtml.ContextImpersonationOptions.Domain"/> and <see cref="P:EvoPdf.PdfToHtml.ContextImpersonationOptions.Password"/> properties must also be set.
+            This property has priority over the <see cref="P:EvoPdf.PdfToHtml.ContextImpersonationOptions.CurrentUserImpersonation"/> property. 
+            By default this property is not set.
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.ContextImpersonationOptions.Domain">
+            <summary>
+            The user Windows domain name. This property together with <see cref="P:EvoPdf.PdfToHtml.ContextImpersonationOptions.Username"/> property define the user to logon before execution.
+            If the user is not part of a Windows domain the machine name can be used.
+            By default this property is not set.
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.ContextImpersonationOptions.Password">
+            <summary>
+            The password of the user specified by <see cref="P:EvoPdf.PdfToHtml.ContextImpersonationOptions.Username"/> and <see cref="P:EvoPdf.PdfToHtml.ContextImpersonationOptions.Domain"/> properties.
+            By default this property is not set.
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.ContextImpersonationOptions.LogonMode">
+            <summary>
+            The logon mode of the user before execution. This property has effect only when a username for impersonation is specified.
+            The default logon mode is automatic.
+            </summary>
+        </member>
+        <member name="T:EvoPdf.PdfToHtml.PageConvertedEventArgs">
+            <summary>
+            The <see cref="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent"/> event args
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PageConvertedEventArgs.PdfPageHtml">
+            <summary>
+            The rendered HTML for PDF page
+            </summary>
+        </member>
+        <member name="T:EvoPdf.PdfToHtml.PageConvertedEventHandler">
+            <summary>
+            The <see cref="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent"/> event delegate
+            </summary>
+            <param name="args">The event arguments object</param>
+        </member>
+        <member name="T:EvoPdf.PdfToHtml.PdfDocumentInfo">
+            <summary>
+            This class encapsulates various properties of the PDF document being converted or searched
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfDocumentInfo.Title">
+            <summary>
+            The PDF document title
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfDocumentInfo.Subject">
+            <summary>
+            The PDF document subject
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfDocumentInfo.Keywords">
+            <summary>
+            The PDF document keywords
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfDocumentInfo.Author">
+            <summary>
+            The PDF document author
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfDocumentInfo.Creator">
+            <summary>
+            The PDF document creator
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfDocumentInfo.Producer">
+            <summary>
+            The PDF document producer
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfDocumentInfo.CreationDate">
+            <summary>
+            The PDF document creation date
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfDocumentInfo.LastModifiedDate">
+            <summary>
+            The PDF document last modification date
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfDocumentInfo.PageCount">
+            <summary>
+            The number of pages in PDF document
+            </summary>
+        </member>
+        <member name="T:EvoPdf.PdfToHtml.PdfPageHtml">
+            <summary>
+            This class encapsulates the HTML rendering of a PDF page
+            </summary>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfPageHtml.Dispose(System.Boolean)">
+            <summary>
+            Releases the HTML document
+            </summary>
+            <param name="disposing">A flag which is true when the function call was triggered by user code</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfPageHtml.Dispose">
+            <summary>
+            Releases the underlying HTML document
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfPageHtml.Html">
+            <summary>
+            The HTML rendering of a PDF page
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfPageHtml.PageNumber">
+            <summary>
+            The number of the PDF page this HTML represents
+            </summary>
+        </member>
+        <member name="T:EvoPdf.PdfToHtml.PdfToHtmlConverter">
+            <summary>
+            This class encapsulates the PDF to HTML Converter functionality and allows you to convert the PDF document pages to HTML documents
+            </summary>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.#ctor">
+            <summary>
+            The PDF to HTML constructor
+            </summary>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.GetPageCount(System.String)">
+            <summary>
+            Gets the number of PDF pages of a PDF file
+            </summary>
+            <param name="pdfFile">The full path of the PDF file</param>
+            <returns>The number of pages in PDF document</returns>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.GetPageCount(System.IO.Stream)">
+            <summary>
+            Gets the number of pages of a PDF document in a stream
+            </summary>
+            <param name="pdfStream">The stream containing the PDF document</param>
+            <returns>The number of pages in PDF document</returns>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.GetPageCount(System.Byte[])">
+            <summary>
+            Gets the number of PDF pages of a PDF document
+            </summary>
+            <param name="pdfData">The memory buffer containing the PDF document</param>
+            <returns>The number of pages in PDF document</returns>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlInEvent(System.String)">
+            <summary>
+            Converts all the pages of a PDF file to HTML documents and raises the <see cref="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent"/> event
+            immediately after a PDF page was converted. The event handler argument contains a reference to resulted HTML document
+            </summary>
+            <param name="pdfFile">The full path of the PDF file to be converted</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlInEvent(System.IO.Stream)">
+            <summary>
+            Converts all the pages of PDF document in a stream to HTML documents and raises the <see cref="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent"/> event
+            immediately after a PDF page was converted. The event handler argument contains a reference to resulted HTML document
+            </summary>
+            <param name="pdfStream">The stream containing the PDF document to be converted</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlInEvent(System.Byte[])">
+            <summary>
+            Converts all the pages in a PDF document to HTML documents and raises the <see cref="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent"/> event
+            immediately after a PDF page was converted. The event handler argument contains a reference to resulted HTML document
+            </summary>
+            <param name="pdfData">The memory buffer containing the PDF document to be converted</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlInEvent(System.String,System.Int32)">
+            <summary>
+            Converts the pages of a PDF file to HTML documents starting from a given PDF page number to the end of the PDF document
+            and raises the <see cref="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent"/> event
+            immediately after a PDF page was converted. The event handler argument contains a reference to resulted HTML document
+            </summary>
+            <param name="pdfFile">The full path of the PDF file to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlInEvent(System.IO.Stream,System.Int32)">
+            <summary>
+            Converts the pages of a PDF document in a stream to HTML documents starting from a given PDF page number to the end of the PDF document
+            and raises the <see cref="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent"/> event
+            immediately after a PDF page was converted. The event handler argument contains a reference to resulted HTML document
+            </summary>
+            <param name="pdfStream">The stream containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlInEvent(System.Byte[],System.Int32)">
+            <summary>
+            Converts the pages of a PDF document to HTML documents starting from a given PDF page number to the end of the PDF document
+            and raises the <see cref="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent"/> event
+            immediately after a PDF page was converted. The event handler argument contains a reference to resulted HTML document
+            </summary>
+            <param name="pdfData">The memory buffer containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlInEvent(System.String,System.Int32,System.Int32)">
+            <summary>
+            Converts a range of pages of a PDF file to HTML documents and raises the <see cref="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent"/> event
+            immediately after a PDF page was converted. The event handler argument contains a reference to resulted HTML document
+            </summary>
+            <param name="pdfFile">The full path of the PDF file to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="endPageNumber">The end page number</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlInEvent(System.IO.Stream,System.Int32,System.Int32)">
+            <summary>
+            Converts a range of pages of a PDF document in a stream to HTML documents and raises the <see cref="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent"/> event
+            immediately after a PDF page was converted. The event handler argument contains a reference to resulted HTML document
+            </summary>
+            <param name="pdfStream">The stream containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="endPageNumber">The end page number</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlInEvent(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Converts a range of pages of a PDF document to HTML documents and raises the <see cref="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent"/> event
+            immediately after a PDF page was converted. The event handler argument contains a reference to resulted HTML document
+            </summary>
+            <param name="pdfData">The memory buffer containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="endPageNumber">The end page number</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlFile(System.String,System.String,System.String)">
+            <summary>
+            Converts all the pages of a PDF file to HTML files.
+            You can use the <see cref="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.CreateIndexFile"/> property to enable or disable the creation of a HTML index file
+            </summary>
+            <param name="pdfFile">The full path of the PDF file to be converted</param>
+            <param name="outputDirectory">The output directory</param>
+            <param name="htmlFileName">The output file name without extension</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlFile(System.IO.Stream,System.String,System.String)">
+            <summary>
+            Converts all the pages of PDF document in a stream to HTML files.
+            You can use the <see cref="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.CreateIndexFile"/> property to enable or disable the creation of a HTML index file
+            </summary>
+            <param name="pdfStream">The stream containing the PDF document to be converted</param>
+            <param name="outputDirectory">The output directory</param>
+            <param name="htmlFileName">The output file name without extension</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlFile(System.Byte[],System.String,System.String)">
+            <summary>
+            Converts all the pages in a PDF document to HTML files.
+            You can use the <see cref="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.CreateIndexFile"/> property to enable or disable the creation of a HTML index file
+            </summary>
+            <param name="pdfData">The memory buffer containing the PDF document to be converted</param>
+            <param name="outputDirectory">The output directory</param>
+            <param name="htmlFileName">The output file name without extension</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlFile(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Converts the pages of a PDF file to HTML files starting from a given PDF page number to the end of the PDF document. 
+            You can use the <see cref="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.CreateIndexFile"/> property to enable or disable the creation of a HTML index file
+            </summary>
+            <param name="pdfFile">The full path of the PDF file to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="outputDirectory">The output directory</param>
+            <param name="htmlFileName">The output file name without extension</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlFile(System.IO.Stream,System.Int32,System.String,System.String)">
+            <summary>
+            Converts the pages of a PDF document in a stream to HTML files starting from a given PDF page number to the end of the PDF document.
+            You can use the <see cref="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.CreateIndexFile"/> property to enable or disable the creation of a HTML index file
+            </summary>
+            <param name="pdfStream">The stream containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="outputDirectory">The output directory</param>
+            <param name="htmlFileName">The output file name without extension</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlFile(System.Byte[],System.Int32,System.String,System.String)">
+            <summary>
+            Converts the pages of a PDF document to HTML files starting from a given PDF page number to the end of the PDF document.
+            You can use the <see cref="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.CreateIndexFile"/> property to enable or disable the creation of a HTML index file
+            </summary>
+            <param name="pdfData">The memory buffer containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="outputDirectory">The output directory</param>
+            <param name="htmlFileName">The output file name without extension</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlFile(System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Converts a range of pages of a PDF file to HTML files.
+            You can use the <see cref="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.CreateIndexFile"/> property to enable or disable the creation of a HTML index file
+            </summary>
+            <param name="pdfFile">The full path of the PDF file to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="endPageNumber">The end page number</param>
+            <param name="outputDirectory">The output directory</param>
+            <param name="htmlFileName">The output file name without extension</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlFile(System.IO.Stream,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Converts a range of pages of a PDF document in a stream to HTML files.
+            You can use the <see cref="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.CreateIndexFile"/> property to enable or disable the creation of a HTML index file
+            </summary>
+            <param name="pdfStream">The stream containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="endPageNumber">The end page number</param>
+            <param name="outputDirectory">The output directory</param>
+            <param name="htmlFileName">The output file name without extension</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlFile(System.Byte[],System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Converts a range of pages of a PDF document to HTML files.
+            You can use the <see cref="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.CreateIndexFile"/> property to enable or disable the creation of a HTML index file
+            </summary>
+            <param name="pdfData">The memory buffer containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="endPageNumber">The end page number</param>
+            <param name="outputDirectory">The output directory</param>
+            <param name="htmlFileName">The output file name without extension</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtml(System.String)">
+            <summary>
+            Converts all the pages of a PDF file to HTML documents
+            </summary>
+            <param name="pdfFile">The full path of the PDF file to be converted</param>
+            <returns>The HTML rendering of the PDF pages</returns>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtml(System.IO.Stream)">
+            <summary>
+            Converts all the pages of PDF document in a stream to HTML documents
+            </summary>
+            <param name="pdfStream">The stream containing the PDF document to be converted</param>
+            <returns>The HTML rendering of the PDF pages</returns>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtml(System.Byte[])">
+            <summary>
+            Converts all the pages in a PDF document to HTML documents
+            </summary>
+            <param name="pdfData">The memory buffer containing the PDF document to be converted</param>
+            <returns>The HTML rendering of the PDF pages</returns>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtml(System.String,System.Int32)">
+            <summary>
+            Converts the pages of a PDF file to HTML documents starting from a given PDF page number to the end of the PDF document
+            </summary>
+            <param name="pdfFile">The full path of the PDF file to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <returns>The HTML rendering of the PDF pages</returns>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtml(System.IO.Stream,System.Int32)">
+            <summary>
+            Converts the pages of a PDF document in a stream to HTML documents starting from a given PDF page number to the end of the PDF document
+            </summary>
+            <param name="pdfStream">The stream containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <returns>The HTML rendering of the PDF pages</returns>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtml(System.Byte[],System.Int32)">
+            <summary>
+            Converts the pages of a PDF document to HTML documents starting from a given PDF page number to the end of the PDF document
+            </summary>
+            <param name="pdfData">The memory buffer containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <returns>The HTML rendering of the PDF pages</returns>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtml(System.String,System.Int32,System.Int32)">
+            <summary>
+            Converts a range of pages of a PDF file to HTML documents
+            </summary>
+            <param name="pdfFile">The full path of the PDF file to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="endPageNumber">The end page number</param>
+            <returns>The HTML rendering of the PDF pages</returns>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtml(System.IO.Stream,System.Int32,System.Int32)">
+            <summary>
+            Converts a range of pages of a PDF document in a stream to HTML documents
+            </summary>
+            <param name="pdfStream">The stream containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="endPageNumber">The end page number</param>
+            <returns>The HTML rendering of the PDF pages</returns>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtml(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Converts a range of pages of a PDF document to HTML documents
+            </summary>
+            <param name="pdfData">The memory buffer containing the PDF document to be converted</param>
+            <param name="startPageNumber">The start page number</param>
+            <param name="endPageNumber">The end page number</param>
+            <returns>The HTML rendering of the PDF pages</returns>
+        </member>
+        <member name="E:EvoPdf.PdfToHtml.PdfToHtmlConverter.PageConvertedEvent">
+            <summary>
+            The event which is raised immediately after a PDF page was converted. You can raise this event by calling the 
+            methods with 'InEvent' suffix like <see cref="M:EvoPdf.PdfToHtml.PdfToHtmlConverter.ConvertPdfPagesToHtmlInEvent(System.String)"/>
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.RunTimeoutSec">
+            <summary>
+            The maximum time allowed for this tool to run
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.UserPassword">
+            <summary>
+            The user password to be used to open a password protected PDF document
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.OwnerPassword">
+            <summary>
+            The owner password to be used to open a password protected PDF document
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.LicenseKey">
+            <summary>
+            Gets or sets the license key string received from vendor. 
+            If this property is null the tool will automatically enter in evaluation mode
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.ImpersonationOptions">
+            <summary>
+            The impersonation options used during tool execution
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.PdfToolFullPath">
+            <summary>
+            Sets the full path of  the .dat helper file. By default this file is expected to be found 
+            in the same folder with .dll assembly.
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.PdfDocumentInfo">
+            <summary>
+            Gets the object encapsulating the PDF document properties. This objects is populated after 
+            tool execution finished
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.CreateIndexFile">
+            <summary>
+            A flag controlling if a HTML index file is also created when the PDF pages are converted to HTML files. The default value is true
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.IgnoreHiddenText">
+            <summary>
+            A flag controlling if the hidden text from PDF is rendered to HTML. The default value is true
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.Resolution">
+            <summary>
+            The resolution in DPI of the HTML images. The default value is 150
+            </summary>
+        </member>
+        <member name="P:EvoPdf.PdfToHtml.PdfToHtmlConverter.Zoom">
+            <summary>
+            The zoom percentage of the generated HTML content. The default value is 100
+            </summary>
+        </member>
+        <member name="T:EvoPdf.PdfToHtml.PdfToHtmlException">
+            <summary>
+            This class represents an exception thrown by the PDF to Image converter
+            </summary>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlException.#ctor(System.String)">
+            <summary>
+            Constructs a PDF to HTML exception with the given error message
+            </summary>
+            <param name="message">The exception message</param>
+        </member>
+        <member name="M:EvoPdf.PdfToHtml.PdfToHtmlException.#ctor(System.String,System.Exception)">
+            <summary>
+            Constructs a PDF to HTML exception with the given error message and the given inner exception object
+            </summary>
+            <param name="message">The exception message</param>
+            <param name="innerException">The inner exception that triggered this exception</param>
+        </member>
+    </members>
+</doc>

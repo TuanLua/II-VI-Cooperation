@@ -1,0 +1,98 @@
+﻿@using II_VI_Incorporated_SCM.Services
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity
+@using II_VI_Incorporated_SCM.Models.TaskManagement
+@using II_VI_Incorporated_SCM.Services
+@model II_VI_Incorporated_SCM.Models.MeetingNote.MeetingNoteViewmodel
+@using II_VI_Incorporated_SCM.Models
+@{
+    ViewBag.Title = "ViewTaskListID";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2></h2>
+<div class="table-responsive" style="overflow: hidden">
+    <table class="table table-striped table-bordered table-hover">
+        <tr>
+            <td width="50px">
+                <p><b>Task</b></p>
+            </td>
+            <td>@ViewBag.Topic</td>
+        </tr>
+        <tr>
+            <td width="50px">
+                <p><b>Type:</b></p>
+            </td>
+            <td>@ViewBag.Type</td>
+        </tr>
+        <tr>
+            <td>
+                <p><b>TaskDetail:</b></p>
+            </td>
+            <td colspan="2"> @ViewBag.TaskDetail</td>
+        </tr>
+        <tr>
+            <td>
+                <p><b>Reference:</b></p>
+            </td>
+            <td colspan="2"> @ViewBag.Ref</td>
+        </tr>
+        <tr>
+            <td width="50px">
+                <p><b>UserCreate:</b></p>
+            </td>
+            <td colspan="2">@ViewBag.User</td>
+        </tr>
+        <tr>
+            <td width="50px">
+                <p><b>DateCreate:</b></p>
+            </td>
+            <td colspan="2">@ViewBag.Date.ToString("dd-MMM-yy")</td>
+        </tr>
+    </table>
+</div>
+@if (ViewBag.TaskList != null)
+{
+    var TaskList = (TASKLIST)ViewBag.TaskList;
+    <h4><b>Action Item:</b></h4>
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<II_VI_Incorporated_SCM.Models.TaskManagement.TaskManagementNCRViewModel>()
+                                                                                                                                                                                                                                                                    .Name("gridTaskDetail")
+                                                                                                                                                                                                                                                                    .Columns(columns =>
+                                                                                                                                                                                                                                                                    {
+                                                                                                                                                                                                                                                                        columns.Bound(p => p.TaskDetail.TaskID).Hidden();
+                                                                                                                                                                                                                                                                        columns.Bound(p => p.TaskDetail.TASKNAME).Title("Task").HtmlAttributes(new { @class = "ClickGrid" });
+                                                                                                                                                                                                                                                                        columns.Bound(p => p.TaskDetail.OWNER).Title("Owner").Hidden();
+                                                                                                                                                                                                                                                                        columns.Bound(p => p.AssigneeName).Title("Assignee").HtmlAttributes(new { @class = "ClickGrid" });
+                                                                                                                                                                                                                                                                        columns.Bound(p => p.TaskDetail.EstimateEndDate).Title("Due Date").HtmlAttributes(new { @class = "ClickGrid" }).ClientTemplate("#= TaskDetail.EstimateEndDate ? kendo.toString(kendo.parseDate(TaskDetail.EstimateEndDate), 'dd-MMM-yy') : '' #");
+                                                                                                                                                                                                                                                                        columns.Bound(p => p.TaskDetail.STATUS).Title("Status").HtmlAttributes(new { @class = "ClickGrid" });
+                                                                                                                                                                                                                                                                        columns.Bound(p => p.TaskDetail.PRIORITY).Title("Priority").HtmlAttributes(new { @class = "ClickGrid" });
+                                                                                                                                                                                                                                                                    })
+                                                                                                                                                                                                                                                                    .Pageable()
+                                                                                                                                                                                                                                                                    .Sortable()
+                                                                                                                                                                                                                                                                    .Scrollable()
+                                                                                                                                                                                                                                                                    .Filterable()
+                                                                                                                                                                                                                                                                    .HtmlAttributes(new { style = "height:200px; border: 1px solid black;" })
+                                                                                                                                                                                                                                                                    .DataSource(dataSource => dataSource
+                                                                                                                                                                                                                                                                        .Ajax()
+                                                                                                                                                                                                                                                                        .PageSize(10)
+                                                                                                                                                                                                                                                                        .Read(read => read.Action("ReadTaksMantNCR", "TaskManagement", new { taskID = ViewBag.TaskID }))
+                                                                                                                                                                                                                                                                        .Sort(sort => sort.Add("TaskDetail.EstimateStartDate").Ascending())
+                                                                                                                                                                                                                                                                    ))
+        </div>
+    </div>
+}
+<div align="center">
+    <button class="btn btn-sm btn-info" id="ADD">AddTask</button>
+    <button class="btn btn-sm btn-danger" id="Close">Close</button>
+</div>
+<script>
+    $('#ADD').on('click', function (e) {
+        e.preventDefault();
+        window.open('@Url.Action("CreateTaskManagementNcrByTaskNo", "TaskManagement", new { taskNO =ViewBag.Ref.Trim(),type=ViewBag.Type })','_blank');
+    })
+     $('#Close').on('click', function (e) {
+                e.preventDefault();
+                 window.location.href = '@Url.Action("index", "TaskManagement")';
+            })
+</script>

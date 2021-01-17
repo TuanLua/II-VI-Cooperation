@@ -1,0 +1,33 @@
+﻿@model List<II_VI_Incorporated_SCM.Models.INS_RESULT_DEFECT>
+@{
+    var i = 1;
+}
+<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-res">
+    <thead>
+    <tr>
+        <th>ITEM</th>
+        <th>QTY</th>
+        <th>DEFECT</th>
+        <th>DECRIPTION</th>
+        <th>REMARK</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+        @foreach (var item in Model)
+        {
+            i++;
+            <td>@i</td>
+            <td>@item.NC_Qty</td>
+            <td>
+                @Html.Action("GetdropdownDefect", "WriteNcrForIqc")
+            </td>
+            <td>
+                @*@Html.Action("GetdropdownDeCript","WriteNcrForIqc")*@
+            </td>
+            <td><textarea type="text" name="remark"></textarea></td>
+        }
+
+    </tr>
+    </tbody>
+</table>

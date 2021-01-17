@@ -1,0 +1,167 @@
+﻿@using II_VI_Incorporated_SCM.Controllers.NCR
+@using II_VI_Incorporated_SCM.Models
+@using II_VI_Incorporated_SCM.Models.NCR
+@using Microsoft.AspNet.Identity
+@using II_VI_Incorporated_SCM.Services
+@{
+    ViewBag.Title = "List NCR Approval";
+}
+<style>
+    .NCR_NUM:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .NCR_NUM {
+        color: blue;
+    }
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+
+    .Taskname {
+        color: blue;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet-body">
+            <h4>NCR WAITTING DISPOSITION <span style="color: red"></span> </h4>
+            <div class="portlet box">
+                <div class="portlet-title">
+                    <div class="actions">
+                        <div class="btn-group">
+                            <button
+                              class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                <i class="fa"></i> Find By
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="javascript:;" onclick="onFindName('My Dispo')"> My Disposition </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" id="clear"> All </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-18 col-md-12">
+                        @(Html.Kendo().Grid<GetListWaiitingDisposition_Result>()
+                                              .Name("gridDisposition")
+                                              .Columns(columns =>
+                                              {
+                                                  columns.Bound(p => p.NCR_NUM).HtmlAttributes(new { @class = "NCR_NUM" }).Width(90).Title("NCR#");
+                                                  columns.Bound(p => p.Amount).Format("{0:c}").Title("Amount").Width(0);
+                                                  columns.Bound(p => p.AGE).Title("Aging");
+                                                  columns.Bound(p => p.USERDISPO).Title("Comment").Width(150);
+                                                  columns.Bound(p => p.MI_PART_NO).Title("PartNum");
+                                                  columns.Bound(p => p.TaskName).Title("Task").HtmlAttributes(new { @class = "Taskname" });
+                                                  columns.Bound(p => p.DESCRIPTION).Title("TaskDetail");
+                                                  columns.Bound(p => p.ASSIGNEE).Title("AssignTo");
+                                                  // columns.Bound(p => p.INS_DATE).Format("{0:dd-MMM-yy}");
+                                                  //  columns.Bound(p => p.RECEIVER).Hidden();
+                                                  columns.Bound(p => p.DueDate).Format("{0:dd-MMM-yy}").Title("Due Date");
+                                                  columns.Bound(p => p.STATUS).Title("Status");
+                                                  //  columns.Bound(p => p.Priorty).Title("Prority");
+                                                  //  columns.Bound(p => p.TaskID).Hidden();
+                                                  //  columns.Bound(p => p.REC_QTY);
+                                                  //    columns.Bound(p => p.);
+                                                  //   columns.Bound(p => p.STATUS);
+                                                  //  columns.Bound(p => p.Userapproval).Hidden();
+                                              })
+                                               .ToolBar(tools => tools.Excel())
+                                              .Excel(excel => excel
+                                .FileName("NCRWaitingDispositon.xlsx")
+                                .Filterable(true)
+                                .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+                                          )
+                                               .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                                              .Sortable()
+                                              .Scrollable()
+                                              .Filterable()
+                                              .HtmlAttributes(new { style = "height:550px;" })
+                                              .DataSource(dataSource => dataSource
+                                                  .Ajax()
+                                                  .PageSize(10)
+                                                  .Read(read => read.Action("GetListWaitingDisposition", "NCR"))
+                                                      .Sort(sort => sort.Add("AGE").Descending())
+                                              ))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input hidden id="name"/>
+</div>
+<script>
+  //  var name = '@User.Identity.GetUserId()';
+</script>
+@section scripts {
+    <script type="text/javascript">
+           $(document).ready(function () {
+            var id = '@User.Identity.GetUserId()';
+            $.blockUI();
+            $.post('@Url.Action("Getnamebyid", "WriteNCRForIQC")', { id: id },
+                function (result) {
+               $("#name").val(result);
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+        })
+        //var mygrid = $("#gridDisposition").kendoGrid({
+        //    selectable: true
+        //});
+        //select row data catch status
+        @*mygrid.on("click", "tr", function () {
+            var grid = $("#gridApproval").data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+            var ncrnum = selectedItem.NCR_NUM;
+            var status = selectedItem.STATUS;
+            if (status != '@Status.Void') {
+                window.open('@Url.Action("ViewApproval", "NCRApproval")' + "?NCR_NUM=" + ncrnum, '_blank');
+            }
+        });*@
+        var filter = "";
+        $("#clear").click(function () {
+            $("#gridDisposition").data("kendoGrid").dataSource.filter({ field: "Taskname", operator: "contains", value: "" });
+            $('#search').val("");
+            $('a.k-grid-filter').removeClass('k-state-active')
+        })
+        function onFindName() {
+            var filter = $('#name').val();
+            $("#gridDisposition").data("kendoGrid").dataSource.filter({ field: "USERDISPO", operator: "contains", value: filter });
+        }
+        $("#gridDisposition").on("click", ".NCR_NUM", function (e) {
+            var grid = $("#gridDisposition").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+              var ncrnum = model.NCR_NUM;
+            window.open('@Url.Action("ViewApproval", "NCRApproval")' + "?NCR_NUM=" + ncrnum, '_blank');
+        });
+        $("#gridDisposition").on("click", ".Taskname", function (e) {
+            var grid = $("#gridDisposition").data("kendoGrid");
+            var model = grid.dataItem($(e.target).closest("tr"));
+            var NCR_NUM = model.TaskID;
+            window.open('@Url.Action("EditTaskManagementNcr", "TaskManagement")' + "?taskID=" + NCR_NUM, '_blank');
+        });
+    </script>
+}

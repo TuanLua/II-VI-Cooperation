@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Innovation/Views/Shared/_LayoutIdea.cshtml";
+}
+<div class="container">
+    <div id="tab-carousel">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#follow">Follow</a>
+            </li>
+            <li>
+                <a href="#theyellow">The Yellow</a>
+            </li>
+            <li>
+                <a href="#brick">Brick</a>
+            </li>
+            <li>
+                <a href="#road">Road</a>
+            </li>
+            <li>
+                <a href="#pussy">Pussy</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="follow">
+                @Html.Partial("~/Views/WriteNCRForProcess/_WriteNCRForProcess.cshtml")
+            </div>
+            <div class="tab-pane" id="theyellow">
+                @Html.Partial("~/Views/WriteNCRForIQC/_SearchForIQC.cshtml")
+            </div>
+            <div class="tab-pane" id="brick">
+                Brick
+            </div>
+            <div class="tab-pane" id="road">
+                Road
+            </div>
+            <div class="tab-pane" id="pussy">
+                <h1>Pussy</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // default bootstrap click, apenas muda com ação do utilizador
+    //$('#myTab a').click(function (e) {
+    //  e.preventDefault()
+    //  $(this).tab('show')
+    //})
+
+    // Tab-Pane change function
+    var tabChange = function () {
+        var tabs = $('.nav-tabs > li');
+        var active = tabs.filter('.active');
+        var next = active.next('li').length ? active.next('li').find('a') : tabs.filter(':first-child').find('a');
+        // Bootsrap tab show, para ativar a tab
+        next.tab('show')
+    }
+    // Tab Cycle function
+    var tabCycle = setInterval(tabChange, 2000)
+    // Tab click event handler
+    $(function () {
+        $('.nav-tabs a').click(function (e) {
+            e.preventDefault();
+            // Parar o loop
+            clearInterval(tabCycle);
+            // mosta o tab clicado, default bootstrap
+            $(this).tab('show')
+            // Inicia o ciclo outra vez
+            setTimeout(function () {
+                tabCycle = setInterval(tabChange, 2000)//quando recomeça assume este timing
+            }, 2000);
+        });
+    });
+</script>

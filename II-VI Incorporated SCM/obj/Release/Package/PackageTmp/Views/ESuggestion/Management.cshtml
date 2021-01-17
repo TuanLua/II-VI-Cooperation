@@ -1,0 +1,190 @@
+﻿@using II_VI_Incorporated_SCM.Models
+@{
+    ViewBag.Title = "Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 align="center"><b>@ViewBag.titi -</b> <b style="color:blue">@ViewBag.ID</b> </h2>
+<br />
+<br />
+<br />
+<div class="col-xs-12" align="right">
+    <div class="col-xs-1"> </div>
+    <div class="col-xs-1">
+        <img id="h1" src="~/Content/img/attachments/1.png" width="80px" style="display:none" />
+        <img id="h11" src="~/Content/img/attachments/1.1.png" width="80px" />
+        <div align="center"><b>Step 1</b></div>
+    </div>
+    <div class="col-xs-1">
+        <br />
+        <img src="~/Content/img/attachments/images.jpg" width="50px" />
+    </div>
+    <div class="col-xs-1">
+        <img id="h2" src="~/Content/img/attachments/2.png" width="80px" style="display:none" />
+        <img id="h22" src="~/Content/img/attachments/2.2.png" width="80px" />
+        <div align="center"><b>Step 2</b></div>
+    </div>
+    <div class="col-xs-1">
+        <br />
+        <img src="~/Content/img/attachments/images.jpg" width="50px" />
+    </div>
+    <div class="col-xs-1">
+        <img id="h3" src="~/Content/img/attachments/3.png" width="80px" style="display:none" />
+        <img id="h33" src="~/Content/img/attachments/3.3.png" width="80px" />
+        <div align="center"><b>Step 3</b></div>
+    </div>
+    <div class="col-sm-1">
+        <br />
+        <img src="~/Content/img/attachments/images.jpg" width="50px" />
+    </div>
+    <div class="col-xs-1">
+        <img id="h4" src="~/Content/img/attachments/4.png" width="80px" style="display:none" />
+        <img id="h44" src="~/Content/img/attachments/4.4.png" width="80px" />
+        <div align="center"><b>Step 4</b></div>
+    </div>
+    <div class="col-xs-1">
+        <br />
+        <img src="~/Content/img/attachments/images.jpg" width="50px" />
+    </div>
+    <div class="col-xs-1">
+        <img id="h5" src="~/Content/img/attachments/5.png" width="80px" style="display:none" />
+        <img id="h55" src="~/Content/img/attachments/5.5.png" width="80px" />
+        <div align="center"><b>Step 5</b></div>
+    </div>
+</div>
+<br />
+<div class="col-xs-12" align="center">
+    <div class="col-xs-1"> </div>
+    <div class="col-xs-2" align="left">
+        <b>Suggestion Submit </b>
+    </div>
+    <div class="col-xs-2" align="left">   <b> CI Approval </b></div>
+    <div class="col-xs-2" align="left"> <b> Sponsor Approve </b></div>
+    <div class="col-xs-2" align="left">  <b> Director Approve </b></div>
+    <div class="col-xs-2" align="left"> <b> Project Leader Kickoff</b></div>
+</div>
+<br />
+<br /><br /><br /><br />
+
+<br /><br /><br /><br />
+<input value="Step1" style="border:0px;font-size:35px;text-align:left" id="StepIdx" />
+<div class="row">
+    <div class="col-xs-18 col-md-12">
+        @(Html.Kendo().Grid<sp_Inv_GetStepInfor_Result>()
+                                                                                                          .Name("gridEsuggestion")
+                                                                                                          .Columns(columns =>
+                                                                                                          {
+                                                                                                              columns.Bound(p => p.item_name).Title("Item").HtmlAttributes(new { @class = "RefNUMBER" }).Width(500);
+                                                                                                              columns.Bound(p => p.item_value).Title("Content").HtmlAttributes(new { @class = "item_value digital-led" }).Width(500).ClientTemplate("#= item_value #");
+                                                                                                          })
+                                                                                                          // .Pageable()
+                                                                                                          .Sortable()
+                                                                                                          // .Scrollable()
+                                                                                                          .Filterable()
+                                                                                                          .HtmlAttributes(new { style = "height:450px;" })
+                                                                                                          .DataSource(dataSource => dataSource
+                                                                                                              .Ajax()
+                                                                                                              .PageSize(30)
+                                                                                                              .Read(read => read.Action("ReadDataE_SuggestionManagement", "E_Suggestion"))
+                                                                                                          //.Sort(sort => sort.Add("ID").Descending())
+                                                                                                          ))
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        debugger;
+        if (@ViewBag.Step === 1) {
+            $("#h1").removeAttr("style", "display:none");
+            $("#h11").attr("style", "display:none");
+
+        }
+        if (@ViewBag.Step === 2) {
+            $("#h1").removeAttr("style", "display:none");
+            $("#h11").attr("style", "display:none");
+            $("#h2").removeAttr("style", "display:none");
+            $("#h22").attr("style", "display:none");
+
+        }
+
+        if (@ViewBag.Step === 3) {
+            $("#h1").removeAttr("style", "display:none");
+            $("#h11").attr("style", "display:none");
+            $("#h2").removeAttr("style", "display:none");
+            $("#h22").attr("style", "display:none");
+            $("#h3").removeAttr("style", "display:none");
+            $("#h33").attr("style", "display:none");
+        }
+        if (@ViewBag.Step === 4) {
+            $("#h1").removeAttr("style", "display:none");
+            $("#h11").attr("style", "display:none");
+            $("#h2").removeAttr("style", "display:none");
+            $("#h22").attr("style", "display:none");
+            $("#h3").removeAttr("style", "display:none");
+            $("#h33").attr("style", "display:none");
+            $("#h4").removeAttr("style", "display:none");
+            $("#h44").attr("style", "display:none");
+        }
+        if (@ViewBag.Step === 5) {
+            $("#h1").removeAttr("style", "display:none");
+            $("#h11").attr("style", "display:none");
+            $("#h2").removeAttr("style", "display:none");
+            $("#h22").attr("style", "display:none");
+            $("#h3").removeAttr("style", "display:none");
+            $("#h33").attr("style", "display:none");
+            $("#h4").removeAttr("style", "display:none");
+            $("#h44").attr("style", "display:none");
+            $("#h5").removeAttr("style", "display:none");
+            $("#h55").attr("style", "display:none");
+        }
+       let id = "@ViewBag.ID";
+        let step = 'Step1';
+
+        $("#gridEsuggestion").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadDataE_SuggestionManagement", "ESuggestion")?step=' + step + '&id=' + id;
+             $("#gridEsuggestion").data("kendoGrid").dataSource.read();
+    });
+      $('#h1').on('click', function () {
+        debugger;
+        let id = "@ViewBag.ID";
+          let step = 'Step1';
+          
+        $("#gridEsuggestion").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadDataE_SuggestionManagement", "ESuggestion")?step=' + step + '&id=' + id;
+          $("#gridEsuggestion").data("kendoGrid").dataSource.read();
+          $('#StepIdx').val("Step 1");
+    })
+    $('#h2').on('click', function () {
+        debugger;
+        let id = "@ViewBag.ID";
+        let step = 'Step2';
+        $("#gridEsuggestion").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadDataE_SuggestionManagement", "ESuggestion")?step=' + step + '&id=' + id;
+        $("#gridEsuggestion").data("kendoGrid").dataSource.read();
+        $('#StepIdx').val("Step 2");
+    })
+     $('#h3').on('click', function () {
+        debugger;
+        let id = "@ViewBag.ID";
+        let step = 'Step3';
+        $("#gridEsuggestion").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadDataE_SuggestionManagement", "ESuggestion")?step=' + step + '&id=' + id;
+         $("#gridEsuggestion").data("kendoGrid").dataSource.read();
+         $('#StepIdx').val("Step 3");
+    })
+     $('#h4').on('click', function () {
+        debugger;
+        let id = "@ViewBag.ID";
+        let step = 'Step4';
+        $("#gridEsuggestion").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadDataE_SuggestionManagement", "ESuggestion")?step=' + step + '&id=' + id;
+         $("#gridEsuggestion").data("kendoGrid").dataSource.read();
+         $('#StepIdx').val("Step 4");
+    })
+         $('#h5').on('click', function () {
+        debugger;
+        let id = "@ViewBag.ID";
+        let step = 'Step5';
+        $("#gridEsuggestion").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadDataE_SuggestionManagement", "ESuggestion")?step=' + step + '&id=' + id;
+             $("#gridEsuggestion").data("kendoGrid").dataSource.read();
+             $('#StepIdx').val("Step 5");
+    })
+
+
+</script>

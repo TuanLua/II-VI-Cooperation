@@ -1,0 +1,57 @@
+﻿@model II_VI_Incorporated_SCM.Models.Account.LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_Login_Layout.cshtml";
+    ViewBag.Title = "Login to your account";
+}
+
+<!-- BEGIN LOGIN FORM -->
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    <h3 class="form-title">@ViewBag.Title</h3>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="alert alert-danger display-hide">
+        <button class="close" data-close="alert"></button>
+        <span> Enter any username and password. </span>
+    </div>
+    <div class="form-group">
+        <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+        @Html.LabelFor(m => m.Username, new { @class = "control-label visible-ie8 visible-ie9" })
+        <div class="input-icon">
+            <i class="fa fa-user"></i>
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control placeholder-no-fix", @autocomplete = "off", @placeholder = "Username" })
+            @*@Html.ValidationMessageFor(m => m.Username , "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "control-label visible-ie8 visible-ie9" })
+        <div class="input-icon">
+            <i class="fa fa-lock"></i>
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control placeholder-no-fix", @autocomplete = "off", @placeholder = "Password", @type = "Password" })
+            @*@Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+    <div class="form-actions">
+        <label class="rememberme mt-checkbox mt-checkbox-outline">
+            @Html.CheckBoxFor(m => m.RememberMe)
+            @Html.LabelFor(m => m.RememberMe)
+            <span></span>
+        </label>
+        <button type="submit" class="btn green pull-right"> Login </button>
+    </div>
+    <div class="forget-password">
+        <h4>Forgot your password ?</h4>
+        <p>
+            no worries, click
+            <a href='@Url.Action("ForgotPassword", "Account")'> here </a> to reset your password.
+        </p>
+    </div>
+    <div class="create-account">
+        <p>
+            Don't have an account yet ?&nbsp;
+            <a href='@Url.Action("Register", "Account")'> Create an account </a>
+        </p>
+    </div>
+}
+<!-- END LOGIN FORM -->

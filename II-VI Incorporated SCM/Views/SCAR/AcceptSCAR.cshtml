@@ -1,0 +1,1252 @@
+﻿@model II_VI_Incorporated_SCM.Models.SCAR.SupplierCompletedViewModel
+@using II_VI_Incorporated_SCM.Models
+@{
+    ViewBag.Title = "SCAR";
+}
+@if (ViewBag.Status == "Accepted by Supplier" || ViewBag.Status == "Verification" )
+{
+    <button type="button" class="btn btn-success" id="btnEdit">Edit</button>
+    <button type="button" class="btn btn-success" id="btnSave" style="display:none">Save</button>
+
+    <a class="btn btn-success" id="closencr" style="float:right; margin-right:5px" target="_blank" href="@Url.Action("CreateTaskManagementNcrByTaskNo", "TaskManagement", new { taskNO = Request.Params["SCARID"],type="SCAR" })">
+        Add Task
+    </a>
+}
+<button type="button" class="btn btn-warning" id="btnAccepted" onclick="OnClickAccept()">Accept</button>
+<button type="button" class="btn btn-danger" id="btnReject" onclick="OnClickReject()">Reject</button>
+<button type="button" class="btn btn-success hidden" id="btnSendNoti" onclick="OnClickSendNoti()">Send Notification to Supplier</button>
+<button type="button" class="btn btn-success" onclick="backToIndex()">Close</button>
+
+@if ((bool)ViewBag.Check6D)
+{
+    <button type="button" class="btn btn-danger" id="btnCloseSCAR" style="float:right; margin-right:5px">Close SCAR</button>
+}
+<button type="button" class="btn btn-warning" onclick="voidSCAR()" style="float:right; margin-right:5px">Void</button>
+<input type="hidden" value="@Model.SCARInfo.ID" name="ID" />
+<div align="center"><h2><strong>SUPPLIER CORRECTIVE ACTION REQUEST (SCAR)</strong></h2></div>
+<div>
+    <table class="table table-striped table-bordered table-hover" border="1">
+        <tr>
+            <td colspan="10">
+                &nbsp;
+            </td>
+            <td colspan="4">Form: 005-0206 Rev </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                <div class="row top-buffer">
+                    <label class="col-md-2 control-label">Supplier:</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("VEN_NAM", (string)ViewBag.SupplierInfo.VEN_NAM, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <label class="col-md-2 control-label">Address:</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("ADDRESS", (string)ViewBag.SupplierInfo.ADDRESS, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <label class="col-md-2 control-label">Contact:</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("CONTACT", (string)ViewBag.SupplierInfo.CONTACT, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <label class="col-md-2 control-label">Email:</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("EMAIL", (string)ViewBag.SupplierInfo.EMAIL, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <label class="col-md-2 control-label">Tel:</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("TEL", (string)ViewBag.SupplierInfo.TEL, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <label class="col-md-2 control-label">Fax:</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("FAX", (string)ViewBag.SupplierInfo.FAX, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+            </td>
+            <td colspan="3">
+                <div class="row top-buffer">
+                    <label class="col-md-4 control-label">SCAR #:</label>
+                    <div class="col-md-8">
+                        @Html.TextBox("SCAR_ID", Model.SCARInfo.SCAR_ID, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <label class="col-md-4 control-label">Noncomforming Qty:</label>
+                    <div class="col-md-8">
+                        @Html.TextBox("NON_QTY", Model.SCARInfo.NON_QTY, new { @class = "form-control", @readonly = "readonly" })
+                        <span id="Err_NonConfQty" class="help-block text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <label class="col-md-4 control-label">II-VI Marlow NCR #:</label>
+                    <div class="col-md-8">
+                        @Html.TextBox("NCR_NUMBER", Model.SCARInfo.NCR_NUMBER, new { @class = "form-control digital-led", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="row top-buffer">
+                    <label class="col-md-4 control-label">NC:</label>
+                    <div class="col-md-8">
+                        <input value="@ViewBag.NCCodeValue" readonly class="form-control" />
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <label class="col-md-4 control-label">RMA#:</label>
+                    <div class="col-md-8">
+                        @Html.TextBox("RMA", Model.SCARInfo.RMA, new { @class = "form-control", @readonly = "readonly" })
+                        <span id="Err_RMA" class="help-block text-danger"></span>
+                    </div>
+                </div>
+                <div class="row top-buffer">
+                    <label class="col-md-4 control-label">CATEGORY:</label>
+                    <div class="col-md-8">
+                        <input value="@ViewBag.Category" readonly class="form-control" />
+                    </div>
+                </div>
+            </td>
+            <td colspan="4">
+                <div class="row top-buffer">
+                    <label class="col-md-5 control-label">Requested By:</label>
+                    <div class="col-md-7">
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <label class="col-md-3 control-label">Buyer:</label>
+                    <div class="col-md-9">
+                        @Html.TextBox("BUYER", Model.SCARInfo.BUYER, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <label class="col-md-3 control-label">Quality:</label>
+                    <div class="col-md-9">
+                        @Html.TextBox("QUALITY", Model.SCARInfo.QUALITY, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <div class="col-md-12">
+                        <table class="table table-striped table-bordered table-hover">
+                            <tr style="background-color:gray">
+                                <td colspan="2" align="center">
+                                    For II-VI Marlow Use Only:
+                                </td>
+                            </tr>
+                            <tr style="background-color:gray">
+                                <td>
+                                    VN SCAR #:
+                                </td>
+                                <td>@Html.TextBox("VN_SCAR", Model.SCARInfo.VN_SCAR, new { @class = "form-control", @readonly = "readonly" })</td>
+                            </tr>
+                            <tr style="background-color:gray">
+                                <td>
+                                    VN NCR #:
+                                </td>
+                                <td>@Html.TextBox("VN_NCR", Model.SCARInfo.VN_NCR, new { @class = "form-control", @readonly = "readonly" })</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                Purchase Order Number:	@Html.TextBox("PO_NUMBER", Model.SCARInfo.PO_NUMBER, new { @class = "form-control", @readonly = "readonly" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                II-VI Marlow Part Number: @Html.TextBox("MI_PART_NO", Model.SCARInfo.MI_PART_NO, new { @class = "form-control", @readonly = "readonly" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="8"><b>CUSTOMER CONCERN:</b></td>
+            <td colspan="2">DATE</td>
+            <td colspan="2">
+                @String.Format("{0:dd-MMM-yy}", Model.SCARInfo.DATEPROBLEM)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                Recurring Problem?
+                @Html.TextBox("RECURING_PROBLEM", Model.SCARInfo.RECURING_PROBLEM, new { @readonly = "readonly" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                @Html.TextArea("PROBLEM", Model.SCARInfo.PROBLEM, new { @class = "form-control", @rows = 5, @readonly = "readonly" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                The above material was found to be non-compliant with the II-VI Marlow specification or purchase order.  Please identify the cause of the defect and the corrective and preventive action taken.  A response should be returned by the given date (below).  Should you require additional time, please contact the II-VI Marlow Supplier Quality Department prior to the due date to request an extension.  (Attach objective evidence as proof of actions taken.)
+
+            </td>
+
+        </tr>
+        <tr>
+            <td colspan="4">
+                Please Respond By:
+            </td>
+            <td colspan="4">@Html.TextBox("DATERESPOND", String.Format("{0:dd-MMM-yy}", Model.SCARInfo.DATERESPOND), new { @class = "form-control", @readonly = "readonly", @style = "background-color:yellow" })</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            @if (Model.D0.EDIVENCE != ".." && Model.D0.EDIVENCE != "" && Model.D0.EDIVENCE != null)
+            {
+                <td colspan="6"><strong><b>D0 - PLAN</b></strong></td>
+                <td colspan="2"><a target="_blank" href="@Model.D0.EDIVENCE"><i class='fa'>Evidence</i></a></td>
+            }
+            else
+            {
+                <td colspan="8"><strong><b>D0 - PLAN</b></strong></td>
+            }
+            <td colspan="2">DATE</td>
+            <td colspan="2">@String.Format("{0:dd-MMM-yy}", Model.D0.DATE_D0)</td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                @Model.D0.CONTENT
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12"></td>
+        </tr>
+        <tr>
+            @if (Model.D1.EDIVENCE != ".." && Model.D1.EDIVENCE != "" && Model.D1.EDIVENCE != null)
+            {
+                <td colspan="6"><strong><b>D1 - USE TEAM APPROACH</b></strong></td>
+                <td colspan="2"><a href="@Model.D1.EDIVENCE"><i class='fa'>Evidence</i></a></td>
+            }
+            else
+            {
+                <td colspan="8"><strong><b>D1 - USE TEAM APPROACH</b></strong></td>
+            }
+            <td colspan="2">DATE</td>
+            <td colspan="2">@String.Format("{0:dd-MMM-yy}", Model.D1.DATE_D1)</td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                Team Leader:
+            </td>
+            <td colspan="2">
+                Champion:
+            </td>
+            <td colspan="2">
+                Member:
+            </td>
+            <td colspan="6">
+                External member:
+            </td>
+        </tr>
+        <tr style="color:blue">
+            <td colspan="4">
+                @Model.D1.LEADER
+            </td>
+            <td colspan="2">
+                @Model.D1.CHAMPION
+            </td>
+            <td colspan="2">
+                @Model.D1.MEMBER
+            </td>
+            <td colspan="6">
+                @Model.D1.EXTERNAL_MEMBER
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12"></td>
+        </tr>
+        <tr>
+            @if (Model.D2.EDIVENCE != ".." && Model.D2.EDIVENCE != "" && Model.D2.EDIVENCE != null)
+            {
+                <td colspan="6"><strong><b>D2 - DESCRIBE THE PROBLEM</b></strong></td>
+                <td colspan="2"><a target="_blank" href="@Model.D2.EDIVENCE"><i class='fa'>Evidence</i></a></td>
+            }
+            else
+            {
+                <td colspan="8"><strong><b>D2 - DESCRIBE THE PROBLEM</b></strong></td>
+            }
+            <td colspan="2">DATE</td>
+            <td colspan="2">@String.Format("{0:dd-MMM-yy}", Model.D2.DATE_D2)</td>
+        </tr>
+        <tr style="color:blue">
+            <td colspan="12">
+                @Model.D2.CONTENT
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12"></td>
+        </tr>
+        <tr>
+            @if (Model.D3.Count > 0)
+            {
+                if (Model.D3[0].EDIVENCE != ".." && Model.D3[0].EDIVENCE != "" && Model.D3[0].EDIVENCE != null)
+                {
+                    <td colspan="6"><strong><b>D3 - IMPLEMENT CONTAINMENT PLANS (SHORT TERM) - DESCRIBE</b></strong></td>
+                    <td colspan="2"><a target="_blank" href="@Model.D3[0].EDIVENCE"><i class='fa'>Evidence</i></a></td>
+                }
+                else
+                {
+                    <td colspan="8"><strong><b>D3 - IMPLEMENT CONTAINMENT PLANS (SHORT TERM) - DESCRIBE</b></strong></td>
+                }
+            }
+            else
+            {
+                <td colspan="8"><strong><b>D3 - IMPLEMENT CONTAINMENT PLANS (SHORT TERM) - DESCRIBE</b></strong></td>
+            }
+            <td colspan="2">WHO</td>
+            <td colspan="2">WHEN</td>
+        </tr>
+        @foreach (var item in Model.D3)
+        {
+            <tr style="color:blue">
+                <td colspan="8">@item.CONTENT</td>
+                <td colspan="2">@item.WHO_IMPLEMENT</td>
+                <td colspan="2">@String.Format("{0:dd-MMM-yy}", item.WHEN_IMPLEMENT)</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="12"></td>
+        </tr>
+        <tr>
+            @if (Model.D4.EDIVENCE != ".." && Model.D4.EDIVENCE != "" && Model.D4.EDIVENCE != null)
+            {
+                <td colspan="6"><strong><b>D4 - DESCRIBE THE ROOT CAUSE</b></strong></td>
+                <td colspan="2"><a target="_blank" href="@Model.D4.EDIVENCE"><i class='fa'>Evidence</i></a></td>
+            }
+            else
+            {
+                <td colspan="8"><strong><b>D4 - DESCRIBE THE ROOT CAUSE</b></strong></td>
+            }
+            <td colspan="2">DATE</td>
+            <td colspan="2">@String.Format("{0:dd-MMM-yy}", Model.D4.DATE_D4)</td>
+        </tr>
+        <tr style="color:blue">
+            <td colspan="12">
+                @Model.D4.CONTENT
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12"></td>
+        </tr>
+        <tr>
+            @if (Model.D5.Count > 0)
+            {
+                if (Model.D5[0].EDIVENCE != ".." && Model.D5[0].EDIVENCE != "" && Model.D5[0].EDIVENCE != null)
+                {
+                    <td colspan="6"><strong><b>D5 - IMPLEMENT PERMANENT CORRECTIVE ACTIONS - DESCRIBE</b></strong></td>
+                    <td colspan="2"><a target="_blank" href="@Model.D5[0].EDIVENCE"><i class='fa'>Evidence</i></a></td>
+                }
+                else
+                {
+                    <td colspan="8"><strong><b>D5 - IMPLEMENT PERMANENT CORRECTIVE ACTIONS - DESCRIBE</b></strong></td>
+                }
+            }
+            else
+            {
+                <td colspan="8"><strong><b>D5 - IMPLEMENT PERMANENT CORRECTIVE ACTIONS - DESCRIBE</b></strong></td>
+            }
+            <td colspan="2">WHO</td>
+            <td colspan="2">WHEN</td>
+        </tr>
+        @foreach (var item in Model.D5)
+        {
+            <tr style="color:blue">
+                <td colspan="8">@item.CONTENT</td>
+                <td colspan="2">@item.WHO_IMPLEMENT</td>
+                <td colspan="2">@String.Format("{0:dd-MMM-yy}", item.WHEN_IMPLEMENT)</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="12"></td>
+        </tr>
+        <tr>
+            @if (Model.D6.Count > 0)
+            {
+                if (Model.D6[0].EDIVENCE != ".." && Model.D6[0].EDIVENCE != "" && Model.D6[0].EDIVENCE != null)
+                {
+                    <td colspan="6"><strong><b>D6 - VALIDATION OF CORRECTIVE ACTION (Please attach copies of audits, meeting minutes, or other type of activities that can be reviewed.)</b></strong></td>
+                    <td colspan="2"><a target="_blank" href="@Model.D6[0].EDIVENCE"><i class='fa'>Evidence</i></a></td>
+                }
+                else
+                {
+                    <td colspan="8"><strong><b>D6 - VALIDATION OF CORRECTIVE ACTION (Please attach copies of audits, meeting minutes, or other type of activities that can be reviewed.)</b></strong></td>
+                }
+            }
+            else
+            {
+                <td colspan="8"><strong><b>D6 - VALIDATION OF CORRECTIVE ACTION (Please attach copies of audits, meeting minutes, or other type of activities that can be reviewed.)</b></strong></td>
+            }
+            <td colspan="2">WHO</td>
+            <td colspan="2">WHEN</td>
+        </tr>
+        @foreach (var item in Model.D6)
+        {
+            <tr style="color:blue">
+                <td colspan="8">@item.CONTENT</td>
+                <td colspan="2">@item.WHO_IMPLEMENT</td>
+                <td colspan="2">@String.Format("{0:dd-MM-yy}", item.WHEN_IMPLEMENT)</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="12"></td>
+        </tr>
+        <tr>
+            @if (Model.D7.Count > 0)
+            {
+                if (Model.D7[0].EDIVENCE != ".." && Model.D7[0].EDIVENCE != "" && Model.D7[0].EDIVENCE != null)
+                {
+                    <td colspan="6"><strong><b>D7 - VERIFY EFFECTIVENESS - DESCRIBE</b></strong></td>
+                    <td colspan="2"><a target="_blank" href="@Model.D7[0].EDIVENCE"><i class='fa'>Evidence</i></a></td>
+                }
+                else
+                {
+                    <td colspan="8"><strong><b>D7 - VERIFY EFFECTIVENESS - DESCRIBE</b></strong></td>
+                }
+            }
+            else
+            {
+                <td colspan="8"><strong><b>D7 - VERIFY EFFECTIVENESS - DESCRIBE</b></strong></td>
+            }
+            <td colspan="2">WHO</td>
+            <td colspan="2">WHEN</td>
+        </tr>
+        @foreach (var item in Model.D7)
+        {
+            <tr style="color:blue">
+                <td colspan="8">@item.CONTENT</td>
+                <td colspan="2">@item.WHO_IMPLEMENT</td>
+                <td colspan="2">@String.Format("{0:dd-MMM-yy}", item.WHEN_IMPLEMENT)</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="12"></td>
+        </tr>
+        <tr>
+            @if (Model.D8.EDIVENCE_D8 != ".." && Model.D8.EDIVENCE_D8 != "" && Model.D8.EDIVENCE_D8 != null)
+            {
+                <td colspan="6"><strong><b>D8 - FOLLOW UP BY II-VI MARLOW</b></strong></td>
+                <td colspan="2"><a target="_blank" href="@Model.D8.EDIVENCE_D8"><i class='fa'>Evidence</i></a></td>
+                <td colspan="4">
+                    <input accept="application/pdf" style="display:none" class="form-control valid" data-val="true" data-val-maximumfilesize="File Upload can not be larger than 10 MB" data-val-maximumfilesize-size="10" data-val-required="The File Upload field is required." data-val-validfiletype="File Upload must be one of the following file types: pdf,PDF" data-val-validfiletype-filetypes="pdf,PDF" id="File_Upload" name="File_Upload" type="file" value="" aria-required="true" aria-describedby="File_Upload-error" aria-invalid="false">
+                    <span class="help-block text-danger requiredFileBox"></span>
+                </td>
+            }
+            else
+            {
+
+                <td colspan="8"><strong><b> D8 - FOLLOW UP BY II - VI MARLOW </b></strong></td>
+                <td colspan="4">
+                    <input accept="application/pdf" style="display:none" class="form-control valid" data-val="true" data-val-maximumfilesize="File Upload can not be larger than 10 MB" data-val-maximumfilesize-size="10485760" data-val-required="The File Upload field is required." data-val-validfiletype="File Upload must be one of the following file types: pdf,PDF" data-val-validfiletype-filetypes="pdf,PDF" id="File_Upload" name="File_Upload" type="file" value="" aria-required="true" aria-describedby="File_Upload-error" aria-invalid="false">
+                    <span class="help-block text-danger requiredFileBox"></span>
+                </td>
+            }
+        </tr>
+        <tr>
+            @if (Model.D8.CONTENT != null)
+            {
+                <td colspan="12">
+                    @Html.TextArea("CONTENTD8", Model.D8.CONTENT, new { @class = "form-control", @rows = 5, @style = "color:blue", @readonly = "readonly" })
+                </td>
+
+            }
+            else
+            {
+                <td colspan="12">
+                    @Html.TextArea("CONTENTD8", "", new { @class = "form-control", @rows = 5, @style = "color:blue", @readonly = "readonly" })
+                </td>
+
+            }
+
+        </tr>
+        <tr>
+            <td colspan="12"></td>
+        </tr>
+        <tr>
+            <td colspan="4">Supplier Representative:</td>
+            <td colspan="4">Response Date:</td>
+            <td colspan="4">II-VI Marlow acknowledgement:</td>
+        </tr>
+        <tr>
+            @if (Model.SCARInfo.SUPPLIER_REPRESENTATIVE == null)
+            {
+                <td colspan="4">@Html.TextBox("SUPPLIER_REPRESENTATIVE", "", new { @class = "form-control", @style = "color:blue" })</td>
+
+            }
+            else
+            {
+                <td colspan="4">@Html.TextBox("SUPPLIER_REPRESENTATIVE", Model.SCARInfo.SUPPLIER_REPRESENTATIVE, new { @class = "form-control", @style = "color:blue" })</td>
+
+            }
+            @if (Model.SCARInfo.DATE_D8 == null)
+            {
+                <td colspan="4">
+                    <input type="text" id="DATE_D8" required="required" name="DATE_D8" @*value="@Model.SCARInfo.DATE_D8.Value.ToString("dd-MMM-yy")"*@ readonly="readonly" class="form-control datepicker">
+                </td>
+            }
+            else
+            {
+                <td colspan="4">
+                    <input type="text" id="DATE_D8" required="required" name="DATE_D8" value="@Model.SCARInfo.DATE_D8.Value.ToString("dd-MMM-yy")" readonly="readonly" class="form-control datepicker">
+                </td>
+            }
+            @if (Model.SCARInfo.ACKNOWLEDGEMENT == null)
+            {
+                <td colspan="4">@Html.TextBox("ACKNOWLEDGEMENT", "", new { @class = "form-control", @style = "color:blue" })</td>
+            }
+            else
+            {
+                <td colspan="4">@Html.TextBox("ACKNOWLEDGEMENT", Model.SCARInfo.ACKNOWLEDGEMENT, new { @class = "form-control", @style = "color:blue" })</td>
+            }
+        </tr>
+        <tr>
+            <td colspan="12"></td>
+        </tr>
+        <tr>
+            <td colspan="6"></td>
+            <td colspan="1" align="right">SCAR status:</td>
+            <td colspan="5">@Html.TextBox("SCAR_STATUS", Model.SCARInfo.STATUS, new { @class = "form-control", @style = "color:blue", @readonly = "readonly" })</td>
+        </tr>
+    </table>
+    @if (ViewBag.TaskList != null)
+    {
+        <label><b>Action Item:</b></label>
+        var TaskList = (TASKLIST)ViewBag.TaskList;
+        <div class="row">
+            <div class="col-xs-18 col-md-12">
+                @(Html.Kendo().Grid<II_VI_Incorporated_SCM.Models.TaskManagement.TaskManagementNCRViewModel>()
+                                                                                                                                                                                                                            .Name("gridTaskDetail")
+                                                                                                                                                                                                                            .Columns(columns =>
+                                                                                                                                                                                                                            {
+                                                                                                                                                                                                                                columns.Bound(p => p.TaskDetail.TaskID).Hidden();
+                                                                                                                                                                                                                                columns.Bound(p => p.TaskDetail.TASKNAME).Title("Task").HtmlAttributes(new { @class = "ClickGrid" });
+                                                                                                                                                                                                                                columns.Bound(p => p.TaskDetail.OWNER).Title("Owner").Hidden();
+                                                                                                                                                                                                                                columns.Bound(p => p.AssigneeName).Title("Assignee").HtmlAttributes(new { @class = "ClickGrid" });
+                                                                                                                                                                                                                                columns.Bound(p => p.TaskDetail.EstimateEndDate).Title("Due Date").HtmlAttributes(new { @class = "ClickGrid" }).ClientTemplate("#= TaskDetail.EstimateEndDate ? kendo.toString(kendo.parseDate(TaskDetail.EstimateEndDate), 'dd/MMM/yy') : '' #");
+                                                                                                                                                                                                                                columns.Bound(p => p.TaskDetail.STATUS).Title("Status").HtmlAttributes(new { @class = "ClickGrid" });
+                                                                                                                                                                                                                                columns.Bound(p => p.TaskDetail.PRIORITY).Title("Priority").HtmlAttributes(new { @class = "ClickGrid" });
+                                                                                                                                                                                                                            })
+                                                                                                                                                                                                                            .Pageable()
+                                                                                                                                                                                                                            .Sortable()
+                                                                                                                                                                                                                            .Scrollable()
+                                                                                                                                                                                                                            .Filterable()
+                                                                                                                                                                                                                            .HtmlAttributes(new { style = "height:200px; border: 1px solid black;" })
+                                                                                                                                                                                                                            .DataSource(dataSource => dataSource
+                                                                                                                                                                                                                                .Ajax()
+                                                                                                                                                                                                                                .PageSize(10)
+                                                                                                                                                                                                                                .Read(read => read.Action("ReadTaksMantNCR", "TaskManagement", new { taskID = TaskList.TopicID }))
+                                                                                                                                                                                                                                .Sort(sort => sort.Add("TaskDetail.EstimateStartDate").Ascending())
+                                                                                                                                                                                                                            ))
+            </div>
+        </div>
+    }
+</div>
+@using (Html.BeginForm("SearchPositon", "SCAR", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "multipart/form-data", @id = "AcceptedForm" }))
+{
+    <div id="popupAccept" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm and Attachment Result</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal col-md-offset-1">
+                        <div class="row top-buffer boxAccepted">
+                            <input type="checkbox" id="Accepted">You are sure Supplier Accepted ?<br>
+                        </div>
+                        <div class="row top-buffer boxAttach" hidden>
+                            <input type="checkbox" id="Attach">Attach File Result from Supplier ?<br>
+                        </div>
+                        <br />
+                        <div class="row top-buffer boxAccepted">
+                            @Html.TextBox("SUPPLIER_REPRESENTATIVE", "", new { @class = "form-control", @style = "color:blue", @placeholder = "SUPPLIER_REPRESENTATIVE", @id = "SUPPLIER_REPRESENTATIVEPop" })
+                            <span class="help-block text-danger requiredBox"></span>
+                        </div>
+                        <div class="row top-buffer boxAccepted">
+                            <div class="input-group date" data-provide="datepicker" style="width: 100%">
+                                @Html.TextBox("DATE_D8", "", new { @class = "form-control", @style = "background-color:yellow", @placeholder = "Response Date", @id = "DATE_D8Pop" })
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                            <span class="help-block text-danger requiredBox"></span>
+                        </div>
+                        <div class="row top-buffer boxAccepted">
+                            @Html.TextBox("ACKNOWLEDGEMENT", "", new { @class = "form-control", @style = "color:blue", @placeholder = "ACKNOWLEDGEMENT", @id = "ACKNOWLEDGEMENTPop" })
+                            <span class="help-block text-danger requiredBox"></span>
+                        </div>
+                        <div class="row top-buffer">
+                            @Html.TextBox("FILE", "", new
+                       {
+                           @class = "hidden"@*, @readonly = "readonly"*@,
+@type = "file",
+@accept = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
+@onchange = "CheckFile(this)"
+})
+                            <span class="help-block text-danger requiredBox"></span>
+                            <div class="lstCheckbox" hidden>
+                                <input type="checkbox" class="DChk" id="D0">D0<br>
+                                <input type="checkbox" class="DChk" id="D1">D1<br>
+                                <input type="checkbox" class="DChk" id="D2">D2<br>
+                                <input type="checkbox" class="DChk" id="D3">D3<br>
+                                <input type="checkbox" class="DChk" id="D4">D4<br>
+                                <input type="checkbox" class="DChk" id="D5">D5<br>
+                                <input type="checkbox" class="DChk" id="D6">D6<br>
+                                <input type="checkbox" class="DChk" id="D7">D7<br>
+                                <input type="checkbox" class="DChk" id="D8">D8<br>
+                            </div>
+                            @*<div class="row top-buffer boxAccepted">
+                                    <input type="text" class="form-control">X<br>
+                                </div>
+                                <div class="row top-buffer boxAccepted">
+                                    <input type="date" class="form-control">Y<br>
+                                </div>
+                                <div class="row top-buffer boxAccepted">
+                                    <input type="text" class="form-control">Z<br>
+                                </div>*@
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="OnClickOk()">OK</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="popupReject" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Reject Form</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    Reason Reject
+                    @Html.TextArea("REASON", "", new { @class = "form-control", @rows = 5 })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="OnClickOkReject()">OK</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("SentMailRemind", "SCAR", FormMethod.Post, new { @class = "form-horizontal", role = "form", @enctype = "multipart/form-data", @id = "SentMailForm" }))
+{
+    <div id="popupSendMail" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Send Notification to Supplier</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row top-buffer">
+                        <label class="col-md-3 control-label">Sent To:</label>
+                        <div class="col-md-9 dropdown">
+                            @Html.TextBox("SENTTO", "", new { @class = "form-control" })
+                            <span class="help-block text-danger requiredBoxMail"></span>
+                        </div>
+                    </div>
+                    <div class="row top-buffer">
+                        <label class="col-md-3 control-label">Subject:</label>
+                        <div class="col-md-9">
+                            @Html.TextBox("SUBJECT", "", new { @class = "form-control" })
+                            <span class="help-block text-danger requiredBoxMail"></span>
+                        </div>
+                    </div>
+                    <div class="row top-buffer">
+                        <label class="col-md-3 control-label">Content:</label>
+                        <div class="col-md-9">
+                            @Html.TextArea("CONTENT", "", new { @class = "form-control", @rows = 5 })
+                            <span class="help-block text-danger requiredBoxMail"></span>
+                        </div>
+                    </div>
+                    <div class="row top-buffer">
+                        <label class="col-md-3 control-label">SCAR File:</label>
+                        <div class="col-md-9">
+                            @Html.Hidden("FILESCAR")
+                            <a id="SCARFILE"><i class='fa' id="FILENAME"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="OnClickOkMail()">OK</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+<script>
+    var SCARID = '@Request.Params["SCARID"]';
+    var VERSION = '@Request.Params["VERSION"]';
+    var Status = '@Model.SCARInfo.STATUS';
+    var select = 1;
+    var checkList = new Array();
+    var $myform = $('#AcceptedForm');
+    var stt = '@Request.Params["STATUS"]';
+    var $SentMail = $('#SentMailForm');
+
+    $(document).ready(function () {
+        //$("#DATE_D8").format("MM/dd/yyyy");
+            $(function () {
+                $('.datepicker').datepicker({
+                    format: 'dd-MM-yy',
+                    autoclose: true
+                });
+            });
+        if ($('[type="date"]').prop('type') != 'date') {
+            $('[type="date"]').datepicker();
+        }
+
+        $("#SCARFILE").attr("href", "../Content/FolderSCAR/SCAR_" + SCARID + "_" + VERSION + ".xlsx");
+        $('#FILENAME').html("SCAR_" + SCARID + "_" + VERSION + ".xlsx")
+        $('#FILESCAR').val("SCAR_" + SCARID + "_" + VERSION + ".xlsx")
+
+        if (Status == "Accepted by Supplier" || Status == "Verification") {
+            $('.boxAccepted').attr("hidden", true);
+            $('#FILE').removeClass('hidden');
+            $('.lstCheckbox').removeAttr('hidden');
+            $('#btnAccepted').html("Attach Result");
+         //   $('#btnReject').addClass('hidden');
+            if (stt == "Accepted(Remind)") {
+                $('#btnSendNoti').removeClass('hidden');
+            }
+
+            $.blockUI();
+            $.post("@Url.Action("LoadCheckBoxD", "SCAR")", { SCARID: SCARID }, function (result) {
+                if (result.success) {
+                    $("#D0").prop('checked', result.success[0]);
+                    $("#D1").prop('checked', result.success[1]);
+                    $("#D2").prop('checked', result.success[2]);
+                    $("#D3").prop('checked', result.success[3]);
+                    $("#D4").prop('checked', result.success[4]);
+                    $("#D5").prop('checked', result.success[5]);
+                    $("#D6").prop('checked', result.success[6]);
+                    $("#D7").prop('checked', result.success[7]);
+                    $("#D8").prop('checked', result.success[8]);
+
+                    //if (result.success[0]) {
+                    //    $("#D0").attr('disabled', 'disabled');
+                    //}
+                    //if (result.success[1]) {
+                    //    $("#D1").attr('disabled', 'disabled');
+                    //}
+                    //if (result.success[2]) {
+                    //    $("#D2").attr('disabled', 'disabled');
+                    //}
+                    //if (result.success[3]) {
+                    //    $("#D3").attr('disabled', 'disabled');
+                    //}
+                    //if (result.success[4]) {
+                    //    $("#D4").attr('disabled', 'disabled');
+                    //}
+                    //if (result.success[5]) {
+                    //    $("#D5").attr('disabled', 'disabled');
+                    //}
+                    //if (result.success[6]) {
+                    //    $("#D6").attr('disabled', 'disabled');
+                    //}
+                    //if (result.success[7]) {
+                    //    $("#D7").attr('disabled', 'disabled');
+                    //}
+                } else {
+
+                }
+            }).fail(function () {
+                bootbox.alert('Action failed. Please contact admin');
+            }).always(function () {
+                $.unblockUI();
+            });
+        }
+    })
+
+    $('#btnCloseSCAR').click(function (e) {
+        e.preventDefault();
+        bootbox.confirm({
+            message: "Are you sure with this action?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.blockUI();
+                    $.post("@Url.Action("UpdateStatusSCAR", "SCAR")", { status: "Closed", SCARID: SCARID }, function (result) {
+                        if (result.success) {
+                            if ($('#Attach').is(":checked")) {
+
+                            } else {
+                                window.location = '@Url.Action("Index", "SCAR")';
+                            }
+                        } else {
+                            bootbox.alert('Action failed. Please contact admin');
+                        }
+                    }).fail(function () {
+                        bootbox.alert('Action failed. Please contact admin');
+                    }).always(function () {
+                        $.unblockUI();
+                    });
+                }
+            }
+        });
+    });
+
+    function OnClickAccept() {
+        $('#popupAccept').modal('show');
+    }
+
+    function OnClickReject() {
+        $('#popupReject').modal('show');
+    }
+
+    function OnClickSendNoti() {
+        $('#popupSendMail').modal('show');
+    }
+
+    function backToIndex() {
+        window.location = '@Url.Action("Index", "SCAR")';
+    }
+
+    $('#Accepted').change(function () {
+        select = $(this).val()
+        if ($(this).is(":checked")) {
+            $('.boxAttach').removeAttr('hidden');
+        } else {
+            clearModal();
+        }
+    });
+
+    $('#AttachMail').change(function () {
+        select = $(this).val()
+        if ($(this).is(":checked")) {
+            $('#FILEMail').removeClass('hidden');
+        } else {
+            $('#FILEMail').addClass('hidden');
+            $('#FILEMail').val('');
+        }
+    });
+
+    $('#Attach').change(function () {
+        select = $(this).val()
+        if ($(this).is(":checked")) {
+            $('#FILE').removeClass('hidden');
+            $('.lstCheckbox').removeAttr('hidden');
+        } else {
+            $('#FILE').addClass('hidden');
+            $('.lstCheckbox').attr("hidden", true);
+            $('.DChk').prop('checked', false);
+            $('#FILE').val('');
+        }
+    });
+
+    function OnClickOkReject() {
+        var Reason = $('#REASON').val();
+
+        $.blockUI();
+        $.post("@Url.Action("SaveReasonReject", "SCAR")", { Reason: Reason, SCARID: SCARID }, function (result) {
+            if (result.success) {
+                bootbox.alert('Action successful.', function (result1) {
+                    window.location = '@Url.Action("EditSCAR", "SCAR")' + "?SCARID=" + SCARID + "&STATUS=Accepted by Supplier";
+                });
+            } else {
+                bootbox.alert('Action failed. Please contact admin');
+            }
+        }).fail(function () {
+            bootbox.alert('Action failed. Please contact admin');
+        }).always(function () {
+            $.unblockUI();
+        });
+    }
+
+    function OnClickOkMail() {
+        if ($('#SENTTO').val() === "" || $('#SUBJECT').val() === "" || $('#CONTENT').val() === "") {
+            $('.requiredBoxMail').html("This field is required!");
+        } else {
+            $('.requiredBoxMail').html("");
+            $SentMail.submit();
+        }
+    }
+
+    $SentMail.submit(function (e) {
+        $.blockUI();
+        var data = new FormData(this);
+        var $fromObj = $(this);
+        var urlAction = $fromObj.attr('action');
+        $.ajax({
+            url: urlAction,
+            type: 'POST',
+            dataType: "Json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: data,
+            fail: function () {
+                bootbox.alert('Please contact to Administrator!');
+            }
+        }).always(function () {
+            $.unblockUI();
+        }).success(function (result) {
+            if (result.success) {
+                bootbox.alert('Email has been sent',
+                    function (result1) {
+                        $('#popupSendMail').modal('hide');
+                    });
+            } else {
+                bootbox.alert('Email cannot be sent because of the total of attached files  size are greater than 5 Mb.Please use other methods to send your attached file!');
+            }
+        });
+        e.preventDefault();
+    });
+
+    function OnClickOk() {
+        if (Status == "Sent to Supplier") {
+            if (!$('#Accepted').is(":checked")) {
+                bootbox.alert('No checkboxes selected');
+            } else {
+                $.blockUI();
+                $.post("@Url.Action("UpdateStatusSCAR", "SCAR")", { status: "Accepted by Supplier", SCARID: SCARID }, function (result) {
+                    if (result.success) {
+                        if ($('#Attach').is(":checked")) {
+                             let supplier = $('#SUPPLIER_REPRESENTATIVEPop').val();
+                            let daterespon = $('#DATE_D8Pop').val();
+                            let ack = $('#ACKNOWLEDGEMENTPop').val();
+                            if (daterespon != "" && supplier != '' && daterespon != '') {
+                                $.blockUI();
+                                $.post("@Url.Action("SaveDataD8Popup", "SCAR")", { SUPPLIER_REPRESENTATIVE: supplier, DATE_D8: daterespon, ACKNOWLEDGEMENT: ack, SCAR_ID: SCARID }, function (result) {
+                                    if (result.success) {
+                                        window.location = '@Url.Action("Index", "SCAR")';
+                                    } else {
+                                        bootbox.alert('Action failed. Please contact admin');
+                                        $.unblockUI();
+                                    }
+                                }).fail(function () {
+                                    bootbox.alert('Action failed. Please contact admin');
+                                }).always(function () {
+                                });
+                            }
+                        } else {
+                            debugger;
+                            let supplier = $('#SUPPLIER_REPRESENTATIVEPop').val();
+                            let daterespon = $('#DATE_D8Pop').val();
+                            let ack = $('#ACKNOWLEDGEMENTPop').val();
+                            if (daterespon != "" && supplier != '' && daterespon != '') {
+                                $.blockUI();
+                                $.post("@Url.Action("SaveDataD8Popup", "SCAR")", { SUPPLIER_REPRESENTATIVE: supplier, DATE_D8: daterespon, ACKNOWLEDGEMENT: ack, SCAR_ID: SCARID }, function (result) {
+                                    if (result.success) {
+                                        window.location = '@Url.Action("Index", "SCAR")';
+                                    } else {
+                                        bootbox.alert('Action failed. Please contact admin');
+                                        $.unblockUI();
+                                    }
+                                }).fail(function () {
+                                    bootbox.alert('Action failed. Please contact admin');
+                                }).always(function () {
+                                });
+                            }
+                            window.location = '@Url.Action("Index", "SCAR")';
+                        }
+                    } else {
+                        bootbox.alert('Action failed. Please contact admin');
+                        $.unblockUI();
+                    }
+                }).fail(function () {
+                    bootbox.alert('Action failed. Please contact admin');
+                }).always(function () {
+                });
+
+                if ($('#Attach').is(":checked")) {
+                    if ($('#D0').is(":checked") && !$('#D0').is(':disabled')) {
+                        checkList.push("D0");
+                    }
+                    if ($('#D1').is(":checked") && !$('#D1').is(':disabled')) {
+                        checkList.push("D1");
+                    }
+                    if ($('#D2').is(":checked") && !$('#D2').is(':disabled')) {
+                        checkList.push("D2");
+                    }
+                    if ($('#D3').is(":checked") && !$('#D3').is(':disabled')) {
+                        checkList.push("D3");
+                    }
+                    if ($('#D4').is(":checked") && !$('#D4').is(':disabled')) {
+                        checkList.push("D4");
+                    }
+                    if ($('#D5').is(":checked") && !$('#D5').is(':disabled')) {
+                        checkList.push("D5");
+                    }
+                    if ($('#D6').is(":checked") && !$('#D6').is(':disabled')) {
+                        checkList.push("D6");
+                    }
+                    if ($('#D7').is(":checked") && !$('#D7').is(':disabled')) {
+                        checkList.push("D7");
+                    }
+                    if ($('#D8').is(":checked") && !$('#D8').is(':disabled')) {
+                        checkList.push("D8");
+                    }
+                    if ($('#FILE').val() === "") {
+                        $('.requiredBox').html("This field is required!");
+                        $.unblockUI();
+                    } else {
+                        $('.requiredBox').html("");
+                        $myform.submit();
+                        checkList = new Array();
+                    }
+                }
+            }
+        } else if (Status === "Accepted by Supplier") {
+            if ($('#D0').is(":checked") && !$('#D0').is(':disabled')) {
+                checkList.push("D0");
+            }
+            if ($('#D1').is(":checked") && !$('#D1').is(':disabled')) {
+                checkList.push("D1");
+            }
+            if ($('#D2').is(":checked") && !$('#D2').is(':disabled')) {
+                checkList.push("D2");
+            }
+            if ($('#D3').is(":checked") && !$('#D3').is(':disabled')) {
+                checkList.push("D3");
+            }
+            if ($('#D4').is(":checked") && !$('#D4').is(':disabled')) {
+                checkList.push("D4");
+            }
+            if ($('#D5').is(":checked") && !$('#D5').is(':disabled')) {
+                checkList.push("D5");
+            }
+            if ($('#D6').is(":checked") && !$('#D6').is(':disabled')) {
+                checkList.push("D6");
+            }
+            if ($('#D7').is(":checked") && !$('#D7').is(':disabled')) {
+                checkList.push("D7");
+            }
+            if ($('#D8').is(":checked") && !$('#D8').is(':disabled')) {
+                checkList.push("D8");
+            }
+            if ($('#FILE').val() === "") {
+                $('.requiredBox').html("This field is required!")
+                $.unblockUI();
+            } else {
+                $('.requiredBox').html("");
+                $myform.submit();
+                checkList = new Array();
+            }
+
+        }
+        else if (Status === "Verification") {
+            if ($('#D0').is(":checked") && !$('#D0').is(':disabled')) {
+                checkList.push("D0");
+            }
+            if ($('#D1').is(":checked") && !$('#D1').is(':disabled')) {
+                checkList.push("D1");
+            }
+            if ($('#D2').is(":checked") && !$('#D2').is(':disabled')) {
+                checkList.push("D2");
+            }
+            if ($('#D3').is(":checked") && !$('#D3').is(':disabled')) {
+                checkList.push("D3");
+            }
+            if ($('#D4').is(":checked") && !$('#D4').is(':disabled')) {
+                checkList.push("D4");
+            }
+            if ($('#D5').is(":checked") && !$('#D5').is(':disabled')) {
+                checkList.push("D5");
+            }
+            if ($('#D6').is(":checked") && !$('#D6').is(':disabled')) {
+                checkList.push("D6");
+            }
+            if ($('#D7').is(":checked") && !$('#D7').is(':disabled')) {
+                checkList.push("D7");
+            }
+            if ($('#D8').is(":checked") && !$('#D8').is(':disabled')) {
+                checkList.push("D8");
+            }
+            if ($('#FILE').val() === "") {
+                $('.requiredBox').html("This field is required!")
+                $.unblockUI();
+            } else {
+                $('.requiredBox').html("");
+                $myform.submit();
+                checkList = new Array();
+            }
+        }
+    }
+    $myform.submit(function (e) {
+        e.preventDefault();
+        $.blockUI();
+        var data = new FormData(this);
+        data.append('ListD', checkList);
+        data.append('SCARID', SCARID);
+
+        var $fromObj = $(this);
+        var urlAction = $fromObj.attr('action');
+        $.ajax({
+            url: urlAction,
+            type: 'POST',
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: data,
+            fail: function () {
+                bootbox.alert('Please contact to Administrator!');
+            }
+        }).always(function () {
+            $.unblockUI();
+        }).success(function (result) {
+            if (result.success == "") {
+                bootbox.alert("Action Successful", function () {
+                    window.location = '@Url.Action("Index", "SCAR")';
+                });
+            } else {
+                bootbox.alert(result.success);
+            }
+        });
+    });
+     function DownloadFile(fileName) {
+        $.blockUI();
+        var id = '@Model.SCARInfo.ID';
+      //  location.href = "Url.Action("DownloadFileD8", "SCAR", new { SCARID = Model.SCARInfo.SCAR_ID, fileName_ = fileName })";
+        location.href = "@Url.Action("DownloadFileD8", "SCAR")?SCARID=" + id + "&fileName=" + fileName;
+        $.unblockUI();
+    }
+    function voidSCAR() {
+        bootbox.confirm({
+            message: "Are you sure with this action?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.blockUI();
+                    $.post("@Url.Action("UpdateStatusSCAR", "SCAR")", { status: "Voided", SCARID: SCARID }, function (result) {
+                        if (result.success) {
+                            if ($('#Attach').is(":checked")) {
+
+                            } else {
+                                window.location = '@Url.Action("Index", "SCAR")';
+                            }
+                        } else {
+                            bootbox.alert('Action failed. Please contact admin');
+                        }
+                    }).fail(function () {
+                        bootbox.alert('Action failed. Please contact admin');
+                    }).always(function () {
+                        $.unblockUI();
+                    });
+                }
+            }
+        });
+    }
+
+    function clearModal() {
+        $('.boxAttach').attr("hidden", true);
+        $('#FILE').addClass('hidden');
+        $('.lstCheckbox').attr("hidden", true);
+        $('#Attach').prop('checked', false);
+        $('.DChk').prop('checked', false);
+        $('#FILE').val('');
+    }
+
+    var arrExtension = ['xls', 'xlsx'];
+    function CheckFile(file) {
+        var test_value = $(file).val();
+        var extension = test_value.split('.').pop().toLowerCase();
+        if (test_value === '') return;
+        if ($.inArray(extension, arrExtension) === -1) {
+            bootbox.alert("Invalid file !");
+            file.value = '';
+            return;
+        }
+    }
+    $('#btnEdit').on('click', function () {
+        $("#btnEdit").css('display', 'none');
+        $("#btnSave").removeAttr('style', 'display-none');
+        $("#ACKNOWLEDGEMENT").removeAttr('readonly', 'readonly');
+        $("#SUPPLIER_REPRESENTATIVE").removeAttr('readonly', 'readonly');
+        $("#CONTENTD8").removeAttr('readonly', 'readonly');
+        $("#DATE_D8").removeAttr('readonly', 'readonly');
+        $('#File_Upload').removeAttr('style', 'display-none');
+    })
+        $('#btnSave').on('click', function () {
+          debugger;
+            var filesave = $('#File_Upload').get(0).files;
+            let content = $('#CONTENTD8').val();
+        var formData = new FormData();
+            formData.append("file", filesave[0]);
+            formData.append("ID", SCARID);
+            formData.append("content", content);
+          $.ajax({ url: '@Url.Action("SaveFileD8", "SCAR")', method: 'post', data: formData, contentType: false, processData: false })
+        let ack = $('#ACKNOWLEDGEMENT').val();
+                            let daterespon = $('#DATE_D8').val();
+            let supplier = $('#SUPPLIER_REPRESENTATIVE').val();
+            if (ack != '' && daterespon != '' && supplier != '') {
+                $.blockUI();
+                $.post("@Url.Action("EditDataD8", "SCAR")", { SUPPLIER_REPRESENTATIVE: supplier, DATE_D8: daterespon, ACKNOWLEDGEMENT: ack, SCAR_ID: SCARID }, function (result) {
+                    if (result.success == true) {
+                        //  bootbox.alert("Edit Sucessfull!");
+                        window.location = '@Url.Action("Index", "SCAR")';
+                    } else {
+                        bootbox.alert('Action failed. Please contact admin');
+                        $.unblockUI();
+                    }
+                }).fail(function () {
+                    bootbox.alert('Action failed. Please contact admin');
+                }).always(function () {
+                });
+            }
+            else {
+                  window.location = '@Url.Action("Index", "SCAR")';
+            }
+    })
+      var mygrid = $("#gridTaskDetail").kendoGrid({
+            selectable: true
+        });
+        //select row data catch status
+        mygrid.on("click", ".ClickGrid", function () {
+            var grid = $("#gridTaskDetail").data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+            var Task = selectedItem.TaskDetail.TaskID;
+            //tuan lua
+              window.open('@Url.Action("EditTaskManagementNcr", "TaskManagement")' + "?taskID=" + Task,'_blank');
+        });
+</script>

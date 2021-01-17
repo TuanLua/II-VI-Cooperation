@@ -1,0 +1,205 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>Innovation  | From</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta content="Innovation Idea | TTT" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" type="image/png" href="~/Theme/assets/global/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" href="~/Theme/assets/global/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="~/Theme/assets/global/icons/favicon-16x16.png" sizes="16x16">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Theme/assets/global/icons/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Theme/assets/global/icons/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/Theme/assets/global/icons/apple-touch-icon-57-precomposed.png">
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <style>
+        #toTopButton {
+            display: inline-block;
+            background-color: #FF9800;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            border-radius: 4px;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            transition: background-color .3s, opacity .5s, visibility .5s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+            #toTopButton::after {
+                content: "\f077";
+                font-family: FontAwesome;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 2em;
+                line-height: 50px;
+                color: #fff;
+            }
+
+            #toTopButton:hover {
+                cursor: pointer;
+                background-color: #333;
+            }
+
+            #toTopButton:active {
+                background-color: #555;
+            }
+
+            #toTopButton.show {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        body {
+            background: #fff;
+            color: #ccc;
+        }
+    </style>
+    @Styles.Render("~/bundles/css")
+    <link href="~/Theme/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Theme/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Theme/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Theme/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    @Styles.Render("~/bundles/style")
+    @*<link href="~/Theme/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+        <link href="~/Theme/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />*@
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    @Styles.Render("~/bundles/stylelayoutcss")
+    @*<link href="~/Theme/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/Theme//assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="~/Theme/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />*@
+    <!-- END THEME LAYOUT STYLES -->
+    <script type="text/javascript">
+        var baseUrl = '@Url.Content("~/")';
+    </script>
+    <!-- BEGIN CORE PLUGINS -->
+    @*@Scripts.Render("~/bundles/BEGINCOREPLUGINS")*@
+    @*<script src="~/Theme/assets/global/plugins/jquery.min.js" type="text/javascript"></script>*@
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Theme/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/respond.min.js"></script>
+    <script src="~/Theme/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="~/Theme/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/Theme/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    @Scripts.Render("~/bundles/GLOBAL SCRIPTS")
+    @*<script src="~/Theme//assets/global/scripts/app.min.js" type="text/javascript"></script>*@
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    @Scripts.Render("~/bundles/ENDCOREPLUGINS")
+    @*<script src="~/Theme//assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+        <script src="~/Theme//assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+        <script src="~/Theme//assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+        <script src="~/Theme//assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>*@
+    <!-- END THEME LAYOUT SCRIPTS -->
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("styles", false)
+</head>
+<!-- END HEAD -->
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+    <a id="toTopButton"></a>
+    <div class="page-wrapper">
+        <!-- BEGIN HEADER -->
+        <!-- END HEADER -->
+        <!-- BEGIN HEADER & CONTENT DIVIDER -->
+        <div class="clearfix"> </div>
+        <!-- END HEADER & CONTENT DIVIDER -->
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+          
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    @RenderBody()
+                    <!-- BEGIN PAGE HEADER-->
+                    <!-- BEGIN THEME PANEL -->
+                    <!-- END THEME PANEL -->
+                    <!-- BEGIN PAGE BAR -->
+                </div>
+            </div>
+            <!-- END PAGE BAR -->
+            <!-- BEGIN PAGE TITLE-->
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+    <!-- BEGIN QUICK SIDEBAR -->
+
+    <!-- END QUICK SIDEBAR -->
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+
+    <div class="page-footer">
+        <div align="center">
+            <span style="color:white">  @DateTime.Now.Year &copy;</span>
+            <a target="_blank" href="http://ii-vi.com">II-VI Incorporated Ver 1.0.0.0</a> &nbsp;&nbsp;
+        </div>
+
+    </div>
+    <!-- END FOOTER -->
+    @Html.Partial("PopupCNN")
+    <!-- BEGIN QUICK NAV -->
+    <div class="quick-nav-overlay"></div>
+    <!-- END QUICK NAV -->
+    <!--[if lt IE 9]>
+    <script src="~/Theme//assets/global/plugins/respond.min.js"></script>
+    <script src="~/Theme//assets/global/plugins/excanvas.min.js"></script>
+    <script src="~/Theme//assets/global/plugins/ie8.fix.min.js"></script>
+    <![endif]-->
+
+    <script>
+        var btn = $('#toTopButton');
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 200) {
+                btn.addClass('show');
+            } else {
+                btn.removeClass('show');
+            }
+        });
+        btn.on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, '300');
+        });
+
+        $(document).ready(function () {
+            //debugger;
+            $('#clickmewow').click(function () {
+                $('#radio1003').attr('checked', 'checked');
+            });
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        })
+            function AvataError(image) {
+            $(image).attr('src', '@Url.Content("~/Theme/assets/layouts/layout6/img/avatar1.png")');
+            return true;
+        }
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

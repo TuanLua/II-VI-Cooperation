@@ -1,0 +1,752 @@
+﻿@using II_VI_Incorporated_SCM.Services
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity
+@model II_VI_Incorporated_SCM.Models.ESuggestion.ESuggestinSponsorViewModel
+@{
+    ViewBag.Title = "ProcessingSuggestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .input-validation-error {
+        border: 1px solid red !important;
+        background-color: #fee !important;
+    }
+</style>
+<h2 align="center">
+    <b>
+        <input value="@ViewBag.titi" style="border:0px;text-align:right" />-
+    </b> <b style="color:blue"><input style="border:0px;text-align:left" id="ESNum" /></b>
+</h2>
+<h3><button class="btn btn-sm btn-success" id="detail" style="float:right" title="Hello Anh thi">View detail</button></h3>
+@using (Html.BeginForm("SaveSponsorESuggestion", "ESuggestion", FormMethod.Post, new
+{
+    @class = "form-inline",
+    @role = "form",
+    @enctype = "multipart/form-data",
+    @id = "form-sponsor"
+}))
+{
+    <input type="hidden" value="@ViewBag.ID" name="Sug_ID" />
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr>
+                <td width="80px">
+                    @Html.CheckBoxFor(m => m.Tech_abi, new
+          {
+              @class = "form-control",
+              @rows = "3",
+              @id = "techcheck",
+              @checked= "checked",
+                   @style = "display:none"
+               })
+                    <input id="Tech_abi_Y" name="Tech_abiR" value="Yes" style="width:20px" type="radio" class="form-control" /> Yes
+                    <input id="Tech_abi_N" name="Tech_abiR" value="No" style="width:20px" type="radio" class="form-control" />  No
+
+                    <input type='hidden' value='0' name='Tech_abi'>
+                </td>
+                <td>
+                    <label>Is there technology ability?</label>
+                </td>
+                <td>
+                    @Html.TextAreaFor(m => m.Tech_com, new
+               {
+                   @class = "form-control",
+                   @style = "min-width: 100%;resize:vertical",
+                   @rows = "3",
+                   @id = "tech",
+               })
+                </td>
+                <td width="80px">
+                    @Html.CheckBoxFor(m => m.Safe_Rel, new
+          {
+              @class = "form-control",
+              @rows = "3",
+              @id = "relatecheck",
+              @checked= "checked",
+                   @style = "display:none"
+               })
+                    <input id="Safe_Rel_Y" name="Safe_RelR" value="Yes" style="width:20px" type="radio" class="form-control" /> Yes
+                    <input id="Safe_Rel_N" name="Safe_RelR" value="No" style="width:20px" type="radio" class="form-control" />  No
+
+                    <input type='hidden' value='0' name='Safe_Rel'>
+                </td>
+                <td>
+                    <label>Is there relate to safety? </label>
+                </td>
+                <td>
+                    @Html.TextAreaFor(m => m.Safe_com, new
+               {
+                   @class = "form-control",
+                   @style = "min-width: 100%;resize:vertical",
+                   @rows = "3",
+                   @id = "relate"
+               })
+                </td>
+
+            </tr>
+            <tr>
+                <td width="40px">
+                    @Html.CheckBoxFor(m => m.Eco_ben, new
+            {
+                @class = "form-control",
+                @rows = "3",
+                @id = "benecheck",
+                @checked= "checked",
+                   @style = "display:none"
+               })
+                    <input id="Eco_ben_Y" name="Eco_benR" value="Yes" style="width:20px" type="radio" class="form-control" /> Yes
+                    <input id="Eco_ben_N" name="Eco_benR" value="No" style="width:20px" type="radio" class="form-control" />  No
+
+                    <input type='hidden' value='0' name='Eco_ben'>
+                </td>
+                <td>
+                    <label>Is there economic benefit?</label>
+                </td>
+                <td>
+                    @Html.TextAreaFor(m => m.Eco_com, new
+               {
+                   @class = "form-control",
+                   @style = "min-width: 100%;resize:vertical",
+                   @rows = "3",
+                   @id = "bene"
+               })
+                </td>
+                <td width="40px">
+                    @Html.CheckBoxFor(m => m.Fin_abi, new
+                          {
+                              @class = "form-control",
+                              @id = "abilicheck",
+                              @checked= "checked",
+                   @style = "display:none"
+               })
+                    <input id="Fin_abi_Y" name="Fin_abiR" value="Yes" style="width:20px" type="radio" class="form-control" /> Yes
+                    <input id="Fin_abi_N" name="Fin_abiR" value="No" style="width:20px" type="radio" class="form-control" />  No
+
+                    <input type='hidden' value='0' name='Fin_abi'>
+                </td>
+                <td>
+                    <label>Is there a financial ability?</label>
+                </td>
+                <td>
+                    @Html.TextAreaFor(m => m.Fin_com, new
+               {
+                   @class = "form-control",
+                   @style = "min-width: 100%;resize:vertical",
+                   @rows = "3",
+                   @id = "abili"
+               })
+                </td>
+
+            </tr>
+            <tr>
+                <td width="40px">
+                    @Html.CheckBoxFor(m => m.Legal_Rel, new
+                             {
+                                 @class = "form-control",
+                                 @rows = "3",
+                                 @id = "legalcheck",
+                                 @checked= "checked",
+                                 @value="true",
+                   @style = "display:none"
+               })
+                    <input id="Legal_Rel_Y" name="Legal_RelR" value="Yes" style="width:20px" type="radio" class="form-control" /> Yes
+                    <input id="Legal_Rel_N" name="Legal_RelR" value="No" style="width:20px" type="radio" class="form-control" />  No
+
+                    <input type='hidden' value='0' name='Legal_Rel'>
+                </td>
+                <td>
+                    <label>Is there relate to legal?</label>
+                </td>
+                <td>
+                    @Html.TextAreaFor(m => m.Legal_com, new
+ {
+     @class = "form-control",
+     @style = "min-width: 100%;resize:vertical",
+     @rows = "3",
+     @id="legal"
+ })
+                </td>
+                <td width="40px">
+                    @Html.CheckBoxFor(m => m.Res_avai, new
+               {
+                   @class = "form-control",
+                   @rows = "3",
+                   @id = "avaicheck",
+                   @checked = "checked",
+                   @style = "display:none"
+               })
+                    <input id="Res_avai_Y" name="Res_avaiR" value="Yes" style="width:20px" type="radio" class="form-control" /> Yes
+                    <input id="Res_avai_N" name="Res_avaiR" value="No" style="width:20px" type="radio" class="form-control" />  No
+
+                    <input type='hidden' value='0' name='Res_avai'>
+                </td>
+                <td>
+                    <label>Is there available of resource?</label>
+                </td>
+                <td>
+                    @Html.TextAreaFor(m => m.Res_com, new
+               {
+                   @class = "form-control",
+                   @style = "min-width: 100%;resize:vertical",
+                   @rows = "3",
+                   @id= "avai"
+               })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr>
+                <td>
+                    <label>Comment:</label>
+                </td>
+                <td>
+                    @Html.TextAreaFor(m => m.Comment, new
+   {
+       @class = "form-control",
+       @style = "min-width: 100%;resize:vertical",
+       @rows = "3",
+      // @required = "required",
+       @id="Comment"
+   })
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label>Project Leader:</label>
+                </td>
+                <td>
+                    @Html.DropDownList("ProLeader", (IEnumerable<SelectListItem>)ViewBag.ListUser, "Select", new { @class = "form-control", id = "listuser", required = "required", style = "width:100%" })
+                    @*@Html.ValidationMessageFor(model => model.ProLeader, null, new { @class = "help-block text-danger", @style = "margin: 1px" })*@
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label>Implementation period</label>
+                </td>
+                <td>
+                    <label>From</label>
+                    @*<input type="text" name="Imp_Start" required="required" class="datepicker">*@
+                    <div class="input-group date" data-provide="datepicker" data-date-format="dd-MM-yy">
+                        @Html.TextBoxFor(m => m.Imp_Start, new { @class = "form-control", @id = "Imp_Start", @name = "Imp_Start", onchange = "javascript:Compare_StartDate()" })
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                    <label>To</label>
+                    @*<input type="text" name="Imp_End" required="required" class="datepicker">*@
+                    <div class="input-group date" data-provide="datepicker" data-date-format="dd-MM-yy">
+                        @Html.TextBoxFor(m => m.Imp_End, new { @class = "form-control", @id = "Imp_End", @name = "Imp_End", onchange = "javascript:Compare_StartDate()" })
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <div align="center">
+        <button class="btn btn-info" id="Save">Save</button>
+        <button class="btn btn-success" id="Approve">Approve</button>
+        <button class="btn btn-warning" id="Pending">Pending</button>
+        <button class="btn btn-danger" id="Reject">Reject</button>
+    </div>
+}
+
+<div id="popupvendor" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                @*<h2 align="center"><b>Cải tiến quy trình cắt -</b> <b style="color:blue">FY19-HR-001</b> </h2>*@
+                <h2 align="center"><b>@ViewBag.titi -</b> <b style="color:blue">@ViewBag.ID</b> </h2>
+                <h3> <button class="btn btn-sm btn-success" style="float:right">View detail</button></h3>
+                <table class="table table-striped table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td align="right">
+                                Project Member:
+                            </td>
+                            <td>
+                                <select class="form-control" id="member" multiple="multiple">
+                                    <option>Select</option>
+                                    <option>Tuấn</option>
+                                    <option>Quang</option>
+                                </select>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchvendor()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+            $(function () {
+                $('.datepicker').datepicker({
+                    format: 'dd-M-yy',
+                    autoclose: true
+                    //startDate: '-3d'
+                });
+            });
+            $('#listuser').select2();
+              $('#ESNum').val('@ViewBag.ID');
+        });
+        var $form = $('#form-sponsor');
+    $('#Save').on('click', function (e) {
+        debugger;
+            e.preventDefault();
+            if (!Compare_StartDate())
+                return;
+        if (!Date.parse($("#Imp_Start").val()) || !Date.parse($("#Imp_End").val())) {
+            alert("Please input Implement Start date and End Date!");
+            return ;
+        }
+
+        var Tech_abi = document.getElementsByName('Tech_abiR');
+        var Safe_Rel = document.getElementsByName('Safe_RelR');
+        var Eco_ben = document.getElementsByName('Eco_benR');
+        var Fin_abi = document.getElementsByName('Fin_abiR');
+        var Legal_Rel = document.getElementsByName('Legal_RelR');
+        var Res_avai = document.getElementsByName('Res_avaiR');
+        if ((Tech_abi[0].checked == false) && (Tech_abi[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Technology ability!');
+            return;
+        }
+        if ((Safe_Rel[0].checked == false) && (Safe_Rel[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Related to safely!');
+            return;
+        }
+        if ((Eco_ben[0].checked == false) && (Eco_ben[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Economic benefit!');
+            return;
+        }
+        if ((Fin_abi[0].checked == false) && (Fin_abi[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Finalcial ability!');
+            return;
+        }
+        if ((Legal_Rel[0].checked == false) && (Legal_Rel[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Related to legal!');
+            return;
+        }
+        if ((Res_avai[0].checked == false) && (Res_avai[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Resource avaiable!');
+            return;
+        }
+        $('#techcheck:checkbox').val(Tech_abi[0].checked);
+        $('#benecheck:checkbox').val(Eco_ben[0].checked);
+        $('#legalcheck:checkbox').val(Legal_Rel[0].checked);
+        $('#abilicheck:checkbox').val(Fin_abi[0].checked);
+        $('#relatecheck:checkbox').val(Safe_Rel[0].checked);
+        $('#avaicheck:checkbox').val(Res_avai[0].checked);
+            let Tech = $('#techcheck:checkbox:checked');
+            let Economic = $('#benecheck:checkbox:checked');
+            let Legal = $('#legalcheck:checkbox:checked');
+            let abili = $('#abilicheck:checkbox:checked');
+            let relatecheck = $('#relatecheck:checkbox:checked');
+            let avai = $('#avaicheck:checkbox:checked');
+
+            if (Economic.val() == "false" && $('#bene').val() == "") {
+                bootbox.alert('Please input Economic benefit!');
+            }
+            else if (Legal.val() == "false" && $('#legal').val() == "") {
+                bootbox.alert('Please input Related to legal!');
+            }
+            else if (abili.val() == "false" && $('#abili').val() == "") {
+                bootbox.alert('Please input Finalcial ability!');
+            }
+            else if (avai.val() == "false"   && $('#avai').val() == "") {
+                bootbox.alert('Please input Resource avaiable!');
+            }
+            else if (relatecheck.val() == "false" && $('#relate').val() == "") {
+                bootbox.alert('Please input Related to safely!');
+            }
+            else if (Tech.val() == "false" && $('#tech').val() == "") {
+                bootbox.alert('Please input Technology ability!');
+            }
+            else {
+                $form.submit();
+            }
+        })
+
+
+    $('#Reject').on('click', function (e) {
+    e.preventDefault();
+        if (!confirm("Do you really want to REJECT?")) return;
+            //$('#listuser').required = "required"
+            let comment = $("#Comment").val();
+            if (comment == "") {
+                //$("#Comment").addClass("input-validation-error");
+                alert("Please input comment for reason reason!");
+                return false;
+            }
+            var input = $("<input>", { type: "hidden", name: "Status", value: "Reject" });
+            $form.append(input);
+        var Tech_abi = document.getElementsByName('Tech_abiR');
+        var Safe_Rel = document.getElementsByName('Safe_RelR');
+        var Eco_ben = document.getElementsByName('Eco_benR');
+        var Fin_abi = document.getElementsByName('Fin_abiR');
+        var Legal_Rel = document.getElementsByName('Legal_RelR');
+        var Res_avai = document.getElementsByName('Res_avaiR');
+        if ((Tech_abi[0].checked == false) && (Tech_abi[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Technology ability!');
+            return;
+        }
+        if ((Safe_Rel[0].checked == false) && (Safe_Rel[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Related to safely!');
+            return;
+        }
+        if ((Eco_ben[0].checked == false) && (Eco_ben[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Economic benefit!');
+            return;
+        }
+        if ((Fin_abi[0].checked == false) && (Fin_abi[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Finalcial ability!');
+            return;
+        }
+        if ((Legal_Rel[0].checked == false) && (Legal_Rel[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Related to legal!');
+            return;
+        }
+        if ((Res_avai[0].checked == false) && (Res_avai[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Resource avaiable!');
+            return;
+        }
+        $('#techcheck:checkbox').val(Tech_abi[0].checked);
+        $('#benecheck:checkbox').val(Eco_ben[0].checked);
+        $('#legalcheck:checkbox').val(Legal_Rel[0].checked);
+        $('#abilicheck:checkbox').val(Fin_abi[0].checked);
+        $('#relatecheck:checkbox').val(Safe_Rel[0].checked);
+        $('#avaicheck:checkbox').val(Res_avai[0].checked);
+        let Tech = $('#techcheck:checkbox:checked');
+        let Economic = $('#benecheck:checkbox:checked');
+        let Legal = $('#legalcheck:checkbox:checked');
+        let abili = $('#abilicheck:checkbox:checked');
+        let relatecheck = $('#relatecheck:checkbox:checked');
+        let avai = $('#avaicheck:checkbox:checked');
+
+        if (Economic.val() == "false" && $('#bene').val() == "") {
+            bootbox.alert('Please input Economic benefit!');
+        }
+        else if (Legal.val() == "false" && $('#legal').val() == "") {
+            bootbox.alert('Please input Related to legal!');
+        }
+        else if (abili.val() == "false" && $('#abili').val() == "") {
+            bootbox.alert('Please input Finalcial ability!');
+        }
+        else if (avai.val() == "false" && $('#avai').val() == "") {
+            bootbox.alert('Please input Resource avaiable!');
+        }
+        else if (relatecheck.val() == "false" && $('#relate').val() == "") {
+            bootbox.alert('Please input Related to safely!');
+        }
+        else if (Tech.val() == "false" && $('#tech').val() == "") {
+            bootbox.alert('Please input Technology ability!');
+        }
+        else {
+            $form.submit();
+        }
+        })
+    $('#Pending').on('click', function (e) {
+    e.preventDefault();
+        if (!confirm("Do you really want to PENDING?")) return;
+            
+            let comment = $("#Comment").val();
+            if (comment == "") {
+                //$("#Comment").addClass("input-validation-error");
+                alert("Please input comment for pending reason!");
+                return false;
+            }
+            var input = $("<input>", { type: "hidden", name: "Status", value: "Pending" });
+            $form.append(input);
+        var Tech_abi = document.getElementsByName('Tech_abiR');
+        var Safe_Rel = document.getElementsByName('Safe_RelR');
+        var Eco_ben = document.getElementsByName('Eco_benR');
+        var Fin_abi = document.getElementsByName('Fin_abiR');
+        var Legal_Rel = document.getElementsByName('Legal_RelR');
+        var Res_avai = document.getElementsByName('Res_avaiR');
+        if ((Tech_abi[0].checked == false) && (Tech_abi[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Technology ability!');
+            return;
+        }
+        if ((Safe_Rel[0].checked == false) && (Safe_Rel[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Related to safely!');
+            return;
+        }
+        if ((Eco_ben[0].checked == false) && (Eco_ben[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Economic benefit!');
+            return;
+        }
+        if ((Fin_abi[0].checked == false) && (Fin_abi[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Finalcial ability!');
+            return;
+        }
+        if ((Legal_Rel[0].checked == false) && (Legal_Rel[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Related to legal!');
+            return;
+        }
+        if ((Res_avai[0].checked == false) && (Res_avai[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Resource avaiable!');
+            return;
+        }
+        $('#techcheck:checkbox').val(Tech_abi[0].checked);
+        $('#benecheck:checkbox').val(Eco_ben[0].checked);
+        $('#legalcheck:checkbox').val(Legal_Rel[0].checked);
+        $('#abilicheck:checkbox').val(Fin_abi[0].checked);
+        $('#relatecheck:checkbox').val(Safe_Rel[0].checked);
+        $('#avaicheck:checkbox').val(Res_avai[0].checked);
+        let Tech = $('#techcheck:checkbox:checked');
+        let Economic = $('#benecheck:checkbox:checked');
+        let Legal = $('#legalcheck:checkbox:checked');
+        let abili = $('#abilicheck:checkbox:checked');
+        let relatecheck = $('#relatecheck:checkbox:checked');
+        let avai = $('#avaicheck:checkbox:checked');
+
+        if (Economic.val() == "false" && $('#bene').val() == "") {
+            bootbox.alert('Please input Economic benefit!');
+        }
+        else if (Legal.val() == "false" && $('#legal').val() == "") {
+            bootbox.alert('Please input Related to legal!');
+        }
+        else if (abili.val() == "false" && $('#abili').val() == "") {
+            bootbox.alert('Please input Finalcial ability!');
+        }
+        else if (avai.val() == "false" && $('#avai').val() == "") {
+            bootbox.alert('Please input Resource avaiable!');
+        }
+        else if (relatecheck.val() == "false" && $('#relate').val() == "") {
+            bootbox.alert('Please input Related to safely!');
+        }
+        else if (Tech.val() == "false" && $('#tech').val() == "") {
+            bootbox.alert('Please input Technology ability!');
+        }
+        else {
+            $form.submit();
+        }
+        })
+    $('#Approve').on('click', function (e) {
+    e.preventDefault();
+        if (!confirm("Do you really want to APPROVE?")) return;
+            
+            if (!Compare_StartDate())
+            return;
+
+        if (!Date.parse($("#Imp_Start").val()) || !Date.parse($("#Imp_End").val())) {
+            alert("Please input Implement Start date and End Date!");
+            return ;
+        }
+
+            var input = $("<input>", { type: "hidden", name: "Status", value: "Approve" });
+            $form.append(input);
+        var Tech_abi = document.getElementsByName('Tech_abiR');
+        var Safe_Rel = document.getElementsByName('Safe_RelR');
+        var Eco_ben = document.getElementsByName('Eco_benR');
+        var Fin_abi = document.getElementsByName('Fin_abiR');
+        var Legal_Rel = document.getElementsByName('Legal_RelR');
+        var Res_avai = document.getElementsByName('Res_avaiR');
+        if ((Tech_abi[0].checked == false) && (Tech_abi[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Technology ability!');
+            return;
+        }
+        if ((Safe_Rel[0].checked == false) && (Safe_Rel[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Related to safely!');
+            return;
+        }
+        if ((Eco_ben[0].checked == false) && (Eco_ben[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Economic benefit!');
+            return;
+        }
+        if ((Fin_abi[0].checked == false) && (Fin_abi[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Finalcial ability!');
+            return;
+        }
+        if ((Legal_Rel[0].checked == false) && (Legal_Rel[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Related to legal!');
+            return;
+        }
+        if ((Res_avai[0].checked == false) && (Res_avai[1].checked == false)) {
+            bootbox.alert('Please choose YES or NO for Resource avaiable!');
+            return;
+        }
+        $('#techcheck:checkbox').val(Tech_abi[0].checked);
+        $('#benecheck:checkbox').val(Eco_ben[0].checked);
+        $('#legalcheck:checkbox').val(Legal_Rel[0].checked);
+        $('#abilicheck:checkbox').val(Fin_abi[0].checked);
+        $('#relatecheck:checkbox').val(Safe_Rel[0].checked);
+        $('#avaicheck:checkbox').val(Res_avai[0].checked);
+        let Tech = $('#techcheck:checkbox:checked');
+        let Economic = $('#benecheck:checkbox:checked');
+        let Legal = $('#legalcheck:checkbox:checked');
+        let abili = $('#abilicheck:checkbox:checked');
+        let relatecheck = $('#relatecheck:checkbox:checked');
+        let avai = $('#avaicheck:checkbox:checked');
+
+        if (Economic.val() == "false" && $('#bene').val() == "") {
+            bootbox.alert('Please input Economic benefit!');
+        }
+        else if (Legal.val() == "false" && $('#legal').val() == "") {
+            bootbox.alert('Please input Related to legal!');
+        }
+        else if (abili.val() == "false" && $('#abili').val() == "") {
+            bootbox.alert('Please input Finalcial ability!');
+        }
+        else if (avai.val() == "false" && $('#avai').val() == "") {
+            bootbox.alert('Please input Resource avaiable!');
+        }
+        else if (relatecheck.val() == "false" && $('#relate').val() == "") {
+            bootbox.alert('Please input Related to safely!');
+        }
+        else if (Tech.val() == "false" && $('#tech').val() == "") {
+            bootbox.alert('Please input Technology ability!');
+        }
+        else {
+            $form.submit();
+        }
+        })
+         $('#detail').on('click', function () {
+            let id = "@ViewBag.ID";
+                window.open('@Url.Action("Management", "ESuggestion")' + "?SuggestionID=" + id);
+        })
+        function Compare_StartDate() {
+            //try {
+            //    debugger
+            //    var monthNames = [
+            //        "January", "February", "March",
+            //        "April", "May", "June", "July",
+            //        "August", "September", "October",
+            //        "November", "December"
+            //    ];
+            //    var dt_now = new Date();
+            //    var date = dt_now.getDate() + "";
+            //    if (date.length === 1) {
+            //        date = "0" + date;
+            //    }
+            //    var month = monthNames[dt_now.getMonth()];
+
+
+            //    var dt_string = date + '-' + month + '-' + dt_now.getFullYear().toString().substr(-2);
+
+            //    var dateSta = $("#Imp_Start").val();
+            //    if (dateSta < dt_string) {
+            //        //$("#Exp_Start_Date").Val('');
+            //        alert("Start date cannot earlier than today!");
+            //        return false;
+            //    }
+            //    var dateDue = $("#Imp_End").val();
+            //    if (dateDue == "") return true;
+            //    $('#Imp_Start').removeClass("input-validation-error");
+            //    if (dateDue < dateSta) {
+            //        $('#Imp_End').addClass("input-validation-error");
+            //        alert('End date cannot earlier than start date');
+            //        $('#Imp_End').focus();
+            //        return false;
+            //    }
+            //    else return true;
+            //}
+            //catch (error) { }
+            try {
+                debugger;
+
+                var dt_now = new Date();
+                var date = dt_now.getDate() + "";
+                if (date.length === 1) {
+                    date = "0" + date;
+                }
+                var month = (dt_now.getMonth() + 1) + "";
+                if (month.length === 1) {
+                    month = "0" + month;
+                }
+                //Get current date
+                var dt_string = dt_now.getFullYear().toString().substr(-2) + '-' + month + '-' + date;
+
+                var dateSta = new Date($("#Imp_Start").val());
+                
+                date = dateSta.getDate() + "";
+                if (date.length === 1) {
+                    date = "0" + date;
+                }
+                month = (dateSta.getMonth() + 1) + "";
+                if (month.length === 1) {
+                    month = "0" + month;
+                }
+                //Get start date
+                var start_str = dateSta.getFullYear().toString().substr(-2) + '-' + month + '-' + date;
+
+                var dateDue = new Date($("#Imp_End").val());
+
+                date = dateDue.getDate() + "";
+                if (date.length === 1) {
+                    date = "0" + date;
+                }
+                month = ((dateDue.getMonth()) + 1) + "";
+                if (month.length === 1) {
+                    month = "0" + month;
+                }
+                //Get end date
+                var End_str = dateDue.getFullYear().toString().substr(-2) + '-' + month + '-' + date;
+
+                if (start_str != "aN-NaN-NaN" && start_str < dt_string) {
+                    $("#Imp_Start").datepicker({
+                        dateFormat: 'D dd M yy',
+                        minDate: 0,
+                        highlightWeek: true,
+                        showAnim: "scale",
+                        showOptions: {
+                            origin: ["top", "left"]
+                        }
+                    }).val('');
+                    alert("Start date cannot earlier than today!");
+                    return false;
+                }
+               
+                if (End_str != "aN-NaN-NaN" && End_str < dt_string) {
+                    $("#Imp_End").datepicker({
+                        dateFormat: 'D dd M yy',
+                        minDate: 0,
+                        highlightWeek: true,
+                        showAnim: "scale",
+                        showOptions: {
+                            origin: ["top", "left"]
+                        }
+                    }).val('');
+                    alert("End date cannot earlier than today!");
+                    return false;
+                }
+                
+                if (End_str != "aN-NaN-NaN" && start_str != "aN-NaN-NaN" && End_str < start_str) {
+                    $("#Imp_End").datepicker({
+                        dateFormat: 'D dd M yy',
+                        minDate: 0,
+                        highlightWeek: true,
+                        showAnim: "scale",
+                        showOptions: {
+                            origin: ["top", "left"]
+                        }
+                    }).val('');
+                    alert('End date cannot earlier than start date');
+                    return false;
+                }
+
+                
+
+                return true;
+            }
+            catch (error) { return false;}
+        }
+</script>

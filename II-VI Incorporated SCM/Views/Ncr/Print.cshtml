@@ -1,0 +1,607 @@
+﻿@using System.Collections.Generic;
+@using II_VI_Incorporated_SCM.Models.NCR
+@model DropdownlistViewModelPrint
+@{
+    ViewBag.Title = "Print NCR Management";
+}
+@*<style>
+        .portlet.box>.portlet-title {
+        border-bottom: 0 !important;
+        padding: 0 10px !important;
+        margin-bottom: 0 !important;
+        margin-top: 8px !important;
+        color: black !important;
+    }
+    </style>*@
+<h4>PRINT NCR </h4>
+
+<div class="portlet box">
+    <div class="portlet-title">
+        <div class="row">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-3" style="color:black">Vendor</label>
+                    <div class="col-md-5 form-group">
+                        @Html.DropDownList("VENDOR", (IEnumerable<SelectListItem>)ViewBag.VendorList, new { @class = "form-control", @onchange = "onChangevendor()" })
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                <i class="fa"></i> Find By
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="javascript:;" id="clear"> Clear Filter</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" onclick="onFindStatus('STATUS')"> STATUS </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" onclick="onFind('Part Number')"> Part Number </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" onclick="onFindNCRnum('NCR Number')"> NCR Number </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" onclick="onFindDate('Created Date')"> Created Date </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-success btn-sm" style="margin-right: 10px;" onclick="openEvidencePopup()">
+                            Print
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<NCRManagementViewModel>()
+                                      .Name("gridNCR")
+                                      .Columns(columns =>
+                                      {
+                                          //columns.Bound(m => m.Selection).ClientTemplate("<input type=\"checkbox\" #=Selection ? checked='checked' :  '' # class=\"chkbox\" id=\"#=NCR_NUM#\" /> ")
+                                          //    .HtmlAttributes(new { style = "text-align:center;" });
+                                          columns.Select().Width(30);
+                                          columns.Bound(p => p.NCR_NUM).Title("NCR Number");
+                                          columns.Bound(p => p.DATESUBMIT).Format("{0:dd-MMM-yy}").Title("Date Submit");
+                                          columns.Bound(p => p.USERSUBMIT).Title("User Submit");
+                                          columns.Bound(p => p.MI_PART_NO).Title("Part Number");
+                                          columns.Bound(p => p.PO_NUM).Title("PO");
+                                          columns.Bound(p => p.INS_DATE).Format("{0:dd-MMM-yy}").Title("INS Date");
+                                          // columns.Bound(p => p.TYPE_NCR).Title("Type NCR");
+                                          columns.Bound(p => p.RECEIVER).Title("Receiver").Hidden();
+                                          //  columns.Bound(p => p.INS_QTY).Title("INS QTY");
+                                          //columns.Bound(p => p.REC_QTY).Title("REC QTY");
+                                          columns.Bound(p => p.STATUS).Title("Status");
+                                          columns.Bound(p => p.AGE).Title("Age").Hidden();
+                                          columns.Bound(p => p.VENDOR).Title("Vendor");
+                                      })
+                                      .Pageable()
+                                      .Sortable()
+                                          .PersistSelection()
+                                      .Scrollable()
+                                       .Events(ev => ev.Change("selectNCR"))
+                                      .Filterable()
+                                      .HtmlAttributes(new { style = "height:550px;" })
+                                      .DataSource(dataSource => dataSource
+                                          .Ajax()
+                                          .PageSize(10)
+                                            .Model(model => model.Id(p => p.NCR_NUM))
+                                          //.Read(read => read.Action("NCRList", "NCR"))
+                                          .Sort(sort => sort.Add("INS_DATE").Descending())
+                                      ))
+        </div>
+    </div>
+</div>
+<div id="popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            @Html.DropDownList("PartNum", new List<SelectListItem>(), new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearch()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupncrnum" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            @Html.DropDownList("NCR_NUM", new List<SelectListItem>(), new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchNCRnum()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupstatus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <input id="statusSearch" type="text" class="dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Created')"> Created </a>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Submitted')"> Submitted</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Waiting for Disposition')">Waiting for Disposition</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Waiting for Disposition Approval')">Waiting for Disposition Approval</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Disposition Approved')"> Disposition Approved </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Close')"> Close </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" onclick="onStatus('Void')"> Void </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchStastus()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popupdate" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <table>
+                            <tr>
+                                <td style="display: none"><input type="hidden" class="form-control boder-opal" id="searchId" /></td>
+                                <td>From</td>
+                                <td>&nbsp;</td>
+                                <td><input type="text" class="form-control" id="datefrom"></td>
+                                <td>&nbsp;</td>
+                                <td>To</td>
+                                <td><input type="text" class="form-control" id="dateto"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchDate()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* Modal Evidences *@
+<div id="modelEvidences" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" style="font-weight: bold">Select Evidences</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table" id="tb-Evidences">
+                    <thead>
+                        <tr>
+                            <th>NO.</th>
+                            <th>FileName</th>
+                            <th>NCR NUM</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-Evidences">
+                        <tr class="">
+                            <td>1</td>
+                            <td><a><i class="fa fa-file-pdf-o" aria-hidden="true"> evidence</i></a></td>
+                            <td>P000001</td>
+                            <td><input type="checkbox" data-evidence="217" data-ncrnum="I000003U" class="checkbox" onchange="fileChecked(this)" /></td>
+                        </tr>
+                        <tr class="success">
+                            <td>2</td>
+                            <td><a><i class="fa fa-file-pdf-o" aria-hidden="true"> evidence</i></a></td>
+                            <td>P000002</td>
+                            <td><input type="checkbox" data-evidence="218" data-ncrnum="I000003U" class="checkbox" checked onchange="fileChecked(this)" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="printf()">Print</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    var Url = '@Url.Action("GetdropdownDefect", "WriteNcrForProcess")';
+</script>
+@section scripts {
+    <script type="text/javascript">
+        var tdSearch;
+        $(document).ready(function () {
+            $("#VENDOR").select2();
+
+            $("#datefrom").datepicker();
+            $("#dateto").datepicker();
+            var vendorReady = $('#VENDOR').val();
+            console.log(vendorReady);
+            //$("#gridNCR").data("kendoGrid").dataSource.filter({ field: "VENDOR", operator: "contains", value: vendorReady });
+            $("#gridNCR").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("NCRList", "NCR")?vendor=' + vendorReady;
+            $("#gridNCR").data("kendoGrid").dataSource.read();
+            $.blockUI();
+            $.post('@Url.Action("DropdownNCRNum", "NCR")',{ vendor: vendorReady },
+                function(data) {
+                    if (data.success) {
+                        $('#NCR_NUM').empty();
+                        if(data.list != undefined){
+                        for (var i = 0; i < data.list.length; i++) {
+                            $('<option/>', { value: data.list[i].Value, text: data.list[i].Text }).appendTo($('select#NCR_NUM'));
+                        }
+                        }
+                    }
+                }).fail(function() {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function() {
+                $.unblockUI();
+            });
+            $.blockUI();
+            $.post('@Url.Action("DropdownNCRNumPartNum", "NCR")',
+                { vendor: vendorReady },
+                function(data) {
+                    if (data.success) {
+                        $('#PartNum').empty();
+                        if (data.list != undefined) {
+                            for (var i = 0; i < data.list.length; i++) {
+                                $('<option/>', { value: data.list[i].Value, text: data.list[i].Text }).appendTo($('select#PartNum'));
+                            }
+                        }
+                    }
+                }).fail(function() {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function() {
+                $.unblockUI();
+            });
+        });
+        function onFind(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Part Number') {
+                $('#searchId').val(4);
+            }
+            $('#popup').modal('show');
+        }
+
+        function onChangevendor() {
+            var vendor = $('#VENDOR').val();
+            console.log(vendor);
+            vendor.trim();
+            $("#gridNCR").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("NCRList", "NCR")?vendor=' + vendor;
+            $("#gridNCR").data("kendoGrid").dataSource.read();
+            //$("#gridNCR").data("kendoGrid").dataSource.filter({ field: "VENDOR", operator: "contains", value: vendor });
+
+
+            $.blockUI();
+            $.post('@Url.Action("DropdownNCRNum", "NCR")', { vendor: vendor }, function (data) {
+                if (data.success) {
+                    $('#NCR_NUM').empty();
+                    if (data.list !== undefined) {
+                        for (var i = 0; i < data.list.length; i++) {
+                            $('<option/>', { value: data.list[i].Value, text: data.list[i].Text }).appendTo($('select#NCR_NUM'));
+                        }
+                    }
+                }
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });
+            //$("#gridNCR").data("kendoGrid").dataSource.filter({ field: "Part Number", operator: "contains", value: vendor });
+            $.blockUI();
+            $.post('@Url.Action("DropdownNCRNumPartNum", "NCR")', { vendor: vendor }, function (data) {
+                if (data.success) {
+                    $('#PartNum').empty();
+                    //for (var item = 0; item <= data.list.length; item++) {
+
+                    //}
+                    if (data.list != undefined) {
+                        for (var i = 0; i < data.list.length; i++) {
+                            $('<option/>', { value: data.list[i].Value, text: data.list[i].Text }).appendTo($('select#PartNum'));
+                        }
+                    }
+                }
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });
+
+        }
+        function onSearch() {
+            var searchText = $('#PartNum').val().toLowerCase();
+            var number = $('#searchId').val();
+            if (number == '4') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "MI_PART_NO", operator: "contains", value: searchText });
+                $('#search').val("");
+            }
+
+            $('#popup').modal('hide');
+
+        }
+
+        function onSearchNCRnum() {
+            var searchText = $('#NCR_NUM').val().toLowerCase();
+            var number = $('#searchId').val();
+            if (number == '1') {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "NCR_NUM", operator: "contains", value: searchText });
+            }
+            $('#popupncrnum').modal('hide');
+        }
+        function onSearchAge() {
+            var age1cond = $('#age1').val();
+            var age2cond = $('#age2').val();
+            var age3cond = $('#age3').val();
+            if (age1cond) {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "lt", value: age1cond });
+            }
+            if (age2cond) {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "lt", value: age2cond + 1 });
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "gt", value: age2cond - 1 });
+            }
+            if (age3cond) {
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "AGE", operator: "gt", value: age3cond });
+            }
+            $('#popupage').modal('hide');
+        }
+
+
+        function onSearchStastus() {
+            var number = $('#searchId').val();
+            if (number == '8') {
+                var searchStatus = $('#statusSearch').val().toLowerCase();
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "STATUS", operator: "contains", value: searchStatus });
+                $('#statusSearch').val("");
+            }
+            $('#popupstatus').modal('hide');
+        }
+
+        function onSearchInspector(inspector) {
+            var number = $('#searchId').val();
+            if (number == '9') {
+                var searchStatus = $('#inspectorId').val().toLowerCase();
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "INSPECTOR", operator: "contains", value: searchStatus });
+                $('#statusSearch').val("");
+            }
+            $('#popupinspector').modal('hide');
+        }
+        function onStatus(status) {
+            $('#search').text(status);
+            $('#statusSearch').val(status);
+        }
+        var mygrid = $("#gridNCR").kendoGrid({
+            selectable: true
+        });
+        //select row data catch status
+        function onFindStatus(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'STATUS') {
+                $('#statusSearch').show();
+                $('#searchId').val(8);
+                $('#popupstatus').modal('show');
+            }
+        }
+        function onFindNCRnum(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'NCR Number') {
+                $('#popupncrnum').show();
+                $('#searchId').val(1);
+                $('#popupncrnum').modal('show');
+            }
+        }
+        function onFindInspector(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Inspector') {
+                $('#inspectorSearch').show();
+                $('#searchId').val(9);
+                $('#popupinspector').modal('show');
+            }
+        }
+        function onFindDate(condition) {
+            $('.searchField').text(condition);
+            if (condition == 'Created Date') {
+                $('#searchId').val(6);
+                $('#popupdate').modal('show');
+            }
+        }
+        function onSearchDate() {
+            var number = $('#searchId').val();
+            if (number == '6') {
+                var datefrom = $('#datefrom').val().toLowerCase();
+                var dateto = $('#dateto').val().toLowerCase();
+                $("#gridNCR").data("kendoGrid").dataSource.filter({ field: "INS_DATE", operator: "gte", value: datefrom },
+                                                                   { field: "INS_DATE", operator: "lte", value: dateto });
+                $('#datefrom').val("");
+                $('#dateto').val("");
+            }
+            $('#popupdate').modal('hide');
+        }
+        var checkedItems = [];
+        function selectNCR() {
+            checkedItems = [];
+            var temp = this.selectedKeyNames();
+            $.each(temp, function (index, value) {
+                checkedItems.push(value);
+            });
+        }
+        function openEvidencePopup() {
+            //checkedItems = [];
+            //var entityGrid = $("#gridNCR").data("kendoGrid");
+            //var rows = entityGrid.select();
+            //rows.each(function (index, row) {
+            //    checkedItems.push(entityGrid.dataItem(row).NCR_NUM);
+            //});
+            $.blockUI();
+            $('#tb-Evidences #tbody-Evidences').html('');
+            $.post('@Url.Action("GetListEvidenceByNCR", "NCR")', { StringListncrnum: JSON.stringify(checkedItems) }, function (res) {
+                if (res !== undefined) {
+                    for (var i = 0; i < res.data.length; i++) {
+                        let No = i + 1;
+                        let template = '<tr class="" id="evi_' + res.data[i].NCRNUM + '_' + No + '">'+
+                            '<td>' + No + '</td>' +
+                            '<td><a href="" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true">' + res.data[i].FileName +'</i></a></td>'+
+                            '<td>' + res.data[i].NCRNUM +'</td>'+
+                            '<td><input type="checkbox" data-evidence="' + res.data[i].EVIID + '" data-ncrnum="' + res.data[i].NCRNUM + '" class="checkbox" onchange="fileChecked(this)" /></td>'+
+                            '</tr>';
+                        $('#tb-Evidences #tbody-Evidences').append(template);
+                    }
+                }
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+                });
+
+            $('#modelEvidences').modal('show');
+        }
+
+        function printf() {
+            @*var entityGrid = $("#gridNCR").data("kendoGrid");
+            var rows = entityGrid.select();
+            rows.each(function (index, row) {
+                checkedItems.push(entityGrid.dataItem(row).NCR_NUM);
+            });
+            $.blockUI();
+            $('#tb-Evidences #tbody-Evidences').html('');
+            $.post('@Url.Action("GetListEvidenceByNCR", "NCR")', { StringListncrnum: JSON.stringify(checkedItems) }, function (res) {
+                if (res !== undefined) {
+                    for (var i = 0; i < res.data.length; i++) {
+                        let No = i + 1;
+                        let template = '<tr class="" id="evi_' + res.data[0].NCRNUM + '_' + No + '">'+
+                            '<td>' + No + '</td>' +
+                            '<td><a href="" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true">' + res.data[0].FileName +'</i></a></td>'+
+                            '<td>' + res.data[0].NCRNUM +'</td>'+
+                            '<td><input type="checkbox" data-evidence="' + res.data[0].EVIID + '" data-ncrnum="' + res.data[0].NCRNUM + '" class="checkbox" onchange="fileChecked(this)" /></td>'+
+                            '</tr>';
+                        $('#tb-Evidences #tbody-Evidences').append(template);
+                    }
+                }
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });*@
+
+
+            let lengthEvidence = $('#tbody-Evidences tr').length;
+            //Get Evidences were printed
+            let lstevidence = [];
+            $('#tb-Evidences input[type=checkbox]').each(function (i, e) {
+                if ($(e).prop('checked')) lstevidence.push({ NCRNUM: $(e).attr('data-ncrnum'), EVIID: $(e).attr('data-evidence') });
+            });
+            @*if (checkedItems.length === 0 & lengthEvidence > 0) {
+                bootbox.alert("Please select the checkbox to print NCR");
+            }
+            else if (lstevidence.length === 0 & lengthEvidence > 0) {
+                bootbox.alert("Please select the checkbox to print Evidence");
+            }
+            else {
+
+                let url = '@Url.Action("PrintMutilpleNCR", "NCR")?' + 'StringListncrnum=' + JSON.stringify(checkedItems) + '&PrintedEvidences=' + JSON.stringify(lstevidence);
+                var win = window.open(url, '_blank');
+                win.focus();
+            }*@
+            let url = '@Url.Action("PrintMutilpleNCR", "NCR")?' + 'StringListncrnum=' + JSON.stringify(checkedItems) + '&PrintedEvidences=' + JSON.stringify(lstevidence);
+                var win = window.open(url, '_blank');
+                win.focus();
+        }
+
+        $("#clear").click(function () {
+            $("#gridNCR").data('kendoGrid').dataSource.filter({
+                field: "INSPECTOR",
+                operator: "contains",
+                value: ""
+            });
+        });
+
+        function fileChecked(checkbox) {
+            let vm = $(checkbox);
+            vm.parent().parent().toggleClass('success');
+        }
+
+        function getEvidenceFiles() {
+            let lstevidence = [];
+            $('#tb-Evidences input[type=checkbox]').each(function (i, e) {
+                if ($(e).prop('checked')) lstevidence.push({ NCRNUM: $(e).attr('data-ncrnum'), EVIID: $(e).attr('data-evidence') });
+            });
+            console.log(JSON.stringify(lstevidence));
+        }
+
+    </script>
+}

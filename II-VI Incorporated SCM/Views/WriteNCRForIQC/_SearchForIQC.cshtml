@@ -1,0 +1,31 @@
+﻿@using (Html.BeginForm("Index", "WriteNCRForIQC", FormMethod.Post))
+{
+    <div class="row">
+        <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+                <div class="caption">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#SearchForIQCByReceiver" data-toggle="tab" aria-expanded="true" id="iqcReceiver">Receiver</a>
+                        </li>
+                        <li class="">
+                            <a href="#SearchForIQCByPONumber" data-toggle="tab" aria-expanded="false" id="iqcPoNumber">PO Number</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="SearchForIQCByReceiver">
+                        @Html.Partial("~/Views/WriteNCRForIQC/_SearchForIQCByReceiver.cshtml")
+                    </div>
+                    <div class="tab-pane" id="SearchForIQCByPONumber">
+                        @Html.Partial("~/Views/WriteNCRForIQC/_SearchForIQCByPONumBer.cshtml")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+}

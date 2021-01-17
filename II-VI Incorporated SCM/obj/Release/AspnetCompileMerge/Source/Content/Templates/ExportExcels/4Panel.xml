@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<FourPanel FullNameIndex="4" FullNameCol="D" VendorIndex="2" VendorCol="F" VendorText="Teng ( {0} ) Quality and OTD performance">
+  <PPM begin="54">
+    <Month begin="A" />
+    <RecQty begin="B"  />
+    <RejQty begin="C" />
+    <Target begin="D"  />
+    <PPMYTD begin="E" />
+  </PPM>
+  <OTD begin="70">
+    <Month begin="A" />
+    <Early begin="B" />
+    <Late begin="C"  />
+    <OnTime begin="D" />
+    <Total begin="E" />
+    <Target begin="F" />
+    <Actual begin="G" />
+  </OTD>
+  <ImprovementTracking Begin ="38">
+    <Ref Begin="L" />
+    <Desc Begin="M" />
+    <JUL Begin="O" />
+    <AUG Begin="P" />
+    <SEP Begin="Q" />
+    <OCT Begin="R" />
+    <NOV Begin="S" />
+    <DEC Begin="T" />
+    <JAN Begin="U" />
+    <FEB Begin="V" />
+    <MAR Begin="W" />
+    <APR Begin="X" />
+    <MAY Begin="Y" />
+    <JUN Begin="Z" />
+    <YTD Begin="AA" />
+  </ImprovementTracking>
+  <SCARProblem Begin="69">
+    <Ref Begin="L" />
+    <CAD Begin="M"/>
+    <TargetDate Begin="T"/>
+    <ActualDate Begin="V" />
+    <Status Begin="X"/>
+    <Owner Begin="Z"/>
+  </SCARProblem>
+</FourPanel>

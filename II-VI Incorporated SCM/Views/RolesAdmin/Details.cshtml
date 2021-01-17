@@ -1,0 +1,45 @@
+﻿@model II_VI_Incorporated_SCM.Models.Account.ApplicationRole
+@{
+    ViewBag.Title = "Role Details";
+}
+<div>
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            Module
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Group)
+        </dd>
+    </dl>
+</div>
+<h4>List of users in this role</h4>
+@if (ViewBag.UserCount == 0)
+{
+    <hr />
+    <p>No users found in this Role.</p>
+}
+<table class="table">
+    @foreach (var item in ViewBag.Users)
+    {
+        <tr>
+            <td>
+                @item.UserName
+            </td>
+        </tr>
+    }
+</table>
+<div class="row">
+    <div class="col-md-offset-1 col-md-11">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" }) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
+    </div>
+</div>
+

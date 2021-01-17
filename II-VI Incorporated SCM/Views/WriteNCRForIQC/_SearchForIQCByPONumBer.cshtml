@@ -1,0 +1,160 @@
+﻿<div class="form-horizontal" role="form">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-4 control-label">PO</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control ms-poser" name="RECEIVER" required="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">Part Number</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control ms-pnser" required="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">LOT</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control ms-lotser" required="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-4">
+                <a class="btn green ms-po-number"><i class="fa fa-search"></i> Go</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ms-updatepo-data" style="display: none">
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>Receiver:</b>
+        </div>
+        <div class="col-md-6">
+            <input class="form-control" readonly="readonly" type="text" name="RECEVER" style="text-align: center" id="RECCP" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>PO Number:</b>
+        </div>
+        <div class="col-md-6">
+            <input class="form-control" readonly="readonly" type="text" name="PO_NUM" style="text-align: center" id="POCP" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>Part Number:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="ITEM" style="text-align: center" id="ITEMCP" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>LOT Number:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="LOT" style="text-align: center" id="LOTCP" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+            <div class="col-md-4  text-center">
+            <b>REC Quantity:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" style="text-align: center" id="QTYCP" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4 text-center">
+            <b>Unit:</b>
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>AQL Visual:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="AQL_VISUAL" style="text-align: center" id="AQLVCP" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>SPL Visual:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="SAMPLING_VISUAL" style="text-align: center" id="SPLVCP" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>AQL MEASURE:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" name="AQL_MEASURE" style="text-align: center" id="AQLMCP" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-4  text-center">
+            <b>SPL MEASURE:</b>
+        </div>
+        <div class="col-md-6">
+            <input type="text" readonly="readonly" class="form-control" style="text-align: center" name="SAMPLING_MEASURE" id="SPLMCP" />
+        </div>
+    </div>
+</div>
+<script>
+    var urlpo = '@Url.Action("GetDetailNCRForIqcSearch", "WriteNcrForIqc")';
+    $('.ms-po-number').click(function () {
+        var partnum = $('.ms-pnser').val();
+        var po = $('.ms-poser').val();
+        var lot = $('.ms-lotser').val();
+        let CCN = $('#CCN').val();
+        if (isBlank(po)) {
+            $('.ms-poser').addClass("input-validation-error");
+            return;
+        } else {
+            $('.ms-poser').removeClass("input-validation-error");
+        }
+
+        if (isBlank(partnum)) {
+            $('.ms-pnser').addClass("input-validation-error");
+            return;
+        } else {
+            $('.ms-pnser').removeClass("input-validation-error");
+        }
+        
+        if (isBlank(lot)) {
+            $('.ms-lotser').addClass("input-validation-error");
+            return;
+        } else {
+            $('.ms-lotser').removeClass("input-validation-error");
+        }
+        $.blockUI();
+        $.post(Urliqc,
+            { po: po, partnum: partnum, lot: lot,CCN:CCN },
+            function (result) {
+                if (result.success) {
+                    $("#LOTCP").val(result.model.LOT);
+                    $("#RECCP").val(result.model.RECEIVER1);
+                    $("#QTYCP").val(result.model.REC_QTY);
+                    $("#POCP").val(result.model.PO_NUM);
+                    $("#ITEMCP").val(result.model.ITEM);
+                    $("#AQLVCP").val(result.model.AQL_VISUAL);
+                    $("#SPLVCP").val(result.model.SAMPLING_VISUAL);
+                    $("#AQLMCP").val(result.model.AQL_MEASURE);
+                    $("#SPLMCP").val(result.model.SAMPLING_MEASURE);
+                    $("#INSP").val(result.model.INS_QTY);
+                    $('.ms-updatepo-data').show();
+                }
+                else {
+                    bootbox.alert(result.message);
+                }
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });
+    })
+</script>

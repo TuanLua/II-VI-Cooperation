@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "LeaderActionSuggestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 align="center"><b>Cải tiến quy trình cắt -</b> <b style="color:blue">FY19-HR-001</b> </h2>
+<h3> <button class="btn btn-sm btn-success" style="float:right">View detail</button></h3>
+<table class="table table-striped table-bordered table-hover">
+    <tbody>
+        <tr>
+            <td align="right">
+                Project Member:
+            </td>
+            <td>
+                <select class="form-control" id="member" multiple="multiple">
+                    <option>Select</option>
+                    <option>Tuấn</option>
+                    <option>Quang</option>
+                </select>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+<div align="center">
+    <button class="btn btn-success" id="save">Save</button>
+    <button class="btn btn-info">Approve</button>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#member').select2();
+    })
+
+</script>

@@ -1,0 +1,255 @@
+﻿@using II_VI_Incorporated_SCM.Services
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity
+@model II_VI_Incorporated_SCM.Models.ESuggestion.CostSavingmodel
+@{
+    ViewBag.Title = "CostSaving";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 align="left">CostSaving</h1>
+<h2 align="center">
+    <b>
+        <input id="titi" value="@ViewBag.titi" style="border:0px;text-align:right" />-
+    </b> <b style="color:blue"><input style="border:0px;text-align:left" id="ESNum" /></b>
+</h2>
+<h3> <button class="btn btn-sm btn-success" id="detail" style="float:right">View detail</button></h3>
+@using (Html.BeginForm("SaveCostSaving", "ESuggestion", FormMethod.Post, new
+{
+    @class = "form-inline",
+    @role = "form",
+    @enctype = "multipart/form-data",
+    @id = "form-board"
+}))
+{
+    <input type="hidden" value="@ViewBag.IDSuggestion" name="Sug_ID" id="Sug_ID" />
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr>
+                <td width="40px" align="center">
+                    Jan
+                </td>
+                <td width="40px" align="center">
+                    Feb
+                </td>
+                <td width="40px" align="center">
+                    Mar
+                </td>
+                <td width="40px" align="center">
+                    Apr
+                </td>
+                <td width="40px" align="center">
+                    May
+                </td>
+                <td width="40px" align="center">
+                    Jun
+                </td>
+                <td width="40px" align="center">
+                    Jul
+                </td>
+                <td width="40px" align="center">
+                    Aug
+                </td>
+                <td width="40px" align="center">
+                    Sep
+                </td>
+                <td width="40px" align="center">
+                    Oct
+                </td>
+                <td width="40px" align="center">
+                    Nov
+                </td>
+                <td width="40px" align="center">
+                    Dec
+                </td>
+            </tr>
+            <tr>
+                <td width="40px">
+                    @*@Html.TextAreaFor(m => m.Jan, 1, 7, new
+                        {
+                            @class = "form-control",
+                            @type = "number",
+                                 //@style = "resize:vertical",
+
+                            @id = "Jan"
+                        })*@
+                    <input type="number" name="Jan" id="Jan" width="40" class="form-control">
+                    @*@Html.ValidationMessageFor(m => m.Jan)*@
+                </td>
+                <td>
+                    @*@Html.TextAreaFor(m => m.Feb,1,7, new
+        {
+            @class = "form-control",
+            @type = "number",
+            //@style = "resize:vertical",
+
+            @id = "Feb"
+        })*@
+                    @* @Html.ValidationMessageFor(m => m.Feb)*@
+                    <input type="number" name="Feb" id="Feb" width="40" class="form-control">
+                </td>
+                <td>
+                    @*@Html.TextAreaFor(m => m.Mar,1,7, new
+        {
+            @class = "form-control",
+            @type = "number",
+            //@style = "min-width: 100%;resize:vertical",
+
+            @id = "Mar"
+        })*@
+                    @*@Html.ValidationMessageFor(m => m.Mar)*@
+                    <input type="number" name="Mar" id="Mar" width="40" class="form-control">
+                </td>
+                <td>
+                    @*@Html.TextAreaFor(m => m.Apr,1,7, new
+        {
+            @class = "form-control",
+            @type = "number",
+            //@style = "min-width: 100%;resize:vertical",
+
+            @id = "Apr"
+        })*@
+                    @*@Html.ValidationMessageFor(m => m.Apr)*@
+                    <input type="number" name="Apr" id="Apr" width="40" class="form-control">
+                </td>
+                <td>
+                    @*@Html.TextAreaFor(m => m.May,1,7, new
+        {
+            @class = "form-control",
+            @type = "number",
+            //@style = "min-width: 100%;resize:vertical",
+
+            @id = "May"
+        })*@
+                    @*@Html.ValidationMessageFor(m => m.May)*@
+                    <input type="number" name="May" id="May" width="40" class="form-control">
+                </td>
+                <td>
+                    @*@Html.TextAreaFor(m => m.Jun,1,7, new
+        {
+            @class = "form-control",
+            @type = "number",
+            //@style = "min-width: 100%;resize:vertical",
+
+            @id = "Jun"
+        })*@
+                    @*@Html.ValidationMessageFor(m => m.Jun)*@
+                    <input type="number" name="Jun" id="Jun" width="40" class="form-control">
+                </td>
+                <td>
+                    @*@Html.TextAreaFor(m => m.Jul,1,7, new
+        {
+            @class = "form-control",
+            @type = "number",
+            //@style = "min-width: 100%;resize:vertical",
+
+            @id = "Jul"
+        })*@
+                    @*@Html.ValidationMessageFor(m => m.Jul)*@
+                    <input type="number" name="Jul" id="Jul" width="40" class="form-control">
+                </td>
+                <td>
+                    @*@Html.TextAreaFor(m => m.Aug,1,7, new
+        {
+            @class = "form-control",
+            @type = "number",
+            //@style = "min-width: 100%;resize:vertical",
+
+            @id = "Aug"
+        })*@
+                    @*@Html.ValidationMessageFor(m => m.Aug)*@
+                    <input type="number" name="Aug" id="Aug" width="40" class="form-control">
+                </td>
+                <td>
+                    @*@Html.TextAreaFor(m => m.Sep,1,7, new
+        {
+            @class = "form-control",
+            @type = "number",
+            //@style = "min-width: 100%;resize:vertical",
+
+            @id = "Sep"
+        })*@
+                    @*@Html.ValidationMessageFor(m => m.Sep)*@
+                    <input type="number" name="Sep" id="Sep" width="40" class="form-control">
+                </td>
+                <td>
+                    @*@Html.TextAreaFor(m => m.Oct,1,7, new
+        {
+            @class = "form-control",
+            @type = "number",
+            //@style = "min-width: 100%;resize:vertical",
+
+            @id = "Oct"
+        })*@
+                    @*@Html.ValidationMessageFor(m => m.Oct)*@
+                    <input type="number" name="Oct" id="Oct" width="40" class="form-control">
+                </td>
+                <td>
+                    @*@Html.TextAreaFor(m => m.Nov,1,7, new
+        {
+            @class = "form-control",
+            @type = "number",
+            //@style = "min-width: 100%;resize:vertical",
+
+            @id = "Nov"
+        })*@
+                    @*@Html.ValidationMessageFor(m => m.Nov)*@
+                    <input type="number" name="Nov" id="Nov" width="40" class="form-control">
+                </td>
+                <td>
+                    @*@Html.TextAreaFor(m => m.Dec,1,7, new
+        {
+            @class = "form-control",
+            @type = "number",
+            //@style = "min-width: 100%;resize:vertical",
+
+            @id = "Dec"
+        })*@
+                    @*@Html.ValidationMessageFor(m => m.Dec)*@
+                    <input type="number" name="Dec" id="Dec" width="40" class="form-control">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div align="center">
+        <button class="btn btn-success btn-sm" id="Save">Save</button>
+    </div>
+}
+    <script>
+        $(document).ready(function () {
+            debugger;
+            $('#ESNum').val('@ViewBag.IDSuggestion');
+            let Sug_ID = '@ViewBag.IDSuggestion';
+            $.post('@Url.Action("getCostSaving", "ESuggestion")', { Sug_ID: Sug_ID },
+                function (result) {
+                    if (result == null) return;
+                $('#Jan').val((result.result.Jan));
+                $('#Feb').val((result.result.Feb));
+                $('#Mar').val((result.result.Mar));
+                $('#Apr').val((result.result.Apr));
+                $('#May').val((result.result.May));
+                $('#Jun').val((result.result.Jun));
+                $('#Jul').val((result.result.Jul));
+                $('#Aug').val((result.result.Aug));
+                $('#Sep').val((result.result.Sep));
+                $('#Oct').val((result.result.Oct));
+                $('#Nov').val((result.result.Nov));
+                $('#Dec').val((result.result.Dec));
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });
+    });
+    $('#detail').on('click', function () {
+            let id = "@ViewBag.IDSuggestion";
+                window.open('@Url.Action("Management", "ESuggestion")' + "?SuggestionID=" + id);
+        })
+    var $form = $('#form-board');
+    $('#Save').on('click', function (e) {
+        debugger;
+        e.preventDefault();
+        $form.submit();
+    })
+    </script>
+

@@ -1,0 +1,193 @@
+﻿@using II_VI_Incorporated_SCM.Models.NCR
+@using II_VI_Incorporated_SCM.Services
+@{
+    ViewBag.Title = "NCR Disposition Day";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>NCR DISPOSITION DAY </h4>
+
+<div class="col-md-5 form-group">
+    <label>FISCAL YEAR </label>
+    @Html.DropDownList("changeyear", (IEnumerable<SelectListItem>)ViewBag.DateList, new { @class = "form-control" })
+</div>
+<br />
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<NCRDispositionDayViewModel>()
+.Name("DisitionDayGrid")
+.Columns(columns =>
+{
+    columns.Bound(p => p.TYPE).Width(50).Title("").Editable("true");
+    columns.Bound(p => p.FY3).Width(30).Title("FY14").Editable("true");
+    columns.Bound(p => p.FY2).Width(30).Title("FY15").Editable("true");
+    columns.Bound(p => p.FY1).Width(30).Title("FY16").Editable("true");
+    columns.Bound(p => p.JUL).Width(30).Title("JUL").Editable("false");
+    columns.Bound(p => p.AUG).Width(30).Title("AUG").Editable("false");
+    columns.Bound(p => p.SEP).Width(30).Title("SEP").Editable("false");
+    columns.Bound(p => p.OCT).Width(30).Title("OCT").Editable("false");
+    columns.Bound(p => p.NOV).Width(30).Title("NOV").Editable("false");
+    columns.Bound(p => p.DEC).Width(30).Title("DEC").Editable("false");
+    columns.Bound(p => p.JAN).Width(30).Title("JAN").Editable("false");
+    columns.Bound(p => p.FEB).Width(30).Title("FEB").Editable("false");
+    columns.Bound(p => p.MAR).Width(30).Title("MAR").Editable("false");
+    columns.Bound(p => p.APR).Width(30).Title("APR").Editable("false");
+    columns.Bound(p => p.MAY).Width(30).Title("MAY").Editable("false");
+    columns.Bound(p => p.JUN).Width(30).Title("JUN").Editable("false");
+    columns.Bound(p => p.FYCurrent).Width(30).Title("FY").Editable("true");
+    columns.Bound(p => p.FY).Width(30).Hidden();
+})
+//.ToolBar(toolbar =>
+//{
+//    toolbar.Save();
+//})
+.Editable(editable => editable.Mode(GridEditMode.InCell))
+    // .Scrollable()
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Batch(true)
+        .ServerOperation(false)
+        .Events(events => events.Error("error_handler")
+                        .Change("updateChart"))
+        .Model(model => model.Id(p => p.FY))
+        .Read("GetNCRDispositionDay", "NCRReport", new { year = DateTime.Now.Subtract(DateTime.ParseExact("01/07/" + DateTime.Now.Year, "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentCulture)).Minutes >= 0 ? DateTime.Now.AddYears(1).Year : DateTime.Now.Year })
+    //.Update("EditingNCRDispositionDay", "NCRReport")
+    )
+            )
+        </div>
+    </div>
+</div>
+</br>
+<div style="text-align:center">
+    <button class="btn btn-sm btn-success" id="save">Save</button>
+</div>
+<div id="chartNCRDispositionDay"></div>
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+    $(document).ready(function () {
+        settitle();
+        $('#save').click(function () {
+            var data = $("#DisitionDayGrid").data("kendoGrid").dataSource.data();
+            var chartSeries = [];
+            data.forEach(function (item) {
+                chartSeries.push(item)
+            })
+            var abc = JSON.stringify(chartSeries);
+            $.blockUI();
+            $.post('@Url.Action("SaveNCRDispositionDay", "NCRReport")', { ListDay: abc },
+                function (result) {
+                    $.unblockUI();
+                }).fail(function () {
+                    $.unblockUI();
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                    $.unblockUI();
+                });
+        });
+    });
+    function settitle() {
+        var yearselected = $("#changeyear option:selected").text();
+        let setyeartitle = yearselected.substring(2, 4);
+        let setyearFy1 = parseInt(setyeartitle) - 1;
+        let setyearFy2 = parseInt(setyeartitle) - 2;
+        let setyearFy3 = parseInt(setyeartitle) - 3;
+        let title = "FY";
+        let JUL = "JUL";
+        let AUG = "AUG";
+        let SEP = "SEP";
+        let OCT = "OCT";
+        let NOV = "NOV";
+        let DEC = "DEC";
+        let JAN = "JAN";
+        let FEB = "FEB";
+        let MAR = "MAR";
+        let APR = "APR";
+        let MAY = "MAY";
+        let JUN = "JUN";
+        $("#DisitionDayGrid thead [data-field=FY3] .k-link").html(title + '-' + setyearFy3);
+        $("#DisitionDayGrid thead [data-field=FY2] .k-link").html(title + '-' + setyearFy2);
+        $("#DisitionDayGrid thead [data-field=FY1] .k-link").html(title + '-' + setyearFy1);
+        $("#DisitionDayGrid thead [data-field=JUL] .k-link").html(JUL + '-' + setyearFy1);
+        $("#DisitionDayGrid thead [data-field=AUG] .k-link").html(AUG + '-' + setyearFy1);
+        $("#DisitionDayGrid thead [data-field=SEP] .k-link").html(SEP + '-' + setyearFy1);
+        $("#DisitionDayGrid thead [data-field=OCT] .k-link").html(OCT + '-' + setyearFy1);
+        $("#DisitionDayGrid thead [data-field=NOV] .k-link").html(NOV + '-' + setyearFy1);
+        $("#DisitionDayGrid thead [data-field=DEC] .k-link").html(DEC + '-' + setyearFy1);
+        $("#DisitionDayGrid thead [data-field=JAN] .k-link").html(JAN + '-' + setyeartitle);
+        $("#DisitionDayGrid thead [data-field=FEB] .k-link").html(FEB + '-' + setyeartitle);
+        $("#DisitionDayGrid thead [data-field=MAR] .k-link").html(MAR + '-' + setyeartitle);
+        $("#DisitionDayGrid thead [data-field=APR] .k-link").html(APR + '-' + setyeartitle);
+        $("#DisitionDayGrid thead [data-field=MAY] .k-link").html(MAY + '-' + setyeartitle);
+        $("#DisitionDayGrid thead [data-field=JUN] .k-link").html(JUN + '-' + setyeartitle);
+        $("#DisitionDayGrid thead [data-field=FYCurrent] .k-link").html(title + '-' + setyeartitle);
+    }
+    //on change year set title
+    $('#changeyear').on('change', function () {
+        var yearselected = $("#changeyear option:selected").text();
+        var DisitionDayGrid = $("#DisitionDayGrid").data("kendoGrid");
+        settitle();
+        DisitionDayGrid.dataSource.transport.options.read.url = '@Url.Action("GetNCRDispositionDay", "NCRReport")?year=' + yearselected;
+        DisitionDayGrid.dataSource.read();
+    })
+    var months = ["FY1", "FY2", "FY3", "", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "", "FYCurrent"];
+    $("#chartNCRDispositionDay").kendoChart({
+        title: {
+            text: "NCR Disposition Day"
+        },
+        seriesDefaults: {
+            type: "line",
+            missingValues: "gap"
+
+        },
+        categoryAxis: {
+            categories: months,
+            //Each month(column) is added as a category
+        }
+
+    });
+
+    function updateChart(dataSource) {
+        var data = $("#DisitionDayGrid").data("kendoGrid").dataSource.view();
+        var dataItems = data;
+        var chartSeries = [];
+        var chartData = [];
+        dataItems.forEach(function (item) {
+            var data = [];
+            months.forEach(function (month) {
+                //Each month value is added to the data collection
+                function valueChart() {
+                    if (item[month] == 0)
+                        return null;
+                    else
+                        return item[month];
+                }
+                data.push(valueChart());
+            })
+
+            chartSeries.push({
+                data: data,
+                //we will be using the Year from the dataItem as name
+                name: item.TYPE
+            })
+        })
+        var chart = $("#chartNCRDispositionDay").data("kendoChart");
+        var options = chart.options;
+        options.series = chartSeries; //setting the series with the new data to the options
+        chart.setOptions(options); //re-initializing the Chart
+    }
+</script>

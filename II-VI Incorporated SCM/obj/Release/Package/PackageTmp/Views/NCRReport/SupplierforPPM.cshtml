@@ -1,0 +1,361 @@
+﻿@using II_VI_Incorporated_SCM.Models.NCR
+@using II_VI_Incorporated_SCM.Services
+@using II_VI_Incorporated_SCM.Models.NCRReport
+@using II_VI_Incorporated_SCM.Models
+@{
+    ViewBag.Title = "Supplier PPM Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script id="dataCellTemplate" type="text/x-kendo-tmpl">
+    # var columnMember = columnTuple ? columnTuple.members[0] : { children: [] }; #
+    # var rowMember = rowTuple ? rowTuple.members[0] : { children: [] }; #
+    # var value = kendo.toString(kendo.parseFloat(dataItem.value) || "0", "0"); #
+
+    # if (columnMember.children.length || rowMember.children.length) { #
+    <em style=" display:none; color: red">#: value # (total)</em>
+    # } else { #
+    #: value #
+    # } #
+</script>
+
+<script id="headerTemplate" type="text/x-kendo-tmpl">
+    # if (!member.children.length) { #
+    <em>#: member.caption #</em>
+    # } else { #
+    #: member.caption #
+    # } #
+</script>
+<h3>Supplier PPM Report </h3>
+<br />
+<div class="row">
+
+    <div class="form-group">
+        <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+            <label class="col-xs-1" style="text-align:right">CCN<span style="color: red">*</span> : </label>
+            <div class="col-md-4">
+                @Html.DropDownList("CCN", (IEnumerable<SelectListItem>)ViewBag.CCNList, new { @class = "form-control", id = "CCN" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <label class="control-label col-xs-1">View by<span style="color: red">*</span> : </label>
+    <div class="col-xs-3">
+        <select class="form-control" id="typeview">
+            <option value="">Please select</option>
+            <option value="type">Supplier Type</option>
+            <option value="supplier">Supplier</option>
+            <option value="part">Part</option>
+        </select>
+    </div>
+    <label class="col-xs-1">From<span style="color: red">*</span> : </label>
+    <div class="col-xs-3 date">
+        <div class="input-group date" data-provide="datepicker">
+            <input class="form-control" id="datePickerSta" />
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+            </div>
+        </div>
+    </div>
+    <label class="col-xs-1">To<span style="color: red">*</span> : </label>
+    <div class="col-md-3 date">
+        <div class="input-group date" data-provide="datepicker">
+            <input class="form-control" id="datePickerEnd" />
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <label class="control-label col-xs-1">Supplier Type</label>
+    <div class="col-xs-3">
+        <select class="form-control" id="typeselect">
+            <option value="all">All</option>
+            <option value="stra">Strategy</option>
+            <option value="none">None Strategy</option>
+        </select>
+    </div>
+    <label class="col-xs-1">Supplier </label>
+    <div class="col-xs-3">
+        <select class="form-control" id="supplierselect"></select>
+    </div>
+    <label class="col-xs-1">Part  </label>
+    <div class="col-xs-3">
+        <select class="form-control" id="partselect"></select>
+    </div>
+
+</div>
+<div class="form-group col-md-12" style="text-align:center">
+    <button class="btn btn-sm btn-success" id="submit">Go</button>
+</div>
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<sp_Report_PPMByPart_Result>
+                    ()
+                    .Name("SupplierPPM")
+                    //     .Events(e => e.ExcelExport("products_excelExport"))
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.Name).Title("Description").Width(30);
+                    //   columns.Bound(p => p.Date).Width(30).Title("Month").Editable("false");
+                    columns.Bound(p => p.Qty).Width(30).Title("Qty").Editable("false");
+                        ;
+                    })
+                    .Editable(editable => editable.Mode(GridEditMode.InCell))
+                    .Sortable()
+                          .ToolBar(tools => tools.Excel())
+                   .Excel(excel => excel
+                .FileName("Kendo UI Grid Export.xlsx")
+                .Filterable(true)
+                .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+            )
+                    .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Batch(true)
+                    .ServerOperation(false)
+                    .Model(model => model.Id(p => p.Name))
+                    .Read("ReadSupplierforPPM", "NCRReport", new { yearselect = DateTime.Now.Subtract(DateTime.ParseExact("01/07/" + DateTime.Now.Year, "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentCulture)).Minutes >= 0 ? DateTime.Now.AddYears(1).Year : DateTime.Now.Year, CCN = "03" })
+                    .Group(group => group.Add(p => p.Vendor))
+                    //    .Group(g => g.Add(p => p.Name))
+                    .Group(g => g.Add(p => p.Date))
+                    .Sort(sort => sort.Add("Date").Ascending())
+                    //.Update("EditingNCRDispositionDay", "NCRReport")
+                    )
+            )
+        </div>
+    </div>
+</div>
+<br />
+
+<div id="chartSupplierPPM"></div>
+<br />
+<script>
+    var movies = [
+        { "rank": 1, "rating": 9.2, "year": 1994, "title": "The Shawshank Redemption" },
+        { "rank": 2, "rating": 9.2, "year": 1972, "title": "The Godfather" },
+        { "rank": 3, "rating": 9, "year": 1974, "title": "The Godfather: Part II" },
+        { "rank": 4, "rating": 8.9, "year": 1966, "title": "Il buono, il brutto, il cattivo." },
+        { "rank": 5, "rating": 8.9, "year": 1994, "title": "Pulp Fiction" },
+        { "rank": 6, "rating": 8.9, "year": 1957, "title": "12 Angry Men" },
+        { "rank": 7, "rating": 8.9, "year": 1993, "title": "Schindler's List" },
+        { "rank": 8, "rating": 8.8, "year": 1975, "title": "One Flew Over the Cuckoo's Nest" },
+        { "rank": 9, "rating": 8.8, "year": 2010, "title": "Inception" },
+        { "rank": 10, "rating": 8.8, "year": 2008, "title": "The Dark Knight" }
+    ];
+
+    var dataSource = new kendo.data.DataSource({
+        data: movies
+    });
+
+    dataSource.group([{ field: "rating" }]);
+    $("#grid").kendoGrid({
+        dataSource: dataSource,
+        sortable: true,
+        scrollable: false,
+        pageable: true,
+        columns: [
+            { field: "rank", title: "Rank" },
+            { field: "year", title: "Year" },
+            { field: "title", title: "Movie Name" }
+        ]
+    });
+</script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            // settitle();
+
+            //$('table tr.k-grid-footer').remove();
+            //$('table td.k-grid-footer').remove();
+            //$('table td.k-alt').remove();
+            $('.date').datepicker({
+                autoclose: true
+              //  format: '{ 0: MM / dd / yyyy }'
+            });
+
+                $('#CCN').select2();
+        });
+
+        var months = ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "", "FYCurrent"];
+        $("#chartSupplierPPM").kendoChart({
+            title: {
+                text: "Supplier PPM Report"
+            },
+
+        //    seriesColors: ['#b71c1c', '#1a237e', '#004d40','#b71c1c', '#1a237e', '#004d40'],
+            seriesDefaults: {
+                type: "line",
+                missingValues: "gap"
+            },
+            tooltip: {
+                visible: true
+            },
+            categoryAxis: {
+                categories: months,
+
+                //Each month(column) is added as a category
+            }
+
+        });
+        function updateChart(dataSource) {
+            var data = $("#SupplierPPM").data("kendoGrid").dataSource.data();
+            debugger
+            console.log(data);
+            var dataItems = [];
+            dataItems.push(data[3]);
+            dataItems.push(data[4]);
+            dataItems.push(data[8]);
+            dataItems.push(data[9]);
+            dataItems.push(data[13]);
+            dataItems.push(data[14]);
+            console.log(dataItems);
+            var chartSeries = [];
+          //  var chartData = [];
+            dataItems.forEach(function (item) {
+                var data = [];
+                months.forEach(function (month) {
+                    //Each month value is added to the data collection
+                    function valueChart() {
+                        if (item[month] == 0)
+                            return null;
+                        else
+                            return item[month];
+                    }
+                    data.push(valueChart());
+                })
+
+                chartSeries.push({
+                    data: data,
+                    //we will be using the Year from the dataItem as name
+                    name: item.TYPE
+                })
+            })
+            var chart = $("#chartSupplierPPM").data("kendoChart");
+            var options = chart.options;
+            options.series = chartSeries; //setting the series with the new data to the options
+            chart.setOptions(options); //re-initializing the Chart
+    }
+     $("#submit").on('click', function () {
+        // var yearselect = $("#changeyear option:selected").text();
+         let CCN = $('#CCN').val();
+         let part = $('#partselect').val();
+         let dateSta = $("#datePickerSta").val();
+         let dateDue = $("#datePickerEnd").val();
+         let viewby = $("#typeview").val();
+          let DisitionDayGrid = $("#SupplierPPM").data("kendoGrid");
+         DisitionDayGrid.dataSource.transport.options.read.url = '@Url.Action("ReadSupplierforPPM", "NCRReport")?part=' + part + '&CCN=' + CCN + '&dateSta=' + dateSta + '&dateDue=' + dateDue;
+         DisitionDayGrid.dataSource.read();
+         let data = DisitionDayGrid.dataSource.data();
+         console.log(data);
+        });
+    //validate form seacrch
+    $('#typeview').on('change', function () {
+        let selected = $("#typeview option:selected").val();
+        if (selected == 'part') {
+            $("#typeselect").attr('disabled', true);
+            $("#supplierselect").attr('disabled', true);
+            $('#partselect').removeAttr('disabled', true);
+            $("#supplierselect").val('');
+            $("#typeselect").val('');
+        }
+        else if (selected == 'type') {
+            $("#partselect").attr('disabled', true);
+            $("#supplierselect").attr('disabled', true);
+            $('#typeselect').removeAttr('disabled', true);
+            $("#partselect").val('');
+            $("#supplierselect").val('');
+        }
+        else {
+            $("#partselect").attr('disabled', true);
+            $('#supplierselect').removeAttr('disabled', true);
+            $('#typeselect').removeAttr('disabled', true);
+            $("#partselect").val('');
+        }
+    })
+
+    $('#supplierselect').on('change', function () {
+        let select = $("#typeview option:selected").val();
+        if (select == '') {
+            bootbox.alert('Please choose Type View !');
+            $('#supplierselect').val('');
+        }
+    })
+    $('#partselect').on('change', function () {
+        let select = $("#typeview option:selected").val();
+        if (select == '') {
+            bootbox.alert('Please choose Type View !');
+            $('#partselect').val('');
+        }
+    })
+    $('#typeselect').on('change', function () {
+        let select = $("#typeview option:selected").val();
+        if (select == '') {
+            bootbox.alert('Please choose Type View !');
+            $('#typeselect').val('');
+        }
+        else {
+            //get supplier by type
+            let dateSta = $("#datePickerSta").val();
+            let dateDue = $("#datePickerEnd").val();
+            $.post('@Url.Action("Getsupplierbytype", "NCRReport")', { type: select, dateSta: dateSta, dateDue: dateDue }, function (result) {
+            if (result.success) {
+                let lstData = result.data;
+                let option = "<option value='null'>--Select--</option>";
+                $.each(lstData,
+                    function () {
+                        let tmp = this;
+                            option = option + '<option value="' + tmp + '">' + tmp + '</option>';
+                    });
+                $("#typeselect").html(option);
+                $("#typeselect").select2();
+             //   $('#lot_num').change();
+            } else {
+                bootbox.alert("Please check date input!");
+            }
+        }).fail(function () {
+            bootbox.alert('Please contact to Administrator!');
+        }).always(function () {
+            $.unblockUI();
+        });
+        }
+    })
+
+    $('#datePickerEnd').on('change', function () {
+        let dateSta1 = new Date($("#datePickerSta").val());
+        let dateDue1 = new Date($("#datePickerEnd").val());
+        let dateSta =$("#datePickerSta").val();
+        let dateDue= $("#datePickerEnd").val();
+        if (dateDue1 < dateSta1) {
+            bootbox.alert('Day To must equal or greater than Day From!');
+            $("#datePickerEnd").val('');
+        }
+        else {
+            //get part by day from day to
+            $.post('@Url.Action("GetpartbyDate", "NCRReport")', { dateSta: dateSta, dateDue: dateDue}, function (result) {
+            if (result.success) {
+                let lstData = result.data;
+                let option = "<option value='null'>--Select--</option>";
+                $.each(lstData,
+                    function () {
+                        let tmp = this;
+                            option = option + '<option value="' + tmp + '">' + tmp + '</option>';
+                    });
+                $("#partselect").html(option);
+                $("#partselect").select2();
+             //   $('#lot_num').change();
+            } else {
+                bootbox.alert("Please check date input!");
+            }
+        }).fail(function () {
+            bootbox.alert('Please contact to Administrator!');
+        }).always(function () {
+            $.unblockUI();
+        });
+        }
+    })
+
+
+</script>

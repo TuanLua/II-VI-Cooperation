@@ -1,0 +1,24 @@
+﻿@model II_VI_Incorporated_SCM.Models.Account.ApplicationRole
+@{
+    ViewBag.Title = "Delete Role";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>Are you sure you want to delete this Role?</h3>
+<p>Deleting this Role will remove all users from this role. It will not delete the users.</p>
+<hr />
+@using (Html.BeginForm("Delete", "RolesAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="Name" class="col-sm-2 control-label"><b>Role name:</b></label>
+        <div class="col-sm-10">
+            <p class="form-control-static">@Model.Name</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    </div>
+}
+@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })

@@ -1,0 +1,2992 @@
+﻿@using II_VI_Incorporated_SCM.Services;
+@using System.Security.Claims;
+@{
+    var claimsIdentity = User.Identity as ClaimsIdentity;
+    var userIdValue = "";
+    if (claimsIdentity != null)
+    {
+        // the principal identity is a claims identity.
+        // now we need to find the NameIdentifier claim
+        var userIdClaim = claimsIdentity.Claims
+            .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+        if (userIdClaim != null)
+        {
+            userIdValue = userIdClaim.Value;
+        }
+    }
+    var avatar = Url.Content(System.Configuration.ConfigurationManager.AppSettings["uploadPathAvatar"] + userIdValue + ".png");
+}
+<li class="nav-item  ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-bar-chart"></i>
+        <span class="title">SPC</span>
+        <span class="arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Element</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ControlLimit_Element.aspx" class="nav-link ">Control Limit </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutOfControl_Element.aspx" class="nav-link ">Out of Control </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_PPK_Element.aspx" class="nav-link ">PPK </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">ID Saw Slicing SPC</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        @* <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Slicing.aspx" class="nav-link ">ID Saw Slicing SPC (Thickness) </a>
+                            </li>*@
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_IDSawSlicingSPC_Deviation.aspx" class="nav-link ">ID Saw Slicing SPC (Deviation)</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Wire Saw Slicing SPC</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_WireSawSlicingcontrolchart.aspx" class="nav-link ">Wire saw Slicing Control Chart </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_WireSawSlicingHistogram.aspx" class="nav-link ">Wire saw Slicing Histogram</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_SurfaceRoughnessSPC.aspx" class="nav-link ">Surface Roughness SPC</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Wafer ENIG Plating</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Element_ThickNickel_SPC.aspx" class="nav-link ">Nickel Plating SPC </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Element_ImmersionGoldSPC.aspx" class="nav-link ">Immersion Gold SPC</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Element_ThickGold_SPC.aspx" class="nav-link ">Gold Plating SPC</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Element_ImmersionTinPlatingSPC.aspx" class="nav-link ">Immersion Tin Thickness SPC </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Wafer Inspection</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_WaferInspectionControlChart.aspx" class="nav-link ">Wafer Inspection Control Chart </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_WaferInspectionHistogram.aspx" class="nav-link ">Wafer Inspection Histogram</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Element inspection</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Element_Height_SPC.aspx" class="nav-link ">Element Width/Length/Height SPC </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Element_Tape_Test.aspx" class="nav-link ">Element Tape Test</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_ElementLoadTest_SPC.aspx" class="nav-link ">Element Load Test SPC</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Wafer Lapping</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WaferLappingSPC.aspx" class="nav-link ">Wafer Lapping SPC </a>
+                        </li>
+                        @*   <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_MamSPC.aspx" class="nav-link ">Flat Plate SPC</a>
+                            </li>*@
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Abrading.aspx" class="nav-link ">Abrading SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_InchWafersPlated.aspx" class="nav-link ">Tin Plating SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TAN.aspx" class="nav-link ">TAN SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Waxsheet_SPC.aspx" class="nav-link ">Waxsheet SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_ADT_Dicing_SPC_Element.aspx" class="nav-link ">ADT Dicing SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_GangSawDicingSPC.aspx" class="nav-link ">Gang Saw Dicing SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/HistogramChartQuickView.aspx" class="nav-link ">On Going Report</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Ceramic</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ControlLimit_Ceramic.aspx" class="nav-link ">Control Limit </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutOfControl_Ceramic.aspx" class="nav-link ">Out of Control </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_PPK_Ceramic.aspx" class="nav-link ">PPK </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Ceramic ENIG Plating</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_ThickGoldPlating_SPC.aspx" class="nav-link ">Thick Gold Plating SPC </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_NickelPlating_SPC.aspx" class="nav-link ">Nickel Plating SPC</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_FlashGoldPlating_SPC.aspx" class="nav-link ">Flash Gold Plating SPC</a>
+                        </li>
+                        @*  <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_PdPlating_SPC.aspx" class="nav-link ">Pd Plating SPC</a>
+                            </li>*@
+                    </ul>
+                </li>
+                @*<li class="nav-item ">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <span class="title">Compliant Tab</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Compatibility_SPC.aspx" class="nav-link ">Compliant Tab Border</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_CompatibilityRTV_SPC.aspx" class="nav-link ">Compliant Tab RTV</a>
+                            </li>
+                        </ul>
+                    </li>*@
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Copper Printing Metallization </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_PrintingSPC_Border.aspx" class="nav-link ">Snapping Subtrate Printing SPC </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_PrintingSPC_Street.aspx" class="nav-link ">Dicing Subtrate Printing SPC</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Ceramic Final inspection</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_DimensionFinalInspectionBorder.aspx" class="nav-link ">Final Inspection on Pattern side Dimension Border</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_DimensionInspectiononFFSide.aspx" class="nav-link ">Final Inspection on FullFace side (Border, Thickness)</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_DimensionFinalInspectionThickness.aspx" class="nav-link ">Final Inspection on Pattern side Thickness</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Ceramic_Snapping_SPC.aspx" class="nav-link ">Final Inspection Width-Length</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_CenterBorderSPC.aspx" class="nav-link ">Final Inspection on Pattern side Center Border</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_BorderSPC.aspx" class="nav-link ">Final Inspection for Colorado</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_StreetSPC.aspx" class="nav-link ">Final Inspection on Pattern side Street</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Dicing SPC</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Ceramic_Dicing_SPC.aspx" class="nav-link ">Dicing SPC</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_CenterBorderDicingSPC.aspx" class="nav-link ">Dicing Border SPC</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_DicingDemensionBorderSPC.aspx" class="nav-link ">Dicing Dimension Border</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TestPattern_SPC.aspx" class="nav-link ">Test Pattern SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_SolderTining_SPC.aspx" class="nav-link ">Solder Tining SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Ceramic_Lapping_SPC.aspx" class="nav-link ">Lapping Subtrate Thickness</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">High Mix Volume </span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ControlLimit_HMV.aspx" class="nav-link ">Control Limit </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutOfControl_HMV.aspx" class="nav-link ">Out of Control </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_SamminaRequestForIQCpurpose_HMV.aspx" class="nav-link ">Customer Request for IQC Purpose </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_PPK_HMV.aspx" class="nav-link ">PPK </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_SolderPasteWeightSPC.aspx" class="nav-link ">Solder Paste Weight SPC </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_SSCoolerDimensionSPC.aspx" class="nav-link ">SS Cooler Production Verification SPC </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_LMCoolerDimensionSPC.aspx" class="nav-link ">LM Cooler Production Verification SPC </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_EZViewerSPC.aspx" class="nav-link ">EZ Viewer SPC </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Lapping SPC</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">Lapped Cooler Cleaning</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item ">
+                                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Lapped_AquaCleanSystemTank3_HMV.aspx" class="nav-link ">Aqua Clean System Tank 3 </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Lapped_AquaCleanSystemTankIPA_HMV.aspx" class="nav-link ">Aqua Clean System IPA </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_LappedCoolerDimensionHistogram.aspx" class="nav-link ">Lapped Cooler Dimension Histogram</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_LappedCoolerDimensionControlChart.aspx" class="nav-link ">Lapped Cooler Dimension Control Chart</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_FlatnessofPlateSPC.aspx" class="nav-link ">Flatness of Plate</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_SlurryViscosityCupTime.aspx" class="nav-link ">Slurry Viscosity Cup Time</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_StandardResistanceSPC.aspx" class="nav-link ">Standard Resistance SPC </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_SolderWireMassSPC.aspx" class="nav-link ">Solder Wire Mass SPC </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_PreCutSolderMassSPC.aspx" class="nav-link ">Pre-Solder Wire Mass SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_HeightMatching.aspx" class="nav-link ">Height Matching</a>
+                </li>
+                @*<li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ParallelismMatching.aspx" class="nav-link ">Parallelism Matching</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ACRMatching.aspx" class="nav-link ">ACR Matching</a>
+                    </li>*@
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TEC_Serialization_Procedure.aspx" class="nav-link ">TEC Serialization Procedure</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">SS Aqua Clean System</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_SS_AquaCleanSystemTank3_HMV.aspx" class="nav-link ">SS Aqua Clean System Tank 3</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_SS_AquaCleanSystemTank6_HMV.aspx" class="nav-link ">SS Aqua Clean System Tank 6</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_SS_AquaCleanSystemTankIPA_HMV.aspx" class="nav-link ">SS Aqua Clean System IPA</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">LW LM Aqua Clean System </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        @*  <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_AquaCleanSystemTank2_LWLM.aspx" class="nav-link ">LW LM Aqua Clean System Tank 2 </a>
+                            </li>*@
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_LWLM_AquaCleanSystemTank3_HMV.aspx" class="nav-link ">LW LM Aqua Clean System Tank 3</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_LWLM_AquaCleanSystemTankIPA_HMV.aspx" class="nav-link ">LW LM Aqua Clean System IPA</a>
+                        </li>
+                    </ul>
+                </li>
+                @*<li class="nav-item  ">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <span class="title">Manual Water Clean</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ManualWaterCleanTank25.aspx" class="nav-link ">Manual Water Clean Tank 2,5 </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ManualWaterCleanTank1346Dyer.aspx" class="nav-link ">Manual Water Clean Tank 1,3,4,6,Dyer</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ManualWaterCleanTank7.aspx" class="nav-link ">Manual Water Clean Tank 7</a>
+                            </li>
+                        </ul>
+                    </li>*@
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Final Inspection Control Chart</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        @*  <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TelecomTECDimensionSPC.aspx" class="nav-link ">Telecom TEC Dimension SPC </a>
+                            </li>*@
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TelecomTECParallelSPC_HMV.aspx" class="nav-link ">Telecom TEC Parallel SPC</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_LMTECDimensionSPC.aspx" class="nav-link ">LM TEC Dimension SPC</a>
+                        </li>
+                        @* <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TelecomTECGoldPostHeight.aspx" class="nav-link ">Telecom TEC Gold Post Height</a>
+                            </li>*@
+                    </ul>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Final Inspection Histogram</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TelecomTECDimensionHistogram.aspx" class="nav-link ">Telecom TEC Dimension Histogram </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TelecomTECParallelHistogram.aspx" class="nav-link ">Telecom TEC Parallel Histogram</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TelecomTECGoldPostHeightHistogram.aspx" class="nav-link ">Telecom TEC Gold Post Height Histogram</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_LMTECDimensionHistogram.aspx" class="nav-link ">LM TEC Dimension Histrogram</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TECSerializationProcedure.aspx" class="nav-link ">Delta T Test Procedure SPC </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TECSerialization.aspx" class="nav-link ">TEC Serialization</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">HVAC </span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ControlLimit_HVAC.aspx" class="nav-link ">Control Limit </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutOfControl_HVAC.aspx" class="nav-link ">Out of Control </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_SamminaRequestForIQCpurpose.aspx" class="nav-link ">Customer Request for IQC Purpose </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_PPK_HVAC.aspx" class="nav-link ">PPK </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TelecomProductionVerificationSPC.aspx" class="nav-link ">Telecom Production Verification SPC </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TelecomProductionVerificationSPC_MutilSection.aspx" class="nav-link ">Mutil Section Telecom Production Verification SPC </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_ConsumeCoolerDimensionSPC.aspx" class="nav-link ">Consume Production Verification SPC </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_AutoCoolerDimensionSPC.aspx" class="nav-link ">Auto Production Verification SPC </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TelecomTECParallelSPC.aspx" class="nav-link ">Telecom TEC Parallel SPC </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TECLeadWiresSPC.aspx" class="nav-link ">TEC Lead Wires SPC </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Aqua Clean System</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_AquaCleanSystemTank4_HVAC.aspx" class="nav-link ">Aqua Clean System Tank #4</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_AquaCleanSystemTank7_HVAC.aspx" class="nav-link ">Aqua Clean System Tank #7</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_AquaCleanSystemIPA_HVAC.aspx" class="nav-link ">Aqua Clean System IPA</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_AquaCleanSystemTank10_HVAC.aspx" class="nav-link ">Aqua Clean System Tank 10</a>
+                        </li>
+                    </ul>
+                </li>
+                @*<li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ACResistanceSPC.aspx" class="nav-link ">AC Resistance SPC </a>
+                    </li>*@
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_EZTestSPC.aspx" class="nav-link ">EZ Test SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_ElectricalTestSPC.aspx" class="nav-link ">Electrical Test SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_SolderWireMassSPC_HVAC.aspx" class="nav-link ">Solder Wire Mass SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_PreCutSolderMassSPC_HVAC.aspx" class="nav-link ">Pre-Solder Wire Mass SPC</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Ceramic Etching</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_CeramicEatchingTank1.aspx" class="nav-link ">Ceramic Etching Tank 1</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_CeramicEatchingTank3.aspx" class="nav-link ">Ceramic Etching Tank 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_FinalWidthLengthDimension.aspx" class="nav-link ">Final Width/Length Dimension</a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Gesture Production Verification SPC </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_InProcessWidthLengthDimension.aspx" class="nav-link ">In-process Width/Length Dimension </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_InProcessHeightDimension.aspx" class="nav-link ">In-process Height Dimension</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_GESTTECParalleSPC.aspx" class="nav-link ">GEST TEC Paralle SPC</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Gesture ACR Test</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_AutomatedTestingSPC.aspx" class="nav-link ">Automated Testing SPC </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_ACRTestSPC.aspx" class="nav-link ">ACR Test SPC</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_ParallelismMatching_HVAC.aspx" class="nav-link ">Parallelism Matching</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TECLeadwireFinalDimensionSPC.aspx" class="nav-link ">TEC Leadwire Final Dimension SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_FinalGoldPostHeight.aspx" class="nav-link ">Final Gold Post Height SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/ClampingAndReflowSPC.aspx" class="nav-link ">Clamping And Reflow SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Special dimension</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TECDimensionHistogram.aspx" class="nav-link ">TEC Dimension Histogram</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TECLeadWiresHistogram.aspx" class="nav-link ">TEC Lead Wires Histogram</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_WireDiameterHistogram.aspx" class="nav-link ">Wire Diameter Histogram</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">SMT</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ControlLimit_SMT.aspx" class="nav-link ">Control Limit </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutOfControl_SMT.aspx" class="nav-link ">Out of Control </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_PPK_SMT.aspx" class="nav-link ">PPK</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_SamminaRequestForIQCpurpose_SMT.aspx" class="nav-link ">Customer Request for IQC Purpose</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TelecomProductionVerificationSPC_SMT.aspx" class="nav-link ">Telecom Production Verification SPC </a>
+                </li>
+                @*   <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ConsumeCoolerDimensionSPC_SMT.aspx" class="nav-link ">Consume Production Verification SPC </a>
+                    </li>*@
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_TelecomTECParallelSPC_SMT.aspx" class="nav-link ">Telecom TEC Parallel SPC </a>
+                </li>
+                @* <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TECLeadWiresSPC_SMT.aspx" class="nav-link ">TEC Lead Wires SPC </a>
+                    </li>*@
+
+                @* <li class="nav-item ">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <span class="title">Aqua Clean System</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_AquaCleanSystemTank4_SMT.aspx" class="nav-link ">Aqua Clean System Tank #4</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_AquaCleanSystemTank7_SMT.aspx" class="nav-link ">Aqua Clean System Tank #7</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_AquaCleanSystemIPA_SMT.aspx" class="nav-link ">Aqua Clean System IPA</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_AquaCleanSystemTank10_SMT.aspx" class="nav-link ">Aqua Clean System Tank 10</a>
+                            </li>
+                        </ul>
+                    </li>*@
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_EZTestSPC_SMT.aspx" class="nav-link ">EZ Test SPC</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_PorchLengthSPC.aspx" class="nav-link ">Porch Length</a>
+                </li>
+                @*<li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ElectricalTestSPC_SMT.aspx" class="nav-link ">Electrical Test SPC</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_SolderWireMassSPC_SMT.aspx" class="nav-link ">Solder Wire Mass SPC</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_PreCutSolderMassSPC_SMT.aspx" class="nav-link ">Pre-Solder Wire Mass SPC</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_FinalWidthLengthDimension_SMT.aspx" class="nav-link ">Final Width/Length Dimension</a>
+                    </li>*@
+            </ul>
+        </li>
+
+
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">System</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_ControlLimit_Sys.aspx" class="nav-link ">Control Limit </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_OutOfControl_Sys.aspx" class="nav-link ">Out of Control </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCCrimpingVerification.aspx" class="nav-link ">Crimping Verification </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCMedicalVerification.aspx" class="nav-link ">Medical Product Verification </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">BR Product Verification</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCBioRadProductVerification_ShortTest.aspx" class="nav-link ">SPC BR Product Short Test </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCBioRadproductVerificayion_StandardRessistanceShortTest.aspx" class="nav-link ">Standard Resistance Short Test</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Bedding Product Veriafication</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCBeddingProduct_NozzleDiameter.aspx" class="nav-link ">Nozzle Diameter </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCBeddingProduct_FinalTest.aspx" class="nav-link ">Final Test</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCBeddingProductVerification_FinalTestStandard.aspx" class="nav-link ">Final Test Standard</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">System Test</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebsys/SPCSystemTest_StandardTest.aspx" class="nav-link ">Standard Test </a>
+                            @*<a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCSystemTest_StandardTest.aspx" class="nav-link ">Standard Test </a>*@
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCSystemTest_ForProduction.aspx" class="nav-link ">System Test For Production</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Cycling Test</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            @*<a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCCyclingTest_StandardTest.aspx" class="nav-link ">Standard Test </a>*@
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebsys/SPCCyclingTest_StandardTest.aspx" class="nav-link ">Standard Test </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCCyclingTest_ForProduct.aspx" class="nav-link ">Cycling Test For Production</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Leak Test</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCLeakTest_StandardTest.aspx" class="nav-link ">Standard Test </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SPCLeakTest_ForProduct.aspx" class="nav-link ">Leak Test For Production</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Pressure Test</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebsys/SPCPressureTest_StandardTest.aspx" class="nav-link ">Standard Test </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </li>
+
+
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_BreakDownCooler.aspx" class="nav-link ">Production Verification (Break Down Cooler)</a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item  ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-bar-chart"></i>
+        <span class="title">Process Parameters</span>
+        <span class="arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Element</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Wafer ENIG Plating </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_E-Gold_Element.aspx" class="nav-link ">E-Gold </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Sn_Element.aspx" class="nav-link ">Electroless Sn Plating</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Ni_Element.aspx" class="nav-link ">Electroless Ni Plating</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Au_Element.aspx" class="nav-link ">Immersion Au plating</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Pd_Element.aspx" class="nav-link ">Pd Activation </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TinSolution.aspx" class="nav-link ">Electrolytic Tin plating analysis</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Slice_Element.aspx" class="nav-link ">Slicing blade control</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Dicing_Element.aspx" class="nav-link ">Dicing Abor Control</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Wiresaw_Element.aspx" class="nav-link ">VN Wire saw run</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Dismount_Element.aspx" class="nav-link ">Dismounting Control</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_WaferCleaning.aspx" class="nav-link ">Wafer Cleaning</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Etch_Element.aspx" class="nav-link ">Etch</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Ceramic</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Screen_Management.aspx" class="nav-link ">Screen Performance Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Screen_Supplier.aspx" class="nav-link ">Screen Performance b/w Supplier </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_NewScreenTension.aspx" class="nav-link ">Screen Tension Control</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ScreenControl.aspx" class="nav-link ">Screen Control</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_PdActivator_Ceramic.aspx" class="nav-link ">Pd Activator</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Detergent_Ceramic.aspx" class="nav-link ">Detergent</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Acid_Ceramic.aspx" class="nav-link ">AcidClean</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Ni_Ceramic.aspx" class="nav-link ">Nickel</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_I-Gold_Ceramic.aspx" class="nav-link ">I-Gold</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_E-Gold_Ceramic.aspx" class="nav-link ">E-Gold</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_IPA_Ceramic.aspx" class="nav-link ">IPA</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">System</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">CMM Measurement </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/CMM_Report.aspx" class="nav-link ">CMM Test (Vacuum Chuck) </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/CMM_DataTestVcumChuck.aspx" class="nav-link ">Data Test (Vacuum Chuck)</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/ACRTestingReport.aspx" class="nav-link ">ACR Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/CoCReport.aspx" class="nav-link ">CoC Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/TorqueCalibration.aspx" class="nav-link ">Torque Verification</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/TorqueCablirationReport.aspx" class="nav-link ">Torque Data</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/FinalInspectionVerificationReport.aspx" class="nav-link ">Inspection Verification</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/CrimpingVerificationReport.aspx" class="nav-link ">Crimping Verification record </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_ESD_WristStraplog.aspx" class="nav-link ">ESD Wrist Strap log </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_Vacuumlevel.aspx" class="nav-link ">Vacuum Level </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Check List </span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                @*<li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_CheckListFE.aspx" class="nav-link ">Check List Front End </a>
+                    </li>*@
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_CheckList.aspx" class="nav-link ">Check List</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_CheckList_SttFE.aspx" class="nav-link ">Check List Status Front End </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_CheckList_Stt.aspx" class="nav-link ">Check List Status Assembly </a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Degreaser </span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Propar_Degeaser.aspx" class="nav-link ">DEGREASER SOLUTION CHANGE </a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+
+</li>
+<li class="nav-item  ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-docs"></i>
+        <span class="title">WO Reports</span>
+        <span class="arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Element</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WorkOrderList.aspx" class="nav-link ">Element Work Order List</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WorkOrder_Rework_InDetail%20_Element.aspx" class="nav-link ">Work Order Rework Report in Detail</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Ceramic</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WorkOrderList_Ceramic.aspx" class="nav-link ">Ceramic Work Order List</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WorkOrder_Rework_InDetail%20_Ceramic.aspx" class="nav-link ">Work Order Rework Report in Detail</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">High Mix Volume</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WorkOrderList_HMV.aspx" class="nav-link ">High Mix Volume Work Order List </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WorkOrder_Rework_InDetail%20_HMV.aspx" class="nav-link ">Work Order Rework Report in Detail</a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">HVAC</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WorkOrderList_HVAC.aspx" class="nav-link ">HVAC Work Order List </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WorkOrder_Rework_InDetail%20_HVAC.aspx" class="nav-link ">Work Order Rework Report in Detail</a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">SMT</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WorkOrderList_SMT.aspx" class="nav-link ">SMT Work Order List </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WorkOrder_Rework_InDetail_SMT.aspx" class="nav-link ">Work Order Rework Report in Detail</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">System</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_WorkOrderList.aspx" class="nav-link ">Work Order List </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_WorkOrder_ReworkList.aspx" class="nav-link ">WO rework list </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/ReportSerialNumberofWOrder.aspx" class="nav-link ">List Serial Number of Work</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/PENDING_LIST_NCR.aspx" class="nav-link ">Assembly pending list NCR </a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item  ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-docs"></i>
+        <span class="title">Traceability</span>
+        <span class="arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Element</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/TravelerElement.aspx" class="nav-link ">Traveler Element</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/TravelerNullE.aspx" class="nav-link ">Blank Traveler Element</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/TravelerWaxsheet.aspx" class="nav-link ">Traveler Waxsheet</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_MaterialLot_Element.aspx" class="nav-link ">Report Material Lot</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EquipmentID_Element.aspx" class="nav-link ">Report Equipment ID</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Stock.aspx" class="nav-link ">None BOM Material Stock</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Consumption.aspx" class="nav-link ">None BOM Material Consumption</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Ceramic</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Traveler.aspx" class="nav-link ">Traveler Ceramic</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/TravelerNullC.aspx" class="nav-link ">Blank Traveler Ceramic</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_MaterialLot_Ceramic.aspx" class="nav-link ">Report Material Lot</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EquipmentID_Ceramic.aspx" class="nav-link ">Report Equipment ID</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Stock_C.aspx" class="nav-link ">None BOM Material Stock</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Consumption_C.aspx" class="nav-link ">None BOM Material Consumption</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ScreenStatus.aspx" class="nav-link ">Screen &amp; Stencil Inventory Status</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_QtyScreenStock.aspx" class="nav-link ">Screen Inventory Tension Status</a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">High Mix Volume</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TravellerHMV.aspx" class="nav-link ">High Mix Volume Traveler </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_BlankTravelerHMV.aspx" class="nav-link ">Blank High Mix Volume Traveler</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ToolStatus_HMV.aspx" class="nav-link ">Tool Status</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Stock_HMV.aspx" class="nav-link ">None BOM Material Stock</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Consumption_HMV.aspx" class="nav-link ">None BOM Material Consumption</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_MaterialLot_HMV.aspx" class="nav-link ">Report Material Lot</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EquipmentID_HMV.aspx" class="nav-link ">Report Equipment ID</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Receive_Return_Material_HMV.aspx" class="nav-link ">Report Receive/Return Material</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">HVAC</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TravellerHVAC.aspx" class="nav-link ">HVAC Traveler </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_BlankTravelerHVAC.aspx" class="nav-link ">Blank HVAC Traveler</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Stock_HVAC.aspx" class="nav-link ">None BOM Material Stock</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Consumption_HVAC.aspx" class="nav-link ">None BOM Material Consumption</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_MaterialLot_HVAC.aspx" class="nav-link ">Report Material Lot</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EquipmentID_HVAC.aspx" class="nav-link ">Report Equipment ID</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Receive_Return_Material_HVAC.aspx" class="nav-link ">Report Receive/Return Material</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">SMT</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TravellerSMT.aspx" class="nav-link ">SMT Traveler </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_BlankTravelerSMT.aspx" class="nav-link ">Blank SMT Traveler</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Stock_SMT.aspx" class="nav-link ">None BOM Material Stock</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Consumption_SMT.aspx" class="nav-link ">None BOM Material Consumption</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_MaterialLot_SMT.aspx" class="nav-link ">Report Material Lot</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EquipmentID_SMT.aspx" class="nav-link ">Report Equipment ID</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Receive_Return_Material_SMT.aspx" class="nav-link ">Report Receive/Return Material</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">System</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Traverler_Blank.aspx" class="nav-link ">Blank Traveler</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Traverler.aspx" class="nav-link ">Traveler by WO </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/TravelerSerialNumber.aspx" class="nav-link ">Traveler by Serial</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/MaterialtoWO.aspx" class="nav-link ">Material by WO</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_MaterialLot_Sys.aspx" class="nav-link ">Report Material Lot</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Step ID Library</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_STEP_ID_LIBRARY.aspx" class="nav-link ">Step ID Library </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_005_0653.aspx" class="nav-link ">005-0653 </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WhereIsUseTheStep.aspx" class="nav-link ">Where is use Step </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_MixFlux.aspx" class="nav-link ">Mixed Flux</a>
+        </li>
+    </ul>
+
+</li>
+
+<li class="nav-item  ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-user"></i>
+        <span class="title">Labor Reports</span>
+        <span class="arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Front End</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Chart_Labor_RealTime.aspx" class="nav-link ">Direct Labor Hours for WO</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_Utilization_FE.aspx" class="nav-link ">Labor Utilization</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_OverTimeCheck_FE.aspx" class="nav-link ">Over Time Check</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_WORKING_HOURS_BY_WO_BY_EMPLOYEES_FE.aspx" class="nav-link ">Working hours by WO by Employee</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_OPERATION_TIME_FE.aspx" class="nav-link ">Operation Time</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_WO_REALTIME_BY_PROCESS_GROUP_FE.aspx" class="nav-link ">WO Realtime by Process Group</a>
+                </li>
+            </ul>
+        </li>
+        @*<li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <span class="title">Element</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/LaborEfficiency.aspx" class="nav-link ">Labor Utilization</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Char_Larbor_OT.aspx" class="nav-link ">Overtime Check </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_AVGTime.aspx" class="nav-link ">Operation Time Report</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Larbor_WorkingHour.aspx" class="nav-link ">Working Hour by WO by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_OT_OutPut.aspx" class="nav-link ">Output per Hrs by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_Work_OT.aspx" class="nav-link ">Overtime Vs Operation Hrs by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_OEE_Element.aspx" class="nav-link ">Report OEE</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_RealTime_ProcessGroup_Element.aspx" class="nav-link ">WO Realtime by Process group</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <span class="title">Ceramic</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/LaborEfficiency_Ceramic.aspx" class="nav-link ">Labor Utilization</a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Char_Larbor_OT_Ceramic.aspx" class="nav-link ">Overtime Check </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_AvgTime_Cermic.aspx" class="nav-link ">Operation Time Report</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Larbor_WorkingHour_Ceramic.aspx" class="nav-link ">Working Hour by WO by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_OT_OutPut_Ceramic.aspx" class="nav-link ">Output per Hrs by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Larbor_WO_OT_Ceramic.aspx" class="nav-link ">Overtime Vs Operation Hrs by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_OEE.aspx" class="nav-link ">Report OEE</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_RealTime_ProcessGroup_Ceramic.aspx" class="nav-link ">WO Realtime by Process group</a>
+                    </li>
+                </ul>
+            </li>*@
+
+        @*<li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <span class="title">HVAC</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                  <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/LaborEfficiency_HVAC.aspx" class="nav-link ">Labor Utilization</a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Char_Larbor_OT_HVAC.aspx" class="nav-link ">Overtime Check </a>
+                    </li>
+                <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_AvgTime_HVAC.aspx" class="nav-link ">Operation Time Report</a>
+                    </li>
+                   <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Larbor_WorkingHour_HVAC.aspx" class="nav-link ">Working Hour by WO by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_OT_OutPut_HVAC.aspx" class="nav-link ">Output per Hrs by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Larbor_WO_OT_HVAC.aspx" class="nav-link ">Overtime Vs Operation Hrs by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_RealTime_ProcessGroup_HVAC.aspx" class="nav-link ">WO Realtime by Process group</a>
+                    </li>
+                </ul>
+            </li>*@
+        @*<li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <span class="title">High Mix Volume</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                   <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/LaborEfficiency_HMV.aspx" class="nav-link ">Labor Utilization</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Char_Larbor_OT_HMV.aspx" class="nav-link ">Overtime Check </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_AvgTime_HMV.aspx" class="nav-link ">Operation Time Report</a>
+                    </li>
+                   <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Larbor_WorkingHour_HMV.aspx" class="nav-link ">Working Hour by WO by Emp</a>
+                    </li>
+                   <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_OT_OutPut_HMV.aspx" class="nav-link ">Output per Hrs by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Larbor_WO_OT_HMV.aspx" class="nav-link ">Overtime Vs Operation Hrs by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_RealTime_ProcessGroup.aspx" class="nav-link ">WO Realtime by Process group</a>
+                    </li>
+                </ul>
+            </li>*@
+        @*<li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <span class="title">SMT</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                   <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/LaborEfficiency_SMT.aspx" class="nav-link ">Labor Utilization</a>
+                    </li>
+
+                   <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Char_Larbor_OT_SMT.aspx" class="nav-link ">Overtime Check </a>
+                    </li>
+                   <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_AvgTime_SMT.aspx" class="nav-link ">Operation Time Report</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Larbor_WorkingHour_SMT.aspx" class="nav-link ">Working Hour by WO by Emp</a>
+                    </li>
+                   <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_OT_OutPut_SMT.aspx" class="nav-link ">Output per Hrs by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Larbor_WO_OT_SMT.aspx" class="nav-link ">Overtime Vs Operation Hrs by Emp</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_RealTime_ProcessGroup_SMT.aspx" class="nav-link ">WO Realtime by Process group</a>
+                    </li>
+                </ul>
+            </li>*@
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">System</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebsys/Chart_Labor_RealTime_Sys.aspx" class="nav-link ">Direct Labor Hours for WO</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebsys/Report_Labor_Utilization_Sys.aspx" class="nav-link ">Labor Utilization</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebsys/Report_Labor_OverTimeCheck_Sys.aspx" class="nav-link ">Over Time Check</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebsys/Report_Labor_WORKING_HOURS_Sys.aspx" class="nav-link ">Working hours by WO by Employee</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebsys/Report_Labor_OPERATION_TIME_Sys.aspx" class="nav-link ">Operation Time</a>
+                </li>
+                <li class="nav-item ">
+                    @*<a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Chart_Labor_RealTime_ProcessGroup.aspx" class="nav-link ">Work Realtime by Process group</a>*@
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebsys/Report_Labor_WO_REALTIME_BY_PROCESS_GROUP_Sys.aspx" class="nav-link ">WO Realtime by Process Group</a>
+                </li>
+
+                @*<li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Labor_WorkingHours.aspx" class="nav-link ">Labor Working Hours</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Labor_Ultilization.aspx" class="nav-link ">Non-Working Time</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Ultilization_Report.aspx" class="nav-link ">Ultilization </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Chart_Labor_RealTime_ProcessGroup.aspx" class="nav-link ">Work Realtime by Process group</a>
+                    </li>*@
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Assebmly</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Chart_Labor_RealTime_HMV.aspx" class="nav-link ">Direct Labor Hours for WO</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_Utilization_Assembly.aspx" class="nav-link ">Labor Utilization</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_OverTimeCheck_Assembly.aspx" class="nav-link ">Over Time Check</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_WORKING_HOURS_BY_WO_BY_EMPLOYEES_Assembly.aspx" class="nav-link ">Working hours by WO by Employee</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_OPERATION_TIME_Assembly.aspx" class="nav-link ">Operation Time</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_WO_REALTIME_BY_PROCESS_GROUP_Assembly.aspx" class="nav-link ">WO Realtime by Process Group</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Warehouse</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Chart_Labor_RealTime_WH.aspx" class="nav-link ">Direct Labor Hours for WO</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_Utilization_WH.aspx" class="nav-link ">Labor Utilization</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_OverTimeCheck_WH.aspx" class="nav-link ">Over Time Check</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_WORKING_HOURS_BY_WO_BY_EMPLOYEES_WH.aspx" class="nav-link ">Working hours by WO by Employee</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_OPERATION_TIME_WH.aspx" class="nav-link ">Operation Time</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_WO_REALTIME_BY_PROCESS_GROUP_WH.aspx" class="nav-link ">WO Realtime by Family</a>
+                </li>
+            </ul>
+        </li>
+        @* <li class="nav-item ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_RealTime.aspx" class="nav-link ">Front End Direct Labor Hours for WO</a>
+            </li>*@
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">IQC</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Chart_Labor_RealTime_IQC.aspx" class="nav-link ">Direct Labor Hours for WO</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_Utilization_IQC.aspx" class="nav-link ">Labor Utilization</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_OverTimeCheck_IQC.aspx" class="nav-link ">Over Time Check</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_WORKING_HOURS_BY_WO_BY_EMPLOYEES_IQC.aspx" class="nav-link ">Working hours by WO by Employee</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_OPERATION_TIME_IQC.aspx" class="nav-link ">Operation Time</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Labor_WO_REALTIME_BY_PROCESS_GROUP_IQC.aspx" class="nav-link ">WO Realtime by Process Group</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</li>
+<li class="nav-item  ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-settings"></i>
+        <span class="title">Quality Reports</span>
+        <span class="arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Element</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Throughput_Yield.aspx" class="nav-link ">Throughput Yield</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Daily_Yield_and_Rework_Element.aspx" class="nav-link ">Daily Yield and Rework Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Nonconfromance_Pareto_Chart.aspx" class="nav-link ">Nonconformance Pareto Chart </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportNonconformanceReworkParetoChart.aspx" class="nav-link ">Nonconformance Rework Pareto Chart</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EscappingPPM_Element.aspx" class="nav-link ">Escapping PPM</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_MonthlyYield_Rework_Element.aspx" class="nav-link ">Monthly Yield & Rework Report</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Ceramic</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Throughput_Yield_Ceramic.aspx" class="nav-link ">Throughput Yield</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Daily_Yield_and_Rework_Ceramic.aspx" class="nav-link ">Daily Yield and Rework Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Nonconfromance_Pareto_Chart_Ceramic.aspx" class="nav-link ">Nonconformance  Pareto Chart </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportNonconformanceReworkParetoChart_Ceramic.aspx" class="nav-link ">Nonconformance Rework Pareto Chart </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Nonconfromance_Pareto_Chart_Code_Ceramic.aspx" class="nav-link ">NC Defect Analysis </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EscappingPPM_Ceramic.aspx" class="nav-link ">Escapping PPM</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_MonthlyYield_Rework_Ceramic.aspx" class="nav-link ">Monthly Yield & Rework Report</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">High Mix Volume</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Throughput_Yield_HMV.aspx" class="nav-link ">Throughput Yield</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Daily_Yield_and_Rework_HMV.aspx" class="nav-link ">Daily Yield and Rework Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Nonconfromance_Pareto_Chart_HMV.aspx" class="nav-link ">Nonconformance  Pareto Chart </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportNonconformanceReworkParetoChart_HMV.aspx" class="nav-link ">Nonconformance Rework Pareto Chart </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Nonconfromance_Pareto_Chart_Code_HMV.aspx" class="nav-link ">NC Defect Analysis </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportNonconformanceReworkParetoChart_Code_HMV.aspx" class="nav-link ">NC Rework Defect Analysis </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">HVAC</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Throughput_Yield_HVAC.aspx" class="nav-link ">Throughput Yield</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Daily_Yield_and_Rework_HVAC.aspx" class="nav-link ">Daily Yield and Rework Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Nonconfromance_Pareto_Chart_HVAC.aspx" class="nav-link ">Nonconformance  Pareto Chart </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportNonconformanceReworkParetoChart_HVAC.aspx" class="nav-link ">Nonconformance Rework Pareto Chart </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Nonconfromance_Pareto_Chart_Code_HVAC.aspx" class="nav-link ">NC Defect Analysis </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportNonconformanceReworkParetoChart_Code_HVAC.aspx" class="nav-link ">NC Rework Defect Analysis </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">SMT</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Throughput_Yield_SMT.aspx" class="nav-link ">Throughput Yield</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Daily_Yield_and_Rework_SMT.aspx" class="nav-link ">Daily Yield and Rework Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Nonconfromance_Pareto_Chart_SMT.aspx" class="nav-link ">Nonconformance  Pareto Chart </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportNonconformanceReworkParetoChart_SMT.aspx" class="nav-link ">Nonconformance Rework Pareto Chart </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Nonconfromance_Pareto_Chart_Code_SMT.aspx" class="nav-link ">NC Defect Analysis </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportNonconformanceReworkParetoChart_Code_SMT.aspx" class="nav-link ">NC Rework Defect Analysis </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">System</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/YieldReport.aspx" class="nav-link ">Yield Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSsystem/Report_YieldFamilybyWO.aspx" class="nav-link ">Yield Family Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSsystem/Report_YieldProductbyWOstep.aspx" class="nav-link ">Yield Part Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSsystem/Report_YieldStepbymonth.aspx" class="nav-link ">Yield Step Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSsystem/Report_YieldbyProcesses.aspx" class="nav-link ">Yield By Processes Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/NonComformanceParetoChart.aspx" class="nav-link ">Non Comformance Pareto Chart</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_Nonconfromance_Pareto_Chart.aspx" class="nav-link ">Nonconformance Rework Pareto Chart</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/ReportNonconformanceReworkParetoChart_Code_Sys.aspx" class="nav-link ">Nonconformance Rework Defect Analysis</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_MonthlyYield.aspx" class="nav-link ">Monthly Yield & Rework Report</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EscappingPPM_HMV.aspx" class="nav-link ">Assembly Escapping PPM</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_MonthlyYield_Rework_HMV.aspx" class="nav-link ">Assembly Monthly Yield & Rework Report</a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item  ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-settings"></i>
+        <span class="title">Production Reports</span>
+        <span class="arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Element</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportWOStatus.aspx" class="nav-link ">Daily WO Status</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutputProductElement.aspx" class="nav-link ">Daily Production Output</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutputProductElement_Month.aspx" class="nav-link ">Monthly Production Output  </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WIPvsClosedWO.aspx" class="nav-link ">WIP vs Closed WO Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WO_Leadtime_Element.aspx" class="nav-link ">WO Lead Time Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WOClosedvsWOClosedOnTime.aspx" class="nav-link ">WO Closed vs WO Closed on time Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EMPLOYEES_REQUIREMNT_Element.aspx" class="nav-link ">Employee Requirement Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WIP_Element.aspx" class="nav-link ">WIP Report</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Ceramic</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportWOStatus_C.aspx" class="nav-link ">Daily WO Status</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutputProductCeramic.aspx" class="nav-link ">Daily Production Output</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutputProductCeramic_Month.aspx" class="nav-link ">Monthly Production Output  </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WIPvsClosedWO_Ceramic.aspx" class="nav-link ">WIP vs Closed WO Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WO_Leadtime_Ceramic.aspx" class="nav-link ">WO Lead Time Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WOClosedvsWOClosedOnTime_Ceramic.aspx" class="nav-link ">WO Closed vs WO Closed on time Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EMPLOYEES_REQUIREMNT_Ceramic.aspx" class="nav-link ">Employee Requirement Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WIP_Ceramic.aspx" class="nav-link ">WIP Report</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">High Mix Volume</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportWOStatus_HMV.aspx" class="nav-link ">Daily WO Status</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutputProductHMV.aspx" class="nav-link ">Daily Production Output</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutputProductHMV_Month.aspx" class="nav-link ">Monthly Production Output  </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WIPvsClosedWO_HMV.aspx" class="nav-link ">WIP vs Closed WO Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WO_Leadtime_HMV.aspx" class="nav-link ">WO Lead Time Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WOClosedvsWOClosedOnTime_HMV.aspx" class="nav-link ">WO Closed vs WO Closed on time Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Shipment.aspx" class="nav-link ">Shipment Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WIP_HMV.aspx" class="nav-link ">WIP Report</a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">HVAC</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportWOStatus_HVAC.aspx" class="nav-link ">Daily WO Status</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutputProductHVAC.aspx" class="nav-link ">Daily Production Output</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutputProductHVAC_Month.aspx" class="nav-link ">Monthly Production Output  </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WIPvsClosedWO_HVAC.aspx" class="nav-link ">WIP vs Closed WO Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WO_Leadtime_HVAC.aspx" class="nav-link ">WO Lead Time Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WOClosedvsWOClosedOnTime_HVAC.aspx" class="nav-link ">WO Closed vs WO Closed on time Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Shipment_HVAC.aspx" class="nav-link ">Shipment Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WIP_HVAC.aspx" class="nav-link ">WIP Report</a>
+                </li>
+                @*<li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EMPLOYEES_REQUIREMNT_HVAC.aspx" class="nav-link ">Employee Requirement Report</a>
+                    </li>*@
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">SMT</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReportWOStatus_SMT.aspx" class="nav-link ">Daily WO Status</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutputProductSMT.aspx" class="nav-link ">Daily Production Output</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_OutputProductSMT_Month.aspx" class="nav-link ">Monthly Production Output  </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WIPvsClosedWO_SMT.aspx" class="nav-link ">WIP vs Closed WO Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WO_Leadtime_SMT.aspx" class="nav-link ">WO Lead Time Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WOClosedvsWOClosedOnTime_SMT.aspx" class="nav-link ">WO Closed vs WO Closed on time Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_Shipment_SMT.aspx" class="nav-link ">Shipment Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_WIP_SMT.aspx" class="nav-link ">WIP Report</a>
+                </li>
+                @* <li class="nav-item ">
+                        <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EMPLOYEES_REQUIREMNT_SMT.aspx" class="nav-link ">Employee Requirement Report</a>
+                    </li>*@
+            </ul>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">System</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/ReportWOStatus_SMS.aspx" class="nav-link ">Daily WO Status</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/WordOrderVariant.aspx" class="nav-link ">Word Order Variant</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/FloorStockReport.aspx" class="nav-link ">Floor Stock</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/SumaryPartNumberAndWO.aspx" class="nav-link ">Production by Date</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/DetailOFstep.aspx" class="nav-link ">Detail Step Of Work Order</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/WorkOrderByOpen.aspx" class="nav-link ">WO Status</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/ProductionQuantityByStep.aspx" class="nav-link ">Production Quantity By Step</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/ProductionLabelByStep.aspx" class="nav-link ">Production Scan Label by Step</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/WIP_FloorStock.aspx" class="nav-link ">WIP FloorStock Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/WIPReport.aspx" class="nav-link ">WIP report by station</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_Shipment.aspx" class="nav-link ">Shipment Report</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Shipment.aspx" class="nav-link ">Shipment</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_ProductionPlan_System.aspx" class="nav-link ">Production Plan</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_WO_Leadtime_Sys.aspx" class="nav-link ">WO Lead Time Report</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_EMPLOYEES_REQUIREMNT.aspx" class="nav-link ">Assembly Employee Requirement Report</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_ProductionPlan.aspx" class="nav-link ">FE Production Plan</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ProductionPlan_HMV.aspx" class="nav-link ">Assembly Production Plan</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_StopLine.aspx" class="nav-link ">Assembly Stop Line</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_Assembly_Productivity.aspx" class="nav-link ">Productivity Assembly</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebsys/Report_System_Productivity.aspx" class="nav-link ">Productivity System</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ProductivityOfOperator.aspx" class="nav-link ">Productivity Of Operators Report</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_FloorStock.aspx" class="nav-link ">DMS Floor Stock Report</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_FloorStock_FE.aspx" class="nav-link ">Front End Floor Stock Report</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_NotesWhenBuildTECs.aspx" class="nav-link ">Notes when build TECs</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_IssueReportOnLine.aspx" class="nav-link ">Giao Ca</a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item  ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-user"></i>
+        <span class="title">Employee Reports</span>
+        <span class="arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Emp_Attendance_Report.aspx" class="nav-link ">Attendance Report</a>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Emp_Resignation_Reason.aspx" class="nav-link ">Resignation Report</a>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Meal Report</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_Meal.aspx" class="nav-link ">Assembly</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Labor_Meal_FE.aspx" class="nav-link ">Front End</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Labor_Meal.aspx" class="nav-link ">System</a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_Emp_Emplist.aspx" class="nav-link ">Employees List</a>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <span class="title">Operators Performance</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_OperatorPerformace_HVAC.aspx" class="nav-link ">Assembly</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_OperatorPerformace_Ceramic.aspx" class="nav-link ">Ceramic</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Chart_OperatorPerformace.aspx" class="nav-link ">Element</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/OperatorPerformance.aspx" class="nav-link ">System</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EmployeesAppraisal.aspx" class="nav-link ">Employees Appraisal Report</a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item start">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-user"></i>
+        <span class="title">OST Reports</span>
+        <span class="arrow"></span>
+    </a>
+
+    <ul class="sub-menu">
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/rpJobStatus.aspx" class="nav-link ">
+                <span class="title">Job Status</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/JobReport.aspx" class="nav-link ">
+                <span class="title">Job Data Report</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/MultiDataReport.aspx" class="nav-link " data-toggle="modal">
+                <span class="title">Multi Data Report</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/ForceTestReport.aspx" class="nav-link " data-toggle="modal">
+                <span class="title">Force Test Report</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/THERMAL_CYCLING_LOG_SHEET.aspx" class="nav-link ">
+                <span class="title">Thermal cycling log sheet</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/OnGoingReport.aspx" class="nav-link ">
+                <span class="title">On Going Report</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/ProductionOnGoingReport.aspx" class="nav-link ">
+                <span class="title">Production On Going Report</span>
+            </a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item start">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-user"></i>
+        <span class="title">PR Reports</span>
+        <span class="arrow"></span>
+    </a>
+
+    <ul class="sub-menu">
+        @*<li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/PR_PRStatus.aspx" class="nav-link ">
+                    <span class="title">PR Status Report</span>
+                </a>
+            </li>
+            <li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/PR_Aging.aspx" class="nav-link ">
+                    <span class="title">PR Aging </span>
+                </a>
+            </li>*@
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/PR_Aging_Report.aspx" class="nav-link ">
+                <span class="title">PR Aging</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/PR_Aging_Dept.aspx" class="nav-link ">
+                <span class="title">PR Aging by Department</span>
+            </a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item start">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-user"></i>
+        <span class="title">Training Reports</span>
+        <span class="arrow"></span>
+    </a>
+
+    <ul class="sub-menu">
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EmployeeTrainingRecord.aspx" class="nav-link ">
+                <span class="title">Employee Training Record</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ReTrainingList.aspx" class="nav-link " data-toggle="modal">
+                <span class="title">Retraining List</span>
+            </a>
+        </li>
+        @* <li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/SkillsetLibrary.aspx" class="nav-link " data-toggle="modal">
+                    <span class="title">Skill set/Subject Library</span>
+                </a>
+            </li>*@
+        @* <li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/SkillInventory.aspx" class="nav-link ">
+                    <span class="title">Skills Inventory</span>
+                </a>
+            </li>*@
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/TrainingMatrix.aspx" class="nav-link ">
+                <span class="title">Training Matrix</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/TrainingPlan.aspx" class="nav-link ">
+                <span class="title">Training Plan</span>
+            </a>
+        </li>
+        @*  <li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/frm_TrainingRequirementfornewmembers.aspx" class="nav-link ">
+                    <span class="title">Training Requirement for new members</span>
+                </a>
+            </li>*@
+        @*  <li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/New%20Operator%20Training%20Efficiency.aspx" class="nav-link ">
+                    <span class="title">New Staff Training Efficiency</span>
+                </a>
+            </li>*@
+        @*<li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Training%20Course%20On%20Time%20Report.aspx" class="nav-link ">
+                    <span class="title">Training Course On Time Report</span>
+                </a>
+            </li>
+            <li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Retraining%20On%20time%20comp%20report.aspx" class="nav-link ">
+                    <span class="title">Re-training Staff Efficiency</span>
+                </a>
+            </li>*@
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Newstafftrainingstatus.aspx" class="nav-link ">
+                <span class="title">Class Training Status</span>
+            </a>
+        </li>
+        @* <li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/TrainingSearchCenterReport.aspx" class="nav-link ">
+                    <span class="title">Training Search Center Report</span>
+                </a>
+            </li>*@
+        @* <li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TrainingStatus.aspx" class="nav-link ">
+                    <span class="title">Training Status</span>
+                </a>
+            </li>*@
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_TrainingCost.aspx" class="nav-link ">
+                <span class="title">Employees Cost</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_EmployeeListTraining.aspx" class="nav-link ">
+                <span class="title">Employees List</span>
+            </a>
+        </li>
+
+        @* <li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ListOfTrainees.aspx" class="nav-link ">
+                    <span class="title">List Of Trainees</span>
+                </a>
+            </li>*@
+        @* <li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ExaminationResult.aspx" class="nav-link ">
+                    <span class="title">Examination Result by Course ID</span>
+                </a>
+            </li>*@
+        @* <li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_ListOfExamResult.aspx" class="nav-link ">
+                    <span class="title">Examination Result by Employeee</span>
+                </a>
+            </li>*@
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/COURSE_EVALUATION_FORM.aspx" class="nav-link ">
+                <span class="title">Course Evaluation Form</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/ThongKeKhoaHoc.aspx" class="nav-link ">
+                <span class="title">Training course evaluation</span>
+            </a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item start">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-control-end"></i>
+        <span class="title">NCR</span>
+        <span class="arrow"></span>
+    </a>
+
+    <ul class="sub-menu">
+        <li class="nav-item start ">
+            <a href="~/Help/Index/" class="nav-link ">
+                <i class="icon-list"></i>
+                <span class="title">Hướng dẫn sử dụng NCR/ Help</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="~/NCR/" class="nav-link ">
+                <i class="icon-list"></i>
+                <span class="title">NCR Management</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a class="nav-link PopupCreateNCR" href="javascript:;">
+                <i class="icon-plus"></i>
+                <span class="title">Create NCR</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="~/NCR/NCRSubmit" class="nav-link ">
+                <i class="icon-book-open"></i>
+                <span class="title">Waiting for My Submit</span>
+            </a>
+        </li>
+
+        <li class="nav-item start ">
+            <a href="~/NCR/Waitingdisposition" class="nav-link ">
+                <i class="icon-book-open"></i>
+                <span class="title">Waiting for Disposition</span>
+            </a>
+        </li>
+
+        <li class="nav-item start ">
+            <a href="~/NCR/ListDispositionpartial" class="nav-link ">
+                <i class="icon-book-open"></i>
+                <span class="title">Partial Disposition</span>
+            </a>
+        </li>
+
+        <li class="nav-item start ">
+            <a href="~/NCRApproval/" class="nav-link ">
+                <i class="icon-book-open"></i>
+                <span class="title">Waiting for My Approval</span>
+            </a>
+        </li>
+
+        <li class="nav-item start ">
+            <a href="~/NCR/NCRWaitingYourApproval" class="nav-link ">
+                <i class="icon-book-open"></i>
+                <span class="title">Waiting for approval</span>
+            </a>
+        </li>
+
+
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_WHOpenNCRforMRBmeeting.aspx" class="nav-link ">
+                <i class="icon-bag"></i>
+                <span class="title">WH Open NCR for MRB meeting</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="~/NCR/NCRAging" class="nav-link ">
+                <i class="icon-bag"></i>
+                <span class="title">NCR Aging</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="~/NCR/NCRSCRAP" class="nav-link ">
+                <i class="icon-bag"></i>
+                <span class="title">NCR less than 10$, moved SCRAP at production</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="~/NCRRTV/" class="nav-link ">
+                <i class="icon-star"></i>
+                <span class="title">NCR RTV </span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="~/NCR/Print" class="nav-link ">
+                <i class="icon-printer"></i>
+                <span class="title">Print NCR</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="~/NCRReport/index" class="nav-link ">
+                <i class="icon-printer"></i>
+                <span class="title">NCR Disposition Day</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="~/NCRReport/UseAsIs" class="nav-link ">
+                <i class="icon-bar-chart"></i>
+                <span class="title">LOT USE AS IS</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="~/TaskManagement/ListTaskmanagement" class="nav-link ">
+                <i class="icon-bar-chart"></i>
+                <span class="title">NCR Task Managemennt</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="~/ChangeItem/index" class="nav-link ">
+                <i class="icon-bar-chart"></i>
+                <span class="title">Change Item Management</span>
+            </a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-bar-chart"></i>
+        <span class="title">Product Transfer</span>
+        <span class="arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item start ">
+            <a href="~/Producttranfer/index" class="nav-link ">
+                <i class="icon-check"></i>
+                <span class="title">Product Transfer</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li class="nav-item ">
+    <a href="~/MeetingNote/meetingnotemanagement" class="nav-link nav-toggle">
+        <i class="icon-bar-chart"></i>
+        <span class="title">Meeting Note</span>
+        <span class="arrow"></span>
+    </a>
+</li>
+<li class="nav-item ">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-bar-chart"></i>
+        <span class="title">eSuggestion</span>
+        <span class="arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item start ">
+            <a href="~/ESuggestion/Index" class="nav-link">
+                <i class="icon-clock"></i>
+                <span class="title">eSuggestion Management</span>
+            </a>
+        </li>
+        @*<li class="nav-item start ">
+                <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/ESUGGESTION/frmSuggestionReport.aspx" class="nav-link ">
+                    <i class="icon-check"></i>
+                    <span class="title">Suggestion Report</span>
+                </a>
+            </li>*@
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_COMPANY_SUGGESTION_ANALYSIS.aspx" class="nav-link ">
+                <i class="icon-check"></i>
+                <span class="title">Suggestion Report</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/ESUGGESTION/frmCostByEmp.aspx" class="nav-link ">
+                <i class="icon-check"></i>
+                <span class="title">Cost SavingReport By EMP</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/ESUGGESTION/frmCostByDept.aspx" class="nav-link ">
+                <i class="icon-check"></i>
+                <span class="title">Cost SavingReport By Department</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li class="nav-item start">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="icon-docs"></i>
+        <span class="title">Supplier Management</span>
+        <span class="arrow"></span>
+    </a>
+
+    <ul class="sub-menu">
+
+        <li class="nav-item start">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-docs"></i>
+                <span class="title">IQC</span>
+                <span class="arrow"></span>
+            </a>
+
+            <ul class="sub-menu">
+                <li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_DataIQC.aspx" class="nav-link ">
+                        <span class="title">IQC Raw Data</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_Receiver.aspx" class="nav-link ">
+                        <span class="title">Inspection result</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWeb/Report_RejectRatiobyPart.aspx" class="nav-link ">
+                        <span class="title">Lot reject ratio by part</span>
+                    </a>
+                </li>
+
+                @*<li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_WIRE_CRIMP_HEIGHT.aspx" class="nav-link ">
+                        <span class="title">REPORT FOR WIRE CRIMP HEIGHT</span>
+                    </a>
+                </li>*@
+                <li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_RejectLotbySupplier.aspx" class="nav-link ">
+                        <span class="title">Pareto Lot reject by supplier</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_LotRejectRate.aspx" class="nav-link ">
+                        <span class="title">Quantity Lot received and reject in month by part</span>
+                    </a>
+                </li>
+                @*<li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_SamplingPPM.aspx" class="nav-link ">
+                        <span class="title">SAMPLE PPM</span>
+                    </a>
+                </li>*@
+                @*<li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_RejectedPPMbySupplier.aspx" class="nav-link ">
+                        <span class="title">REJECTED PPM BY SUPPLIER</span>
+                    </a>
+                </li>*@
+                @*<li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_SkiplotvsInspectedlot.aspx" class="nav-link ">
+                        <span class="title">Skip lot VS Inspected lot</span>
+                    </a>
+                </li>*@
+                <li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSSystem/Report_Pareto_of_NC.aspx" class="nav-link ">
+                        <span class="title">Pareto defect mode by part</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="~/NCRReport/EscappingPPM" class="nav-link ">
+                        <i class="icon-printer"></i>
+                        <span class="title">Escapping PPM</span>
+                    </a>
+                </li>
+
+            </ul>
+
+
+        </li>
+        <li class="nav-item start">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-docs"></i>
+                <span class="title">Supplier performance</span>
+                <span class="arrow"></span>
+            </a>
+
+            <ul class="sub-menu">
+                <li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_SupplierPPM_byMonth.aspx" class="nav-link ">
+                        <i class="icon-printer"></i>
+                        <span class="title">Defect ratio (PPM)</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_SupplierOTD_byMonth.aspx" class="nav-link ">
+                        <i class="icon-printer"></i>
+                        <span class="title">On time delivery (%)</span>
+                    </a>
+                </li>
+                <!-- Six Panels Report -->
+
+                <li class="nav-item start ">
+                    <a href="/SQEDB/SixPanelsReport/MasterViewReport?reportName=6PanelsReport" class="nav-link ">
+                        <span class="title">6 Panels Report</span>
+                    </a>
+                </li>
+                <!-- QRD Report -->
+                <li class="nav-item start">
+                    <a href="/SQEDB/AssessmentAndViewReport/ViewAssessmentReportManagement" class="nav-link">
+                        <span class="title">QRD Report</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- SCAR -->
+        <li class="nav-item ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-bar-chart"></i>
+                <span class="title">SCAR</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item start ">
+                    <a href="~/SCAR/" class="nav-link">
+                        <i class="icon-clock"></i>
+                        <span class="title">SCAR status</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="~/SCAR/CreateSCARForSupplier" class="nav-link ">
+                        <i class="icon-check"></i>
+                        <span class="title">Create SCAR For Supplier</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="~/SCAR/NCRWaitingforSCAR" class="nav-link ">
+                        <i class="icon-check"></i>
+                        <span class="title">NCR Waitting For SCAR</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-item ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-bar-chart"></i>
+                <span class="title">Supplier development</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item  ">
+                    <a href="/SQEDB/RiskAssessment/RiskAssessmentManagement?reportName=RiskAssessmentReport" class="nav-link ">
+                        <span class="title">Supplier Risk Level</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="/SQEDB/SupplierDevelopment/ImprovementPlanManagement" class="nav-link ">
+                        <span class="title">Improvement Plan</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="/SQEDB/SupplierDevelopment/VisitAuditPlanMaster" class="nav-link ">
+                        <span class="title">Visit Audit Plan</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <!-- Supplier Log-->
+        <li class="nav-item  ">
+            <a href="/SQEDB/SupplierLog/SupplierLogManagement" class="nav-link ">
+                <span class="title">SupplierLog Management</span>
+            </a>
+        </li>
+        <!-- PCN -->
+        <li class="nav-item  ">
+            <a href="/SQEDB/PCN/PCNManagement" class="nav-link ">
+                <span class="title">PCN Management</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a id="viewStrategy" class="nav-link " data-toggle="modal">
+                <i class="icon-printer"></i>
+                <span class="title">Supplier Strategy</span>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-bar-chart"></i>
+                <span class="title">Setup</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item start ">
+                    <a id="supplier" class="nav-link " data-toggle="modal">
+                        <i class="icon-printer"></i>
+                        <span class="title">Supplier STRATEGY</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/SQEDB/MasterDataMaintenance/CategoryScoringMaintenance" class="nav-link ">
+                        <span class="title">Point frame for 6 panel & QRD</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/SQEDB/MasterDataMaintenance/RiskLevelMaintenance" )" class="nav-link ">
+                        <span class="title">Point frame for supplier risk</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/SQEDB/MasterDataMaintenance/WeightMaintenance?reportID=1" class="nav-link " data-toggle="modal">
+                        <span class="title">Weight ratio</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="/SQEDB/RiskAssessment/ProductClassSetting" class="nav-link ">
+                        <span class="title">Product Class Setting</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/SQEDB/MasterDataMaintenance/CategoryTargetMaintenance" class="nav-link ">
+                        <span class="title">PPM&OTD supplier target</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/SQEDB/MasterDataMaintenance/ResponsivenessQuestionnaire" )" class="nav-link " data-toggle="modal">
+                        <span class="title">Responsiveness Questionnaire</span>
+                    </a>
+                </li>
+                <li class="nav-item start">
+                    <a href="/SQEDB/AssessmentPeriod/Management" class="nav-link " data-toggle="modal">
+                        <span class="title">QRD Create Assessment</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/SQEDB/MasterDataMaintenance/RatingPerformanceReferenceMaintenance" class="nav-link " data-toggle="modal">
+                        <span class="title">QRD Performance setting</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/SQEDB/SixPanelsReport/CustomerClaimUpdate" class="nav-link ">
+                        <span class="title">6 panel input Customer claim</span>
+                    </a>
+                </li>
+
+                <li class="nav-item start ">
+                    <a href="/SQEDB/SixPanelsReport/PremiumFreightUpdate" class="nav-link ">
+                        <span class="title"> 6 panel input Premium Freigh</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">Setting Report(IT)</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item start ">
+                            <a href="@Url.Action("StoreProcedure","MasterDataMaintenance")" class="nav-link ">
+                                <span class="title">Store Procedure</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="@Url.Action("StoreProcedureParameter","MasterDataMaintenance")" class="nav-link ">
+                                <span class="title">SP Parameter</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="@Url.Action("ReportSetting","MasterDataMaintenance")" class="nav-link ">
+                                <span class="title">Report Setting</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="@Url.Action("ReportPara","MasterDataMaintenance")" class="nav-link ">
+                                <span class="title">Report Para</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="@Url.Action("ReportDataSource","MasterDataMaintenance")" class="nav-link ">
+                                <span class="title">Report DataSource</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="@Url.Action("ReportDataSourcePara","MasterDataMaintenance")" class="nav-link ">
+                                <span class="title">Report DataSource Para</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="@Url.Action("DataGridSetting","MasterDataMaintenance")" class="nav-link ">
+                                <span class="title">Data Grid Setting</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="@Url.Action("BarChartSetting","MasterDataMaintenance")" class="nav-link ">
+                                <span class="title">Bar Chart Setting</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="@Url.Action("LineChartSetting","MasterDataMaintenance")" class="nav-link ">
+                                <span class="title">Line Chart Setting</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="@Url.Action("AdvanceSetting","MasterDataMaintenance")" class="nav-link ">
+                                <span class="title">Advance Setting</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </li>
+        @* <li class="nav-item start ">
+        </li>*@
+
+
+
+        @*<li class="nav-item start ">
+            <a href="~/NCRReport/Pareto" class="nav-link ">
+                <i class="icon-printer"></i>
+                <span class="title">Pareto by Part Number</span>
+            </a>
+        </li>*@
+        @*<li class="nav-item start ">
+            <a href="~/NCRReport/ParetobyVendor" class="nav-link ">
+                <i class="icon-printer"></i>
+                <span class="title">Pareto by Vendor</span>
+            </a>
+        </li>*@
+
+
+
+
+    </ul>
+        </li>
+
+        <li class="nav-item ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-bar-chart"></i>
+                <span class="title">Task Management</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item start ">
+                    <a href="~/TaskManagement/" class="nav-link">
+                        <i class="icon-clock"></i>
+                        <span class="title">Task Management</span>
+                    </a>
+                </li>
+
+                <li class="nav-item start ">
+                    <a href="~/TaskManagement/Task_Statistical_ByUser/" class="nav-link">
+                        <i class="icon-bar-chart"></i>
+                        <span class="title">Task By Person Report</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="~/TaskManagement/Task_Statistical_ByDept/" class="nav-link">
+                        <i class="icon-bar-chart"></i>
+                        <span class="title">Task By Departmnet Report</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="~/TaskManagement/Task_Search_Result/" class="nav-link">
+                        <i class="icon-bar-chart"></i>
+                        <span class="title">Task Search</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-bar-chart"></i>
+                <span class="title">PVC</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/PVC/Process.aspx?us=@((Request.IsAuthenticated && User.Identity != null) ? userIdValue  : "")" class="nav-link ">Process List</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/PVC/PVC.aspx?us=@((Request.IsAuthenticated && User.Identity != null) ? userIdValue  : "")" class="nav-link ">Scoring</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-bar-chart"></i>
+                <span class="title">Other Web Reports</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item  ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_SearchFile.aspx" class="nav-link ">
+                        <span class="title">Electronic Document Store Search</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_HistoryUploadTraveler.aspx" class="nav-link ">
+                        <span class="title">History of upload traveler</span>
+                    </a>
+                </li>
+                @* <li class="nav-item  ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/DMSWebTest/Report_List_ClosedWO.aspx" class="nav-link ">
+                        <span class="title">List of Closed WO</span>
+                    </a>
+                </li>*@
+                <li class="nav-item  ">
+                    <a href="http://vnmbi-dmserp/CMS" class="nav-link ">
+                        <span class="title">CMS</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="http://intranet.marlow.ii-vi.net/CADD" class="nav-link ">
+                        <span class="title">ERMS</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="http://iivivn02/default.aspx" class="nav-link ">
+                        <span class="title">Production Traveler management system</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="http://vnappvm01/dcc/dcc/index.php" class="nav-link ">
+                        <span class="title">Document Search</span>
+                    </a>
+                </li>
+                <li class="nav-item start ">
+                    <a href="/DMS/iframe/redirect?url=http://vnmbi-dmserp/OSTNCR/frmHR.aspx" class="nav-link ">
+                        <span class="title">Check Time Scan</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="heading">
+            <h3 class="uppercase">General</h3>
+        </li>
+        <li class="nav-item ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-user"></i>
+                <span class="title">Account</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item">
+
+                    <a href="@Url.Action("Index", "RolesAdmin")" class="nav-link ">
+                        <i class="icon-user-following"></i>
+                        <span class="title">Roles Management</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="@Url.Action("Index", "GroupsAdmin")" class="nav-link ">
+                        <i class="icon-users"></i>
+                        <span class="title">Group Roles Management</span>
+                    </a>
+                </li>
+
+                <li class="nav-item  ">
+                    <a href="@Url.Action("Index", "UsersAdmin")" class="nav-link ">
+                        <i class="icon-users"></i>
+                        <span class="title">Accounts Management</span>
+                    </a>
+                </li>
+
+                <li class="nav-item  ">
+                    <a href="@Url.Action("ListUser", "NCR")" class="nav-link ">
+                        <i class="icon-users"></i>
+                        <span class="title">User Management</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-settings"></i>
+                <span class="title">System</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item  ">
+                    <a href="page_cookie_consent_1.html" class="nav-link ">
+                        <span class="title">Attachment Configuration</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <script>
+    var FY = @DateTime.Now.Year;
+    $( document ).ready(function() {
+        //$('#supplier').attr("href","@Url.Action("SelectSupplierStrategy","NCRREport")" + "?CCN=" + "03" + "&FY=" + FY);
+        $('#supplier').attr("href", "@Url.Action("SelectSupplierStrategy","NCRREport")");
+        $('#viewStrategy').attr("href","@Url.Action("ViewSupplierStrategy","NCRREport")");
+    });
+        </script>

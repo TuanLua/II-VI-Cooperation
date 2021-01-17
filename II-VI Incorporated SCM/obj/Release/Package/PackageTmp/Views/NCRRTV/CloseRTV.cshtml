@@ -1,0 +1,56 @@
+﻿@model II_VI_Incorporated_SCM.Models.RTV.RTVProccessViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<style>
+    #body {
+        margin-top: 50px;
+    }
+
+    #contain {
+        margin: 0px 20px 0px 20px;
+    }
+</style>
+
+<div id="contain">
+    <button type="button" class="btn btn-sm btn-danger btn-closecl">Close</button>
+
+
+    <div id="body">
+        <div class="well well-lg" style="padding: 20px;">
+            <div class="panel panel-default" style="width: 200px; margin:-37px -10px; padding: 0px 0px">
+                <div class="panel-body" style="padding: 8px;">NCR Information</div>
+            </div>
+            <div class="well" style="background-color: #ffffff; margin: 50px 0px 0px -10px; padding: 30px 20px;">
+                NCR No : @Model.NCR_NUMBER
+                <br><br>
+                Qty : @ViewBag.defect
+            </div>
+        </div>
+    </div>
+
+
+    <div id="body">
+        <div class="well well-lg" style="padding: 20px;">
+            <div class="panel panel-default" style="width: 200px; margin:-37px -10px; padding: 0px 0px">
+                <div class="panel-body" style="padding: 8px;">RTV Information</div>
+            </div>
+            <div class="well" style="background-color: #ffffff; margin: 50px 0px 0px -10px; padding: 30px 20px;">
+                Status:  @Model.RTVStatus
+                <br><br>
+                Qty : @Model.Qty
+                <br><br>
+                Remark: @Model.Remark
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $('.btn-closecl').on('click', function () {
+        window.location = '@Url.Action("Index", "NCRRTV")';
+    })
+</script>

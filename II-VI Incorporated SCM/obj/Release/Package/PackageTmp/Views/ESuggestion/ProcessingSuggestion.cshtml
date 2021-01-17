@@ -1,0 +1,197 @@
+﻿@using II_VI_Incorporated_SCM.Services
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity
+@model II_VI_Incorporated_SCM.Models.ESuggestion.ProcessingViewModel
+@{
+    ViewBag.Title = "ProcessingSuggestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 align="center">
+    <b>
+        <input value="@ViewBag.titi" style="border:0px;text-align:right" />-
+    </b> <b style="color:blue"><input style="border:0px;text-align:left" id="ESNum" /></b>
+</h2>
+<h3> <button class="btn btn-sm btn-success" id="detail" style="float:right">View detail</button></h3>
+@using (Html.BeginForm("SaveProcessing", "ESuggestion", FormMethod.Post, new
+{
+    @class = "form-inline",
+    @role = "form",
+    @enctype = "multipart/form-data",
+    @id = "form-process"
+}))
+{
+    <input type="hidden" value="@ViewBag.ID" name="Sug_ID" />
+
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr>
+                <td width="120px">
+                    <label>Implementation Method</label>
+                </td>
+                <td width="350px">
+                    @Html.DropDownList("Imp_Method", (IEnumerable<SelectListItem>)ViewBag.ListImple, "Select", new { @class = "form-control", id = "imple", required = "required", style = "width:100%" })
+
+                </td>
+                <td width="100px">
+                    <label>Sponsor: </label>
+                </td>
+                <td>
+                    @Html.DropDownList("Sponsor", (IEnumerable<SelectListItem>)ViewBag.ListSponsor, "Select", new { @class = "form-control", id = "sponsor", required = "required", style = "width:100%" })
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label>Coacher:</label>
+                </td>
+                <td>
+                    @Html.DropDownList("Coacher", (IEnumerable<SelectListItem>)ViewBag.ListCoach, "Select", new { @class = "form-control", id = "coacher", required = "required", style = "width:100%" })
+
+                </td>
+                <td>
+                    <label>Board Director: </label>
+                </td>
+                <td>
+                    @Html.DropDownList("Board", (IEnumerable<SelectListItem>)ViewBag.ListBoard, "Select", new { @class = "form-control", id = "board", required = "required", style = "width:100%", multiple = "multiple" })
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label>Comment:</label>
+                </td>
+                <td colspan="3">
+                    @Html.TextAreaFor(m => m.Comment, new
+               {
+                   @class = "form-control",
+                   @style = "min-width: 100%;resize:vertical",
+                   @rows = "3",
+                   // @required = "required",
+                   @id = "Comment"
+               })
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <div align="center">
+        <button class="btn btn-info" id="save">Save</button>
+        <button class="btn btn-success" id="approve">Approve</button>
+        <button class="btn btn-danger" id="reject">Reject</button>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $('#board').select2();
+        $('#coacher').select2();
+        $('#sponsor').select2();
+        $('#imple').select2();
+        $('#ESNum').val('@ViewBag.ID');
+        let Sug_ID = '@ViewBag.ID';
+        $.post('@Url.Action("getvaluesetselectedBoard", "ESuggestion")', { ID: Sug_ID },
+            function (result) {
+                $.each(result.result, function (i, item) {
+                    $('#board').append($('<option>', {
+                        value: item.Value,
+                        text: item.Text,
+                        selected: true
+                    }));
+                });
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });
+        @*$.post('@Url.Action("getCIApprove", "ESuggestion")', { SuggestionID: Sug_ID },
+            function (result) {
+                alert(result.Coacher);
+                if (result == null) return;
+                $('#coacher').val(result.Coacher);
+                $('#sponsor').val(result.Sponsor);
+                $('#imple').val(result.Imp_Method);
+                $('#Comment').val(result.Comment);
+
+
+            }).fail(function () {
+                bootbox.alert('Please contact to Administrator!');
+            }).always(function () {
+                $.unblockUI();
+            });*@
+    });
+    $('#detail').on('click', function () {
+        debugger;
+        let id = "@ViewBag.ID";
+        window.open('@Url.Action("Management", "ESuggestion")' + "?SuggestionID=" + id);
+    });
+    var $form = $('#form-process');
+    $('#save').on('click', function (e) {
+        e.preventDefault();
+        debugger;
+        var imple = $('#imple').val();
+        if (imple == null || imple == "") {
+            alert("Please choose implement method");
+            return;
+        }
+        var sponsor = $('#sponsor').val();
+        if (sponsor == null || sponsor == "") {
+            alert("Please choose sponsor");
+            return;
+        }
+        var coacher = $('#coacher').val();
+        if (coacher == null || coacher == "") {
+            alert("Please choose coacher");
+            return;
+        }
+        var board = $('#board').val();
+        if (board == null || board == "") {
+            alert("Please choose director");
+            return;
+        }
+
+        
+        $form.submit();
+    })
+    $('#approve').on('click', function (e) {
+     e.preventDefault();
+        if (!confirm("Do you really want to APPROVE?")) return;
+
+        debugger;
+        var imple = $('#imple').val();
+        if (imple == null || imple == "") {
+            alert("Please choose implement method");
+            return;
+        }
+        var sponsor = $('#sponsor').val();
+        if (sponsor == null || sponsor == "") {
+            alert("Please choose sponsor");
+            return;
+        }
+        var coacher = $('#coacher').val();
+        if (coacher == null || coacher == "") {
+            alert("Please choose coacher");
+            return;
+        }
+        var board = $('#board').val();
+        if (board == null || board == "") {
+            alert("Please choose director");
+            return;
+        }
+
+        var input = $("<input>", { type: "hidden", name: "Status", value: "Approve" });
+        $form.append(input);
+        $form.submit();
+    })
+    $('#reject').on('click', function (e) {
+    e.preventDefault();
+        if (!confirm("Do you really want to REJECT?")) return;
+        var Comment = $('#Comment').val();
+        if (Comment == null || Comment.trim() == "") {
+            alert("Please input comment for reject");
+            return;
+        }
+        var input = $("<input>", { type: "hidden", name: "Status", value: "Reject" });
+        $form.append(input);
+        $form.submit();
+    })
+</script>

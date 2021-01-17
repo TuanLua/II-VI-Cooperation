@@ -1,0 +1,124 @@
+﻿
+@using II_VI_Incorporated_SCM.Models
+
+@{
+    ViewBag.Title = "ViewSupplierStrategy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@section styles{
+    <link href="~/Content/listBoxPlugin/bootstrap-duallistbox.min.css" rel="stylesheet" />
+}
+<h3> View Supplier Strategy</h3>
+<div class="form-group row" style="text-align:right">
+    <label class="col-md-4">FISCAL YEAR<span style="color: red">*</span> : </label>
+    <div class="col-md-4 date">
+        @Html.DropDownList("changeyear", (IEnumerable<SelectListItem>)ViewBag.DateList, new { @class = "form-control" })
+    </div>
+</div>
+<div class="row" style="text-align:right">
+    <div class="form-group">
+        <div class="row" style="margin-left:0px !important; margin-right:0px !important;">
+            <label class="col-md-4">CCN<span style="color: red">*</span> : </label>
+            <div class="col-md-4 date">
+                @Html.DropDownList("CCN", (IEnumerable<SelectListItem>)ViewBag.CCNList, new { @class = "form-control", id = "CCN" })
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="col-lg-12 col-md-9 col-sm-9 col-xs-12">
+    <form id="demoform" action="#" method="post">
+        @Html.DropDownList("VENDOR[]", (IEnumerable<SelectListItem>)ViewBag.VendorList, new { @class = "form-control", multiple = "multiple", size = "15", style = "display: none;" })
+    </form>
+    <br>
+
+</div>*@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<VENDOR>()
+                                                                                                                      .Name("gridStrategy")
+                                                                                                                      .Columns(columns =>
+                                                                                                                      {
+                                                                                                                          columns.Bound(p => p.VENDOR1).Title("Vendor Code").HtmlAttributes(new { @class = "RefNUMBER" }).Width(100);
+                                                                                                                          columns.Bound(p => p.PUR_LOC).Title("Pur Loc").HtmlAttributes(new { @class = "RefNUMBER" }).Width(100);
+                                                                                                                          columns.Bound(p => p.VEN_NAM).Title("Vendor Name").HtmlAttributes(new { @class = "RefNUMBER" }).Width(300);
+                                                                                                                          
+
+                                                                                                                      })
+                                                                                                                      .Pageable()
+                                                                                                                      .Sortable()
+                                                                                                                      .Scrollable()
+                                                                                                                      .Filterable()
+                                                                                                                      .HtmlAttributes(new { style = "height:650px;" })
+                                                                                                                      .DataSource(dataSource => dataSource
+                                                                                                                          .Ajax()
+                                                                                                                          .PageSize(25)
+                                                                                                                          //.Read(read => read.Action("StrategyList", "NCRREport", new { CCN = "03", FY = '' }))
+                                                                                                                      //.Sort(sort => sort.Add("Submit_date").Descending())
+                                                                                                                      ))
+        </div>
+    </div>
+</div>
+@*<div class="form-group row" style="text-align:right">
+    <label class="col-md-5"> </label>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-success btn-block" id="save">Save</button>
+    </div>
+</div>*@
+
+@section scripts{
+    <script src="~/Content/listBoxPlugin/jquery.bootstrap-duallistbox.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //$("#vendor").select2();
+            $("#changeyear").select2();
+            $("#CCN").select2();
+
+            var value = $('select#changeyear option:selected').val();
+            var ccn = $('select#CCN option:selected').val();
+            if (ccn == "") {
+                bootbox.alert("Please select CCN");
+            }
+            
+             $("#gridStrategy").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("StrategyList", "NCRREport")?CCN=' + ccn + '&FY=' + value;
+            $("#gridStrategy").data("kendoGrid").dataSource.read();
+        });
+        //var demo1 = $('select[name="VENDOR[]"]').bootstrapDualListbox();
+            //$("#demoform").submit(function () {
+            //    alert($('[name="VENDOR[]"]').val());
+            //    return false;
+            //});
+        @*$("#save").on('click',function () {
+            var vendor = ($('[name="VENDOR[]"]').val());
+            if (vendor.Count < 0) {
+                bootbox.alert("Please select vendor!");
+            }
+            var value = $('select#changeyear option:selected').val();
+            var ccn = $('select#CCN option:selected').val();
+            window.location.href = "@Url.Action("SaveSupplierStrategy", "NCRREport")" + "?CCN=" + ccn + "&FY=" + value + "&vendor=" + JSON.stringify(vendor);
+            return false;
+        });*@
+        $("#changeyear").on('change', function () {
+            var value = $('select#changeyear option:selected').val();
+            var ccn = $('select#CCN option:selected').val();
+            if (ccn == "") {
+                bootbox.alert("Please select CCN");
+            }
+            //window.location.href = "@Url.Action("ViewSupplierStrategy","NCRREport")" + "?CCN=" + ccn + "&FY=" + value;
+            $("#gridStrategy").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("StrategyList", "NCRREport")?CCN=' + ccn + '&FY=' + value;
+            $("#gridStrategy").data("kendoGrid").dataSource.read();
+        })
+        $("#CCN").on('change', function () {
+            var value = $('select#changeyear option:selected').val();
+            var ccn = $('select#CCN option:selected').val();
+            if (ccn == "") {
+                bootbox.alert("Please select CCN");
+            }
+            //window.location.href = "@Url.Action("ViewSupplierStrategy","NCRREport")" + "?CCN=" + ccn + "&FY=" + value;
+             $("#gridStrategy").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("StrategyList", "NCRREport")?CCN=' + ccn + '&FY=' + value;
+            $("#gridStrategy").data("kendoGrid").dataSource.read();
+        })
+    </script>
+}
