@@ -1450,9 +1450,10 @@ namespace II_VI_Incorporated_SCM.Services
         {
             try
             {
-                var tmp = _db.V_WO_Issue
-                    .Where(o => o.WOCode.Trim() == wo.Trim() && o.MaterialID.Trim() == partnum.Trim())
-                    .Select(o => o.LotNumber).ToList();
+                //var tmp = _db.V_WO_Issue
+                //    .Where(o => o.WOCode.Trim() == wo.Trim() && o.MaterialID.Trim() == partnum.Trim())
+                //    .Select(o => o.LotNumber).ToList();
+                var  tmp = new List<string>();
                 return tmp;
             }
             catch (Exception)
@@ -1478,9 +1479,10 @@ namespace II_VI_Incorporated_SCM.Services
         {
             try
             {
-                var tmp = _db.V_Material_HadMake_FLupSerialNumber
-                    .Where(o => o.SerialNumber.Trim() == serial.Trim() && o.MaterialID.Trim() == partnum.Trim())
-                    .Select(o => o.LotNumber.Trim()).ToList();
+                //var tmp = _db.V_Material_HadMake_FLupSerialNumber
+                //    .Where(o => o.SerialNumber.Trim() == serial.Trim() && o.MaterialID.Trim() == partnum.Trim())
+                //    .Select(o => o.LotNumber.Trim()).ToList();
+                var tmp = new  List<string>();
                 return tmp;
             }
             catch (Exception)

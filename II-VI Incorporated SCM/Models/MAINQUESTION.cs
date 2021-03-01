@@ -18,6 +18,7 @@ namespace II_VI_Incorporated_SCM.Models
         public MAINQUESTION()
         {
             this.DETAILQUESTIONs = new HashSet<DETAILQUESTION>();
+            this.DETAILQUESTIONs1 = new HashSet<DETAILQUESTION>();
         }
     
         public int ID { get; set; }
@@ -30,5 +31,7 @@ namespace II_VI_Incorporated_SCM.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETAILQUESTION> DETAILQUESTIONs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETAILQUESTION> DETAILQUESTIONs1 { get; set; }
     }
 }

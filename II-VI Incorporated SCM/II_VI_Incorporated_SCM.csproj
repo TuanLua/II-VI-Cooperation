@@ -228,6 +228,7 @@
     <Compile Include="Controllers\NCR\WriteNCRForProcessController.cs" />
     <Compile Include="Controllers\Productranfer\ProductTranferController.cs" />
     <Compile Include="Controllers\SCAR\SCARController.cs" />
+    <Compile Include="Controllers\SOReview\SOReviewController.cs" />
     <Compile Include="Controllers\Task Management\TaskManagementController.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="HelperClasses\ToConcatenatedString.cs" />
@@ -316,9 +317,6 @@
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DISPOSITION.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DMS_WOLot.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DOC_by_ITEM.cs">
@@ -536,6 +534,9 @@
     <Compile Include="Models\NCR_History.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NCR_WH_OPEN_COMMENT.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NC_BY_PART.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
@@ -549,6 +550,9 @@
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NC_GROUP.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NC_PART.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ONESUPPLLIER_PPMRB.cs">
@@ -605,6 +609,9 @@
     <Compile Include="Models\pChartTaskOfEmp_Result.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pGet_MEASUREMENT_STD_BY_PART_bk_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pGet_MEASUREMENT_STD_BY_PART_Result.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
@@ -639,9 +646,6 @@
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PO_REV_Temp.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PPM_RejectQty.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Producttranfer\ProductViewModel.cs" />
@@ -758,6 +762,11 @@
     <Compile Include="Models\SKIP_LOT_LEVEL_bk.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SOReview\FamilyReviewmodel.cs" />
+    <Compile Include="Models\SOReview\FileUploadSoviewmodel.cs" />
+    <Compile Include="Models\SOReview\ItemReviewmodel.cs" />
+    <Compile Include="Models\SOReview\PICReviewmodel.cs" />
+    <Compile Include="Models\SOReview\SoReviewDetail.cs" />
     <Compile Include="Models\SplitString_Result.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
@@ -893,6 +902,12 @@
     <Compile Include="Models\sp_GetNCRAging_Result1.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_GetOperator_IQC_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetSoReview_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_GET_ListNC_BY_ListNCGroup_Result.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
@@ -938,7 +953,19 @@
     <Compile Include="Models\sp_Inv_Report_Score_Result.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_Inv_Report_SUGGESTION_ANALYSIS_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Inv_Report_Suggestion_ByMonth_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Inv_Report_Suggestion_ByPerson_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_Inv_Report_Suggestion_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Inv_Report_Suggestion_Status_Result.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_Inv_SugList_Result.cs">
@@ -992,6 +1019,9 @@
     <Compile Include="Models\sp_Report_MonthIQC_TEM_Result.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_Report_MonthIQC_TEM_SumByPart_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_Report_ParetoOfNC_Result.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
@@ -1017,6 +1047,66 @@
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_Report_SkiplotvsInspectedlot_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_6Panel_DetailScar_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_6Panel_GetListVendor_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_6Panel_OTD_By_Month_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_6Panel_PPM_By_Month_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_6Panel_QualityPerformance_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_6Panel_ScoreJudment_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_6Panel_ScoringRef_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_6Panel_SupplierInfo_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_6Panel_TopDefectPart_By_Month_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_6Panel_TopDefectPart_By_YTD_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_Auto6Panel_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_GetListVendor_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_GetSupplierInfo_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_ListVendorDetail_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_RA_ProductClass_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_SupplierDevelopment_FiscalYear_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_SupplierDevelopment_NewPlan_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_SupplierDevelopment_SearchPlan_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_SupplierDevelopment_VisitAuditSum_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SQE_Yearlist_Result.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_SupplierPPMReportReceiverQTYDataRaw_Result.cs">
@@ -1073,9 +1163,6 @@
     <Compile Include="Models\SUPPLIER_PPM_RP.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TASKCOMMENT.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
@@ -1107,6 +1194,9 @@
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TASK_PHASE.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbDashboard_Guide_Show.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbEvent.cs">
@@ -1181,7 +1271,190 @@
     <Compile Include="Models\tbl_PT_Status.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbl_PT_TaskList.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbl_PT_Work_Center.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_RP_Advance_Setting.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_RP_DataSource_Para.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_RP_Data_Source.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_RP_Report.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_RP_Report_Para.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_RP_Setting_BarChart.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_RP_Setting_DataGrid.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_RP_Setting_LineChart.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_RP_StoreProcedure.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_RP_Store_Parameter.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SOR_Attached_ForItemReview.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SOR_Cur_Review_Detail.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SOR_Cur_Review_List.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SOR_Family_Setup_Qty.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SOR_His_Review_Detail.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SOR_His_Review_List.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SOR_Item_Review.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SOR_Review_Pic.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_6Panel_TopNCPart.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Ass_Period.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Ass_Resp.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Ass_Resp_Status.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Ass_Vendor.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Category.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Category_Target.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Customer_Claim.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Develop_AuditVisit_Attachment.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Develop_Category.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Develop_Goal.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Develop_ImprovePlan.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Develop_ProblemDesc.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Develop_SourceFrom.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Develop_Status.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Develop_VisitAudit.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_PCN.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_PCN_Attached.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_PCN_Class.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_PCN_Contact.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_PCN_Status.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Premium_Freight.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Report_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Report_Type.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Report_Weight.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Res_Item.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Score_Ref.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Score_Reponsiveness.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog_Attached.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog_BusinessType.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog_CoC.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog_CoCItem.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog_Commodity.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog_Contact.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog_ISO.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog_MaterialSupplied.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog_QMS.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog_QMSItem.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_SupplierLog_Status.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Supplier_Finish6Panel.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SQE_Vendor_Score_Ref.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_TP_Family.cs">
@@ -1229,34 +1502,7 @@
     <Compile Include="Models\VENDOR_Temp.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\vNCR_DET.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vNCR_DET_2.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vNCR_HDR.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\VNMaterialTraceability.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\v_AQL.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_AspNetUsers.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\v_INS_RESULT.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_Material_HadMake_FLupSerialNumber.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\v_Operator.cs">
-      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_WO_Issue.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Work_Center.cs">
@@ -1280,6 +1526,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ReportNcrService.cs" />
     <Compile Include="Services\SCARService.cs" />
+    <Compile Include="Services\SoReviewService.cs" />
     <Compile Include="Services\TaskManagementService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\UtilitiesService.cs" />
@@ -3658,6 +3905,11 @@
     <Content Include="Views\NCRReport\ViewSupplierStrategiy.cshtml" />
     <Content Include="Views\NCRReport\ViewSupplierStrategy.cshtml" />
     <Content Include="Views\TaskManagement\Task_Statistical_ByDetail.cshtml" />
+    <Content Include="Views\SOReview\SOReviewList.cshtml" />
+    <Content Include="Views\SOReview\PICReviewList.cshtml" />
+    <Content Include="Views\SOReview\SOReviewDetail.cshtml" />
+    <Content Include="Views\SOReview\ItemReviewList.cshtml" />
+    <Content Include="Views\SOReview\FamilyReviewList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

@@ -1,0 +1,327 @@
+﻿@using II_VI_Incorporated_SCM.Services;
+@model List<II_VI_Incorporated_SCM.Models.SOReview.ItemReviewmodel>
+
+<h3>Item Review</h3>
+<div class="row">
+    <div class="col-md-12">
+        @*@if ((bool)ViewBag.checkRoleUser == true)
+            {*@
+        @*@if ((bool)ViewBag.IsPlanner)
+        {*@
+            <button style="float:right; margin-left:10px" class="btn btn-sm btn-success " id="addnew" onclick="AddNew()">Add New</button>
+       @* }*@
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered" id="gridQMSSummary">
+            <thead>
+                <tr>
+                    <th class="text-center">Dept</th>
+                    <th class="text-center">Item Review</th>
+                    <th class="text-center">Is default</th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody id="idtb">
+                @foreach (var item in Model)
+                {
+                <tr ID="@item.ID" dept="@item.Dept" pic="@item.ItemReview" Isdefault="@item.Isdefault">
+                    <td style="text-align:center; width:350px">
+                        @item.Dept
+                    </td>
+                    <td class="pic" style="text-align:center; width:350px">
+                        @item.ItemReview
+                    </td>
+                    <td  style="text-align:center; width:350px">
+                        @item.Isdefault
+                    </td>
+                    <td style="text-align:center; width:350px">
+                        @*@if ((bool)ViewBag.IsPlanner)
+                        {*@
+                            <button class="btn btn-info btn-xs btn-edit">Edit</button>
+                            <button class="btn btn-danger btn-xs btn-delete">Delete</button>
+                        @*}*@
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<script>
+    var gridDataQMS;
+      // Validate data
+    function ValidateDataQMS(dept, pic) {
+        if (dept == "") {
+            bootbox.alert("Please input Dept!");
+            return;
+        }
+        if (pic == "") {
+            bootbox.alert("Please input Item Review!");
+            return;
+        }
+        return true;
+    }
+    //Delete data
+    function DeleteDataQMSSummary(e) {
+        var id = $(this).parents("tr").attr('ID');
+        bootbox.confirm({
+            message: 'Are you sure to delete data?',
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            closeButton: false,
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteItemReview", "SoReview")',
+                        type: "POST",
+                        data: { id: id },
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.success) {
+                                bootbox.alert('Delete sucess!', function () {
+                                    window.location.reload();
+                                });
+                            }
+                            else {
+                                bootbox.alert(result.message);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+    var IsEdit = 1;
+    $("#gridQMSSummary tbody").on("click", ".btn-edit", function () {
+        IsEdit = IsEdit + 1;
+        if (IsEdit > 2) {
+            bootbox.alert("Please update before edit next row!");
+            IsEdit = 1;
+            return;
+        }
+        else {
+
+        var dept = $(this).parents("tr").attr('dept');
+        var pic = $(this).parents("tr").attr('pic');
+        var Isdefault = $(this).parents("tr").attr('Isdefault');
+        $(this).parents("tr").find("td:eq(0)").html('<input class="form-control" name="dept" value="' + dept + '">');
+        $(this).parents("tr").find("td:eq(1)").html('<input class="form-control" name="pic" value="' + pic + '">');
+        $(this).parents("tr").find("td:eq(2)").html('<select class="form-control" name="Isdefault" id="Isdefault"><select/>');
+        $(this).parents("tr").find("td:eq(3)").prepend("<button class='btn btn-info btn-xs btn-update'>Update</button><button class='btn btn-warning btn-xs btn-cancel'>Cancel</button>")
+        $(this).hide();
+         $.post('@Url.Action("ReViewReSult", "SoReview")',
+             function (result) {
+                    $.each(result, function (i, item) {
+                        $('#Isdefault').append($('<option>', {
+                            value: item.Value,
+                            text: item.Text
+                        }));
+                    });
+                }).fail(function() {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function() {
+                });
+        $("#Isdefault").select2();
+            $('#Isdefault').val(Isdefault).trigger('change');
+        }
+     });
+
+    //Delete
+    $("#gridQMSSummary tbody").on("click", ".btn-delete", function () {
+        var id = $(this).parents("tr").attr('id');
+        var tr = $(this).parents("tr");
+        bootbox.confirm({
+            message: 'Are you sure to delete data?',
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            closeButton: false,
+            callback: function (result) {
+                if (result) {
+                      $.ajax({
+                        url: '@Url.Action("DeleteItemReview", "SOReview")',
+                        type: "POST",
+                        data: {id:id },
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.success) {
+                                bootbox.alert('Delete sucess', function (e) {
+                                    tr.remove();
+                                      $('#addnew').removeAttr('disabled', 'disabled');
+                                });
+                            }
+                            else {
+                              //  bootbox.alert(result.message);
+                                tr.remove();
+                                   $('#addnew').removeAttr('disabled', 'disabled');
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+    //Cancel
+    $("#gridQMSSummary tbody").on("click", ".btn-cancel", function () {
+        IsEdit = 1;
+        var dept = $(this).parents("tr").attr('dept');
+        $(this).parents("tr").find("td:eq(0)").text(dept);
+        var pic = $(this).parents("tr").attr('pic');
+        $(this).parents("tr").find("td:eq(1)").text(pic);
+        var Isdefault = $(this).parents("tr").attr('Isdefault');
+        $(this).parents("tr").find("td:eq(2)").text(Isdefault);
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-update").remove();
+        $(this).parents("tr").find(".btn-cancel").remove();
+    });
+    //Edit and Save Update HTML
+    $("#gridQMSSummary tbody").on("click", ".btn-update", function () {
+        var dept =$(this).parents("tr").find("input[name='dept']").val();
+        var pic = $(this).parents("tr").find("input[name='pic']").val();
+        var Isdefault = $(this).parents("tr").find("input[name='Isdefault']").val();
+        var pictext = $(this).parents("tr").find("select[name='pic']").text();
+        var id = $(this).parents("tr").attr('ID');
+
+        //Save Update Data
+        if (ValidateDataQMS(dept, pic)) {
+
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-cancel").remove();
+        $(this).parents("tr").find(".btn-update").remove();
+            bootbox.confirm({
+                message: 'Are you sure to edit data?',
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                closeButton: false,
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: '@Url.Action("UpdateItemReview", "SoReview")',
+                            type: "POST",
+                            data: { id: id, dept: dept, pic: pic, isdefault: Isdefault },
+                            dataType: "json",
+                            success: function (result) {
+                                if (result.success) {
+                                    bootbox.alert('Update sucess', function () {
+                                          window.location.reload();
+                                    });
+                                }
+                                else {
+                                    bootbox.alert(result.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+
+
+    });
+    //Save New
+    $("#gridQMSSummary tbody").on("click", ".btn-save", function () {
+        var dept =$(this).parents("tr").find("input[name='dept']").val();
+        var pic = $(this).parents("tr").find("input[name='pic']").val();
+        var Isdefault = $(this).parents("tr").find("input[name='Isdefault']").val();
+         id = 0;
+
+        $(this).parents("tr").attr('pic', pic);
+        $(this).parents("tr").attr('dept', dept);
+        $(this).parents("tr").attr('Isdefault', Isdefault);
+        if (ValidateDataQMS(dept, pic)) {
+            bootbox.confirm({
+                message: 'Are you sure to Save data?',
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                closeButton: false,
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: '@Url.Action("SaveItemReview", "SoReview")',
+                            type: "POST",
+                            data: { dept: dept, pic: pic, isdefault: Isdefault},
+                            dataType: "json",
+                            success: function (result) {
+                                if (result.success) {
+                                    bootbox.alert('Save sucess', function () {
+                                        window.location.reload();
+                                    });
+                                }
+                                else {
+                                    bootbox.alert(result.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+     });
+    //Add new
+    function AddNew() {
+        $('#addnew').attr('disabled', 'disabled');
+        var qms = ""
+         var certificationdate ="";
+        var duedate = "";
+        let html = "<tr dept='" + certificationdate + "' pic='" + duedate + "'>" +
+            "<td><input class='form-control' name='dept'/> </td>" +
+            "<td><input class='form-control' name='pic' /> </td>" +
+            "<td><select class='form-control' name='Isdefault' id='Isdefault'><select/></td>" +
+            "<td style='text-align:center; width:350px'><button class='btn btn-info btn-xs btn-save'>Save</button> <button class='btn btn-danger btn-xs btn-delete'>Delete</button></td>"+
+             "</tr>";
+        $("#gridQMSSummary tbody").append(html);
+         $.post('@Url.Action("ReViewReSult", "SoReview")',
+             function (result) {
+                    $.each(result, function (i, item) {
+                        $('#Isdefault').append($('<option>', {
+                            value: item.Value,
+                            text: item.Text
+                        }));
+                    });
+                }).fail(function() {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function() {
+                });
+        $("#Isdefault").select2();
+    }
+</script>

@@ -31,7 +31,9 @@ namespace II_VI_Incorporated_SCM.Services
             builder.RegisterType<MeetingNoteService>().As<IMeetingNoteService>().InstancePerRequest();
             builder.RegisterType<ESuggestionService>().As<IESuggestionService>().InstancePerRequest();
             builder.RegisterType<ProductTranferService>().As<IProductTranferService>().InstancePerRequest();
+            builder.RegisterType<SoReviewService>().As<ISoReviewService>().InstancePerRequest();
             builder.RegisterType<HomeService>().As<IHomeService>().InstancePerRequest();
+            
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }

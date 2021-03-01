@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model '\\vnmbi-nas01\data01\Data-Apps\19.Source Code of Tools\THI\DMS Web Source\II-VI Incorporated SCM\Models\II-VI-DBModel.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Source\II-VI\II-VI-Cooperation\II-VI Incorporated SCM\Models\II-VI-DBModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -1,0 +1,542 @@
+﻿@model List<II_VI_Incorporated_SCM.Models.SOReview.SoReviewDetail>
+@using II_VI_Incorporated_SCM.Models
+@{
+    ViewBag.Title = "SOReviewDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Review for SO : @Model.FirstOrDefault().SONO </h2>
+
+<br />
+<input type="hidden" id="SoNo" name="SoNo" value="@Model.FirstOrDefault().SONO" />
+<div class="row col-sm-3">
+</div>
+<div class="row col-sm-3">
+    <label> Plan Ship Date</label>
+    <input class="form-control" id="Shipdate" />
+</div>
+<div class="col-sm-2">
+    <label></label>
+    <input type="checkbox" id="IsDefine" class="form-control" />
+</div>
+<div class="row col-sm-2" style="float:right">
+    <label> </label>
+    @if (ViewBag.Status == "Open")
+    {
+        <button class="btn btn-sm btn-info" id="finish-review">Finish Review </button>
+    }
+    <button class="btn btn-sm btn-danger" id="back-tolist">Back to list </button>
+</div>
+<br />
+<br />
+<br />
+<br />
+<table id="tblCustomers" class="table table-striped table-bordered table-hover table-checkable order-column" cellpadding="0" cellspacing="0">
+    <tr>
+        <th style="width:100px">Dept</th>
+        <th style="width:250px">Item</th>
+        <th style="width:50px">Review Result</th>
+        <th style="width:150px">Comment</th>
+        <th style="width:50px">Last Review</th>
+        <th style="width:150px">Last Comment</th>
+        <th style="width:50px"></th>
+    </tr>
+    @foreach (var customer in Model)
+    {
+        <tr reviewresult="@customer.ReviewResult" id="@customer.ID" titemreview="@customer.ItemReview" comment="@customer.Comment" islock="@customer.IsLock">
+            <td class="DeptReview">
+                <span>@customer.DeptReview</span>
+            </td>
+            <td class="ItemReview">
+                <span>@customer.ItemReview</span>
+            </td>
+            <td class="ReviewResult">
+                <span>@customer.ReviewResult</span>
+            </td>
+            <td class="Comment">
+                <span>@customer.Comment</span>
+            </td>
+            <td class="LastReview">
+                <span>@customer.LastReview</span>
+            </td>
+            <td class="LastComment">
+                <span>@customer.LastComment</span>
+            </td>
+            <td class="SONO" style="display:none">
+                <span>@customer.SONO</span>
+            </td>
+            <td>
+                @if (customer.DeptReview == ViewBag.IsDaprt && customer.IsLock == "Fasle" && ViewBag.Status == "Open")
+                {
+                    <a class="btn-sm btn-info Edit" href="javascript:;">Edit</a>
+                    <a class=" btn-sm btn-success Update" href="javascript:;" style="display:none">Update</a>
+                    <a class="btn-sm btn-danger Cancel" href="javascript:;" style="display:none">Cancel</a>
+                }
+
+            </td>
+        </tr>
+    }
+</table>
+
+<legend>List File Attach File For Review High Volumn if any</legend>
+<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbEvidenceInProcess">
+    <thead>
+        <tr>
+            <th>File Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="tbodyEvidenceInProcess" style="display:none">
+        @if (Model.FirstOrDefault().OldEvidence.Count > 0)
+        {
+            int i = 0;
+            foreach (var evi in Model.FirstOrDefault().OldEvidence)
+            {
+        <tr id="@evi.ID">
+            <td width="80%;" style="text-align: left !important;">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="@Url.Action("DownloadFile", "SoReview", new { fileId = evi.ID })"><i class="fa fa-file-pdf-o"> &nbsp; @evi.Attached_File.Split('/')[1] </i></a>
+                <input type="hidden" name="EVIID" value="@evi.ID" class="old-evi" />
+            </td>
+            @if (ViewBag.Status == "Open")
+            {
+                <td><button onclick="deleteEvedenceRowInProcess(this)" type="button" class="btn btn-danger pull-right">Delete</button></td>
+            }
+            </tr>
+                i++;
+            }
+        }
+    </tbody>
+</table>
+<div id="popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add File</h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                    <div class="form-horizontal col-md-offset-1">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">File</label>
+                            <div class="col-md-6">
+                                <input type="file"id="file" class="form-control boder-opal">
+                            </div>
+                        </div>
+                      <input type="hidden" id="iditemreview" name="iditemreview" />
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" id="save-file" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="popupTask" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Task</h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Assignee:</label>
+                        <div class="col-md-6">
+                            <select class="form-control" name="user" id="user"></select>
+                        </div>
+                        <input type="hidden" id="reviewitemname" name="reviewitemname" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn-addtask" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+
+    <legend>List Task Management</legend>
+    @if (ViewBag.TaskList != null)
+    {
+        var TaskList = (TASKLIST)ViewBag.TaskList;
+        <div class="row">
+            <div class="col-xs-18 col-md-12">
+                @(Html.Kendo().Grid<II_VI_Incorporated_SCM.Models.TaskManagement.TaskManagementNCRViewModel>()
+                                .Name("gridTaskDetail")
+                                .Columns(columns =>
+                                {
+                                    columns.Bound(p => p.TaskDetail.TaskID).Hidden();
+                                    columns.Bound(p => p.TaskDetail.TASKNAME).Title("Task").HtmlAttributes(new { @class = "ClickGrid" });
+                                    columns.Bound(p => p.TaskDetail.OWNER).Title("Owner").Hidden();
+                                    columns.Bound(p => p.AssigneeName).Title("Assignee").HtmlAttributes(new { @class = "ClickGrid" });
+                                    columns.Bound(p => p.TaskDetail.EstimateEndDate).Title("Due Date").HtmlAttributes(new { @class = "ClickGrid" }).ClientTemplate("#= TaskDetail.EstimateEndDate ? kendo.toString(kendo.parseDate(TaskDetail.EstimateEndDate), 'dd/MMM/yy') : '' #");
+                                    columns.Bound(p => p.TaskDetail.STATUS).Title("Status").HtmlAttributes(new { @class = "ClickGrid" });
+                                    columns.Bound(p => p.TaskDetail.PRIORITY).Title("Priority").HtmlAttributes(new { @class = "ClickGrid" });
+                                })
+                                .Pageable()
+                                .Sortable()
+                                .Scrollable()
+                                .Filterable()
+                                .HtmlAttributes(new { style = "height:200px; border: 1px solid black;" })
+                                .DataSource(dataSource => dataSource
+                                    .Ajax()
+                                    .PageSize(10)
+                                    .Read(read => read.Action("ReadTaksMantNCR", "TaskManagement", new { taskID = TaskList.TopicID, type = "SOReView" }))
+                                    .Sort(sort => sort.Add("TaskDetail.EstimateStartDate").Ascending())
+                                ))
+            </div>
+        </div>
+    }
+</div>
+<script>
+    $('#finish-review').on('click', function () {
+        var sono = $('#SoNo').val();
+        var planshipdate = $('#Shipdate').val();
+        var isdefine = $('#IsDefine').is(":checked");
+        if (isdefine == false && planshipdate == "") {
+            bootbox.alert("Please select Plan Ship Date!");
+            return;
+        }
+        else {
+         bootbox.confirm({
+                message: 'Are you sure to finish review?',
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                closeButton: false,
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: '@Url.Action("UpdateSoReviewFinish", "SoReview")',
+                            type: "POST",
+                            data: { sono: sono, planshipdate: planshipdate, isdefine: isdefine, Date: '@ViewBag.Date' },
+                            dataType: "json",
+                            success: function (result) {
+                                if (result.success) {
+                                    bootbox.alert('Update sucess', function () {
+                                       window.location.href = "@Url.Action("SOReviewList", "SoReview")";
+                                    });
+                                }
+                                else {
+                                    bootbox.alert(result.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+    $('#back-tolist').on('click', function () {
+        window.location.href = "@Url.Action("SOReviewList", "SoReview")";
+    })
+    function getval(sel,ID) {
+        if (sel.value == "Y") {
+            //Set cung ID no Default item show popup add file
+            if (ID == "1")
+            $('#iditemreview').val(ID);
+            $('#popup').modal('show');
+        }
+        if (sel.value == "N") {
+            $('#popupTask').modal('show');
+        }
+    }
+
+    $('#btn-addtask').on('click', function () {
+        var SoNo = '@ViewBag.SoNo';
+        var Date = '@ViewBag.Date';
+        var itemreview = $('#reviewitemname').val();
+        var assignee = $('#user').val();
+        if (assignee == null || assignee == "") {
+            bootbox.alert("Please select assignee!");
+            return;
+        }
+        else {
+            $.ajax({
+                url: '@Url.Action("AddTaskForItemReview", "SOReview")',
+                type: "POST",
+                data: { SoNo: SoNo, Date: Date, itemreview: itemreview, assignee: assignee},
+                dataType: "json",
+                success: function (result) {
+                    if (result.success) {
+                        bootbox.alert('Update sucess', function () {
+                            $('#popupTask').modal('hide');
+                        });
+                    }
+                    else {
+                        bootbox.alert(result.message);
+                        $('#popupTask').modal('hide');
+                    }
+                }
+            });
+        }
+
+    });
+
+    function ValidateDataQMS(dept, pic) {
+        if (dept == "" || dept == null) {
+            bootbox.alert("Please select result !");
+            return;
+        }
+            if (dept == "N" && pic == "") {
+                bootbox.alert("Please input Comment!");
+                return;
+            }
+        return true;
+    }
+
+    $(document).ready(function () {
+                $(function () {
+                    $('#Shipdate').datepicker({
+                        format: 'dd-M-yyyy',
+                        autoclose: true
+                    });
+                });
+              $.post('@Url.Action("GetListUser", "SoReview")',
+                function (result) {
+                    $.each(result, function (i, item) {
+                        $('#user').append($('<option>', {
+                            value: item.Value,
+                            text: item.Text
+                        }));
+                    });
+                }).fail(function () {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function () {
+                });
+            $("#user").select2();
+            var $newOption = $("<option selected='selected'></option>").val("").text("")
+        $("#user").append($newOption).trigger('change');
+        $('#Shipdate').val(@ViewBag.planshipdate);
+    })
+
+    $("body").on("click", "#tblCustomers .Edit", function () {
+        var row = $(this).closest("tr");
+        var titemreview = $(this).parents("tr").attr('titemreview');
+        var id = $(this).parents("tr").attr('id');
+        //set value itemnamepopup
+        $('#reviewitemname').val(titemreview);
+            var reviewresult = $(this).parents("tr").attr('reviewresult');
+            var comment = $(this).parents("tr").attr('comment');
+        $(this).parents("tr").find("td:eq(2)").html('<select class="form-control"  onchange="getval(this,'+id+');" name="reviewresult" id="QMSDropdown"><select/>');
+            $(this).parents("tr").find("td:eq(3)").html('<textarea  class="form-control " name="comment">'+comment+'</textarea>');
+
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    $(this).find("input").show();
+                    $(this).find("span").hide();
+                }
+            });
+            row.find(".Update").show();
+            row.find(".Cancel").show();
+            $(this).hide();
+              $.post('@Url.Action("ReViewReSult", "SoReview")',
+             function (result) {
+                    $.each(result, function (i, item) {
+                        $('#QMSDropdown').append($('<option>', {
+                            value: item.Value,
+                            text: item.Text
+                        }));
+                    });
+                }).fail(function() {
+                    bootbox.alert('Please contact to Administrator!');
+                }).always(function() {
+                });
+             var $newOption = $("<option selected='selected'></option>").val("").text("")
+        $("#QMSDropdown").append($newOption).trigger('change');
+        var topic = '@ViewBag.SoNo' + '-' + '@ViewBag.Date' + '-' + titemreview;
+
+            //call data source task list when select
+        $("#gridTaskDetail").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadTaksMantSoReview", "Soreview")' + '?taskNo=' + topic;
+        $("#gridTaskDetail").data("kendoGrid").dataSource.read();
+        //show file item high volumn qty
+        if (id == "1") {
+            $('#tbodyEvidenceInProcess').removeAttr('style','display:none');
+        }
+        else {
+            $('#tbodyEvidenceInProcess').attr('style','display:none');
+        }
+        });
+
+        //Cancel
+    $("#tblCustomers tbody").on("click", ".Cancel", function () {
+        //var reviewresult = $(this).parents("tr").attr('reviewresult');
+        //if (reviewresult == undefined) {
+        //    reviewresult = "";
+        //}
+        //    var comment = $(this).parents("tr").attr('comment');
+        //    $(this).parents("tr").find("td:eq(2)").text(reviewresult);
+        //    $(this).parents("tr").find("td:eq(3)").text(comment);
+        //    $(this).parents("tr").find(".Edit").show();
+        //    $(this).parents("tr").find(".Update").remove();
+        //    $(this).parents("tr").find(".Cancel").remove();
+        window.location.reload();
+    });
+
+    $("#tblCustomers tbody").on("click", ".Update", function () {
+        var reviewresult = $(this).parents("tr").find("select[name='reviewresult']").val();
+        var comment = $(this).parents("tr").find("textarea[name='comment']").val();
+        var islock = $(this).parents("tr").attr('islock');
+        var id = $(this).parents("tr").attr('id');
+
+        //Save Update Data
+        if (ValidateDataQMS(reviewresult, comment)) {
+
+            $(this).parents("tr").find(".Edit").show();
+            $(this).parents("tr").find(".Cancel").remove();
+            $(this).parents("tr").find(".Update").remove();
+                        $.ajax({
+                            url: '@Url.Action("UpdateSoReview", "SoReview")',
+                            type: "POST",
+                            data: { id: id, reviewresult: reviewresult, comment: comment, islock: islock},
+                            dataType: "json",
+                            success: function (result) {
+                                if (result.success) {
+                                    bootbox.alert('Update sucess', function () {
+                                        window.location.reload();
+                                    });
+                                }
+                                else {
+                                    bootbox.alert(result.message);
+                                }
+                            }
+                        });
+        }
+    })
+
+    $('#save-file').on('click', function () {
+        let filesave = $('#file').get(0).files;
+        let name = '';
+        if (filesave.length > 0) {
+            name = filesave[0].name;
+        }
+        var formData = new FormData();
+        formData.append("file", filesave[0]);
+            if (name != '') {
+                        $.ajax({ url: '@Url.Action("SaveFileADDINItem", "SoReview")', method: 'post', data: formData, contentType: false, processData: false })
+                        }
+          $.ajax({
+                            url: '@Url.Action("AddFileforItemReview", "SoReview")',
+              type: "POST",
+              data: { SO_NO: '@ViewBag.SoNo', Date: '@ViewBag.Date', File: name, ID: $('#iditemreview').val()},
+                            dataType: "json",
+                            success: function (result) {
+                                if (result.success) {
+                                    bootbox.alert('Update sucess', function () {
+                                        $('#popup').modal('hide');
+                                    });
+                                }
+                                else {
+                                    bootbox.alert(result.message);
+                                }
+                            }
+                        });
+    })
+
+    function deleteEvedenceRowInProcess(e) {
+
+        var id = $(e).parent().parents("tr").attr('id');
+        bootbox.confirm({
+            message: 'Are you sure to delete data?',
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label:'No',
+                   className: 'btn-danger'
+                }
+            },
+            closeButton: false,
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteFileReview", "SoReview")',
+                        type: "POST",
+                        data: { id: id },
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.success) {
+                                bootbox.alert('Delete sucess!', function () {
+                                    window.location.reload();
+                                });
+                            }
+                            else {
+                                bootbox.alert(result.message);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+     function ViewFileEvidence(evi_file) {
+
+            var test_value = $(evi_file).val();
+            var extension = test_value.split('.').pop().toLowerCase();
+
+            if ($.inArray(extension, arrExtension) === -1 & test_value !== '') {
+                bootbox.alert("Invalid file !");
+                evi_file.value = '';
+                return;
+            }
+            if (evi_file.files[0].size > 10485760) {
+                bootbox.alert('File is too big, more than 10mb !!!');
+                evi_file.value = '';
+                return;
+            }
+
+            var formData = new FormData();
+
+            formData.append('ReviewFile', evi_file.files[0]);
+            console.log(formData);
+            $.ajax({
+                url: '@Url.Action("SaveFileReview", "SoReview")',
+                type: "POST",
+                dataType: 'json',
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: formData,
+                success: function (result) {
+                    window.open(result, '_blank');
+                },
+                error: function (err) {
+                    window.open(err.responseText, '_blank');
+                }
+            });
+    }
+
+
+        var mygrid = $("#gridTaskDetail").kendoGrid({
+            selectable: true
+        });
+        //select row data catch status
+        mygrid.on("click", ".ClickGrid", function () {
+            var grid = $("#gridTaskDetail").data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+            var Task = selectedItem.TaskDetail.TaskID;
+
+            @*window.location = '@Url.Action("EditTaskManagementNcr", "TaskManagement")' + "?taskID=" + Task;*@
+            //tuan lua
+              window.open('@Url.Action("EditTaskManagementNcr", "TaskManagement")' + "?taskID=" + Task,'_blank');
+        });
+</script>
+

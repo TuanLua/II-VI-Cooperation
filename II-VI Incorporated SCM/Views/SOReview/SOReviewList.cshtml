@@ -1,0 +1,245 @@
+﻿@using II_VI_Incorporated_SCM.Models
+@using II_VI_Incorporated_SCM.Services
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "SOReviewList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .k-grid td {
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .k-grid table {
+        table-layout: fixed;
+    }
+    .CRNo:hover {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .CRNo {
+        color: blue;
+    }
+</style>
+<h3>SO Review List </h3>
+<div class="portlet box">
+    <div class="portlet-title">
+        <div class="actions">
+            <div class="btn-group">
+                <button type="button" class="btn green dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" readonly>
+                    <i class="fa"></i> Find By
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:;" id="clear"> Clear Filter</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('ANALYST')"> Part </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFind('SO_NO')"> SO No </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="onFindDate('Created Date')">Date Review </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<sp_GetSoReview_Result>()
+                                                      .Name("gridSoReview")
+                                                      .Columns(columns =>
+                                                      {
+                                                          columns.Bound(p => p.ANALYST).Title("ANALYST").HtmlAttributes(new { @class = "history" }).Width(120);
+                                                          columns.Bound(p => p.SO_NO).Title("SO No").HtmlAttributes(new { @class = "CRNo" }).Width(150);
+                                                          columns.Bound(p => p.DOWNLOAD_DATE).Title("Review Date").Format("{0:dd-MMM-yy}").Width(150);
+                                                          columns.Bound(p => p.REVIEW_STATUS).Title("Review Status").Width(120);
+                                                          columns.Bound(p => p.SO_ON_HOLD).Title("SO on hold").Width(100);
+                                                          columns.Bound(p => p.SHIP_TO).Title("Ship To Location").Width(150);
+                                                          columns.Bound(p => p.ITEM).Title("Item").Width(100);
+                                                          columns.Bound(p => p.NEW_REVIEW).Title("New SO VS last week").Width(100);
+                                                          columns.Bound(p => p.FAI).Title("FAI").Width(100);
+                                                          columns.Bound(p => p.LAST_BUILD_DR_REV).Title("Last Build Dr Rev").Width(150);
+                                                          columns.Bound(p => p.LAST_REVIEW_DR_REV).Title("Last week Drw Revision Rev").Width(150);
+                                                          columns.Bound(p => p.DR_REV).Title("Drw Revision").Width(100);
+                                                          columns.Bound(p => p.REQUIRED_DATE).Title("Required Date").Format("{0:dd-MMM-yy}").Width(150);
+                                                          columns.Bound(p => p.ORD_QTY).Title("Order Qty").Width(150);
+                                                          columns.Bound(p => p.BLC_QTY).Title("Balance Qty").Width(150);
+                                                          columns.Bound(p => p.BLC_VALUE).Title("Balance Value").Width(150);
+                                                          columns.Bound(p => p.ONHAND_QTY).Title("On hand Qty").Width(150);
+                                                          columns.Bound(p => p.PLAN_SHIP_DATE).Title("On hand Qty").Width(0);
+                                                      }).ToolBar(tools => tools.Excel())
+                                                      .Sortable()
+                                                      .Scrollable()
+                                                         .Excel(excel => excel
+                                                    .FileName("So Review List.xlsx")
+                                                    .Filterable(true)
+                                                    .ProxyURL(Url.Action("Excel_Export_Save", "Grid")))
+                                                         .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                                                      .HtmlAttributes(new { style = "height:550px;" })
+                                                      .DataSource(dataSource => dataSource
+                                                          .Ajax()
+                                                          .PageSize(10)
+                                                          .Read(read => read.Action("SoReViewListRead", "SOReview"))
+                                                        .Filter(f => f.Add(a => a.REVIEW_STATUS).IsEqualTo("Open"))
+                                                       .Sort(sort => sort.Add("DOWNLOAD_DATE").Descending())
+
+                                                      ))
+        </div>
+    </div>
+</div>
+
+<div id="popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 lbWT searchField "></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control boder-opal" id="search">
+                            <input type="hidden" class="form-control boder-opal" id="searchId">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearch()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popupdate" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title searchField"></h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-horizontal col-md-offset-1">
+                    <div class="form-group">
+                        <table>
+                            <tr>
+                                <td style="display: none"><input type="hidden" class="form-control boder-opal" id="searchId" /></td>
+                                <td>From</td>
+                                <td>&nbsp;</td>
+                                <td><input type="text" class="form-control" id="datefrom"></td>
+                                <td>&nbsp;</td>
+                                <td>To</td>
+                                <td><input type="text" class="form-control" id="dateto"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onSearchDate()" class="btn btn-success">Find</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $('#datefrom').datepicker({
+                format: 'dd-M-yyyy',
+                autoclose: true
+            });
+            $('#dateto').datepicker({
+                format: 'dd-M-yyyy',
+                autoclose: true
+            });
+        });
+    })
+    $(".k-header").kendoTooltip({
+        content: function (e) {
+            var target = e.target; // element for which the tooltip is shown
+            return $(target).text();
+        },
+        position: "top"
+    });
+
+    function onFind(condition) {
+        $('.searchField').text(condition);
+
+        if (condition == 'ANALYST') {
+            $('#search').val();
+            $('#searchId').val(0);
+        }
+        else if (condition == 'SO_NO') {
+            $('#searchId').val(1);
+        }
+        $('#popup').modal('show');
+    }
+    function onSearch() {
+        var searchText = $('#search').val().toLowerCase();
+        var number = $('#searchId').val();
+        if (number == '0') {
+            $("#gridSoReview").data("kendoGrid").dataSource.filter({ field: "ANALYST", operator: "contains", value: searchText });
+            $('#search').val("");
+        }
+        else if (number == '1') {
+            $("#gridSoReview").data("kendoGrid").dataSource.filter({ field: "SO_NO", operator: "contains", value: searchText });
+            $('#search').val("");
+        }
+       
+        $('#popup').modal('hide');
+
+    }
+
+    function onFindDate(condition) {
+        $('.searchField').text(condition);
+        if (condition == 'Created Date') {
+            $('#searchId').val(3);
+            $('#popupdate').modal('show');
+        }
+    }
+
+    function onSearchDate() {
+        var number = $('#searchId').val();
+        if (number == '3') {
+            var datefrom = $('#datefrom').val().toLowerCase();;
+            var dateto = $('#dateto').val().toLowerCase();;
+            $("#gridSoReview").data("kendoGrid").dataSource.filter({ field: "DOWNLOAD_DATE", operator: "gte", value: datefrom },
+                { field: "DOWNLOAD_DATE", operator: "lte", value: dateto });
+            $('#datefrom').val("");
+            $('#dateto').val("");
+        }
+        $('#popupdate').modal('hide');
+    }
+
+    $("#gridSoReview").on("click", ".CRNo", function (e) {
+        var grid = $("#gridSoReview").data("kendoGrid");
+        var model = grid.dataItem($(e.target).closest("tr"));
+        var SONO = model.SO_NO;
+        var Date = model.DOWNLOAD_DATE;
+        var Status = model.REVIEW_STATUS;
+        var planshipdate = model.PLAN_SHIP_DATE;
+        debugger
+        window.open('@Url.Action("SOReviewDetail", "SOReview")' + "?SoNo=" + SONO + "&Date=" + Date + "&status=" + Status + "&planshipdate=" + planshipdate , '_blank');
+    });
+
+    $("#clear").click(function () {
+        $("#gridSoReview").data("kendoGrid").dataSource.filter({ field: "SO_NO", operator: "contains", value: "" });
+        $('#search').val("");
+        $('a.k-grid-filter').removeClass('k-state-active')
+    })
+</script>

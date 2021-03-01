@@ -1891,6 +1891,297 @@
       <Parameter Name="YEAR" Mode="In" Type="Int32" />
       <Parameter Name="MONTH" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="sp_Task_Report">
+      <Parameter Name="Report_Type" Mode="In" Type="Int32" />
+      <Parameter Name="Dept" Mode="In" Type="String" />
+      <Parameter Name="TaskStatus" Mode="In" Type="String" />
+      <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Task_Search" ReturnType="Collection(IQCTestModel.sp_Task_Search_Result)">
+      <Parameter Name="KeyWord" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Task_Statistical_ByDept" ReturnType="Collection(IQCTestModel.sp_Task_Statistical_ByDept_Result)">
+      <Parameter Name="Dept" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Task_Statistical_ByUser" ReturnType="Collection(IQCTestModel.sp_Task_Statistical_ByUser_Result)">
+      <Parameter Name="User" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_TaskList_Report" ReturnType="Collection(IQCTestModel.sp_TaskList_Report_Result)">
+      <Parameter Name="Dept" Mode="In" Type="String" />
+      <Parameter Name="TaskStatus" Mode="In" Type="String" />
+      <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_TaskStatistical_Report" ReturnType="Collection(IQCTestModel.sp_TaskStatistical_Report_Result)">
+      <Parameter Name="Dept" Mode="In" Type="String" />
+      <Parameter Name="TaskStatus" Mode="In" Type="String" />
+      <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Inv_SugList" ReturnType="Collection(IQCTestModel.sp_Inv_SugList_Result)" />
+    <FunctionImport Name="sp_Task_Statistical_ByDetail" ReturnType="Collection(IQCTestModel.sp_Task_Statistical_ByDetail_Result)">
+      <Parameter Name="SearchType" Mode="In" Type="String" />
+      <Parameter Name="SearchValue" Mode="In" Type="String" />
+      <Parameter Name="TaskStatus" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetSoReview" ReturnType="Collection(IQCTestModel.sp_GetSoReview_Result)" />
+    <FunctionImport Name="DynamicPivot">
+      <Parameter Name="Month" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetListOperIQC" />
+    <FunctionImport Name="p_AgingTimeAQL_Parts_Detail_New">
+      <Parameter Name="date" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="p_AgingTimeAQL_Parts_New">
+      <Parameter Name="f" Mode="In" Type="DateTime" />
+      <Parameter Name="t" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="p_Remind_Purchase_Order_Status" />
+    <FunctionImport Name="pGet_MEASUREMENT_STD_BY_PART_bk" ReturnType="Collection(IQCTestModel.pGet_MEASUREMENT_STD_BY_PART_bk_Result)">
+      <Parameter Name="RECEIVER" Mode="In" Type="String" />
+      <Parameter Name="REC_LINE" Mode="In" Type="String" />
+      <Parameter Name="CCN" Mode="In" Type="String" />
+      <Parameter Name="ITEM" Mode="In" Type="String" />
+      <Parameter Name="DRAW_REV" Mode="In" Type="String" />
+      <Parameter Name="REV" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Chart_Labor_RealTime_Rev2">
+      <Parameter Name="Line" Mode="In" Type="String" />
+      <Parameter Name="f" Mode="In" Type="DateTime" />
+      <Parameter Name="to" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GET_ListNC_Rev2">
+      <Parameter Name="CCN" Mode="In" Type="String" />
+      <Parameter Name="ITEM" Mode="In" Type="String" />
+      <Parameter Name="DRAW_REV" Mode="In" Type="String" />
+      <Parameter Name="Chuoi" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GET_NCCode_byItem">
+      <Parameter Name="ITEM" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GET_NCGroup_byItem">
+      <Parameter Name="ITEM" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetOperator_IQC" ReturnType="Collection(IQCTestModel.sp_GetOperator_IQC_Result)">
+      <Parameter Name="line" Mode="In" Type="String" />
+      <Parameter Name="f" Mode="In" Type="DateTime" />
+      <Parameter Name="t" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetProduct_byLine" ReturnType="Collection(String)" />
+    <FunctionImport Name="sp_InsertPART_INFO_TEMP">
+      <Parameter Name="CCN" Mode="In" Type="String" />
+      <Parameter Name="ITEM" Mode="In" Type="String" />
+      <Parameter Name="DESCR" Mode="In" Type="String" />
+      <Parameter Name="DRAW_REV" Mode="In" Type="String" />
+      <Parameter Name="REC_RULE" Mode="In" Type="String" />
+      <Parameter Name="INPUT" Mode="In" Type="DateTime" />
+      <Parameter Name="EMPLOYEE" Mode="In" Type="String" />
+      <Parameter Name="ANALYST" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Inv_Report_SUGGESTION_ANALYSIS" ReturnType="Collection(IQCTestModel.sp_Inv_Report_SUGGESTION_ANALYSIS_Result)">
+      <Parameter Name="dtFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="dtTo" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Inv_Report_Suggestion_ByMonth" ReturnType="Collection(IQCTestModel.sp_Inv_Report_Suggestion_ByMonth_Result)">
+      <Parameter Name="dtFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="dtTo" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Inv_Report_Suggestion_ByPerson" ReturnType="Collection(IQCTestModel.sp_Inv_Report_Suggestion_ByPerson_Result)">
+      <Parameter Name="dtFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="dtTo" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Inv_Report_Suggestion_Status" ReturnType="Collection(IQCTestModel.sp_Inv_Report_Suggestion_Status_Result)">
+      <Parameter Name="dtFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="dtTo" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_LaborScan_RealTime">
+      <Parameter Name="OperID" Mode="In" Type="String" />
+      <Parameter Name="Date" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_LaborScan_Rev2">
+      <Parameter Name="OperID" Mode="In" Type="String" />
+      <Parameter Name="Action" Mode="In" Type="String" />
+      <Parameter Name="WC" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PT_Complete_BuyPart" />
+    <FunctionImport Name="sp_RemindSupplierLog_Re_Evaluation" />
+    <FunctionImport Name="sp_Report_Labor_OPERATION_TIME_Rev2">
+      <Parameter Name="line" Mode="In" Type="String" />
+      <Parameter Name="oper" Mode="In" Type="String" />
+      <Parameter Name="para1" Mode="In" Type="String" />
+      <Parameter Name="from" Mode="In" Type="DateTime" />
+      <Parameter Name="to" Mode="In" Type="DateTime" />
+      <Parameter Name="para2" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Report_Labor_OverTimeCheck_Rev2">
+      <Parameter Name="line" Mode="In" Type="String" />
+      <Parameter Name="oper" Mode="In" Type="String" />
+      <Parameter Name="para1" Mode="In" Type="String" />
+      <Parameter Name="from" Mode="In" Type="DateTime" />
+      <Parameter Name="to" Mode="In" Type="DateTime" />
+      <Parameter Name="para2" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Report_Labor_RealTime_ProcessGroup_Rev2">
+      <Parameter Name="line" Mode="In" Type="String" />
+      <Parameter Name="part" Mode="In" Type="String" />
+      <Parameter Name="para1" Mode="In" Type="String" />
+      <Parameter Name="from" Mode="In" Type="DateTime" />
+      <Parameter Name="to" Mode="In" Type="DateTime" />
+      <Parameter Name="para2" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Report_LABOR_UTILIZATION_Rev2">
+      <Parameter Name="line" Mode="In" Type="String" />
+      <Parameter Name="oper" Mode="In" Type="String" />
+      <Parameter Name="para1" Mode="In" Type="String" />
+      <Parameter Name="from" Mode="In" Type="DateTime" />
+      <Parameter Name="to" Mode="In" Type="DateTime" />
+      <Parameter Name="para2" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Report_Labor_WORKING_HOURS_BY_WO_BY_EMPLOYEES_Rev2">
+      <Parameter Name="Line" Mode="In" Type="String" />
+      <Parameter Name="f" Mode="In" Type="DateTime" />
+      <Parameter Name="to" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Report_LABOR_WorkingTime_Rev2">
+      <Parameter Name="line" Mode="In" Type="String" />
+      <Parameter Name="from" Mode="In" Type="DateTime" />
+      <Parameter Name="to" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Report_MonthIQC_TEM_SumByPart" ReturnType="Collection(IQCTestModel.sp_Report_MonthIQC_TEM_SumByPart_Result)">
+      <Parameter Name="part" Mode="In" Type="String" />
+      <Parameter Name="f" Mode="In" Type="DateTime" />
+      <Parameter Name="t" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ReportWHOpenNCRforMRBmeeting_AddCom">
+      <Parameter Name="ncr" Mode="In" Type="String" />
+      <Parameter Name="com" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_CustClaim_By_Month">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_DefectDetail">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_DeliveryPerformance">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_DetailScar" ReturnType="Collection(IQCTestModel.sp_SQE_6Panel_DetailScar_Result)">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_Freight_By_Month">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_GetListVendor" ReturnType="Collection(IQCTestModel.sp_SQE_6Panel_GetListVendor_Result)" />
+    <FunctionImport Name="sp_SQE_6Panel_OTD_By_Month" ReturnType="Collection(IQCTestModel.sp_SQE_6Panel_OTD_By_Month_Result)">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_Performance">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_PPM_By_Month" ReturnType="Collection(IQCTestModel.sp_SQE_6Panel_PPM_By_Month_Result)">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_QualityPerformance" ReturnType="Collection(IQCTestModel.sp_SQE_6Panel_QualityPerformance_Result)">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_ScoreJudment" ReturnType="Collection(IQCTestModel.sp_SQE_6Panel_ScoreJudment_Result)">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_ScoringRef" ReturnType="Collection(IQCTestModel.sp_SQE_6Panel_ScoringRef_Result)">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_SupplierInfo" ReturnType="Collection(IQCTestModel.sp_SQE_6Panel_SupplierInfo_Result)">
+      <Parameter Name="SupplierCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_TopDefectPart_By_Month" ReturnType="Collection(IQCTestModel.sp_SQE_6Panel_TopDefectPart_By_Month_Result)">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_TopDefectPart_By_YTD" ReturnType="Collection(IQCTestModel.sp_SQE_6Panel_TopDefectPart_By_YTD_Result)">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_6Panel_UpdatePerformance">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_Auto6Panel" ReturnType="Collection(IQCTestModel.sp_SQE_Auto6Panel_Result)" />
+    <FunctionImport Name="sp_SQE_GetListVendor" ReturnType="Collection(IQCTestModel.sp_SQE_GetListVendor_Result)" />
+    <FunctionImport Name="sp_SQE_GetSupplierInfo" ReturnType="Collection(IQCTestModel.sp_SQE_GetSupplierInfo_Result)">
+      <Parameter Name="VendorCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_ListVendorDetail" ReturnType="Collection(IQCTestModel.sp_SQE_ListVendorDetail_Result)" />
+    <FunctionImport Name="sp_SQE_Part_OTD">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_Part_PPM">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Date_From" Mode="In" Type="DateTime" />
+      <Parameter Name="Date_To" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_PCN_PartList" />
+    <FunctionImport Name="sp_SQE_RA_ProductClass" ReturnType="Collection(IQCTestModel.sp_SQE_RA_ProductClass_Result)" />
+    <FunctionImport Name="sp_SQE_RemindSupplierLog_DueDate" />
+    <FunctionImport Name="sp_SQE_RemindSupplierLog_Re_Evaluation" />
+    <FunctionImport Name="sp_SQE_RemindSupplierLog_Re_Examined" />
+    <FunctionImport Name="sp_SQE_Risk_Assessment">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_SupplierDevelop_Scar" ReturnType="Collection(String)">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="Int32" />
+      <Parameter Name="Month" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_SupplierDevelopment_CheckPlan" ReturnType="Collection(Int32)">
+      <Parameter Name="SupplierCode" Mode="In" Type="String" />
+      <Parameter Name="FiscalYear" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_SupplierDevelopment_FiscalYear" ReturnType="Collection(IQCTestModel.sp_SQE_SupplierDevelopment_FiscalYear_Result)" />
+    <FunctionImport Name="sp_SQE_SupplierDevelopment_NewPlan" ReturnType="Collection(IQCTestModel.sp_SQE_SupplierDevelopment_NewPlan_Result)">
+      <Parameter Name="SupplierCode" Mode="In" Type="String" />
+      <Parameter Name="FiscalYear" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_SupplierDevelopment_RiskAssessment">
+      <Parameter Name="Vendor" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="Int32" />
+      <Parameter Name="Month" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_SupplierDevelopment_SearchPlan" ReturnType="Collection(IQCTestModel.sp_SQE_SupplierDevelopment_SearchPlan_Result)">
+      <Parameter Name="SupplierCode" Mode="In" Type="String" />
+      <Parameter Name="FiscalYear" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SQE_SupplierDevelopment_VisitAuditSum" ReturnType="Collection(IQCTestModel.sp_SQE_SupplierDevelopment_VisitAuditSum_Result)" />
+    <FunctionImport Name="sp_SQE_Yearlist" ReturnType="Collection(IQCTestModel.sp_SQE_Yearlist_Result)" />
+    <FunctionImport Name="sp_SQEDB_SupplierLog_Remind_ReEvaluation" />
     <EntitySet Name="C__MigrationHistory" EntityType="IQCTestModel.C__MigrationHistory" />
     <EntitySet Name="ADD_INS" EntityType="IQCTestModel.ADD_INS" />
     <EntitySet Name="ApplicationGroupRoles" EntityType="IQCTestModel.ApplicationGroupRole" />
@@ -1949,11 +2240,13 @@
     <EntitySet Name="NC_BY_PRODUCT_GRP" EntityType="IQCTestModel.NC_BY_PRODUCT_GRP" />
     <EntitySet Name="NC_CAT_NoUse" EntityType="IQCTestModel.NC_CAT_NoUse" />
     <EntitySet Name="NC_GROUP" EntityType="IQCTestModel.NC_GROUP" />
+    <EntitySet Name="NC_PART" EntityType="IQCTestModel.NC_PART" />
     <EntitySet Name="NCR_DET" EntityType="IQCTestModel.NCR_DET" />
     <EntitySet Name="NCR_DET_History" EntityType="IQCTestModel.NCR_DET_History" />
     <EntitySet Name="NCR_DIS" EntityType="IQCTestModel.NCR_DIS" />
     <EntitySet Name="NCR_DIS_History" EntityType="IQCTestModel.NCR_DIS_History" />
     <EntitySet Name="NCR_EVI" EntityType="IQCTestModel.NCR_EVI" />
+    <EntitySet Name="NCR_HDR" EntityType="IQCTestModel.NCR_HDR" />
     <EntitySet Name="NCR_HDR_History" EntityType="IQCTestModel.NCR_HDR_History" />
     <EntitySet Name="NCR_History" EntityType="IQCTestModel.NCR_History" />
     <EntitySet Name="NCRDispositionDays" EntityType="IQCTestModel.NCRDispositionDay" />
@@ -1989,13 +2282,13 @@
     <EntitySet Name="SCAR_RESULT_D6" EntityType="IQCTestModel.SCAR_RESULT_D6" />
     <EntitySet Name="SCAR_RESULT_D7" EntityType="IQCTestModel.SCAR_RESULT_D7" />
     <EntitySet Name="SCAREMAILs" EntityType="IQCTestModel.SCAREMAIL" />
+    <EntitySet Name="SCARINFOes" EntityType="IQCTestModel.SCARINFO" />
     <EntitySet Name="SCARnNCRs" EntityType="IQCTestModel.SCARnNCR" />
     <EntitySet Name="SCRAP_REASON" EntityType="IQCTestModel.SCRAP_REASON" />
     <EntitySet Name="SCRAPCategories" EntityType="IQCTestModel.SCRAPCategory" />
     <EntitySet Name="STATUS" EntityType="IQCTestModel.STATUS" />
     <EntitySet Name="SUPPLIER_PPM" EntityType="IQCTestModel.SUPPLIER_PPM" />
     <EntitySet Name="SUPPLIER_PPM_RP" EntityType="IQCTestModel.SUPPLIER_PPM_RP" />
-    <EntitySet Name="sysdiagrams" EntityType="IQCTestModel.sysdiagram" />
     <EntitySet Name="TASK_APPROVE" EntityType="IQCTestModel.TASK_APPROVE" />
     <EntitySet Name="TASK_CATEGORY" EntityType="IQCTestModel.TASK_CATEGORY" />
     <EntitySet Name="TASK_PHASE" EntityType="IQCTestModel.TASK_PHASE" />
@@ -2004,6 +2297,7 @@
     <EntitySet Name="TASKDOCUMENTs" EntityType="IQCTestModel.TASKDOCUMENT" />
     <EntitySet Name="TaskHis" EntityType="IQCTestModel.TaskHi" />
     <EntitySet Name="TASKLISTs" EntityType="IQCTestModel.TASKLIST" />
+    <EntitySet Name="tbDashboard_Guide_Show" EntityType="IQCTestModel.tbDashboard_Guide_Show" />
     <EntitySet Name="tbEvents" EntityType="IQCTestModel.tbEvent" />
     <EntitySet Name="TbFixtures" EntityType="IQCTestModel.TbFixture" />
     <EntitySet Name="tbl_Inv_Apr_Process" EntityType="IQCTestModel.tbl_Inv_Apr_Process" />
@@ -2015,6 +2309,7 @@
     <EntitySet Name="tbl_Inv_ImpMethod" EntityType="IQCTestModel.tbl_Inv_ImpMethod" />
     <EntitySet Name="tbl_Inv_Role" EntityType="IQCTestModel.tbl_Inv_Role" />
     <EntitySet Name="tbl_Inv_Score_Percent" EntityType="IQCTestModel.tbl_Inv_Score_Percent" />
+    <EntitySet Name="tbl_Inv_Step1_SubmitSuggestion" EntityType="IQCTestModel.tbl_Inv_Step1_SubmitSuggestion" />
     <EntitySet Name="tbl_Inv_Step2_CIAproval" EntityType="IQCTestModel.tbl_Inv_Step2_CIAproval" />
     <EntitySet Name="tbl_Inv_Step3_SponsorApr" EntityType="IQCTestModel.tbl_Inv_Step3_SponsorApr" />
     <EntitySet Name="tbl_Inv_Step4_DirApr" EntityType="IQCTestModel.tbl_Inv_Step4_DirApr" />
@@ -2023,6 +2318,60 @@
     <EntitySet Name="tbl_PT_Infor" EntityType="IQCTestModel.tbl_PT_Infor" />
     <EntitySet Name="tbl_PT_Status" EntityType="IQCTestModel.tbl_PT_Status" />
     <EntitySet Name="tbl_PT_Work_Center" EntityType="IQCTestModel.tbl_PT_Work_Center" />
+    <EntitySet Name="tbl_RP_DataSource_Para" EntityType="IQCTestModel.tbl_RP_DataSource_Para" />
+    <EntitySet Name="tbl_RP_Report" EntityType="IQCTestModel.tbl_RP_Report" />
+    <EntitySet Name="tbl_RP_Report_Para" EntityType="IQCTestModel.tbl_RP_Report_Para" />
+    <EntitySet Name="tbl_RP_Setting_BarChart" EntityType="IQCTestModel.tbl_RP_Setting_BarChart" />
+    <EntitySet Name="tbl_RP_Setting_DataGrid" EntityType="IQCTestModel.tbl_RP_Setting_DataGrid" />
+    <EntitySet Name="tbl_RP_Setting_LineChart" EntityType="IQCTestModel.tbl_RP_Setting_LineChart" />
+    <EntitySet Name="tbl_RP_Store_Parameter" EntityType="IQCTestModel.tbl_RP_Store_Parameter" />
+    <EntitySet Name="tbl_RP_StoreProcedure" EntityType="IQCTestModel.tbl_RP_StoreProcedure" />
+    <EntitySet Name="tbl_SOR_Attached_ForItemReview" EntityType="IQCTestModel.tbl_SOR_Attached_ForItemReview" />
+    <EntitySet Name="tbl_SOR_Cur_Review_Detail" EntityType="IQCTestModel.tbl_SOR_Cur_Review_Detail" />
+    <EntitySet Name="tbl_SOR_Cur_Review_List" EntityType="IQCTestModel.tbl_SOR_Cur_Review_List" />
+    <EntitySet Name="tbl_SOR_Family_Setup_Qty" EntityType="IQCTestModel.tbl_SOR_Family_Setup_Qty" />
+    <EntitySet Name="tbl_SOR_His_Review_Detail" EntityType="IQCTestModel.tbl_SOR_His_Review_Detail" />
+    <EntitySet Name="tbl_SOR_His_Review_List" EntityType="IQCTestModel.tbl_SOR_His_Review_List" />
+    <EntitySet Name="tbl_SOR_Item_Review" EntityType="IQCTestModel.tbl_SOR_Item_Review" />
+    <EntitySet Name="tbl_SOR_Review_Pic" EntityType="IQCTestModel.tbl_SOR_Review_Pic" />
+    <EntitySet Name="tbl_SQE_Ass_Period" EntityType="IQCTestModel.tbl_SQE_Ass_Period" />
+    <EntitySet Name="tbl_SQE_Ass_Resp" EntityType="IQCTestModel.tbl_SQE_Ass_Resp" />
+    <EntitySet Name="tbl_SQE_Ass_Resp_Status" EntityType="IQCTestModel.tbl_SQE_Ass_Resp_Status" />
+    <EntitySet Name="tbl_SQE_Ass_Vendor" EntityType="IQCTestModel.tbl_SQE_Ass_Vendor" />
+    <EntitySet Name="tbl_SQE_Category" EntityType="IQCTestModel.tbl_SQE_Category" />
+    <EntitySet Name="tbl_SQE_Category_Target" EntityType="IQCTestModel.tbl_SQE_Category_Target" />
+    <EntitySet Name="tbl_SQE_Customer_Claim" EntityType="IQCTestModel.tbl_SQE_Customer_Claim" />
+    <EntitySet Name="tbl_SQE_Develop_AuditVisit_Attachment" EntityType="IQCTestModel.tbl_SQE_Develop_AuditVisit_Attachment" />
+    <EntitySet Name="tbl_SQE_Develop_Category" EntityType="IQCTestModel.tbl_SQE_Develop_Category" />
+    <EntitySet Name="tbl_SQE_Develop_Goal" EntityType="IQCTestModel.tbl_SQE_Develop_Goal" />
+    <EntitySet Name="tbl_SQE_Develop_ImprovePlan" EntityType="IQCTestModel.tbl_SQE_Develop_ImprovePlan" />
+    <EntitySet Name="tbl_SQE_Develop_ProblemDesc" EntityType="IQCTestModel.tbl_SQE_Develop_ProblemDesc" />
+    <EntitySet Name="tbl_SQE_Develop_SourceFrom" EntityType="IQCTestModel.tbl_SQE_Develop_SourceFrom" />
+    <EntitySet Name="tbl_SQE_Develop_Status" EntityType="IQCTestModel.tbl_SQE_Develop_Status" />
+    <EntitySet Name="tbl_SQE_Develop_VisitAudit" EntityType="IQCTestModel.tbl_SQE_Develop_VisitAudit" />
+    <EntitySet Name="tbl_SQE_PCN" EntityType="IQCTestModel.tbl_SQE_PCN" />
+    <EntitySet Name="tbl_SQE_PCN_Attached" EntityType="IQCTestModel.tbl_SQE_PCN_Attached" />
+    <EntitySet Name="tbl_SQE_PCN_Class" EntityType="IQCTestModel.tbl_SQE_PCN_Class" />
+    <EntitySet Name="tbl_SQE_PCN_Contact" EntityType="IQCTestModel.tbl_SQE_PCN_Contact" />
+    <EntitySet Name="tbl_SQE_Premium_Freight" EntityType="IQCTestModel.tbl_SQE_Premium_Freight" />
+    <EntitySet Name="tbl_SQE_Report_Result" EntityType="IQCTestModel.tbl_SQE_Report_Result" />
+    <EntitySet Name="tbl_SQE_Report_Type" EntityType="IQCTestModel.tbl_SQE_Report_Type" />
+    <EntitySet Name="tbl_SQE_Report_Weight" EntityType="IQCTestModel.tbl_SQE_Report_Weight" />
+    <EntitySet Name="tbl_SQE_Res_Item" EntityType="IQCTestModel.tbl_SQE_Res_Item" />
+    <EntitySet Name="tbl_SQE_Score_Ref" EntityType="IQCTestModel.tbl_SQE_Score_Ref" />
+    <EntitySet Name="tbl_SQE_Score_Reponsiveness" EntityType="IQCTestModel.tbl_SQE_Score_Reponsiveness" />
+    <EntitySet Name="tbl_SQE_SupplierLog" EntityType="IQCTestModel.tbl_SQE_SupplierLog" />
+    <EntitySet Name="tbl_SQE_SupplierLog_Attached" EntityType="IQCTestModel.tbl_SQE_SupplierLog_Attached" />
+    <EntitySet Name="tbl_SQE_SupplierLog_BusinessType" EntityType="IQCTestModel.tbl_SQE_SupplierLog_BusinessType" />
+    <EntitySet Name="tbl_SQE_SupplierLog_CoC" EntityType="IQCTestModel.tbl_SQE_SupplierLog_CoC" />
+    <EntitySet Name="tbl_SQE_SupplierLog_CoCItem" EntityType="IQCTestModel.tbl_SQE_SupplierLog_CoCItem" />
+    <EntitySet Name="tbl_SQE_SupplierLog_Commodity" EntityType="IQCTestModel.tbl_SQE_SupplierLog_Commodity" />
+    <EntitySet Name="tbl_SQE_SupplierLog_Contact" EntityType="IQCTestModel.tbl_SQE_SupplierLog_Contact" />
+    <EntitySet Name="tbl_SQE_SupplierLog_ISO" EntityType="IQCTestModel.tbl_SQE_SupplierLog_ISO" />
+    <EntitySet Name="tbl_SQE_SupplierLog_MaterialSupplied" EntityType="IQCTestModel.tbl_SQE_SupplierLog_MaterialSupplied" />
+    <EntitySet Name="tbl_SQE_SupplierLog_QMSItem" EntityType="IQCTestModel.tbl_SQE_SupplierLog_QMSItem" />
+    <EntitySet Name="tbl_SQE_SupplierLog_Status" EntityType="IQCTestModel.tbl_SQE_SupplierLog_Status" />
+    <EntitySet Name="tbl_SQE_Vendor_Score_Ref" EntityType="IQCTestModel.tbl_SQE_Vendor_Score_Ref" />
     <EntitySet Name="tbl_TP_Family" EntityType="IQCTestModel.tbl_TP_Family" />
     <EntitySet Name="tbl_TP_Section" EntityType="IQCTestModel.tbl_TP_Section" />
     <EntitySet Name="tbLaborScans" EntityType="IQCTestModel.tbLaborScan" />
@@ -2046,6 +2395,7 @@
     <EntitySet Name="INSPECTORs" EntityType="IQCTestModel.INSPECTOR" />
     <EntitySet Name="MEASUREMENT_STD_BY_PART_CHANGED_SPL" EntityType="IQCTestModel.MEASUREMENT_STD_BY_PART_CHANGED_SPL" />
     <EntitySet Name="NCR_HDR_PUR" EntityType="IQCTestModel.NCR_HDR_PUR" />
+    <EntitySet Name="NCR_WH_OPEN_COMMENT" EntityType="IQCTestModel.NCR_WH_OPEN_COMMENT" />
     <EntitySet Name="PART_INS_REQ_VISUAL" EntityType="IQCTestModel.PART_INS_REQ_VISUAL" />
     <EntitySet Name="PART_REJECT" EntityType="IQCTestModel.PART_REJECT" />
     <EntitySet Name="PARTIAL_INS_RESULT" EntityType="IQCTestModel.PARTIAL_INS_RESULT" />
@@ -2061,20 +2411,17 @@
     <EntitySet Name="tbl_Inv_ScoreCost_4_Mem" EntityType="IQCTestModel.tbl_Inv_ScoreCost_4_Mem" />
     <EntitySet Name="tbl_PT_Dept_PIC" EntityType="IQCTestModel.tbl_PT_Dept_PIC" />
     <EntitySet Name="tbl_PT_Dept_PIC_BuyPart" EntityType="IQCTestModel.tbl_PT_Dept_PIC_BuyPart" />
+    <EntitySet Name="tbl_PT_TaskList" EntityType="IQCTestModel.tbl_PT_TaskList" />
+    <EntitySet Name="tbl_RP_Advance_Setting" EntityType="IQCTestModel.tbl_RP_Advance_Setting" />
+    <EntitySet Name="tbl_RP_Data_Source" EntityType="IQCTestModel.tbl_RP_Data_Source" />
+    <EntitySet Name="tbl_SQE_6Panel_TopNCPart" EntityType="IQCTestModel.tbl_SQE_6Panel_TopNCPart" />
+    <EntitySet Name="tbl_SQE_PCN_Status" EntityType="IQCTestModel.tbl_SQE_PCN_Status" />
+    <EntitySet Name="tbl_SQE_Supplier_Finish6Panel" EntityType="IQCTestModel.tbl_SQE_Supplier_Finish6Panel" />
+    <EntitySet Name="tbl_SQE_SupplierLog_QMS" EntityType="IQCTestModel.tbl_SQE_SupplierLog_QMS" />
     <EntitySet Name="TemporaryUpsizedTable2" EntityType="IQCTestModel.TemporaryUpsizedTable2" />
     <EntitySet Name="USER_PERMIT" EntityType="IQCTestModel.USER_PERMIT" />
     <EntitySet Name="VENDOR_Temp" EntityType="IQCTestModel.VENDOR_Temp" />
     <EntitySet Name="Work_Centers" EntityType="IQCTestModel.Work_Center" />
-    <EntitySet Name="DMS_WOLot" EntityType="IQCTestModel.DMS_WOLot" />
-    <EntitySet Name="PPM_RejectQty" EntityType="IQCTestModel.PPM_RejectQty" />
-    <EntitySet Name="v_AQL" EntityType="IQCTestModel.v_AQL" />
-    <EntitySet Name="v_INS_RESULT" EntityType="IQCTestModel.v_INS_RESULT" />
-    <EntitySet Name="V_Material_HadMake_FLupSerialNumber" EntityType="IQCTestModel.V_Material_HadMake_FLupSerialNumber" />
-    <EntitySet Name="v_Operator" EntityType="IQCTestModel.v_Operator" />
-    <EntitySet Name="V_WO_Issue" EntityType="IQCTestModel.V_WO_Issue" />
-    <EntitySet Name="vNCR_DET" EntityType="IQCTestModel.vNCR_DET" />
-    <EntitySet Name="vNCR_DET_2" EntityType="IQCTestModel.vNCR_DET_2" />
-    <EntitySet Name="vNCR_HDR" EntityType="IQCTestModel.vNCR_HDR" />
     <AssociationSet Name="FK_dbo_ApplicationGroupRoles_dbo_ApplicationGroups_ApplicationGroupId" Association="IQCTestModel.FK_dbo_ApplicationGroupRoles_dbo_ApplicationGroups_ApplicationGroupId">
       <End Role="ApplicationGroup" EntitySet="ApplicationGroups" />
       <End Role="ApplicationGroupRole" EntitySet="ApplicationGroupRoles" />
@@ -2091,55 +2438,21 @@
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
     </AssociationSet>
-    <AssociationSet Name="FK__DETAILQUE__IDQUE__6521F869" Association="IQCTestModel.FK__DETAILQUE__IDQUE__6521F869">
+    <AssociationSet Name="FK__DETAILQUE__IDQUE__68BD7F23" Association="IQCTestModel.FK__DETAILQUE__IDQUE__68BD7F23">
       <End Role="MAINQUESTION" EntitySet="MAINQUESTIONs" />
       <End Role="DETAILQUESTION" EntitySet="DETAILQUESTIONs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETAILQUE__IDQUE__7E8CC4B1" Association="IQCTestModel.FK__DETAILQUE__IDQUE__7E8CC4B1">
+      <End Role="MAINQUESTION" EntitySet="MAINQUESTIONs" />
+      <End Role="DETAILQUESTION" EntitySet="DETAILQUESTIONs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SCAREMAIL__SCAR___5E74FADA" Association="IQCTestModel.FK__SCAREMAIL__SCAR___5E74FADA">
+      <End Role="SCARINFO" EntitySet="SCARINFOes" />
+      <End Role="SCAREMAIL" EntitySet="SCAREMAILs" />
     </AssociationSet>
     <AssociationSet Name="AspNetUserRoles" Association="IQCTestModel.AspNetUserRoles">
       <End Role="AspNetRole" EntitySet="AspNetRoles" />
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
-    </AssociationSet>
-    <FunctionImport Name="sp_Task_Report">
-      <Parameter Name="Report_Type" Mode="In" Type="Int32" />
-      <Parameter Name="Dept" Mode="In" Type="String" />
-      <Parameter Name="TaskStatus" Mode="In" Type="String" />
-      <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
-      <Parameter Name="DateTo" Mode="In" Type="DateTime" />
-    </FunctionImport>
-    <FunctionImport Name="sp_Task_Search" ReturnType="Collection(IQCTestModel.sp_Task_Search_Result)">
-      <Parameter Name="KeyWord" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_Task_Statistical_ByDept" ReturnType="Collection(IQCTestModel.sp_Task_Statistical_ByDept_Result)">
-      <Parameter Name="Dept" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_Task_Statistical_ByUser" ReturnType="Collection(IQCTestModel.sp_Task_Statistical_ByUser_Result)">
-      <Parameter Name="User" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_TaskList_Report" ReturnType="Collection(IQCTestModel.sp_TaskList_Report_Result)">
-      <Parameter Name="Dept" Mode="In" Type="String" />
-      <Parameter Name="TaskStatus" Mode="In" Type="String" />
-      <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
-      <Parameter Name="DateTo" Mode="In" Type="DateTime" />
-    </FunctionImport>
-    <FunctionImport Name="sp_TaskStatistical_Report" ReturnType="Collection(IQCTestModel.sp_TaskStatistical_Report_Result)">
-      <Parameter Name="Dept" Mode="In" Type="String" />
-      <Parameter Name="TaskStatus" Mode="In" Type="String" />
-      <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
-      <Parameter Name="DateTo" Mode="In" Type="DateTime" />
-    </FunctionImport>
-    <EntitySet Name="tbl_Inv_Step1_SubmitSuggestion" EntityType="IQCTestModel.tbl_Inv_Step1_SubmitSuggestion" />
-    <FunctionImport Name="sp_Inv_SugList" ReturnType="Collection(IQCTestModel.sp_Inv_SugList_Result)" />
-    <EntitySet Name="NCR_HDR" EntityType="IQCTestModel.NCR_HDR" />
-    <FunctionImport Name="sp_Task_Statistical_ByDetail" ReturnType="Collection(IQCTestModel.sp_Task_Statistical_ByDetail_Result)">
-      <Parameter Name="SearchType" Mode="In" Type="String" />
-      <Parameter Name="SearchValue" Mode="In" Type="String" />
-      <Parameter Name="TaskStatus" Mode="In" Type="String" />
-    </FunctionImport>
-    <EntitySet Name="V_AspNetUsers" EntityType="IQCTestModel.V_AspNetUsers" />
-    <EntitySet Name="SCARINFOes" EntityType="IQCTestModel.SCARINFO" />
-    <AssociationSet Name="FK__SCAREMAIL__SCAR___5E74FADA" Association="IQCTestModel.FK__SCAREMAIL__SCAR___5E74FADA">
-      <End Role="SCARINFO" EntitySet="SCARINFOes" />
-      <End Role="SCAREMAIL" EntitySet="SCAREMAILs" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="pGet_MEASUREMENT_STD_BY_PART_Result">
@@ -3928,6 +4241,297 @@
     <Property Type="Double" Name="REJ_QTY" Nullable="true" />
     <Property Type="DateTime" Name="DATEAPPROVAL" Nullable="true" />
   </ComplexType>
+  <ComplexType Name="sp_Task_Search_Result">
+    <Property Type="String" Name="Topic" Nullable="true" />
+    <Property Type="String" Name="TYPE" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IDTask" Nullable="false" />
+    <Property Type="Int32" Name="TopicID" Nullable="true" />
+    <Property Type="String" Name="TASKNAME" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DESCRIPTION" Nullable="true" />
+    <Property Type="String" Name="OWNER" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="ASSIGNEE" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="APPROVE" Nullable="true" />
+    <Property Type="DateTime" Name="EstimateStartDate" Nullable="true" />
+    <Property Type="DateTime" Name="EstimateEndDate" Nullable="true" />
+    <Property Type="DateTime" Name="ActualStartDate" Nullable="true" />
+    <Property Type="DateTime" Name="ActualEndDate" Nullable="true" />
+    <Property Type="Int32" Name="PROCESS" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
+    <Property Type="String" Name="STATUS" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="PRIORITY" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Level" Nullable="true" />
+    <Property Type="String" Name="Department" Nullable="true" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="sp_Task_Statistical_ByDept_Result">
+    <Property Type="String" Name="Department" Nullable="true" />
+    <Property Type="Int32" Name="Closed" Nullable="true" />
+    <Property Type="Int32" Name="Late" Nullable="true" />
+    <Property Type="Int32" Name="ActionNear" Nullable="true" />
+    <Property Type="Int32" Name="ActionIndue" Nullable="true" />
+    <Property Type="Int32" Name="MaxAging" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_Task_Statistical_ByUser_Result">
+    <Property Type="String" Name="ASSIGNEE" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="Closed" Nullable="true" />
+    <Property Type="Int32" Name="Late" Nullable="true" />
+    <Property Type="Int32" Name="ActionNear" Nullable="true" />
+    <Property Type="Int32" Name="ActionIndue" Nullable="true" />
+    <Property Type="Int32" Name="MaxAging" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_TaskList_Report_Result">
+    <Property Type="String" Name="Department" Nullable="true" />
+    <Property Type="String" Name="TASKNAME" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="IDTask" Nullable="false" />
+    <Property Type="String" Name="Topic" Nullable="true" />
+    <Property Type="String" Name="TYPE" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="EstimateEndDate" Nullable="true" />
+    <Property Type="String" Name="STATUS" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Aging" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_TaskStatistical_Report_Result">
+    <Property Type="String" Name="Department" Nullable="true" />
+    <Property Type="Int32" Name="Closed" Nullable="true" />
+    <Property Type="Int32" Name="Late" Nullable="true" />
+    <Property Type="Int32" Name="Open" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_Inv_SugList_Result">
+    <Property Type="String" Name="Sug_ID" Nullable="false" MaxLength="14" />
+    <Property Type="String" Name="Sug_Type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Sug_title" Nullable="true" />
+    <Property Type="String" Name="Cur_prob" Nullable="true" />
+    <Property Type="String" Name="Idea_impr" Nullable="true" />
+    <Property Type="String" Name="Cur_Step" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="Exp_Start_Date" Nullable="true" />
+    <Property Type="DateTime" Name="Exp_End_date" Nullable="true" />
+    <Property Type="DateTime" Name="Submit_date" Nullable="true" />
+    <Property Type="String" Name="Submitter" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Requestor" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Rqtor_name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Req_Dept" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Req_Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Att_File_Current" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Att_File_Idea" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Step_Status" Nullable="true" MaxLength="74" />
+    <Property Type="String" Name="Next_Approver" Nullable="true" />
+    <Property Type="String" Name="Coacher" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Sponsor" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="CIManager" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Director" Nullable="true" />
+    <Property Type="String" Name="Pro_Leader" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Member" Nullable="true" />
+    <Property Type="String" Name="Action_Date" Nullable="true" MaxLength="4000" />
+  </ComplexType>
+  <ComplexType Name="sp_Task_Statistical_ByDetail_Result">
+    <Property Type="String" Name="Task_Status" Nullable="false" MaxLength="11" />
+    <Property Type="String" Name="Topic" Nullable="true" />
+    <Property Type="String" Name="TYPE" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IDTask" Nullable="false" />
+    <Property Type="String" Name="TASKNAME" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DESCRIPTION" Nullable="true" />
+    <Property Type="String" Name="OWNER" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="ASSIGNEE" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="ASSIGNAME" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="APPROVE" Nullable="true" />
+    <Property Type="DateTime" Name="EstimateStartDate" Nullable="true" />
+    <Property Type="DateTime" Name="EstimateEndDate" Nullable="true" />
+    <Property Type="DateTime" Name="ActualStartDate" Nullable="true" />
+    <Property Type="DateTime" Name="ActualEndDate" Nullable="true" />
+    <Property Type="Int32" Name="PROCESS" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
+    <Property Type="String" Name="STATUS" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="PRIORITY" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Department" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetSoReview_Result">
+    <Property Type="DateTime" Name="DOWNLOAD_DATE" Nullable="false" />
+    <Property Type="String" Name="SO_NO" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ANALYST" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SO_ON_HOLD" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SHIP_TO" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ITEM" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FAI" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="NEW_REVIEW" Nullable="true" />
+    <Property Type="String" Name="LAST_BUILD_DR_REV" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LAST_REVIEW_DR_REV" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="DR_REV" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="REQUIRED_DATE" Nullable="true" />
+    <Property Type="DateTime" Name="SCHEDULE_DATE" Nullable="true" />
+    <Property Type="DateTime" Name="PROMISE_DATE" Nullable="true" />
+    <Property Type="Double" Name="ORD_QTY" Nullable="true" />
+    <Property Type="Double" Name="BLC_QTY" Nullable="true" />
+    <Property Type="Double" Name="BLC_VALUE" Nullable="true" />
+    <Property Type="Double" Name="ONHAND_QTY" Nullable="true" />
+    <Property Type="String" Name="REVIEW_STATUS" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="pGet_MEASUREMENT_STD_BY_PART_bk_Result">
+    <Property Type="String" Name="MEASURE_PARA" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="EVA_METHOD" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="TOOL_FIXTURE" Nullable="true" MaxLength="250" />
+    <Property Type="Double" Name="LVALUE" Nullable="true" />
+    <Property Type="Double" Name="UVALUE" Nullable="true" />
+    <Property Type="String" Name="unit" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="critial" Nullable="true" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="sp_GetOperator_IQC_Result">
+    <Property Type="String" Name="OperatorID" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="OperatorName" Nullable="true" MaxLength="1000" />
+  </ComplexType>
+  <ComplexType Name="sp_Inv_Report_SUGGESTION_ANALYSIS_Result">
+    <Property Type="Int32" Name="Qty" Nullable="true" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="sp_Inv_Report_Suggestion_ByMonth_Result">
+    <Property Type="String" Name="Sug_ID" Nullable="false" MaxLength="14" />
+    <Property Type="String" Name="Req_Dept" Nullable="true" MaxLength="30" />
+    <Property Type="DateTime" Name="Submit_date" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_Inv_Report_Suggestion_ByPerson_Result">
+    <Property Type="String" Name="Rqtor_name" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Total" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_Inv_Report_Suggestion_Status_Result">
+    <Property Type="String" Name="Sug_id" Nullable="false" MaxLength="14" />
+    <Property Type="String" Name="Column1" Nullable="false" MaxLength="12" />
+  </ComplexType>
+  <ComplexType Name="sp_Report_MonthIQC_TEM_SumByPart_Result">
+    <Property Type="String" Name="VEN_NAME" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="ITEM" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="LOT" Nullable="true" MaxLength="25" />
+    <Property Type="Double" Name="REC_Qty" Nullable="true" />
+    <Property Type="Double" Name="REJ_QTY" Nullable="true" />
+    <Property Type="Decimal" Name="Rate" Nullable="true" Precision="13" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_6Panel_DetailScar_Result">
+    <Property Type="String" Name="Ref_" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Corrective_Action_Description" Nullable="true" />
+    <Property Type="String" Name="Target_Date" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="Actual_Date" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="STATUS" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_6Panel_GetListVendor_Result">
+    <Property Type="String" Name="Value" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Text" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_6Panel_OTD_By_Month_Result">
+    <Property Type="DateTime" Name="Month" Nullable="true" />
+    <Property Type="Double" Name="D_OTD" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_6Panel_PPM_By_Month_Result">
+    <Property Type="DateTime" Name="Month" Nullable="true" />
+    <Property Type="Double" Name="Q_PPM" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_6Panel_QualityPerformance_Result">
+    <Property Type="String" Name="Month" Nullable="true" MaxLength="4000" />
+    <Property Type="Double" Name="Rec_Qty" Nullable="true" />
+    <Property Type="Double" Name="Defect_Qty" Nullable="true" />
+    <Property Type="Double" Name="Target" Nullable="true" />
+    <Property Type="Double" Name="PPM" Nullable="true" />
+    <Property Type="Double" Name="PPM_YTD" Nullable="true" />
+    <Property Type="DateTime" Name="M_idx" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_6Panel_ScoreJudment_Result">
+    <Property Type="Double" Name="Q_Score" Nullable="true" />
+    <Property Type="Double" Name="D_Score" Nullable="true" />
+    <Property Type="Double" Name="Cust_Score" Nullable="true" />
+    <Property Type="Int32" Name="Freight_Score" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_6Panel_ScoringRef_Result">
+    <Property Type="String" Name="Performance" Nullable="false" MaxLength="13" />
+    <Property Type="Int32" Name="Weight" Nullable="false" />
+    <Property Type="String" Name="C5_Score_Very___Satisfied" Nullable="false" MaxLength="6" />
+    <Property Type="String" Name="C4_Score___Satisfied" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="C3_Score___Fairly_Satisfied" Nullable="false" MaxLength="11" />
+    <Property Type="String" Name="C2_Score___Dissatisfied" Nullable="false" MaxLength="11" />
+    <Property Type="String" Name="C1_Score___Very_Dissatisfied" Nullable="false" MaxLength="5" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_6Panel_SupplierInfo_Result">
+    <Property Type="String" Name="Item" Nullable="false" MaxLength="17" />
+    <Property Type="String" Name="value" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_6Panel_TopDefectPart_By_Month_Result">
+    <Property Type="String" Name="Part" Nullable="false" MaxLength="50" />
+    <Property Type="Double" Name="QTY" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_6Panel_TopDefectPart_By_YTD_Result">
+    <Property Type="String" Name="Part" Nullable="false" MaxLength="50" />
+    <Property Type="Double" Name="QTY" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_Auto6Panel_Result">
+    <Property Type="DateTime" Name="Month" Nullable="true" />
+    <Property Type="Double" Name="Q_PPM" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_GetListVendor_Result">
+    <Property Type="String" Name="Value" Nullable="false" MaxLength="16" />
+    <Property Type="String" Name="Text" Nullable="true" MaxLength="231" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_GetSupplierInfo_Result">
+    <Property Type="String" Name="SupplierCode" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="SupplierName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SupplierType" Nullable="false" MaxLength="12" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_ListVendorDetail_Result">
+    <Property Type="String" Name="CCN" Nullable="false" MaxLength="2" />
+    <Property Type="String" Name="VENDOR" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="PUR_LOC" Nullable="false" MaxLength="6" />
+    <Property Type="String" Name="VEN_NAM" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ADDRESS" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="STATE" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="ZIP" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CTRY" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="CONTACT" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="EMAIL" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="FAX" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="TEL" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="SQE_PIC" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="BUYER_PIC" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="PRO_CLASS" Nullable="true" MaxLength="5" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_RA_ProductClass_Result">
+    <Property Type="String" Name="SupplierCode" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="SupplierName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SupplierType" Nullable="false" MaxLength="12" />
+    <Property Type="String" Name="ProductClass" Nullable="true" MaxLength="5" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_SupplierDevelopment_FiscalYear_Result">
+    <Property Type="Int32" Name="Value" Nullable="true" />
+    <Property Type="Int32" Name="Text" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_SupplierDevelopment_NewPlan_Result">
+    <Property Type="Int64" Name="ID" Nullable="true" />
+    <Property Type="String" Name="Supplier_Code" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="Year" Nullable="true" />
+    <Property Type="Int32" Name="Month" Nullable="true" />
+    <Property Type="Boolean" Name="Visit_Plan" Nullable="true" />
+    <Property Type="String" Name="Visit_Actual" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Visit_Com" Nullable="true" MaxLength="1000" />
+    <Property Type="Boolean" Name="Audit_Plan" Nullable="true" />
+    <Property Type="String" Name="Audit_Actual" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Audit_Com" Nullable="true" MaxLength="1000" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_SupplierDevelopment_SearchPlan_Result">
+    <Property Type="Int64" Name="ID" Nullable="true" />
+    <Property Type="String" Name="Supplier_Code" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="Year" Nullable="true" />
+    <Property Type="Int32" Name="Month" Nullable="true" />
+    <Property Type="Boolean" Name="Visit_Plan" Nullable="true" />
+    <Property Type="String" Name="Visit_Actual" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Visit_Com" Nullable="true" MaxLength="1000" />
+    <Property Type="Boolean" Name="Audit_Plan" Nullable="true" />
+    <Property Type="String" Name="Audit_Actual" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Audit_Com" Nullable="true" MaxLength="1000" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_SupplierDevelopment_VisitAuditSum_Result">
+    <Property Type="String" Name="SupplierCode" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="SupplierName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SupplierType" Nullable="false" MaxLength="12" />
+    <Property Type="String" Name="HasPlan" Nullable="false" MaxLength="3" />
+  </ComplexType>
+  <ComplexType Name="sp_SQE_Yearlist_Result">
+    <Property Type="Int32" Name="Value" Nullable="true" />
+    <Property Type="Int32" Name="Text" Nullable="true" />
+  </ComplexType>
   <EntityType Name="C__MigrationHistory">
     <Key>
       <PropertyRef Name="MigrationId" />
@@ -4226,7 +4830,8 @@
     <Property Name="CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="WRTIEDATE" Type="DateTime" Precision="0" />
     <Property Name="WRITEBY" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="MAINQUESTION" Relationship="IQCTestModel.FK__DETAILQUE__IDQUE__6521F869" FromRole="DETAILQUESTION" ToRole="MAINQUESTION" />
+    <NavigationProperty Name="MAINQUESTION" Relationship="IQCTestModel.FK__DETAILQUE__IDQUE__68BD7F23" FromRole="DETAILQUESTION" ToRole="MAINQUESTION" />
+    <NavigationProperty Name="MAINQUESTION1" Relationship="IQCTestModel.FK__DETAILQUE__IDQUE__7E8CC4B1" FromRole="DETAILQUESTION" ToRole="MAINQUESTION" />
   </EntityType>
   <EntityType Name="DIMENSION_STD_BY_PART">
     <Key>
@@ -4682,7 +5287,8 @@
     <Property Name="PUBLICQUESTION" Type="Boolean" />
     <Property Name="PUBLICDATE" Type="DateTime" Precision="0" />
     <Property Name="PUBLICBY" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="DETAILQUESTIONs" Relationship="IQCTestModel.FK__DETAILQUE__IDQUE__6521F869" FromRole="MAINQUESTION" ToRole="DETAILQUESTION" />
+    <NavigationProperty Name="DETAILQUESTIONs" Relationship="IQCTestModel.FK__DETAILQUE__IDQUE__68BD7F23" FromRole="MAINQUESTION" ToRole="DETAILQUESTION" />
+    <NavigationProperty Name="DETAILQUESTIONs1" Relationship="IQCTestModel.FK__DETAILQUE__IDQUE__7E8CC4B1" FromRole="MAINQUESTION" ToRole="DETAILQUESTION" />
   </EntityType>
   <EntityType Name="MEASUREMENT_STD_BY_PART">
     <Key>
@@ -4806,6 +5412,16 @@
     <Property Name="NC_GRP_DESC" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="CCN" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="NC_PART">
+    <Key>
+      <PropertyRef Name="NC_CODE" />
+      <PropertyRef Name="ITEM" />
+    </Key>
+    <Property Name="NC_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NC_DESC" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="NC_GRP_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ITEM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="NCR_DET">
     <Key>
       <PropertyRef Name="NCR_NUM" />
@@ -4902,6 +5518,78 @@
     <Property Name="EVI_PATH" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="EVI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IsPrint" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="NCR_HDR">
+    <Key>
+      <PropertyRef Name="NCR_NUM" />
+      <PropertyRef Name="SEC" />
+    </Key>
+    <Property Name="NCR_NUM" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="SEC" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MI_PART_NO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="DRAW_REV" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Name="PO_NUM" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="RECEIVER" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+    <Property Name="LOT" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="ITEM_DESC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VENDOR" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="VEN_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="VEN_ADD" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+    <Property Name="INS_PLAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SKIP_LOT_LEVEL" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="FAI" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="REC_QTY" Type="Double" Nullable="false" />
+    <Property Name="INS_QTY" Type="Double" />
+    <Property Name="REJ_QTY" Type="Double" />
+    <Property Name="INSPECTOR" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="INS_DATE" Type="DateTime" Precision="3" />
+    <Property Name="CORRECT_ACTION" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="SCAR_NUM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="SCAR_DATE" Type="DateTime" Precision="3" />
+    <Property Name="SCAR_BY" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="FOLLOW_UP_NOTES" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="QA_PIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="QA_DATE" Type="DateTime" Precision="3" />
+    <Property Name="EN_PIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MFG_PIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MFG_DATE" Type="DateTime" Precision="3" />
+    <Property Name="PUR_PIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PUR_DATE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="CCN" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="NOT_REQUIRED" Type="Boolean" />
+    <Property Name="REQUIRED" Type="Boolean" />
+    <Property Name="NOTIFICATION_ONLY" Type="Boolean" />
+    <Property Name="ISSUED_REQUEST_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ISSUED_REQUEST_DATE" Type="DateTime" Precision="0" />
+    <Property Name="RETURN_NUMBER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="REMOVED_FROM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BOOK_INV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ISSUE_MEMO_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ISSUE_MEMO_DATE" Type="DateTime" Precision="0" />
+    <Property Name="NOTES" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="SHIPPING_METHOD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AQL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SAMPLE_INSP" Type="Boolean" />
+    <Property Name="PERCENT_INSP" Type="Boolean" />
+    <Property Name="FIRST_ARTICLE" Type="Boolean" />
+    <Property Name="LEVEL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="TYPE_NCR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MODEL_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ZIP_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DATESUBMIT" Type="DateTime" Precision="0" />
+    <Property Name="USERSUBMIT" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DATEDISPO" Type="DateTime" Precision="0" />
+    <Property Name="USERDISPO" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DateApproval" Type="DateTime" Precision="3" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DEFECTIVE" Type="Double" />
+    <Property Name="Amount" Type="Double" />
+    <Property Name="UserConfirm" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ConfirmDate" Type="DateTime" Precision="3" />
+    <Property Name="MRB_LOC" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="NCR_HDR_History">
     <Key>
@@ -5513,6 +6201,43 @@
     <Property Name="NCRFILE" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="SCARINFO" Relationship="IQCTestModel.FK__SCAREMAIL__SCAR___5E74FADA" FromRole="SCAREMAIL" ToRole="SCARINFO" />
   </EntityType>
+  <EntityType Name="SCARINFO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VENDOR" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PUR_LOC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NON_QTY" Type="Int32" Nullable="false" />
+    <Property Name="RMA" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NCR_NUMBER" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PO_NUMBER" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ITEM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="BUYER" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="QUALITY" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="VN_SCAR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VN_NCR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PROBLEM" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DATEPROBLEM" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DATERESPOND" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="WRITTENBY" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WRITTENDATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VERSION" Type="Int32" Nullable="false" />
+    <Property Name="SCAR_ID" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="MI_PART_NO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LOT" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SUPPLIER_REPRESENTATIVE" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DATE_D8" Type="DateTime" Precision="3" />
+    <Property Name="ACKNOWLEDGEMENT" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="SCAR_STATUS" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="EDIVENCE_D8" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DEFECTCODE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="RECURING_PROBLEM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="CATEGORY" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SCAREMAILs" Relationship="IQCTestModel.FK__SCAREMAIL__SCAR___5E74FADA" FromRole="SCARINFO" ToRole="SCAREMAIL" />
+  </EntityType>
   <EntityType Name="SCARnNCR">
     <Key>
       <PropertyRef Name="ScarId" />
@@ -5582,16 +6307,6 @@
     <Property Name="MAY" Type="Double" Nullable="false" />
     <Property Name="JUN" Type="Double" Nullable="false" />
     <Property Name="Sort" Type="Int32" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="TASK_APPROVE">
     <Key>
@@ -5698,6 +6413,17 @@
     <Property Name="Task_Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Level" Type="Int32" />
     <Property Name="Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbDashboard_Guide_Show">
+    <Key>
+      <PropertyRef Name="Sq" />
+    </Key>
+    <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Sq" Type="Int32" Nullable="false" />
+    <Property Name="Path" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Path_Upload" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="tbEvent">
     <Key>
@@ -5825,6 +6551,27 @@
     <Property Name="Leader" Type="Double" Nullable="false" />
     <Property Name="Member" Type="Double" Nullable="false" />
   </EntityType>
+  <EntityType Name="tbl_Inv_Step1_SubmitSuggestion">
+    <Key>
+      <PropertyRef Name="Sug_ID" />
+    </Key>
+    <Property Name="Sug_ID" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Name="Sug_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Sug_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Cur_prob" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Idea_impr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Cur_Step" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Exp_Start_Date" Type="DateTime" Precision="0" />
+    <Property Name="Exp_End_date" Type="DateTime" Precision="0" />
+    <Property Name="Submit_date" Type="DateTime" Precision="0" />
+    <Property Name="Submitter" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Requestor" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Rqtor_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Req_Dept" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Req_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Att_File_Current" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Att_File_Idea" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="tbl_Inv_Step2_CIAproval">
     <Key>
       <PropertyRef Name="Sug_ID" />
@@ -5934,6 +6681,725 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_RP_DataSource_Para">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Report_ID" Type="Int64" Nullable="false" />
+    <Property Name="Data_Source" Type="Int64" Nullable="false" />
+    <Property Name="Para_Idx" Type="Int64" Nullable="false" />
+    <Property Name="Idx" Type="Int64" Nullable="false" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Report">
+    <Key>
+      <PropertyRef Name="Report_ID" />
+    </Key>
+    <Property Name="Report_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Report_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Report_Title" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Para_Align" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DataSource_Align" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Para_arrange" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DataSource_arrage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Report_Para">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Report_ID" Type="Int64" Nullable="false" />
+    <Property Name="Para_Index" Type="Int64" Nullable="false" />
+    <Property Name="ParaType" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Para_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Para_Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="data_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Data_Source" Type="Int64" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Setting_BarChart">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Report_ID" Type="Int64" Nullable="false" />
+    <Property Name="DataSource_Idx" Type="Byte" Nullable="false" />
+    <Property Name="Data_Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Data_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Data_Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Data_Font" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Data_Format" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Default_Value" Type="Double" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Setting_DataGrid">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Report_ID" Type="Int64" Nullable="false" />
+    <Property Name="DataSource_Idx" Type="Byte" Nullable="false" />
+    <Property Name="Col_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Col_header" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Width" Type="Double" />
+    <Property Name="Col_Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Text_Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Text_Font" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Text_Size" Type="Byte" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Setting_LineChart">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Report_ID" Type="Int64" Nullable="false" />
+    <Property Name="DataSource_Idx" Type="Byte" Nullable="false" />
+    <Property Name="Data_Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Data_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Data_Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Data_Font" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Data_Format" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Default_Value" Type="Double" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Store_Parameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SP_ID" Type="Int64" Nullable="false" />
+    <Property Name="Para_idx" Type="Byte" Nullable="false" />
+    <Property Name="Para_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Data_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_RP_StoreProcedure">
+    <Key>
+      <PropertyRef Name="SP_ID" />
+    </Key>
+    <Property Name="SP_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SP_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SP_Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Attached_ForItemReview">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SO_NO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Download_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Item_Idx" Type="Int32" Nullable="false" />
+    <Property Name="Attached_File" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Cur_Review_Detail">
+    <Key>
+      <PropertyRef Name="ITEM_REVIEW_ID" />
+    </Key>
+    <Property Name="ITEM_REVIEW_ID" Type="Int64" Nullable="false" />
+    <Property Name="SO_NO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DOWNLOAD_DATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DEPT_REVIEW" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ITEM_REVIEW" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="RESULT" Type="Boolean" />
+    <Property Name="COMMENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="REVIEW_AT" Type="DateTime" Precision="3" />
+    <Property Name="REVIEW_BY" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ISLOCK" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Cur_Review_List">
+    <Key>
+      <PropertyRef Name="REVIEW_ID" />
+    </Key>
+    <Property Name="REVIEW_ID" Type="Int64" Nullable="false" />
+    <Property Name="DOWNLOAD_DATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SO_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ANALYST" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SO_ON_HOLD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SHIP_TO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ITEM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FAI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NEW_REVIEW" Type="Boolean" />
+    <Property Name="LAST_BUILD_DR_REV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LAST_REVIEW_DR_REV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DR_REV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="REQUIRED_DATE" Type="DateTime" Precision="0" />
+    <Property Name="SCHEDULE_DATE" Type="DateTime" Precision="0" />
+    <Property Name="PROMISE_DATE" Type="DateTime" Precision="0" />
+    <Property Name="ORD_QTY" Type="Double" />
+    <Property Name="BLC_QTY" Type="Double" />
+    <Property Name="BLC_VALUE" Type="Double" />
+    <Property Name="ONHAND_QTY" Type="Double" />
+    <Property Name="REVIEW_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PLAN_SHIP_DATE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Family_Setup_Qty">
+    <Key>
+      <PropertyRef Name="Family_inx" />
+    </Key>
+    <Property Name="Family_inx" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Family" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Setup_Qty" Type="Double" Nullable="false" />
+    <Property Name="Review_Completed" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_His_Review_Detail">
+    <Key>
+      <PropertyRef Name="ITEM_REVIEW_ID" />
+    </Key>
+    <Property Name="ITEM_REVIEW_ID" Type="Int64" Nullable="false" />
+    <Property Name="SO_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DOWNLOAD_DATE" Type="DateTime" Precision="0" />
+    <Property Name="DEPT_REVIEW" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ITEM_REVIEW" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="RESULT" Type="Boolean" />
+    <Property Name="COMMENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="REVIEW_AT" Type="DateTime" Precision="3" />
+    <Property Name="REVIEW_BY" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_His_Review_List">
+    <Key>
+      <PropertyRef Name="REVIEW_ID" />
+    </Key>
+    <Property Name="REVIEW_ID" Type="Int64" Nullable="false" />
+    <Property Name="DOWNLOAD_DATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SO_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ANALYST" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SO_ON_HOLD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SHIP_TO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ITEM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FAI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NEW_REVIEW" Type="Boolean" />
+    <Property Name="LAST_BUILD_DR_REV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LAST_REVIEW_DR_REV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DR_REV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="REQUIRED_DATE" Type="DateTime" Precision="0" />
+    <Property Name="SCHEDULE_DATE" Type="DateTime" Precision="0" />
+    <Property Name="PROMISE_DATE" Type="DateTime" Precision="0" />
+    <Property Name="ORD_QTY" Type="Double" />
+    <Property Name="BLC_QTY" Type="Double" />
+    <Property Name="BLC_VALUE" Type="Double" />
+    <Property Name="ONHAND_QTY" Type="Double" />
+    <Property Name="REVIEW_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PLAN_SHIP_DATE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Item_Review">
+    <Key>
+      <PropertyRef Name="Item_Idx" />
+    </Key>
+    <Property Name="Item_Idx" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dept_Rv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Item_Rv" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Default" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Review_Pic">
+    <Key>
+      <PropertyRef Name="Pic_Inx" />
+    </Key>
+    <Property Name="Pic_Inx" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dept_Rv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pic_Rv" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Ass_Period">
+    <Key>
+      <PropertyRef Name="Report_ID" />
+      <PropertyRef Name="Period_Code" />
+    </Key>
+    <Property Name="Report_ID" Type="Byte" Nullable="false" />
+    <Property Name="Period_Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Period_Desc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Ass_From" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Ass_To" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Ass_Resp">
+    <Key>
+      <PropertyRef Name="Period_Code" />
+      <PropertyRef Name="Res_Item_ID" />
+    </Key>
+    <Property Name="Period_Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Res_Item_ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Ass_Resp_Status">
+    <Key>
+      <PropertyRef Name="Assessment_ID" />
+    </Key>
+    <Property Name="Assessment_ID" Type="Int64" Nullable="false" />
+    <Property Name="SQE_Status" Type="Boolean" />
+    <Property Name="SQE_User" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="SQE_Date" Type="DateTime" Precision="3" />
+    <Property Name="Buyer_Status" Type="Boolean" />
+    <Property Name="Buyer_User" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Buyer_Date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Ass_Vendor">
+    <Key>
+      <PropertyRef Name="Period_Code" />
+      <PropertyRef Name="Vendor_code" />
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Assessment_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Period_Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Vendor_code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Category_ID" Type="Byte" Nullable="false" />
+    <Property Name="Ass_Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Ave_Score" Type="Double" />
+    <Property Name="Conclusion1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Conclusion2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Conclusion3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Action_Date" Type="DateTime" Precision="3" />
+    <Property Name="Action_User" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Byte" Nullable="false" />
+    <Property Name="Category_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Category_Target">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Supplier" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="CategoryID" Type="Byte" Nullable="false" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="Target_Value" Type="Double" Nullable="false" />
+    <Property Name="Created_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Customer_Claim">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Supplier" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Month" Type="Byte" Nullable="false" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="Product" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Part" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Defect_Qty" Type="Double" />
+    <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_AuditVisit_Attachment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VisitAudit_ID" Type="Int64" Nullable="false" />
+    <Property Name="Is_Visit_File" Type="Boolean" />
+    <Property Name="File_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Uploaded_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Uploaded_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_Goal">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Goal" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_ImprovePlan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Source_From" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Supplier_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Part" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Month" Type="Int32" />
+    <Property Name="Risk_Level" Type="Byte" />
+    <Property Name="Quality" Type="Double" />
+    <Property Name="Delivery" Type="Double" />
+    <Property Name="Cust_Claim" Type="Double" />
+    <Property Name="Freight" Type="Double" />
+    <Property Name="Pro_Desc" Type="Int32" />
+    <Property Name="Goal" Type="Int32" />
+    <Property Name="Scar_Action" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Other_Action" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Owner" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Due_date" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_ProblemDesc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pro_Desc" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_SourceFrom">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Source_From" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_VisitAudit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Supplier_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="Month" Type="Int32" Nullable="false" />
+    <Property Name="Visit_Plan" Type="Boolean" />
+    <Property Name="Visit_Actual" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Visit_Com" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Audit_Plan" Type="Boolean" />
+    <Property Name="Audit_Actual" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Audit_Com" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Attachment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_PCN">
+    <Key>
+      <PropertyRef Name="PCN_Num" />
+    </Key>
+    <Property Name="PCN_Num" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Supplier_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Other_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Supplier_Add" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Req_Date" Type="DateTime" Precision="0" />
+    <Property Name="MI_Part" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="MI_Attached" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Afftect_Desc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="PCN_Class" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Other_Class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Imp_Plan" Type="DateTime" Precision="0" />
+    <Property Name="Chg_Desc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Chg_Reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Chg_Effect" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Test_Result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Supplier_Signature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Supplier_Date_Sign" Type="DateTime" Precision="0" />
+    <Property Name="PCN_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Dec_Reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="QRB_Sign" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="QRB_Date" Type="DateTime" Precision="0" />
+    <Property Name="Procurement" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Procurement_Date" Type="DateTime" Precision="0" />
+    <Property Name="Supplier_QA" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="QA_Date" Type="DateTime" Precision="0" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_PCN_Attached">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PCN_Num" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="File_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Uploaded_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Uploaded_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_PCN_Class">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PCN_Class" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_PCN_Contact">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PCN_Num" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Contact_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Pos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Tel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Premium_Freight">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Supplier" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Month" Type="Byte" Nullable="false" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="Part" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Part_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Report_Result">
+    <Key>
+      <PropertyRef Name="Assessment_ID" />
+      <PropertyRef Name="Item" />
+    </Key>
+    <Property Name="Assessment_ID" Type="Int64" Nullable="false" />
+    <Property Name="Item" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Score" Type="Double" />
+    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Report_Type">
+    <Key>
+      <PropertyRef Name="Report_ID" />
+    </Key>
+    <Property Name="Report_ID" Type="Byte" Nullable="false" />
+    <Property Name="Report_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Report_Weight">
+    <Key>
+      <PropertyRef Name="Report_ID" />
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Report_ID" Type="Byte" Nullable="false" />
+    <Property Name="Category_ID" Type="Byte" Nullable="false" />
+    <Property Name="Weight" Type="Double" Nullable="false" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Res_Item">
+    <Key>
+      <PropertyRef Name="Res_Item_ID" />
+    </Key>
+    <Property Name="Res_Item_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Res_Item" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Role_Ans" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Score_Ref">
+    <Key>
+      <PropertyRef Name="Category_ID" />
+      <PropertyRef Name="Index" />
+    </Key>
+    <Property Name="Category_ID" Type="Byte" Nullable="false" />
+    <Property Name="Index" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Value_From" Type="Double" />
+    <Property Name="Value_To" Type="Double" />
+    <Property Name="Score" Type="Int32" />
+    <Property Name="Result" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Other" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Score_Reponsiveness">
+    <Key>
+      <PropertyRef Name="Index" />
+    </Key>
+    <Property Name="Index" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Item_Conclusion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Score" Type="Int32" Nullable="false" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog">
+    <Key>
+      <PropertyRef Name="Supplier_Code" />
+    </Key>
+    <Property Name="Supplier_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Supplier_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_Supplied" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Other_Supplied" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Strategic" Type="Boolean" />
+    <Property Name="Business_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Other_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Commodity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Other_Commodity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Survey_Require" Type="Boolean" />
+    <Property Name="Survey_Date" Type="DateTime" Precision="3" />
+    <Property Name="Servey_Score" Type="Double" />
+    <Property Name="Supplier_Level" Type="Byte" />
+    <Property Name="Approval_Date" Type="DateTime" Precision="3" />
+    <Property Name="Re_Examined" Type="DateTime" Precision="3" />
+    <Property Name="Re_Evaluation" Type="DateTime" Precision="3" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_Attached">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Supplier_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="File_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="File_Rev" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="File_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Upload_At" Type="DateTime" Precision="3" />
+    <Property Name="Upload_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Upload_For" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_BusinessType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Business_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_CoC">
+    <Key>
+      <PropertyRef Name="Supplier_Code" />
+      <PropertyRef Name="CoC_Item" />
+    </Key>
+    <Property Name="Supplier_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="CoC_Item" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Commitment" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_CoCItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CoC_Item" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_Commodity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Commodity" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_Contact">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Supplier_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Contact_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Tilte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contact_Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_ISO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ISO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_MaterialSupplied">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Material_Supplied" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_QMSItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QMS_Item" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Supplier_Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Vendor_Score_Ref">
+    <Key>
+      <PropertyRef Name="Vendor" />
+      <PropertyRef Name="Category_ID" />
+      <PropertyRef Name="Index" />
+    </Key>
+    <Property Name="Vendor" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Category_ID" Type="Byte" Nullable="false" />
+    <Property Name="Index" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Value_From" Type="Double" />
+    <Property Name="Value_To" Type="Double" />
+    <Property Name="Score" Type="Int32" />
+    <Property Name="Result" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Other" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="tbl_TP_Family">
     <Key>
@@ -6397,6 +7863,13 @@
     <Property Name="ConfirmDate" Type="DateTime" Precision="3" />
     <Property Name="PUR_LOC" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="NCR_WH_OPEN_COMMENT">
+    <Key>
+      <PropertyRef Name="NCR_NUM" />
+    </Key>
+    <Property Name="NCR_NUM" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="PART_INS_REQ_VISUAL">
     <Key>
       <PropertyRef Name="CCN" />
@@ -6675,6 +8148,99 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Task_Default" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="tbl_PT_TaskList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TASK_NAME" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TASK_PIC" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PIC_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Advance_Setting">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Report_ID" />
+      <PropertyRef Name="DataSource_ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Report_ID" Type="Int64" Nullable="false" />
+    <Property Name="DataSource_ID" Type="Int64" Nullable="false" />
+    <Property Name="Header_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Show_Header" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bar_Direct" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Enable_Export" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="File_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Data_Source">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Report_ID" />
+      <PropertyRef Name="Data_Source" />
+      <PropertyRef Name="Data_Idx" />
+      <PropertyRef Name="Data_Title" />
+      <PropertyRef Name="Show_method" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Report_ID" Type="Int64" Nullable="false" />
+    <Property Name="Data_Source" Type="Int64" Nullable="false" />
+    <Property Name="Data_Idx" Type="Byte" Nullable="false" />
+    <Property Name="Data_Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Title_Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Title_Font" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Title_Size" Type="Double" />
+    <Property Name="Show_method" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Data_Group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_6Panel_TopNCPart">
+    <Key>
+      <PropertyRef Name="Statistical_Type" />
+      <PropertyRef Name="Month" />
+      <PropertyRef Name="Part" />
+      <PropertyRef Name="Qty" />
+    </Key>
+    <Property Name="Supplier_Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Statistical_Type" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Month" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Part" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Qty" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_PCN_Status">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PCN_Status" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PCN_Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Supplier_Finish6Panel">
+    <Key>
+      <PropertyRef Name="Supplier_Code" />
+    </Key>
+    <Property Name="Supplier_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_QMS">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Supplier_Code" />
+      <PropertyRef Name="QMS" />
+      <PropertyRef Name="Certification_Date" />
+      <PropertyRef Name="DueDate" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Supplier_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="QMS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Certification_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
   <EntityType Name="TemporaryUpsizedTable2">
     <Key>
       <PropertyRef Name="ID_auto1" />
@@ -6752,171 +8318,6 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="DMS_WOLot">
-    <Key>
-      <PropertyRef Name="Department" />
-    </Key>
-    <Property Name="Department" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-    <Property Name="ProductID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="WOCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Lot" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="PPM_RejectQty">
-    <Key>
-      <PropertyRef Name="NCR_NUM" />
-      <PropertyRef Name="SEC" />
-      <PropertyRef Name="MI_PART_NO" />
-      <PropertyRef Name="DRAW_REV" />
-      <PropertyRef Name="ITEM_DESC" />
-      <PropertyRef Name="REC_QTY" />
-    </Key>
-    <Property Name="NCR_NUM" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="SEC" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="MI_PART_NO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="ANALYST" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DRAW_REV" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
-    <Property Name="PO_NUM" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="RECEIVER" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-    <Property Name="LOT" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-    <Property Name="ITEM_DESC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="VENDOR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="VEN_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="VEN_ADD" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
-    <Property Name="REC_QTY" Type="Double" Nullable="false" />
-    <Property Name="INS_QTY" Type="Double" />
-    <Property Name="REJ_QTY" Type="Double" />
-    <Property Name="DATEAPPROVAL" Type="DateTime" Precision="0" />
-    <Property Name="CCN" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-  </EntityType>
-  <EntityType Name="v_AQL">
-    <Key>
-      <PropertyRef Name="AQLName" />
-      <PropertyRef Name="Date" />
-    </Key>
-    <Property Name="AQLName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="LotFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="LotTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Accept" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Reject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="v_INS_RESULT">
-    <Key>
-      <PropertyRef Name="RECEIVER" />
-      <PropertyRef Name="ITEM" />
-      <PropertyRef Name="QTY" />
-      <PropertyRef Name="REC_QTY" />
-      <PropertyRef Name="REC_DATE" />
-      <PropertyRef Name="INS_DATE" />
-      <PropertyRef Name="SAMPLING_MEASURE" />
-      <PropertyRef Name="SAMPLING_VISUAL" />
-      <PropertyRef Name="ACC_QTY" />
-      <PropertyRef Name="REJ_QTY" />
-    </Key>
-    <Property Name="RECEIVER" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="true" />
-    <Property Name="ITEM" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="QTY" Type="Double" Nullable="false" />
-    <Property Name="REC_QTY" Type="Double" Nullable="false" />
-    <Property Name="INSP_STAT" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
-    <Property Name="STATUS" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-    <Property Name="REC_DATE" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="INS_DATE" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="SAMPLING_MEASURE" Type="Double" Nullable="false" />
-    <Property Name="SAMPLING_VISUAL" Type="Double" Nullable="false" />
-    <Property Name="AQL_MEASURE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="AQL_VISUAL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ACC_QTY" Type="Double" Nullable="false" />
-    <Property Name="REJ_QTY" Type="Double" Nullable="false" />
-  </EntityType>
-  <EntityType Name="V_Material_HadMake_FLupSerialNumber">
-    <Key>
-      <PropertyRef Name="WOCode" />
-      <PropertyRef Name="PartNumber" />
-      <PropertyRef Name="Revision" />
-      <PropertyRef Name="SerialNumber" />
-      <PropertyRef Name="MaterialID" />
-    </Key>
-    <Property Name="WOCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PartNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Revision" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="SerialNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MaterialID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="LotNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="Qty" Type="Decimal" Precision="38" Scale="3" />
-    <Property Name="ExpiryDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="v_Operator">
-    <Key>
-      <PropertyRef Name="OperatorID" />
-      <PropertyRef Name="DepartmentName" />
-    </Key>
-    <Property Name="OperatorID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="OperatorName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="LineName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="V_WO_Issue">
-    <Key>
-      <PropertyRef Name="MaterialID" />
-      <PropertyRef Name="WOCode" />
-    </Key>
-    <Property Name="MaterialID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="WOCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="LotNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="vNCR_DET">
-    <Key>
-      <PropertyRef Name="PartialID" />
-    </Key>
-    <Property Name="ID" Type="Int32" />
-    <Property Name="PartialID" Type="Int32" Nullable="false" />
-    <Property Name="Non_Conformances" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="NC_Qty" Type="Double" />
-    <Property Name="Defect" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Response" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Disposition" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="vNCR_DET_2">
-    <Key>
-      <PropertyRef Name="PartialID" />
-    </Key>
-    <Property Name="NCR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="RPT_DATE" Type="DateTime" Precision="3" />
-    <Property Name="ID" Type="Int32" />
-    <Property Name="PartialID" Type="Int32" Nullable="false" />
-    <Property Name="Non_Conformances" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="NC_Qty" Type="Double" />
-    <Property Name="Defect" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Response" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Disposition" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="vNCR_HDR">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="PN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="DESCR" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Supplier" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Supplier_code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="REV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Qty" Type="Double" />
-    <Property Name="Unit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="RPT_DATE" Type="DateTime" Precision="3" />
-    <Property Name="Remark" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="AQLM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="AQLV" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="SPL1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="SPL2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="NCR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IQA_Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="CA" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="NCR_writen_Date" Type="DateTime" Precision="3" />
-  </EntityType>
   <Association Name="FK_dbo_ApplicationGroupRoles_dbo_ApplicationGroups_ApplicationGroupId">
     <End Type="IQCTestModel.ApplicationGroup" Role="ApplicationGroup" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -6973,7 +8374,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__DETAILQUE__IDQUE__6521F869">
+  <Association Name="FK__DETAILQUE__IDQUE__68BD7F23">
     <End Type="IQCTestModel.MAINQUESTION" Role="MAINQUESTION" Multiplicity="0..1" />
     <End Type="IQCTestModel.DETAILQUESTION" Role="DETAILQUESTION" Multiplicity="*" />
     <ReferentialConstraint>
@@ -6985,249 +8386,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="AspNetUserRoles">
-    <End Type="IQCTestModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-    <End Type="IQCTestModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  <Association Name="FK__DETAILQUE__IDQUE__7E8CC4B1">
+    <End Type="IQCTestModel.MAINQUESTION" Role="MAINQUESTION" Multiplicity="0..1" />
+    <End Type="IQCTestModel.DETAILQUESTION" Role="DETAILQUESTION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MAINQUESTION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DETAILQUESTION">
+        <PropertyRef Name="IDQUESTION" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
-  <ComplexType Name="sp_Task_Search_Result">
-    <Property Type="String" Name="Topic" Nullable="true" />
-    <Property Type="String" Name="TYPE" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="IDTask" Nullable="false" />
-    <Property Type="Int32" Name="TopicID" Nullable="true" />
-    <Property Type="String" Name="TASKNAME" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="DESCRIPTION" Nullable="true" />
-    <Property Type="String" Name="OWNER" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="ASSIGNEE" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="APPROVE" Nullable="true" />
-    <Property Type="DateTime" Name="EstimateStartDate" Nullable="true" />
-    <Property Type="DateTime" Name="EstimateEndDate" Nullable="true" />
-    <Property Type="DateTime" Name="ActualStartDate" Nullable="true" />
-    <Property Type="DateTime" Name="ActualEndDate" Nullable="true" />
-    <Property Type="Int32" Name="PROCESS" Nullable="true" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
-    <Property Type="String" Name="STATUS" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="PRIORITY" Nullable="true" MaxLength="20" />
-    <Property Type="Int32" Name="Level" Nullable="true" />
-    <Property Type="String" Name="Department" Nullable="true" />
-    <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
-  </ComplexType>
-  <ComplexType Name="sp_Task_Statistical_ByDept_Result">
-    <Property Type="String" Name="Department" Nullable="true" />
-    <Property Type="Int32" Name="Closed" Nullable="true" />
-    <Property Type="Int32" Name="Late" Nullable="true" />
-    <Property Type="Int32" Name="ActionNear" Nullable="true" />
-    <Property Type="Int32" Name="ActionIndue" Nullable="true" />
-    <Property Type="Int32" Name="MaxAging" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="sp_Task_Statistical_ByUser_Result">
-    <Property Type="String" Name="ASSIGNEE" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="Closed" Nullable="true" />
-    <Property Type="Int32" Name="Late" Nullable="true" />
-    <Property Type="Int32" Name="ActionNear" Nullable="true" />
-    <Property Type="Int32" Name="ActionIndue" Nullable="true" />
-    <Property Type="Int32" Name="MaxAging" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="sp_TaskList_Report_Result">
-    <Property Type="String" Name="Department" Nullable="true" />
-    <Property Type="String" Name="TASKNAME" Nullable="true" MaxLength="200" />
-    <Property Type="Int32" Name="IDTask" Nullable="false" />
-    <Property Type="String" Name="Topic" Nullable="true" />
-    <Property Type="String" Name="TYPE" Nullable="true" MaxLength="50" />
-    <Property Type="DateTime" Name="EstimateEndDate" Nullable="true" />
-    <Property Type="String" Name="STATUS" Nullable="true" MaxLength="20" />
-    <Property Type="Int32" Name="Aging" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_TaskStatistical_Report_Result">
-    <Property Type="String" Name="Department" Nullable="true" />
-    <Property Type="Int32" Name="Closed" Nullable="true" />
-    <Property Type="Int32" Name="Late" Nullable="true" />
-    <Property Type="Int32" Name="Open" Nullable="true" />
-  </ComplexType>
-  <EntityType Name="tbl_Inv_Step1_SubmitSuggestion">
-    <Key>
-      <PropertyRef Name="Sug_ID" />
-    </Key>
-    <Property Name="Sug_ID" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
-    <Property Name="Sug_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Sug_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Cur_prob" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Idea_impr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Cur_Step" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Exp_Start_Date" Type="DateTime" Precision="0" />
-    <Property Name="Exp_End_date" Type="DateTime" Precision="0" />
-    <Property Name="Submit_date" Type="DateTime" Precision="0" />
-    <Property Name="Submitter" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Requestor" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Rqtor_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Req_Dept" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Req_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Att_File_Current" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Att_File_Idea" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <ComplexType Name="sp_Inv_SugList_Result">
-    <Property Type="String" Name="Sug_ID" Nullable="false" MaxLength="14" />
-    <Property Type="String" Name="Sug_Type" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Sug_title" Nullable="true" />
-    <Property Type="String" Name="Cur_prob" Nullable="true" />
-    <Property Type="String" Name="Idea_impr" Nullable="true" />
-    <Property Type="String" Name="Cur_Step" Nullable="true" MaxLength="50" />
-    <Property Type="DateTime" Name="Exp_Start_Date" Nullable="true" />
-    <Property Type="DateTime" Name="Exp_End_date" Nullable="true" />
-    <Property Type="DateTime" Name="Submit_date" Nullable="true" />
-    <Property Type="String" Name="Submitter" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Requestor" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Rqtor_name" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Req_Dept" Nullable="true" MaxLength="30" />
-    <Property Type="String" Name="Req_Email" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Att_File_Current" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="Att_File_Idea" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="Step_Status" Nullable="true" MaxLength="74" />
-    <Property Type="String" Name="Next_Approver" Nullable="true" />
-    <Property Type="String" Name="Coacher" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Sponsor" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="CIManager" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Director" Nullable="true" />
-    <Property Type="String" Name="Pro_Leader" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Member" Nullable="true" />
-    <Property Type="String" Name="Action_Date" Nullable="true" MaxLength="4000" />
-  </ComplexType>
-  <EntityType Name="NCR_HDR">
-    <Key>
-      <PropertyRef Name="NCR_NUM" />
-      <PropertyRef Name="SEC" />
-    </Key>
-    <Property Name="NCR_NUM" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="SEC" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="MI_PART_NO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="DRAW_REV" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
-    <Property Name="PO_NUM" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="RECEIVER" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-    <Property Name="LOT" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-    <Property Name="ITEM_DESC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="VENDOR" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="VEN_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="VEN_ADD" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
-    <Property Name="INS_PLAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="SKIP_LOT_LEVEL" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="FAI" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="REC_QTY" Type="Double" Nullable="false" />
-    <Property Name="INS_QTY" Type="Double" />
-    <Property Name="REJ_QTY" Type="Double" />
-    <Property Name="INSPECTOR" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="INS_DATE" Type="DateTime" Precision="3" />
-    <Property Name="CORRECT_ACTION" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="SCAR_NUM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="SCAR_DATE" Type="DateTime" Precision="3" />
-    <Property Name="SCAR_BY" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="FOLLOW_UP_NOTES" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-    <Property Name="QA_PIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="QA_DATE" Type="DateTime" Precision="3" />
-    <Property Name="EN_PIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="MFG_PIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="MFG_DATE" Type="DateTime" Precision="3" />
-    <Property Name="PUR_PIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="PUR_DATE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="CCN" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-    <Property Name="NOT_REQUIRED" Type="Boolean" />
-    <Property Name="REQUIRED" Type="Boolean" />
-    <Property Name="NOTIFICATION_ONLY" Type="Boolean" />
-    <Property Name="ISSUED_REQUEST_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ISSUED_REQUEST_DATE" Type="DateTime" Precision="0" />
-    <Property Name="RETURN_NUMBER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="REMOVED_FROM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BOOK_INV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ISSUE_MEMO_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ISSUE_MEMO_DATE" Type="DateTime" Precision="0" />
-    <Property Name="NOTES" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="SHIPPING_METHOD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="AQL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="SAMPLE_INSP" Type="Boolean" />
-    <Property Name="PERCENT_INSP" Type="Boolean" />
-    <Property Name="FIRST_ARTICLE" Type="Boolean" />
-    <Property Name="LEVEL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="STATUS" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="TYPE_NCR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MODEL_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ZIP_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DATESUBMIT" Type="DateTime" Precision="0" />
-    <Property Name="USERSUBMIT" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="DATEDISPO" Type="DateTime" Precision="0" />
-    <Property Name="USERDISPO" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="DateApproval" Type="DateTime" Precision="3" />
-    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DEFECTIVE" Type="Double" />
-    <Property Name="Amount" Type="Double" />
-    <Property Name="UserConfirm" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ConfirmDate" Type="DateTime" Precision="3" />
-    <Property Name="MRB_LOC" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <ComplexType Name="sp_Task_Statistical_ByDetail_Result">
-    <Property Type="String" Name="Task_Status" Nullable="false" MaxLength="11" />
-    <Property Type="String" Name="Topic" Nullable="true" />
-    <Property Type="String" Name="TYPE" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="IDTask" Nullable="false" />
-    <Property Type="String" Name="TASKNAME" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="DESCRIPTION" Nullable="true" />
-    <Property Type="String" Name="OWNER" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="ASSIGNEE" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="ASSIGNAME" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="APPROVE" Nullable="true" />
-    <Property Type="DateTime" Name="EstimateStartDate" Nullable="true" />
-    <Property Type="DateTime" Name="EstimateEndDate" Nullable="true" />
-    <Property Type="DateTime" Name="ActualStartDate" Nullable="true" />
-    <Property Type="DateTime" Name="ActualEndDate" Nullable="true" />
-    <Property Type="Int32" Name="PROCESS" Nullable="true" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
-    <Property Type="String" Name="STATUS" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="PRIORITY" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="Department" Nullable="true" />
-  </ComplexType>
-  <EntityType Name="V_AspNetUsers">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="FullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="SCARINFO">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="VENDOR" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="PUR_LOC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NON_QTY" Type="Int32" Nullable="false" />
-    <Property Name="RMA" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="NCR_NUMBER" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="PO_NUMBER" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="ITEM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="BUYER" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="QUALITY" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="VN_SCAR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="VN_NCR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PROBLEM" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DATEPROBLEM" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="DATERESPOND" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="WRITTENBY" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="WRITTENDATE" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="VERSION" Type="Int32" Nullable="false" />
-    <Property Name="SCAR_ID" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-    <Property Name="MI_PART_NO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="LOT" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-    <Property Name="CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="SUPPLIER_REPRESENTATIVE" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="DATE_D8" Type="DateTime" Precision="3" />
-    <Property Name="ACKNOWLEDGEMENT" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="SCAR_STATUS" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="EDIVENCE_D8" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="DEFECTCODE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="RECURING_PROBLEM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-    <Property Name="CATEGORY" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="SCAREMAILs" Relationship="IQCTestModel.FK__SCAREMAIL__SCAR___5E74FADA" FromRole="SCARINFO" ToRole="SCAREMAIL" />
-  </EntityType>
   <Association Name="FK__SCAREMAIL__SCAR___5E74FADA">
     <End Type="IQCTestModel.SCARINFO" Role="SCARINFO" Multiplicity="1" />
     <End Type="IQCTestModel.SCAREMAIL" Role="SCAREMAIL" Multiplicity="*" />
@@ -7239,5 +8409,9 @@
         <PropertyRef Name="SCAR_ID" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="IQCTestModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="IQCTestModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
   </Association>
 </Schema>

@@ -1103,6 +1103,16 @@ warning 6002: The table/view 'IQC.dbo.MEASUREMENT_STD_BY_PART_CHANGED_SPL' does 
     <Property Name="NC_GRP_DESC" Type="nvarchar" MaxLength="250" />
     <Property Name="CCN" Type="nvarchar" MaxLength="2" Nullable="false" />
   </EntityType>
+  <EntityType Name="NC_PART">
+    <Key>
+      <PropertyRef Name="NC_CODE" />
+      <PropertyRef Name="ITEM" />
+    </Key>
+    <Property Name="NC_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NC_DESC" Type="nvarchar" MaxLength="250" />
+    <Property Name="NC_GRP_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ITEM" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="NCR_DET">
     <Key>
       <PropertyRef Name="NCR_NUM" />
@@ -1435,6 +1445,15 @@ warning 6002: The table/view 'IQC.dbo.NCR_HDR_PUR' does not have a primary key d
     <Property Name="Action" Type="varchar" MaxLength="255" />
     <Property Name="IsActive" Type="bit" />
     <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IQC.dbo.NCR_WH_OPEN_COMMENT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="NCR_WH_OPEN_COMMENT">
+    <Key>
+      <PropertyRef Name="NCR_NUM" />
+    </Key>
+    <Property Name="NCR_NUM" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="1000" />
   </EntityType>
   <EntityType Name="NCRDispositionDay">
     <Key>
@@ -2324,16 +2343,6 @@ warning 6002: The table/view 'IQC.dbo.STDCOST_Temp' does not have a primary key 
     <Property Name="JUN" Type="float" Nullable="false" />
     <Property Name="Sort" Type="int" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="TASK_APPROVE">
     <Key>
       <PropertyRef Name="TASK_ID" />
@@ -2439,6 +2448,17 @@ warning 6002: The table/view 'IQC.dbo.STDCOST_Temp' does not have a primary key 
     <Property Name="Task_Detail" Type="nvarchar(max)" />
     <Property Name="Level" Type="int" />
     <Property Name="Reference" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbDashboard_Guide_Show">
+    <Key>
+      <PropertyRef Name="Sq" />
+    </Key>
+    <Property Name="FileName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Sq" Type="int" Nullable="false" />
+    <Property Name="Path" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Path_Upload" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Title" Type="nvarchar" MaxLength="4000" />
   </EntityType>
   <EntityType Name="tbEvent">
     <Key>
@@ -2740,12 +2760,838 @@ warning 6002: The table/view 'IQC.dbo.tbl_PT_Dept_PIC_BuyPart' does not have a p
     <Property Name="Date_Finish" Type="datetime" />
     <Property Name="User_Finish" Type="nvarchar" MaxLength="128" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IQC.dbo.tbl_PT_TaskList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_PT_TaskList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TASK_NAME" Type="nvarchar" MaxLength="500" />
+    <Property Name="TASK_PIC" Type="nvarchar" MaxLength="128" />
+    <Property Name="PIC_NAME" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="tbl_PT_Work_Center">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IQC.dbo.tbl_RP_Advance_Setting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_RP_Advance_Setting">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Report_ID" />
+      <PropertyRef Name="DataSource_ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Report_ID" Type="bigint" Nullable="false" />
+    <Property Name="DataSource_ID" Type="bigint" Nullable="false" />
+    <Property Name="Header_Type" Type="varchar" MaxLength="50" />
+    <Property Name="Show_Header" Type="varchar" MaxLength="50" />
+    <Property Name="Bar_Direct" Type="varchar" MaxLength="50" />
+    <Property Name="Enable_Export" Type="varchar" MaxLength="50" />
+    <Property Name="File_Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IQC.dbo.tbl_RP_Data_Source' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_RP_Data_Source">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Report_ID" />
+      <PropertyRef Name="Data_Source" />
+      <PropertyRef Name="Data_Idx" />
+      <PropertyRef Name="Data_Title" />
+      <PropertyRef Name="Show_method" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Report_ID" Type="bigint" Nullable="false" />
+    <Property Name="Data_Source" Type="bigint" Nullable="false" />
+    <Property Name="Data_Idx" Type="tinyint" Nullable="false" />
+    <Property Name="Data_Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Title_Color" Type="varchar" MaxLength="50" />
+    <Property Name="Title_Font" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title_Size" Type="float" />
+    <Property Name="Show_method" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Data_Group" Type="nvarchar" MaxLength="50" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_RP_DataSource_Para">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Report_ID" Type="bigint" Nullable="false" />
+    <Property Name="Data_Source" Type="bigint" Nullable="false" />
+    <Property Name="Para_Idx" Type="bigint" Nullable="false" />
+    <Property Name="Idx" Type="bigint" Nullable="false" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Report">
+    <Key>
+      <PropertyRef Name="Report_ID" />
+    </Key>
+    <Property Name="Report_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Report_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Report_Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Para_Align" Type="varchar" MaxLength="30" />
+    <Property Name="DataSource_Align" Type="varchar" MaxLength="30" />
+    <Property Name="Para_arrange" Type="varchar" MaxLength="50" />
+    <Property Name="DataSource_arrage" Type="varchar" MaxLength="50" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Report_Para">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Report_ID" Type="bigint" Nullable="false" />
+    <Property Name="Para_Index" Type="bigint" Nullable="false" />
+    <Property Name="ParaType" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Para_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Para_Title" Type="nvarchar" MaxLength="100" />
+    <Property Name="data_Type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Data_Source" Type="bigint" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Setting_BarChart">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Report_ID" Type="bigint" Nullable="false" />
+    <Property Name="DataSource_Idx" Type="tinyint" Nullable="false" />
+    <Property Name="Data_Type" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Data_Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Data_Color" Type="varchar" MaxLength="50" />
+    <Property Name="Data_Font" Type="nvarchar" MaxLength="50" />
+    <Property Name="Data_Format" Type="nvarchar" MaxLength="100" />
+    <Property Name="Default_Value" Type="float" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Setting_DataGrid">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Report_ID" Type="bigint" Nullable="false" />
+    <Property Name="DataSource_Idx" Type="tinyint" Nullable="false" />
+    <Property Name="Col_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Col_header" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Width" Type="float" />
+    <Property Name="Col_Color" Type="varchar" MaxLength="50" />
+    <Property Name="Text_Color" Type="varchar" MaxLength="50" />
+    <Property Name="Text_Font" Type="nvarchar" MaxLength="50" />
+    <Property Name="Text_Size" Type="tinyint" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Setting_LineChart">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Report_ID" Type="bigint" Nullable="false" />
+    <Property Name="DataSource_Idx" Type="tinyint" Nullable="false" />
+    <Property Name="Data_Type" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Data_Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Data_Color" Type="varchar" MaxLength="50" />
+    <Property Name="Data_Font" Type="nvarchar" MaxLength="50" />
+    <Property Name="Data_Format" Type="nvarchar" MaxLength="100" />
+    <Property Name="Default_Value" Type="float" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_RP_Store_Parameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SP_ID" Type="bigint" Nullable="false" />
+    <Property Name="Para_idx" Type="tinyint" Nullable="false" />
+    <Property Name="Para_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Data_Type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_RP_StoreProcedure">
+    <Key>
+      <PropertyRef Name="SP_ID" />
+    </Key>
+    <Property Name="SP_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SP_Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="SP_Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Attached_ForItemReview">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SO_NO" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Download_Date" Type="date" Nullable="false" />
+    <Property Name="Item_Idx" Type="int" Nullable="false" />
+    <Property Name="Attached_File" Type="nvarchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Cur_Review_Detail">
+    <Key>
+      <PropertyRef Name="ITEM_REVIEW_ID" />
+    </Key>
+    <Property Name="ITEM_REVIEW_ID" Type="bigint" Nullable="false" />
+    <Property Name="SO_NO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DOWNLOAD_DATE" Type="date" Nullable="false" />
+    <Property Name="DEPT_REVIEW" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ITEM_REVIEW" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="RESULT" Type="bit" />
+    <Property Name="COMMENT" Type="nvarchar(max)" />
+    <Property Name="REVIEW_AT" Type="datetime" />
+    <Property Name="REVIEW_BY" Type="nvarchar" MaxLength="128" />
+    <Property Name="ISLOCK" Type="bit" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Cur_Review_List">
+    <Key>
+      <PropertyRef Name="REVIEW_ID" />
+    </Key>
+    <Property Name="REVIEW_ID" Type="bigint" Nullable="false" />
+    <Property Name="DOWNLOAD_DATE" Type="date" Nullable="false" />
+    <Property Name="SO_NO" Type="varchar" MaxLength="50" />
+    <Property Name="ANALYST" Type="varchar" MaxLength="50" />
+    <Property Name="SO_ON_HOLD" Type="varchar" MaxLength="50" />
+    <Property Name="SHIP_TO" Type="varchar" MaxLength="50" />
+    <Property Name="ITEM" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAI" Type="nvarchar" MaxLength="50" />
+    <Property Name="NEW_REVIEW" Type="bit" />
+    <Property Name="LAST_BUILD_DR_REV" Type="varchar" MaxLength="50" />
+    <Property Name="LAST_REVIEW_DR_REV" Type="varchar" MaxLength="50" />
+    <Property Name="DR_REV" Type="varchar" MaxLength="50" />
+    <Property Name="REQUIRED_DATE" Type="date" />
+    <Property Name="SCHEDULE_DATE" Type="date" />
+    <Property Name="PROMISE_DATE" Type="date" />
+    <Property Name="ORD_QTY" Type="float" />
+    <Property Name="BLC_QTY" Type="float" />
+    <Property Name="BLC_VALUE" Type="float" />
+    <Property Name="ONHAND_QTY" Type="float" />
+    <Property Name="REVIEW_STATUS" Type="nvarchar" MaxLength="50" />
+    <Property Name="PLAN_SHIP_DATE" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Family_Setup_Qty">
+    <Key>
+      <PropertyRef Name="Family_inx" />
+    </Key>
+    <Property Name="Family_inx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Family" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Setup_Qty" Type="float" Nullable="false" />
+    <Property Name="Review_Completed" Type="bit" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_His_Review_Detail">
+    <Key>
+      <PropertyRef Name="ITEM_REVIEW_ID" />
+    </Key>
+    <Property Name="ITEM_REVIEW_ID" Type="bigint" Nullable="false" />
+    <Property Name="SO_NO" Type="varchar" MaxLength="50" />
+    <Property Name="DOWNLOAD_DATE" Type="date" />
+    <Property Name="DEPT_REVIEW" Type="varchar" MaxLength="50" />
+    <Property Name="ITEM_REVIEW" Type="nvarchar" MaxLength="1000" />
+    <Property Name="RESULT" Type="bit" />
+    <Property Name="COMMENT" Type="nvarchar(max)" />
+    <Property Name="REVIEW_AT" Type="datetime" />
+    <Property Name="REVIEW_BY" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_His_Review_List">
+    <Key>
+      <PropertyRef Name="REVIEW_ID" />
+    </Key>
+    <Property Name="REVIEW_ID" Type="bigint" Nullable="false" />
+    <Property Name="DOWNLOAD_DATE" Type="date" Nullable="false" />
+    <Property Name="SO_NO" Type="varchar" MaxLength="50" />
+    <Property Name="ANALYST" Type="varchar" MaxLength="50" />
+    <Property Name="SO_ON_HOLD" Type="varchar" MaxLength="50" />
+    <Property Name="SHIP_TO" Type="varchar" MaxLength="50" />
+    <Property Name="ITEM" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAI" Type="nvarchar" MaxLength="50" />
+    <Property Name="NEW_REVIEW" Type="bit" />
+    <Property Name="LAST_BUILD_DR_REV" Type="varchar" MaxLength="50" />
+    <Property Name="LAST_REVIEW_DR_REV" Type="varchar" MaxLength="50" />
+    <Property Name="DR_REV" Type="varchar" MaxLength="50" />
+    <Property Name="REQUIRED_DATE" Type="date" />
+    <Property Name="SCHEDULE_DATE" Type="date" />
+    <Property Name="PROMISE_DATE" Type="date" />
+    <Property Name="ORD_QTY" Type="float" />
+    <Property Name="BLC_QTY" Type="float" />
+    <Property Name="BLC_VALUE" Type="float" />
+    <Property Name="ONHAND_QTY" Type="float" />
+    <Property Name="REVIEW_STATUS" Type="nvarchar" MaxLength="50" />
+    <Property Name="PLAN_SHIP_DATE" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Item_Review">
+    <Key>
+      <PropertyRef Name="Item_Idx" />
+    </Key>
+    <Property Name="Item_Idx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dept_Rv" Type="varchar" MaxLength="50" />
+    <Property Name="Item_Rv" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Default" Type="bit" />
+  </EntityType>
+  <EntityType Name="tbl_SOR_Review_Pic">
+    <Key>
+      <PropertyRef Name="Pic_Inx" />
+    </Key>
+    <Property Name="Pic_Inx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dept_Rv" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pic_Rv" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IQC.dbo.tbl_SQE_6Panel_TopNCPart' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_SQE_6Panel_TopNCPart">
+    <Key>
+      <PropertyRef Name="Statistical_Type" />
+      <PropertyRef Name="Month" />
+      <PropertyRef Name="Part" />
+      <PropertyRef Name="Qty" />
+    </Key>
+    <Property Name="Supplier_Code" Type="nchar" MaxLength="10" />
+    <Property Name="Statistical_Type" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Month" Type="date" Nullable="false" />
+    <Property Name="Part" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Qty" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Ass_Period">
+    <Key>
+      <PropertyRef Name="Report_ID" />
+      <PropertyRef Name="Period_Code" />
+    </Key>
+    <Property Name="Report_ID" Type="tinyint" Nullable="false" />
+    <Property Name="Period_Code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Period_Desc" Type="nvarchar" MaxLength="200" />
+    <Property Name="Ass_From" Type="date" Nullable="false" />
+    <Property Name="Ass_To" Type="date" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="20" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Ass_Resp">
+    <Key>
+      <PropertyRef Name="Period_Code" />
+      <PropertyRef Name="Res_Item_ID" />
+    </Key>
+    <Property Name="Period_Code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Res_Item_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Ass_Resp_Status">
+    <Key>
+      <PropertyRef Name="Assessment_ID" />
+    </Key>
+    <Property Name="Assessment_ID" Type="bigint" Nullable="false" />
+    <Property Name="SQE_Status" Type="bit" />
+    <Property Name="SQE_User" Type="nvarchar" MaxLength="128" />
+    <Property Name="SQE_Date" Type="datetime" />
+    <Property Name="Buyer_Status" Type="bit" />
+    <Property Name="Buyer_User" Type="nvarchar" MaxLength="128" />
+    <Property Name="Buyer_Date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Ass_Vendor">
+    <Key>
+      <PropertyRef Name="Period_Code" />
+      <PropertyRef Name="Vendor_code" />
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Assessment_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Period_Code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Vendor_code" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Category_ID" Type="tinyint" Nullable="false" />
+    <Property Name="Ass_Status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ave_Score" Type="float" />
+    <Property Name="Conclusion1" Type="nvarchar" MaxLength="500" />
+    <Property Name="Conclusion2" Type="nvarchar" MaxLength="500" />
+    <Property Name="Conclusion3" Type="nvarchar" MaxLength="500" />
+    <Property Name="Action_Date" Type="datetime" />
+    <Property Name="Action_User" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="tinyint" Nullable="false" />
+    <Property Name="Category_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Category_Target">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Supplier" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="CategoryID" Type="tinyint" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Target_Value" Type="float" Nullable="false" />
+    <Property Name="Created_by" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Customer_Claim">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Supplier" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Month" Type="tinyint" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Product" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Part" Type="varchar" MaxLength="50" />
+    <Property Name="Defect_Qty" Type="float" />
+    <Property Name="Customer" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Note" Type="nvarchar" MaxLength="200" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_AuditVisit_Attachment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisitAudit_ID" Type="bigint" Nullable="false" />
+    <Property Name="Is_Visit_File" Type="bit" />
+    <Property Name="File_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="200" />
+    <Property Name="Uploaded_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Uploaded_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_Goal">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Goal" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_ImprovePlan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Source_From" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Supplier_Code" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Part" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="Risk_Level" Type="tinyint" />
+    <Property Name="Quality" Type="float" />
+    <Property Name="Delivery" Type="float" />
+    <Property Name="Cust_Claim" Type="float" />
+    <Property Name="Freight" Type="float" />
+    <Property Name="Pro_Desc" Type="int" />
+    <Property Name="Goal" Type="int" />
+    <Property Name="Scar_Action" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Other_Action" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Owner" Type="nvarchar" MaxLength="128" />
+    <Property Name="Due_date" Type="date" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_ProblemDesc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pro_Desc" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_SourceFrom">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Source_From" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Develop_VisitAudit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Supplier_Code" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Month" Type="int" Nullable="false" />
+    <Property Name="Visit_Plan" Type="bit" />
+    <Property Name="Visit_Actual" Type="nvarchar" MaxLength="50" />
+    <Property Name="Visit_Com" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Audit_Plan" Type="bit" />
+    <Property Name="Audit_Actual" Type="nvarchar" MaxLength="50" />
+    <Property Name="Audit_Com" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Attachment" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_PCN">
+    <Key>
+      <PropertyRef Name="PCN_Num" />
+    </Key>
+    <Property Name="PCN_Num" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Supplier_Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Other_Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Supplier_Add" Type="nvarchar" MaxLength="500" />
+    <Property Name="Req_Date" Type="date" />
+    <Property Name="MI_Part" Type="nvarchar" MaxLength="500" />
+    <Property Name="MI_Attached" Type="nvarchar" MaxLength="500" />
+    <Property Name="Afftect_Desc" Type="nvarchar" MaxLength="500" />
+    <Property Name="PCN_Class" Type="nvarchar" MaxLength="500" />
+    <Property Name="Other_Class" Type="nvarchar" MaxLength="50" />
+    <Property Name="Imp_Plan" Type="date" />
+    <Property Name="Chg_Desc" Type="nvarchar" MaxLength="500" />
+    <Property Name="Chg_Reason" Type="nvarchar" MaxLength="500" />
+    <Property Name="Chg_Effect" Type="nvarchar" MaxLength="500" />
+    <Property Name="Test_Result" Type="nvarchar(max)" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="Supplier_Signature" Type="nvarchar" MaxLength="50" />
+    <Property Name="Supplier_Date_Sign" Type="date" />
+    <Property Name="PCN_Status" Type="varchar" MaxLength="50" />
+    <Property Name="Dec_Reason" Type="nvarchar" MaxLength="500" />
+    <Property Name="QRB_Sign" Type="nvarchar" MaxLength="128" />
+    <Property Name="QRB_Date" Type="date" />
+    <Property Name="Procurement" Type="nvarchar" MaxLength="128" />
+    <Property Name="Procurement_Date" Type="date" />
+    <Property Name="Supplier_QA" Type="nvarchar" MaxLength="128" />
+    <Property Name="QA_Date" Type="date" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_PCN_Attached">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PCN_Num" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="File_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="200" />
+    <Property Name="Uploaded_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Uploaded_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_PCN_Class">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PCN_Class" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_PCN_Contact">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PCN_Num" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Contact_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Contact_Pos" Type="nvarchar" MaxLength="100" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="100" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IQC.dbo.tbl_SQE_PCN_Status' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_SQE_PCN_Status">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PCN_Status" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PCN_Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Premium_Freight">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Supplier" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Month" Type="tinyint" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Part" Type="varchar" MaxLength="50" />
+    <Property Name="Part_name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Note" Type="nvarchar" MaxLength="200" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Report_Result">
+    <Key>
+      <PropertyRef Name="Assessment_ID" />
+      <PropertyRef Name="Item" />
+    </Key>
+    <Property Name="Assessment_ID" Type="bigint" Nullable="false" />
+    <Property Name="Item" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Score" Type="float" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Report_Type">
+    <Key>
+      <PropertyRef Name="Report_ID" />
+    </Key>
+    <Property Name="Report_ID" Type="tinyint" Nullable="false" />
+    <Property Name="Report_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Report_Weight">
+    <Key>
+      <PropertyRef Name="Report_ID" />
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Report_ID" Type="tinyint" Nullable="false" />
+    <Property Name="Category_ID" Type="tinyint" Nullable="false" />
+    <Property Name="Weight" Type="float" Nullable="false" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Res_Item">
+    <Key>
+      <PropertyRef Name="Res_Item_ID" />
+    </Key>
+    <Property Name="Res_Item_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Res_Item" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Role_Ans" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Score_Ref">
+    <Key>
+      <PropertyRef Name="Category_ID" />
+      <PropertyRef Name="Index" />
+    </Key>
+    <Property Name="Category_ID" Type="tinyint" Nullable="false" />
+    <Property Name="Index" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Value_From" Type="float" />
+    <Property Name="Value_To" Type="float" />
+    <Property Name="Score" Type="int" />
+    <Property Name="Result" Type="nvarchar" MaxLength="50" />
+    <Property Name="Other" Type="nvarchar" MaxLength="50" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Score_Reponsiveness">
+    <Key>
+      <PropertyRef Name="Index" />
+    </Key>
+    <Property Name="Index" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Item_Conclusion" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Score" Type="int" Nullable="false" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IQC.dbo.tbl_SQE_Supplier_Finish6Panel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_SQE_Supplier_Finish6Panel">
+    <Key>
+      <PropertyRef Name="Supplier_Code" />
+    </Key>
+    <Property Name="Supplier_Code" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog">
+    <Key>
+      <PropertyRef Name="Supplier_Code" />
+    </Key>
+    <Property Name="Supplier_Code" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Supplier_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Material_Supplied" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Other_Supplied" Type="nvarchar" MaxLength="50" />
+    <Property Name="Strategic" Type="bit" />
+    <Property Name="Business_type" Type="nvarchar" MaxLength="100" />
+    <Property Name="Other_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Commodity" Type="varchar" MaxLength="50" />
+    <Property Name="Other_Commodity" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Survey_Require" Type="bit" />
+    <Property Name="Survey_Date" Type="datetime" />
+    <Property Name="Servey_Score" Type="float" />
+    <Property Name="Supplier_Level" Type="tinyint" />
+    <Property Name="Approval_Date" Type="datetime" />
+    <Property Name="Re_Examined" Type="datetime" />
+    <Property Name="Re_Evaluation" Type="datetime" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_Attached">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Supplier_Code" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="File_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="File_Rev" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="File_Type" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="200" />
+    <Property Name="Upload_At" Type="datetime" />
+    <Property Name="Upload_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Upload_For" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_BusinessType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Business_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_CoC">
+    <Key>
+      <PropertyRef Name="Supplier_Code" />
+      <PropertyRef Name="CoC_Item" />
+    </Key>
+    <Property Name="Supplier_Code" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="CoC_Item" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Commitment" Type="bit" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_CoCItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CoC_Item" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_Commodity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Commodity" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_Contact">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Supplier_Code" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Contact_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contact_Tilte" Type="nvarchar" MaxLength="50" />
+    <Property Name="Contact_Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contact_Phone" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_ISO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ISO" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_MaterialSupplied">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Material_Supplied" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IQC.dbo.tbl_SQE_SupplierLog_QMS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_SQE_SupplierLog_QMS">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Supplier_Code" />
+      <PropertyRef Name="QMS" />
+      <PropertyRef Name="Certification_Date" />
+      <PropertyRef Name="DueDate" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Supplier_Code" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="QMS" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Certification_Date" Type="datetime" Nullable="false" />
+    <Property Name="DueDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_QMSItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QMS_Item" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_SupplierLog_Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Supplier_Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SQE_Vendor_Score_Ref">
+    <Key>
+      <PropertyRef Name="Vendor" />
+      <PropertyRef Name="Category_ID" />
+      <PropertyRef Name="Index" />
+    </Key>
+    <Property Name="Vendor" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Category_ID" Type="tinyint" Nullable="false" />
+    <Property Name="Index" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Value_From" Type="float" />
+    <Property Name="Value_To" Type="float" />
+    <Property Name="Score" Type="int" />
+    <Property Name="Result" Type="nvarchar" MaxLength="50" />
+    <Property Name="Other" Type="nvarchar" MaxLength="50" />
+    <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Created_At" Type="datetime" />
+    <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+    <Property Name="Updated_At" Type="datetime" />
   </EntityType>
   <EntityType Name="tbl_TP_Family">
     <Key>
@@ -3006,201 +3852,19 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="255" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IQC.dbo.DMS_WOLot' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="DMS_WOLot">
-    <Key>
-      <PropertyRef Name="Department" />
-    </Key>
-    <Property Name="Department" Type="varchar" MaxLength="8" Nullable="false" />
-    <Property Name="ProductID" Type="nvarchar" MaxLength="50" />
-    <Property Name="WOCode" Type="nvarchar" MaxLength="50" />
-    <Property Name="Lot" Type="nvarchar" MaxLength="101" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IQC.dbo.PPM_RejectQty' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="PPM_RejectQty">
-    <Key>
-      <PropertyRef Name="NCR_NUM" />
-      <PropertyRef Name="SEC" />
-      <PropertyRef Name="MI_PART_NO" />
-      <PropertyRef Name="DRAW_REV" />
-      <PropertyRef Name="ITEM_DESC" />
-      <PropertyRef Name="REC_QTY" />
-    </Key>
-    <Property Name="NCR_NUM" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="SEC" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="MI_PART_NO" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="ANALYST" Type="nvarchar" MaxLength="10" />
-    <Property Name="DRAW_REV" Type="nchar" MaxLength="6" Nullable="false" />
-    <Property Name="PO_NUM" Type="nvarchar" MaxLength="30" />
-    <Property Name="RECEIVER" Type="nchar" MaxLength="8" />
-    <Property Name="LOT" Type="nvarchar" MaxLength="25" />
-    <Property Name="ITEM_DESC" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="VENDOR" Type="nvarchar" MaxLength="10" />
-    <Property Name="VEN_NAME" Type="nvarchar" MaxLength="200" />
-    <Property Name="VEN_ADD" Type="nchar" MaxLength="300" />
-    <Property Name="REC_QTY" Type="float" Nullable="false" />
-    <Property Name="INS_QTY" Type="float" />
-    <Property Name="REJ_QTY" Type="float" />
-    <Property Name="DATEAPPROVAL" Type="date" />
-    <Property Name="CCN" Type="nchar" MaxLength="2" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IQC.dbo.v_AQL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="v_AQL">
-    <Key>
-      <PropertyRef Name="AQLName" />
-      <PropertyRef Name="Date" />
-    </Key>
-    <Property Name="AQLName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="LotFrom" Type="nvarchar" MaxLength="50" />
-    <Property Name="LotTo" Type="nvarchar" MaxLength="50" />
-    <Property Name="Size" Type="nvarchar" MaxLength="50" />
-    <Property Name="Accept" Type="nvarchar" MaxLength="50" />
-    <Property Name="Reject" Type="nvarchar" MaxLength="50" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IQC.dbo.V_AspNetUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="V_AspNetUsers">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="250" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IQC.dbo.v_INS_RESULT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="v_INS_RESULT">
-    <Key>
-      <PropertyRef Name="RECEIVER" />
-      <PropertyRef Name="ITEM" />
-      <PropertyRef Name="QTY" />
-      <PropertyRef Name="REC_QTY" />
-      <PropertyRef Name="REC_DATE" />
-      <PropertyRef Name="INS_DATE" />
-      <PropertyRef Name="SAMPLING_MEASURE" />
-      <PropertyRef Name="SAMPLING_VISUAL" />
-      <PropertyRef Name="ACC_QTY" />
-      <PropertyRef Name="REJ_QTY" />
-    </Key>
-    <Property Name="RECEIVER" Type="nchar" MaxLength="8" Nullable="false" />
-    <Property Name="ITEM" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="QTY" Type="float" Nullable="false" />
-    <Property Name="REC_QTY" Type="float" Nullable="false" />
-    <Property Name="INSP_STAT" Type="nchar" MaxLength="4" />
-    <Property Name="STATUS" Type="varchar" MaxLength="8" />
-    <Property Name="REC_DATE" Type="datetime" Nullable="false" />
-    <Property Name="INS_DATE" Type="datetime" Nullable="false" />
-    <Property Name="SAMPLING_MEASURE" Type="float" Nullable="false" />
-    <Property Name="SAMPLING_VISUAL" Type="float" Nullable="false" />
-    <Property Name="AQL_MEASURE" Type="nvarchar" MaxLength="50" />
-    <Property Name="AQL_VISUAL" Type="nvarchar" MaxLength="50" />
-    <Property Name="ACC_QTY" Type="float" Nullable="false" />
-    <Property Name="REJ_QTY" Type="float" Nullable="false" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IQC.dbo.V_Material_HadMake_FLupSerialNumber' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="V_Material_HadMake_FLupSerialNumber">
-    <Key>
-      <PropertyRef Name="WOCode" />
-      <PropertyRef Name="PartNumber" />
-      <PropertyRef Name="Revision" />
-      <PropertyRef Name="SerialNumber" />
-      <PropertyRef Name="MaterialID" />
-    </Key>
-    <Property Name="WOCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="PartNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Revision" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="MaterialID" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="LotNumber" Type="nvarchar" MaxLength="250" />
-    <Property Name="Qty" Type="decimal" Precision="38" Scale="3" />
-    <Property Name="ExpiryDate" Type="nvarchar(max)" />
-    <Property Name="Description" Type="ntext" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IQC.dbo.v_Operator' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="v_Operator">
-    <Key>
-      <PropertyRef Name="OperatorID" />
-      <PropertyRef Name="DepartmentName" />
-    </Key>
-    <Property Name="OperatorID" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="OperatorName" Type="nvarchar" MaxLength="250" />
-    <Property Name="LineName" Type="nvarchar" MaxLength="250" />
-    <Property Name="DepartmentName" Type="nvarchar" MaxLength="250" Nullable="false" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IQC.dbo.V_WO_Issue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="V_WO_Issue">
-    <Key>
-      <PropertyRef Name="MaterialID" />
-      <PropertyRef Name="WOCode" />
-    </Key>
-    <Property Name="MaterialID" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="WOCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="LotNumber" Type="nvarchar" MaxLength="50" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IQC.dbo.vNCR_DET' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="vNCR_DET">
-    <Key>
-      <PropertyRef Name="PartialID" />
-    </Key>
-    <Property Name="ID" Type="int" />
-    <Property Name="PartialID" Type="int" Nullable="false" />
-    <Property Name="Non_Conformances" Type="nvarchar" MaxLength="255" />
-    <Property Name="NC_Qty" Type="float" />
-    <Property Name="Defect" Type="nvarchar" MaxLength="255" />
-    <Property Name="Response" Type="nvarchar" MaxLength="255" />
-    <Property Name="Disposition" Type="nvarchar" MaxLength="255" />
-    <Property Name="Remark" Type="ntext" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IQC.dbo.vNCR_DET_2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="vNCR_DET_2">
-    <Key>
-      <PropertyRef Name="PartialID" />
-    </Key>
-    <Property Name="NCR" Type="nvarchar" MaxLength="50" />
-    <Property Name="RPT_DATE" Type="datetime" />
-    <Property Name="ID" Type="int" />
-    <Property Name="PartialID" Type="int" Nullable="false" />
-    <Property Name="Non_Conformances" Type="nvarchar" MaxLength="255" />
-    <Property Name="NC_Qty" Type="float" />
-    <Property Name="Defect" Type="nvarchar" MaxLength="255" />
-    <Property Name="Response" Type="nvarchar" MaxLength="255" />
-    <Property Name="Disposition" Type="nvarchar" MaxLength="255" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="vNCR_HDR">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PO" Type="nvarchar" MaxLength="255" />
-    <Property Name="PN" Type="nvarchar" MaxLength="255" />
-    <Property Name="DESCR" Type="nvarchar" MaxLength="255" />
-    <Property Name="Supplier" Type="nvarchar" MaxLength="100" />
-    <Property Name="Supplier_code" Type="nvarchar" MaxLength="100" />
-    <Property Name="REV" Type="nvarchar" MaxLength="50" />
-    <Property Name="Qty" Type="float" />
-    <Property Name="Unit" Type="nvarchar" MaxLength="255" />
-    <Property Name="RPT_DATE" Type="datetime" />
-    <Property Name="Remark" Type="nvarchar" MaxLength="255" />
-    <Property Name="AQLM" Type="nvarchar" MaxLength="255" />
-    <Property Name="AQLV" Type="nvarchar" MaxLength="255" />
-    <Property Name="SPL1" Type="nvarchar" MaxLength="255" />
-    <Property Name="SPL2" Type="nvarchar" MaxLength="255" />
-    <Property Name="NCR" Type="nvarchar" MaxLength="50" />
-    <Property Name="IQA_Status" Type="nvarchar" MaxLength="255" />
-    <Property Name="CA" Type="nvarchar" MaxLength="255" />
-    <Property Name="NCR_writen_Date" Type="datetime" />
-  </EntityType>
-  <Association Name="FK__DETAILQUE__IDQUE__6521F869">
+  <Association Name="FK__DETAILQUE__IDQUE__68BD7F23">
+    <End Role="MAINQUESTION" Type="Self.MAINQUESTION" Multiplicity="0..1" />
+    <End Role="DETAILQUESTION" Type="Self.DETAILQUESTION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MAINQUESTION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DETAILQUESTION">
+        <PropertyRef Name="IDQUESTION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETAILQUE__IDQUE__7E8CC4B1">
     <End Role="MAINQUESTION" Type="Self.MAINQUESTION" Multiplicity="0..1" />
     <End Role="DETAILQUESTION" Type="Self.DETAILQUESTION" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3308,6 +3972,9 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="DynamicPivot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Month" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="f_NCR_DET_1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <ReturnType>
       <CollectionType>
@@ -3324,10 +3991,14 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
       </CollectionType>
     </ReturnType>
   </Function>
-  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="fn_Inv_NewSugID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
     <Parameter Name="dept_code" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="fn_SQE_SupplierDevelopment_CheckPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="SupplierCode" Type="nchar" Mode="In" />
+    <Parameter Name="FiscalYear" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetListOperIQC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetListWaiitingDisposition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="getlistwaittingScar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetUserByRoleGroupId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -3341,6 +4012,13 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
   <Function Name="p_AgingTimeAQL_Parts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="p_AgingTimeAQL_Parts_Detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="p_AgingTimeAQL_Parts_Detail_New" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="p_AgingTimeAQL_Parts_New" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="f" Type="datetime" Mode="In" />
+    <Parameter Name="t" Type="datetime" Mode="In" />
   </Function>
   <Function Name="p_AgingTimeNCR_Parts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="p_AgingTimeNCR_Parts_Detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -3377,6 +4055,7 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="user" Type="nvarchar" Mode="In" />
     <Parameter Name="com" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="p_Remind_Purchase_Order_Status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="p_SET_FAI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="rec" Type="nvarchar" Mode="In" />
     <Parameter Name="recline" Type="nvarchar" Mode="In" />
@@ -3418,13 +4097,18 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="DRAW_REV" Type="nvarchar" Mode="In" />
     <Parameter Name="REV" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="pGet_MEASUREMENT_STD_BY_PART_bk" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RECEIVER" Type="nvarchar" Mode="In" />
+    <Parameter Name="REC_LINE" Type="nvarchar" Mode="In" />
+    <Parameter Name="CCN" Type="nvarchar" Mode="In" />
+    <Parameter Name="ITEM" Type="nvarchar" Mode="In" />
+    <Parameter Name="DRAW_REV" Type="nvarchar" Mode="In" />
+    <Parameter Name="REV" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="pImp_Receiver" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LAST_BATCH" Type="float" Mode="InOut" />
   </Function>
   <Function Name="pImp_Receiver_Auto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="pImp_Receiver_test" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LAST_BATCH" Type="float" Mode="InOut" />
-  </Function>
   <Function Name="pImp_ReceiverOrg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LAST_BATCH" Type="float" Mode="InOut" />
   </Function>
@@ -3491,12 +4175,6 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="REC_RECEIVER" Type="nchar" Mode="In" />
     <Parameter Name="REC_REC_LINE" Type="nchar" Mode="In" />
   </Function>
-  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
   <Function Name="sp_ATTACHMENT_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="RECEIVER" Type="nchar" Mode="In" />
     <Parameter Name="REC_LINE" Type="nchar" Mode="In" />
@@ -3530,6 +4208,11 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="CCN" Type="nvarchar" Mode="In" />
     <Parameter Name="Receiver" Type="nvarchar" Mode="In" />
     <Parameter Name="Rec_Line" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Chart_Labor_RealTime_Rev2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Line" Type="nvarchar" Mode="In" />
+    <Parameter Name="f" Type="datetime" Mode="In" />
+    <Parameter Name="to" Type="datetime" Mode="In" />
   </Function>
   <Function Name="sp_ChartH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="part" Type="nvarchar" Mode="In" />
@@ -3576,12 +4259,6 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="oper" Type="nvarchar" Mode="In" />
     <Parameter Name="mac" Type="nvarchar" Mode="In" />
   </Function>
-  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
   <Function Name="sp_Dashboard_PerformanceIQC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CCN" Type="nvarchar" Mode="In" />
@@ -3627,10 +4304,6 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="VerifiedDocUser" Type="nvarchar" Mode="In" />
   </Function>
-  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
   <Function Name="sp_EscapePPMToComponent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="YEAR" Type="int" Mode="In" />
     <Parameter Name="MONTH" Type="int" Mode="In" />
@@ -3658,6 +4331,12 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
   <Function Name="sp_GET_ListNC_BY_ListNCGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Chuoi" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="sp_GET_ListNC_Rev2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CCN" Type="nvarchar" Mode="In" />
+    <Parameter Name="ITEM" Type="nvarchar" Mode="In" />
+    <Parameter Name="DRAW_REV" Type="nvarchar" Mode="In" />
+    <Parameter Name="Chuoi" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="sp_Get_ListPart_Approve" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CCN" Type="nvarchar" Mode="In" />
     <Parameter Name="ITEM" Type="nvarchar" Mode="In" />
@@ -3671,6 +4350,12 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="MEASURE_PARA" Type="nvarchar" Mode="In" />
     <Parameter Name="REV" Type="nvarchar" Mode="In" />
     <Parameter Name="CCN" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GET_NCCode_byItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ITEM" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GET_NCGroup_byItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ITEM" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_Get_Part" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CCN" Type="nvarchar" Mode="In" />
@@ -3708,10 +4393,17 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="item" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_GetNCRAging" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetOperator_IQC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="line" Type="nvarchar" Mode="In" />
+    <Parameter Name="f" Type="datetime" Mode="In" />
+    <Parameter Name="t" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="sp_GetPartOTD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="From" Type="datetime" Mode="In" />
     <Parameter Name="To" Type="datetime" Mode="In" />
   </Function>
+  <Function Name="sp_GetProduct_byLine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetSoReview" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_GetSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="type" Type="nvarchar" Mode="In" />
     <Parameter Name="f" Type="datetime" Mode="In" />
@@ -3721,14 +4413,6 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="type" Type="nvarchar" Mode="In" />
     <Parameter Name="From" Type="datetime" Mode="In" />
     <Parameter Name="To" Type="datetime" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_Import_VENDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CCN" Type="nchar" Mode="In" />
@@ -3778,6 +4462,16 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
   <Function Name="sp_IMPROVEMENT_TRACKINGAQL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NC_STRING" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="NCR_STRING" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertPART_INFO_TEMP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CCN" Type="nchar" Mode="In" />
+    <Parameter Name="ITEM" Type="nvarchar" Mode="In" />
+    <Parameter Name="DESCR" Type="nvarchar" Mode="In" />
+    <Parameter Name="DRAW_REV" Type="nchar" Mode="In" />
+    <Parameter Name="REC_RULE" Type="nchar" Mode="In" />
+    <Parameter Name="INPUT" Type="datetime" Mode="In" />
+    <Parameter Name="EMPLOYEE" Type="nvarchar" Mode="In" />
+    <Parameter Name="ANALYST" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_Inv_Cal_ScoreCost_4Mem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Sug_ID" Type="varchar" Mode="In" />
@@ -3831,6 +4525,22 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="DeptList" Type="nvarchar" Mode="In" />
     <Parameter Name="Imp_Method" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="sp_Inv_Report_SUGGESTION_ANALYSIS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dtFrom" Type="datetime" Mode="In" />
+    <Parameter Name="dtTo" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_Inv_Report_Suggestion_ByMonth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dtFrom" Type="datetime" Mode="In" />
+    <Parameter Name="dtTo" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_Inv_Report_Suggestion_ByPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dtFrom" Type="datetime" Mode="In" />
+    <Parameter Name="dtTo" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_Inv_Report_Suggestion_Status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dtFrom" Type="datetime" Mode="In" />
+    <Parameter Name="dtTo" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="sp_Inv_SendMail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="SugID" Type="varchar" Mode="In" />
     <Parameter Name="Step" Type="tinyint" Mode="In" />
@@ -3853,6 +4563,15 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
   </Function>
   <Function Name="sp_Inv_SugList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_LaborScan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OperID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Action" Type="nvarchar" Mode="In" />
+    <Parameter Name="WC" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_LaborScan_RealTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OperID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_LaborScan_Rev2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="OperID" Type="nvarchar" Mode="In" />
     <Parameter Name="Action" Type="nvarchar" Mode="In" />
     <Parameter Name="WC" Type="nvarchar" Mode="In" />
@@ -3929,6 +4648,7 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="USERNAME" Type="nvarchar" Mode="In" />
     <Parameter Name="FORMID" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="sp_PT_Complete_BuyPart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_PT_GetProTransfer_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_RemindApprovalNCR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_RemindCompleteTask_Not_NCR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -3938,15 +4658,53 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
   <Function Name="sp_RemindNCRValue30k" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_RemindNCRValue45k" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_RemindPO_DOC_Email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_RemindSupplierLog_Re_Evaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_RemindSupplierResponse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-  </Function>
   <Function Name="sp_Report_CheckAndLoadEvidence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="rec" Type="nvarchar" Mode="In" />
     <Parameter Name="ccn" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Report_Labor_OPERATION_TIME_Rev2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="line" Type="nvarchar" Mode="In" />
+    <Parameter Name="oper" Type="nvarchar" Mode="In" />
+    <Parameter Name="para1" Type="nvarchar" Mode="In" />
+    <Parameter Name="from" Type="datetime" Mode="In" />
+    <Parameter Name="to" Type="datetime" Mode="In" />
+    <Parameter Name="para2" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Report_Labor_OverTimeCheck_Rev2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="line" Type="nvarchar" Mode="In" />
+    <Parameter Name="oper" Type="nvarchar" Mode="In" />
+    <Parameter Name="para1" Type="nvarchar" Mode="In" />
+    <Parameter Name="from" Type="datetime" Mode="In" />
+    <Parameter Name="to" Type="datetime" Mode="In" />
+    <Parameter Name="para2" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Report_Labor_RealTime_ProcessGroup_Rev2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="line" Type="nvarchar" Mode="In" />
+    <Parameter Name="part" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="para1" Type="nvarchar" Mode="In" />
+    <Parameter Name="from" Type="datetime" Mode="In" />
+    <Parameter Name="to" Type="datetime" Mode="In" />
+    <Parameter Name="para2" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Report_LABOR_UTILIZATION_Rev2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="line" Type="nvarchar" Mode="In" />
+    <Parameter Name="oper" Type="nvarchar" Mode="In" />
+    <Parameter Name="para1" Type="nvarchar" Mode="In" />
+    <Parameter Name="from" Type="datetime" Mode="In" />
+    <Parameter Name="to" Type="datetime" Mode="In" />
+    <Parameter Name="para2" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Report_Labor_WORKING_HOURS_BY_WO_BY_EMPLOYEES_Rev2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Line" Type="nvarchar" Mode="In" />
+    <Parameter Name="f" Type="datetime" Mode="In" />
+    <Parameter Name="to" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_Report_LABOR_WorkingTime_Rev2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="line" Type="nvarchar" Mode="In" />
+    <Parameter Name="from" Type="datetime" Mode="In" />
+    <Parameter Name="to" Type="datetime" Mode="In" />
   </Function>
   <Function Name="sp_Report_LotRejectRate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="From" Type="datetime" Mode="In" />
@@ -3956,6 +4714,11 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
   </Function>
   <Function Name="sp_Report_MonthIQC_TEM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ccn" Type="nvarchar" Mode="In" />
+    <Parameter Name="f" Type="datetime" Mode="In" />
+    <Parameter Name="t" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_Report_MonthIQC_TEM_SumByPart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="part" Type="nvarchar" Mode="In" />
     <Parameter Name="f" Type="datetime" Mode="In" />
     <Parameter Name="t" Type="datetime" Mode="In" />
   </Function>
@@ -4025,6 +4788,10 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="Supplier" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_ReportWHOpenNCRforMRBmeeting" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_ReportWHOpenNCRforMRBmeeting_AddCom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ncr" Type="nvarchar" Mode="In" />
+    <Parameter Name="com" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="sp_ReportWHOpenNCRforMRBmeeting_R02" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_Reverse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CCN" Type="nvarchar" Mode="In" />
@@ -4047,6 +4814,131 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="NCR_NUMBER" Type="nvarchar" Mode="In" />
     <Parameter Name="NewReceiver" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="sp_SQE_6Panel_CustClaim_By_Month" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_DefectDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_DeliveryPerformance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_DetailScar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_Freight_By_Month" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_GetListVendor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQE_6Panel_OTD_By_Month" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_Performance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_PPM_By_Month" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_QualityPerformance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_ScoreJudment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_ScoringRef" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_SupplierInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SupplierCode" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_TopDefectPart_By_Month" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_TopDefectPart_By_YTD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_6Panel_UpdatePerformance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_Auto6Panel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQE_GetListVendor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQE_GetSupplierInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="VendorCode" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_ListVendorDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQE_Part_OTD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_Part_PPM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Date_From" Type="datetime" Mode="In" />
+    <Parameter Name="Date_To" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_PCN_PartList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQE_RA_ProductClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQE_RemindSupplierLog_DueDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQE_RemindSupplierLog_Re_Evaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQE_RemindSupplierLog_Re_Examined" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQE_Risk_Assessment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Year" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_SupplierDevelop_Scar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Year" Type="int" Mode="In" />
+    <Parameter Name="Month" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_SupplierDevelopment_CheckPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SupplierCode" Type="nchar" Mode="In" />
+    <Parameter Name="FiscalYear" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_SupplierDevelopment_FiscalYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQE_SupplierDevelopment_NewPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SupplierCode" Type="nchar" Mode="In" />
+    <Parameter Name="FiscalYear" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_SupplierDevelopment_RiskAssessment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor" Type="varchar" Mode="In" />
+    <Parameter Name="Year" Type="int" Mode="In" />
+    <Parameter Name="Month" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_SupplierDevelopment_SearchPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SupplierCode" Type="nchar" Mode="In" />
+    <Parameter Name="FiscalYear" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SQE_SupplierDevelopment_VisitAuditSum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQE_Yearlist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SQEDB_SupplierLog_Remind_ReEvaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_SupplierPPMReportReceiverQTY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Year" Type="int" Mode="In" />
     <Parameter Name="Month" Type="int" Mode="In" />
@@ -4152,7 +5044,6 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <Parameter Name="DRAWING_PATH" Type="nvarchar" Mode="In" />
     <Parameter Name="USER_APPROVE" Type="nvarchar" Mode="In" />
   </Function>
-  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="spINSERT_PARTS_SHORATGE_FOR_WO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Sq" Type="int" Mode="In" />
     <Parameter Name="RequestDate" Type="nvarchar" Mode="In" />
@@ -4259,6 +5150,7 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <EntitySet Name="NC_BY_PRODUCT_GRP" EntityType="Self.NC_BY_PRODUCT_GRP" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NC_CAT_NoUse" EntityType="Self.NC_CAT_NoUse" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NC_GROUP" EntityType="Self.NC_GROUP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NC_PART" EntityType="Self.NC_PART" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NCR_DET" EntityType="Self.NCR_DET" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NCR_DET_History" EntityType="Self.NCR_DET_History" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NCR_DIS" EntityType="Self.NCR_DIS" Schema="dbo" store:Type="Tables" />
@@ -4307,7 +5199,6 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <EntitySet Name="STATUS" EntityType="Self.STATUS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SUPPLIER_PPM" EntityType="Self.SUPPLIER_PPM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SUPPLIER_PPM_RP" EntityType="Self.SUPPLIER_PPM_RP" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TASK_APPROVE" EntityType="Self.TASK_APPROVE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TASK_CATEGORY" EntityType="Self.TASK_CATEGORY" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TASK_PHASE" EntityType="Self.TASK_PHASE" Schema="dbo" store:Type="Tables" />
@@ -4316,6 +5207,7 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <EntitySet Name="TASKDOCUMENT" EntityType="Self.TASKDOCUMENT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaskHis" EntityType="Self.TaskHis" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TASKLIST" EntityType="Self.TASKLIST" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbDashboard_Guide_Show" EntityType="Self.tbDashboard_Guide_Show" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbEvent" EntityType="Self.tbEvent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TbFixture" EntityType="Self.TbFixture" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Inv_Apr_Process" EntityType="Self.tbl_Inv_Apr_Process" Schema="dbo" store:Type="Tables" />
@@ -4336,6 +5228,60 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     <EntitySet Name="tbl_PT_Infor" EntityType="Self.tbl_PT_Infor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_PT_Status" EntityType="Self.tbl_PT_Status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_PT_Work_Center" EntityType="Self.tbl_PT_Work_Center" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_RP_DataSource_Para" EntityType="Self.tbl_RP_DataSource_Para" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_RP_Report" EntityType="Self.tbl_RP_Report" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_RP_Report_Para" EntityType="Self.tbl_RP_Report_Para" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_RP_Setting_BarChart" EntityType="Self.tbl_RP_Setting_BarChart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_RP_Setting_DataGrid" EntityType="Self.tbl_RP_Setting_DataGrid" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_RP_Setting_LineChart" EntityType="Self.tbl_RP_Setting_LineChart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_RP_Store_Parameter" EntityType="Self.tbl_RP_Store_Parameter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_RP_StoreProcedure" EntityType="Self.tbl_RP_StoreProcedure" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SOR_Attached_ForItemReview" EntityType="Self.tbl_SOR_Attached_ForItemReview" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SOR_Cur_Review_Detail" EntityType="Self.tbl_SOR_Cur_Review_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SOR_Cur_Review_List" EntityType="Self.tbl_SOR_Cur_Review_List" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SOR_Family_Setup_Qty" EntityType="Self.tbl_SOR_Family_Setup_Qty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SOR_His_Review_Detail" EntityType="Self.tbl_SOR_His_Review_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SOR_His_Review_List" EntityType="Self.tbl_SOR_His_Review_List" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SOR_Item_Review" EntityType="Self.tbl_SOR_Item_Review" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SOR_Review_Pic" EntityType="Self.tbl_SOR_Review_Pic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Ass_Period" EntityType="Self.tbl_SQE_Ass_Period" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Ass_Resp" EntityType="Self.tbl_SQE_Ass_Resp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Ass_Resp_Status" EntityType="Self.tbl_SQE_Ass_Resp_Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Ass_Vendor" EntityType="Self.tbl_SQE_Ass_Vendor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Category" EntityType="Self.tbl_SQE_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Category_Target" EntityType="Self.tbl_SQE_Category_Target" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Customer_Claim" EntityType="Self.tbl_SQE_Customer_Claim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Develop_AuditVisit_Attachment" EntityType="Self.tbl_SQE_Develop_AuditVisit_Attachment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Develop_Category" EntityType="Self.tbl_SQE_Develop_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Develop_Goal" EntityType="Self.tbl_SQE_Develop_Goal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Develop_ImprovePlan" EntityType="Self.tbl_SQE_Develop_ImprovePlan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Develop_ProblemDesc" EntityType="Self.tbl_SQE_Develop_ProblemDesc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Develop_SourceFrom" EntityType="Self.tbl_SQE_Develop_SourceFrom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Develop_Status" EntityType="Self.tbl_SQE_Develop_Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Develop_VisitAudit" EntityType="Self.tbl_SQE_Develop_VisitAudit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_PCN" EntityType="Self.tbl_SQE_PCN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_PCN_Attached" EntityType="Self.tbl_SQE_PCN_Attached" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_PCN_Class" EntityType="Self.tbl_SQE_PCN_Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_PCN_Contact" EntityType="Self.tbl_SQE_PCN_Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Premium_Freight" EntityType="Self.tbl_SQE_Premium_Freight" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Report_Result" EntityType="Self.tbl_SQE_Report_Result" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Report_Type" EntityType="Self.tbl_SQE_Report_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Report_Weight" EntityType="Self.tbl_SQE_Report_Weight" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Res_Item" EntityType="Self.tbl_SQE_Res_Item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Score_Ref" EntityType="Self.tbl_SQE_Score_Ref" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Score_Reponsiveness" EntityType="Self.tbl_SQE_Score_Reponsiveness" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_SupplierLog" EntityType="Self.tbl_SQE_SupplierLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_SupplierLog_Attached" EntityType="Self.tbl_SQE_SupplierLog_Attached" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_SupplierLog_BusinessType" EntityType="Self.tbl_SQE_SupplierLog_BusinessType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_SupplierLog_CoC" EntityType="Self.tbl_SQE_SupplierLog_CoC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_SupplierLog_CoCItem" EntityType="Self.tbl_SQE_SupplierLog_CoCItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_SupplierLog_Commodity" EntityType="Self.tbl_SQE_SupplierLog_Commodity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_SupplierLog_Contact" EntityType="Self.tbl_SQE_SupplierLog_Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_SupplierLog_ISO" EntityType="Self.tbl_SQE_SupplierLog_ISO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_SupplierLog_MaterialSupplied" EntityType="Self.tbl_SQE_SupplierLog_MaterialSupplied" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_SupplierLog_QMSItem" EntityType="Self.tbl_SQE_SupplierLog_QMSItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_SupplierLog_Status" EntityType="Self.tbl_SQE_SupplierLog_Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SQE_Vendor_Score_Ref" EntityType="Self.tbl_SQE_Vendor_Score_Ref" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_TP_Family" EntityType="Self.tbl_TP_Family" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_TP_Section" EntityType="Self.tbl_TP_Section" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbLaborScan" EntityType="Self.tbLaborScan" Schema="dbo" store:Type="Tables" />
@@ -4571,6 +5517,12 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     [NCR_HDR_PUR].[PUR_LOC] AS [PUR_LOC]
     FROM [dbo].[NCR_HDR_PUR] AS [NCR_HDR_PUR]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="NCR_WH_OPEN_COMMENT" EntityType="Self.NCR_WH_OPEN_COMMENT" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [NCR_WH_OPEN_COMMENT].[NCR_NUM] AS [NCR_NUM], 
+    [NCR_WH_OPEN_COMMENT].[Comment] AS [Comment]
+    FROM [dbo].[NCR_WH_OPEN_COMMENT] AS [NCR_WH_OPEN_COMMENT]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="PART_INS_REQ_VISUAL" EntityType="Self.PART_INS_REQ_VISUAL" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [PART_INS_REQ_VISUAL].[CCN] AS [CCN], 
@@ -4799,6 +5751,77 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     [tbl_PT_Dept_PIC_BuyPart].[Task_Default] AS [Task_Default]
     FROM [dbo].[tbl_PT_Dept_PIC_BuyPart] AS [tbl_PT_Dept_PIC_BuyPart]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="tbl_PT_TaskList" EntityType="Self.tbl_PT_TaskList" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_PT_TaskList].[ID] AS [ID], 
+    [tbl_PT_TaskList].[TASK_NAME] AS [TASK_NAME], 
+    [tbl_PT_TaskList].[TASK_PIC] AS [TASK_PIC], 
+    [tbl_PT_TaskList].[PIC_NAME] AS [PIC_NAME]
+    FROM [dbo].[tbl_PT_TaskList] AS [tbl_PT_TaskList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_RP_Advance_Setting" EntityType="Self.tbl_RP_Advance_Setting" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_RP_Advance_Setting].[ID] AS [ID], 
+    [tbl_RP_Advance_Setting].[Report_ID] AS [Report_ID], 
+    [tbl_RP_Advance_Setting].[DataSource_ID] AS [DataSource_ID], 
+    [tbl_RP_Advance_Setting].[Header_Type] AS [Header_Type], 
+    [tbl_RP_Advance_Setting].[Show_Header] AS [Show_Header], 
+    [tbl_RP_Advance_Setting].[Bar_Direct] AS [Bar_Direct], 
+    [tbl_RP_Advance_Setting].[Enable_Export] AS [Enable_Export], 
+    [tbl_RP_Advance_Setting].[File_Name] AS [File_Name], 
+    [tbl_RP_Advance_Setting].[Created_By] AS [Created_By], 
+    [tbl_RP_Advance_Setting].[Created_At] AS [Created_At], 
+    [tbl_RP_Advance_Setting].[Updated_By] AS [Updated_By], 
+    [tbl_RP_Advance_Setting].[Updated_At] AS [Updated_At]
+    FROM [dbo].[tbl_RP_Advance_Setting] AS [tbl_RP_Advance_Setting]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_RP_Data_Source" EntityType="Self.tbl_RP_Data_Source" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_RP_Data_Source].[ID] AS [ID], 
+    [tbl_RP_Data_Source].[Report_ID] AS [Report_ID], 
+    [tbl_RP_Data_Source].[Data_Source] AS [Data_Source], 
+    [tbl_RP_Data_Source].[Data_Idx] AS [Data_Idx], 
+    [tbl_RP_Data_Source].[Data_Title] AS [Data_Title], 
+    [tbl_RP_Data_Source].[Title_Color] AS [Title_Color], 
+    [tbl_RP_Data_Source].[Title_Font] AS [Title_Font], 
+    [tbl_RP_Data_Source].[Title_Size] AS [Title_Size], 
+    [tbl_RP_Data_Source].[Show_method] AS [Show_method], 
+    [tbl_RP_Data_Source].[Data_Group] AS [Data_Group], 
+    [tbl_RP_Data_Source].[Created_By] AS [Created_By], 
+    [tbl_RP_Data_Source].[Created_At] AS [Created_At], 
+    [tbl_RP_Data_Source].[Updated_By] AS [Updated_By], 
+    [tbl_RP_Data_Source].[Updated_At] AS [Updated_At]
+    FROM [dbo].[tbl_RP_Data_Source] AS [tbl_RP_Data_Source]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_SQE_6Panel_TopNCPart" EntityType="Self.tbl_SQE_6Panel_TopNCPart" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_SQE_6Panel_TopNCPart].[Supplier_Code] AS [Supplier_Code], 
+    [tbl_SQE_6Panel_TopNCPart].[Statistical_Type] AS [Statistical_Type], 
+    [tbl_SQE_6Panel_TopNCPart].[Month] AS [Month], 
+    [tbl_SQE_6Panel_TopNCPart].[Part] AS [Part], 
+    [tbl_SQE_6Panel_TopNCPart].[Qty] AS [Qty]
+    FROM [dbo].[tbl_SQE_6Panel_TopNCPart] AS [tbl_SQE_6Panel_TopNCPart]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_SQE_PCN_Status" EntityType="Self.tbl_SQE_PCN_Status" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_SQE_PCN_Status].[ID] AS [ID], 
+    [tbl_SQE_PCN_Status].[PCN_Status] AS [PCN_Status]
+    FROM [dbo].[tbl_SQE_PCN_Status] AS [tbl_SQE_PCN_Status]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_SQE_Supplier_Finish6Panel" EntityType="Self.tbl_SQE_Supplier_Finish6Panel" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_SQE_Supplier_Finish6Panel].[Supplier_Code] AS [Supplier_Code]
+    FROM [dbo].[tbl_SQE_Supplier_Finish6Panel] AS [tbl_SQE_Supplier_Finish6Panel]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_SQE_SupplierLog_QMS" EntityType="Self.tbl_SQE_SupplierLog_QMS" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_SQE_SupplierLog_QMS].[ID] AS [ID], 
+    [tbl_SQE_SupplierLog_QMS].[Supplier_Code] AS [Supplier_Code], 
+    [tbl_SQE_SupplierLog_QMS].[QMS] AS [QMS], 
+    [tbl_SQE_SupplierLog_QMS].[Certification_Date] AS [Certification_Date], 
+    [tbl_SQE_SupplierLog_QMS].[DueDate] AS [DueDate]
+    FROM [dbo].[tbl_SQE_SupplierLog_QMS] AS [tbl_SQE_SupplierLog_QMS]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="TemporaryUpsizedTable2" EntityType="Self.TemporaryUpsizedTable2" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [TemporaryUpsizedTable2].[ID-auto1] AS [ID-auto1], 
@@ -4869,147 +5892,11 @@ warning 6002: The table/view 'IQC.dbo.vNCR_HDR' does not have a primary key defi
     [Work Center].[Name] AS [Name]
     FROM [dbo].[Work Center] AS [Work Center]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="DMS_WOLot" EntityType="Self.DMS_WOLot" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [DMS_WOLot].[Department] AS [Department], 
-    [DMS_WOLot].[ProductID] AS [ProductID], 
-    [DMS_WOLot].[WOCode] AS [WOCode], 
-    [DMS_WOLot].[Lot] AS [Lot]
-    FROM [dbo].[DMS_WOLot] AS [DMS_WOLot]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="PPM_RejectQty" EntityType="Self.PPM_RejectQty" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [PPM_RejectQty].[NCR_NUM] AS [NCR_NUM], 
-    [PPM_RejectQty].[SEC] AS [SEC], 
-    [PPM_RejectQty].[MI_PART_NO] AS [MI_PART_NO], 
-    [PPM_RejectQty].[ANALYST] AS [ANALYST], 
-    [PPM_RejectQty].[DRAW_REV] AS [DRAW_REV], 
-    [PPM_RejectQty].[PO_NUM] AS [PO_NUM], 
-    [PPM_RejectQty].[RECEIVER] AS [RECEIVER], 
-    [PPM_RejectQty].[LOT] AS [LOT], 
-    [PPM_RejectQty].[ITEM_DESC] AS [ITEM_DESC], 
-    [PPM_RejectQty].[VENDOR] AS [VENDOR], 
-    [PPM_RejectQty].[VEN_NAME] AS [VEN_NAME], 
-    [PPM_RejectQty].[VEN_ADD] AS [VEN_ADD], 
-    [PPM_RejectQty].[REC_QTY] AS [REC_QTY], 
-    [PPM_RejectQty].[INS_QTY] AS [INS_QTY], 
-    [PPM_RejectQty].[REJ_QTY] AS [REJ_QTY], 
-    [PPM_RejectQty].[DATEAPPROVAL] AS [DATEAPPROVAL], 
-    [PPM_RejectQty].[CCN] AS [CCN]
-    FROM [dbo].[PPM_RejectQty] AS [PPM_RejectQty]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="v_AQL" EntityType="Self.v_AQL" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [v_AQL].[AQLName] AS [AQLName], 
-    [v_AQL].[Date] AS [Date], 
-    [v_AQL].[LotFrom] AS [LotFrom], 
-    [v_AQL].[LotTo] AS [LotTo], 
-    [v_AQL].[Size] AS [Size], 
-    [v_AQL].[Accept] AS [Accept], 
-    [v_AQL].[Reject] AS [Reject]
-    FROM [dbo].[v_AQL] AS [v_AQL]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="V_AspNetUsers" EntityType="Self.V_AspNetUsers" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [V_AspNetUsers].[id] AS [id], 
-    [V_AspNetUsers].[FullName] AS [FullName]
-    FROM [dbo].[V_AspNetUsers] AS [V_AspNetUsers]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="v_INS_RESULT" EntityType="Self.v_INS_RESULT" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [v_INS_RESULT].[RECEIVER] AS [RECEIVER], 
-    [v_INS_RESULT].[ITEM] AS [ITEM], 
-    [v_INS_RESULT].[QTY] AS [QTY], 
-    [v_INS_RESULT].[REC_QTY] AS [REC_QTY], 
-    [v_INS_RESULT].[INSP_STAT] AS [INSP_STAT], 
-    [v_INS_RESULT].[STATUS] AS [STATUS], 
-    [v_INS_RESULT].[REC_DATE] AS [REC_DATE], 
-    [v_INS_RESULT].[INS_DATE] AS [INS_DATE], 
-    [v_INS_RESULT].[SAMPLING_MEASURE] AS [SAMPLING_MEASURE], 
-    [v_INS_RESULT].[SAMPLING_VISUAL] AS [SAMPLING_VISUAL], 
-    [v_INS_RESULT].[AQL_MEASURE] AS [AQL_MEASURE], 
-    [v_INS_RESULT].[AQL_VISUAL] AS [AQL_VISUAL], 
-    [v_INS_RESULT].[ACC_QTY] AS [ACC_QTY], 
-    [v_INS_RESULT].[REJ_QTY] AS [REJ_QTY]
-    FROM [dbo].[v_INS_RESULT] AS [v_INS_RESULT]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="V_Material_HadMake_FLupSerialNumber" EntityType="Self.V_Material_HadMake_FLupSerialNumber" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [V_Material_HadMake_FLupSerialNumber].[WOCode] AS [WOCode], 
-    [V_Material_HadMake_FLupSerialNumber].[PartNumber] AS [PartNumber], 
-    [V_Material_HadMake_FLupSerialNumber].[Revision] AS [Revision], 
-    [V_Material_HadMake_FLupSerialNumber].[SerialNumber] AS [SerialNumber], 
-    [V_Material_HadMake_FLupSerialNumber].[MaterialID] AS [MaterialID], 
-    [V_Material_HadMake_FLupSerialNumber].[LotNumber] AS [LotNumber], 
-    [V_Material_HadMake_FLupSerialNumber].[Qty] AS [Qty], 
-    [V_Material_HadMake_FLupSerialNumber].[ExpiryDate] AS [ExpiryDate], 
-    [V_Material_HadMake_FLupSerialNumber].[Description] AS [Description]
-    FROM [dbo].[V_Material_HadMake_FLupSerialNumber] AS [V_Material_HadMake_FLupSerialNumber]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="v_Operator" EntityType="Self.v_Operator" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [v_Operator].[OperatorID] AS [OperatorID], 
-    [v_Operator].[OperatorName] AS [OperatorName], 
-    [v_Operator].[LineName] AS [LineName], 
-    [v_Operator].[DepartmentName] AS [DepartmentName]
-    FROM [dbo].[v_Operator] AS [v_Operator]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="V_WO_Issue" EntityType="Self.V_WO_Issue" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [V_WO_Issue].[MaterialID] AS [MaterialID], 
-    [V_WO_Issue].[WOCode] AS [WOCode], 
-    [V_WO_Issue].[LotNumber] AS [LotNumber]
-    FROM [dbo].[V_WO_Issue] AS [V_WO_Issue]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="vNCR_DET" EntityType="Self.vNCR_DET" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [vNCR_DET].[ID] AS [ID], 
-    [vNCR_DET].[PartialID] AS [PartialID], 
-    [vNCR_DET].[Non_Conformances] AS [Non_Conformances], 
-    [vNCR_DET].[NC_Qty] AS [NC_Qty], 
-    [vNCR_DET].[Defect] AS [Defect], 
-    [vNCR_DET].[Response] AS [Response], 
-    [vNCR_DET].[Disposition] AS [Disposition], 
-    [vNCR_DET].[Remark] AS [Remark]
-    FROM [dbo].[vNCR_DET] AS [vNCR_DET]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="vNCR_DET_2" EntityType="Self.vNCR_DET_2" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [vNCR_DET_2].[NCR] AS [NCR], 
-    [vNCR_DET_2].[RPT_DATE] AS [RPT_DATE], 
-    [vNCR_DET_2].[ID] AS [ID], 
-    [vNCR_DET_2].[PartialID] AS [PartialID], 
-    [vNCR_DET_2].[Non_Conformances] AS [Non_Conformances], 
-    [vNCR_DET_2].[NC_Qty] AS [NC_Qty], 
-    [vNCR_DET_2].[Defect] AS [Defect], 
-    [vNCR_DET_2].[Response] AS [Response], 
-    [vNCR_DET_2].[Disposition] AS [Disposition]
-    FROM [dbo].[vNCR_DET_2] AS [vNCR_DET_2]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="vNCR_HDR" EntityType="Self.vNCR_HDR" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [vNCR_HDR].[ID] AS [ID], 
-    [vNCR_HDR].[PO] AS [PO], 
-    [vNCR_HDR].[PN] AS [PN], 
-    [vNCR_HDR].[DESCR] AS [DESCR], 
-    [vNCR_HDR].[Supplier] AS [Supplier], 
-    [vNCR_HDR].[Supplier_code] AS [Supplier_code], 
-    [vNCR_HDR].[REV] AS [REV], 
-    [vNCR_HDR].[Qty] AS [Qty], 
-    [vNCR_HDR].[Unit] AS [Unit], 
-    [vNCR_HDR].[RPT_DATE] AS [RPT_DATE], 
-    [vNCR_HDR].[Remark] AS [Remark], 
-    [vNCR_HDR].[AQLM] AS [AQLM], 
-    [vNCR_HDR].[AQLV] AS [AQLV], 
-    [vNCR_HDR].[SPL1] AS [SPL1], 
-    [vNCR_HDR].[SPL2] AS [SPL2], 
-    [vNCR_HDR].[NCR] AS [NCR], 
-    [vNCR_HDR].[IQA_Status] AS [IQA_Status], 
-    [vNCR_HDR].[CA] AS [CA], 
-    [vNCR_HDR].[NCR_writen_Date] AS [NCR_writen_Date]
-    FROM [dbo].[vNCR_HDR] AS [vNCR_HDR]</DefiningQuery>
-    </EntitySet>
-    <AssociationSet Name="FK__DETAILQUE__IDQUE__6521F869" Association="Self.FK__DETAILQUE__IDQUE__6521F869">
+    <AssociationSet Name="FK__DETAILQUE__IDQUE__68BD7F23" Association="Self.FK__DETAILQUE__IDQUE__68BD7F23">
+      <End Role="MAINQUESTION" EntitySet="MAINQUESTION" />
+      <End Role="DETAILQUESTION" EntitySet="DETAILQUESTION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETAILQUE__IDQUE__7E8CC4B1" Association="Self.FK__DETAILQUE__IDQUE__7E8CC4B1">
       <End Role="MAINQUESTION" EntitySet="MAINQUESTION" />
       <End Role="DETAILQUESTION" EntitySet="DETAILQUESTION" />
     </AssociationSet>

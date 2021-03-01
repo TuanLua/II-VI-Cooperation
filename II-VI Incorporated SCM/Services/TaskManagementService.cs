@@ -67,6 +67,7 @@ namespace II_VI_Incorporated_SCM.Services
         List<sp_Task_Statistical_ByDept_Result> Get_Task_Statistical_ByDept(string dept);
         List<sp_Task_Statistical_ByDetail_Result> Get_Task_Statistical_ByDetail(string SearchType, string SearchValue, string TaskStatus);
         List<sp_Task_Search_Result> Get_Task_BykeyWord(string key);
+        IEnumerable<TaskManagementNCRViewModel> GetListTaskMantSoreviewByID(string taskNo);
     }
 
     //services
@@ -90,6 +91,118 @@ namespace II_VI_Incorporated_SCM.Services
         /// <returns></returns>
         public IEnumerable<TaskManagementNCRViewModel> GetListTaskMantNCRByID(int taskID)
         {
+            List<TaskManagementNCRViewModel> lsTaskMantNCR = new List<TaskManagementNCRViewModel>();
+            foreach (var taskDetail in _db.TASKDETAILs.ToList())
+            {
+                if (taskDetail.TopicID == taskID)
+                {
+                    TaskManagementNCRViewModel taskNCRView = new TaskManagementNCRViewModel();
+
+                    //TakList
+                    TASKLIST taskList = new TASKLIST();
+                    taskList = GetTaskListByID(taskID);
+                    taskNCRView.TaskList = taskList;
+                    //taskNCRView.TaskList = new TASKLIST();
+                    //taskNCRView.TaskList.ID = taskDetail.TASKID;
+                    //taskNCRView.TaskList.TASKNO = taskDetail.TASKNO;
+                    //taskNCRView.TaskList.TYPE = taskDetail.TYPE;
+                    //taskNCRView.TaskList.WRITTENBY = taskDetail.WRITTENBY;
+                    //taskNCRView.TaskList.WRITEDATE = taskDetail.WRITEDATE;
+
+                    //TaskDetail
+                    //taskNCRView.TaskDetail = taskDetail;
+                    taskNCRView.TaskDetail = new TaskDetailViewModel
+                    {
+                        TaskID = taskDetail.IDTask,
+                        TopicID = taskDetail.TopicID,
+                        TASKNAME = taskDetail.TASKNAME,
+                        DESCRIPTION = taskDetail.DESCRIPTION,
+                        OWNER = taskDetail.OWNER,
+                        ASSIGNEE = taskDetail.ASSIGNEE,
+                        APPROVE = taskDetail.APPROVE,
+                        EstimateStartDate = taskDetail.EstimateStartDate,
+                        EstimateEndDate = taskDetail.EstimateEndDate,
+                        ActualStartDate = taskDetail.ActualStartDate,
+                        ActualEndDate = taskDetail.ActualEndDate,
+                        PROCESS = taskDetail.PROCESS,
+                        CreateDate = taskDetail.CreatedDate,
+                        STATUS = taskDetail.STATUS,
+                        PRIORITY = taskDetail.PRIORITY
+                    };
+
+                    string[] lsApp;
+                    if (taskNCRView.TaskDetail.APPROVE != null)
+                    {
+                        taskNCRView.ListApprove = new List<string>();
+                        lsApp = taskDetail.APPROVE.Split(new string[] { "<br/>" }, StringSplitOptions.None);
+                        foreach (var app in lsApp)
+                        {
+                            taskNCRView.ListApprove.Add(app);
+                            taskNCRView.OpproverName = taskNCRView.OpproverName + GetUserNameByID(app) + "<br/>";
+                        }
+                        taskNCRView.OpproverName = taskNCRView.OpproverName.Substring(0, taskNCRView.OpproverName.Length - 5);
+                    }
+                    //TASKDETAIL taskDetail = new TASKDETAIL();
+                    //taskDetail = GetTaskDetailByID(taskDetail.ID);
+                    //taskNCRView.TaskDetail = new TASKDETAIL();
+                    //taskNCRView.TaskDetail.ID = taskDetail.ID;
+                    //taskNCRView.TaskDetail.TASKID = taskDetail.TASKID;
+                    //taskNCRView.TaskDetail.TASKNAME = taskDetail.TASKNAME;
+                    //taskNCRView.TaskDetail.DESCRIPTION = taskDetail.DESCRIPTION;
+                    //taskNCRView.TaskDetail.OWNER = taskDetail.OWNER;
+                    //taskNCRView.TaskDetail.ASSIGNEE = taskDetail.ASSIGNEE;
+                    //taskNCRView.TaskDetail.APPROVE = taskDetail.APPROVE;
+                    //taskNCRView.TaskDetail.STARTDATE = taskDetail.STARTDATE;
+                    //taskNCRView.TaskDetail.DUEDATE = taskDetail.DUEDATE;
+                    //taskNCRView.TaskDetail.CORRECTSTARTDATE = taskDetail.CORRECTSTARTDATE;
+                    //taskNCRView.TaskDetail.CORRECTENDDATE = taskDetail.CORRECTENDDATE;
+                    //taskNCRView.TaskDetail.PROCESS = taskDetail.PROCESS;
+                    //taskNCRView.TaskDetail.EST_COMPLETEIONDATE = taskDetail.EST_COMPLETEIONDATE;
+                    //taskNCRView.TaskDetail.STATUS = taskDetail.STATUS;
+                    //taskNCRView.TaskDetail.PRIORITY = taskDetail.PRIORITY;
+
+                    //List TaskComment
+                    List<TASKCOMMENT> lsComment = new List<TASKCOMMENT>();
+                    lsComment = GetListTaskCommentByID(taskDetail.IDTask).ToList();
+                    taskNCRView.TaskComments = new List<TASKCOMMENT>();
+                    taskNCRView.TaskComments = lsComment;
+
+                    if (lsComment.Count > 0)
+                    {
+                        string contentComm = lsComment.LastOrDefault().CONTENTCOMMENT;
+                        string ownerComm = GetUserNameByID(lsComment.LastOrDefault().WRITTENBY);
+                        string lastComm = contentComm + ".<br/> by: " + ownerComm;
+                        taskNCRView.LastComment = lastComm;
+                    }
+
+                    //taskNCRView.LastComment = "";
+
+                    //List TaskDocument
+                    List<TASKDOCUMENT> lsDocument = new List<TASKDOCUMENT>();
+                    lsDocument = GetListTaskDoucumentByID(taskDetail.IDTask).ToList();
+                    taskNCRView.TaskDocuments = new List<TASKDOCUMENT>();
+                    taskNCRView.TaskDocuments = lsDocument;
+
+                    taskNCRView.DocumentCount = lsDocument.Count;
+                    taskNCRView.OwnerName = GetUserNameByID(taskDetail.OWNER);
+                    taskNCRView.AssigneeName = GetUserNameByID(taskDetail.ASSIGNEE);
+                    //taskNCRView.OpproverName = GetUserNameByID(taskDetail.APPROVE);
+
+                    //foreach (var app in lsApp)
+                    //{
+                    //    taskNCRView.OpproverName = taskNCRView.OpproverName + GetUserNameByID(app) + "<br/>";
+                    //}
+                    //taskNCRView.OpproverName = taskNCRView.OpproverName.Substring(0, taskNCRView.OpproverName.Length - 5);
+
+                    lsTaskMantNCR.Add(taskNCRView);
+                }
+            }
+            return lsTaskMantNCR;
+        }
+
+        public IEnumerable<TaskManagementNCRViewModel> GetListTaskMantSoreviewByID(string taskNo)
+        {
+            int taskID = _db.TASKLISTs.Where(x => x.Topic == taskNo).FirstOrDefault().TopicID;
             List<TaskManagementNCRViewModel> lsTaskMantNCR = new List<TaskManagementNCRViewModel>();
             foreach (var taskDetail in _db.TASKDETAILs.ToList())
             {
@@ -1013,6 +1126,20 @@ namespace II_VI_Incorporated_SCM.Services
                     {
                         Topic = taskNO.Trim(),
                         TYPE = "Improve_Action",
+                        WRITEDATE = DateTime.Now,
+                        WRITTENBY = uid,
+                        Level = 1,
+                        Reference = taskNO
+                    });
+                    _db.SaveChanges();
+
+                }
+                else if (ckTaskList == null && type == "SoReview")
+                {
+                    _db.TASKLISTs.Add(new TASKLIST
+                    {
+                        Topic = taskNO.Trim(),
+                        TYPE = "SoReview",
                         WRITEDATE = DateTime.Now,
                         WRITTENBY = uid,
                         Level = 1,

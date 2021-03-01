@@ -85,11 +85,13 @@ namespace II_VI_Incorporated_SCM.Models
         public virtual DbSet<NC_BY_PRODUCT_GRP> NC_BY_PRODUCT_GRP { get; set; }
         public virtual DbSet<NC_CAT_NoUse> NC_CAT_NoUse { get; set; }
         public virtual DbSet<NC_GROUP> NC_GROUP { get; set; }
+        public virtual DbSet<NC_PART> NC_PART { get; set; }
         public virtual DbSet<NCR_DET> NCR_DET { get; set; }
         public virtual DbSet<NCR_DET_History> NCR_DET_History { get; set; }
         public virtual DbSet<NCR_DIS> NCR_DIS { get; set; }
         public virtual DbSet<NCR_DIS_History> NCR_DIS_History { get; set; }
         public virtual DbSet<NCR_EVI> NCR_EVI { get; set; }
+        public virtual DbSet<NCR_HDR> NCR_HDR { get; set; }
         public virtual DbSet<NCR_HDR_History> NCR_HDR_History { get; set; }
         public virtual DbSet<NCR_History> NCR_History { get; set; }
         public virtual DbSet<NCRDispositionDay> NCRDispositionDays { get; set; }
@@ -125,13 +127,13 @@ namespace II_VI_Incorporated_SCM.Models
         public virtual DbSet<SCAR_RESULT_D6> SCAR_RESULT_D6 { get; set; }
         public virtual DbSet<SCAR_RESULT_D7> SCAR_RESULT_D7 { get; set; }
         public virtual DbSet<SCAREMAIL> SCAREMAILs { get; set; }
+        public virtual DbSet<SCARINFO> SCARINFOes { get; set; }
         public virtual DbSet<SCARnNCR> SCARnNCRs { get; set; }
         public virtual DbSet<SCRAP_REASON> SCRAP_REASON { get; set; }
         public virtual DbSet<SCRAPCategory> SCRAPCategories { get; set; }
         public virtual DbSet<STATUS> STATUS { get; set; }
         public virtual DbSet<SUPPLIER_PPM> SUPPLIER_PPM { get; set; }
         public virtual DbSet<SUPPLIER_PPM_RP> SUPPLIER_PPM_RP { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TASK_APPROVE> TASK_APPROVE { get; set; }
         public virtual DbSet<TASK_CATEGORY> TASK_CATEGORY { get; set; }
         public virtual DbSet<TASK_PHASE> TASK_PHASE { get; set; }
@@ -140,6 +142,7 @@ namespace II_VI_Incorporated_SCM.Models
         public virtual DbSet<TASKDOCUMENT> TASKDOCUMENTs { get; set; }
         public virtual DbSet<TaskHi> TaskHis { get; set; }
         public virtual DbSet<TASKLIST> TASKLISTs { get; set; }
+        public virtual DbSet<tbDashboard_Guide_Show> tbDashboard_Guide_Show { get; set; }
         public virtual DbSet<tbEvent> tbEvents { get; set; }
         public virtual DbSet<TbFixture> TbFixtures { get; set; }
         public virtual DbSet<tbl_Inv_Apr_Process> tbl_Inv_Apr_Process { get; set; }
@@ -151,6 +154,7 @@ namespace II_VI_Incorporated_SCM.Models
         public virtual DbSet<tbl_Inv_ImpMethod> tbl_Inv_ImpMethod { get; set; }
         public virtual DbSet<tbl_Inv_Role> tbl_Inv_Role { get; set; }
         public virtual DbSet<tbl_Inv_Score_Percent> tbl_Inv_Score_Percent { get; set; }
+        public virtual DbSet<tbl_Inv_Step1_SubmitSuggestion> tbl_Inv_Step1_SubmitSuggestion { get; set; }
         public virtual DbSet<tbl_Inv_Step2_CIAproval> tbl_Inv_Step2_CIAproval { get; set; }
         public virtual DbSet<tbl_Inv_Step3_SponsorApr> tbl_Inv_Step3_SponsorApr { get; set; }
         public virtual DbSet<tbl_Inv_Step4_DirApr> tbl_Inv_Step4_DirApr { get; set; }
@@ -159,6 +163,60 @@ namespace II_VI_Incorporated_SCM.Models
         public virtual DbSet<tbl_PT_Infor> tbl_PT_Infor { get; set; }
         public virtual DbSet<tbl_PT_Status> tbl_PT_Status { get; set; }
         public virtual DbSet<tbl_PT_Work_Center> tbl_PT_Work_Center { get; set; }
+        public virtual DbSet<tbl_RP_DataSource_Para> tbl_RP_DataSource_Para { get; set; }
+        public virtual DbSet<tbl_RP_Report> tbl_RP_Report { get; set; }
+        public virtual DbSet<tbl_RP_Report_Para> tbl_RP_Report_Para { get; set; }
+        public virtual DbSet<tbl_RP_Setting_BarChart> tbl_RP_Setting_BarChart { get; set; }
+        public virtual DbSet<tbl_RP_Setting_DataGrid> tbl_RP_Setting_DataGrid { get; set; }
+        public virtual DbSet<tbl_RP_Setting_LineChart> tbl_RP_Setting_LineChart { get; set; }
+        public virtual DbSet<tbl_RP_Store_Parameter> tbl_RP_Store_Parameter { get; set; }
+        public virtual DbSet<tbl_RP_StoreProcedure> tbl_RP_StoreProcedure { get; set; }
+        public virtual DbSet<tbl_SOR_Attached_ForItemReview> tbl_SOR_Attached_ForItemReview { get; set; }
+        public virtual DbSet<tbl_SOR_Cur_Review_Detail> tbl_SOR_Cur_Review_Detail { get; set; }
+        public virtual DbSet<tbl_SOR_Cur_Review_List> tbl_SOR_Cur_Review_List { get; set; }
+        public virtual DbSet<tbl_SOR_Family_Setup_Qty> tbl_SOR_Family_Setup_Qty { get; set; }
+        public virtual DbSet<tbl_SOR_His_Review_Detail> tbl_SOR_His_Review_Detail { get; set; }
+        public virtual DbSet<tbl_SOR_His_Review_List> tbl_SOR_His_Review_List { get; set; }
+        public virtual DbSet<tbl_SOR_Item_Review> tbl_SOR_Item_Review { get; set; }
+        public virtual DbSet<tbl_SOR_Review_Pic> tbl_SOR_Review_Pic { get; set; }
+        public virtual DbSet<tbl_SQE_Ass_Period> tbl_SQE_Ass_Period { get; set; }
+        public virtual DbSet<tbl_SQE_Ass_Resp> tbl_SQE_Ass_Resp { get; set; }
+        public virtual DbSet<tbl_SQE_Ass_Resp_Status> tbl_SQE_Ass_Resp_Status { get; set; }
+        public virtual DbSet<tbl_SQE_Ass_Vendor> tbl_SQE_Ass_Vendor { get; set; }
+        public virtual DbSet<tbl_SQE_Category> tbl_SQE_Category { get; set; }
+        public virtual DbSet<tbl_SQE_Category_Target> tbl_SQE_Category_Target { get; set; }
+        public virtual DbSet<tbl_SQE_Customer_Claim> tbl_SQE_Customer_Claim { get; set; }
+        public virtual DbSet<tbl_SQE_Develop_AuditVisit_Attachment> tbl_SQE_Develop_AuditVisit_Attachment { get; set; }
+        public virtual DbSet<tbl_SQE_Develop_Category> tbl_SQE_Develop_Category { get; set; }
+        public virtual DbSet<tbl_SQE_Develop_Goal> tbl_SQE_Develop_Goal { get; set; }
+        public virtual DbSet<tbl_SQE_Develop_ImprovePlan> tbl_SQE_Develop_ImprovePlan { get; set; }
+        public virtual DbSet<tbl_SQE_Develop_ProblemDesc> tbl_SQE_Develop_ProblemDesc { get; set; }
+        public virtual DbSet<tbl_SQE_Develop_SourceFrom> tbl_SQE_Develop_SourceFrom { get; set; }
+        public virtual DbSet<tbl_SQE_Develop_Status> tbl_SQE_Develop_Status { get; set; }
+        public virtual DbSet<tbl_SQE_Develop_VisitAudit> tbl_SQE_Develop_VisitAudit { get; set; }
+        public virtual DbSet<tbl_SQE_PCN> tbl_SQE_PCN { get; set; }
+        public virtual DbSet<tbl_SQE_PCN_Attached> tbl_SQE_PCN_Attached { get; set; }
+        public virtual DbSet<tbl_SQE_PCN_Class> tbl_SQE_PCN_Class { get; set; }
+        public virtual DbSet<tbl_SQE_PCN_Contact> tbl_SQE_PCN_Contact { get; set; }
+        public virtual DbSet<tbl_SQE_Premium_Freight> tbl_SQE_Premium_Freight { get; set; }
+        public virtual DbSet<tbl_SQE_Report_Result> tbl_SQE_Report_Result { get; set; }
+        public virtual DbSet<tbl_SQE_Report_Type> tbl_SQE_Report_Type { get; set; }
+        public virtual DbSet<tbl_SQE_Report_Weight> tbl_SQE_Report_Weight { get; set; }
+        public virtual DbSet<tbl_SQE_Res_Item> tbl_SQE_Res_Item { get; set; }
+        public virtual DbSet<tbl_SQE_Score_Ref> tbl_SQE_Score_Ref { get; set; }
+        public virtual DbSet<tbl_SQE_Score_Reponsiveness> tbl_SQE_Score_Reponsiveness { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog> tbl_SQE_SupplierLog { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog_Attached> tbl_SQE_SupplierLog_Attached { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog_BusinessType> tbl_SQE_SupplierLog_BusinessType { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog_CoC> tbl_SQE_SupplierLog_CoC { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog_CoCItem> tbl_SQE_SupplierLog_CoCItem { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog_Commodity> tbl_SQE_SupplierLog_Commodity { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog_Contact> tbl_SQE_SupplierLog_Contact { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog_ISO> tbl_SQE_SupplierLog_ISO { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog_MaterialSupplied> tbl_SQE_SupplierLog_MaterialSupplied { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog_QMSItem> tbl_SQE_SupplierLog_QMSItem { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog_Status> tbl_SQE_SupplierLog_Status { get; set; }
+        public virtual DbSet<tbl_SQE_Vendor_Score_Ref> tbl_SQE_Vendor_Score_Ref { get; set; }
         public virtual DbSet<tbl_TP_Family> tbl_TP_Family { get; set; }
         public virtual DbSet<tbl_TP_Section> tbl_TP_Section { get; set; }
         public virtual DbSet<tbLaborScan> tbLaborScans { get; set; }
@@ -182,6 +240,7 @@ namespace II_VI_Incorporated_SCM.Models
         public virtual DbSet<INSPECTOR> INSPECTORs { get; set; }
         public virtual DbSet<MEASUREMENT_STD_BY_PART_CHANGED_SPL> MEASUREMENT_STD_BY_PART_CHANGED_SPL { get; set; }
         public virtual DbSet<NCR_HDR_PUR> NCR_HDR_PUR { get; set; }
+        public virtual DbSet<NCR_WH_OPEN_COMMENT> NCR_WH_OPEN_COMMENT { get; set; }
         public virtual DbSet<PART_INS_REQ_VISUAL> PART_INS_REQ_VISUAL { get; set; }
         public virtual DbSet<PART_REJECT> PART_REJECT { get; set; }
         public virtual DbSet<PARTIAL_INS_RESULT> PARTIAL_INS_RESULT { get; set; }
@@ -197,24 +256,17 @@ namespace II_VI_Incorporated_SCM.Models
         public virtual DbSet<tbl_Inv_ScoreCost_4_Mem> tbl_Inv_ScoreCost_4_Mem { get; set; }
         public virtual DbSet<tbl_PT_Dept_PIC> tbl_PT_Dept_PIC { get; set; }
         public virtual DbSet<tbl_PT_Dept_PIC_BuyPart> tbl_PT_Dept_PIC_BuyPart { get; set; }
+        public virtual DbSet<tbl_PT_TaskList> tbl_PT_TaskList { get; set; }
+        public virtual DbSet<tbl_RP_Advance_Setting> tbl_RP_Advance_Setting { get; set; }
+        public virtual DbSet<tbl_RP_Data_Source> tbl_RP_Data_Source { get; set; }
+        public virtual DbSet<tbl_SQE_6Panel_TopNCPart> tbl_SQE_6Panel_TopNCPart { get; set; }
+        public virtual DbSet<tbl_SQE_PCN_Status> tbl_SQE_PCN_Status { get; set; }
+        public virtual DbSet<tbl_SQE_Supplier_Finish6Panel> tbl_SQE_Supplier_Finish6Panel { get; set; }
+        public virtual DbSet<tbl_SQE_SupplierLog_QMS> tbl_SQE_SupplierLog_QMS { get; set; }
         public virtual DbSet<TemporaryUpsizedTable2> TemporaryUpsizedTable2 { get; set; }
         public virtual DbSet<USER_PERMIT> USER_PERMIT { get; set; }
         public virtual DbSet<VENDOR_Temp> VENDOR_Temp { get; set; }
         public virtual DbSet<Work_Center> Work_Centers { get; set; }
-        public virtual DbSet<DMS_WOLot> DMS_WOLot { get; set; }
-        public virtual DbSet<PPM_RejectQty> PPM_RejectQty { get; set; }
-        public virtual DbSet<v_AQL> v_AQL { get; set; }
-        public virtual DbSet<v_INS_RESULT> v_INS_RESULT { get; set; }
-        public virtual DbSet<V_Material_HadMake_FLupSerialNumber> V_Material_HadMake_FLupSerialNumber { get; set; }
-        public virtual DbSet<v_Operator> v_Operator { get; set; }
-        public virtual DbSet<V_WO_Issue> V_WO_Issue { get; set; }
-        public virtual DbSet<vNCR_DET> vNCR_DET { get; set; }
-        public virtual DbSet<vNCR_DET_2> vNCR_DET_2 { get; set; }
-        public virtual DbSet<vNCR_HDR> vNCR_HDR { get; set; }
-        public virtual DbSet<tbl_Inv_Step1_SubmitSuggestion> tbl_Inv_Step1_SubmitSuggestion { get; set; }
-        public virtual DbSet<NCR_HDR> NCR_HDR { get; set; }
-        public virtual DbSet<V_AspNetUsers> V_AspNetUsers { get; set; }
-        public virtual DbSet<SCARINFO> SCARINFOes { get; set; }
     
         [DbFunction("Entities", "f_NCR_DET_1")]
         public virtual IQueryable<f_NCR_DET_1_Result> f_NCR_DET_1()
@@ -7030,6 +7082,909 @@ namespace II_VI_Incorporated_SCM.Models
                 new ObjectParameter("TaskStatus", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Task_Statistical_ByDetail_Result>("sp_Task_Statistical_ByDetail", searchTypeParameter, searchValueParameter, taskStatusParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetSoReview_Result> sp_GetSoReview()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSoReview_Result>("sp_GetSoReview");
+        }
+    
+        public virtual int DynamicPivot(Nullable<System.DateTime> month)
+        {
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("Month", month) :
+                new ObjectParameter("Month", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DynamicPivot", monthParameter);
+        }
+    
+        public virtual int GetListOperIQC()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetListOperIQC");
+        }
+    
+        public virtual int p_AgingTimeAQL_Parts_Detail_New(Nullable<System.DateTime> date)
+        {
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("p_AgingTimeAQL_Parts_Detail_New", dateParameter);
+        }
+    
+        public virtual int p_AgingTimeAQL_Parts_New(Nullable<System.DateTime> f, Nullable<System.DateTime> t)
+        {
+            var fParameter = f.HasValue ?
+                new ObjectParameter("f", f) :
+                new ObjectParameter("f", typeof(System.DateTime));
+    
+            var tParameter = t.HasValue ?
+                new ObjectParameter("t", t) :
+                new ObjectParameter("t", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("p_AgingTimeAQL_Parts_New", fParameter, tParameter);
+        }
+    
+        public virtual int p_Remind_Purchase_Order_Status()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("p_Remind_Purchase_Order_Status");
+        }
+    
+        public virtual ObjectResult<pGet_MEASUREMENT_STD_BY_PART_bk_Result> pGet_MEASUREMENT_STD_BY_PART_bk(string rECEIVER, string rEC_LINE, string cCN, string iTEM, string dRAW_REV, string rEV)
+        {
+            var rECEIVERParameter = rECEIVER != null ?
+                new ObjectParameter("RECEIVER", rECEIVER) :
+                new ObjectParameter("RECEIVER", typeof(string));
+    
+            var rEC_LINEParameter = rEC_LINE != null ?
+                new ObjectParameter("REC_LINE", rEC_LINE) :
+                new ObjectParameter("REC_LINE", typeof(string));
+    
+            var cCNParameter = cCN != null ?
+                new ObjectParameter("CCN", cCN) :
+                new ObjectParameter("CCN", typeof(string));
+    
+            var iTEMParameter = iTEM != null ?
+                new ObjectParameter("ITEM", iTEM) :
+                new ObjectParameter("ITEM", typeof(string));
+    
+            var dRAW_REVParameter = dRAW_REV != null ?
+                new ObjectParameter("DRAW_REV", dRAW_REV) :
+                new ObjectParameter("DRAW_REV", typeof(string));
+    
+            var rEVParameter = rEV != null ?
+                new ObjectParameter("REV", rEV) :
+                new ObjectParameter("REV", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pGet_MEASUREMENT_STD_BY_PART_bk_Result>("pGet_MEASUREMENT_STD_BY_PART_bk", rECEIVERParameter, rEC_LINEParameter, cCNParameter, iTEMParameter, dRAW_REVParameter, rEVParameter);
+        }
+    
+        public virtual int sp_Chart_Labor_RealTime_Rev2(string line, Nullable<System.DateTime> f, Nullable<System.DateTime> to)
+        {
+            var lineParameter = line != null ?
+                new ObjectParameter("Line", line) :
+                new ObjectParameter("Line", typeof(string));
+    
+            var fParameter = f.HasValue ?
+                new ObjectParameter("f", f) :
+                new ObjectParameter("f", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("to", to) :
+                new ObjectParameter("to", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Chart_Labor_RealTime_Rev2", lineParameter, fParameter, toParameter);
+        }
+    
+        public virtual int sp_GET_ListNC_Rev2(string cCN, string iTEM, string dRAW_REV, string chuoi)
+        {
+            var cCNParameter = cCN != null ?
+                new ObjectParameter("CCN", cCN) :
+                new ObjectParameter("CCN", typeof(string));
+    
+            var iTEMParameter = iTEM != null ?
+                new ObjectParameter("ITEM", iTEM) :
+                new ObjectParameter("ITEM", typeof(string));
+    
+            var dRAW_REVParameter = dRAW_REV != null ?
+                new ObjectParameter("DRAW_REV", dRAW_REV) :
+                new ObjectParameter("DRAW_REV", typeof(string));
+    
+            var chuoiParameter = chuoi != null ?
+                new ObjectParameter("Chuoi", chuoi) :
+                new ObjectParameter("Chuoi", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_GET_ListNC_Rev2", cCNParameter, iTEMParameter, dRAW_REVParameter, chuoiParameter);
+        }
+    
+        public virtual int sp_GET_NCCode_byItem(string iTEM)
+        {
+            var iTEMParameter = iTEM != null ?
+                new ObjectParameter("ITEM", iTEM) :
+                new ObjectParameter("ITEM", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_GET_NCCode_byItem", iTEMParameter);
+        }
+    
+        public virtual int sp_GET_NCGroup_byItem(string iTEM)
+        {
+            var iTEMParameter = iTEM != null ?
+                new ObjectParameter("ITEM", iTEM) :
+                new ObjectParameter("ITEM", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_GET_NCGroup_byItem", iTEMParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetOperator_IQC_Result> sp_GetOperator_IQC(string line, Nullable<System.DateTime> f, Nullable<System.DateTime> t)
+        {
+            var lineParameter = line != null ?
+                new ObjectParameter("line", line) :
+                new ObjectParameter("line", typeof(string));
+    
+            var fParameter = f.HasValue ?
+                new ObjectParameter("f", f) :
+                new ObjectParameter("f", typeof(System.DateTime));
+    
+            var tParameter = t.HasValue ?
+                new ObjectParameter("t", t) :
+                new ObjectParameter("t", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetOperator_IQC_Result>("sp_GetOperator_IQC", lineParameter, fParameter, tParameter);
+        }
+    
+        public virtual ObjectResult<string> sp_GetProduct_byLine()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_GetProduct_byLine");
+        }
+    
+        public virtual int sp_InsertPART_INFO_TEMP(string cCN, string iTEM, string dESCR, string dRAW_REV, string rEC_RULE, Nullable<System.DateTime> iNPUT, string eMPLOYEE, string aNALYST)
+        {
+            var cCNParameter = cCN != null ?
+                new ObjectParameter("CCN", cCN) :
+                new ObjectParameter("CCN", typeof(string));
+    
+            var iTEMParameter = iTEM != null ?
+                new ObjectParameter("ITEM", iTEM) :
+                new ObjectParameter("ITEM", typeof(string));
+    
+            var dESCRParameter = dESCR != null ?
+                new ObjectParameter("DESCR", dESCR) :
+                new ObjectParameter("DESCR", typeof(string));
+    
+            var dRAW_REVParameter = dRAW_REV != null ?
+                new ObjectParameter("DRAW_REV", dRAW_REV) :
+                new ObjectParameter("DRAW_REV", typeof(string));
+    
+            var rEC_RULEParameter = rEC_RULE != null ?
+                new ObjectParameter("REC_RULE", rEC_RULE) :
+                new ObjectParameter("REC_RULE", typeof(string));
+    
+            var iNPUTParameter = iNPUT.HasValue ?
+                new ObjectParameter("INPUT", iNPUT) :
+                new ObjectParameter("INPUT", typeof(System.DateTime));
+    
+            var eMPLOYEEParameter = eMPLOYEE != null ?
+                new ObjectParameter("EMPLOYEE", eMPLOYEE) :
+                new ObjectParameter("EMPLOYEE", typeof(string));
+    
+            var aNALYSTParameter = aNALYST != null ?
+                new ObjectParameter("ANALYST", aNALYST) :
+                new ObjectParameter("ANALYST", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertPART_INFO_TEMP", cCNParameter, iTEMParameter, dESCRParameter, dRAW_REVParameter, rEC_RULEParameter, iNPUTParameter, eMPLOYEEParameter, aNALYSTParameter);
+        }
+    
+        public virtual ObjectResult<sp_Inv_Report_SUGGESTION_ANALYSIS_Result> sp_Inv_Report_SUGGESTION_ANALYSIS(Nullable<System.DateTime> dtFrom, Nullable<System.DateTime> dtTo)
+        {
+            var dtFromParameter = dtFrom.HasValue ?
+                new ObjectParameter("dtFrom", dtFrom) :
+                new ObjectParameter("dtFrom", typeof(System.DateTime));
+    
+            var dtToParameter = dtTo.HasValue ?
+                new ObjectParameter("dtTo", dtTo) :
+                new ObjectParameter("dtTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Inv_Report_SUGGESTION_ANALYSIS_Result>("sp_Inv_Report_SUGGESTION_ANALYSIS", dtFromParameter, dtToParameter);
+        }
+    
+        public virtual ObjectResult<sp_Inv_Report_Suggestion_ByMonth_Result> sp_Inv_Report_Suggestion_ByMonth(Nullable<System.DateTime> dtFrom, Nullable<System.DateTime> dtTo)
+        {
+            var dtFromParameter = dtFrom.HasValue ?
+                new ObjectParameter("dtFrom", dtFrom) :
+                new ObjectParameter("dtFrom", typeof(System.DateTime));
+    
+            var dtToParameter = dtTo.HasValue ?
+                new ObjectParameter("dtTo", dtTo) :
+                new ObjectParameter("dtTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Inv_Report_Suggestion_ByMonth_Result>("sp_Inv_Report_Suggestion_ByMonth", dtFromParameter, dtToParameter);
+        }
+    
+        public virtual ObjectResult<sp_Inv_Report_Suggestion_ByPerson_Result> sp_Inv_Report_Suggestion_ByPerson(Nullable<System.DateTime> dtFrom, Nullable<System.DateTime> dtTo)
+        {
+            var dtFromParameter = dtFrom.HasValue ?
+                new ObjectParameter("dtFrom", dtFrom) :
+                new ObjectParameter("dtFrom", typeof(System.DateTime));
+    
+            var dtToParameter = dtTo.HasValue ?
+                new ObjectParameter("dtTo", dtTo) :
+                new ObjectParameter("dtTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Inv_Report_Suggestion_ByPerson_Result>("sp_Inv_Report_Suggestion_ByPerson", dtFromParameter, dtToParameter);
+        }
+    
+        public virtual ObjectResult<sp_Inv_Report_Suggestion_Status_Result> sp_Inv_Report_Suggestion_Status(Nullable<System.DateTime> dtFrom, Nullable<System.DateTime> dtTo)
+        {
+            var dtFromParameter = dtFrom.HasValue ?
+                new ObjectParameter("dtFrom", dtFrom) :
+                new ObjectParameter("dtFrom", typeof(System.DateTime));
+    
+            var dtToParameter = dtTo.HasValue ?
+                new ObjectParameter("dtTo", dtTo) :
+                new ObjectParameter("dtTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Inv_Report_Suggestion_Status_Result>("sp_Inv_Report_Suggestion_Status", dtFromParameter, dtToParameter);
+        }
+    
+        public virtual int sp_LaborScan_RealTime(string operID, Nullable<System.DateTime> date)
+        {
+            var operIDParameter = operID != null ?
+                new ObjectParameter("OperID", operID) :
+                new ObjectParameter("OperID", typeof(string));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_LaborScan_RealTime", operIDParameter, dateParameter);
+        }
+    
+        public virtual int sp_LaborScan_Rev2(string operID, string action, string wC)
+        {
+            var operIDParameter = operID != null ?
+                new ObjectParameter("OperID", operID) :
+                new ObjectParameter("OperID", typeof(string));
+    
+            var actionParameter = action != null ?
+                new ObjectParameter("Action", action) :
+                new ObjectParameter("Action", typeof(string));
+    
+            var wCParameter = wC != null ?
+                new ObjectParameter("WC", wC) :
+                new ObjectParameter("WC", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_LaborScan_Rev2", operIDParameter, actionParameter, wCParameter);
+        }
+    
+        public virtual int sp_PT_Complete_BuyPart()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PT_Complete_BuyPart");
+        }
+    
+        public virtual int sp_RemindSupplierLog_Re_Evaluation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RemindSupplierLog_Re_Evaluation");
+        }
+    
+        public virtual int sp_Report_Labor_OPERATION_TIME_Rev2(string line, string oper, string para1, Nullable<System.DateTime> from, Nullable<System.DateTime> to, string para2)
+        {
+            var lineParameter = line != null ?
+                new ObjectParameter("line", line) :
+                new ObjectParameter("line", typeof(string));
+    
+            var operParameter = oper != null ?
+                new ObjectParameter("oper", oper) :
+                new ObjectParameter("oper", typeof(string));
+    
+            var para1Parameter = para1 != null ?
+                new ObjectParameter("para1", para1) :
+                new ObjectParameter("para1", typeof(string));
+    
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("from", from) :
+                new ObjectParameter("from", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("to", to) :
+                new ObjectParameter("to", typeof(System.DateTime));
+    
+            var para2Parameter = para2 != null ?
+                new ObjectParameter("para2", para2) :
+                new ObjectParameter("para2", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Report_Labor_OPERATION_TIME_Rev2", lineParameter, operParameter, para1Parameter, fromParameter, toParameter, para2Parameter);
+        }
+    
+        public virtual int sp_Report_Labor_OverTimeCheck_Rev2(string line, string oper, string para1, Nullable<System.DateTime> from, Nullable<System.DateTime> to, string para2)
+        {
+            var lineParameter = line != null ?
+                new ObjectParameter("line", line) :
+                new ObjectParameter("line", typeof(string));
+    
+            var operParameter = oper != null ?
+                new ObjectParameter("oper", oper) :
+                new ObjectParameter("oper", typeof(string));
+    
+            var para1Parameter = para1 != null ?
+                new ObjectParameter("para1", para1) :
+                new ObjectParameter("para1", typeof(string));
+    
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("from", from) :
+                new ObjectParameter("from", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("to", to) :
+                new ObjectParameter("to", typeof(System.DateTime));
+    
+            var para2Parameter = para2 != null ?
+                new ObjectParameter("para2", para2) :
+                new ObjectParameter("para2", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Report_Labor_OverTimeCheck_Rev2", lineParameter, operParameter, para1Parameter, fromParameter, toParameter, para2Parameter);
+        }
+    
+        public virtual int sp_Report_Labor_RealTime_ProcessGroup_Rev2(string line, string part, string para1, Nullable<System.DateTime> from, Nullable<System.DateTime> to, string para2)
+        {
+            var lineParameter = line != null ?
+                new ObjectParameter("line", line) :
+                new ObjectParameter("line", typeof(string));
+    
+            var partParameter = part != null ?
+                new ObjectParameter("part", part) :
+                new ObjectParameter("part", typeof(string));
+    
+            var para1Parameter = para1 != null ?
+                new ObjectParameter("para1", para1) :
+                new ObjectParameter("para1", typeof(string));
+    
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("from", from) :
+                new ObjectParameter("from", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("to", to) :
+                new ObjectParameter("to", typeof(System.DateTime));
+    
+            var para2Parameter = para2 != null ?
+                new ObjectParameter("para2", para2) :
+                new ObjectParameter("para2", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Report_Labor_RealTime_ProcessGroup_Rev2", lineParameter, partParameter, para1Parameter, fromParameter, toParameter, para2Parameter);
+        }
+    
+        public virtual int sp_Report_LABOR_UTILIZATION_Rev2(string line, string oper, string para1, Nullable<System.DateTime> from, Nullable<System.DateTime> to, string para2)
+        {
+            var lineParameter = line != null ?
+                new ObjectParameter("line", line) :
+                new ObjectParameter("line", typeof(string));
+    
+            var operParameter = oper != null ?
+                new ObjectParameter("oper", oper) :
+                new ObjectParameter("oper", typeof(string));
+    
+            var para1Parameter = para1 != null ?
+                new ObjectParameter("para1", para1) :
+                new ObjectParameter("para1", typeof(string));
+    
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("from", from) :
+                new ObjectParameter("from", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("to", to) :
+                new ObjectParameter("to", typeof(System.DateTime));
+    
+            var para2Parameter = para2 != null ?
+                new ObjectParameter("para2", para2) :
+                new ObjectParameter("para2", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Report_LABOR_UTILIZATION_Rev2", lineParameter, operParameter, para1Parameter, fromParameter, toParameter, para2Parameter);
+        }
+    
+        public virtual int sp_Report_Labor_WORKING_HOURS_BY_WO_BY_EMPLOYEES_Rev2(string line, Nullable<System.DateTime> f, Nullable<System.DateTime> to)
+        {
+            var lineParameter = line != null ?
+                new ObjectParameter("Line", line) :
+                new ObjectParameter("Line", typeof(string));
+    
+            var fParameter = f.HasValue ?
+                new ObjectParameter("f", f) :
+                new ObjectParameter("f", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("to", to) :
+                new ObjectParameter("to", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Report_Labor_WORKING_HOURS_BY_WO_BY_EMPLOYEES_Rev2", lineParameter, fParameter, toParameter);
+        }
+    
+        public virtual int sp_Report_LABOR_WorkingTime_Rev2(string line, Nullable<System.DateTime> from, Nullable<System.DateTime> to)
+        {
+            var lineParameter = line != null ?
+                new ObjectParameter("line", line) :
+                new ObjectParameter("line", typeof(string));
+    
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("from", from) :
+                new ObjectParameter("from", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("to", to) :
+                new ObjectParameter("to", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Report_LABOR_WorkingTime_Rev2", lineParameter, fromParameter, toParameter);
+        }
+    
+        public virtual ObjectResult<sp_Report_MonthIQC_TEM_SumByPart_Result> sp_Report_MonthIQC_TEM_SumByPart(string part, Nullable<System.DateTime> f, Nullable<System.DateTime> t)
+        {
+            var partParameter = part != null ?
+                new ObjectParameter("part", part) :
+                new ObjectParameter("part", typeof(string));
+    
+            var fParameter = f.HasValue ?
+                new ObjectParameter("f", f) :
+                new ObjectParameter("f", typeof(System.DateTime));
+    
+            var tParameter = t.HasValue ?
+                new ObjectParameter("t", t) :
+                new ObjectParameter("t", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Report_MonthIQC_TEM_SumByPart_Result>("sp_Report_MonthIQC_TEM_SumByPart", partParameter, fParameter, tParameter);
+        }
+    
+        public virtual int sp_ReportWHOpenNCRforMRBmeeting_AddCom(string ncr, string com)
+        {
+            var ncrParameter = ncr != null ?
+                new ObjectParameter("ncr", ncr) :
+                new ObjectParameter("ncr", typeof(string));
+    
+            var comParameter = com != null ?
+                new ObjectParameter("com", com) :
+                new ObjectParameter("com", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ReportWHOpenNCRforMRBmeeting_AddCom", ncrParameter, comParameter);
+        }
+    
+        public virtual int sp_SQE_6Panel_CustClaim_By_Month(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_6Panel_CustClaim_By_Month", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual int sp_SQE_6Panel_DefectDetail(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_6Panel_DefectDetail", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual int sp_SQE_6Panel_DeliveryPerformance(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_6Panel_DeliveryPerformance", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_6Panel_DetailScar_Result> sp_SQE_6Panel_DetailScar(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_6Panel_DetailScar_Result>("sp_SQE_6Panel_DetailScar", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual int sp_SQE_6Panel_Freight_By_Month(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_6Panel_Freight_By_Month", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_6Panel_GetListVendor_Result> sp_SQE_6Panel_GetListVendor()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_6Panel_GetListVendor_Result>("sp_SQE_6Panel_GetListVendor");
+        }
+    
+        public virtual ObjectResult<sp_SQE_6Panel_OTD_By_Month_Result> sp_SQE_6Panel_OTD_By_Month(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_6Panel_OTD_By_Month_Result>("sp_SQE_6Panel_OTD_By_Month", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual int sp_SQE_6Panel_Performance(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_6Panel_Performance", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_6Panel_PPM_By_Month_Result> sp_SQE_6Panel_PPM_By_Month(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_6Panel_PPM_By_Month_Result>("sp_SQE_6Panel_PPM_By_Month", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_6Panel_QualityPerformance_Result> sp_SQE_6Panel_QualityPerformance(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_6Panel_QualityPerformance_Result>("sp_SQE_6Panel_QualityPerformance", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_6Panel_ScoreJudment_Result> sp_SQE_6Panel_ScoreJudment(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_6Panel_ScoreJudment_Result>("sp_SQE_6Panel_ScoreJudment", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_6Panel_ScoringRef_Result> sp_SQE_6Panel_ScoringRef(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_6Panel_ScoringRef_Result>("sp_SQE_6Panel_ScoringRef", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_6Panel_SupplierInfo_Result> sp_SQE_6Panel_SupplierInfo(string supplierCode)
+        {
+            var supplierCodeParameter = supplierCode != null ?
+                new ObjectParameter("SupplierCode", supplierCode) :
+                new ObjectParameter("SupplierCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_6Panel_SupplierInfo_Result>("sp_SQE_6Panel_SupplierInfo", supplierCodeParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_6Panel_TopDefectPart_By_Month_Result> sp_SQE_6Panel_TopDefectPart_By_Month(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_6Panel_TopDefectPart_By_Month_Result>("sp_SQE_6Panel_TopDefectPart_By_Month", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_6Panel_TopDefectPart_By_YTD_Result> sp_SQE_6Panel_TopDefectPart_By_YTD(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_6Panel_TopDefectPart_By_YTD_Result>("sp_SQE_6Panel_TopDefectPart_By_YTD", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual int sp_SQE_6Panel_UpdatePerformance(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_6Panel_UpdatePerformance", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_Auto6Panel_Result> sp_SQE_Auto6Panel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_Auto6Panel_Result>("sp_SQE_Auto6Panel");
+        }
+    
+        public virtual ObjectResult<sp_SQE_GetListVendor_Result> sp_SQE_GetListVendor()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_GetListVendor_Result>("sp_SQE_GetListVendor");
+        }
+    
+        public virtual ObjectResult<sp_SQE_GetSupplierInfo_Result> sp_SQE_GetSupplierInfo(string vendorCode)
+        {
+            var vendorCodeParameter = vendorCode != null ?
+                new ObjectParameter("VendorCode", vendorCode) :
+                new ObjectParameter("VendorCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_GetSupplierInfo_Result>("sp_SQE_GetSupplierInfo", vendorCodeParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_ListVendorDetail_Result> sp_SQE_ListVendorDetail()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_ListVendorDetail_Result>("sp_SQE_ListVendorDetail");
+        }
+    
+        public virtual int sp_SQE_Part_OTD(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_Part_OTD", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual int sp_SQE_Part_PPM(string vendor, Nullable<System.DateTime> date_From, Nullable<System.DateTime> date_To)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var date_FromParameter = date_From.HasValue ?
+                new ObjectParameter("Date_From", date_From) :
+                new ObjectParameter("Date_From", typeof(System.DateTime));
+    
+            var date_ToParameter = date_To.HasValue ?
+                new ObjectParameter("Date_To", date_To) :
+                new ObjectParameter("Date_To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_Part_PPM", vendorParameter, date_FromParameter, date_ToParameter);
+        }
+    
+        public virtual int sp_SQE_PCN_PartList()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_PCN_PartList");
+        }
+    
+        public virtual ObjectResult<sp_SQE_RA_ProductClass_Result> sp_SQE_RA_ProductClass()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_RA_ProductClass_Result>("sp_SQE_RA_ProductClass");
+        }
+    
+        public virtual int sp_SQE_RemindSupplierLog_DueDate()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_RemindSupplierLog_DueDate");
+        }
+    
+        public virtual int sp_SQE_RemindSupplierLog_Re_Evaluation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_RemindSupplierLog_Re_Evaluation");
+        }
+    
+        public virtual int sp_SQE_RemindSupplierLog_Re_Examined()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_RemindSupplierLog_Re_Examined");
+        }
+    
+        public virtual int sp_SQE_Risk_Assessment(string vendor, Nullable<int> year)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_Risk_Assessment", vendorParameter, yearParameter);
+        }
+    
+        public virtual ObjectResult<string> sp_SQE_SupplierDevelop_Scar(string vendor, Nullable<int> year, Nullable<int> month)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(int));
+    
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("Month", month) :
+                new ObjectParameter("Month", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_SQE_SupplierDevelop_Scar", vendorParameter, yearParameter, monthParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_SQE_SupplierDevelopment_CheckPlan(string supplierCode, Nullable<int> fiscalYear)
+        {
+            var supplierCodeParameter = supplierCode != null ?
+                new ObjectParameter("SupplierCode", supplierCode) :
+                new ObjectParameter("SupplierCode", typeof(string));
+    
+            var fiscalYearParameter = fiscalYear.HasValue ?
+                new ObjectParameter("FiscalYear", fiscalYear) :
+                new ObjectParameter("FiscalYear", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_SQE_SupplierDevelopment_CheckPlan", supplierCodeParameter, fiscalYearParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_SupplierDevelopment_FiscalYear_Result> sp_SQE_SupplierDevelopment_FiscalYear()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_SupplierDevelopment_FiscalYear_Result>("sp_SQE_SupplierDevelopment_FiscalYear");
+        }
+    
+        public virtual ObjectResult<sp_SQE_SupplierDevelopment_NewPlan_Result> sp_SQE_SupplierDevelopment_NewPlan(string supplierCode, Nullable<int> fiscalYear)
+        {
+            var supplierCodeParameter = supplierCode != null ?
+                new ObjectParameter("SupplierCode", supplierCode) :
+                new ObjectParameter("SupplierCode", typeof(string));
+    
+            var fiscalYearParameter = fiscalYear.HasValue ?
+                new ObjectParameter("FiscalYear", fiscalYear) :
+                new ObjectParameter("FiscalYear", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_SupplierDevelopment_NewPlan_Result>("sp_SQE_SupplierDevelopment_NewPlan", supplierCodeParameter, fiscalYearParameter);
+        }
+    
+        public virtual int sp_SQE_SupplierDevelopment_RiskAssessment(string vendor, Nullable<int> year, Nullable<int> month)
+        {
+            var vendorParameter = vendor != null ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(string));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(int));
+    
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("Month", month) :
+                new ObjectParameter("Month", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQE_SupplierDevelopment_RiskAssessment", vendorParameter, yearParameter, monthParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_SupplierDevelopment_SearchPlan_Result> sp_SQE_SupplierDevelopment_SearchPlan(string supplierCode, Nullable<int> fiscalYear)
+        {
+            var supplierCodeParameter = supplierCode != null ?
+                new ObjectParameter("SupplierCode", supplierCode) :
+                new ObjectParameter("SupplierCode", typeof(string));
+    
+            var fiscalYearParameter = fiscalYear.HasValue ?
+                new ObjectParameter("FiscalYear", fiscalYear) :
+                new ObjectParameter("FiscalYear", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_SupplierDevelopment_SearchPlan_Result>("sp_SQE_SupplierDevelopment_SearchPlan", supplierCodeParameter, fiscalYearParameter);
+        }
+    
+        public virtual ObjectResult<sp_SQE_SupplierDevelopment_VisitAuditSum_Result> sp_SQE_SupplierDevelopment_VisitAuditSum()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_SupplierDevelopment_VisitAuditSum_Result>("sp_SQE_SupplierDevelopment_VisitAuditSum");
+        }
+    
+        public virtual ObjectResult<sp_SQE_Yearlist_Result> sp_SQE_Yearlist()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SQE_Yearlist_Result>("sp_SQE_Yearlist");
+        }
+    
+        public virtual int sp_SQEDB_SupplierLog_Remind_ReEvaluation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQEDB_SupplierLog_Remind_ReEvaluation");
         }
     }
 }

@@ -63,11 +63,12 @@ namespace II_VI_Incorporated_SCM.Services
         }
         public List<SelectListItem> GetDropdownlistMember()
         {
-            List<SelectListItem> listvendor = _db.V_AspNetUsers.Select(x => new SelectListItem
-            {
-                Value = x.id,
-                Text = x.FullName.Trim(),
-            }).ToList();
+            //List<SelectListItem> listvendor = _db.V_AspNetUsers.Select(x => new SelectListItem
+            //{
+            //    Value = x.id,
+            //    Text = x.FullName.Trim(),
+            //}).ToList();
+            var listvendor = new  List<SelectListItem>();
             return listvendor;
         }
         public List<SelectListItem> GetDeptByUserID()

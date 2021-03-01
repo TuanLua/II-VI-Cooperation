@@ -1,0 +1,286 @@
+﻿@using II_VI_Incorporated_SCM.Services;
+@model List<II_VI_Incorporated_SCM.Models.SOReview.FamilyReviewmodel>
+
+<h3>Family Review</h3>
+<div class="row">
+    <div class="col-md-12">
+        @*@if ((bool)ViewBag.checkRoleUser == true )
+            {*@
+        @*@if ((bool)ViewBag.IsPlanner)
+            {*@
+        <button style="float:right; margin-left:10px" class="btn btn-sm btn-success " id="addnew" onclick="AddNew()">Add New</button>
+        @* }*@
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered" id="gridQMSSummary">
+            <thead>
+                <tr>
+                    <th class="text-center">Family</th>
+                    <th class="text-center">Max Qty</th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody id="idtb">
+                @foreach (var item in Model)
+                {
+                    <tr ID="@item.ID" dept="@item.Family" pic="@item.MaxQty">
+                        <td style="text-align:center; width:350px">
+                            @item.Family
+                        </td>
+                        <td class="pic" style="text-align:center; width:350px">
+                            @item.MaxQty
+                        </td>
+                    
+                        <td style="text-align:center; width:350px">
+                            @*@if ((bool)ViewBag.IsPlanner)
+                                {*@
+                            <button class="btn btn-info btn-xs btn-edit">Edit</button>
+                            <button class="btn btn-danger btn-xs btn-delete">Delete</button>
+                            @*}*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<script>
+    var gridDataQMS;
+      // Validate data
+    function ValidateDataQMS(dept, pic) {
+        if (dept == null || dept == '' || dept == 'underfined') {
+            bootbox.alert("Please input Family!");
+            return;
+        }
+        if (pic == null || pic == '' || pic == 'underfined' || pic <=0) {
+            bootbox.alert("Please input Max Qty!");
+            return;
+        }
+        return true;
+    }
+    //Delete data
+    function DeleteDataQMSSummary(e) {
+        var id = $(this).parents("tr").attr('ID');
+        bootbox.confirm({
+            message: 'Are you sure to delete data?',
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            closeButton: false,
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteFamilyReview", "SoReview")',
+                        type: "POST",
+                        data: { id: id },
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.success) {
+                                bootbox.alert('Delete sucess!', function () {
+                                    window.location.reload();
+                                });
+                            }
+                            else {
+                                bootbox.alert(result.message);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+    var IsEdit = 1;
+    $("#gridQMSSummary tbody").on("click", ".btn-edit", function () {
+        IsEdit = IsEdit + 1;
+        if (IsEdit > 2) {
+            bootbox.alert("Please update before edit next row!");
+            IsEdit = 1;
+            return;
+        } else {
+            var dept = $(this).parents("tr").attr('dept');
+            var pic = $(this).parents("tr").attr('pic');
+            $(this).parents("tr").find("td:eq(0)").html('<input class="form-control " name="dept" value="' + dept + '">');
+            $(this).parents("tr").find("td:eq(1)").html('<input class="form-control " type="number" name="pic" value="' + pic + '">');
+            $(this).parents("tr").find("td:eq(2)").prepend("<button class='btn btn-info btn-xs btn-update'>Update</button><button class='btn btn-warning btn-xs btn-cancel'>Cancel</button>")
+            $(this).hide();
+        }
+     });
+
+    //Delete
+    $("#gridQMSSummary tbody").on("click", ".btn-delete", function () {
+        var id = $(this).parents("tr").attr('id');
+        var tr = $(this).parents("tr");
+        bootbox.confirm({
+            message: 'Are you sure to delete data?',
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            closeButton: false,
+            callback: function (result) {
+                if (result) {
+                      $.ajax({
+                        url: '@Url.Action("DeleteFamilyReview", "SOReview")',
+                        type: "POST",
+                        data: {id:id },
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.success) {
+                                bootbox.alert('Delete sucess', function (e) {
+                                    tr.remove();
+                                      $('#addnew').removeAttr('disabled', 'disabled');
+                                });
+                            }
+                            else {
+                              //  bootbox.alert(result.message);
+                                tr.remove();
+                                   $('#addnew').removeAttr('disabled', 'disabled');
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+    //Cancel
+    $("#gridQMSSummary tbody").on("click", ".btn-cancel", function () {
+        IsEdit = 1;
+        var dept = $(this).parents("tr").attr('dept');
+        $(this).parents("tr").find("td:eq(0)").text(dept);
+        var pic = $(this).parents("tr").attr('pic');
+        $(this).parents("tr").find("td:eq(1)").text(pic);
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-update").remove();
+        $(this).parents("tr").find(".btn-cancel").remove();
+    });
+    //Edit and Save Update HTML
+    $("#gridQMSSummary tbody").on("click", ".btn-update", function () {
+        var dept =$(this).parents("tr").find("input[name='dept']").val();
+        var pic = $(this).parents("tr").find("input[name='pic']").val();
+        var id = $(this).parents("tr").attr('ID');
+
+        //Save Update Data
+        if (ValidateDataQMS(dept, pic)) {
+
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-cancel").remove();
+        $(this).parents("tr").find(".btn-update").remove();
+            bootbox.confirm({
+                message: 'Are you sure to edit data?',
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                closeButton: false,
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: '@Url.Action("UpdateFamilyReview", "SoReview")',
+                            type: "POST",
+                            data: { id: id, dept: dept, pic: pic },
+                            dataType: "json",
+                            success: function (result) {
+                                if (result.success) {
+                                    bootbox.alert('Update sucess', function () {
+                                          window.location.reload();
+                                    });
+                                }
+                                else {
+                                    bootbox.alert(result.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+
+
+    });
+    //Save New
+    $("#gridQMSSummary tbody").on("click", ".btn-save", function () {
+        var dept =$(this).parents("tr").find("input[name='dept']").val();
+        var pic = $(this).parents("tr").find("input[name='pic']").val();
+         id = 0;
+
+        $(this).parents("tr").attr('pic', pic);
+        $(this).parents("tr").attr('dept', dept);
+        if (ValidateDataQMS(dept, pic)) {
+            bootbox.confirm({
+                message: 'Are you sure to Save data?',
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                closeButton: false,
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: '@Url.Action("SaveFamilyReview", "SoReview")',
+                            type: "POST",
+                            data: { dept: dept, pic: pic },
+                            dataType: "json",
+                            success: function (result) {
+                                if (result.success) {
+                                    bootbox.alert('Save sucess', function () {
+                                        window.location.reload();
+                                    });
+                                }
+                                else {
+                                    bootbox.alert(result.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+     });
+    //Add new
+    function AddNew() {
+        $('#addnew').attr('disabled', 'disabled');
+        var qms = ""
+         var certificationdate ="";
+        var duedate = "";
+        let html = "<tr dept='" + certificationdate + "' pic='" + duedate + "'>" +
+            "<td><input class='form-control' name='dept'/> </td>" +
+            "<td><input class='form-control' type='number' name='pic' /> </td>" +
+            "<td style='text-align:center; width:350px'><button class='btn btn-info btn-xs btn-save'>Save</button> <button class='btn btn-danger btn-xs btn-delete'>Delete</button></td>"+
+             "</tr>";
+        $("#gridQMSSummary tbody").append(html);
+    }
+</script>

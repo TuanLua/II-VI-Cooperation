@@ -21,5 +21,6 @@ namespace II_VI_Incorporated_SCM.Models
         public string WRITEBY { get; set; }
     
         public virtual MAINQUESTION MAINQUESTION { get; set; }
+        public virtual MAINQUESTION MAINQUESTION1 { get; set; }
     }
 }
