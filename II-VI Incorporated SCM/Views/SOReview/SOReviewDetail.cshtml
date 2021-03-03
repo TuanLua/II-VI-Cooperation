@@ -323,7 +323,11 @@
             $("#user").select2();
             var $newOption = $("<option selected='selected'></option>").val("").text("")
         $("#user").append($newOption).trigger('change');
+        if (@ViewBag.planshipdate == "TBD") {
+            $("#IsDefine").prop("checked", true);
+        } else {
         $('#Shipdate').val(@ViewBag.planshipdate);
+        }
     })
 
     $("body").on("click", "#tblCustomers .Edit", function () {

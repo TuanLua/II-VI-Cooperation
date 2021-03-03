@@ -65,6 +65,10 @@ namespace II_VI_Incorporated_SCM.Services
 
         #endregion
 
+        #region Report
+        List<SelectListItem> GetdropdownPart();
+        List<SelectListItem> GetdropdownSoReview();
+        #endregion
 
     }
     public class SoReviewService : ISoReviewService
@@ -702,6 +706,28 @@ namespace II_VI_Incorporated_SCM.Services
             }
         }
         #endregion
+
+        #endregion
+
+        #region Report
+        public List<SelectListItem> GetdropdownPart()
+        {
+            List<SelectListItem> listpart = _db.tbl_SOR_Cur_Review_List.Select(x => new SelectListItem
+            {
+                Value = x.ANALYST,
+                Text = x.ANALYST
+            }).ToList();
+            return listpart;
+        }
+        public List<SelectListItem> GetdropdownSoReview()
+        {
+            List<SelectListItem> lstSo = _db.tbl_SOR_Cur_Review_List.Select(x => new SelectListItem
+            {
+                Value = x.SO_NO,
+                Text = x.SO_NO
+            }).ToList();
+            return lstSo;
+        }
 
         #endregion
     }

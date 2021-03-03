@@ -1,0 +1,54 @@
+﻿@using II_VI_Incorporated_SCM.Models
+@using II_VI_Incorporated_SCM.Services
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "ReleaseforReview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div  style="float:right"> <button class="btn btn-sm btn-success">Release</button></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<sp_GetSoReview_Result>()
+                                                      .Name("gridSoReview")
+                                                      .Columns(columns =>
+                                                      {
+                                                          columns.Bound(p => p.ANALYST).Title("ANALYST").HtmlAttributes(new { @class = "history" }).Width(120);
+                                                          columns.Bound(p => p.SO_NO).Title("SO No").HtmlAttributes(new { @class = "CRNo" }).Width(150);
+                                                          columns.Bound(p => p.DOWNLOAD_DATE).Title("Review Date").Format("{0:dd-MMM-yy}").Width(150);
+                                                          columns.Bound(p => p.REVIEW_STATUS).Title("Review Status").Width(120);
+                                                          columns.Bound(p => p.SO_ON_HOLD).Title("SO on hold").Width(100);
+                                                          columns.Bound(p => p.SHIP_TO).Title("Ship To Location").Width(150);
+                                                          columns.Bound(p => p.ITEM).Title("Item").Width(100);
+                                                          columns.Bound(p => p.NEW_REVIEW).Title("New SO VS last week").Width(100);
+                                                          columns.Bound(p => p.FAI).Title("FAI").Width(100);
+                                                          columns.Bound(p => p.LAST_BUILD_DR_REV).Title("Last Build Dr Rev").Width(150);
+                                                          columns.Bound(p => p.LAST_REVIEW_DR_REV).Title("Last week Drw Revision Rev").Width(150);
+                                                          columns.Bound(p => p.DR_REV).Title("Drw Revision").Width(100);
+                                                          columns.Bound(p => p.REQUIRED_DATE).Title("Required Date").Format("{0:dd-MMM-yy}").Width(150);
+                                                          columns.Bound(p => p.ORD_QTY).Title("Order Qty").Width(150);
+                                                          columns.Bound(p => p.BLC_QTY).Title("Balance Qty").Width(150);
+                                                          columns.Bound(p => p.BLC_VALUE).Title("Balance Value").Width(150);
+                                                          columns.Bound(p => p.ONHAND_QTY).Title("On hand Qty").Width(150);
+                                                          columns.Bound(p => p.PLAN_SHIP_DATE).Title("On hand Qty").Width(0);
+                                                      }).ToolBar(tools => tools.Excel())
+                                                      .Sortable()
+                                                      .Scrollable()
+                                                         .Excel(excel => excel
+                                                    .FileName("So Review List.xlsx")
+                                                    .Filterable(true)
+                                                    .ProxyURL(Url.Action("Excel_Export_Save", "Grid")))
+                                                         .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
+                                                      .HtmlAttributes(new { style = "height:550px;" })
+                                                      .DataSource(dataSource => dataSource
+                                                          .Ajax()
+                                                          .PageSize(10)
+                                                          .Read(read => read.Action("SoReViewListRead", "SOReview"))
+                                                        .Filter(f => f.Add(a => a.REVIEW_STATUS).IsEqualTo("Open"))
+                                                       .Sort(sort => sort.Add("DOWNLOAD_DATE").Descending())
+
+                                                      ))
+        </div>
+    </div>
+</div>

@@ -28,6 +28,11 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
         }
 
         #region SoReview
+        public ActionResult ReleaseforReview()
+        {
+
+            return View();
+        }
 
         public ActionResult SOReviewList()
         {
@@ -389,6 +394,26 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
 
         #endregion
         #endregion
+
+        #region Report
+
+        public ActionResult ListSoWithDetailReview()
+        {
+           ViewBag.Part = _iSoReviewService.GetdropdownPart();
+            ViewBag.SoNo = _iSoReviewService.GetdropdownSoReview();
+            return View();
+        }
+        public ActionResult RiskShipByValue()
+        {
+            return View();
+        }
+
+        public ActionResult OTDByLine()
+        {
+            return View();
+        }
+        #endregion
+
 
     }
 }

@@ -3910,6 +3910,10 @@
     <Content Include="Views\SOReview\SOReviewDetail.cshtml" />
     <Content Include="Views\SOReview\ItemReviewList.cshtml" />
     <Content Include="Views\SOReview\FamilyReviewList.cshtml" />
+    <Content Include="Views\SOReview\ListSoWithDetailReview.cshtml" />
+    <Content Include="Views\SOReview\ReleaseforReview.cshtml" />
+    <Content Include="Views\SOReview\RiskShipByValue.cshtml" />
+    <Content Include="Views\SOReview\OTDByLine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
