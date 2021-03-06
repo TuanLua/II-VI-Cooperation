@@ -17,7 +17,7 @@ namespace II_VI_Incorporated_SCM.Services
 
         List<SelectListItem> GetReviewResult();
 
-        List<sp_GetSoReview_Result> GetListSoReview();
+        List<sp_SOR_GetSoReview_Result> GetListSoReview();
 
         string GetDepart(string userID);
         List<SoReviewDetail> GetSoReviewDetail(string soNo, DateTime dateReview, string status);
@@ -104,9 +104,9 @@ namespace II_VI_Incorporated_SCM.Services
             return lstData;
         }
 
-        public List<sp_GetSoReview_Result> GetListSoReview()
+        public List<sp_SOR_GetSoReview_Result> GetListSoReview()
         {
-            List<sp_GetSoReview_Result> data = _db.sp_GetSoReview().ToList();
+            List<sp_SOR_GetSoReview_Result> data = _db.sp_SOR_GetSoReview().ToList();
             return data;
         }
 
@@ -728,6 +728,7 @@ namespace II_VI_Incorporated_SCM.Services
             }).ToList();
             return lstSo;
         }
+
 
         #endregion
     }

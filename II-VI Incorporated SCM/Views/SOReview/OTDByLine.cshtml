@@ -1,8 +1,42 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "OTDByLine";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-<h2>OTDByLine</h2>
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+</style>
 
+    <table>
+        <tr>
+            <th></th>
+            <th colspan="2">
+                <h3 style="text-align:center ;color:red"><b>OTD FAIL BY LINE </b></h3>
+            </th>
+        </tr>
+        <tr>
+            <td></td>
+            <td><h3 style="text-align:center "><b>CURRENT MONTH</b></h3></td>
+            <td><h3 style="text-align:center"><b>NEXT MONTH</b></h3></td>
+        </tr>
+        <tr>
+            <td><b>BY REQUEST</b></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><b>BY PROMISE</b></td>
+            <td> </td>
+            <td></td>
+        </tr>
+      
+    </table>

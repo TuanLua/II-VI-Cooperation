@@ -7986,5 +7986,20 @@ namespace II_VI_Incorporated_SCM.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQEDB_SupplierLog_Remind_ReEvaluation");
         }
+    
+        public virtual int sp_SOR_OTDFailByLine_Report()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SOR_OTDFailByLine_Report");
+        }
+    
+        public virtual int sp_SOR_RiskShip_Report()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SOR_RiskShip_Report");
+        }
+    
+        public virtual ObjectResult<sp_SOR_GetSoReview_Result> sp_SOR_GetSoReview()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoReview_Result>("sp_SOR_GetSoReview");
+        }
     }
 }

@@ -11,8 +11,9 @@ namespace II_VI_Incorporated_SCM.Models
 {
     using System;
     
-    public partial class sp_GetSoReview_Result
+    public partial class sp_SOR_GetSoReview_Result
     {
+        public long REVIEW_ID { get; set; }
         public System.DateTime DOWNLOAD_DATE { get; set; }
         public string SO_NO { get; set; }
         public string ANALYST { get; set; }
@@ -32,5 +33,6 @@ namespace II_VI_Incorporated_SCM.Models
         public Nullable<double> BLC_VALUE { get; set; }
         public Nullable<double> ONHAND_QTY { get; set; }
         public string REVIEW_STATUS { get; set; }
+        public string PLAN_SHIP_DATE { get; set; }
     }
 }

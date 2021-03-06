@@ -41,7 +41,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
 
         public ActionResult SoReViewListRead([DataSourceRequest] DataSourceRequest request)
         {
-            List<sp_GetSoReview_Result> list = _iSoReviewService.GetListSoReview();
+            List<sp_SOR_GetSoReview_Result> list = _iSoReviewService.GetListSoReview();
             return Json(list.ToDataSourceResult(request));
         }
 
@@ -403,8 +403,10 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             ViewBag.SoNo = _iSoReviewService.GetdropdownSoReview();
             return View();
         }
+
         public ActionResult RiskShipByValue()
         {
+
             return View();
         }
 

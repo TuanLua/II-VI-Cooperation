@@ -7,9 +7,9 @@
       <Diagram DiagramId="2d4e6cf9c3674ad9988f8efee6204b14" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="IQCTestModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="IQCTestModel.ADD_INS" Width="1.5" PointX="2.75" PointY="7.75" />
-        <EntityTypeShape EntityType="IQCTestModel.ApplicationGroupRole" Width="1.5" PointX="10" PointY="3.375" />
+        <EntityTypeShape EntityType="IQCTestModel.ApplicationGroupRole" Width="1.5" PointX="10" PointY="1" />
         <EntityTypeShape EntityType="IQCTestModel.ApplicationGroup" Width="1.5" PointX="7.75" PointY="2" />
-        <EntityTypeShape EntityType="IQCTestModel.ApplicationUserGroup" Width="1.5" PointX="10" PointY="1" />
+        <EntityTypeShape EntityType="IQCTestModel.ApplicationUserGroup" Width="1.5" PointX="10" PointY="3.375" />
         <EntityTypeShape EntityType="IQCTestModel.APPROVAL" Width="1.5" PointX="10.75" PointY="5.75" />
         <EntityTypeShape EntityType="IQCTestModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.75" />
         <EntityTypeShape EntityType="IQCTestModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1.375" />
