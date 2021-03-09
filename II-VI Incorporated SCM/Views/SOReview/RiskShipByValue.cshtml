@@ -1,15 +1,46 @@
-﻿@using II_VI_Incorporated_SCM.Models
-@using II_VI_Incorporated_SCM.Services
+﻿@using II_VI_Incorporated_SCM.Services
 @using Microsoft.AspNet.Identity
+@model List<II_VI_Incorporated_SCM.Models.sp_SOR_RiskShip_Report1_Result>
 @{
     ViewBag.Title = "RiskShipByValue";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-<h3 style="text-align:center ;color:red"><b>RISK SHIP BY DOLLAR $ </b></h3>
-<div class="col-sm-2"></div>
-<div class="col-sm-4"><h3 style="text-align:center "><b>CURRENT MONTH</b></h3></div>
-<div class="col-sm-4"> <h3 style="text-align:center"><b>NEXT MONTH</b></h3></div>
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+</style>
+<table>
+    <tr>
+        <th></th>
+        <th colspan="2">
+            <h3 style="text-align:center ;color:red"><b>RISK SHIP BY DOLLAR $ </b></h3>
+        </th>
+    </tr>
+    <tr>
+        <td></td>
+        <td><h3 style="text-align:center "><b>CURRENT MONTH</b></h3></td>
+        <td><h3 style="text-align:center"><b>NEXT MONTH</b></h3></td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td></td>
+            <td><h3 style="text-align:center "><b>@item.Current_Month</b></h3></td>
+            <td><h3 style="text-align:center"><b>@item.Next_Month</b></h3></td>
+        </tr>
+    }
+
+</table>
+
 <div class="col-sm-12">
     <h3 style="text-align:center">(based on <b>SCHEDULE Date</b>)</h3>
 </div>

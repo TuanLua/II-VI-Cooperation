@@ -2457,6 +2457,8 @@
       <End Role="AspNetRole" EntitySet="AspNetRoles" />
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
     </AssociationSet>
+    <FunctionImport Name="sp_SOR_OTDFailByLine_Report1" ReturnType="Collection(IQCTestModel.sp_SOR_OTDFailByLine_Report1_Result)" />
+    <FunctionImport Name="sp_SOR_RiskShip_Report1" ReturnType="Collection(IQCTestModel.sp_SOR_RiskShip_Report1_Result)" />
   </EntityContainer>
   <ComplexType Name="pGet_MEASUREMENT_STD_BY_PART_Result">
     <Property Type="String" Name="MEASURE_PARA" Nullable="false" MaxLength="50" />
@@ -8440,4 +8442,15 @@
     <End Type="IQCTestModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
     <End Type="IQCTestModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
   </Association>
+  <ComplexType Name="sp_SOR_OTDFailByLine_Report1_Result">
+    <Property Type="String" Name="DateType" Nullable="false" MaxLength="7" />
+    <Property Type="Decimal" Name="Current_Month" Nullable="false" Precision="1" Scale="1" />
+    <Property Type="Decimal" Name="Next_Month" Nullable="false" Precision="1" Scale="1" />
+    <Property Type="String" Name="Line" Nullable="false" MaxLength="4" />
+  </ComplexType>
+  <ComplexType Name="sp_SOR_RiskShip_Report1_Result">
+    <Property Type="String" Name="Factory" Nullable="false" MaxLength="7" />
+    <Property Type="Decimal" Name="Current_Month" Nullable="false" Precision="1" Scale="1" />
+    <Property Type="Decimal" Name="Next_Month" Nullable="false" Precision="1" Scale="1" />
+  </ComplexType>
 </Schema>

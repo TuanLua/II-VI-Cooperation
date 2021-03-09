@@ -15,11 +15,6 @@
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.AAA' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="AAA">
-          <Property Name="REC" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
         <EntityType Name="ADD_INS">
           <Key>
             <PropertyRef Name="ID" />
@@ -27,20 +22,6 @@ warning 6013: The table/view 'IQC.dbo.AAA' does not have a primary key defined a
           <Property Name="ID" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="NAME" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.AgingTimeAQL_Parts' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="AgingTimeAQL_Parts">
-          <Property Name="Date" Type="datetime" />
-          <Property Name="PartAVG" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Target" Type="decimal" Precision="18" Scale="0" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.AgingTimeNCR_Parts' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="AgingTimeNCR_Parts">
-          <Property Name="Date" Type="datetime" />
-          <Property Name="PartAVG" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Target" Type="decimal" Precision="18" Scale="0" />
-        </EntityType>-->
         <EntityType Name="ApplicationGroupRoles">
           <Key>
             <PropertyRef Name="ApplicationRoleId" />
@@ -256,33 +237,6 @@ warning 6002: The table/view 'IQC.dbo.Attribute' does not have a primary key def
           <Property Name="Di5" Type="nvarchar" MaxLength="255" />
           <Property Name="Di6" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.B42017$' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="B42017$">
-          <Property Name="ITEM" Type="nvarchar" MaxLength="255" />
-          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="255" />
-          <Property Name="Stock UM" Type="nvarchar" MaxLength="255" />
-          <Property Name="VENDOR" Type="nvarchar" MaxLength="255" />
-          <Property Name="Vendor Name" Type="nvarchar" MaxLength="255" />
-          <Property Name="PO Number" Type="nvarchar" MaxLength="255" />
-          <Property Name="ref_line" Type="nvarchar" MaxLength="255" />
-          <Property Name="QA Status" Type="nvarchar" MaxLength="255" />
-          <Property Name="RECEIVER" Type="nvarchar" MaxLength="255" />
-          <Property Name="rec_line" Type="nvarchar" MaxLength="255" />
-          <Property Name="LOT" Type="nvarchar" MaxLength="255" />
-          <Property Name="HALT" Type="nvarchar" MaxLength="255" />
-          <Property Name="QTY" Type="float" />
-          <Property Name="Posting Date" Type="datetime" />
-          <Property Name="User" Type="float" />
-          <Property Name="user_date" Type="datetime" />
-          <Property Name="pcname" Type="nvarchar" MaxLength="255" />
-          <Property Name="status" Type="float" />
-          <Property Name="batchno" Type="float" />
-          <Property Name="reccomment" Type="nvarchar" MaxLength="255" />
-          <Property Name="LOCATION" Type="nvarchar" MaxLength="255" />
-          <Property Name="CCN" Type="nvarchar" MaxLength="255" />
-          <Property Name="PUR_LOC" Type="nvarchar" MaxLength="255" />
-        </EntityType>-->
         <EntityType Name="CCN">
           <Key>
             <PropertyRef Name="CCN" />
@@ -357,14 +311,6 @@ warning 6002: The table/view 'IQC.dbo.CHANGED_SPL_BK' does not have a primary ke
           <Property Name="RefNumber" Type="char" MaxLength="10" />
           <Property Name="CRStatus" Type="char" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.ChartTaskOfEmp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="ChartTaskOfEmp">
-          <Property Name="Emp" Type="nvarchar" MaxLength="500" />
-          <Property Name="Total" Type="int" />
-          <Property Name="Task" Type="int" />
-          <Property Name="Name" Type="nvarchar" MaxLength="500" />
-        </EntityType>-->
         <EntityType Name="CS">
           <Key>
             <PropertyRef Name="RECEIVER" />
@@ -662,27 +608,6 @@ warning 6002: The table/view 'IQC.dbo.DESCRIPTION_Temp' does not have a primary 
           <Property Name="Comment" Type="nvarchar" MaxLength="4000" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.FIXTURE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="FIXTURE">
-          <Property Name="FIX_ID" Type="nvarchar" MaxLength="50" />
-          <Property Name="FIX_NAME" Type="nvarchar" MaxLength="50" />
-          <Property Name="FIX_DESC" Type="nvarchar" MaxLength="250" />
-          <Property Name="FIX_GROUP" Type="nvarchar" MaxLength="50" />
-          <Property Name="EVA_METHOD" Type="nvarchar" MaxLength="50" />
-          <Property Name="STATUS" Type="nvarchar" MaxLength="50" />
-          <Property Name="LINE" Type="nvarchar" MaxLength="50" />
-          <Property Name="YN" Type="nvarchar" MaxLength="5" />
-          <Property Name="KIND" Type="nvarchar" MaxLength="20" />
-          <Property Name="DATE" Type="nvarchar" MaxLength="50" />
-          <Property Name="FREQUENCY" Type="nvarchar" MaxLength="50" />
-          <Property Name="FIX_TYPE" Type="nvarchar" MaxLength="50" />
-          <Property Name="YN_2" Type="nvarchar" MaxLength="5" />
-          <Property Name="FREQUENCY_2" Type="nvarchar" MaxLength="50" />
-          <Property Name="DATE_2" Type="nvarchar" MaxLength="50" />
-          <Property Name="LOCATION" Type="nvarchar" MaxLength="50" />
-          <Property Name="SKILLCODE" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'IQC.dbo.FIXTURE_ACT_BY_SPL_NoUse' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="FIXTURE_ACT_BY_SPL_NoUse">
           <Key>
@@ -707,12 +632,6 @@ warning 6002: The table/view 'IQC.dbo.FIXTURE_ACT_BY_SPL_NoUse' does not have a 
           <Property Name="CRITIAL" Type="nchar" MaxLength="1" Nullable="false" />
           <Property Name="EVALUATION" Type="nchar" MaxLength="2" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.FIXTURE_GROUP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="FIXTURE_GROUP">
-          <Property Name="FIX_GROUP" Type="nvarchar" MaxLength="50" />
-          <Property Name="GROUP_NAME" Type="nvarchar" MaxLength="100" />
-        </EntityType>-->
         <EntityType Name="FIXTURE_STD_BY_PART_NoUse">
           <Key>
             <PropertyRef Name="CCN" />
@@ -743,12 +662,6 @@ warning 6013: The table/view 'IQC.dbo.FIXTURE_GROUP' does not have a primary key
           <Property Name="CRITIAL" Type="nchar" MaxLength="1" Nullable="false" />
           <Property Name="EVA_METHOD" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.FORMNAME' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="FORMNAME">
-          <Property Name="FORMNAME" Type="nvarchar" MaxLength="50" />
-          <Property Name="GROUPNAME" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
         <EntityType Name="INS_RESULT">
           <Key>
             <PropertyRef Name="RECEIVER" />
@@ -960,13 +873,6 @@ warning 6002: The table/view 'IQC.dbo.INSPECTOR' does not have a primary key def
           <Property Name="PROJECT_ID" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="REQUEST_NO" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.Keyword' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Keyword">
-          <Property Name="Key" Type="nvarchar" MaxLength="50" />
-          <Property Name="Word" Type="nvarchar" MaxLength="100" />
-          <Property Name="Category" Type="nvarchar" MaxLength="255" />
-        </EntityType>-->
         <EntityType Name="LAST_BATCH_NO">
           <Key>
             <PropertyRef Name="TASK" />
@@ -1644,11 +1550,6 @@ warning 6002: The table/view 'IQC.dbo.NCR_WH_OPEN_COMMENT' does not have a prima
           <Property Name="Vendor" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="JUN" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.PARAM_UNIT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="PARAM_UNIT">
-          <Property Name="UNIT" Type="varchar" MaxLength="50" />
-        </EntityType>-->
         <EntityType Name="PART_DRAW_Nouse">
           <Key>
             <PropertyRef Name="ITEM" />
@@ -1844,19 +1745,6 @@ warning 6002: The table/view 'IQC.dbo.PARTIAL_NC' does not have a primary key de
           <Property Name="Response" Type="nvarchar" MaxLength="255" />
           <Property Name="Disposition" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.PARTS_SHORATGE_FOR_WO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="PARTS_SHORATGE_FOR_WO">
-          <Property Name="Sq" Type="int" />
-          <Property Name="RequestDate" Type="nvarchar" MaxLength="500" />
-          <Property Name="RequestPerson" Type="nvarchar" MaxLength="500" />
-          <Property Name="Part" Type="nvarchar" MaxLength="50" />
-          <Property Name="Qty" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="CompletedDate" Type="nvarchar" MaxLength="500" />
-          <Property Name="ForWO" Type="nvarchar" MaxLength="1000" />
-          <Property Name="WH" Type="bit" />
-          <Property Name="Note" Type="nvarchar" MaxLength="4000" />
-        </EntityType>-->
         <EntityType Name="PATH">
           <Key>
             <PropertyRef Name="DOC_TYPE" />
@@ -1865,50 +1753,6 @@ warning 6013: The table/view 'IQC.dbo.PARTS_SHORATGE_FOR_WO' does not have a pri
           <Property Name="DOC_TYPE" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PATH" Type="nvarchar" MaxLength="400" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.PN' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="PN">
-          <Property Name="PN" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" />
-          <Property Name="Category" Type="nvarchar" MaxLength="255" />
-          <Property Name="Rev" Type="nvarchar" MaxLength="50" />
-          <Property Name="Pic" Type="image" />
-          <Property Name="Required_Inspection" Type="nvarchar" MaxLength="50" />
-          <Property Name="AQLV" Type="nvarchar" MaxLength="50" />
-          <Property Name="AQLM" Type="nvarchar" MaxLength="50" />
-          <Property Name="IQA_status" Type="nvarchar" MaxLength="255" />
-          <Property Name="Skiplot" Type="nvarchar" MaxLength="255" />
-          <Property Name="1_USL" Type="float" />
-          <Property Name="1_LSL" Type="float" />
-          <Property Name="2_USL" Type="float" />
-          <Property Name="2_LSL" Type="float" />
-          <Property Name="3_USL" Type="float" />
-          <Property Name="3_LSL" Type="float" />
-          <Property Name="4_USL" Type="float" />
-          <Property Name="4_LSL" Type="float" />
-          <Property Name="5_USL" Type="float" />
-          <Property Name="5_LSL" Type="float" />
-          <Property Name="6_USL" Type="float" />
-          <Property Name="6_LSL" Type="float" />
-          <Property Name="7_USL" Type="float" />
-          <Property Name="7_LSL" Type="float" />
-          <Property Name="8_USL" Type="float" />
-          <Property Name="8_LSL" Type="float" />
-          <Property Name="9_USL" Type="float" />
-          <Property Name="9_LSL" Type="float" />
-          <Property Name="10_USL" Type="float" />
-          <Property Name="10_LSL" Type="float" />
-          <Property Name="11_USL" Type="float" />
-          <Property Name="11_LSL" Type="float" />
-          <Property Name="12_USL" Type="float" />
-          <Property Name="12_LSL" Type="float" />
-          <Property Name="13_USL" Type="float" />
-          <Property Name="13_LSL" Type="float" />
-          <Property Name="14_USL" Type="float" />
-          <Property Name="14_LSL" Type="float" />
-          <Property Name="15_USL" Type="float" />
-          <Property Name="15_LSL" Type="float" />
-        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IQC.dbo.PO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PO">
@@ -2009,24 +1853,6 @@ warning 6002: The table/view 'IQC.dbo.PO_BK' does not have a primary key defined
           <Property Name="Last_signed_Date" Type="datetime" />
           <Property Name="Note" Type="ntext" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.PO_Need_CoC_4_IQC' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="PO_Need_CoC_4_IQC">
-          <Property Name="Orig Date" Type="datetime" />
-          <Property Name="Est Arrival Date" Type="datetime" />
-          <Property Name="sched_date" Type="datetime" />
-          <Property Name="ShippingMode" Type="nvarchar" MaxLength="255" />
-          <Property Name="PO#" Type="nvarchar" MaxLength="255" />
-          <Property Name="Line" Type="nvarchar" MaxLength="255" />
-          <Property Name="Del" Type="nvarchar" MaxLength="255" />
-          <Property Name="Qty Due" Type="float" />
-          <Property Name="Item" Type="nvarchar" MaxLength="255" />
-          <Property Name="FAI" Type="nvarchar" MaxLength="255" />
-          <Property Name="Vendor Name" Type="nvarchar" MaxLength="255" />
-          <Property Name="Vendor No" Type="nvarchar" MaxLength="255" />
-          <Property Name="BUYER" Type="nvarchar" MaxLength="255" />
-          <Property Name="CCN" Type="nvarchar" MaxLength="255" />
-        </EntityType>-->
         <EntityType Name="PO_REV">
           <Key>
             <PropertyRef Name="PONo" />
@@ -2047,54 +1873,6 @@ warning 6013: The table/view 'IQC.dbo.PO_Need_CoC_4_IQC' does not have a primary
           <Property Name="Item" Type="varchar" MaxLength="30" />
           <Property Name="Rev" Type="varchar" MaxLength="30" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.Purchase_Order_Status' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Purchase_Order_Status">
-          <Property Name="PO No#" Type="nvarchar" MaxLength="255" />
-          <Property Name="PO Line" Type="nvarchar" MaxLength="255" />
-          <Property Name="PO DEL" Type="nvarchar" MaxLength="255" />
-          <Property Name="Item" Type="nvarchar" MaxLength="255" />
-          <Property Name="DRAW REV" Type="nvarchar" MaxLength="255" />
-          <Property Name="Item Description" Type="nvarchar" MaxLength="255" />
-          <Property Name="UOM" Type="nvarchar" MaxLength="255" />
-          <Property Name="Order Date" Type="datetime" />
-          <Property Name="Request Date" Type="datetime" />
-          <Property Name="Original Date" Type="datetime" />
-          <Property Name="Scheduled Date" Type="datetime" />
-          <Property Name="DTS LT" Type="float" />
-          <Property Name="Manufacturing LT" Type="float" />
-          <Property Name="Est Arrival Date" Type="datetime" />
-          <Property Name="Late" Type="float" />
-          <Property Name="ShippingMode" Type="nvarchar" MaxLength="255" />
-          <Property Name="Received Date" Type="datetime" />
-          <Property Name="Supplier Reference" Type="nvarchar" MaxLength="255" />
-          <Property Name="Standard Cost" Type="float" />
-          <Property Name="Unit Price" Type="float" />
-          <Property Name="Currency" Type="nvarchar" MaxLength="255" />
-          <Property Name="Order Qty" Type="float" />
-          <Property Name="Received Qty" Type="float" />
-          <Property Name="REQUESTOR" Type="nvarchar" MaxLength="255" />
-          <Property Name="Po ( PO Line) Comment" Type="nvarchar" MaxLength="255" />
-          <Property Name="Account" Type="nvarchar" MaxLength="255" />
-          <Property Name="Cost Center" Type="nvarchar" MaxLength="255" />
-          <Property Name="BYR" Type="nvarchar" MaxLength="255" />
-          <Property Name="Opr ID" Type="nvarchar" MaxLength="255" />
-          <Property Name="Anlyst" Type="nvarchar" MaxLength="255" />
-          <Property Name="Supplier Code" Type="nvarchar" MaxLength="255" />
-          <Property Name="SUPPLIER NAME" Type="nvarchar" MaxLength="255" />
-          <Property Name="PRIMARY SUPPLIER" Type="nvarchar" MaxLength="255" />
-          <Property Name="Country origin" Type="nvarchar" MaxLength="255" />
-          <Property Name="Terms" Type="nvarchar" MaxLength="255" />
-          <Property Name="Del Terms" Type="nvarchar" MaxLength="255" />
-          <Property Name="Amount" Type="float" />
-          <Property Name="Value Balance" Type="float" />
-          <Property Name="VEN ITEM" Type="nvarchar" MaxLength="255" />
-          <Property Name="USER ALPHA1" Type="nvarchar" MaxLength="255" />
-          <Property Name="CANC DATE" Type="datetime" />
-          <Property Name="Exception Item" Type="nvarchar" MaxLength="255" />
-          <Property Name="Expedite Date" Type="datetime" />
-          <Property Name="Status" Type="nvarchar" MaxLength="255" />
-        </EntityType>-->
         <EntityType Name="RECEIVER">
           <Key>
             <PropertyRef Name="RECEIVER" />
@@ -2477,14 +2255,6 @@ warning 6002: The table/view 'IQC.dbo.receiver_bk' does not have a primary key d
           <Property Name="Reason" Type="varchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.Sheet2' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Sheet2">
-          <Property Name="NC_Code" Type="nvarchar" MaxLength="255" />
-          <Property Name="DES" Type="nvarchar" MaxLength="255" />
-          <Property Name="NC_GROUP" Type="nvarchar" MaxLength="255" />
-          <Property Name="PN" Type="nvarchar" MaxLength="255" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'IQC.dbo.SKIP_LOT_LEVEL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SKIP_LOT_LEVEL">
           <Key>
@@ -2578,12 +2348,6 @@ warning 6002: The table/view 'IQC.dbo.STDCOST_Temp' does not have a primary key 
           <Property Name="JUN" Type="float" Nullable="false" />
           <Property Name="Sort" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.Table_1' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Table_1">
-          <Property Name="f1" Type="nvarchar" MaxLength="50" />
-          <Property Name="f2" Type="date" />
-        </EntityType>-->
         <EntityType Name="TASK_APPROVE">
           <Key>
             <PropertyRef Name="TASK_ID" />
@@ -2690,21 +2454,6 @@ warning 6013: The table/view 'IQC.dbo.Table_1' does not have a primary key defin
           <Property Name="Level" Type="int" />
           <Property Name="Reference" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.tb4056' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="tb4056">
-          <Property Name="Ven ID" Type="nvarchar" MaxLength="255" />
-          <Property Name="Name" Type="nvarchar" MaxLength="255" />
-          <Property Name="PO" Type="nvarchar" MaxLength="255" />
-          <Property Name="Rec" Type="nvarchar" MaxLength="255" />
-          <Property Name="Item" Type="nvarchar" MaxLength="255" />
-          <Property Name="Recd" Type="datetime" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.tbComponentPart_Gap' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="tbComponentPart_Gap">
-          <Property Name="ComponentPart" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
         <EntityType Name="tbDashboard_Guide_Show">
           <Key>
             <PropertyRef Name="Sq" />
@@ -3327,32 +3076,6 @@ warning 6002: The table/view 'IQC.dbo.tbl_RP_Data_Source' does not have a primar
           <Property Name="Pic_Rv" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.tbl_SQE_6Panel_SystemPerformance' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="tbl_SQE_6Panel_SystemPerformance">
-          <Property Name="Supplier_Code" Type="nchar" MaxLength="10" />
-          <Property Name="FY" Type="int" />
-          <Property Name="Month" Type="date" />
-          <Property Name="Q_Receive" Type="float" />
-          <Property Name="Q_Reject" Type="float" />
-          <Property Name="Q_PPM" Type="float" />
-          <Property Name="Q_PPM_YTD" Type="float" />
-          <Property Name="Q_Score" Type="float" />
-          <Property Name="D_Receive" Type="float" />
-          <Property Name="D_OnTime" Type="float" />
-          <Property Name="D_OTD" Type="float" />
-          <Property Name="D_OTD_YTD" Type="float" />
-          <Property Name="D_Score" Type="float" />
-          <Property Name="C_Case" Type="int" />
-          <Property Name="C_Case_YTD" Type="int" />
-          <Property Name="C_Score" Type="float" />
-          <Property Name="F_Case" Type="int" />
-          <Property Name="F_Case_YTD" Type="int" />
-          <Property Name="F_Score" Type="int" />
-          <Property Name="Total_Score" Type="float" />
-          <Property Name="Total_Score_YTD" Type="float" />
-          <Property Name="Performance" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'IQC.dbo.tbl_SQE_6Panel_TopNCPart' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tbl_SQE_6Panel_TopNCPart">
           <Key>
@@ -3904,18 +3627,6 @@ warning 6002: The table/view 'IQC.dbo.tbl_SQE_SupplierLog_QMS' does not have a p
           <Property Name="RealTimeWorking" Type="decimal" Precision="13" Scale="0" />
           <Property Name="TotalTime" Type="decimal" Precision="13" Scale="0" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.tbPPM_Target' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="tbPPM_Target">
-          <Property Name="SupCode" Type="nvarchar" MaxLength="250" />
-          <Property Name="Target" Type="decimal" Precision="18" Scale="0" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.tbReceiver_Delete' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="tbReceiver_Delete">
-          <Property Name="RECEIVER" Type="nvarchar" MaxLength="50" />
-          <Property Name="Date" Type="datetime" />
-        </EntityType>-->
         <EntityType Name="tbTargetOT">
           <Key>
             <PropertyRef Name="ID" />
@@ -3944,17 +3655,6 @@ warning 6013: The table/view 'IQC.dbo.tbReceiver_Delete' does not have a primary
           <Property Name="DATE_2" Type="nvarchar" MaxLength="50" />
           <Property Name="LOCATION" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.TEMP_PDF_PART' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="TEMP_PDF_PART">
-          <Property Name="CCN" Type="nvarchar" MaxLength="2" />
-          <Property Name="ITEM" Type="nvarchar" MaxLength="250" />
-          <Property Name="DRAW_REV" Type="nchar" MaxLength="6" />
-          <Property Name="REV" Type="nvarchar" MaxLength="50" />
-          <Property Name="DRAW_FILE" Type="varbinary(max)" />
-          <Property Name="FILE_NAME" Type="nvarchar" MaxLength="500" />
-          <Property Name="RECEIVER" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
         <EntityType Name="TEMPLATE_DET">
           <Key>
             <PropertyRef Name="TEMPLATE_NUM" />
@@ -4019,13 +3719,6 @@ warning 6002: The table/view 'IQC.dbo.TemporaryUpsizedTable2' does not have a pr
           <Property Name="Di5" Type="nvarchar" MaxLength="255" />
           <Property Name="Di6" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.USER_APPROVE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="USER_APPROVE">
-          <Property Name="USERNAME" Type="nvarchar" MaxLength="50" />
-          <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
-          <Property Name="USER_LEVEL" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IQC.dbo.USER_PERMIT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="USER_PERMIT">
@@ -4146,227 +3839,6 @@ warning 6002: The table/view 'IQC.dbo.VENDOR_Temp' does not have a primary key d
           <Property Name="FAX" Type="nvarchar(max)" />
           <Property Name="TEL" Type="nvarchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.VN_MATERIAL_SHORTAGE_4_DASHBOARD' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="VN_MATERIAL_SHORTAGE_4_DASHBOARD">
-          <Property Name="WC" Type="nvarchar" MaxLength="50" />
-          <Property Name="Item" Type="nvarchar" MaxLength="50" />
-          <Property Name="WONum" Type="nvarchar" MaxLength="50" />
-          <Property Name="OrderQty" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="CompletedQty" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="OpenDate" Type="datetime" />
-          <Property Name="StartDate" Type="datetime" />
-          <Property Name="DueDate" Type="datetime" />
-          <Property Name="ComponentPart" Type="nvarchar" MaxLength="50" />
-          <Property Name="ComponentDescription" Type="nvarchar" MaxLength="500" />
-          <Property Name="FlrStk" Type="nvarchar" MaxLength="50" />
-          <Property Name="Anlst" Type="nvarchar" MaxLength="50" />
-          <Property Name="UM" Type="nvarchar" MaxLength="50" />
-          <Property Name="ReqrdQty" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="CommQty" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="IssueQty" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="SHORTQty" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="TotalOnHand" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="shortage" Type="nvarchar" MaxLength="50" />
-          <Property Name="BalanceRemains" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="TotalINSRIN" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="TotalVNSTK" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="TotalFLRSTK" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="TotalVNFIN" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="WOstatus" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.VN_Monthly_OTD_Details_4_SQE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="VN_Monthly_OTD_Details_4_SQE">
-          <Property Name="vendor" Type="nvarchar" MaxLength="255" />
-          <Property Name="name" Type="nvarchar" MaxLength="255" />
-          <Property Name="po_num" Type="nvarchar" MaxLength="255" />
-          <Property Name="po_line" Type="nvarchar" MaxLength="255" />
-          <Property Name="item" Type="nvarchar" MaxLength="255" />
-          <Property Name="IDTS_LT" Type="float" />
-          <Property Name="IFix_LT" Type="float" />
-          <Property Name="IPrep_LT" Type="float" />
-          <Property Name="agc" Type="nvarchar" MaxLength="255" />
-          <Property Name="buyer" Type="nvarchar" MaxLength="255" />
-          <Property Name="qty" Type="float" />
-          <Property Name="rec_qty" Type="float" />
-          <Property Name="Remain_Qty" Type="float" />
-          <Property Name="Request_Qty_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="Promised_QTY_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="date_placed" Type="datetime" />
-          <Property Name="rec_date" Type="datetime" />
-          <Property Name="Request_LT_Date" Type="datetime" />
-          <Property Name="orig_reqd_date" Type="datetime" />
-          <Property Name="sched_date" Type="datetime" />
-          <Property Name="Promised_OTD" Type="float" />
-          <Property Name="Promised_OTD_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="reqd_date" Type="datetime" />
-          <Property Name="Planner_Date" Type="datetime" />
-          <Property Name="Request_OTD" Type="float" />
-          <Property Name="Request_OTD_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="Planner_RQ_Diff" Type="float" />
-          <Property Name="Planner_RQ_LT" Type="nvarchar" MaxLength="255" />
-          <Property Name="Period" Type="datetime" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.VN_Monthly_OTD_Details_4_SQE_Temp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="VN_Monthly_OTD_Details_4_SQE_Temp">
-          <Property Name="vendor" Type="nvarchar" MaxLength="255" />
-          <Property Name="name" Type="nvarchar" MaxLength="255" />
-          <Property Name="po_num" Type="nvarchar" MaxLength="255" />
-          <Property Name="po_line" Type="nvarchar" MaxLength="255" />
-          <Property Name="item" Type="nvarchar" MaxLength="255" />
-          <Property Name="IDTS_LT" Type="float" />
-          <Property Name="IFix_LT" Type="float" />
-          <Property Name="IPrep_LT" Type="float" />
-          <Property Name="agc" Type="nvarchar" MaxLength="255" />
-          <Property Name="buyer" Type="nvarchar" MaxLength="255" />
-          <Property Name="qty" Type="float" />
-          <Property Name="rec_qty" Type="float" />
-          <Property Name="Remain_Qty" Type="float" />
-          <Property Name="Request_Qty_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="Promised_QTY_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="date_placed" Type="datetime" />
-          <Property Name="rec_date" Type="datetime" />
-          <Property Name="Request_LT_Date" Type="datetime" />
-          <Property Name="orig_reqd_date" Type="datetime" />
-          <Property Name="sched_date" Type="datetime" />
-          <Property Name="Promised_OTD" Type="float" />
-          <Property Name="Promised_OTD_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="reqd_date" Type="datetime" />
-          <Property Name="Planner_Date" Type="datetime" />
-          <Property Name="Request_OTD" Type="float" />
-          <Property Name="Request_OTD_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="Planner_RQ_Diff" Type="float" />
-          <Property Name="Planner_RQ_LT" Type="nvarchar" MaxLength="255" />
-          <Property Name="Period" Type="datetime" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.Vn_Monthly_OTD_Summary_4_SQE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Vn_Monthly_OTD_Summary_4_SQE">
-          <Property Name="VENDOR" Type="nvarchar" MaxLength="255" />
-          <Property Name="Early" Type="float" />
-          <Property Name="Late" Type="float" />
-          <Property Name="OnTime" Type="float" />
-          <Property Name="TotalRec" Type="float" />
-          <Property Name="TotalOrd" Type="float" />
-          <Property Name="Target" Type="float" />
-          <Property Name="Actual" Type="float" />
-          <Property Name="Period" Type="datetime" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.Vn_Monthly_OTD_Summary_4_SQE_Temp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Vn_Monthly_OTD_Summary_4_SQE_Temp">
-          <Property Name="VENDOR" Type="nvarchar" MaxLength="255" />
-          <Property Name="Early" Type="float" />
-          <Property Name="Late" Type="float" />
-          <Property Name="OnTime" Type="float" />
-          <Property Name="TotalRec" Type="float" />
-          <Property Name="TotalOrd" Type="float" />
-          <Property Name="Target" Type="float" />
-          <Property Name="Actual" Type="float" />
-          <Property Name="Period" Type="datetime" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.VN_PO_QUALIFIED_COMPLETE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="VN_PO_QUALIFIED_COMPLETE">
-          <Property Name="CCN" Type="nvarchar" MaxLength="255" />
-          <Property Name="PO NUM" Type="nvarchar" MaxLength="255" />
-          <Property Name="PO LINE" Type="nvarchar" MaxLength="255" />
-          <Property Name="QUALIFY COMPLETED" Type="nvarchar" MaxLength="255" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.VN_Year2Date_OTD_Details_4_SQE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="VN_Year2Date_OTD_Details_4_SQE">
-          <Property Name="vendor" Type="nvarchar" MaxLength="255" />
-          <Property Name="name" Type="nvarchar" MaxLength="255" />
-          <Property Name="po_num" Type="nvarchar" MaxLength="255" />
-          <Property Name="po_line" Type="nvarchar" MaxLength="255" />
-          <Property Name="item" Type="nvarchar" MaxLength="255" />
-          <Property Name="IDTS_LT" Type="float" />
-          <Property Name="IFix_LT" Type="float" />
-          <Property Name="IPrep_LT" Type="float" />
-          <Property Name="agc" Type="nvarchar" MaxLength="255" />
-          <Property Name="buyer" Type="nvarchar" MaxLength="255" />
-          <Property Name="qty" Type="float" />
-          <Property Name="rec_qty" Type="float" />
-          <Property Name="Remain_Qty" Type="float" />
-          <Property Name="Request_Qty_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="Promised_QTY_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="date_placed" Type="datetime" />
-          <Property Name="rec_date" Type="datetime" />
-          <Property Name="Request_LT_Date" Type="datetime" />
-          <Property Name="orig_reqd_date" Type="datetime" />
-          <Property Name="sched_date" Type="datetime" />
-          <Property Name="Promised_OTD" Type="float" />
-          <Property Name="Promised_OTD_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="reqd_date" Type="datetime" />
-          <Property Name="Planner_Date" Type="datetime" />
-          <Property Name="Request_OTD" Type="float" />
-          <Property Name="Request_OTD_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="Planner_RQ_Diff" Type="float" />
-          <Property Name="Planner_RQ_LT" Type="nvarchar" MaxLength="255" />
-          <Property Name="FY" Type="datetime" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.VN_Year2Date_OTD_Details_4_SQE_Temp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="VN_Year2Date_OTD_Details_4_SQE_Temp">
-          <Property Name="vendor" Type="nvarchar" MaxLength="255" />
-          <Property Name="name" Type="nvarchar" MaxLength="255" />
-          <Property Name="po_num" Type="nvarchar" MaxLength="255" />
-          <Property Name="po_line" Type="nvarchar" MaxLength="255" />
-          <Property Name="item" Type="nvarchar" MaxLength="255" />
-          <Property Name="IDTS_LT" Type="float" />
-          <Property Name="IFix_LT" Type="float" />
-          <Property Name="IPrep_LT" Type="float" />
-          <Property Name="agc" Type="nvarchar" MaxLength="255" />
-          <Property Name="buyer" Type="nvarchar" MaxLength="255" />
-          <Property Name="qty" Type="float" />
-          <Property Name="rec_qty" Type="float" />
-          <Property Name="Remain_Qty" Type="float" />
-          <Property Name="Request_Qty_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="Promised_QTY_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="date_placed" Type="datetime" />
-          <Property Name="rec_date" Type="datetime" />
-          <Property Name="Request_LT_Date" Type="datetime" />
-          <Property Name="orig_reqd_date" Type="datetime" />
-          <Property Name="sched_date" Type="datetime" />
-          <Property Name="Promised_OTD" Type="float" />
-          <Property Name="Promised_OTD_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="reqd_date" Type="datetime" />
-          <Property Name="Planner_Date" Type="datetime" />
-          <Property Name="Request_OTD" Type="float" />
-          <Property Name="Request_OTD_Stat" Type="nvarchar" MaxLength="255" />
-          <Property Name="Planner_RQ_Diff" Type="float" />
-          <Property Name="Planner_RQ_LT" Type="nvarchar" MaxLength="255" />
-          <Property Name="FY" Type="datetime" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.VN_Year2Date_OTD_Summary_4_SQE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="VN_Year2Date_OTD_Summary_4_SQE">
-          <Property Name="VENDOR" Type="nvarchar" MaxLength="255" />
-          <Property Name="Early" Type="float" />
-          <Property Name="Late" Type="float" />
-          <Property Name="OnTime" Type="float" />
-          <Property Name="TotalRec" Type="float" />
-          <Property Name="TotalOrd" Type="float" />
-          <Property Name="Target" Type="float" />
-          <Property Name="Actual" Type="float" />
-          <Property Name="FY" Type="datetime" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'IQC.dbo.VN_Year2Date_OTD_Summary_4_SQE_Temp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="VN_Year2Date_OTD_Summary_4_SQE_Temp">
-          <Property Name="VENDOR" Type="nvarchar" MaxLength="255" />
-          <Property Name="Early" Type="float" />
-          <Property Name="Late" Type="float" />
-          <Property Name="OnTime" Type="float" />
-          <Property Name="TotalRec" Type="float" />
-          <Property Name="TotalOrd" Type="float" />
-          <Property Name="Target" Type="float" />
-          <Property Name="Actual" Type="float" />
-          <Property Name="FY" Type="datetime" />
-        </EntityType>-->
         <EntityType Name="VNMaterialTraceability">
           <Key>
             <PropertyRef Name="Id" />
@@ -5345,7 +4817,9 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
         </Function>
         <Function Name="sp_SOR_GetSoReview" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_SOR_OTDFailByLine_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_SOR_OTDFailByLine_Report1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_SOR_RiskShip_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_SOR_RiskShip_Report1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_SortNCR_Number" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NCR_NUMBER" Type="nvarchar" Mode="In" />
           <Parameter Name="NewReceiver" Type="nvarchar" Mode="In" />
@@ -8926,6 +8400,8 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <FunctionImport Name="sp_SOR_OTDFailByLine_Report1" ReturnType="Collection(IQCTestModel.sp_SOR_OTDFailByLine_Report1_Result)" />
+          <FunctionImport Name="sp_SOR_RiskShip_Report1" ReturnType="Collection(IQCTestModel.sp_SOR_RiskShip_Report1_Result)" />
           </EntityContainer>
         <ComplexType Name="pGet_MEASUREMENT_STD_BY_PART_Result">
           <Property Type="String" Name="MEASURE_PARA" Nullable="false" MaxLength="50" />
@@ -14909,6 +14385,17 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
           <End Type="IQCTestModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="IQCTestModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <ComplexType Name="sp_SOR_OTDFailByLine_Report1_Result">
+          <Property Type="String" Name="DateType" Nullable="false" MaxLength="7" />
+          <Property Type="Decimal" Name="Current_Month" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="Decimal" Name="Next_Month" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="String" Name="Line" Nullable="false" MaxLength="4" />
+        </ComplexType>
+        <ComplexType Name="sp_SOR_RiskShip_Report1_Result">
+          <Property Type="String" Name="Factory" Nullable="false" MaxLength="7" />
+          <Property Type="Decimal" Name="Current_Month" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="Decimal" Name="Next_Month" Nullable="false" Precision="1" Scale="1" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -20487,6 +19974,25 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_SOR_OTDFailByLine_Report1" FunctionName="IQCTestModel.Store.sp_SOR_OTDFailByLine_Report1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_OTDFailByLine_Report1_Result">
+                <ScalarProperty Name="DateType" ColumnName="DateType" />
+                <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
+                <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
+                <ScalarProperty Name="Line" ColumnName="Line" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SOR_RiskShip_Report1" FunctionName="IQCTestModel.Store.sp_SOR_RiskShip_Report1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_RiskShip_Report1_Result">
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+                <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
+                <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

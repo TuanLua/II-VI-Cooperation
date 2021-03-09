@@ -5573,5 +5573,24 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_SOR_OTDFailByLine_Report1" FunctionName="IQCTestModel.Store.sp_SOR_OTDFailByLine_Report1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_OTDFailByLine_Report1_Result">
+          <ScalarProperty Name="DateType" ColumnName="DateType" />
+          <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
+          <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
+          <ScalarProperty Name="Line" ColumnName="Line" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SOR_RiskShip_Report1" FunctionName="IQCTestModel.Store.sp_SOR_RiskShip_Report1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_RiskShip_Report1_Result">
+          <ScalarProperty Name="Factory" ColumnName="Factory" />
+          <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
+          <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

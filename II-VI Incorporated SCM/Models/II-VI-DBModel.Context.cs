@@ -8001,5 +8001,15 @@ namespace II_VI_Incorporated_SCM.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoReview_Result>("sp_SOR_GetSoReview");
         }
+    
+        public virtual ObjectResult<sp_SOR_OTDFailByLine_Report1_Result> sp_SOR_OTDFailByLine_Report1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_OTDFailByLine_Report1_Result>("sp_SOR_OTDFailByLine_Report1");
+        }
+    
+        public virtual ObjectResult<sp_SOR_RiskShip_Report1_Result> sp_SOR_RiskShip_Report1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_RiskShip_Report1_Result>("sp_SOR_RiskShip_Report1");
+        }
     }
 }

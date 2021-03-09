@@ -406,13 +406,15 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
 
         public ActionResult RiskShipByValue()
         {
+            var data = _iSoReviewService.SOR_RiskShip_Report1_Result();
 
-            return View();
+            return View(data);
         }
 
         public ActionResult OTDByLine()
         {
-            return View();
+            var data = _iSoReviewService.SOR_OTDFailByLine_Report();
+            return View(data);
         }
         #endregion
 

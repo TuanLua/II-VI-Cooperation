@@ -68,6 +68,10 @@ namespace II_VI_Incorporated_SCM.Services
         #region Report
         List<SelectListItem> GetdropdownPart();
         List<SelectListItem> GetdropdownSoReview();
+
+        List<sp_SOR_OTDFailByLine_Report1_Result> SOR_OTDFailByLine_Report();
+
+        List<sp_SOR_RiskShip_Report1_Result> SOR_RiskShip_Report1_Result();
         #endregion
 
     }
@@ -729,7 +733,17 @@ namespace II_VI_Incorporated_SCM.Services
             return lstSo;
         }
 
+        public List<sp_SOR_OTDFailByLine_Report1_Result>SOR_OTDFailByLine_Report()
+        {
+            List<sp_SOR_OTDFailByLine_Report1_Result> data = _db.sp_SOR_OTDFailByLine_Report1().ToList();
+            return data;
+        }
 
+        public List<sp_SOR_RiskShip_Report1_Result> SOR_RiskShip_Report1_Result()
+        {
+            List<sp_SOR_RiskShip_Report1_Result> data = _db.sp_SOR_RiskShip_Report1().ToList();
+            return data;
+        }
         #endregion
     }
 }
