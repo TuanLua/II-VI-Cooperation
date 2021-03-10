@@ -4815,11 +4815,16 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
           <Parameter Name="part" Type="nvarchar" Mode="In" />
           <Parameter Name="Email" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_SOR_GetSoOpen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_SOR_GetSoReview" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_SOR_GetSoReviewHist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_SOR_OTDFailByLine_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_SOR_OTDFailByLine_Report1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_SOR_OTDFailByLine_ReportT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_SOR_Release" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_SOR_RiskShip_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_SOR_RiskShip_Report1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_SOR_RiskShip_ReportT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_SortNCR_Number" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NCR_NUMBER" Type="nvarchar" Mode="In" />
           <Parameter Name="NewReceiver" Type="nvarchar" Mode="In" />
@@ -8402,6 +8407,11 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
           </AssociationSet>
           <FunctionImport Name="sp_SOR_OTDFailByLine_Report1" ReturnType="Collection(IQCTestModel.sp_SOR_OTDFailByLine_Report1_Result)" />
           <FunctionImport Name="sp_SOR_RiskShip_Report1" ReturnType="Collection(IQCTestModel.sp_SOR_RiskShip_Report1_Result)" />
+          <FunctionImport Name="sp_SOR_GetSoOpen" ReturnType="Collection(IQCTestModel.sp_SOR_GetSoOpen_Result)" />
+          <FunctionImport Name="sp_SOR_GetSoReviewHist" ReturnType="Collection(IQCTestModel.sp_SOR_GetSoReviewHist_Result)" />
+          <FunctionImport Name="sp_SOR_Release" ReturnType="Collection(IQCTestModel.sp_SOR_Release_Result)" />
+          <FunctionImport Name="sp_SOR_OTDFailByLine_ReportT" />
+          <FunctionImport Name="sp_SOR_RiskShip_ReportT" />
           </EntityContainer>
         <ComplexType Name="pGet_MEASUREMENT_STD_BY_PART_Result">
           <Property Type="String" Name="MEASURE_PARA" Nullable="false" MaxLength="50" />
@@ -14396,6 +14406,56 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
           <Property Type="Decimal" Name="Current_Month" Nullable="false" Precision="1" Scale="1" />
           <Property Type="Decimal" Name="Next_Month" Nullable="false" Precision="1" Scale="1" />
         </ComplexType>
+        <ComplexType Name="sp_SOR_GetSoOpen_Result">
+          <Property Type="Int64" Name="REVIEW_ID" Nullable="false" />
+          <Property Type="DateTime" Name="DOWNLOAD_DATE" Nullable="false" />
+          <Property Type="String" Name="SO_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ANALYST" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SO_ON_HOLD" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SHIP_TO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ITEM" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FAI" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="NEW_REVIEW" Nullable="true" />
+          <Property Type="String" Name="LAST_BUILD_DR_REV" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LAST_REVIEW_DR_REV" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DR_REV" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="REQUIRED_DATE" Nullable="true" />
+          <Property Type="DateTime" Name="SCHEDULE_DATE" Nullable="true" />
+          <Property Type="DateTime" Name="PROMISE_DATE" Nullable="true" />
+          <Property Type="Double" Name="ORD_QTY" Nullable="true" />
+          <Property Type="Double" Name="BLC_QTY" Nullable="true" />
+          <Property Type="Double" Name="BLC_VALUE" Nullable="true" />
+          <Property Type="Double" Name="ONHAND_QTY" Nullable="true" />
+          <Property Type="String" Name="REVIEW_STATUS" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PLAN_SHIP_DATE" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_SOR_GetSoReviewHist_Result">
+          <Property Type="Int64" Name="REVIEW_ID" Nullable="false" />
+          <Property Type="DateTime" Name="DOWNLOAD_DATE" Nullable="false" />
+          <Property Type="String" Name="SO_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ANALYST" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SO_ON_HOLD" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SHIP_TO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ITEM" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FAI" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="NEW_REVIEW" Nullable="true" />
+          <Property Type="String" Name="LAST_BUILD_DR_REV" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LAST_REVIEW_DR_REV" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DR_REV" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="REQUIRED_DATE" Nullable="true" />
+          <Property Type="DateTime" Name="SCHEDULE_DATE" Nullable="true" />
+          <Property Type="DateTime" Name="PROMISE_DATE" Nullable="true" />
+          <Property Type="Double" Name="ORD_QTY" Nullable="true" />
+          <Property Type="Double" Name="BLC_QTY" Nullable="true" />
+          <Property Type="Double" Name="BLC_VALUE" Nullable="true" />
+          <Property Type="Double" Name="ONHAND_QTY" Nullable="true" />
+          <Property Type="String" Name="REVIEW_STATUS" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PLAN_SHIP_DATE" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_SOR_Release_Result">
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -19993,6 +20053,70 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SOR_GetSoOpen" FunctionName="IQCTestModel.Store.sp_SOR_GetSoOpen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_GetSoOpen_Result">
+                <ScalarProperty Name="REVIEW_ID" ColumnName="REVIEW_ID" />
+                <ScalarProperty Name="DOWNLOAD_DATE" ColumnName="DOWNLOAD_DATE" />
+                <ScalarProperty Name="SO_NO" ColumnName="SO_NO" />
+                <ScalarProperty Name="ANALYST" ColumnName="ANALYST" />
+                <ScalarProperty Name="SO_ON_HOLD" ColumnName="SO_ON_HOLD" />
+                <ScalarProperty Name="SHIP_TO" ColumnName="SHIP_TO" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+                <ScalarProperty Name="FAI" ColumnName="FAI" />
+                <ScalarProperty Name="NEW_REVIEW" ColumnName="NEW_REVIEW" />
+                <ScalarProperty Name="LAST_BUILD_DR_REV" ColumnName="LAST_BUILD_DR_REV" />
+                <ScalarProperty Name="LAST_REVIEW_DR_REV" ColumnName="LAST_REVIEW_DR_REV" />
+                <ScalarProperty Name="DR_REV" ColumnName="DR_REV" />
+                <ScalarProperty Name="REQUIRED_DATE" ColumnName="REQUIRED_DATE" />
+                <ScalarProperty Name="SCHEDULE_DATE" ColumnName="SCHEDULE_DATE" />
+                <ScalarProperty Name="PROMISE_DATE" ColumnName="PROMISE_DATE" />
+                <ScalarProperty Name="ORD_QTY" ColumnName="ORD_QTY" />
+                <ScalarProperty Name="BLC_QTY" ColumnName="BLC_QTY" />
+                <ScalarProperty Name="BLC_VALUE" ColumnName="BLC_VALUE" />
+                <ScalarProperty Name="ONHAND_QTY" ColumnName="ONHAND_QTY" />
+                <ScalarProperty Name="REVIEW_STATUS" ColumnName="REVIEW_STATUS" />
+                <ScalarProperty Name="PLAN_SHIP_DATE" ColumnName="PLAN_SHIP_DATE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SOR_GetSoReviewHist" FunctionName="IQCTestModel.Store.sp_SOR_GetSoReviewHist">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_GetSoReviewHist_Result">
+                <ScalarProperty Name="REVIEW_ID" ColumnName="REVIEW_ID" />
+                <ScalarProperty Name="DOWNLOAD_DATE" ColumnName="DOWNLOAD_DATE" />
+                <ScalarProperty Name="SO_NO" ColumnName="SO_NO" />
+                <ScalarProperty Name="ANALYST" ColumnName="ANALYST" />
+                <ScalarProperty Name="SO_ON_HOLD" ColumnName="SO_ON_HOLD" />
+                <ScalarProperty Name="SHIP_TO" ColumnName="SHIP_TO" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+                <ScalarProperty Name="FAI" ColumnName="FAI" />
+                <ScalarProperty Name="NEW_REVIEW" ColumnName="NEW_REVIEW" />
+                <ScalarProperty Name="LAST_BUILD_DR_REV" ColumnName="LAST_BUILD_DR_REV" />
+                <ScalarProperty Name="LAST_REVIEW_DR_REV" ColumnName="LAST_REVIEW_DR_REV" />
+                <ScalarProperty Name="DR_REV" ColumnName="DR_REV" />
+                <ScalarProperty Name="REQUIRED_DATE" ColumnName="REQUIRED_DATE" />
+                <ScalarProperty Name="SCHEDULE_DATE" ColumnName="SCHEDULE_DATE" />
+                <ScalarProperty Name="PROMISE_DATE" ColumnName="PROMISE_DATE" />
+                <ScalarProperty Name="ORD_QTY" ColumnName="ORD_QTY" />
+                <ScalarProperty Name="BLC_QTY" ColumnName="BLC_QTY" />
+                <ScalarProperty Name="BLC_VALUE" ColumnName="BLC_VALUE" />
+                <ScalarProperty Name="ONHAND_QTY" ColumnName="ONHAND_QTY" />
+                <ScalarProperty Name="REVIEW_STATUS" ColumnName="REVIEW_STATUS" />
+                <ScalarProperty Name="PLAN_SHIP_DATE" ColumnName="PLAN_SHIP_DATE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SOR_Release" FunctionName="IQCTestModel.Store.sp_SOR_Release">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_Release_Result">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SOR_OTDFailByLine_ReportT" FunctionName="IQCTestModel.Store.sp_SOR_OTDFailByLine_ReportT" />
+          <FunctionImportMapping FunctionImportName="sp_SOR_RiskShip_ReportT" FunctionName="IQCTestModel.Store.sp_SOR_RiskShip_ReportT" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

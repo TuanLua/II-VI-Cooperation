@@ -6,11 +6,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div  style="float:right"> <button class="btn btn-sm btn-success">Release</button></div>
+<div  style="float:right"> <button class="btn btn-sm btn-success" id="release-so">Release</button></div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-18 col-md-12">
-            @(Html.Kendo().Grid<sp_SOR_GetSoReview_Result>()
+            @(Html.Kendo().Grid<sp_SOR_GetSoOpen_Result>()
                                                       .Name("gridSoReview")
                                                       .Columns(columns =>
                                                       {
@@ -32,7 +32,8 @@
                                                           columns.Bound(p => p.BLC_VALUE).Title("Balance Value").Width(150);
                                                           columns.Bound(p => p.ONHAND_QTY).Title("On hand Qty").Width(150);
                                                           columns.Bound(p => p.PLAN_SHIP_DATE).Title("On hand Qty").Width(0);
-                                                      }).ToolBar(tools => tools.Excel())
+                                                      })
+                                                      //.ToolBar(tools => tools.Excel())
                                                       .Sortable()
                                                       .Scrollable()
                                                          .Excel(excel => excel
@@ -44,7 +45,7 @@
                                                       .DataSource(dataSource => dataSource
                                                           .Ajax()
                                                           .PageSize(10)
-                                                          .Read(read => read.Action("SoReViewListRead", "SOReview"))
+                                                          .Read(read => read.Action("SoReViewReaLeaseRead", "SOReview"))
                                                         .Filter(f => f.Add(a => a.REVIEW_STATUS).IsEqualTo("Open"))
                                                        .Sort(sort => sort.Add("DOWNLOAD_DATE").Descending())
 
@@ -52,3 +53,42 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#release-so').on('click', function () {
+          bootbox.confirm({
+            message: 'Are you sure to release data?',
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label:'No',
+                   className: 'btn-danger'
+                }
+            },
+            closeButton: false,
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: '@Url.Action("ReleaseSo", "SoReview")',
+                        type: "POST",
+                        data: {  },
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.success) {
+                                bootbox.alert('Release sucess!', function () {
+                                    window.location.reload();
+                                });
+                            }
+                            else {
+                                bootbox.alert(result.message);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    })
+</script>

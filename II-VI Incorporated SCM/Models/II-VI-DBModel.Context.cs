@@ -8011,5 +8011,30 @@ namespace II_VI_Incorporated_SCM.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_RiskShip_Report1_Result>("sp_SOR_RiskShip_Report1");
         }
+    
+        public virtual ObjectResult<sp_SOR_GetSoOpen_Result> sp_SOR_GetSoOpen()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoOpen_Result>("sp_SOR_GetSoOpen");
+        }
+    
+        public virtual ObjectResult<sp_SOR_GetSoReviewHist_Result> sp_SOR_GetSoReviewHist()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoReviewHist_Result>("sp_SOR_GetSoReviewHist");
+        }
+    
+        public virtual ObjectResult<sp_SOR_Release_Result> sp_SOR_Release()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_Release_Result>("sp_SOR_Release");
+        }
+    
+        public virtual int sp_SOR_OTDFailByLine_ReportT()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SOR_OTDFailByLine_ReportT");
+        }
+    
+        public virtual int sp_SOR_RiskShip_ReportT()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SOR_RiskShip_ReportT");
+        }
     }
 }

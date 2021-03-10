@@ -24,8 +24,8 @@
         color: blue;
     }
 </style>
-<h3>SO Review List </h3>
-<div class="portlet box">
+<h3>Review SO </h3>
+<div class="portlet box" style="display:none">
     <div class="portlet-title">
         <div class="actions">
             <div class="btn-group">
@@ -89,7 +89,7 @@
                                                           .Ajax()
                                                           .PageSize(10)
                                                           .Read(read => read.Action("SoReViewListRead", "SOReview"))
-                                                        .Filter(f => f.Add(a => a.REVIEW_STATUS).IsEqualTo("Open"))
+                                                      //  .Filter(f => f.Add(a => a.REVIEW_STATUS).IsEqualTo("Open"))
                                                        .Sort(sort => sort.Add("DOWNLOAD_DATE").Descending())
 
                                                       ))
@@ -233,7 +233,6 @@
         var Date = model.DOWNLOAD_DATE;
         var Status = model.REVIEW_STATUS;
         var planshipdate = model.PLAN_SHIP_DATE;
-        debugger
         window.open('@Url.Action("SOReviewDetail", "SOReview")' + "?SoNo=" + SONO + "&Date=" + Date + "&status=" + Status + "&planshipdate=" + planshipdate , '_blank');
     });
 

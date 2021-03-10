@@ -30,8 +30,17 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
         #region SoReview
         public ActionResult ReleaseforReview()
         {
-
             return View();
+        }
+        public ActionResult SoReViewReaLeaseRead([DataSourceRequest] DataSourceRequest request)
+        {
+            List<sp_SOR_GetSoOpen_Result> list = _iSoReviewService.GetListReleaseSoReview();
+            return Json(list.ToDataSourceResult(request));
+        }
+        public JsonResult ReleaseSo()
+        {
+            bool res = _iSoReviewService.RealeaseSo();
+            return Json(new { res, message = "Release succes!"});
         }
 
         public ActionResult SOReviewList()
@@ -399,9 +408,12 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
 
         public ActionResult ListSoWithDetailReview()
         {
-           ViewBag.Part = _iSoReviewService.GetdropdownPart();
-            ViewBag.SoNo = _iSoReviewService.GetdropdownSoReview();
             return View();
+        }
+        public ActionResult SoReViewHistoryRead([DataSourceRequest] DataSourceRequest request)
+        {
+            List<sp_SOR_GetSoReviewHist_Result> list = _iSoReviewService.GetListSoReviewHistory();
+            return Json(list.ToDataSourceResult(request));
         }
 
         public ActionResult RiskShipByValue()

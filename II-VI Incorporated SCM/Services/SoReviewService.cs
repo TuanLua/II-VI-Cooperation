@@ -19,6 +19,10 @@ namespace II_VI_Incorporated_SCM.Services
 
         List<sp_SOR_GetSoReview_Result> GetListSoReview();
 
+        List<sp_SOR_GetSoOpen_Result> GetListReleaseSoReview();
+        bool RealeaseSo();
+
+        List<sp_SOR_GetSoReviewHist_Result> GetListSoReviewHistory();
         string GetDepart(string userID);
         List<SoReviewDetail> GetSoReviewDetail(string soNo, DateTime dateReview, string status);
 
@@ -113,7 +117,22 @@ namespace II_VI_Incorporated_SCM.Services
             List<sp_SOR_GetSoReview_Result> data = _db.sp_SOR_GetSoReview().ToList();
             return data;
         }
+        public List<sp_SOR_GetSoReviewHist_Result> GetListSoReviewHistory()
+        {
+            List<sp_SOR_GetSoReviewHist_Result> data = _db.sp_SOR_GetSoReviewHist().ToList();
+            return data;
+        }
+        public List<sp_SOR_GetSoOpen_Result> GetListReleaseSoReview()
+        {
+            List<sp_SOR_GetSoOpen_Result> data = _db.sp_SOR_GetSoOpen().ToList();
+            return data;
+        }
 
+        public bool RealeaseSo()
+        {
+            var data = _db.sp_SOR_Release();
+            return true;
+        }
         public List<SoReviewDetail> GetSoReviewDetail(string soNo, DateTime dateReview, string status)
         {
                 var data = (from  aaa in _db.tbl_SOR_Cur_Review_Detail  

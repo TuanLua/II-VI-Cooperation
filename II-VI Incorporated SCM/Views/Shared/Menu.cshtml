@@ -2880,42 +2880,50 @@
     </ul>
 </li>
 <li class="nav-item ">
+    <a href="@Url.Action("ReleaseforReview", "SoReview")" class="nav-link nav-toggle">
+        <i class="icon-bar-chart"></i>
+        <span class="title">Release SO for Review</span>
+        <span class="arrow"></span>
+    </a>
+    </li>
+<li class="nav-item ">
+    @*<ul class="sub-menu">
+            <li class="nav-item ">
+                <a href="@Url.Action("SOReviewList", "SoReview")" class="nav-link ">Review SO</a>
+            </li>
+           <li class="nav-item ">
+                <a href="@Url.Action("PICReviewList", "SoReview")" class="nav-link ">PIC Item Review</a>
+            </li>
+            <li class="nav-item ">
+                <a href="@Url.Action("ItemReviewList", "SoReview")" class="nav-link ">Item Review</a>
+            </li>
+            <li class="nav-item ">
+                <a href="@Url.Action("FamilyReviewList", "SoReview")" class="nav-link ">Family Review</a>
+            </li>
+        </ul>*@
+    <a href="@Url.Action("SOReviewList", "SoReview")" class="nav-link">
+        <i class="icon-bar-chart"></i>
+        <span class="title">Review SO</span>
+        <span class="arrow"></span>
+    </a>
+    </li>
+<li class="nav-item ">
     <a href="javascript:;" class="nav-link nav-toggle">
         <i class="icon-bar-chart"></i>
-        <span class="title">SO Review</span>
+        <span class="title">Report</span>
         <span class="arrow"></span>
     </a>
     <ul class="sub-menu">
         <li class="nav-item ">
-            <a href="@Url.Action("SOReviewList", "SoReview")" class="nav-link ">SO Review List</a>
+            <a href="@Url.Action("ListSoWithDetailReview", "SoReview")" class="nav-link ">So Review History</a>
         </li>
         <li class="nav-item ">
-            <a href="@Url.Action("PICReviewList", "SoReview")" class="nav-link ">PIC Item Review</a>
+            <a href="@Url.Action("RiskShipByValue", "SoReview")" class="nav-link ">Risk Ship</a>
         </li>
         <li class="nav-item ">
-            <a href="@Url.Action("ItemReviewList", "SoReview")" class="nav-link ">Item Review</a>
-        </li>
-        <li class="nav-item ">
-            <a href="@Url.Action("FamilyReviewList", "SoReview")" class="nav-link ">Family Review</a>
+            <a href="@Url.Action("OTDByLine", "SoReview")" class="nav-link ">OTD Fail By Line</a>
         </li>
     </ul>
-    <a href="javascript:;" class="nav-link nav-toggle">
-        <i class="icon-bar-chart"></i>
-        <span class="title">SO Review Report</span>
-        <span class="arrow"></span>
-        <ul class="sub-menu">
-            <li class="nav-item ">
-                <a href="@Url.Action("ListSoWithDetailReview", "SoReview")" class="nav-link ">List So With Detail Review</a>
-            </li>
-            <li class="nav-item ">
-                <a href="@Url.Action("RiskShipByValue", "SoReview")" class="nav-link ">Risk Ship By Value</a>
-            </li>
-            <li class="nav-item ">
-                <a href="@Url.Action("OTDByLine", "SoReview")" class="nav-link ">OTD By Line</a>
-            </li>
-           
-        </ul>
-    </a>
 </li>
 <li class="nav-item ">
     <a href="javascript:;" class="nav-link nav-toggle">
