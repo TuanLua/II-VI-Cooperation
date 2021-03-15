@@ -1797,8 +1797,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_SQEDB_SupplierLog_Remind_ReEvaluation" FunctionName="IQCTestModel.Store.sp_SQEDB_SupplierLog_Remind_ReEvaluation" />
-    <FunctionImportMapping FunctionImportName="sp_SOR_OTDFailByLine_Report" FunctionName="IQCTestModel.Store.sp_SOR_OTDFailByLine_Report" />
-    <FunctionImportMapping FunctionImportName="sp_SOR_RiskShip_Report" FunctionName="IQCTestModel.Store.sp_SOR_RiskShip_Report" />
     <FunctionImportMapping FunctionImportName="sp_SOR_GetSoReview" FunctionName="IQCTestModel.Store.sp_SOR_GetSoReview">
       <ResultMapping>
         <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_GetSoReview_Result">
@@ -5573,25 +5571,6 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="sp_SOR_OTDFailByLine_Report1" FunctionName="IQCTestModel.Store.sp_SOR_OTDFailByLine_Report1">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_OTDFailByLine_Report1_Result">
-          <ScalarProperty Name="DateType" ColumnName="DateType" />
-          <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
-          <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
-          <ScalarProperty Name="Line" ColumnName="Line" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_SOR_RiskShip_Report1" FunctionName="IQCTestModel.Store.sp_SOR_RiskShip_Report1">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_RiskShip_Report1_Result">
-          <ScalarProperty Name="Factory" ColumnName="Factory" />
-          <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
-          <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_SOR_GetSoOpen" FunctionName="IQCTestModel.Store.sp_SOR_GetSoOpen">
       <ResultMapping>
         <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_GetSoOpen_Result">
@@ -5654,7 +5633,40 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_SOR_OTDFailByLine_ReportT" FunctionName="IQCTestModel.Store.sp_SOR_OTDFailByLine_ReportT" />
-    <FunctionImportMapping FunctionImportName="sp_SOR_RiskShip_ReportT" FunctionName="IQCTestModel.Store.sp_SOR_RiskShip_ReportT" />
+    <FunctionImportMapping FunctionImportName="sp_SOR_SoReviewDetail" FunctionName="IQCTestModel.Store.sp_SOR_SoReviewDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_SoReviewDetail_Result">
+          <ScalarProperty Name="ITEM_REVIEW_ID" ColumnName="ITEM_REVIEW_ID" />
+          <ScalarProperty Name="SO_NO" ColumnName="SO_NO" />
+          <ScalarProperty Name="DOWNLOAD_DATE" ColumnName="DOWNLOAD_DATE" />
+          <ScalarProperty Name="DEPT_REVIEW" ColumnName="DEPT_REVIEW" />
+          <ScalarProperty Name="ITEM_REVIEW" ColumnName="ITEM_REVIEW" />
+          <ScalarProperty Name="RESULT" ColumnName="RESULT" />
+          <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+          <ScalarProperty Name="REVIEW_AT" ColumnName="REVIEW_AT" />
+          <ScalarProperty Name="REVIEW_BY" ColumnName="REVIEW_BY" />
+          <ScalarProperty Name="ISLOCK" ColumnName="ISLOCK" />
+          <ScalarProperty Name="Comment1" ColumnName="Comment1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SOR_OTDFailByLine_Report" FunctionName="IQCTestModel.Store.sp_SOR_OTDFailByLine_Report">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_OTDFailByLine_Report_Result1">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
+          <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SOR_RiskShip_Report" FunctionName="IQCTestModel.Store.sp_SOR_RiskShip_Report">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_RiskShip_Report_Result">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
+          <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

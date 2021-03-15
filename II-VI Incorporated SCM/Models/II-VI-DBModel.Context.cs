@@ -7987,29 +7987,9 @@ namespace II_VI_Incorporated_SCM.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQEDB_SupplierLog_Remind_ReEvaluation");
         }
     
-        public virtual int sp_SOR_OTDFailByLine_Report()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SOR_OTDFailByLine_Report");
-        }
-    
-        public virtual int sp_SOR_RiskShip_Report()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SOR_RiskShip_Report");
-        }
-    
         public virtual ObjectResult<sp_SOR_GetSoReview_Result> sp_SOR_GetSoReview()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoReview_Result>("sp_SOR_GetSoReview");
-        }
-    
-        public virtual ObjectResult<sp_SOR_OTDFailByLine_Report1_Result> sp_SOR_OTDFailByLine_Report1()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_OTDFailByLine_Report1_Result>("sp_SOR_OTDFailByLine_Report1");
-        }
-    
-        public virtual ObjectResult<sp_SOR_RiskShip_Report1_Result> sp_SOR_RiskShip_Report1()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_RiskShip_Report1_Result>("sp_SOR_RiskShip_Report1");
         }
     
         public virtual ObjectResult<sp_SOR_GetSoOpen_Result> sp_SOR_GetSoOpen()
@@ -8027,14 +8007,27 @@ namespace II_VI_Incorporated_SCM.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_Release_Result>("sp_SOR_Release");
         }
     
-        public virtual int sp_SOR_OTDFailByLine_ReportT()
+        public virtual ObjectResult<sp_SOR_SoReviewDetail_Result> sp_SOR_SoReviewDetail(string sono, Nullable<System.DateTime> downloadDate)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SOR_OTDFailByLine_ReportT");
+            var sonoParameter = sono != null ?
+                new ObjectParameter("Sono", sono) :
+                new ObjectParameter("Sono", typeof(string));
+    
+            var downloadDateParameter = downloadDate.HasValue ?
+                new ObjectParameter("DownloadDate", downloadDate) :
+                new ObjectParameter("DownloadDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_SoReviewDetail_Result>("sp_SOR_SoReviewDetail", sonoParameter, downloadDateParameter);
         }
     
-        public virtual int sp_SOR_RiskShip_ReportT()
+        public virtual ObjectResult<sp_SOR_OTDFailByLine_Report_Result1> sp_SOR_OTDFailByLine_Report()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SOR_RiskShip_ReportT");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_OTDFailByLine_Report_Result1>("sp_SOR_OTDFailByLine_Report");
+        }
+    
+        public virtual ObjectResult<sp_SOR_RiskShip_Report_Result> sp_SOR_RiskShip_Report()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_RiskShip_Report_Result>("sp_SOR_RiskShip_Report");
         }
     }
 }

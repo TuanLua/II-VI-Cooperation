@@ -2967,7 +2967,7 @@ warning 6002: The table/view 'IQC.dbo.tbl_RP_Data_Source' does not have a primar
     <Key>
       <PropertyRef Name="ITEM_REVIEW_ID" />
     </Key>
-    <Property Name="ITEM_REVIEW_ID" Type="bigint" Nullable="false" />
+    <Property Name="ITEM_REVIEW_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SO_NO" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="DOWNLOAD_DATE" Type="date" Nullable="false" />
     <Property Name="DEPT_REVIEW" Type="varchar" MaxLength="50" Nullable="false" />
@@ -4814,12 +4814,12 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
   <Function Name="sp_SOR_GetSoReview" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_SOR_GetSoReviewHist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_SOR_OTDFailByLine_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_SOR_OTDFailByLine_Report1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_SOR_OTDFailByLine_ReportT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_SOR_Release" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_SOR_RiskShip_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_SOR_RiskShip_Report1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_SOR_RiskShip_ReportT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_SOR_SoReviewDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Sono" Type="nvarchar" Mode="In" />
+    <Parameter Name="DownloadDate" Type="date" Mode="In" />
+  </Function>
   <Function Name="sp_SortNCR_Number" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NCR_NUMBER" Type="nvarchar" Mode="In" />
     <Parameter Name="NewReceiver" Type="nvarchar" Mode="In" />

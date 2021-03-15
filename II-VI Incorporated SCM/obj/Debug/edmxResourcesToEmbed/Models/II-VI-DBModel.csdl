@@ -2182,8 +2182,6 @@
     <FunctionImport Name="sp_SQE_SupplierDevelopment_VisitAuditSum" ReturnType="Collection(IQCTestModel.sp_SQE_SupplierDevelopment_VisitAuditSum_Result)" />
     <FunctionImport Name="sp_SQE_Yearlist" ReturnType="Collection(IQCTestModel.sp_SQE_Yearlist_Result)" />
     <FunctionImport Name="sp_SQEDB_SupplierLog_Remind_ReEvaluation" />
-    <FunctionImport Name="sp_SOR_OTDFailByLine_Report" />
-    <FunctionImport Name="sp_SOR_RiskShip_Report" />
     <FunctionImport Name="sp_SOR_GetSoReview" ReturnType="Collection(IQCTestModel.sp_SOR_GetSoReview_Result)" />
     <EntitySet Name="C__MigrationHistory" EntityType="IQCTestModel.C__MigrationHistory" />
     <EntitySet Name="ADD_INS" EntityType="IQCTestModel.ADD_INS" />
@@ -2457,13 +2455,15 @@
       <End Role="AspNetRole" EntitySet="AspNetRoles" />
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
     </AssociationSet>
-    <FunctionImport Name="sp_SOR_OTDFailByLine_Report1" ReturnType="Collection(IQCTestModel.sp_SOR_OTDFailByLine_Report1_Result)" />
-    <FunctionImport Name="sp_SOR_RiskShip_Report1" ReturnType="Collection(IQCTestModel.sp_SOR_RiskShip_Report1_Result)" />
     <FunctionImport Name="sp_SOR_GetSoOpen" ReturnType="Collection(IQCTestModel.sp_SOR_GetSoOpen_Result)" />
     <FunctionImport Name="sp_SOR_GetSoReviewHist" ReturnType="Collection(IQCTestModel.sp_SOR_GetSoReviewHist_Result)" />
     <FunctionImport Name="sp_SOR_Release" ReturnType="Collection(IQCTestModel.sp_SOR_Release_Result)" />
-    <FunctionImport Name="sp_SOR_OTDFailByLine_ReportT" />
-    <FunctionImport Name="sp_SOR_RiskShip_ReportT" />
+    <FunctionImport Name="sp_SOR_SoReviewDetail" ReturnType="Collection(IQCTestModel.sp_SOR_SoReviewDetail_Result)">
+      <Parameter Name="Sono" Mode="In" Type="String" />
+      <Parameter Name="DownloadDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SOR_OTDFailByLine_Report" ReturnType="Collection(IQCTestModel.sp_SOR_OTDFailByLine_Report_Result1)" />
+    <FunctionImport Name="sp_SOR_RiskShip_Report" ReturnType="Collection(IQCTestModel.sp_SOR_RiskShip_Report_Result)" />
   </EntityContainer>
   <ComplexType Name="pGet_MEASUREMENT_STD_BY_PART_Result">
     <Property Type="String" Name="MEASURE_PARA" Nullable="false" MaxLength="50" />
@@ -8507,5 +8507,38 @@
   <ComplexType Name="sp_SOR_Release_Result">
     <Property Type="String" Name="FullName" Nullable="true" MaxLength="128" />
     <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+  </ComplexType>
+  <ComplexType Name="sp_SOR_SoReviewDetail_Result">
+    <Property Type="Int64" Name="ITEM_REVIEW_ID" Nullable="false" />
+    <Property Type="String" Name="SO_NO" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="DOWNLOAD_DATE" Nullable="false" />
+    <Property Type="String" Name="DEPT_REVIEW" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ITEM_REVIEW" Nullable="false" MaxLength="1000" />
+    <Property Type="Boolean" Name="RESULT" Nullable="true" />
+    <Property Type="String" Name="COMMENT" Nullable="true" />
+    <Property Type="DateTime" Name="REVIEW_AT" Nullable="true" Precision="23" />
+    <Property Type="String" Name="REVIEW_BY" Nullable="true" MaxLength="128" />
+    <Property Type="Boolean" Name="ISLOCK" Nullable="true" />
+    <Property Type="String" Name="Comment1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_SOR_OTDFailByLine_Report_Result">
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="11" />
+    <Property Type="Int32" Name="Current_Month" Nullable="false" />
+    <Property Type="Int32" Name="Next_Month" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_SOR_RiskShip_Report1_Result1">
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="11" />
+    <Property Type="Int32" Name="Current_Month" Nullable="false" />
+    <Property Type="Int32" Name="Next_Month" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_SOR_OTDFailByLine_Report_Result1">
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="11" />
+    <Property Type="Int32" Name="Current_Month" Nullable="false" />
+    <Property Type="Int32" Name="Next_Month" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_SOR_RiskShip_Report_Result">
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="11" />
+    <Property Type="Int32" Name="Current_Month" Nullable="false" />
+    <Property Type="Int32" Name="Next_Month" Nullable="false" />
   </ComplexType>
 </Schema>

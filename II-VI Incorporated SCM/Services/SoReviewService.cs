@@ -73,9 +73,9 @@ namespace II_VI_Incorporated_SCM.Services
         List<SelectListItem> GetdropdownPart();
         List<SelectListItem> GetdropdownSoReview();
 
-        List<sp_SOR_OTDFailByLine_Report1_Result> SOR_OTDFailByLine_Report();
+        List<sp_SOR_OTDFailByLine_Report_Result1> SOR_OTDFailByLine_Report();
 
-        List<sp_SOR_RiskShip_Report1_Result> SOR_RiskShip_Report1_Result();
+        List<sp_SOR_RiskShip_Report_Result> SOR_RiskShip_Report1_Result();
         #endregion
 
     }
@@ -135,22 +135,47 @@ namespace II_VI_Incorporated_SCM.Services
         }
         public List<SoReviewDetail> GetSoReviewDetail(string soNo, DateTime dateReview, string status)
         {
-                var data = (from  aaa in _db.tbl_SOR_Cur_Review_Detail  
-                        join bbb in _db.tbl_SOR_His_Review_Detail on aaa.SO_NO equals bbb.SO_NO 
-                        where aaa.DOWNLOAD_DATE == bbb.DOWNLOAD_DATE && aaa.DOWNLOAD_DATE == dateReview
-                        select  new SoReviewDetail
-                        {
-                            ID = aaa.ITEM_REVIEW_ID,
-                            SONO = aaa.SO_NO,
-                            ItemReview = aaa.ITEM_REVIEW,
-                            DeptReview = aaa.DEPT_REVIEW,
-                            Comment = aaa.COMMENT,
-                            LastComment = bbb.COMMENT,
-                            LastReview = bbb.RESULT,
-                            ReviewResult = bbb.RESULT == true ? "True" : "Fasle",
-                            IsLock = aaa.ISLOCK == true ? "True" : "Fasle"
-                        }).ToList();
+            var current =  _db.tbl_SOR_Cur_Review_Detail.Where(x =>x.SO_NO == soNo && x.DOWNLOAD_DATE == dateReview)                    
+                      .ToList();
+            var top1 =  _db.tbl_SOR_His_Review_Detail.Where(x => x.SO_NO == soNo && x.DOWNLOAD_DATE == dateReview).ToList().OrderBy(x => x.DOWNLOAD_DATE)?.FirstOrDefault();
+            if (top1 != null)
+            {
+                var history = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.SO_NO == top1.SO_NO && x.DOWNLOAD_DATE == top1.DOWNLOAD_DATE).ToList();
+                var data = (from c in current
+                            join p in history on c.SO_NO equals p.SO_NO into ps
+                            from p in ps.DefaultIfEmpty()
+                            where (c.SO_NO == soNo && c.DOWNLOAD_DATE == dateReview)
+                            select new SoReviewDetail
+                            {
+                                ID = c.ITEM_REVIEW_ID,
+                                SONO = c.SO_NO,
+                                ItemReview = c.ITEM_REVIEW,
+                                DeptReview = c.DEPT_REVIEW,
+                                Comment = c.COMMENT,
+                                LastComment = p.COMMENT,
+                                LastReview = p.RESULT,
+                                ReviewResult = c.RESULT == false ? "True" : "False",
+                                IsLock = c.ISLOCK == true ? "True" : "Fasle"
+                            }).ToList();
                 return data;
+            }
+            else
+            {
+                var datacurrent = current.Where(x=>x.SO_NO == soNo && x.DOWNLOAD_DATE == dateReview)
+                    .Select( x=> new SoReviewDetail
+                                  {
+                                      ID = x.ITEM_REVIEW_ID,
+                                      SONO = x.SO_NO,
+                                      ItemReview = x.ITEM_REVIEW,
+                                      DeptReview = x.DEPT_REVIEW,
+                                      Comment = x.COMMENT,
+                                      LastComment = null,
+                                      ReviewResult = null,
+                                      IsLock = x.ISLOCK == true ? "True" : "Fasle"
+                                  }).ToList();
+                return datacurrent;
+            }
+               
         }
 
         public string GetDepart(string userID)
@@ -752,15 +777,15 @@ namespace II_VI_Incorporated_SCM.Services
             return lstSo;
         }
 
-        public List<sp_SOR_OTDFailByLine_Report1_Result>SOR_OTDFailByLine_Report()
+        public List<sp_SOR_OTDFailByLine_Report_Result1> SOR_OTDFailByLine_Report()
         {
-            List<sp_SOR_OTDFailByLine_Report1_Result> data = _db.sp_SOR_OTDFailByLine_Report1().ToList();
+            List<sp_SOR_OTDFailByLine_Report_Result1> data = _db.sp_SOR_OTDFailByLine_Report().ToList();
             return data;
         }
 
-        public List<sp_SOR_RiskShip_Report1_Result> SOR_RiskShip_Report1_Result()
+        public List<sp_SOR_RiskShip_Report_Result> SOR_RiskShip_Report1_Result()
         {
-            List<sp_SOR_RiskShip_Report1_Result> data = _db.sp_SOR_RiskShip_Report1().ToList();
+            List<sp_SOR_RiskShip_Report_Result> data = _db.sp_SOR_RiskShip_Report().ToList();
             return data;
         }
         #endregion

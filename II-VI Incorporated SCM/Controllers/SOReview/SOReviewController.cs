@@ -68,6 +68,8 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             }
             else
             {
+                SoReviewDetail example = new SoReviewDetail();
+                data.Add(example);
                 data.FirstOrDefault().OldEvidence = new List<tbl_SOR_Attached_ForItemReview>();
             }
             ViewBag.TaskList = _iTaskManagementService.GetTaskListByTaskNO(SoNo, "SoReview");
@@ -75,7 +77,8 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             ViewBag.SoNo = SoNo;
             ViewBag.Date = dt.ToString("dd-MMM-yyyy");
             ViewBag.Status = status;
-            ViewBag.planshipdate = planshipdate;
+            var dates = DateTime.Parse(planshipdate);
+            ViewBag.planshipdate = dates.ToString("dd-MMM-yyyy"); ;
             return View(data);
         }
         [HttpPost]

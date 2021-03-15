@@ -76,7 +76,7 @@
                                                           columns.Bound(p => p.BLC_QTY).Title("Balance Qty").Width(150);
                                                           columns.Bound(p => p.BLC_VALUE).Title("Balance Value").Width(150);
                                                           columns.Bound(p => p.ONHAND_QTY).Title("On hand Qty").Width(150);
-                                                          columns.Bound(p => p.PLAN_SHIP_DATE).Title("On hand Qty").Width(0);
+                                                          columns.Bound(p => p.PLAN_SHIP_DATE).Format("{0:dd-MMM-yy}").Width(0);
                                                       }).ToolBar(tools => tools.Excel())
                                                       .Sortable()
                                                       .Scrollable()
