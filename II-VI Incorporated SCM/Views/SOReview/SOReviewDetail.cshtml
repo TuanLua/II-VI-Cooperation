@@ -11,7 +11,7 @@
 <input type="hidden" id="SoNo" name="SoNo" value="@Model.FirstOrDefault().SONO" />
 <div class="row col-sm-3">
 </div>
-@if (ViewBag.Status == "Release")
+@if (ViewBag.Status == "Released")
 {
     <div class="row col-sm-3">
         <label> Plan Ship Date</label>
@@ -29,9 +29,9 @@
         <label></label>
         <input type="checkbox" id="IsDefine" class="form-control" />
     </div>
-    <div class="row col-sm-2" style="float:right">
+    <div class="row col-sm-3" style="float:right">
         <label> </label>
-        @if (ViewBag.Status == "Release")
+        @if (ViewBag.Status == "Released")
         {
             <button class="btn btn-sm btn-info" id="finish-review">Finish Review </button>
         }
@@ -76,11 +76,11 @@
                     <span>@customer.SONO</span>
                 </td>
                 <td>
-                    @if (customer.DeptReview == ViewBag.IsDaprt && customer.IsLock == "False" && ViewBag.Status == "Release")
+                    @if (customer.DeptReview == ViewBag.IsDaprt && customer.IsLock == "False" && ViewBag.Status == "Released")
                     {
                         <a class="btn-sm btn-info Edit" href="javascript:;">Edit</a>
                         <a class=" btn-sm btn-success Update" href="javascript:;" style="display:none">Update</a>
-                        <a class="btn-sm btn-danger Cancel" href="javascript:;" style="display:none">Cancel</a>
+                        <a class="btn-sm btn-danger Cancel" href="javascript:;" style="display:none;float:right">Cancel</a>
                     }
 
                 </td>
@@ -254,7 +254,7 @@
         }
     });
         $('#back-tolist').on('click', function () {
-            if (ViewBag.Status == "Done") {
+            if ('@ViewBag.Status' == "Done") {
                 window.location.href = "@Url.Action("ListSoWithDetailReview", "SoReview")"
             }
             else {
@@ -262,12 +262,13 @@
                  window.location.href = "@Url.Action("SOReviewList", "SoReview")"
             }
              })
-    function getval(sel,ID) {
+        function getval(sel, ID) {
         if (sel.value == "Y") {
             //Set cung ID no Default item show popup add file
-            if (ID == "1")
-            $('#iditemreview').val(ID);
-            $('#popup').modal('show');
+            if (ID == "1") {
+                $('#iditemreview').val(ID);
+                $('#popup').modal('show');
+            }
         }
         if (sel.value == "N") {
             $('#popupTask').modal('show');
@@ -346,7 +347,8 @@
         }
     })
 
-    $("body").on("click", "#tblCustomers .Edit", function () {
+        $("body").on("click", "#tblCustomers .Edit", function () {
+            debugger
         var row = $(this).closest("tr");
         var titemreview = $(this).parents("tr").attr('titemreview');
         var id = $(this).parents("tr").attr('id');
@@ -380,7 +382,7 @@
                 });
              var $newOption = $("<option selected='selected'></option>").val("").text("")
         $("#QMSDropdown").append($newOption).trigger('change');
-        var topic = '@ViewBag.SoNo' + '-' + '@ViewBag.Date' + '-' + titemreview;
+        var topic = '@ViewBag.SoNo';
 
             //call data source task list when select
         $("#gridTaskDetail").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadTaksMantSoReview", "Soreview")' + '?taskNo=' + topic;

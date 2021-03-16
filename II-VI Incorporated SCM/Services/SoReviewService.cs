@@ -151,11 +151,11 @@ namespace II_VI_Incorporated_SCM.Services
                                 SONO = c.SO_NO,
                                 ItemReview = c.ITEM_REVIEW,
                                 DeptReview = c.DEPT_REVIEW,
-                                Comment = c.COMMENT,
+                                Comment = c.COMMENT == null ? "" : c.COMMENT,
                                 LastComment = p.COMMENT,
                                 LastReview = p.RESULT,
                                 ReviewResult = c.RESULT == false ? "True" : "False",
-                                IsLock = c.ISLOCK == true ? "True" : "Fasle"
+                                IsLock = c.ISLOCK == true ? "True" : "False"
                             }).ToList();
                 return data;
             }
@@ -168,11 +168,11 @@ namespace II_VI_Incorporated_SCM.Services
                                       SONO = x.SO_NO,
                                       ItemReview = x.ITEM_REVIEW,
                                       DeptReview = x.DEPT_REVIEW,
-                                      Comment = x.COMMENT,
+                                      Comment = x.COMMENT == null ? "" : x.COMMENT,
                                       LastComment = null,
                                       ReviewResult = null,
-                                      IsLock = x.ISLOCK == true ? "True" : "Fasle"
-                                  }).ToList();
+                                      IsLock = x.ISLOCK == true ? "True" : "False"
+                    }).ToList();
                 return datacurrent;
             }
                

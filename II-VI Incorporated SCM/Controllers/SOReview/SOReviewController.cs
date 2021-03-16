@@ -77,8 +77,16 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             ViewBag.SoNo = SoNo;
             ViewBag.Date = dt.ToString("dd-MMM-yyyy");
             ViewBag.Status = status;
-            var dates = DateTime.Parse(planshipdate);
-            ViewBag.planshipdate = dates.ToString("dd-MMM-yyyy"); ;
+             if (planshipdate != "null")
+            {
+                var dates = DateTime.Parse(planshipdate);
+                ViewBag.planshipdate = dates.ToString("dd-MMM-yyyy"); ;
+            }
+            else
+            {
+                ViewBag.planshipdate = planshipdate;
+            }
+
             return View(data);
         }
         [HttpPost]
