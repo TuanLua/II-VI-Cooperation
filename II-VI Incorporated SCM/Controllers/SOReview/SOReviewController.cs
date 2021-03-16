@@ -72,6 +72,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
                 data.Add(example);
                 data.FirstOrDefault().OldEvidence = new List<tbl_SOR_Attached_ForItemReview>();
             }
+            ViewBag.IsPlanner = _IUserService.CheckGroupRoleForUser(User.Identity.GetUserId(), UserGroup.Planner);
             ViewBag.TaskList = _iTaskManagementService.GetTaskListByTaskNO(SoNo, "SoReview");
             ViewBag.IsDaprt = _iSoReviewService.GetDepart(User.Identity.GetUserId());
             ViewBag.SoNo = SoNo;
@@ -123,7 +124,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             data.PlanShipDate = planshipdate;
             data.DateDownLoad = DateTime.Parse(Date);
             Result res = _iSoReviewService.UpdateSoReviewFinish(data);
-            return Json(new { res.success, message = "Finish sucess!", obj = res.obj });
+            return Json(new { res.success, message = res.message, obj = res.obj });
         }
         [HttpPost]
         public JsonResult SaveFileUpLoadDocument()
@@ -295,7 +296,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
 
         public ActionResult PICReviewList()
         {
-            ViewBag.IsPlanner = _IUserService.CheckGroupRoleForUser(User.Identity.GetUserId(), UserGroup.Planer);
+            ViewBag.IsPlanner = _IUserService.CheckGroupRoleForUser(User.Identity.GetUserId(), UserGroup.Planner);
             var lstPIC = _iSoReviewService.GetListPIC();
             return View(lstPIC);
         }
@@ -334,7 +335,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
         #region Item Review
         public ActionResult ItemReviewList()
         {
-            ViewBag.IsPlanner = _IUserService.CheckGroupRoleForUser(User.Identity.GetUserId(), UserGroup.Planer);
+            ViewBag.IsPlanner = _IUserService.CheckGroupRoleForUser(User.Identity.GetUserId(), UserGroup.Planner);
             var lstPIC = _iSoReviewService.GetListItem();
             return View(lstPIC);
         }
@@ -377,7 +378,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
 
         public ActionResult FamilyReviewList()
         {
-            ViewBag.IsPlanner = _IUserService.CheckGroupRoleForUser(User.Identity.GetUserId(), UserGroup.Planer);
+            ViewBag.IsPlanner = _IUserService.CheckGroupRoleForUser(User.Identity.GetUserId(), UserGroup.Planner);
             var lstPIC = _iSoReviewService.GetListFamily();
             return View(lstPIC);
         }

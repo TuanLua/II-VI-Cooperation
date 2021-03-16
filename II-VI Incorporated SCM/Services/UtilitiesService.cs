@@ -135,7 +135,7 @@ namespace II_VI_Incorporated_SCM.Services
         public static string VNOwner = "VN Owner";
         public static string Initiator = "Initiator";
         public static string PE = "PE";
-        public static string Planer = "Planer";
+        public static string Planner = "Planner";
     }
 
     public static class Status

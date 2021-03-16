@@ -154,9 +154,25 @@ namespace II_VI_Incorporated_SCM.Services
                                 Comment = c.COMMENT == null ? "" : c.COMMENT,
                                 LastComment = p.COMMENT,
                                 LastReview = p.RESULT,
-                                ReviewResult = c.RESULT == false ? "True" : "False",
+                                ReviewBool = c.RESULT,
                                 IsLock = c.ISLOCK == true ? "True" : "False"
                             }).ToList();
+                foreach (var item in data)
+                {
+                    if (item.ReviewBool == null)
+                    {
+                        item.ReviewResult = "";
+                    }
+                    else if (item.ReviewBool == false)
+                    {
+                        item.ReviewResult = "False";
+                    }
+                    else if (item.ReviewBool == true)
+                    {
+                        item.ReviewResult = "True";
+                    }
+
+                }
                 return data;
             }
             else
@@ -170,9 +186,25 @@ namespace II_VI_Incorporated_SCM.Services
                                       DeptReview = x.DEPT_REVIEW,
                                       Comment = x.COMMENT == null ? "" : x.COMMENT,
                                       LastComment = null,
-                                      ReviewResult = null,
+                                      ReviewBool =  x.RESULT ,
                                       IsLock = x.ISLOCK == true ? "True" : "False"
                     }).ToList();
+                foreach (var item in datacurrent)
+                {
+                    if(item.ReviewBool == null)
+                    {
+                        item.ReviewResult = "";
+                    }
+                    else if(item.ReviewBool == false)
+                    {
+                        item.ReviewResult = "False";
+                    }
+                    else if(item.ReviewBool == true)
+                    {
+                        item.ReviewResult = "True";
+                    }
+                    
+                }
                 return datacurrent;
             }
                
@@ -400,14 +432,13 @@ namespace II_VI_Incorporated_SCM.Services
                                 dataSoreview.PLAN_SHIP_DATE = picData.PlanShipDate;
                                 dataSoreview.REVIEW_STATUS = "Done";
 
-                                //move to history ????
-
 
                                 _db.SaveChanges();
                                 tranj.Commit();
                                 return new Result
                                 {
                                     success = true,
+                                    message = "Finish sucess!"
                                 };
                             }
                         }
@@ -445,7 +476,7 @@ namespace II_VI_Incorporated_SCM.Services
                         return new Result
                         {
                             success = false,
-                            message = "Item review locked by Planer!",
+                            message = "Item review locked by Planner!",
                             obj = -1
                         };
                     }

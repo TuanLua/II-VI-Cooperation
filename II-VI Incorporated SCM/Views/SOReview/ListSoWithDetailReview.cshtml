@@ -39,7 +39,7 @@
                         <a href="javascript:;" id="clear"> Clear Filter</a>
                     </li>
                     <li>
-                        <a href="javascript:;" onclick="onFind('ANALYST')"> Part </a>
+                        <a href="javascript:;" onclick="onFind('PART')"> Part </a>
                     </li>
                     <li>
                         <a href="javascript:;" onclick="onFind('SO_NO')"> SO No </a>
@@ -79,10 +79,10 @@
                                                           columns.Bound(p => p.PLAN_SHIP_DATE).Format("{0:dd-MMM-yy}").Width(0);
                                                       }).ToolBar(tools => tools.Excel())
                                                       .Sortable()
+                                                       .Filterable()
                                                       .Scrollable()
                                                          .Excel(excel => excel
                                                     .FileName("So Review List.xlsx")
-                                                    .Filterable(true)
                                                     .ProxyURL(Url.Action("Excel_Export_Save", "Grid")))
                                                          .Pageable(m => m.PageSizes(new List<object> { 5, 10, 20, 50, "All" }).Refresh(true))
                                                       .HtmlAttributes(new { style = "height:550px;" })
@@ -181,7 +181,7 @@
     function onFind(condition) {
         $('.searchField').text(condition);
 
-        if (condition == 'ANALYST') {
+        if (condition == 'PART') {
             $('#search').val();
             $('#searchId').val(0);
         }
