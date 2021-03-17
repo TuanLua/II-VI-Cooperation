@@ -8025,9 +8025,9 @@ namespace II_VI_Incorporated_SCM.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_OTDFailByLine_Report_Result1>("sp_SOR_OTDFailByLine_Report");
         }
     
-        public virtual ObjectResult<sp_SOR_RiskShip_Report_Result> sp_SOR_RiskShip_Report()
+        public virtual ObjectResult<sp_SOR_RiskShip_Report_Result1> sp_SOR_RiskShip_Report()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_RiskShip_Report_Result>("sp_SOR_RiskShip_Report");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_RiskShip_Report_Result1>("sp_SOR_RiskShip_Report");
         }
     }
 }

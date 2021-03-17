@@ -1,6 +1,6 @@
 ﻿@using II_VI_Incorporated_SCM.Services
 @using Microsoft.AspNet.Identity
-@model List<II_VI_Incorporated_SCM.Models.sp_SOR_RiskShip_Report_Result>
+@model List<II_VI_Incorporated_SCM.Models.sp_SOR_RiskShip_Report_Result1>
 @{
     ViewBag.Title = "RiskShipByValue";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -33,7 +33,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td></td>
+            <td>@item.Factory</td>
             <td><h3 style="text-align:center "><b>@item.Current_Month</b></h3></td>
             <td><h3 style="text-align:center"><b>@item.Next_Month</b></h3></td>
         </tr>

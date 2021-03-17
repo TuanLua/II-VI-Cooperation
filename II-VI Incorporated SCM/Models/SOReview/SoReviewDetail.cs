@@ -27,6 +27,7 @@ namespace II_VI_Incorporated_SCM.Models.SOReview
 
         public string PlanShipDate { get; set;}
         public string IsLock { get; set; }
+        public string Item { get; set; }
         public List<EvidenceView> ModelEvidence { get; set; }
         public List<tbl_SOR_Attached_ForItemReview> OldEvidence { get; set; }
 

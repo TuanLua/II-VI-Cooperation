@@ -202,7 +202,11 @@ namespace II_VI_Incorporated_SCM.Services
 
         public IEnumerable<TaskManagementNCRViewModel> GetListTaskMantSoreviewByID(string taskNo)
         {
-            int taskID = _db.TASKLISTs.Where(x => x.Topic == taskNo).FirstOrDefault().TopicID;
+           var task= _db.TASKLISTs.Where(x => x.Topic == taskNo).FirstOrDefault();
+            int taskID = 0;
+            if (task != null) {
+                taskID = task.TopicID;
+            }
             List<TaskManagementNCRViewModel> lsTaskMantNCR = new List<TaskManagementNCRViewModel>();
             foreach (var taskDetail in _db.TASKDETAILs.ToList())
             {

@@ -1079,6 +1079,9 @@
     <Compile Include="Models\sp_SOR_RiskShip_Report_Result.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_SOR_RiskShip_Report_Result1.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_SOR_SoReviewDetail_Result.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>

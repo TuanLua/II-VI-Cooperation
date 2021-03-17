@@ -54,17 +54,32 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             return Json(list.ToDataSourceResult(request));
         }
 
-        public ActionResult SOReviewDetail(string SoNo, string Date, string status,string planshipdate)
+        
+             [HttpPost]
+        public JsonResult LockSoReview(string SoNo,string item)
+        {
+            Result res = _iSoReviewService.LockSoReview(SoNo,item);
+            return Json(new { res.success, message = res.message, obj = res.obj });
+        }
+        public ActionResult SOReviewDetail(string SoNo, string Date, string status,string planshipdate,string item)
         {
             Date = Date.Substring(0, Date.IndexOf(" GMT"));
             DateTime dt;
             DateTime.TryParseExact(Date, "ddd MMM d yyyy hh:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.None, out dt);
-            var data = _iSoReviewService.GetSoReviewDetail(SoNo, dt, status);
+            var data = _iSoReviewService.GetSoReviewDetail(SoNo, dt, status,item.Trim());
+            List<tbl_SOR_Attached_ForItemReview> lstFile = new List<tbl_SOR_Attached_ForItemReview>();
             //set default item high qty
-            int IDItemHigh = 1;
             if (data.Count > 0)
             {
-                data.FirstOrDefault().OldEvidence = _iSoReviewService.GetListFileItem(IDItemHigh);
+                foreach (var item1 in data)
+                {
+                    if(item1.DeptReview == "HIGH_VOLUME")
+                    {
+                        lstFile = _iSoReviewService.GetListFileItem(SoNo, dt, item1.ID, item);
+                    }
+                  
+                }
+                data.FirstOrDefault().OldEvidence = lstFile;
             }
             else
             {
@@ -78,7 +93,8 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             ViewBag.SoNo = SoNo;
             ViewBag.Date = dt.ToString("dd-MMM-yyyy");
             ViewBag.Status = status;
-             if (planshipdate != "null")
+            ViewBag.Item = item;
+            if (planshipdate != "null")
             {
                 var dates = DateTime.Parse(planshipdate);
                 ViewBag.planshipdate = dates.ToString("dd-MMM-yyyy"); ;
@@ -91,9 +107,9 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             return View(data);
         }
         [HttpPost]
-        public JsonResult AddTaskForItemReview(string SoNo, string Date, string itemreview, string assignee)
+        public JsonResult AddTaskForItemReview(string SoNo, string Date, string itemreview, string assignee,string item)
         {
-            Result res = _iSoReviewService.AddTaskForItemReview(SoNo, Date, itemreview, User.Identity.GetUserId(), assignee);
+            Result res = _iSoReviewService.AddTaskForItemReview(SoNo, Date, itemreview, User.Identity.GetUserId(), assignee,item);
             return Json(new { res.success, message = res.message, obj = res.obj });
         }
         public JsonResult ReadTaksMantSoReview([DataSourceRequest] DataSourceRequest request, string taskNo)
@@ -101,7 +117,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             return Json(_iTaskManagementService.GetListTaskMantSoreviewByID(taskNo).ToDataSourceResult(request));
         }
         [HttpPost]
-        public JsonResult UpdateSoReview(string id, string reviewresult, string comment,string islock)
+        public JsonResult UpdateSoReview(string id, string reviewresult, string comment,string islock,string item)
         {
             int ID = Convert.ToInt32(id);
            
@@ -109,11 +125,12 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             data.Comment = comment;
             data.ReviewResult = reviewresult;
             data.IsLock = islock;
+            data.Item = item;
             Result res = _iSoReviewService.UpdateDataSoReview(data, ID);
             return Json(new { res.success, message = res.message, obj = res.obj });
         }
         [HttpPost]
-        public JsonResult UpdateSoReviewFinish(string sono, string planshipdate, string isdefine,string Date)
+        public JsonResult UpdateSoReviewFinish(string sono, string planshipdate, string isdefine,string Date,string item)
         {
             SoReviewDetail data = new SoReviewDetail();
             if (isdefine == "true")
@@ -123,6 +140,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             data.SONO = sono;
             data.PlanShipDate = planshipdate;
             data.DateDownLoad = DateTime.Parse(Date);
+            data.Item = item;
             Result res = _iSoReviewService.UpdateSoReviewFinish(data);
             return Json(new { res.success, message = res.message, obj = res.obj });
         }
@@ -260,7 +278,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
         }
 
         [HttpPost]
-        public ActionResult AddFileforItemReview(string SO_NO, string Date,  string File, string ID )
+        public ActionResult AddFileforItemReview(string SO_NO, string Date,  string File, string ID,string item )
         {
             DateTime date = DateTime.Now;
             string returnPath = date.Year + "-" + date.Month + "-" + date.Day + "-" + date.Hour + "-" +
@@ -273,7 +291,8 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
                    SO_NO = SO_NO,
                     Attached_File = returnPath + "/" + File,
                    Download_Date = date,
-                   Item_Idx = id
+                   Item_Idx = id,
+                   ITEM = item
                 };
                 Result res = _iSoReviewService.SaveFileAttachedItemReview(datafiles);
                 return Json(new { success = res.success, message = res.obj });

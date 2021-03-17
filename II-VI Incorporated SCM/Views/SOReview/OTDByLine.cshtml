@@ -32,21 +32,11 @@
     @foreach (var item in Model)
     {
 <tr>
-    <td></td>
+    <td>@item.Type</td>
     <td><h3 style="text-align:center "><b>@item.Current_Month</b></h3></td>
     <td><h3 style="text-align:center"><b>@item.Next_Month</b></h3></td>
 </tr>
     }
-<tr>
-    <td><b>BY REQUEST</b></td>
-    <td></td>
-    <td></td>
-    <td></td>
-</tr>
-    <tr>
-        <td><b>BY PROMISE</b></td>
-        <td> </td>
-        <td></td>
-    </tr>
+
 
 </table>

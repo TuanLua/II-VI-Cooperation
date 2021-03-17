@@ -24,5 +24,6 @@ namespace II_VI_Incorporated_SCM.Models
         public Nullable<System.DateTime> REVIEW_AT { get; set; }
         public string REVIEW_BY { get; set; }
         public Nullable<bool> ISLOCK { get; set; }
+        public string ITEM { get; set; }
     }
 }

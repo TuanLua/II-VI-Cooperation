@@ -234,7 +234,8 @@
         var Date = model.DOWNLOAD_DATE;
         var Status = model.REVIEW_STATUS;
         var planshipdate = model.PLAN_SHIP_DATE;
-        window.open('@Url.Action("SOReviewDetail", "SOReview")' + "?SoNo=" + SONO + "&Date=" + Date + "&status=" + Status + "&planshipdate=" + planshipdate , '_blank');
+        var item = model.ITEM;
+        window.open('@Url.Action("SOReviewDetail", "SOReview")' + "?SoNo=" + SONO + "&Date=" + Date + "&status=" + Status + "&planshipdate=" + planshipdate + "&item=" +item , '_blank');
     });
 
     $("#clear").click(function () {

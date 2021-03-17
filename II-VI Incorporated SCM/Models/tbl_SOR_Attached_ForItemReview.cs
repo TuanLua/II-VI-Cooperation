@@ -19,5 +19,6 @@ namespace II_VI_Incorporated_SCM.Models
         public System.DateTime Download_Date { get; set; }
         public int Item_Idx { get; set; }
         public string Attached_File { get; set; }
+        public string ITEM { get; set; }
     }
 }

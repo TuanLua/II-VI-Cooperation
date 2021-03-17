@@ -35,6 +35,10 @@
         {
             <button class="btn btn-sm btn-info" id="finish-review">Finish Review </button>
         }
+       @if (ViewBag.IsPlanner == true)
+        {
+            <button class="btn btn-sm btn-success" id="lock-review">Lock Review </button>
+        }
         <button class="btn btn-sm btn-danger" id="back-tolist">Back to list </button>
     </div>
     <br />
@@ -54,7 +58,7 @@
         </tr>
         @foreach (var customer in Model)
         {
-    <tr reviewresult="@customer.ReviewResult" id="@customer.ID" titemreview="@customer.ItemReview" comment="@customer.Comment" islock="@customer.IsLock">
+    <tr reviewresult="@customer.ReviewResult" id="@customer.ID" titemreview="@customer.ItemReview" deptre ="@customer.DeptReview" comment="@customer.Comment" islock="@customer.IsLock">
         <td class="DeptReview">
             <span>@customer.DeptReview</span>
         </td>
@@ -77,7 +81,7 @@
             <span>@customer.SONO</span>
         </td>
         <td>
-            @if (customer.DeptReview == ViewBag.IsDaprt && customer.IsLock == "False" && ViewBag.Status == "Released")
+            @if ((customer.DeptReview == ViewBag.IsDaprt && customer.IsLock == "False" && ViewBag.Status == "Released") || ViewBag.IsPlanner == true)
             {
                 <a class="btn-sm btn-info Edit" href="javascript:;">Edit</a>
                 <a class=" btn-sm btn-success Update" href="javascript:;" style="display:none">Update</a>
@@ -85,7 +89,7 @@
 
         </td>
         <td>
-            @if (customer.DeptReview == ViewBag.IsDaprt && customer.IsLock == "False" && ViewBag.Status == "Released")
+            @if ((customer.DeptReview == ViewBag.IsDaprt && customer.IsLock == "False" && ViewBag.Status == "Released")|| ViewBag.IsPlanner == true)
             {
                 <a class="btn-sm btn-danger Cancel" href="javascript:;" style="display:none;float:right">Cancel</a>
             }
@@ -215,6 +219,43 @@
         }
     </div>
     <script>
+        $('#lock-review').on('click', function () {
+        var sono = $('#SoNo').val();
+         bootbox.confirm({
+                message: 'Are you sure to Lock review?',
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                closeButton: false,
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: '@Url.Action("LockSoReview", "SoReview")',
+                            type: "POST",
+                            data: { sono: sono,item: '@ViewBag.Item'},
+                            dataType: "json",
+                            success: function (result) {
+                                if (result.success) {
+                                    bootbox.alert('Lock  is success', function () {
+                                       window.location.href = "@Url.Action("SOReviewList", "SoReview")";
+                                    });
+                                }
+                                else {
+                                    bootbox.alert(result.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+    });
     $('#finish-review').on('click', function () {
         var sono = $('#SoNo').val();
         var planshipdate = $('#Shipdate').val();
@@ -242,7 +283,7 @@
                         $.ajax({
                             url: '@Url.Action("UpdateSoReviewFinish", "SoReview")',
                             type: "POST",
-                            data: { sono: sono, planshipdate: planshipdate, isdefine: isdefine, Date: '@ViewBag.Date' },
+                            data: { sono: sono, planshipdate: planshipdate, isdefine: isdefine, Date: '@ViewBag.Date',item: '@ViewBag.Item' },
                             dataType: "json",
                             success: function (result) {
                                 if (result.success) {
@@ -278,12 +319,12 @@
 
                  window.location.href = "@Url.Action("SOReviewList", "SoReview")"
             }
-             })
-        function getval(sel, ID) {
+        })
+        var IsHigh = null;
+        function getval(sel) {
         if (sel.value == "Y") {
             //Set cung ID no Default item show popup add file
-            if (ID == "9") {
-                $('#iditemreview').val(ID);
+            if (IsHigh == "HIGH_VOLUME") {
                 $('#popup').modal('show');
             }
         }
@@ -305,7 +346,7 @@
             $.ajax({
                 url: '@Url.Action("AddTaskForItemReview", "SOReview")',
                 type: "POST",
-                data: { SoNo: SoNo, Date: Date, itemreview: itemreview, assignee: assignee},
+                data: { SoNo: SoNo, Date: Date, itemreview: itemreview, assignee: assignee,item: '@ViewBag.Item'},
                 dataType: "json",
                 success: function (result) {
                     if (result.success) {
@@ -375,12 +416,22 @@
             } else {
                 var row = $(this).closest("tr");
                 var titemreview = $(this).parents("tr").attr('titemreview');
+                var deptreview = $(this).parents("tr").attr('deptre');
                 var id = $(this).parents("tr").attr('id');
+                IsHigh = deptreview;
                 //set value itemnamepopup
                 $('#reviewitemname').val(titemreview);
                 var reviewresult = $(this).parents("tr").attr('reviewresult');
+                $('#iditemreview').val(id);
+                //show file item high volumn qty
+                if (deptreview == "HIGH_VOLUME") {
+                    $('#tbodyEvidenceInProcess').removeAttr('style', 'display:none');
+                }
+                else {
+                    $('#tbodyEvidenceInProcess').attr('style', 'display:none');
+                }
                 var comment = $(this).parents("tr").attr('comment');
-                $(this).parents("tr").find("td:eq(2)").html('<select class="form-control"  onchange="getval(this,' + id + ');" name="reviewresult" id="QMSDropdown"><select/>');
+                $(this).parents("tr").find("td:eq(2)").html('<select class="form-control"  onchange="getval(this);" name="reviewresult" id="QMSDropdown"><select/>');
                 $(this).parents("tr").find("td:eq(3)").html('<textarea  class="form-control " name="comment">' + comment + '</textarea>');
 
                 $("td", row).each(function () {
@@ -407,33 +458,17 @@
                 var $newOption = $("<option selected='selected'></option>").val("").text("")
                 $("#QMSDropdown").append($newOption).trigger('change');
                 var Date = '@ViewBag.Date';
-                var topic = '@ViewBag.SoNo' + "-" + Date + "-" + titemreview;
+                var topic = '@ViewBag.SoNo' + "-" + Date + "-" + titemreview + "-" + '@ViewBag.Item';
 
                 //call data source task list when select
                 $("#gridTaskDetail").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadTaksMantSoReview", "Soreview")' + '?taskNo=' + topic;
                 $("#gridTaskDetail").data("kendoGrid").dataSource.read();
-                //show file item high volumn qty
-                if (id == "1") {
-                    $('#tbodyEvidenceInProcess').removeAttr('style', 'display:none');
-                }
-                else {
-                    $('#tbodyEvidenceInProcess').attr('style', 'display:none');
-                }
+
             }
         });
 
         //Cancel
     $("#tblCustomers tbody").on("click", ".Cancel", function () {
-        //var reviewresult = $(this).parents("tr").attr('reviewresult');
-        //if (reviewresult == undefined) {
-        //    reviewresult = "";
-        //}
-        //    var comment = $(this).parents("tr").attr('comment');
-        //    $(this).parents("tr").find("td:eq(2)").text(reviewresult);
-        //    $(this).parents("tr").find("td:eq(3)").text(comment);
-        //    $(this).parents("tr").find(".Edit").show();
-        //    $(this).parents("tr").find(".Update").remove();
-        //    $(this).parents("tr").find(".Cancel").remove();
         window.location.reload();
     });
 
@@ -452,7 +487,7 @@
                         $.ajax({
                             url: '@Url.Action("UpdateSoReview", "SoReview")',
                             type: "POST",
-                            data: { id: id, reviewresult: reviewresult, comment: comment, islock: islock},
+                            data: { id: id, reviewresult: reviewresult, comment: comment, islock: islock,item: '@ViewBag.Item'},
                             dataType: "json",
                             success: function (result) {
                                 if (result.success) {
@@ -482,7 +517,7 @@
           $.ajax({
                             url: '@Url.Action("AddFileforItemReview", "SoReview")',
               type: "POST",
-              data: { SO_NO: '@ViewBag.SoNo', Date: '@ViewBag.Date', File: name, ID: $('#iditemreview').val()},
+              data: { SO_NO: '@ViewBag.SoNo', Date: '@ViewBag.Date', File: name, ID: $('#iditemreview').val(),item: '@ViewBag.Item'},
                             dataType: "json",
                             success: function (result) {
                                 if (result.success) {
