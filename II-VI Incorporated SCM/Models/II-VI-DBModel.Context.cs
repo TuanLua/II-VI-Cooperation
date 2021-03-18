@@ -7987,26 +7987,6 @@ namespace II_VI_Incorporated_SCM.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SQEDB_SupplierLog_Remind_ReEvaluation");
         }
     
-        public virtual ObjectResult<sp_SOR_GetSoReview_Result> sp_SOR_GetSoReview()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoReview_Result>("sp_SOR_GetSoReview");
-        }
-    
-        public virtual ObjectResult<sp_SOR_GetSoOpen_Result> sp_SOR_GetSoOpen()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoOpen_Result>("sp_SOR_GetSoOpen");
-        }
-    
-        public virtual ObjectResult<sp_SOR_GetSoReviewHist_Result> sp_SOR_GetSoReviewHist()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoReviewHist_Result>("sp_SOR_GetSoReviewHist");
-        }
-    
-        public virtual ObjectResult<sp_SOR_Release_Result> sp_SOR_Release()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_Release_Result>("sp_SOR_Release");
-        }
-    
         public virtual ObjectResult<sp_SOR_SoReviewDetail_Result> sp_SOR_SoReviewDetail(string sono, Nullable<System.DateTime> downloadDate)
         {
             var sonoParameter = sono != null ?
@@ -8028,6 +8008,26 @@ namespace II_VI_Incorporated_SCM.Models
         public virtual ObjectResult<sp_SOR_RiskShip_Report_Result1> sp_SOR_RiskShip_Report()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_RiskShip_Report_Result1>("sp_SOR_RiskShip_Report");
+        }
+    
+        public virtual ObjectResult<sp_SOR_GetSoOpen_Result1> sp_SOR_GetSoOpen()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoOpen_Result1>("sp_SOR_GetSoOpen");
+        }
+    
+        public virtual ObjectResult<sp_SOR_GetSoReview_Result1> sp_SOR_GetSoReview()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoReview_Result1>("sp_SOR_GetSoReview");
+        }
+    
+        public virtual ObjectResult<sp_SOR_GetSoReviewHist_Result1> sp_SOR_GetSoReviewHist()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoReviewHist_Result1>("sp_SOR_GetSoReviewHist");
+        }
+    
+        public virtual int sp_SOR_Release()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SOR_Release");
         }
     }
 }

@@ -34,7 +34,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
         }
         public ActionResult SoReViewReaLeaseRead([DataSourceRequest] DataSourceRequest request)
         {
-            List<sp_SOR_GetSoOpen_Result> list = _iSoReviewService.GetListReleaseSoReview();
+            List<sp_SOR_GetSoOpen_Result1> list = _iSoReviewService.GetListReleaseSoReview();
             return Json(list.ToDataSourceResult(request));
         }
         public JsonResult ReleaseSo()
@@ -50,7 +50,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
 
         public ActionResult SoReViewListRead([DataSourceRequest] DataSourceRequest request)
         {
-            List<sp_SOR_GetSoReview_Result> list = _iSoReviewService.GetListSoReview();
+            List<sp_SOR_GetSoReview_Result1> list = _iSoReviewService.GetListSoReview();
             return Json(list.ToDataSourceResult(request));
         }
 
@@ -290,9 +290,9 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
                 {
                    SO_NO = SO_NO,
                     Attached_File = returnPath + "/" + File,
-                   Download_Date = date,
+                   Download_Date = Date,
                    Item_Idx = id,
-                   ITEM = item
+                   LINE = item
                 };
                 Result res = _iSoReviewService.SaveFileAttachedItemReview(datafiles);
                 return Json(new { success = res.success, message = res.obj });
@@ -443,7 +443,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
         }
         public ActionResult SoReViewHistoryRead([DataSourceRequest] DataSourceRequest request)
         {
-            List<sp_SOR_GetSoReviewHist_Result> list = _iSoReviewService.GetListSoReviewHistory();
+            List<sp_SOR_GetSoReviewHist_Result1> list = _iSoReviewService.GetListSoReviewHistory();
             return Json(list.ToDataSourceResult(request));
         }
 

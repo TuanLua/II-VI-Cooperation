@@ -23,6 +23,6 @@ namespace II_VI_Incorporated_SCM.Models
         public string COMMENT { get; set; }
         public Nullable<System.DateTime> REVIEW_AT { get; set; }
         public string REVIEW_BY { get; set; }
-        public string ITEM { get; set; }
+        public string LINE { get; set; }
     }
 }

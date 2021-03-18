@@ -10,9 +10,8 @@
 namespace II_VI_Incorporated_SCM.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tbl_SOR_Cur_Review_List
+    public partial class sp_SOR_GetSoReviewHist_Result1
     {
         public long REVIEW_ID { get; set; }
         public System.DateTime DOWNLOAD_DATE { get; set; }

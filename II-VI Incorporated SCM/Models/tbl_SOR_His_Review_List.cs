@@ -35,5 +35,6 @@ namespace II_VI_Incorporated_SCM.Models
         public Nullable<double> ONHAND_QTY { get; set; }
         public string REVIEW_STATUS { get; set; }
         public string PLAN_SHIP_DATE { get; set; }
+        public string LINE { get; set; }
     }
 }

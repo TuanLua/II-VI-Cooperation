@@ -17,12 +17,12 @@ namespace II_VI_Incorporated_SCM.Services
 
         List<SelectListItem> GetReviewResult();
 
-        List<sp_SOR_GetSoReview_Result> GetListSoReview();
+        List<sp_SOR_GetSoReview_Result1> GetListSoReview();
 
-        List<sp_SOR_GetSoOpen_Result> GetListReleaseSoReview();
+        List<sp_SOR_GetSoOpen_Result1> GetListReleaseSoReview();
         bool RealeaseSo();
 
-        List<sp_SOR_GetSoReviewHist_Result> GetListSoReviewHistory();
+        List<sp_SOR_GetSoReviewHist_Result1> GetListSoReviewHistory();
         string GetDepart(string userID);
         Result LockSoReview(string SoNo,string item);
         List<SoReviewDetail> GetSoReviewDetail(string soNo, DateTime dateReview, string status, string item);
@@ -113,19 +113,19 @@ namespace II_VI_Incorporated_SCM.Services
             return lstData;
         }
 
-        public List<sp_SOR_GetSoReview_Result> GetListSoReview()
+        public List<sp_SOR_GetSoReview_Result1> GetListSoReview()
         {
-            List<sp_SOR_GetSoReview_Result> data = _db.sp_SOR_GetSoReview().ToList();
+            List<sp_SOR_GetSoReview_Result1> data = _db.sp_SOR_GetSoReview().ToList();
             return data;
         }
-        public List<sp_SOR_GetSoReviewHist_Result> GetListSoReviewHistory()
+        public List<sp_SOR_GetSoReviewHist_Result1> GetListSoReviewHistory()
         {
-            List<sp_SOR_GetSoReviewHist_Result> data = _db.sp_SOR_GetSoReviewHist().ToList();
+            List<sp_SOR_GetSoReviewHist_Result1> data = _db.sp_SOR_GetSoReviewHist().ToList();
             return data;
         }
-        public List<sp_SOR_GetSoOpen_Result> GetListReleaseSoReview()
+        public List<sp_SOR_GetSoOpen_Result1> GetListReleaseSoReview()
         {
-            List<sp_SOR_GetSoOpen_Result> data = _db.sp_SOR_GetSoOpen().ToList();
+            List<sp_SOR_GetSoOpen_Result1> data = _db.sp_SOR_GetSoOpen().ToList();
             return data;
         }
 
@@ -136,12 +136,12 @@ namespace II_VI_Incorporated_SCM.Services
         }
         public List<SoReviewDetail> GetSoReviewDetail(string soNo, DateTime dateReview, string status,string item1)
         {
-            var current =  _db.tbl_SOR_Cur_Review_Detail.Where(x =>x.SO_NO == soNo && x.DOWNLOAD_DATE == dateReview /*&& x.ITEM.Trim() == item1*/ )                    
+            var current =  _db.tbl_SOR_Cur_Review_Detail.Where(x =>x.SO_NO == soNo && x.DOWNLOAD_DATE == dateReview && x.LINE.Trim() == item1 )                    
                       .ToList();
-            var top1 =  _db.tbl_SOR_His_Review_Detail.Where(x => x.SO_NO == soNo && x.DOWNLOAD_DATE == dateReview /*&& x.ITEM.Trim() == item1*/).ToList().OrderBy(x => x.DOWNLOAD_DATE)?.FirstOrDefault();
+            var top1 =  _db.tbl_SOR_His_Review_Detail.Where(x => x.SO_NO == soNo && x.DOWNLOAD_DATE == dateReview && x.LINE.Trim() == item1).ToList().OrderBy(x => x.DOWNLOAD_DATE)?.FirstOrDefault();
             if (top1 != null)
             {
-                var history = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.SO_NO == top1.SO_NO && x.DOWNLOAD_DATE == top1.DOWNLOAD_DATE/* && x.ITEM.Trim() == item1*/).ToList();
+                var history = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.SO_NO == top1.SO_NO && x.DOWNLOAD_DATE == top1.DOWNLOAD_DATE && x.LINE.Trim() == item1).ToList();
                 var data = (from c in current
                             join p in history on c.SO_NO equals p.SO_NO into ps
                             from p in ps.DefaultIfEmpty()
@@ -178,7 +178,7 @@ namespace II_VI_Incorporated_SCM.Services
             }
             else
             {
-                var datacurrent = current.Where(x=>x.SO_NO == soNo && x.DOWNLOAD_DATE == dateReview /*&& x.ITEM.Trim() == item1*/)
+                var datacurrent = current.Where(x=>x.SO_NO == soNo && x.DOWNLOAD_DATE == dateReview && x.LINE.Trim() == item1)
                     .Select( x=> new SoReviewDetail
                                   {
                                       ID = x.ITEM_REVIEW_ID,
@@ -230,7 +230,7 @@ namespace II_VI_Incorporated_SCM.Services
                 try
                 {
                     
-                    var data = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.SO_NO == SoNo /*&& x.ITEM == item*/).ToList();
+                    var data = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.SO_NO == SoNo && x.LINE == item).ToList();
                     if (data != null)
                     {
                         foreach (var item1 in data)
@@ -268,7 +268,7 @@ namespace II_VI_Incorporated_SCM.Services
         public List<tbl_SOR_Attached_ForItemReview> GetListFileItem(string SoNo,DateTime datedownload ,long ID,string item)
         {
             // get date certification
-            var data = _db.tbl_SOR_Attached_ForItemReview.Where(x => x.SO_NO == SoNo && x.Download_Date == datedownload && x.Item_Idx == ID /*&& x.ITEM.Trim() == item*/).ToList();
+            var data = _db.tbl_SOR_Attached_ForItemReview.Where(x => x.SO_NO == SoNo && x.Download_Date == datedownload && x.Item_Idx == ID && x.LINE.Trim() == item).ToList();
             return data;
         }
 
