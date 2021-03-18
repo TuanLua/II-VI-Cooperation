@@ -284,13 +284,16 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             string returnPath = date.Year + "-" + date.Month + "-" + date.Day + "-" + date.Hour + "-" +
                                  date.Minute;
             int id = int.Parse(ID);
+            Date = Date.Substring(0, Date.IndexOf(" GMT"));
+            DateTime dt;
+            DateTime.TryParseExact(Date, "ddd MMM d yyyy hh:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.None, out dt);
             if (File != null)
             {
                 var  datafiles = new tbl_SOR_Attached_ForItemReview
                 {
                    SO_NO = SO_NO,
                     Attached_File = returnPath + "/" + File,
-                   Download_Date = Date,
+                   Download_Date = dt,
                    Item_Idx = id,
                    LINE = item
                 };

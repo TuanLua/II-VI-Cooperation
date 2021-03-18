@@ -456,7 +456,7 @@ namespace II_VI_Incorporated_SCM.Services
             {
                 try
                 {
-                    var data = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.SO_NO == picData.SONO && x.DOWNLOAD_DATE == picData.DateDownLoad /*&& x.ITEM == picData.Item*/).ToList();
+                    var data = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.SO_NO == picData.SONO && x.DOWNLOAD_DATE == picData.DateDownLoad && x.LINE == picData.Item).ToList();
                     if (data != null)
                     {
                         foreach (var item in data)
@@ -471,7 +471,7 @@ namespace II_VI_Incorporated_SCM.Services
                             }
                             else
                             {
-                                var dataSoreview = _db.tbl_SOR_Cur_Review_List.Where(x => x.SO_NO == picData.SONO && x.DOWNLOAD_DATE == picData.DateDownLoad /*&& x.ITEM == picData.Item*/).FirstOrDefault();
+                                var dataSoreview = _db.tbl_SOR_Cur_Review_List.Where(x => x.SO_NO == picData.SONO && x.DOWNLOAD_DATE == picData.DateDownLoad && x.LINE == picData.Item).FirstOrDefault();
                                 dataSoreview.PLAN_SHIP_DATE = picData.PlanShipDate;
                                 dataSoreview.REVIEW_STATUS = "Done";
 
