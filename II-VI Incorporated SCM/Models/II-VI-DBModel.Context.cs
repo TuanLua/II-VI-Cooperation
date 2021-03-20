@@ -8000,16 +8000,6 @@ namespace II_VI_Incorporated_SCM.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_SoReviewDetail_Result>("sp_SOR_SoReviewDetail", sonoParameter, downloadDateParameter);
         }
     
-        public virtual ObjectResult<sp_SOR_OTDFailByLine_Report_Result1> sp_SOR_OTDFailByLine_Report()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_OTDFailByLine_Report_Result1>("sp_SOR_OTDFailByLine_Report");
-        }
-    
-        public virtual ObjectResult<sp_SOR_RiskShip_Report_Result1> sp_SOR_RiskShip_Report()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_RiskShip_Report_Result1>("sp_SOR_RiskShip_Report");
-        }
-    
         public virtual ObjectResult<sp_SOR_GetSoOpen_Result1> sp_SOR_GetSoOpen()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoOpen_Result1>("sp_SOR_GetSoOpen");
@@ -8025,9 +8015,19 @@ namespace II_VI_Incorporated_SCM.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_GetSoReviewHist_Result1>("sp_SOR_GetSoReviewHist");
         }
     
-        public virtual int sp_SOR_Release()
+        public virtual ObjectResult<sp_SOR_OTDFailByLine_Report_Result2> sp_SOR_OTDFailByLine_Report()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SOR_Release");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_OTDFailByLine_Report_Result2>("sp_SOR_OTDFailByLine_Report");
+        }
+    
+        public virtual ObjectResult<sp_SOR_Release_Result1> sp_SOR_Release()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_Release_Result1>("sp_SOR_Release");
+        }
+    
+        public virtual ObjectResult<sp_SOR_RiskShip_Report_Result3> sp_SOR_RiskShip_Report()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SOR_RiskShip_Report_Result3>("sp_SOR_RiskShip_Report");
         }
     }
 }

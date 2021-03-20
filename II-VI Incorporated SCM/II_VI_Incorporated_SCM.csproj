@@ -1076,7 +1076,13 @@
     <Compile Include="Models\sp_SOR_OTDFailByLine_Report_Result1.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_SOR_OTDFailByLine_Report_Result2.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_SOR_Release_Result.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SOR_Release_Result1.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_SOR_RiskShip_Report1_Result.cs">
@@ -1089,6 +1095,12 @@
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_SOR_RiskShip_Report_Result1.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SOR_RiskShip_Report_Result2.cs">
+      <DependentUpon>II-VI-DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SOR_RiskShip_Report_Result3.cs">
       <DependentUpon>II-VI-DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_SOR_SoReviewDetail_Result.cs">

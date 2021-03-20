@@ -14,7 +14,7 @@ namespace II_VI_Incorporated_SCM.Services
     {
         #region SOReview
         List<SelectListItem> GetDropdownlistUser();
-
+        bool GetIsLockBySo(string SO, DateTime date, string line);
         List<SelectListItem> GetReviewResult();
 
         List<sp_SOR_GetSoReview_Result1> GetListSoReview();
@@ -24,7 +24,7 @@ namespace II_VI_Incorporated_SCM.Services
 
         List<sp_SOR_GetSoReviewHist_Result1> GetListSoReviewHistory();
         string GetDepart(string userID);
-        Result LockSoReview(string SoNo,string item);
+        Result LockSoReview(string SoNo,string item,DateTime date,string islock);
         List<SoReviewDetail> GetSoReviewDetail(string soNo, DateTime dateReview, string status, string item);
 
         List<tbl_SOR_Attached_ForItemReview> GetListFileItem(string SoNo, DateTime datedownload, long ID,string item);
@@ -33,7 +33,7 @@ namespace II_VI_Incorporated_SCM.Services
 
         Result UpdateSoReviewFinish(SoReviewDetail picData);
 
-        Result AddTaskForItemReview(string SoNo, string Date, string itemreview, string userID,string assignee,string item);
+        Result AddTaskForItemReview(string SoNo, string Date, string itemreview, string userID,string assignee,string item,string taskname);
 
         Result SaveFileAttachedItemReview(tbl_SOR_Attached_ForItemReview picData);
 
@@ -74,9 +74,9 @@ namespace II_VI_Incorporated_SCM.Services
         List<SelectListItem> GetdropdownPart();
         List<SelectListItem> GetdropdownSoReview();
 
-        List<sp_SOR_OTDFailByLine_Report_Result1> SOR_OTDFailByLine_Report();
+        List<sp_SOR_OTDFailByLine_Report_Result2> SOR_OTDFailByLine_Report();
 
-        List<sp_SOR_RiskShip_Report_Result1> SOR_RiskShip_Report1_Result();
+        List<sp_SOR_RiskShip_Report_Result3> SOR_RiskShip_Report1_Result();
         #endregion
 
     }
@@ -134,6 +134,18 @@ namespace II_VI_Incorporated_SCM.Services
             var data = _db.sp_SOR_Release();
             return true;
         }
+        public bool GetIsLockBySo(string SO,DateTime date ,string line)
+        {
+            var data = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.SO_NO == SO && x.DOWNLOAD_DATE == date && x.LINE == line && x.ISLOCK == true).ToList();
+            if(data.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public List<SoReviewDetail> GetSoReviewDetail(string soNo, DateTime dateReview, string status,string item1)
         {
             var current =  _db.tbl_SOR_Cur_Review_Detail.Where(x =>x.SO_NO == soNo && x.DOWNLOAD_DATE == dateReview && x.LINE.Trim() == item1 )                    
@@ -166,11 +178,11 @@ namespace II_VI_Incorporated_SCM.Services
                     }
                     else if (item.ReviewBool == false)
                     {
-                        item.ReviewResult = "False";
+                        item.ReviewResult = "N";
                     }
                     else if (item.ReviewBool == true)
                     {
-                        item.ReviewResult = "True";
+                        item.ReviewResult = "Y";
                     }
 
                 }
@@ -198,11 +210,11 @@ namespace II_VI_Incorporated_SCM.Services
                     }
                     else if(item.ReviewBool == false)
                     {
-                        item.ReviewResult = "False";
+                        item.ReviewResult = "N";
                     }
                     else if(item.ReviewBool == true)
                     {
-                        item.ReviewResult = "True";
+                        item.ReviewResult = "Y";
                     }
                     
                 }
@@ -222,7 +234,7 @@ namespace II_VI_Incorporated_SCM.Services
                 return "";
             }
         }
-        public Result LockSoReview(string SoNo,string item)
+        public Result LockSoReview(string SoNo,string item,DateTime date,string isLock)
         {
             var _log = new LogWriter("Updatedata");
             using (var tranj = _db.Database.BeginTransaction())
@@ -230,8 +242,8 @@ namespace II_VI_Incorporated_SCM.Services
                 try
                 {
                     
-                    var data = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.SO_NO == SoNo && x.LINE == item).ToList();
-                    if (data != null)
+                    var data = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.SO_NO == SoNo && x.DOWNLOAD_DATE == date && x.LINE == item).ToList();
+                    if (data != null && isLock == "False")
                     {
                         foreach (var item1 in data)
                         {
@@ -245,12 +257,28 @@ namespace II_VI_Incorporated_SCM.Services
                             message = "Lock Data sucess!",
                         };
                     }
-                    return new Result
+                    else if(data != null && isLock == "True")
                     {
-                        success = false,
-                        message = "Updatedata!",
-                        obj = -1
-                    };
+                        foreach (var item1 in data)
+                        {
+                            item1.ISLOCK = false;
+                        }
+                        _db.SaveChanges();
+                        tranj.Commit();
+                        return new Result
+                        {
+                            success = true,
+                            message = "UnLock Data sucess!",
+                        };
+                    }
+                    else
+                    {
+                        return new Result
+                        {
+                            success = true,
+                            message = "No data unlock!",
+                        };
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -306,7 +334,7 @@ namespace II_VI_Incorporated_SCM.Services
             }
         }
 
-        public Result AddTaskForItemReview(string SoNo, string Date, string itemreview, string userID,string Assignee,string item)
+        public Result AddTaskForItemReview(string SoNo, string Date, string itemreview, string userID,string Assignee,string item,string taskname)
         {
             var _log = new LogWriter("Updatedata");
             using (var tranj = _db.Database.BeginTransaction())
@@ -333,7 +361,7 @@ namespace II_VI_Incorporated_SCM.Services
                         TASKDETAIL taskDetail = new TASKDETAIL
                         {
                             TopicID = currentTaskListID,
-                            TASKNAME = "Task Review Item "+ itemreview,
+                            TASKNAME = taskname,
                             DESCRIPTION = "",
                             OWNER = userID,
                             ASSIGNEE = Assignee,
@@ -349,6 +377,12 @@ namespace II_VI_Incorporated_SCM.Services
                         _db.TASKDETAILs.Add(taskDetail);
                         _db.SaveChanges();
                            tranj.Commit();
+                        return new Result
+                        {
+                            success = true,
+                            message = "Create task success!",
+                            obj = -1
+                        };
                     }
                     return new Result
                     {
@@ -851,15 +885,15 @@ namespace II_VI_Incorporated_SCM.Services
             return lstSo;
         }
 
-        public List<sp_SOR_OTDFailByLine_Report_Result1> SOR_OTDFailByLine_Report()
+        public List<sp_SOR_OTDFailByLine_Report_Result2> SOR_OTDFailByLine_Report()
         {
-            List<sp_SOR_OTDFailByLine_Report_Result1> data = _db.sp_SOR_OTDFailByLine_Report().ToList();
+            List<sp_SOR_OTDFailByLine_Report_Result2> data = _db.sp_SOR_OTDFailByLine_Report().ToList();
             return data;
         }
 
-        public List<sp_SOR_RiskShip_Report_Result1> SOR_RiskShip_Report1_Result()
+        public List<sp_SOR_RiskShip_Report_Result3> SOR_RiskShip_Report1_Result()
         {
-            List<sp_SOR_RiskShip_Report_Result1> data = _db.sp_SOR_RiskShip_Report().ToList();
+            List<sp_SOR_RiskShip_Report_Result3> data = _db.sp_SOR_RiskShip_Report().ToList();
             return data;
         }
         #endregion

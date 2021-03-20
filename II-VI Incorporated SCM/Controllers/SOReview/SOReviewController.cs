@@ -56,9 +56,10 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
 
         
              [HttpPost]
-        public JsonResult LockSoReview(string SoNo,string item)
+        public JsonResult LockSoReview(string SoNo,string item,string Date,string islock)
         {
-            Result res = _iSoReviewService.LockSoReview(SoNo,item);
+            DateTime   date=   DateTime.Parse(Date);
+            Result res = _iSoReviewService.LockSoReview(SoNo,item, date, islock);
             return Json(new { res.success, message = res.message, obj = res.obj });
         }
         public ActionResult SOReviewDetail(string SoNo, string Date, string status,string planshipdate,string item)
@@ -66,6 +67,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             Date = Date.Substring(0, Date.IndexOf(" GMT"));
             DateTime dt;
             DateTime.TryParseExact(Date, "ddd MMM d yyyy hh:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.None, out dt);
+            var isLock = _iSoReviewService.GetIsLockBySo(SoNo, dt, item);
             var data = _iSoReviewService.GetSoReviewDetail(SoNo, dt, status,item.Trim());
             List<tbl_SOR_Attached_ForItemReview> lstFile = new List<tbl_SOR_Attached_ForItemReview>();
             //set default item high qty
@@ -93,8 +95,9 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             ViewBag.SoNo = SoNo;
             ViewBag.Date = dt.ToString("dd-MMM-yyyy");
             ViewBag.Status = status;
+            ViewBag.IsLock = isLock;
             ViewBag.Item = item;
-            if (planshipdate != "null")
+            if (planshipdate != "null" || planshipdate!= "TBD")
             {
                 var dates = DateTime.Parse(planshipdate);
                 ViewBag.planshipdate = dates.ToString("dd-MMM-yyyy"); ;
@@ -107,9 +110,9 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             return View(data);
         }
         [HttpPost]
-        public JsonResult AddTaskForItemReview(string SoNo, string Date, string itemreview, string assignee,string item)
+        public JsonResult AddTaskForItemReview(string SoNo, string Date, string itemreview, string assignee,string item,string taskname)
         {
-            Result res = _iSoReviewService.AddTaskForItemReview(SoNo, Date, itemreview, User.Identity.GetUserId(), assignee,item);
+            Result res = _iSoReviewService.AddTaskForItemReview(SoNo, Date, itemreview, User.Identity.GetUserId(), assignee,item, taskname);
             return Json(new { res.success, message = res.message, obj = res.obj });
         }
         public JsonResult ReadTaksMantSoReview([DataSourceRequest] DataSourceRequest request, string taskNo)

@@ -26,7 +26,7 @@
         </div>
     }
     <div class="col-sm-2">
-        <label >TBD</label>
+        <label style="margin-left: 40px;">TBD</label>
         <input style="float:left" type="checkbox" id="IsDefine" class="form-control" />
     </div>
     <div class="row col-sm-4" style="float:right">
@@ -35,7 +35,12 @@
         {
             <button class="btn btn-sm btn-info" id="finish-review">Finish Review </button>
         }
-       @if (ViewBag.IsPlanner == true)
+        @if (ViewBag.IsPlanner == true && ViewBag.IsLock == true)
+        {
+            <button class="btn btn-sm btn-success" id="lock-review">UnLock Review </button>
+
+        }
+        else
         {
             <button class="btn btn-sm btn-success" id="lock-review">Lock Review </button>
         }
@@ -173,6 +178,13 @@
                                 <select class="form-control" name="user" style="width:100%" id="user"></select>
                             </div>
                             <input type="hidden" id="reviewitemname" name="reviewitemname" />
+                          
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Task Name</label>
+                            <div class="col-md-6">
+                                <input class="form-control" style="width:100%" id="taskname" />
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -239,7 +251,7 @@
                         $.ajax({
                             url: '@Url.Action("LockSoReview", "SoReview")',
                             type: "POST",
-                            data: { sono: sono,item: '@ViewBag.Item'},
+                            data: { sono:sono, item: '@ViewBag.Item', Date:'@ViewBag.Date', islock: '@ViewBag.IsLock' },
                             dataType: "json",
                             success: function (result) {
                                 if (result.success) {
@@ -338,15 +350,20 @@
         var Date = '@ViewBag.Date';
         var itemreview = $('#reviewitemname').val();
         var assignee = $('#user').val();
+        var taskname = $('#taskname').val();
         if (assignee == null || assignee == "") {
             bootbox.alert("Please select assignee!");
+            return;
+        }
+        else if (taskname == null || taskname == "") {
+            bootbox.alert("Please input Task Name!");
             return;
         }
         else {
             $.ajax({
                 url: '@Url.Action("AddTaskForItemReview", "SOReview")',
                 type: "POST",
-                data: { SoNo: SoNo, Date: Date, itemreview: itemreview, assignee: assignee,item: '@ViewBag.Item'},
+                data: { SoNo: SoNo, Date: Date, itemreview: itemreview, assignee: assignee, item: '@ViewBag.Item', taskname: taskname},
                 dataType: "json",
                 success: function (result) {
                     if (result.success) {
@@ -376,11 +393,12 @@
         return true;
     }
 
-    $(document).ready(function () {
+        $(document).ready(function () {
                 $(function () {
                     $('#Shipdate').datepicker({
                         format: 'dd-M-yyyy',
-                        autoclose: true
+                        autoclose: true,
+                        startDate: new Date()
                     });
                 });
               $.post('@Url.Action("GetListUser", "SoReview")',
@@ -431,7 +449,8 @@
                     $('#tbodyEvidenceInProcess').attr('style', 'display:none');
                 }
                 var comment = $(this).parents("tr").attr('comment');
-                $(this).parents("tr").find("td:eq(2)").html('<select class="form-control"  onchange="getval(this);" name="reviewresult" id="QMSDropdown"><select/>');
+                $(this).parents("tr").find("td:eq(2)").html('<p style="text-align:center">' + reviewresult + '</p><select class="form-control"  onchange="getval(this);" name="reviewresult" id="QMSDropdown"><select/>');
+                //<input type=text class="form-control" value='+reviewresult+' />
                 $(this).parents("tr").find("td:eq(3)").html('<textarea  class="form-control " name="comment">' + comment + '</textarea>');
 
                 $("td", row).each(function () {
@@ -448,15 +467,18 @@
                         $.each(result, function (i, item) {
                             $('#QMSDropdown').append($('<option>', {
                                 value: item.Value,
-                                text: item.Text
+                                text: item.Text,
                             }));
                         });
                     }).fail(function () {
                         bootbox.alert('Please contact to Administrator!');
                     }).always(function () {
                     });
+           //    var $newOption = $("<option selected='selected'></option>").val(reviewresult).text(reviewresult);
+            //   $("#QMSDropdown").append($newOption).trigger('change');
                 var $newOption = $("<option selected='selected'></option>").val("").text("")
                 $("#QMSDropdown").append($newOption).trigger('change');
+             //   $("#QMSDropdown option[value='["+reviewresult+"]'").prop('selected', true);
                 var Date = '@ViewBag.Date';
                 var topic = '@ViewBag.SoNo' + "-" + Date + "-" + titemreview + "-" + '@ViewBag.Item';
 
@@ -555,7 +577,7 @@
                         type: "POST",
                         data: { id: id },
                         dataType: "json",
-                        success: function (result) {
+                        success: function (resuViewBagt) {
                             if (result.success) {
                                 bootbox.alert('Delete sucess!', function () {
                                     window.location.reload();

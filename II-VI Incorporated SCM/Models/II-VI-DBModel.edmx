@@ -8139,8 +8139,6 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
             <Parameter Name="Sono" Mode="In" Type="String" />
             <Parameter Name="DownloadDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="sp_SOR_OTDFailByLine_Report" ReturnType="Collection(IQCTestModel.sp_SOR_OTDFailByLine_Report_Result1)" />
-          <FunctionImport Name="sp_SOR_RiskShip_Report" ReturnType="Collection(IQCTestModel.sp_SOR_RiskShip_Report_Result1)" />
           <EntitySet Name="C__MigrationHistory" EntityType="IQCTestModel.C__MigrationHistory" />
           <EntitySet Name="ADD_INS" EntityType="IQCTestModel.ADD_INS" />
           <EntitySet Name="ApplicationGroupRoles" EntityType="IQCTestModel.ApplicationGroupRole" />
@@ -8416,7 +8414,9 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
           <FunctionImport Name="sp_SOR_GetSoOpen" ReturnType="Collection(IQCTestModel.sp_SOR_GetSoOpen_Result1)" />
           <FunctionImport Name="sp_SOR_GetSoReview" ReturnType="Collection(IQCTestModel.sp_SOR_GetSoReview_Result1)" />
           <FunctionImport Name="sp_SOR_GetSoReviewHist" ReturnType="Collection(IQCTestModel.sp_SOR_GetSoReviewHist_Result1)" />
-          <FunctionImport Name="sp_SOR_Release" />
+          <FunctionImport Name="sp_SOR_OTDFailByLine_Report" ReturnType="Collection(IQCTestModel.sp_SOR_OTDFailByLine_Report_Result2)" />
+          <FunctionImport Name="sp_SOR_Release" ReturnType="Collection(IQCTestModel.sp_SOR_Release_Result1)" />
+          <FunctionImport Name="sp_SOR_RiskShip_Report" ReturnType="Collection(IQCTestModel.sp_SOR_RiskShip_Report_Result3)" />
           </EntityContainer>
         <ComplexType Name="pGet_MEASUREMENT_STD_BY_PART_Result">
           <Property Type="String" Name="MEASURE_PARA" Nullable="false" MaxLength="50" />
@@ -14576,6 +14576,26 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
           <Property Type="String" Name="PLAN_SHIP_DATE" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="LINE" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="sp_SOR_OTDFailByLine_Report_Result2">
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="11" />
+          <Property Type="Decimal" Name="Current_Month" Nullable="false" Precision="2" Scale="1" />
+          <Property Type="Decimal" Name="Next_Month" Nullable="false" Precision="2" Scale="1" />
+        </ComplexType>
+        <ComplexType Name="sp_SOR_Release_Result1">
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="sp_SOR_RiskShip_Report_Result2">
+          <Property Type="String" Name="Factory" Nullable="false" MaxLength="11" />
+          <Property Type="Int32" Name="Column1" Nullable="false" />
+          <Property Type="Int32" Name="Current_Month" Nullable="false" />
+          <Property Type="Decimal" Name="Next_Month" Nullable="false" Precision="2" Scale="1" />
+        </ComplexType>
+        <ComplexType Name="sp_SOR_RiskShip_Report_Result3">
+          <Property Type="String" Name="Factory" Nullable="false" MaxLength="11" />
+          <Property Type="Decimal" Name="Current_Month" Nullable="false" Precision="2" Scale="1" />
+          <Property Type="Decimal" Name="Next_Month" Nullable="false" Precision="2" Scale="1" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -16392,24 +16412,6 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
                 <ScalarProperty Name="REVIEW_BY" ColumnName="REVIEW_BY" />
                 <ScalarProperty Name="ISLOCK" ColumnName="ISLOCK" />
                 <ScalarProperty Name="Comment1" ColumnName="Comment1" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_SOR_OTDFailByLine_Report" FunctionName="IQCTestModel.Store.sp_SOR_OTDFailByLine_Report">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_OTDFailByLine_Report_Result1">
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
-                <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_SOR_RiskShip_Report" FunctionName="IQCTestModel.Store.sp_SOR_RiskShip_Report">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_RiskShip_Report_Result1">
-                <ScalarProperty Name="Factory" ColumnName="Factory" />
-                <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
-                <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -20249,7 +20251,32 @@ warning 6002: The table/view 'IQC.dbo.Work Center' does not have a primary key d
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_SOR_Release" FunctionName="IQCTestModel.Store.sp_SOR_Release" />
+          <FunctionImportMapping FunctionImportName="sp_SOR_OTDFailByLine_Report" FunctionName="IQCTestModel.Store.sp_SOR_OTDFailByLine_Report">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_OTDFailByLine_Report_Result2">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
+                <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SOR_Release" FunctionName="IQCTestModel.Store.sp_SOR_Release">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_Release_Result1">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SOR_RiskShip_Report" FunctionName="IQCTestModel.Store.sp_SOR_RiskShip_Report">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IQCTestModel.sp_SOR_RiskShip_Report_Result3">
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+                <ScalarProperty Name="Current_Month" ColumnName="Current Month" />
+                <ScalarProperty Name="Next_Month" ColumnName="Next Month" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
