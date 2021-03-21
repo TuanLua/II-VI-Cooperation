@@ -31,7 +31,7 @@
     </div>
     <div class="row col-sm-4" style="float:right">
         <label> </label>
-        @if (ViewBag.Status == "Released")
+        @if (ViewBag.Status == "Released" && ViewBag.IsLock == false)
         {
             <button class="btn btn-sm btn-info" id="finish-review">Finish Review </button>
         }
@@ -124,7 +124,7 @@
                             <a href="@Url.Action("DownloadFile", "SoReview", new { fileId = evi.ID })"><i class="fa fa-file-pdf-o"> &nbsp; @evi.Attached_File.Split('/')[1] </i></a>
                             <input type="hidden" name="EVIID" value="@evi.ID" class="old-evi" />
                         </td>
-                        @if (ViewBag.Status == "Released")
+                        @if (ViewBag.Status == "Released" )
                         {
                             <td><button onclick="deleteEvedenceRowInProcess(this)" type="button" class="btn btn-danger pull-right">Delete</button></td>
                         }
@@ -232,41 +232,79 @@
     </div>
     <script>
         $('#lock-review').on('click', function () {
-        var sono = $('#SoNo').val();
-         bootbox.confirm({
-                message: 'Are you sure to Lock review?',
-                buttons: {
-                    confirm: {
-                        label: 'Yes',
-                        className: 'btn-success'
+            var sono = $('#SoNo').val();
+            if ('@ViewBag.IsLock' == "False") {
+                bootbox.confirm({
+                    message: 'Are you sure to Lock review?',
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-danger'
+                        }
                     },
-                    cancel: {
-                        label: 'No',
-                        className: 'btn-danger'
-                    }
-                },
-                closeButton: false,
-                callback: function (result) {
-                    if (result) {
-                        $.ajax({
-                            url: '@Url.Action("LockSoReview", "SoReview")',
-                            type: "POST",
-                            data: { sono:sono, item: '@ViewBag.Item', Date:'@ViewBag.Date', islock: '@ViewBag.IsLock' },
-                            dataType: "json",
-                            success: function (result) {
-                                if (result.success) {
-                                    bootbox.alert('Lock  is success', function () {
-                                       window.location.href = "@Url.Action("SOReviewList", "SoReview")";
-                                    });
+                    closeButton: false,
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: '@Url.Action("LockSoReview", "SoReview")',
+                                type: "POST",
+                                data: { sono: sono, item: '@ViewBag.Item', Date: '@ViewBag.Date', islock: '@ViewBag.IsLock' },
+                                dataType: "json",
+                                success: function (result) {
+                                    if (result.success) {
+                                        bootbox.alert('Lock  is success!', function () {
+                                            window.location.href = "@Url.Action("SOReviewList", "SoReview")";
+                                        });
+                                    }
+                                    else {
+                                        bootbox.alert(result.message);
+                                    }
                                 }
-                                else {
-                                    bootbox.alert(result.message);
-                                }
-                            }
-                        });
+                            });
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                 bootbox.confirm({
+                    message: 'Are you sure to Un Lock review?',
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-danger'
+                        }
+                    },
+                    closeButton: false,
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: '@Url.Action("LockSoReview", "SoReview")',
+                                type: "POST",
+                                data: { sono: sono, item: '@ViewBag.Item', Date: '@ViewBag.Date', islock: '@ViewBag.IsLock' },
+                                dataType: "json",
+                                success: function (result) {
+                                    if (result.success) {
+                                        bootbox.alert('UnLock  is success!', function () {
+                                            window.location.href = "@Url.Action("SOReviewList", "SoReview")";
+                                        });
+                                    }
+                                    else {
+                                        bootbox.alert(result.message);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+
     });
     $('#finish-review').on('click', function () {
         var sono = $('#SoNo').val();
@@ -480,7 +518,7 @@
                 $("#QMSDropdown").append($newOption).trigger('change');
              //   $("#QMSDropdown option[value='["+reviewresult+"]'").prop('selected', true);
                 var Date = '@ViewBag.Date';
-                var topic = '@ViewBag.SoNo' + "-" + Date + "-" + titemreview + "-" + '@ViewBag.Item';
+                var topic = '@ViewBag.SoNo' + "-" + Date  + "-" + '@ViewBag.Item';
 
                 //call data source task list when select
                 $("#gridTaskDetail").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadTaksMantSoReview", "Soreview")' + '?taskNo=' + topic;

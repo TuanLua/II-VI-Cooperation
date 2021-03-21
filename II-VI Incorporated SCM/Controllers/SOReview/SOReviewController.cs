@@ -97,7 +97,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             ViewBag.Status = status;
             ViewBag.IsLock = isLock;
             ViewBag.Item = item;
-            if (planshipdate != "null" || planshipdate!= "TBD")
+            if (planshipdate != "null" && planshipdate!= "TBD")
             {
                 var dates = DateTime.Parse(planshipdate);
                 ViewBag.planshipdate = dates.ToString("dd-MMM-yyyy"); ;

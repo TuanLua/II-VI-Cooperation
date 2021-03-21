@@ -342,7 +342,7 @@ namespace II_VI_Incorporated_SCM.Services
                 try
                 {
                    var currentTaskListID = 0;
-                    var taskNO = SoNo +"-" + Date + "-"+ itemreview + "-" + item;
+                    var taskNO = SoNo +"-" + Date + "-" + item;
                     var ckTaskList = _db.TASKLISTs.FirstOrDefault(x => x.Reference.Trim().Equals(taskNO.Trim()) && x.TYPE == "SoReview");
                     if (ckTaskList == null)
                     {
