@@ -75,7 +75,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             {
                 foreach (var item1 in data)
                 {
-                    if(item1.DeptReview == "HIGH_VOLUME")
+                    if(item1.DeptReview.Contains("HIGH_VOLUME"))
                     {
                         lstFile = _iSoReviewService.GetListFileItem(SoNo, dt, item1.ID, item);
                     }
@@ -287,16 +287,14 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             string returnPath = date.Year + "-" + date.Month + "-" + date.Day + "-" + date.Hour + "-" +
                                  date.Minute;
             int id = int.Parse(ID);
-            Date = Date.Substring(0, Date.IndexOf(" GMT"));
-            DateTime dt;
-            DateTime.TryParseExact(Date, "ddd MMM d yyyy hh:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.None, out dt);
+            DateTime dates = DateTime.Parse(Date);
             if (File != null)
             {
                 var  datafiles = new tbl_SOR_Attached_ForItemReview
                 {
                    SO_NO = SO_NO,
                     Attached_File = returnPath + "/" + File,
-                   Download_Date = dt,
+                   Download_Date = dates,
                    Item_Idx = id,
                    LINE = item
                 };
