@@ -40,7 +40,7 @@
             <button class="btn btn-sm btn-success" id="lock-review">UnLock Review </button>
 
         }
-        else
+        else if(ViewBag.IsPlanner == true && ViewBag.IsLock == false)
         {
             <button class="btn btn-sm btn-success" id="lock-review">Lock Review </button>
         }
@@ -86,7 +86,7 @@
             <span>@customer.SONO</span>
         </td>
         <td>
-            @if ((customer.DeptReview == ViewBag.IsDaprt && customer.IsLock == "False" && ViewBag.Status == "Released") || ViewBag.IsPlanner == true)
+            @if ((customer.DeptReview == ViewBag.IsDaprt && customer.IsLock == "False" && ViewBag.Status == "Released") || (ViewBag.IsPlanner == true && customer.IsLock == "False" && ViewBag.Status == "Released"))
             {
                 <a class="btn-sm btn-info Edit" href="javascript:;">Edit</a>
                 <a class=" btn-sm btn-success Update" href="javascript:;" style="display:none">Update</a>
@@ -94,7 +94,7 @@
 
         </td>
         <td>
-            @if ((customer.DeptReview == ViewBag.IsDaprt && customer.IsLock == "False" && ViewBag.Status == "Released")|| ViewBag.IsPlanner == true)
+            @if ((customer.DeptReview == ViewBag.IsDaprt && customer.IsLock == "False" && ViewBag.Status == "Released")|| (ViewBag.IsPlanner == true && customer.IsLock == "False" && ViewBag.Status == "Released"))
             {
                 <a class="btn-sm btn-danger Cancel" href="javascript:;" style="display:none;float:right">Cancel</a>
             }
