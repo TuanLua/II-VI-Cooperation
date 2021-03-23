@@ -112,7 +112,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody id="tbodyEvidenceInProcess" style="display:none">
+        <tbody id="tbodyEvidenceInProcess" @*style="display:none"*@>
             @if (Model.FirstOrDefault().OldEvidence.Count > 0)
             {
                 int i = 0;
@@ -480,12 +480,12 @@
                 var reviewresult = $(this).parents("tr").attr('reviewresult');
                 $('#iditemreview').val(id);
                 //show file item high volumn qty
-                if (deptreview == "HIGH_VOLUME") {
-                    $('#tbodyEvidenceInProcess').removeAttr('style', 'display:none');
-                }
-                else {
-                    $('#tbodyEvidenceInProcess').attr('style', 'display:none');
-                }
+             //   if (deptreview == "HIGH_VOLUME") {
+            //        $('#tbodyEvidenceInProcess').removeAttr('style', 'display:none');
+            //    }
+           //     else {
+           //         $('#tbodyEvidenceInProcess').attr('style', 'display:none');
+           //     }
                 var comment = $(this).parents("tr").attr('comment');
                 $(this).parents("tr").find("td:eq(2)").html('<p style="text-align:center">' + reviewresult + '</p><select class="form-control"  onchange="getval(this);" name="reviewresult" id="QMSDropdown"><select/>');
                 //<input type=text class="form-control" value='+reviewresult+' />
@@ -521,8 +521,8 @@
                 var topic = '@ViewBag.SoNo' + "-" + Date  + "-" + '@ViewBag.Item';
 
                 //call data source task list when select
-                $("#gridTaskDetail").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadTaksMantSoReview", "Soreview")' + '?taskNo=' + topic;
-                $("#gridTaskDetail").data("kendoGrid").dataSource.read();
+             //   $("#gridTaskDetail").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadTaksMantSoReview", "Soreview")' + '?taskNo=' + topic;
+            //    $("#gridTaskDetail").data("kendoGrid").dataSource.read();
 
             }
         });
@@ -615,7 +615,7 @@
                         type: "POST",
                         data: { id: id },
                         dataType: "json",
-                        success: function (resuViewBagt) {
+                        success: function (result) {
                             if (result.success) {
                                 bootbox.alert('Delete sucess!', function () {
                                     window.location.reload();

@@ -89,8 +89,9 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
                 data.Add(example);
                 data.FirstOrDefault().OldEvidence = new List<tbl_SOR_Attached_ForItemReview>();
             }
+            var taskno = SoNo + "-" + dt.ToString("dd-MMM-yyyy") +"-"+ item;
             ViewBag.IsPlanner = _IUserService.CheckGroupRoleForUser(User.Identity.GetUserId(), UserGroup.Planner);
-            ViewBag.TaskList = _iTaskManagementService.GetTaskListByTaskNO(SoNo, "SoReview");
+            ViewBag.TaskList = _iTaskManagementService.GetTaskListByTaskNO(taskno, "SoReview");
             ViewBag.IsDaprt = _iSoReviewService.GetDepart(User.Identity.GetUserId());
             ViewBag.SoNo = SoNo;
             ViewBag.Date = dt.ToString("dd-MMM-yyyy");

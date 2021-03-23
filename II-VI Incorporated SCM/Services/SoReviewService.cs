@@ -361,8 +361,8 @@ namespace II_VI_Incorporated_SCM.Services
                         TASKDETAIL taskDetail = new TASKDETAIL
                         {
                             TopicID = currentTaskListID,
-                            TASKNAME = taskname,
-                            DESCRIPTION = "",
+                            TASKNAME = itemreview,
+                            DESCRIPTION = taskname,
                             OWNER = userID,
                             ASSIGNEE = Assignee,
                             APPROVE = userID,
