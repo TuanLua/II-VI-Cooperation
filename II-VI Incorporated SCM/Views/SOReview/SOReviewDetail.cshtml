@@ -31,7 +31,7 @@
     </div>
     <div class="row col-sm-4" style="float:right">
         <label> </label>
-        @if (ViewBag.Status == "Released" && ViewBag.IsLock == false)
+        @if (ViewBag.Status == "Released" && ViewBag.IsLock == false && ViewBag.IsPlanner == true)
         {
             <button class="btn btn-sm btn-info" id="finish-review">Finish Review </button>
         }
