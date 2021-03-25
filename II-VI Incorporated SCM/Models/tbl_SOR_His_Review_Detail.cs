@@ -19,7 +19,7 @@ namespace II_VI_Incorporated_SCM.Models
         public Nullable<System.DateTime> DOWNLOAD_DATE { get; set; }
         public string DEPT_REVIEW { get; set; }
         public string ITEM_REVIEW { get; set; }
-        public Nullable<bool> RESULT { get; set; }
+        public string RESULT { get; set; }
         public string COMMENT { get; set; }
         public Nullable<System.DateTime> REVIEW_AT { get; set; }
         public string REVIEW_BY { get; set; }

@@ -20,9 +20,8 @@ namespace II_VI_Incorporated_SCM.Models.SOReview
 
         public string Comment { get; set; }
 
-        public bool? LastReview { get; set; }
+        public string LastReview { get; set; }
 
-        public bool? ReviewBool { get; set; }
         public string LastComment { get; set; }
 
         public string PlanShipDate { get; set;}

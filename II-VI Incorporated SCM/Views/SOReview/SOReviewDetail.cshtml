@@ -405,7 +405,7 @@
                 dataType: "json",
                 success: function (result) {
                     if (result.success) {
-                        bootbox.alert('Update sucess', function () {
+                        bootbox.alert('Add Task sucess!', function () {
                             $('#popupTask').modal('hide');
                         });
                     }
@@ -514,8 +514,8 @@
                     });
            //    var $newOption = $("<option selected='selected'></option>").val(reviewresult).text(reviewresult);
             //   $("#QMSDropdown").append($newOption).trigger('change');
-                var $newOption = $("<option selected='selected'></option>").val("").text("")
-                $("#QMSDropdown").append($newOption).trigger('change');
+          //      var $newOption = $("<option selected='selected'></option>").val("").text("")
+         //       $("#QMSDropdown").append($newOption).trigger('change');
              //   $("#QMSDropdown option[value='["+reviewresult+"]'").prop('selected', true);
                 var Date = '@ViewBag.Date';
                 var topic = '@ViewBag.SoNo' + "-" + Date  + "-" + '@ViewBag.Item';
@@ -581,7 +581,7 @@
                             dataType: "json",
                             success: function (result) {
                                 if (result.success) {
-                                    bootbox.alert('Update sucess', function () {
+                                    bootbox.alert('Add File sucess!', function () {
                                         $('#popup').modal('hide');
                                     });
                                 }

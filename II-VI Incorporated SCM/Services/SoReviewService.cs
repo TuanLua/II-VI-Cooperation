@@ -110,6 +110,10 @@ namespace II_VI_Incorporated_SCM.Services
             s2.Value = "N";
             s2.Text = "N";
             lstData.Add(s2);
+            SelectListItem s3 = new SelectListItem();
+            s3.Value = "N/A";
+            s3.Text = "N/A";
+            lstData.Add(s3);
             return lstData;
         }
 
@@ -165,24 +169,16 @@ namespace II_VI_Incorporated_SCM.Services
                                 ItemReview = c.ITEM_REVIEW,
                                 DeptReview = c.DEPT_REVIEW.Trim(),
                                 Comment = c.COMMENT == null ? "" : c.COMMENT,
+                                ReviewResult = c.RESULT,
                                 LastComment = p.COMMENT,
                                 LastReview = p.RESULT,
-                                ReviewBool = c.RESULT,
                                 IsLock = c.ISLOCK == true ? "True" : "False"
                             }).ToList();
                 foreach (var item in data)
                 {
-                    if (item.ReviewBool == null)
+                    if (item.ReviewResult == null)
                     {
                         item.ReviewResult = "";
-                    }
-                    else if (item.ReviewBool == false)
-                    {
-                        item.ReviewResult = "N";
-                    }
-                    else if (item.ReviewBool == true)
-                    {
-                        item.ReviewResult = "Y";
                     }
 
                 }
@@ -198,23 +194,15 @@ namespace II_VI_Incorporated_SCM.Services
                                       ItemReview = x.ITEM_REVIEW,
                                       DeptReview = x.DEPT_REVIEW.Trim(),
                                       Comment = x.COMMENT == null ? "" : x.COMMENT,
+                                      ReviewResult = x.RESULT,
                                       LastComment = null,
-                                      ReviewBool =  x.RESULT ,
                                       IsLock = x.ISLOCK == true ? "True" : "False"
                     }).ToList();
                 foreach (var item in datacurrent)
                 {
-                    if(item.ReviewBool == null)
+                    if(item.ReviewResult == null)
                     {
                         item.ReviewResult = "";
-                    }
-                    else if(item.ReviewBool == false)
-                    {
-                        item.ReviewResult = "N";
-                    }
-                    else if(item.ReviewBool == true)
-                    {
-                        item.ReviewResult = "Y";
                     }
                     
                 }
@@ -344,20 +332,8 @@ namespace II_VI_Incorporated_SCM.Services
                    var currentTaskListID = 0;
                     var taskNO = SoNo +"-" + Date + "-" + item;
                     var ckTaskList = _db.TASKLISTs.FirstOrDefault(x => x.Reference.Trim().Equals(taskNO.Trim()) && x.TYPE == "SoReview");
-                    if (ckTaskList == null)
+                    if (ckTaskList != null)
                     {
-                        var model = new TASKLIST
-                        {
-                            Topic = taskNO.Trim(),
-                            TYPE = "SoReview",
-                            WRITEDATE = DateTime.Now,
-                            WRITTENBY = userID,
-                            Level = 1,
-                            Reference = taskNO
-                        };
-                        _db.TASKLISTs.Add(model);
-                        _db.SaveChanges();
-                        currentTaskListID = model.TopicID;
                         TASKDETAIL taskDetail = new TASKDETAIL
                         {
                             TopicID = currentTaskListID,
@@ -560,13 +536,9 @@ namespace II_VI_Incorporated_SCM.Services
                     var data = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.ITEM_REVIEW_ID == picID).FirstOrDefault();
                     if(data != null)
                     {
-                        bool result = false;
-                        if (picData.ReviewResult == "Y")
-                        {
-                            result = true;
-                        }
+                       
                         data.COMMENT = picData.Comment;
-                        data.RESULT = result;
+                        data.RESULT = picData.ReviewResult;
                         _db.SaveChanges();
                         tranj.Commit();
                         return new Result
