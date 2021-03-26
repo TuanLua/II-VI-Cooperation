@@ -40,7 +40,7 @@
             <button class="btn btn-sm btn-success" id="lock-review">UnLock Review </button>
 
         }
-        else if(ViewBag.IsPlanner == true && ViewBag.IsLock == false)
+        else if (ViewBag.IsPlanner == true && ViewBag.IsLock == false)
         {
             <button class="btn btn-sm btn-success" id="lock-review">Lock Review </button>
         }
@@ -337,7 +337,7 @@
                             dataType: "json",
                             success: function (result) {
                                 if (result.success) {
-                                    bootbox.alert('Update sucess', function () {
+                                    bootbox.alert('Finish success!', function () {
                                        window.location.href = "@Url.Action("SOReviewList", "SoReview")";
                                     });
                                 }
@@ -386,6 +386,7 @@
     $('#btn-addtask').on('click', function () {
         var SoNo = '@ViewBag.SoNo';
         var Date = '@ViewBag.Date';
+        var topic = '@ViewBag.SoNo' + "-" + Date  + "-" + '@ViewBag.Item';
         var itemreview = $('#reviewitemname').val();
         var assignee = $('#user').val();
         var taskname = $('#taskname').val();
@@ -407,11 +408,16 @@
                     if (result.success) {
                         bootbox.alert('Add Task sucess!', function () {
                             $('#popupTask').modal('hide');
+
                         });
                     }
                     else {
                         bootbox.alert(result.message);
                         $('#popupTask').modal('hide');
+
+                //call data source task list when select
+               $("#gridTaskDetail").data("kendoGrid").dataSource.transport.options.read.url = '@Url.Action("ReadTaksMantSoReview", "Soreview")' + '?taskNo=' + topic;
+               $("#gridTaskDetail").data("kendoGrid").dataSource.read();
                     }
                 }
             });

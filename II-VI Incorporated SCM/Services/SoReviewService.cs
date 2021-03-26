@@ -336,7 +336,7 @@ namespace II_VI_Incorporated_SCM.Services
                     {
                         TASKDETAIL taskDetail = new TASKDETAIL
                         {
-                            TopicID = currentTaskListID,
+                            TopicID = ckTaskList.TopicID,
                             TASKNAME = itemreview,
                             DESCRIPTION = taskname,
                             OWNER = userID,
@@ -469,33 +469,35 @@ namespace II_VI_Incorporated_SCM.Services
                     var data = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.SO_NO == picData.SONO && x.DOWNLOAD_DATE == picData.DateDownLoad && x.LINE == picData.Item).ToList();
                     if (data != null)
                     {
+                        bool isNotUpdate = false;
                         foreach (var item in data)
                         {
                             if(item.RESULT == null)
                             {
-                                return new Result
-                                {
-                                    success = false,
-                                    message = "Please review all item !",
-                                };
-                            }
-                            else
-                            {
-                                var dataSoreview = _db.tbl_SOR_Cur_Review_List.Where(x => x.SO_NO == picData.SONO && x.DOWNLOAD_DATE == picData.DateDownLoad && x.LINE == picData.Item).FirstOrDefault();
-                                dataSoreview.PLAN_SHIP_DATE = picData.PlanShipDate;
-                                dataSoreview.REVIEW_STATUS = "Done";
-
-
-                                _db.SaveChanges();
-                                tranj.Commit();
-                                return new Result
-                                {
-                                    success = true,
-                                    message = "Finish sucess!"
-                                };
+                                isNotUpdate = true;
                             }
                         }
-                      
+                        if (isNotUpdate)
+                        {
+                            return new Result
+                            {
+                                success = false,
+                                message = "Please review all item !",
+                            };
+                        }
+                        else
+                        {
+                            var dataSoreview = _db.tbl_SOR_Cur_Review_List.Where(x => x.SO_NO == picData.SONO && x.DOWNLOAD_DATE == picData.DateDownLoad && x.LINE == picData.Item).FirstOrDefault();
+                            dataSoreview.PLAN_SHIP_DATE = picData.PlanShipDate;
+                            dataSoreview.REVIEW_STATUS = "Done";
+                            _db.SaveChanges();
+                            tranj.Commit();
+                            return new Result
+                            {
+                                success = true,
+                                message = "Finish sucess!"
+                            };
+                        }
                     }
                     return new Result
                     {
