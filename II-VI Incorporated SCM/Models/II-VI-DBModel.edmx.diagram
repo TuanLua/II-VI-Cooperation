@@ -206,45 +206,45 @@
         <EntityTypeShape EntityType="IQCTestModel.UserLogin" Width="1.5" PointX="8.75" PointY="42.75" />
         <EntityTypeShape EntityType="IQCTestModel.VARIABLE_ACT_BY_SPL" Width="1.5" PointX="42.75" PointY="10.75" />
         <EntityTypeShape EntityType="IQCTestModel.VARIABLE_STD_BY_PART_NoUse" Width="1.5" PointX="10.75" PointY="42.75" />
-        <EntityTypeShape EntityType="IQCTestModel.VENDOR" Width="1.5" PointX="12.75" PointY="42.75" />
-        <EntityTypeShape EntityType="IQCTestModel.VNMaterialTraceability" Width="1.5" PointX="42.75" PointY="15.75" />
-        <EntityTypeShape EntityType="IQCTestModel.Attribute" Width="1.5" PointX="42.75" PointY="18.75" />
-        <EntityTypeShape EntityType="IQCTestModel.CHANGED_SPL_BK" Width="1.5" PointX="20.75" PointY="42.75" />
-        <EntityTypeShape EntityType="IQCTestModel.CS_HIS" Width="1.5" PointX="37.75" PointY="42.75" />
+        <EntityTypeShape EntityType="IQCTestModel.VENDOR" Width="1.5" PointX="42.75" PointY="15.75" />
+        <EntityTypeShape EntityType="IQCTestModel.VNMaterialTraceability" Width="1.5" PointX="42.75" PointY="20.75" />
+        <EntityTypeShape EntityType="IQCTestModel.Attribute" Width="1.5" PointX="37.75" PointY="42.75" />
+        <EntityTypeShape EntityType="IQCTestModel.CHANGED_SPL_BK" Width="1.5" PointX="42.75" PointY="23.75" />
+        <EntityTypeShape EntityType="IQCTestModel.CS_HIS" Width="1.5" PointX="12.75" PointY="43.75" />
         <EntityTypeShape EntityType="IQCTestModel.DESCRIPTION_Temp" Width="1.5" PointX="14.75" PointY="43.75" />
         <EntityTypeShape EntityType="IQCTestModel.FIXTURE_ACT_BY_SPL_NoUse" Width="1.5" PointX="16.75" PointY="43.75" />
-        <EntityTypeShape EntityType="IQCTestModel.INS_RESULT_HIS" Width="1.5" PointX="22.75" PointY="43.75" />
-        <EntityTypeShape EntityType="IQCTestModel.INS_RESULT_VISUAL_LOT" Width="1.5" PointX="43.75" PointY="27.75" />
-        <EntityTypeShape EntityType="IQCTestModel.INSPECTOR" Width="1.5" PointX="27.75" PointY="43.75" />
-        <EntityTypeShape EntityType="IQCTestModel.MEASUREMENT_STD_BY_PART_CHANGED_SPL" Width="1.5" PointX="29.75" PointY="43.75" />
-        <EntityTypeShape EntityType="IQCTestModel.NCR_HDR_PUR" Width="1.5" PointX="43.75" PointY="30.75" />
-        <EntityTypeShape EntityType="IQCTestModel.NCR_WH_OPEN_COMMENT" Width="1.5" PointX="31.75" PointY="43.75" />
-        <EntityTypeShape EntityType="IQCTestModel.PART_INS_REQ_VISUAL" Width="1.5" PointX="44.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IQCTestModel.PART_REJECT" Width="1.5" PointX="44.75" PointY="3.75" />
-        <EntityTypeShape EntityType="IQCTestModel.PARTIAL_INS_RESULT" Width="1.5" PointX="4.75" PointY="44.75" />
-        <EntityTypeShape EntityType="IQCTestModel.PARTIAL_NC" Width="1.5" PointX="44.75" PointY="7.75" />
-        <EntityTypeShape EntityType="IQCTestModel.PO" Width="1.5" PointX="44.75" PointY="11.75" />
-        <EntityTypeShape EntityType="IQCTestModel.PO_BK" Width="1.5" PointX="24.75" PointY="44.75" />
-        <EntityTypeShape EntityType="IQCTestModel.receiver_bk" Width="1.5" PointX="6.75" PointY="45.75" />
-        <EntityTypeShape EntityType="IQCTestModel.SKIP_LOT_LEVEL" Width="1.5" PointX="44.75" PointY="22.75" />
-        <EntityTypeShape EntityType="IQCTestModel.SKIP_LOT_LEVEL_bk" Width="1.5" PointX="45.75" PointY="25.75" />
-        <EntityTypeShape EntityType="IQCTestModel.STDCOST" Width="1.5" PointX="45.75" PointY="28.75" />
-        <EntityTypeShape EntityType="IQCTestModel.STDCOST_Temp" Width="1.5" PointX="45.75" PointY="31.75" />
-        <EntityTypeShape EntityType="IQCTestModel.tbl_Inv_File_Attach" Width="1.5" PointX="33.75" PointY="45.75" />
-        <EntityTypeShape EntityType="IQCTestModel.tbl_Inv_ScoreCost_4_Mem" Width="1.5" PointX="45.75" PointY="34.75" />
-        <EntityTypeShape EntityType="IQCTestModel.tbl_PT_Dept_PIC" Width="1.5" PointX="45.75" PointY="37.75" />
-        <EntityTypeShape EntityType="IQCTestModel.tbl_PT_Dept_PIC_BuyPart" Width="1.5" PointX="45.75" PointY="40.75" />
-        <EntityTypeShape EntityType="IQCTestModel.tbl_PT_TaskList" Width="1.5" PointX="45.75" PointY="43.75" />
-        <EntityTypeShape EntityType="IQCTestModel.tbl_RP_Advance_Setting" Width="1.5" PointX="46.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IQCTestModel.tbl_RP_Data_Source" Width="1.5" PointX="46.75" PointY="5.75" />
-        <EntityTypeShape EntityType="IQCTestModel.tbl_SQE_6Panel_TopNCPart" Width="1.5" PointX="8.75" PointY="46.75" />
-        <EntityTypeShape EntityType="IQCTestModel.tbl_SQE_PCN_Status" Width="1.5" PointX="46.75" PointY="10.75" />
-        <EntityTypeShape EntityType="IQCTestModel.tbl_SQE_Supplier_Finish6Panel" Width="1.5" PointX="46.75" PointY="13.75" />
-        <EntityTypeShape EntityType="IQCTestModel.tbl_SQE_SupplierLog_QMS" Width="1.5" PointX="46.75" PointY="15.75" />
-        <EntityTypeShape EntityType="IQCTestModel.TemporaryUpsizedTable2" Width="1.5" PointX="18.75" PointY="46.75" />
-        <EntityTypeShape EntityType="IQCTestModel.USER_PERMIT" Width="1.5" PointX="46.75" PointY="18.75" />
-        <EntityTypeShape EntityType="IQCTestModel.VENDOR_Temp" Width="1.5" PointX="26.75" PointY="46.75" />
-        <EntityTypeShape EntityType="IQCTestModel.Work_Center" Width="1.5" PointX="46.75" PointY="21.75" />
+        <EntityTypeShape EntityType="IQCTestModel.INS_RESULT_HIS" Width="1.5" PointX="18.75" PointY="43.75" />
+        <EntityTypeShape EntityType="IQCTestModel.INS_RESULT_VISUAL_LOT" Width="1.5" PointX="20.75" PointY="43.75" />
+        <EntityTypeShape EntityType="IQCTestModel.INSPECTOR" Width="1.5" PointX="22.75" PointY="43.75" />
+        <EntityTypeShape EntityType="IQCTestModel.MEASUREMENT_STD_BY_PART_CHANGED_SPL" Width="1.5" PointX="43.75" PointY="27.75" />
+        <EntityTypeShape EntityType="IQCTestModel.NCR_HDR_PUR" Width="1.5" PointX="27.75" PointY="43.75" />
+        <EntityTypeShape EntityType="IQCTestModel.NCR_WH_OPEN_COMMENT" Width="1.5" PointX="29.75" PointY="43.75" />
+        <EntityTypeShape EntityType="IQCTestModel.PART_INS_REQ_VISUAL" Width="1.5" PointX="43.75" PointY="31.75" />
+        <EntityTypeShape EntityType="IQCTestModel.PART_REJECT" Width="1.5" PointX="31.75" PointY="43.75" />
+        <EntityTypeShape EntityType="IQCTestModel.PARTIAL_INS_RESULT" Width="1.5" PointX="43.75" PointY="34.75" />
+        <EntityTypeShape EntityType="IQCTestModel.PARTIAL_NC" Width="1.5" PointX="43.75" PointY="38.75" />
+        <EntityTypeShape EntityType="IQCTestModel.PO" Width="1.5" PointX="43.75" PointY="42.75" />
+        <EntityTypeShape EntityType="IQCTestModel.PO_BK" Width="1.5" PointX="44.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IQCTestModel.receiver_bk" Width="1.5" PointX="4.75" PointY="44.75" />
+        <EntityTypeShape EntityType="IQCTestModel.SKIP_LOT_LEVEL" Width="1.5" PointX="44.75" PointY="11.75" />
+        <EntityTypeShape EntityType="IQCTestModel.SKIP_LOT_LEVEL_bk" Width="1.5" PointX="44.75" PointY="14.75" />
+        <EntityTypeShape EntityType="IQCTestModel.STDCOST" Width="1.5" PointX="44.75" PointY="17.75" />
+        <EntityTypeShape EntityType="IQCTestModel.STDCOST_Temp" Width="1.5" PointX="44.75" PointY="20.75" />
+        <EntityTypeShape EntityType="IQCTestModel.tbl_Inv_File_Attach" Width="1.5" PointX="44.75" PointY="23.75" />
+        <EntityTypeShape EntityType="IQCTestModel.tbl_Inv_ScoreCost_4_Mem" Width="1.5" PointX="24.75" PointY="44.75" />
+        <EntityTypeShape EntityType="IQCTestModel.tbl_PT_Dept_PIC" Width="1.5" PointX="6.75" PointY="45.75" />
+        <EntityTypeShape EntityType="IQCTestModel.tbl_PT_Dept_PIC_BuyPart" Width="1.5" PointX="45.75" PointY="26.75" />
+        <EntityTypeShape EntityType="IQCTestModel.tbl_PT_TaskList" Width="1.5" PointX="45.75" PointY="29.75" />
+        <EntityTypeShape EntityType="IQCTestModel.tbl_RP_Advance_Setting" Width="1.5" PointX="45.75" PointY="32.75" />
+        <EntityTypeShape EntityType="IQCTestModel.tbl_RP_Data_Source" Width="1.5" PointX="33.75" PointY="45.75" />
+        <EntityTypeShape EntityType="IQCTestModel.tbl_SQE_6Panel_TopNCPart" Width="1.5" PointX="45.75" PointY="37.75" />
+        <EntityTypeShape EntityType="IQCTestModel.tbl_SQE_PCN_Status" Width="1.5" PointX="45.75" PointY="40.75" />
+        <EntityTypeShape EntityType="IQCTestModel.tbl_SQE_Supplier_Finish6Panel" Width="1.5" PointX="45.75" PointY="43.75" />
+        <EntityTypeShape EntityType="IQCTestModel.tbl_SQE_SupplierLog_QMS" Width="1.5" PointX="45.75" PointY="45.75" />
+        <EntityTypeShape EntityType="IQCTestModel.TemporaryUpsizedTable2" Width="1.5" PointX="46.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IQCTestModel.USER_PERMIT" Width="1.5" PointX="8.75" PointY="46.75" />
+        <EntityTypeShape EntityType="IQCTestModel.VENDOR_Temp" Width="1.5" PointX="46.75" PointY="9.75" />
+        <EntityTypeShape EntityType="IQCTestModel.Work_Center" Width="1.5" PointX="46.75" PointY="14.75" />
         <AssociationConnector Association="IQCTestModel.FK_dbo_ApplicationGroupRoles_dbo_ApplicationGroups_ApplicationGroupId" />
         <AssociationConnector Association="IQCTestModel.FK_dbo_ApplicationUserGroups_dbo_ApplicationGroups_ApplicationGroupId" />
         <AssociationConnector Association="IQCTestModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />

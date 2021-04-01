@@ -50,7 +50,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
 
         public ActionResult SoReViewListRead([DataSourceRequest] DataSourceRequest request)
         {
-            List<sp_SOR_GetSoReview_Result1> list = _iSoReviewService.GetListSoReview();
+            List<sp_SOR_GetSoReview_Result2> list = _iSoReviewService.GetListSoReview();
             return Json(list.ToDataSourceResult(request));
         }
 
@@ -62,7 +62,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             Result res = _iSoReviewService.LockSoReview(SoNo,item, date, islock);
             return Json(new { res.success, message = res.message, obj = res.obj });
         }
-        public ActionResult SOReviewDetail(string SoNo, string Date, string status,string planshipdate,string item)
+        public ActionResult SOReviewDetail(string SoNo, string Date, string status,string planshipdate,string item,string comment)
         {
             Date = Date.Substring(0, Date.IndexOf(" GMT"));
             DateTime dt;
@@ -98,6 +98,11 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             ViewBag.Status = status;
             ViewBag.IsLock = isLock;
             ViewBag.Item = item;
+            if(comment == "null")
+            {
+                comment = "";
+            }
+            ViewBag.Comment = comment;
             if (planshipdate != "null" && planshipdate!= "TBD")
             {
                 var dates = DateTime.Parse(planshipdate);
@@ -134,7 +139,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             return Json(new { res.success, message = res.message, obj = res.obj });
         }
         [HttpPost]
-        public JsonResult UpdateSoReviewFinish(string sono, string planshipdate, string isdefine,string Date,string item)
+        public JsonResult UpdateSoReviewFinish(string sono, string planshipdate, string isdefine,string Date,string item, string comment)
         {
             SoReviewDetail data = new SoReviewDetail();
             if (isdefine == "true")
@@ -145,6 +150,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             data.PlanShipDate = planshipdate;
             data.DateDownLoad = DateTime.Parse(Date);
             data.Item = item;
+            data.Comment = comment;
             Result res = _iSoReviewService.UpdateSoReviewFinish(data);
             return Json(new { res.success, message = res.message, obj = res.obj });
         }
@@ -448,7 +454,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
         }
         public ActionResult SoReViewHistoryRead([DataSourceRequest] DataSourceRequest request)
         {
-            List<sp_SOR_GetSoReviewHist_Result1> list = _iSoReviewService.GetListSoReviewHistory();
+            List<sp_SOR_GetSoReviewHist_Result2> list = _iSoReviewService.GetListSoReviewHistory();
             return Json(list.ToDataSourceResult(request));
         }
 

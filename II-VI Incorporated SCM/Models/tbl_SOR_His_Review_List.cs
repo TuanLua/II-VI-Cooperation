@@ -36,5 +36,6 @@ namespace II_VI_Incorporated_SCM.Models
         public string REVIEW_STATUS { get; set; }
         public string PLAN_SHIP_DATE { get; set; }
         public string LINE { get; set; }
+        public string COMMENT { get; set; }
     }
 }

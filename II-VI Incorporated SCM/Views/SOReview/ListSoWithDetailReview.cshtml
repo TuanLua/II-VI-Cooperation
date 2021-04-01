@@ -55,7 +55,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-18 col-md-12">
-            @(Html.Kendo().Grid<sp_SOR_GetSoReviewHist_Result1>()
+            @(Html.Kendo().Grid<sp_SOR_GetSoReviewHist_Result2>()
                                                       .Name("gridSoReview")
                                                       .Columns(columns =>
                                                       {
@@ -78,6 +78,7 @@
                                                           columns.Bound(p => p.ONHAND_QTY).Title("On hand Qty").Width(150);
                                                           columns.Bound(p => p.PLAN_SHIP_DATE).Format("{0:dd-MMM-yy}").Width(0);
                                                           columns.Bound(p => p.LINE).Width(0);
+                                                          columns.Bound(p => p.COMMENT).Width(0);
                                                       }).ToolBar(tools => tools.Excel())
                                                       .Sortable()
                                                        .Filterable()
@@ -236,7 +237,8 @@
         var Status = model.REVIEW_STATUS;
         var planshipdate = model.PLAN_SHIP_DATE;
         var item = model.LINE;
-        window.open('@Url.Action("SOReviewDetail", "SOReview")' + "?SoNo=" + SONO + "&Date=" + Date + "&status=" + Status + "&planshipdate=" + planshipdate + "&item=" +item , '_blank');
+        var comment = model.COMMENT;
+        window.open('@Url.Action("SOReviewDetail", "SOReview")' + "?SoNo=" + SONO + "&Date=" + Date + "&status=" + Status + "&planshipdate=" + planshipdate + "&item=" + item + "&comment=" + comment, '_blank');
     });
 
     $("#clear").click(function () {

@@ -17,12 +17,12 @@ namespace II_VI_Incorporated_SCM.Services
         bool GetIsLockBySo(string SO, DateTime date, string line);
         List<SelectListItem> GetReviewResult();
 
-        List<sp_SOR_GetSoReview_Result1> GetListSoReview();
+        List<sp_SOR_GetSoReview_Result2> GetListSoReview();
 
         List<sp_SOR_GetSoOpen_Result1> GetListReleaseSoReview();
         bool RealeaseSo();
 
-        List<sp_SOR_GetSoReviewHist_Result1> GetListSoReviewHistory();
+        List<sp_SOR_GetSoReviewHist_Result2> GetListSoReviewHistory();
         string GetDepart(string userID);
         Result LockSoReview(string SoNo,string item,DateTime date,string islock);
         List<SoReviewDetail> GetSoReviewDetail(string soNo, DateTime dateReview, string status, string item);
@@ -117,14 +117,14 @@ namespace II_VI_Incorporated_SCM.Services
             return lstData;
         }
 
-        public List<sp_SOR_GetSoReview_Result1> GetListSoReview()
+        public List<sp_SOR_GetSoReview_Result2> GetListSoReview()
         {
-            List<sp_SOR_GetSoReview_Result1> data = _db.sp_SOR_GetSoReview().ToList();
+            List<sp_SOR_GetSoReview_Result2> data = _db.sp_SOR_GetSoReview().ToList();
             return data;
         }
-        public List<sp_SOR_GetSoReviewHist_Result1> GetListSoReviewHistory()
+        public List<sp_SOR_GetSoReviewHist_Result2> GetListSoReviewHistory()
         {
-            List<sp_SOR_GetSoReviewHist_Result1> data = _db.sp_SOR_GetSoReviewHist().ToList();
+            List<sp_SOR_GetSoReviewHist_Result2> data = _db.sp_SOR_GetSoReviewHist().ToList();
             return data;
         }
         public List<sp_SOR_GetSoOpen_Result1> GetListReleaseSoReview()
@@ -490,6 +490,7 @@ namespace II_VI_Incorporated_SCM.Services
                             var dataSoreview = _db.tbl_SOR_Cur_Review_List.Where(x => x.SO_NO == picData.SONO && x.DOWNLOAD_DATE == picData.DateDownLoad && x.LINE == picData.Item).FirstOrDefault();
                             dataSoreview.PLAN_SHIP_DATE = picData.PlanShipDate;
                             dataSoreview.REVIEW_STATUS = "Done";
+                            dataSoreview.COMMENT = picData.Comment;
                             _db.SaveChanges();
                             tranj.Commit();
                             return new Result
