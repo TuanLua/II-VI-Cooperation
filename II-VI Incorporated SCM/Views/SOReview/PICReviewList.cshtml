@@ -6,7 +6,7 @@
     <div class="col-md-12">
         @*@if ((bool)ViewBag.checkRoleUser == true)
         {*@
-     if ((bool)ViewBag.IsPlanner)
+     @if ((bool)ViewBag.IsPlanner)
         {
             <button style="float:right; margin-left:10px" class="btn btn-sm btn-success " id="addnew" onclick="AddNew()">Add New</button>
        }
