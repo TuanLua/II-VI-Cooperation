@@ -33,9 +33,9 @@ namespace II_VI_Incorporated_SCM.Services
 
         Result UpdateSoReviewFinish(SoReviewDetail picData);
 
-        Result AddTaskForItemReview(string SoNo, string Date, string itemreview, string userID,string assignee,string item,string taskname);
+        Result AddTaskForItemReview(string SoNo, string Date, string itemreview, string userID,string assignee,string item,string taskname,int id);
 
-        Result SaveFileAttachedItemReview(tbl_SOR_Attached_ForItemReview picData);
+        Result SaveFileAttachedItemReview(tbl_SOR_Attached_ForItemReview picData,int id);
 
         tbl_SOR_Attached_ForItemReview GetFileWithFileID(int fileId);
 
@@ -293,7 +293,7 @@ namespace II_VI_Incorporated_SCM.Services
             return _db.tbl_SOR_Attached_ForItemReview.Where(m => m.ID == fileId).FirstOrDefault();
         }
 
-        public Result SaveFileAttachedItemReview(tbl_SOR_Attached_ForItemReview picData)
+        public Result SaveFileAttachedItemReview(tbl_SOR_Attached_ForItemReview picData,int id)
         {
             var _log = new LogWriter("AddData");
             using (var tranj = _db.Database.BeginTransaction())
@@ -302,6 +302,12 @@ namespace II_VI_Incorporated_SCM.Services
                 {
                     _db.tbl_SOR_Attached_ForItemReview.Add(picData);
                     _db.SaveChanges();
+                    var data = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.ITEM_REVIEW_ID == id).FirstOrDefault();
+                    if (data != null)
+                    {
+                        data.RESULT = "Y";
+                        _db.SaveChanges();
+                    }
                     tranj.Commit();
                     return new Result
                     {
@@ -322,7 +328,7 @@ namespace II_VI_Incorporated_SCM.Services
             }
         }
 
-        public Result AddTaskForItemReview(string SoNo, string Date, string itemreview, string userID,string Assignee,string item,string taskname)
+        public Result AddTaskForItemReview(string SoNo, string Date, string itemreview, string userID,string Assignee,string item,string taskname,int id)
         {
             var _log = new LogWriter("Updatedata");
             using (var tranj = _db.Database.BeginTransaction())
@@ -352,7 +358,18 @@ namespace II_VI_Incorporated_SCM.Services
                         };
                         _db.TASKDETAILs.Add(taskDetail);
                         _db.SaveChanges();
-                           tranj.Commit();
+
+
+                        var data = _db.tbl_SOR_Cur_Review_Detail.Where(x => x.ITEM_REVIEW_ID == id).FirstOrDefault();
+                        if (data != null)
+                        {
+
+                          //  data.COMMENT = picData.Comment;
+                            data.RESULT = "N";
+                            _db.SaveChanges();
+                        }
+
+                        tranj.Commit();
                         return new Result
                         {
                             success = true,

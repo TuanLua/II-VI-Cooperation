@@ -190,6 +190,7 @@
                             <input class="form-control" style="width:100%" id="taskname" />
                         </div>
                     </div>
+                    <input type="hidden" id="itemreviewID" name="itemreviewID" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="btn-addtask" class="btn btn-success">Save</button>
@@ -381,10 +382,13 @@
             //Set cung ID no Default item show popup add file
             if (IsHigh == "HIGH_VOLUME") {
                 $('#popup').modal('show');
+                $('#file').val('');
             }
         }
         if (sel.value == "N") {
             $('#popupTask').modal('show');
+            $('#user').val('');
+            $('#taskname').val('');
         }
     }
 
@@ -393,6 +397,7 @@
         var Date = '@ViewBag.Date';
         var topic = '@ViewBag.SoNo' + "-" + Date  + "-" + '@ViewBag.Item';
         var itemreview = $('#reviewitemname').val();
+        var itemreviewID = $('#itemreviewID').val();
         var assignee = $('#user').val();
         var taskname = $('#taskname').val();
         if (assignee == null || assignee == "") {
@@ -407,7 +412,7 @@
             $.ajax({
                 url: '@Url.Action("AddTaskForItemReview", "SOReview")',
                 type: "POST",
-                data: { SoNo: SoNo, Date: Date, itemreview: itemreview, assignee: assignee, item: '@ViewBag.Item', taskname: taskname},
+                data: { SoNo: SoNo, Date: Date, itemreview: itemreview, assignee: assignee, item: '@ViewBag.Item', taskname: taskname, itemreviewID: itemreviewID},
                 dataType: "json",
                 success: function (result) {
                     if (result.success) {
@@ -489,6 +494,7 @@
                 IsHigh = deptreview;
                 //set value itemnamepopup
                 $('#reviewitemname').val(titemreview);
+                $('#itemreviewID').val(id);
                 var reviewresult = $(this).parents("tr").attr('reviewresult');
                 $('#iditemreview').val(id);
                 //show file item high volumn qty
@@ -526,9 +532,8 @@
                     });
            //    var $newOption = $("<option selected='selected'></option>").val(reviewresult).text(reviewresult);
             //   $("#QMSDropdown").append($newOption).trigger('change');
-          //      var $newOption = $("<option selected='selected'></option>").val("").text("")
-         //       $("#QMSDropdown").append($newOption).trigger('change');
-             //   $("#QMSDropdown option[value='["+reviewresult+"]'").prop('selected', true);
+              var $newOption = $("<option selected='selected'></option>").val("").text("")
+                $("#QMSDropdown").append($newOption).trigger('change');
                 var Date = '@ViewBag.Date';
                 var topic = '@ViewBag.SoNo' + "-" + Date  + "-" + '@ViewBag.Item';
 

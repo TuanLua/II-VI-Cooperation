@@ -116,9 +116,10 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
             return View(data);
         }
         [HttpPost]
-        public JsonResult AddTaskForItemReview(string SoNo, string Date, string itemreview, string assignee,string item,string taskname)
+        public JsonResult AddTaskForItemReview(string SoNo, string Date, string itemreview, string assignee,string item,string taskname,string itemreviewID)
         {
-            Result res = _iSoReviewService.AddTaskForItemReview(SoNo, Date, itemreview, User.Identity.GetUserId(), assignee,item, taskname);
+            int ID = Convert.ToInt32(itemreviewID);
+            Result res = _iSoReviewService.AddTaskForItemReview(SoNo, Date, itemreview, User.Identity.GetUserId(), assignee,item, taskname, ID);
             return Json(new { res.success, message = res.message, obj = res.obj });
         }
         public JsonResult ReadTaksMantSoReview([DataSourceRequest] DataSourceRequest request, string taskNo)
@@ -305,7 +306,7 @@ namespace II_VI_Incorporated_SCM.Controllers.SOReview
                    Item_Idx = id,
                    LINE = item
                 };
-                Result res = _iSoReviewService.SaveFileAttachedItemReview(datafiles);
+                Result res = _iSoReviewService.SaveFileAttachedItemReview(datafiles,id);
                 return Json(new { success = res.success, message = res.obj });
             }
             return Json(new { success = false, message = "Save file not sucess!" });
